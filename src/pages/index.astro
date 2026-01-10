@@ -5,6 +5,8 @@ import SlimNav from "../components/SlimNav.astro";
 import LandingHero from "../components/LandingHero.astro";
 import ProjectsThreshold from "../components/ProjectsThreshold.astro";
 import ProjectDrawer from "../components/ProjectDrawer.astro";
+import InfociganSection from "../components/InfociganSection.astro";
+import ContactSection from "../components/ContactSection.astro";
 ---
 
 <Layout title="Q888 — Identity">
@@ -20,17 +22,9 @@ import ProjectDrawer from "../components/ProjectDrawer.astro";
       <ProjectsThreshold />
     </section>
 
-    <section id="infocigan" data-section="infocigan" class="h-[100vh] bg-[var(--bg-fog)] border-t border-[var(--line-soft)] flex items-center justify-center">
-      <span class="font-mono text-[8px] uppercase tracking-[0.4em] text-[var(--text-muted)] opacity-20">
-        // infocigan placeholder
-      </span>
-    </section>
+    <InfociganSection />
 
-    <section id="contact" data-section="contact" class="h-[100vh] bg-[var(--bg-fog)] border-t border-[var(--line-soft)] flex items-center justify-center">
-      <span class="font-mono text-[8px] uppercase tracking-[0.4em] text-[var(--text-muted)] opacity-20">
-        // contact placeholder
-      </span>
-    </section>
+    <ContactSection />
   </main>
 
   <SystemMeta position="bottom" />
