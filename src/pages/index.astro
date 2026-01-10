@@ -1,20 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SystemMeta from "../components/SystemMeta.astro";
+import SlimNav from "../components/SlimNav.astro";
 import LandingHero from "../components/LandingHero.astro";
 import ProjectsThreshold from "../components/ProjectsThreshold.astro";
 import ProjectDrawer from "../components/ProjectDrawer.astro";
 ---
 
-<Layout title="Q888 — Identity" hideNav>
+<Layout title="Q888 — Identity">
+  <SlimNav />
   <SystemMeta position="top" />
   
-  <main class="relative min-h-screen">
+  <main class="relative min-h-screen pt-10 md:pt-11">
     <section id="landing" data-section="landing" class="relative">
       <LandingHero />
     </section>
 
-    <section data-section="projects">
+    <section id="projects" data-section="projects">
       <ProjectsThreshold />
     </section>
 
@@ -36,17 +38,28 @@ import ProjectDrawer from "../components/ProjectDrawer.astro";
 
   <script>
     import { initThresholdMotion } from "../scripts/thresholdMotion";
-    import { initProjectDrawer } from "../scripts/drawerNav";
-    import { initSystemMetaState } from "../scripts/systemMetaState";
-    
-    initThresholdMotion();
-    initProjectDrawer();
-    initSystemMetaState();
-    
-    document.addEventListener("astro:page-load", () => {
+    import { initProjectDrawer, destroyProjectDrawer } from "../scripts/drawerNav";
+    import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
+    import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
+
+    function init() {
       initThresholdMotion();
       initProjectDrawer();
       initSystemMetaState();
+      initNavScroll();
+    }
+
+    function cleanup() {
+      destroyProjectDrawer();
+      destroySystemMetaState();
+      destroyNavScroll();
+    }
+
+    init();
+
+    document.addEventListener("astro:page-load", () => {
+      cleanup();
+      init();
     });
   </script>
 </Layout>

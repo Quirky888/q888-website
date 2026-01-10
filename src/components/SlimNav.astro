@@ -1,0 +1,168 @@
+---
+const navLinks = [
+  { label: "Projects", href: "#projects" },
+  { label: "Infocigan", href: "#infocigan" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<nav class="slim-nav" data-slim-nav>
+  <div class="slim-nav-inner">
+    <a href="#landing" class="slim-wordmark" data-scroll>Q888</a>
+    
+    <button 
+      class="slim-toggle" 
+      aria-label="Menu"
+      aria-expanded="false"
+      type="button"
+    >
+      <span class="slim-toggle-bar"></span>
+      <span class="slim-toggle-bar"></span>
+    </button>
+    
+    <div class="slim-links" data-slim-links>
+      {navLinks.map((link) => (
+        <a href={link.href} class="slim-link" data-scroll>{link.label}</a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  function initSlimNavToggle() {
+    const nav = document.querySelector('[data-slim-nav]');
+    const toggle = nav?.querySelector('.slim-toggle');
+    const links = nav?.querySelector('[data-slim-links]');
+    
+    if (!toggle || !links) return;
+    
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      links.classList.toggle('open');
+    });
+
+    links.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        links.classList.remove('open');
+      });
+    });
+  }
+  
+  initSlimNavToggle();
+  document.addEventListener('astro:page-load', initSlimNavToggle);
+</script>
+
+<style>
+  .slim-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .slim-nav-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.625rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    .slim-nav-inner {
+      padding: 0.75rem 2rem;
+    }
+  }
+
+  .slim-wordmark {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-ink);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .slim-wordmark:hover {
+    color: var(--text-muted);
+  }
+
+  .slim-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .slim-toggle {
+      display: none;
+    }
+  }
+
+  .slim-toggle-bar {
+    display: block;
+    width: 16px;
+    height: 1px;
+    background: var(--text-ink);
+    transition: opacity 120ms ease;
+  }
+
+  .slim-toggle[aria-expanded="true"] .slim-toggle-bar:first-child {
+    opacity: 0.4;
+  }
+
+  .slim-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .slim-links.open {
+    display: flex;
+  }
+
+  @media (min-width: 768px) {
+    .slim-links {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      gap: 1.5rem;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+  }
+
+  .slim-link {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  .slim-link:hover {
+    color: var(--text-ink);
+  }
+</style>

@@ -7,6 +7,8 @@ type Direction = "left" | "right";
 let activeDrawer: DrawerId | null = null;
 let triggerElement: HTMLElement | null = null;
 let focusTrapCleanup: (() => void) | null = null;
+let initialized = false;
+let abortController: AbortController | null = null;
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -118,43 +120,67 @@ export function closeDrawer(direction: Direction) {
 function handleEscape(e: KeyboardEvent) {
   if (e.key === "Escape" && activeDrawer) {
     const panel = getDrawerPanel(activeDrawer);
-    const direction = panel?.dataset.direction as Direction || "left";
+    const direction = (panel?.dataset.direction as Direction) || "left";
     closeDrawer(direction);
   }
 }
 
+export function destroyProjectDrawer() {
+  abortController?.abort();
+  abortController = null;
+  initialized = false;
+}
+
 export function initProjectDrawer() {
+  if (initialized) return;
+  initialized = true;
+
+  abortController = new AbortController();
+  const { signal } = abortController;
+
   const triggers = document.querySelectorAll<HTMLElement>("[data-drawer-trigger]");
   const closeButtons = document.querySelectorAll<HTMLElement>("[data-drawer-close]");
 
   triggers.forEach((trigger) => {
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault();
-      const id = trigger.dataset.drawerTrigger as DrawerId;
-      const direction = trigger.dataset.navDirection as Direction || "left";
-      triggerElement = trigger;
-      openDrawer(id, direction);
-    });
-
-    trigger.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
+    trigger.addEventListener(
+      "click",
+      (e) => {
         e.preventDefault();
         const id = trigger.dataset.drawerTrigger as DrawerId;
-        const direction = trigger.dataset.navDirection as Direction || "left";
+        const direction = (trigger.dataset.navDirection as Direction) || "left";
         triggerElement = trigger;
         openDrawer(id, direction);
-      }
-    });
+      },
+      { signal }
+    );
+
+    trigger.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          const id = trigger.dataset.drawerTrigger as DrawerId;
+          const direction = (trigger.dataset.navDirection as Direction) || "left";
+          triggerElement = trigger;
+          openDrawer(id, direction);
+        }
+      },
+      { signal }
+    );
   });
 
   closeButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (!activeDrawer) return;
-      const panel = getDrawerPanel(activeDrawer);
-      const direction = panel?.dataset.direction as Direction || "left";
-      closeDrawer(direction);
-    });
+    btn.addEventListener(
+      "click",
+      () => {
+        if (!activeDrawer) return;
+        const panel = getDrawerPanel(activeDrawer);
+        const direction = (panel?.dataset.direction as Direction) || "left";
+        closeDrawer(direction);
+      },
+      { signal }
+    );
   });
 
-  document.addEventListener("keydown", handleEscape);
+  document.addEventListener("keydown", handleEscape, { signal });
 }

@@ -1,13 +1,11 @@
 ---
 import "../styles/global.css";
-import TopNav from "../components/TopNav.astro";
 
 interface Props {
 	title?: string;
-	hideNav?: boolean;
 }
 
-const { title = "Q888", hideNav = false } = Astro.props;
+const { title = "Q888" } = Astro.props;
 ---
 
 <html lang="en">
@@ -18,8 +16,7 @@ const { title = "Q888", hideNav = false } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class:list={[!hideNav && "pt-12 md:pt-14"]}>
-		{!hideNav && <TopNav />}
+	<body>
 		<slot />
 	</body>
 </html>
