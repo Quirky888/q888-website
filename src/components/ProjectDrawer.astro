@@ -1,0 +1,270 @@
+---
+---
+
+<div 
+  id="project-drawer" 
+  data-drawer 
+  class="drawer-root"
+  aria-hidden="true"
+>
+  <!-- Digital Ink Panel -->
+  <div 
+    data-drawer-panel="digital-ink" 
+    data-direction="left"
+    class="drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Digital Ink project details"
+  >
+    <div class="drawer-scroll">
+      <header class="drawer-header">
+        <button 
+          data-drawer-close 
+          class="drawer-back"
+          aria-label="Close drawer and return to Projects"
+        >
+          ← Back to Projects
+        </button>
+      </header>
+      
+      <article class="drawer-content">
+        <h1 class="drawer-title">Digital Ink</h1>
+        <div class="drawer-meta">
+          <span>STATUS: IN DEVELOPMENT</span>
+          <span>TYPE: SYSTEM</span>
+          <span>YEAR: 2024–</span>
+        </div>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Premise</h2>
+          <p class="drawer-text">
+            A system for meaning, scarcity, and traceable digital creation. 
+            Digital Ink explores what it means to create artifacts that carry 
+            provenance, intention, and finite editions in a world of infinite copies.
+          </p>
+        </section>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Core Mechanism</h2>
+          <p class="drawer-text">
+            Each work carries a unique hash. Each edition is numbered. 
+            The chain of custody is visible. The ink does not wash out.
+          </p>
+        </section>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Visual Language</h2>
+          <div class="drawer-placeholder">
+            // screenshots forthcoming
+          </div>
+        </section>
+      </article>
+    </div>
+  </div>
+
+  <!-- Edinburgh Magical Map Panel -->
+  <div 
+    data-drawer-panel="edinburgh-map" 
+    data-direction="right"
+    class="drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Edinburgh Magical Map project details"
+  >
+    <div class="drawer-scroll">
+      <header class="drawer-header">
+        <button 
+          data-drawer-close 
+          class="drawer-back"
+          aria-label="Close drawer and return to Projects"
+        >
+          Back to Projects →
+        </button>
+      </header>
+      
+      <article class="drawer-content">
+        <h1 class="drawer-title">Edinburgh Magical Map</h1>
+        <div class="drawer-meta">
+          <span>STATUS: ONGOING</span>
+          <span>TYPE: CARTOGRAPHY</span>
+          <span>LOCALE: 55.9533°N</span>
+        </div>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Fragment I: The Closes</h2>
+          <p class="drawer-text">
+            The narrow passageways between the Royal Mile and the valleys below. 
+            Each close holds a name, a ghost, a doorway to another era.
+          </p>
+        </section>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Fragment II: Arthur's Seat</h2>
+          <p class="drawer-text">
+            The ancient volcano that watches over the city. 
+            From its summit, the entire myth spreads out like a manuscript.
+          </p>
+        </section>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Fragment III: The Underground</h2>
+          <p class="drawer-text">
+            Beneath South Bridge, vaulted chambers hold the city's shadow memory. 
+            The map extends downward.
+          </p>
+        </section>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Fragment IV: The New Town Grid</h2>
+          <p class="drawer-text">
+            Enlightenment rationality overlaid on older patterns. 
+            The streets form a spell of order.
+          </p>
+        </section>
+        
+        <section class="drawer-section">
+          <h2 class="drawer-section-title">Fragment V: The Water of Leith</h2>
+          <p class="drawer-text">
+            The hidden river that threads through the city unseen. 
+            Follow the water and you find the seams.
+          </p>
+        </section>
+      </article>
+    </div>
+  </div>
+</div>
+
+<style>
+  .drawer-root {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .drawer-root[aria-hidden="false"] {
+    pointer-events: auto;
+  }
+
+  .drawer-panel {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-fog);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .drawer-panel.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .drawer-scroll {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .drawer-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 1.5rem 2rem;
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  @media (min-width: 768px) {
+    .drawer-header {
+      padding: 2rem 4rem;
+    }
+  }
+
+  .drawer-back {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .drawer-back:hover {
+    color: var(--text-ink);
+  }
+
+  .drawer-content {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .drawer-content {
+      padding: 4rem 4rem 8rem;
+    }
+  }
+
+  .drawer-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 400;
+    color: var(--text-ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .drawer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .drawer-section {
+    margin-bottom: 3rem;
+  }
+
+  .drawer-section-title {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .drawer-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-ink);
+    max-width: 40ch;
+  }
+
+  @media (min-width: 768px) {
+    .drawer-text {
+      font-size: 1.125rem;
+    }
+  }
+
+  .drawer-placeholder {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.3;
+    padding: 4rem 2rem;
+    border: 1px dashed var(--line-soft);
+    text-align: center;
+  }
+</style>

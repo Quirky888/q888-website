@@ -3,40 +3,50 @@ import Layout from "../layouts/Layout.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import LandingHero from "../components/LandingHero.astro";
 import ProjectsThreshold from "../components/ProjectsThreshold.astro";
+import ProjectDrawer from "../components/ProjectDrawer.astro";
 ---
 
-<Layout title="Q888 — Identity">
+<Layout title="Q888 — Identity" hideNav>
+  <SystemMeta position="top" />
+  
   <main class="relative min-h-screen">
-    <section id="landing" class="relative">
-      <SystemMeta position="top" />
-      
+    <section id="landing" data-section="landing" class="relative">
       <LandingHero />
-      
-      <SystemMeta position="bottom" />
     </section>
 
-    <ProjectsThreshold />
+    <section data-section="projects">
+      <ProjectsThreshold />
+    </section>
 
-    <!-- Temporary Scroll Spacer for Testing -->
-    <section class="h-[140vh] bg-[var(--bg-fog)] border-t border-[var(--line-soft)] flex items-center justify-center">
+    <section id="infocigan" data-section="infocigan" class="h-[100vh] bg-[var(--bg-fog)] border-t border-[var(--line-soft)] flex items-center justify-center">
       <span class="font-mono text-[8px] uppercase tracking-[0.4em] text-[var(--text-muted)] opacity-20">
-        // system air
+        // infocigan placeholder
       </span>
     </section>
 
-    <!-- Future Sections -->
-    <div id="projects-content"></div>
-    <div id="infocigan"></div>
-    <div id="contact"></div>
+    <section id="contact" data-section="contact" class="h-[100vh] bg-[var(--bg-fog)] border-t border-[var(--line-soft)] flex items-center justify-center">
+      <span class="font-mono text-[8px] uppercase tracking-[0.4em] text-[var(--text-muted)] opacity-20">
+        // contact placeholder
+      </span>
+    </section>
   </main>
+
+  <SystemMeta position="bottom" />
+  <ProjectDrawer />
 
   <script>
     import { initThresholdMotion } from "../scripts/thresholdMotion";
+    import { initProjectDrawer } from "../scripts/drawerNav";
+    import { initSystemMetaState } from "../scripts/systemMetaState";
     
-    // Run on initial load
     initThresholdMotion();
+    initProjectDrawer();
+    initSystemMetaState();
     
-    // Handle Astro page transitions if any were added in the future
-    document.addEventListener("astro:page-load", initThresholdMotion);
+    document.addEventListener("astro:page-load", () => {
+      initThresholdMotion();
+      initProjectDrawer();
+      initSystemMetaState();
+    });
   </script>
 </Layout>

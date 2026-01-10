@@ -6,23 +6,36 @@ interface Props {
 const { position } = Astro.props;
 
 const metaItems = [
-  { label: "SYSTEM_STATUS", value: "QUIET" },
-  { label: "ORACLE_MODE", value: "ENGAGED" },
-  { label: "WHISPER_PROTOCOL", value: "ACTIVE" },
-  { label: "COORDS", value: "55.9533N, 3.1883W" },
+  { field: "system_status", label: "SYSTEM_STATUS", value: "QUIET" },
+  { field: "oracle_mode", label: "ORACLE_MODE", value: "ENGAGED" },
+  { field: "whisper_protocol", label: "WHISPER_PROTOCOL", value: "ACTIVE" },
+  { field: "coords", label: "COORDS", value: "55.9533N, 3.1883W" },
 ];
 ---
 
-<div class:list={[
-  "fixed inset-x-0 font-mono text-xs tracking-wide uppercase text-neutral-400 select-none px-4 py-3 md:px-8 md:py-4",
-  position === "top" ? "top-0" : "bottom-0"
-]}>
+<div 
+  class:list={[
+    "system-meta fixed inset-x-0 font-mono text-xs tracking-wide uppercase text-neutral-400 select-none px-4 py-3 md:px-8 md:py-4 z-50",
+    position === "top" ? "top-0" : "bottom-0"
+  ]}
+  data-system-meta={position}
+>
   <div class="mx-auto w-full max-w-6xl grid grid-cols-2 gap-x-4 gap-y-2 md:flex md:items-center md:justify-between md:gap-x-6 md:gap-y-0">
     {metaItems.map((item) => (
       <div class="flex gap-2 whitespace-nowrap">
         <span class="opacity-50">{item.label}:</span>
-        <span>{item.value}</span>
+        <span class="meta-value" data-field={item.field}>{item.value}</span>
       </div>
     ))}
   </div>
 </div>
+
+<style>
+  .meta-value {
+    transition: opacity 180ms ease-out;
+  }
+  
+  .meta-value.is-changing {
+    opacity: 0.6;
+  }
+</style>

@@ -1,0 +1,168 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const navLinks = [
+  { label: "Projects", href: "/#projects" },
+  { label: "Digital Ink", href: "/digital-ink" },
+  { label: "Map", href: "/edinburgh-map" },
+  { label: "Infocigan", href: "/infocigan" },
+  { label: "Contact", href: "/contact" },
+];
+---
+
+<nav class:list={["top-nav", className]}>
+  <div class="nav-inner">
+    <a href="/" class="wordmark">Q888</a>
+    
+    <button 
+      class="mobile-toggle" 
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      type="button"
+    >
+      <span class="toggle-bar"></span>
+      <span class="toggle-bar"></span>
+    </button>
+    
+    <div class="nav-links" data-nav-links>
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  function initNav() {
+    const toggle = document.querySelector('.mobile-toggle');
+    const links = document.querySelector('[data-nav-links]');
+    
+    if (!toggle || !links) return;
+    
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      links.classList.toggle('open');
+    });
+
+    links.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        links.classList.remove('open');
+      });
+    });
+  }
+  
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
+</script>
+
+<style>
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .nav-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    .nav-inner {
+      padding: 1rem 2rem;
+    }
+  }
+
+  .wordmark {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-ink);
+    text-decoration: none;
+  }
+
+  .wordmark:hover {
+    color: var(--text-muted);
+  }
+
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-toggle {
+      display: none;
+    }
+  }
+
+  .toggle-bar {
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: var(--text-ink);
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      gap: 1.5rem;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+  }
+
+  .nav-link {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--text-ink);
+  }
+</style>

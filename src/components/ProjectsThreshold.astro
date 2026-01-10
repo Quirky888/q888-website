@@ -4,11 +4,12 @@
 <section id="projects" data-threshold="projects" class="relative w-full border-t border-[var(--line-soft)]">
   <div class="flex flex-col lg:flex-row lg:h-screen min-h-screen">
     <!-- Digital Ink Panel -->
-    <div 
+    <button 
+      type="button"
+      data-drawer-trigger="digital-ink"
+      data-nav-direction="left"
       id="project-digital-ink"
       data-project="digital-ink"
-      tabindex="0"
-      role="button"
       aria-label="View Digital Ink: A system for digital creation"
       class="group relative flex-1 flex flex-col items-center justify-center p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-[var(--line-soft)] cursor-pointer min-h-[60vh] lg:min-h-0 bg-[var(--bg-fog)] outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500"
     >
@@ -20,14 +21,15 @@
           A system for meaning, scarcity, and traceable digital creation.
         </p>
       </div>
-    </div>
+    </button>
 
     <!-- Edinburgh Magical Map Panel -->
-    <div 
+    <button 
+      type="button"
+      data-drawer-trigger="edinburgh-map"
+      data-nav-direction="right"
       id="project-edinburgh-map"
       data-project="edinburgh-map"
-      tabindex="0"
-      role="button"
       aria-label="View Edinburgh Magical Map: A mythic cartography"
       class="group relative flex-1 flex flex-col items-center justify-center p-8 lg:p-12 cursor-pointer min-h-[60vh] lg:min-h-0 bg-[var(--bg-fog)] outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500"
     >
@@ -39,6 +41,6 @@
           A mythic cartography of place, memory, and hidden doors.
         </p>
       </div>
-    </div>
+    </button>
   </div>
 </section>

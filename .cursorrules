@@ -1,29 +1,134 @@
-Q888 Website Rules (Canonical)
+# Q888 Website Rules (Canonical) — v1.1
 
-Tone:
+## 0) Prime Directive
+Preserve the established aesthetic and hierarchy.
+When in doubt: keep it quieter, smaller, and closer to the existing system.
+
+---
+
+## Tone
 - Quiet confidence, system-aware, human.
 - No marketing CTA language.
 - Humor only in Infocigan microcopy, never in recruiter-facing Contact.
 
-Visual:
+---
+
+## Visual (Global)
 - Landing background: near-white fog with subtle grain.
 - Typography: primary sans + monospace for system metadata.
-- Spacing: generous margins, whitespace is active.
+- Spacing: generous margins; whitespace is active.
+- Borders: thin, soft (use existing tokens only).
 
-Motion:
+Forbidden unless explicitly requested:
+- Changing font families
+- Changing global type scale
+- Changing landing layout/hero hierarchy
+- Adding decorative UI (shadows/cards/glass effects/icons)
+- Changing background gradient/noise behavior
+
+---
+
+## Motion
 - Implied, restrained. No loops that beg attention.
 - Allowed: opacity settling, rare metadata flicker, slow micro drift.
-- Forbidden: playful easing, bouncy transitions, loud parallax.
+- Forbidden: playful easing, bouncy transitions, loud parallax, scroll-jacking.
 
-Navigation:
+Accessibility:
+- Must respect prefers-reduced-motion.
+- When reduced motion is enabled: no transforms left behind, navigation becomes instant.
+
+---
+
+## Navigation
 - Directional reveal (left/right) is a meaning ritual, not a normal page jump.
 - Toolbar is an instrument panel: Q888 / Projects / Infocigan / Contact.
 - Exits must feel like retreat, not teleport.
 
-Infocigan:
+IMPORTANT:
+- Default site structure is a SINGLE continuous scroll with anchors:
+  #landing → #projects → #infocigan → #contact
+- Do NOT introduce multi-page routing for projects unless explicitly requested.
+- Projects open as an in-page directional reveal / drawer (left/right) by default.
+
+---
+
+## System Status / Mood Bars (Global)
+- SystemMeta is global and persistent (top + bottom), consistent with landing style.
+- Content (values) may change per section; styling must not change.
+- Allowed animation: subtle crossfade only (no typewriter, no flashing).
+
+---
+
+## Infocigan
 - Not a store UI. No cart, no checkout, no filters, no urgency.
 - Floating artifacts, portal hub, contact-first.
+- “Products” are zones/artifacts, not SKUs.
+- Humor is optional; never explain the joke too early.
 
-Quality:
+---
+
+## Quality
 - Prefer simple, readable code. Avoid over-engineering.
 - Optimize images, lazy-load large assets.
+- No debug UI/logs unless explicitly requested.
+- Keep selectors stable; avoid brittle DOM assumptions.
+
+---
+
+# Strict Guardrails (Non-Negotiable)
+
+1) **Do NOT redesign the Landing page.**
+   No typography changes, no new nav bars, no new spacing system,
+   no background changes, no new fonts.
+
+2) **Do NOT modify `src/styles/tokens.css`** unless explicitly requested.
+
+3) **Only modify files explicitly listed in the task.**
+   If another file must change, STOP and ask—never change it silently.
+
+4) **Small diffs only.**
+   Prefer adding new components/scripts over rewriting existing ones.
+
+5) **No debug UI.**
+   No outlines, markers, or console logs unless explicitly requested for debugging.
+
+6) **Preserve existing motion logic** for ProjectsThreshold center reveal
+   (`centerReveal.ts`, `thresholdMotion.ts`) unless explicitly asked to change.
+
+7) **Do NOT create new routes/pages or a router-based architecture**
+   (e.g. /digital-ink, /edinburgh-map) unless explicitly requested.
+
+8) **Do NOT introduce a new navigation paradigm**
+   (hamburger redesigns, sidebars, mega menus, sticky headers with new styling)
+   unless explicitly requested.
+
+---
+
+# Working Agreement (Required Response Format)
+
+Every response must follow this structure:
+
+## 1) Files I will change
+List each file path that will be modified or created.
+
+## 2) What will NOT change
+Explicitly confirm which protected files/systems remain untouched
+(Landing design, tokens.css, motion scripts, etc.).
+
+## 3) Implementation
+Make the changes.
+
+## 4) How to verify
+Provide a short checklist to confirm the change works as intended.
+
+---
+
+# STOP & ASK FIRST — Red Flags
+If you are about to do any of the following, STOP and ask first:
+- change typography scale or font family
+- change landing layout/hero hierarchy
+- add a top nav that wasn’t requested
+- convert single-page into multi-page
+- modify tokens.css
+- replace GSAP behavior with a different library
+- rewrite Layout.astro structure instead of adding minimal wrappers
