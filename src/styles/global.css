@@ -1,0 +1,12 @@
+@import "./tokens.css";
+@import "tailwindcss";
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background: var(--bg-fog);
+	color: var(--text-ink);
+}

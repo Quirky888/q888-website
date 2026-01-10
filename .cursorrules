@@ -1,0 +1,29 @@
+Q888 Website Rules (Canonical)
+
+Tone:
+- Quiet confidence, system-aware, human.
+- No marketing CTA language.
+- Humor only in Infocigan microcopy, never in recruiter-facing Contact.
+
+Visual:
+- Landing background: near-white fog with subtle grain.
+- Typography: primary sans + monospace for system metadata.
+- Spacing: generous margins, whitespace is active.
+
+Motion:
+- Implied, restrained. No loops that beg attention.
+- Allowed: opacity settling, rare metadata flicker, slow micro drift.
+- Forbidden: playful easing, bouncy transitions, loud parallax.
+
+Navigation:
+- Directional reveal (left/right) is a meaning ritual, not a normal page jump.
+- Toolbar is an instrument panel: Q888 / Projects / Infocigan / Contact.
+- Exits must feel like retreat, not teleport.
+
+Infocigan:
+- Not a store UI. No cart, no checkout, no filters, no urgency.
+- Floating artifacts, portal hub, contact-first.
+
+Quality:
+- Prefer simple, readable code. Avoid over-engineering.
+- Optimize images, lazy-load large assets.
