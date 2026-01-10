@@ -17,9 +17,26 @@ import ProjectsThreshold from "../components/ProjectsThreshold.astro";
 
     <ProjectsThreshold />
 
+    <!-- Temporary Scroll Spacer for Testing -->
+    <section class="h-[140vh] bg-[var(--bg-fog)] border-t border-[var(--line-soft)] flex items-center justify-center">
+      <span class="font-mono text-[8px] uppercase tracking-[0.4em] text-[var(--text-muted)] opacity-20">
+        // system air
+      </span>
+    </section>
+
     <!-- Future Sections -->
-    <div id="projects"></div>
+    <div id="projects-content"></div>
     <div id="infocigan"></div>
     <div id="contact"></div>
   </main>
+
+  <script>
+    import { initThresholdMotion } from "../scripts/thresholdMotion";
+    
+    // Run on initial load
+    initThresholdMotion();
+    
+    // Handle Astro page transitions if any were added in the future
+    document.addEventListener("astro:page-load", initThresholdMotion);
+  </script>
 </Layout>
