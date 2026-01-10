@@ -37,26 +37,44 @@ import ContactSection from "../components/ContactSection.astro";
     import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
     import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
 
+    let didInit = false;
+    let didBindLifecycle = false;
+
     function init() {
+      if (didInit) return;
+      
+      initNavScroll();
+      initSystemMetaState();
       initThresholdMotion();
       initProjectDrawer();
-      initSystemMetaState();
-      initNavScroll();
       initInfociganPortal();
+      
+      didInit = true;
     }
 
     function cleanup() {
-      destroyProjectDrawer();
-      destroySystemMetaState();
+      if (!didInit) return;
+
       destroyNavScroll();
+      destroySystemMetaState();
+      destroyProjectDrawer();
       destroyInfociganPortal();
+      
+      didInit = false;
     }
 
-    init();
+    if (!didBindLifecycle) {
+      // Initial load fallback
+      if (document.readyState !== "loading") {
+        init();
+      } else {
+        document.addEventListener("DOMContentLoaded", init, { once: true });
+      }
 
-    document.addEventListener("astro:page-load", () => {
-      cleanup();
-      init();
-    });
+      document.addEventListener("astro:page-load", init);
+      document.addEventListener("astro:before-swap", cleanup);
+      window.addEventListener("beforeunload", cleanup);
+      didBindLifecycle = true;
+    }
   </script>
 </Layout>
