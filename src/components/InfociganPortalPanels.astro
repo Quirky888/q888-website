@@ -1,0 +1,218 @@
+---
+const zones = [
+  {
+    slug: "overpriced-stickers",
+    title: "Overpriced Stickers",
+    description: "Standard adhesive signals for those who require immediate identification without long-term commitment. Each set is printed on speculative paper that responds to local trust levels.",
+    specs: [
+      { label: "MATERIAL", value: "VINYL_GHOST" },
+      { label: "LIFESPAN", value: "UNTIL_REALITY_SETTLES" },
+      { label: "UTILITY", value: "SIGNALING_ONLY" }
+    ]
+  },
+  {
+    slug: "q-bag",
+    title: "Q-Bag",
+    description: "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
+    specs: [
+      { label: "VOLUME", value: "NON_EUCLIDEAN" },
+      { label: "CLOSURE", value: "ZIPPER_LOGIC" },
+      { label: "DENSITY", value: "LIGHTWEIGHT" }
+    ]
+  },
+  {
+    slug: "afterlife-contracts",
+    title: "Afterlife Contracts",
+    description: "Pre-notarized agreements for post-existence bureaucracy. Essential for those who expect to continue managing their legacy after their primary biological sequence has terminated.",
+    specs: [
+      { label: "TERM", value: "INDEFINITE" },
+      { label: "JURISDICTION", value: "BEYOND" },
+      { label: "REFUND", value: "IMPOSSIBLE" }
+    ]
+  },
+  {
+    slug: "president-of-the-galaxy",
+    title: "President of the Galaxy™",
+    description: "A ceremonial title providing zero jurisdictional power over any planetary or stellar body. It functions as a psychological stabilizer for those overwhelmed by their lack of control over the universe.",
+    specs: [
+      { label: "POWER", value: "NULL" },
+      { label: "SCOPE", value: "COSMIC_FICTION" },
+      { label: "SASH_INCLUDED", value: "TRUE" }
+    ]
+  }
+];
+---
+
+<div class="infocigan-portal-system">
+  {zones.map((zone) => (
+    <div 
+      class="portal-panel" 
+      data-portal-panel={zone.slug}
+    >
+      <div class="panel-overlay"></div>
+      <div class="panel-content">
+        <div class="panel-scroll">
+          <article class="panel-article">
+            <h2 class="panel-title">{zone.title}</h2>
+            <div class="panel-meta">
+              {zone.specs.map(spec => (
+                <span>{spec.label}: {spec.value}</span>
+              ))}
+            </div>
+            
+            <section class="panel-body">
+              <p>{zone.description}</p>
+            </section>
+            
+            <div class="panel-visual">
+              <span>// VISUAL_DATA_PENDING</span>
+            </div>
+
+            <div class="panel-footer">
+              <button 
+                type="button"
+                data-portal-back 
+                class="panel-back"
+              >
+                Back to market
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .infocigan-portal-system {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .portal-panel {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .portal-panel.is-active {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+  }
+
+  .panel-content {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-fog);
+    opacity: 0;
+  }
+
+  .panel-scroll {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .panel-article {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    .panel-article {
+      padding: 4rem 6rem 4rem;
+    }
+  }
+
+  .panel-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4rem;
+    margin-top: auto;
+    padding-bottom: 4rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .panel-back {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 150ms ease;
+  }
+
+  .panel-back:hover {
+    color: var(--text-ink);
+  }
+
+  .panel-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text-ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .panel-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .panel-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-ink);
+    max-width: 40ch;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .panel-body {
+      font-size: 1.125rem;
+    }
+  }
+
+  .panel-visual {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.3;
+    padding: 4rem 2rem;
+    border: 1px dashed var(--line-soft);
+    text-align: center;
+  }
+</style>

@@ -1,145 +1,107 @@
 ---
+import InfociganPortalPanels from "./InfociganPortalPanels.astro";
+
+const zones = [
+  {
+    slug: "overpriced-stickers",
+    title: "Overpriced Stickers",
+    descriptor: "Collectibles where price is part of the narrative.",
+    system: "SYST: STICKY",
+    scatter: "md:translate-y-4 md:translate-x-2 md:scale-110"
+  },
+  {
+    slug: "q-bag",
+    title: "Q-Bag",
+    descriptor: "A bag, a ritual, and a question about daily objects.",
+    system: "SYST: VOID",
+    scatter: "md:-translate-y-8 md:-translate-x-4 md:scale-95"
+  },
+  {
+    slug: "afterlife-contracts",
+    title: "Afterlife Contracts",
+    descriptor: "Paperwork for things that may outlive you.",
+    system: "SYST: FINAL",
+    scatter: "md:translate-y-12 md:translate-x-6 md:scale-105"
+  },
+  {
+    slug: "president-of-the-galaxy",
+    title: "President of the Galaxy™",
+    descriptor: "Authority fiction stabilizer.",
+    system: "SYST: NULL",
+    scatter: "md:-translate-y-4 md:-translate-x-2 md:scale-100"
+  }
+];
 ---
 
 <section 
   id="infocigan" 
   data-section="infocigan" 
-  class="relative min-h-screen py-32 px-6 md:px-12 lg:px-24 bg-[var(--bg-fog)] border-t border-[var(--line-soft)]"
+  class="w-full min-h-screen relative border-t border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden"
 >
-  <div class="max-w-6xl mx-auto">
+  <!-- Subtle gold shift overlay -->
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(circle_at_50%_50%,var(--gold),transparent_70%)]"></div>
+  
+  <div class="relative z-10 max-w-7xl px-6 md:px-24 py-24 md:py-32">
     <!-- Header Block -->
-    <header class="mb-24">
-      <h2 class="text-[3rem] md:text-[5rem] font-light tracking-tight leading-none mb-4">
+    <header class="mb-32">
+      <h2 class="text-[3rem] md:text-[5rem] font-light tracking-tight leading-none mb-4 text-[var(--text-ink)] uppercase">
         INFOCIGAN
       </h2>
-      <p class="text-[var(--text-muted)] text-sm md:text-base mb-8 max-w-xl">
+      <p class="text-[var(--text-muted)] text-sm md:text-base mb-8 max-w-xl font-light">
         A speculative marketplace for objects, belief, and optional nonsense.
       </p>
       <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--text-muted)] space-y-1 opacity-60">
         <div>MARKET_STATE: UNSTABLE</div>
         <div>VALUE_LOGIC: SYMBOLIC</div>
         <div>TRUST_LEVEL: OPTIONAL</div>
+        <div>LAST_KNOWN_VERSION: UNRELIABLE</div>
       </div>
     </header>
 
-    <!-- Artifact Field -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-      <!-- 1) Overpriced Stickers -->
-      <div class="artifact-card transform translate-y-4">
-        <div class="p-8 bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm">
-          <h3 class="text-xs uppercase tracking-widest mb-4">Overpriced Stickers</h3>
-          <div class="w-full aspect-square bg-white/20 border border-[var(--line-soft)] mb-6"></div>
-          <details class="group cursor-pointer">
-            <summary class="list-none text-[10px] uppercase tracking-widest text-[var(--text-muted)] group-open:mb-4">
-              System Notes [+]
-            </summary>
-            <div class="text-[12px] text-[var(--text-muted)] leading-relaxed font-light">
-              Adhesive artifacts for status signaling. 
-              Limited utility, high symbolic density.
-              Guaranteed to peel eventually.
+    <!-- Stable Field with Mild Scatter -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24 md:gap-y-32">
+      {zones.map((zone) => (
+        <div class={`relative group ${zone.scatter}`}>
+          <a 
+            href={`#infocigan-zone-${zone.slug}`}
+            data-infocigan-slug={zone.slug}
+            class="block relative aspect-square md:aspect-[4/5] bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm transition-all duration-700 hover:border-[var(--gold)]/30 overflow-hidden cursor-pointer"
+          >
+            <!-- Image Frame Placeholder -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-10">
+              <span class="font-mono text-[10px] uppercase tracking-[0.4em] italic select-none">IMAGE_DATA_ENCRYPTED</span>
             </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- 2) Q-Bag -->
-      <div class="artifact-card transform -translate-y-8">
-        <div class="p-8 bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm">
-          <h3 class="text-xs uppercase tracking-widest mb-4">Q-Bag</h3>
-          <div class="w-full aspect-square bg-white/20 border border-[var(--line-soft)] mb-6"></div>
-          <details class="group cursor-pointer">
-            <summary class="list-none text-[10px] uppercase tracking-widest text-[var(--text-muted)] group-open:mb-4">
-              System Notes [+]
-            </summary>
-            <div class="text-[12px] text-[var(--text-muted)] leading-relaxed font-light">
-              A containment vessel for identity fragments. 
-              Minimalist volume. Non-euclidean interior potential.
+            
+            <!-- Always-on Overlay Labels -->
+            <div class="absolute inset-0 p-8 flex flex-col justify-end pointer-events-none">
+              <div class="space-y-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 class="text-xs uppercase tracking-[0.2em] font-medium text-[var(--text-ink)]">{zone.title}</h3>
+                <p class="text-[11px] text-[var(--text-muted)] leading-tight max-w-[25ch] font-light">{zone.descriptor}</p>
+                <div class="pt-2 font-mono text-[9px] uppercase tracking-widest text-[var(--text-muted)] opacity-50">
+                  {zone.system}
+                </div>
+              </div>
             </div>
-          </details>
+          </a>
         </div>
-      </div>
-
-      <!-- 3) Afterlife Contracts -->
-      <div class="artifact-card transform translate-y-12">
-        <div class="p-8 bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm">
-          <h3 class="text-xs uppercase tracking-widest mb-4">Afterlife Contracts</h3>
-          <div class="w-full aspect-square bg-white/20 border border-[var(--line-soft)] mb-6"></div>
-          <details class="group cursor-pointer">
-            <summary class="list-none text-[10px] uppercase tracking-widest text-[var(--text-muted)] group-open:mb-4">
-              System Notes [+]
-            </summary>
-            <div class="text-[12px] text-[var(--text-muted)] leading-relaxed font-light">
-              Post-existence bureaucracy facilitators. 
-              Notarized by speculative authorities.
-              Non-refundable.
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- 4) President of the Galaxy -->
-      <div class="artifact-card transform -translate-y-4">
-        <div class="p-8 bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm">
-          <h3 class="text-xs uppercase tracking-widest mb-4">President of the Galaxy</h3>
-          <div class="w-full aspect-square bg-white/20 border border-[var(--line-soft)] mb-6"></div>
-          <details class="group cursor-pointer">
-            <summary class="list-none text-[10px] uppercase tracking-widest text-[var(--text-muted)] group-open:mb-4">
-              System Notes [+]
-            </summary>
-            <div class="text-[12px] text-[var(--text-muted)] leading-relaxed font-light">
-              A title with zero jurisdictional power. 
-              Includes sash of questionable material.
-              Ideal for redirecting blame.
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- 5) Nar-Mail Express -->
-      <div class="artifact-card transform translate-y-8">
-        <div class="p-8 bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm">
-          <h3 class="text-xs uppercase tracking-widest mb-4">Nar-Mail Express</h3>
-          <div class="w-full aspect-square bg-white/20 border border-[var(--line-soft)] mb-6"></div>
-          <details class="group cursor-pointer">
-            <summary class="list-none text-[10px] uppercase tracking-widest text-[var(--text-muted)] group-open:mb-4">
-              System Notes [+]
-            </summary>
-            <div class="text-[12px] text-[var(--text-muted)] leading-relaxed font-light">
-              Communication protocol for the delusional. 
-              Latency measured in lifetimes.
-              End-to-end confusion guaranteed.
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- 6) Edinburgh Map Artifacts -->
-      <div class="artifact-card transform -translate-y-12">
-        <div class="p-8 bg-white/40 border border-[var(--line-soft)] backdrop-blur-sm">
-          <h3 class="text-xs uppercase tracking-widest mb-4">Official Maps</h3>
-          <div class="w-full aspect-square bg-white/20 border border-[var(--line-soft)] mb-6"></div>
-          <details class="group cursor-pointer">
-            <summary class="list-none text-[10px] uppercase tracking-widest text-[var(--text-muted)] group-open:mb-4">
-              System Notes [+]
-            </summary>
-            <div class="text-[12px] text-[var(--text-muted)] leading-relaxed font-light">
-              Cartography of non-existent alleys. 
-              Includes coordinates for missing pubs.
-              Scale: 1:Unknown.
-            </div>
-          </details>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
+
+  <!-- Portal Panels -->
+  <InfociganPortalPanels />
 </section>
 
 <style>
-  .artifact-card {
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  /* Base card transitions */
+  [data-infocigan-slug] {
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   }
   
-  details summary::-webkit-details-marker {
-    display: none;
+  /* Disable scatter on mobile */
+  @media (max-width: 767px) {
+    .grid > div {
+      transform: none !important;
+    }
   }
 </style>

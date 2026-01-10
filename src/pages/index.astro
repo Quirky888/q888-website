@@ -35,18 +35,21 @@ import ContactSection from "../components/ContactSection.astro";
     import { initProjectDrawer, destroyProjectDrawer } from "../scripts/drawerNav";
     import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
     import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
+    import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
 
     function init() {
       initThresholdMotion();
       initProjectDrawer();
       initSystemMetaState();
       initNavScroll();
+      initInfociganPortal();
     }
 
     function cleanup() {
       destroyProjectDrawer();
       destroySystemMetaState();
       destroyNavScroll();
+      destroyInfociganPortal();
     }
 
     init();
