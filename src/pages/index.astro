@@ -1,10 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+import LandingHero from "../components/LandingHero.astro";
 ---
 
-<Layout title="Q888 — Portfolio">
-	<main class="min-h-screen bg-white p-10">
-		<h1 class="text-4xl font-semibold">Q888</h1>
-		<p class="mt-4 text-lg text-neutral-700">Tailwind is active if this text is grey and spaced.</p>
-	</main>
+<Layout title="Q888 — Identity">
+  <main class="relative min-h-screen">
+    <section id="landing" class="relative">
+      <SystemMeta position="top" />
+      
+      <LandingHero />
+      
+      <SystemMeta position="bottom" />
+    </section>
+
+    <!-- Future Sections -->
+    <div id="projects"></div>
+    <div id="infocigan"></div>
+    <div id="contact"></div>
+  </main>
 </Layout>
