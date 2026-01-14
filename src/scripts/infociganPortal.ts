@@ -149,6 +149,21 @@ export function initInfociganPortal() {
       },
       { signal }
     );
+
+    card.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          const slug = card.getAttribute("data-infocigan-slug");
+          if (!slug) return;
+          triggerElement = card;
+          const direction = getDirection(card);
+          openPortal(slug, direction);
+        }
+      },
+      { signal }
+    );
   });
 
   backButtons.forEach((btn) => {
@@ -169,6 +184,9 @@ export function initInfociganPortal() {
 }
 
 export function destroyInfociganPortal() {
+  if (activePanel) {
+    unlockScroll();
+  }
   abortController?.abort();
   abortController = null;
   initialized = false;

@@ -36,6 +36,7 @@ import ContactSection from "../components/ContactSection.astro";
     import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
     import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
     import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
+    import { initGraphiteMist, destroyGraphiteMist } from "../scripts/graphiteMist";
 
     let didInit = false;
     let didBindLifecycle = false;
@@ -48,6 +49,7 @@ import ContactSection from "../components/ContactSection.astro";
       initThresholdMotion();
       initProjectDrawer();
       initInfociganPortal();
+      initGraphiteMist();
       
       didInit = true;
     }
@@ -59,6 +61,7 @@ import ContactSection from "../components/ContactSection.astro";
       destroySystemMetaState();
       destroyProjectDrawer();
       destroyInfociganPortal();
+      destroyGraphiteMist();
       
       didInit = false;
     }
