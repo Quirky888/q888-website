@@ -75,6 +75,36 @@ IMPORTANT:
 
 ---
 
+## Content Editing Rule: Section Markers (Non-Negotiable)
+
+Problem:
+Cursor struggles with "simple text swaps" because insertion points are ambiguous in long Astro components.
+
+Solution:
+All long-form content MUST be wrapped in explicit section anchors. Edits must target anchors, never "approximate" locations.
+
+Marker format (exact):
+<!-- Q888:SECTION_START id="UNIQUE_ID" -->
+...section markup...
+<!-- Q888:SECTION_END id="UNIQUE_ID" -->
+
+Rules:
+1) Every major content block (H2 section) must have a UNIQUE id.
+2) Any request to "add text after/before X" must be executed by inserting content:
+   - after <!-- Q888:SECTION_END id="X" -->, OR
+   - between end of X and start of Y if both exist.
+3) Any request to "swap/update text in X" must ONLY modify content inside X's START/END markers.
+4) Do NOT refactor surrounding layout, classes, or spacing when doing content swaps.
+5) If markers for the target section do not exist:
+   - FIRST add markers around the relevant sections (no other changes),
+   - THEN perform the requested edit using those markers.
+6) If the assistant cannot find the markers, STOP and report which ids exist.
+
+Acceptance check:
+- A content change is only "done" if the targeted START/END markers are present and only that bounded region changed.
+
+---
+
 # Strict Guardrails (Non-Negotiable)
 
 1) **Do NOT redesign the Landing page.**
