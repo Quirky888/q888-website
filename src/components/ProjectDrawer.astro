@@ -23,7 +23,7 @@
           class="drawer-back"
           aria-label="Close drawer and return to Projects"
         >
-          ← Back to Projects
+          Back to Projects
         </button>
       </header>
       
@@ -36,12 +36,12 @@
             </h1>
             
             <p class="mt-8 mx-auto text-[clamp(1.9rem,3vw,3.4rem)] leading-[1.12] text-zinc-200">
-              A scarcity-based iPadOS art system where <span class="text-zinc-50">every pixel carries provenance</span>.
+              What if digital art had memory? What if every brushstroke carried weight, history, and emotional resonance? Digital Ink reimagines digital creation by introducing scarcity, symbolism, and intention into the drawing process—transforming pixels into living artifacts that remember their origins and evolve through your artistic journey.
             </p>
 
             <p class="mt-8 mx-auto text-[clamp(1.3rem,1.5vw,1.6rem)] leading-relaxed text-zinc-300">
               Digital Ink turns the smallest unit of digital creation into something with weight:
-              <span class="text-zinc-100">one image → one Smart Ink Drop (1×1) → one irreversible decision</span>.
+              <span class="text-zinc-100">one image → one Smart Ink Drop (1×1) </span>
             </p>
 
             <div class="di-mono mt-10 text-lg sm:text-xl text-zinc-400 leading-relaxed">
@@ -132,9 +132,9 @@
             />
 
             <!-- Fog quote text -->
-            <div class="di-fog-text absolute right-6 sm:right-10 lg:right-16 top-1/2 -translate-y-1/2 z-15 text-right pointer-events-none">
-              <p class="text-[clamp(2.2rem,5vw,5rem)] font-medium tracking-[-0.03em] leading-[1.1] text-zinc-200/40 blur-[1.5px]" style="text-shadow: 0 0 30px rgba(255,255,255,0.15);">
-                I remember …<br/>being many pixels…
+            <div class="di-fog-text absolute right-6 sm:right-10 lg:right-16 top-1/2 -translate-y-1/2 z-15 text-left pointer-events-none">
+              <p class="text-[clamp(2.2rem,5vw,5rem)] font-bold tracking-[-0.03em] leading-[1.1] text-zinc-200/40 blur-[1.5px]" style="font-family: 'Space Grotesk', sans-serif; text-shadow: 0 0 30px rgba(255,255,255,0.15);">
+                I REMEMBER …<br/>being many pixels…
               </p>
             </div>
           </div>
@@ -426,7 +426,7 @@
           class="drawer-back"
           aria-label="Close drawer and return to Projects"
         >
-          Back to Projects →
+          Back to Projects
         </button>
       </header>
       
@@ -516,10 +516,12 @@
   .drawer-header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
     padding: 1.5rem 2rem;
     background: var(--bg-fog);
     border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: flex-end;
   }
 
   @media (min-width: 768px) {
@@ -530,7 +532,7 @@
 
   .drawer-back {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -618,20 +620,20 @@
 
   /* Scoped Theme for Digital Ink */
   .drawer-panel.di-theme {
-    background: #000;
+    background: #28282B;
   }
   .drawer-panel.di-theme .drawer-header,
   .drawer-panel.di-theme .drawer-scroll {
-    background: #000;
+    background: #28282B;
   }
   .drawer-panel.di-theme .drawer-header {
-    border-bottom-color: #27272a; /* zinc-800 */
+    border-bottom-color: rgba(255, 255, 255, 0.08);
   }
   .drawer-panel.di-theme .drawer-back:hover {
     color: #fff;
   }
 
-  .di-panel { overflow-x: clip; background: #000; }
+  .di-panel { overflow-x: clip; background: #28282B; }
 
   .di-panel .di-headline {
     font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
