@@ -11,7 +11,7 @@
   <div 
     data-drawer-panel="digital-ink" 
     data-direction="left"
-    class="drawer-panel"
+    class="drawer-panel di-theme"
     role="dialog"
     aria-modal="true"
     aria-label="Digital Ink project details"
@@ -27,38 +27,156 @@
         </button>
       </header>
       
-      <article class="drawer-content">
-        <h1 class="drawer-title">Digital Ink</h1>
-        <div class="drawer-meta">
-          <span>STATUS: IN DEVELOPMENT</span>
-          <span>TYPE: SYSTEM</span>
-          <span>YEAR: 2024–</span>
-        </div>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Premise</h2>
-          <p class="drawer-text">
-            A system for meaning, scarcity, and traceable digital creation. 
-            Digital Ink explores what it means to create artifacts that carry 
-            provenance, intention, and finite editions in a world of infinite copies.
+      <section class="di-panel di-body overflow-x-clip">
+        <div class="px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
+          <h1 class="di-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-zinc-50">
+            DIGITAL INK
+          </h1>
+          
+          <p class="mt-8 max-w-7xl text-[clamp(1.9rem,3vw,3.4rem)] leading-[1.12] text-zinc-200">
+            A scarcity-based iPadOS art system where <span class="text-zinc-50">every pixel carries provenance</span>.
           </p>
-        </section>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Core Mechanism</h2>
-          <p class="drawer-text">
-            Each work carries a unique hash. Each edition is numbered. 
-            The chain of custody is visible. The ink does not wash out.
+
+          <p class="mt-8 max-w-7xl text-[clamp(1.3rem,1.5vw,1.6rem)] leading-relaxed text-zinc-300">
+            Digital Ink turns the smallest unit of digital creation into something with weight:
+            <span class="text-zinc-100">one image → one Smart Ink Drop (1×1) → one irreversible decision</span>.
           </p>
-        </section>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Visual Language</h2>
-          <div class="drawer-placeholder">
-            // screenshots forthcoming
+
+          <div class="di-mono mt-10 text-lg sm:text-xl text-zinc-400 leading-relaxed">
+            <div>SYSTEM_STATUS: APPROVED · PLATFORM: iPadOS (iPad-only)</div>
+            <div>STATUS: AVAILABLE TOMORROW</div>
+            <div>ROLE: Concept · Product Design · UX · SwiftUI</div>
+            <div>YEAR: 2025–2026</div>
           </div>
-        </section>
-      </article>
+        </div>
+
+        <!-- IMAGE 1 -->
+        <div class="full-bleed">
+          <div class="aspect-video w-full bg-zinc-900/60">
+            <img src="/images/DigitalInk_Ipad_kn.webp" alt="Digital Ink on iPad" class="h-full w-full object-cover" />
+          </div>
+        </div>
+
+        <div class="px-6 sm:px-10 lg:px-16 py-16">
+          <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">What you do inside it</h2>
+          <div class="mt-8 space-y-8 max-w-6xl text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+            <p>
+              You don’t “paint” in the usual sense. You place. Each Smart Ink Drop can exist in only one place at a time: InkHome (unused), Canvas (active), or Gallery (frozen). Nothing is duplicated. Everything is moved.
+            </p>
+            <p>
+              The result is calm and slightly uncomfortable in a good way: you feel the cost of each choice — and that makes the outcome more real.
+            </p>
+          </div>
+        </div>
+
+        <!-- IMAGE 2 -->
+        <div class="full-bleed">
+          <div class="di-reveal aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image2">
+            <!-- Base (aligned right, not stretched) -->
+            <img
+              src="/images/screen.webp"
+              alt="Digital Ink canvas (base)"
+              class="absolute inset-y-0 right-0 h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-10"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Overlay (aligned right, not stretched) -->
+            <img
+              src="/images/screen_overlay.webp"
+              alt="Digital Ink canvas (overlay)"
+              class="di-reveal-overlay absolute inset-y-0 right-0 h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-20"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+        <div class="px-6 sm:px-10 lg:px-16 py-16">
+          <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">Interface as philosophy</h2>
+          <div class="mt-8 space-y-8 max-w-6xl text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+            <p>
+              The canvas is a ritual space: pixel grid, deep zoom, precise placement. No loud brushes. No spray-and-hope gestures. The system stays quiet until you ask it something.
+            </p>
+            <p>
+              If most tools optimize for speed, this one optimizes for meaning. iPad-only is intentional: touch-first, scale-aware, built for close work.
+            </p>
+          </div>
+        </div>
+
+        <!-- IMAGE 3 -->
+        <div class="full-bleed">
+          <div class="di-reveal aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image3">
+            <!-- Base image -->
+            <img
+              src="/images/memory.webp"
+              alt="Digital Ink memory (base)"
+              class="absolute inset-y-0 right-0 h-full w-auto object-contain z-10"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Overlay image -->
+            <img
+              src="/images/memory_overlay.webp"
+              alt="Digital Ink memory (overlay)"
+              class="di-reveal-overlay absolute inset-y-0 right-0 h-full w-auto object-contain z-20"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Fog quote text -->
+            <div class="di-fog-text absolute right-6 sm:right-10 lg:right-16 top-1/2 -translate-y-1/2 z-15 text-right pointer-events-none">
+              <p class="text-[clamp(2.2rem,5vw,5rem)] font-medium tracking-[-0.03em] leading-[1.1] text-zinc-200/40 blur-[1.5px]" style="text-shadow: 0 0 30px rgba(255,255,255,0.15);">
+                I remember …<br/>being many pixels…
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-6 sm:px-10 lg:px-16 py-16 pb-32">
+          <div class="space-y-16">
+            <div>
+              <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">Every pixel has a biography</h2>
+              <p class="mt-8 max-w-6xl text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                Tap any pixel to reveal what it is and where it came from: source identity (hash/reference), timestamp, optional AI description, usage state. The artwork becomes an audit trail of choices — inspectable, not vague.
+              </p>
+            </div>
+
+            <div>
+              <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">How it was made, and what comes next</h2>
+              <div class="mt-8 space-y-8 max-w-6xl text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>
+                  Digital Ink was built as one continuous loop: concept → constraints → interface → data rules → usability → App Store reality. The hardest part wasn’t drawing pixels — it was making the system reliable under real-world conditions without turning it into a shop.
+                </p>
+                <p>
+                  Next improvements will be slow on purpose: refine canvas navigation (zoom/pan/grid feel), deepen provenance inspection, and keep optional online enrichment separate from the core offline creation.
+                </p>
+              </div>
+            </div>
+
+            <p class="text-3xl sm:text-4xl tracking-[-0.01em] text-zinc-200">
+              One image. One pixel. One decision.
+            </p>
+          </div>
+        </div>
+
+        <!-- FOOTER BANNER -->
+        <div class="full-bleed mt-24 pb-32 flex justify-center">
+          <a 
+            href="https://apps.apple.com/us/app/digital-ink/id6757157376" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="di-app-banner block w-[95%] max-w-6xl outline-none"
+          >
+            <img 
+              src="/images/digitalink_appstore.png" 
+              alt="Download Digital Ink on the App Store" 
+              class="w-full h-auto object-cover"
+            />
+          </a>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -267,4 +385,177 @@
     border: 1px dashed var(--line-soft);
     text-align: center;
   }
+
+  /* Scoped Theme for Digital Ink */
+  .drawer-panel.di-theme {
+    background: #000;
+  }
+  .drawer-panel.di-theme .drawer-header,
+  .drawer-panel.di-theme .drawer-scroll {
+    background: #000;
+  }
+  .drawer-panel.di-theme .drawer-header {
+    border-bottom-color: #27272a; /* zinc-800 */
+  }
+  .drawer-panel.di-theme .drawer-back:hover {
+    color: #fff;
+  }
+
+  .di-panel { overflow-x: clip; background: #000; }
+
+  .di-panel .di-headline {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  }
+  .di-panel.di-body, .di-panel .di-body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  }
+  .di-panel .di-mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  /* Local Full-Bleed Utility */
+  .di-panel .full-bleed {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+  }
+
+  .di-panel .di-reveal-overlay {
+    transition:
+      opacity 1200ms cubic-bezier(.4,0,.2,1),
+      filter 1200ms cubic-bezier(.4,0,.2,1),
+      transform 1200ms cubic-bezier(.4,0,.2,1);
+    will-change: opacity, filter, transform;
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(1.015);
+    pointer-events: none;
+  }
+
+  .di-panel .di-reveal.is-active .di-reveal-overlay {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+
+  .di-panel .di-fog-text {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    transition:
+      opacity 1000ms cubic-bezier(.4,0,.2,1),
+      filter 1000ms cubic-bezier(.4,0,.2,1);
+    will-change: opacity, filter;
+  }
+
+  .di-panel .di-reveal.is-active .di-fog-text {
+    opacity: 0;
+    filter: blur(8px);
+  }
+
+  .di-panel .di-app-banner {
+    transition: filter 400ms ease;
+  }
+
+  .di-panel .di-app-banner:hover {
+    filter: brightness(1.1);
+  }
+
+  .di-panel .di-app-banner:focus-visible {
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    outline-offset: -1px;
+  }
+
+  .di-panel .di-app-banner img {
+    display: block;
+  }
 </style>
+
+<script>
+  (() => {
+    const panel = document.querySelector('[data-drawer-panel="digital-ink"]');
+    if (!panel) return;
+
+    const scrollContainer = panel.querySelector('.drawer-scroll');
+    if (!scrollContainer) return;
+
+    const image2 = panel.querySelector('[data-di-reveal="image2"]');
+    const image3 = panel.querySelector('[data-di-reveal="image3"]');
+    if (!image2 && !image3) return;
+
+    let ticking = false;
+    let lastScrollTop = 0;
+
+    function checkReveal() {
+      if (!scrollContainer) return;
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const containerHeight = containerRect.height;
+      if (containerHeight === 0) return;
+
+      const currentScrollTop = scrollContainer.scrollTop;
+      const scrollingDown = currentScrollTop > lastScrollTop;
+      lastScrollTop = currentScrollTop;
+
+      const containerCenter = containerRect.top + containerHeight / 2;
+      const threshold = containerHeight * 0.15;
+
+      // IMAGE 2: zone-based (on near center, off when away)
+      if (image2) {
+        const rect2 = image2.getBoundingClientRect();
+        const center2 = rect2.top + rect2.height / 2;
+        const dist2 = Math.abs(containerCenter - center2);
+
+        if (dist2 < threshold) {
+          image2.classList.add('is-active');
+        } else {
+          image2.classList.remove('is-active');
+        }
+      }
+
+      // IMAGE 3: sticky downward (on near center, stays on when scrolling down, off when scrolling up)
+      if (image3) {
+        const rect3 = image3.getBoundingClientRect();
+        const center3 = rect3.top + rect3.height / 2;
+        const dist3 = Math.abs(containerCenter - center3);
+        const isInZone = dist3 < threshold;
+
+        if (isInZone) {
+          if (!image3.classList.contains('is-active')) {
+            image3.classList.add('is-active');
+            console.log('[Digital Ink] IMAGE 3: ON');
+          }
+        } else if (!scrollingDown) {
+          // Only deactivate when scrolling UP and out of zone
+          if (image3.classList.contains('is-active')) {
+            image3.classList.remove('is-active');
+            console.log('[Digital Ink] IMAGE 3: OFF (scrolling up)');
+          }
+        }
+      }
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(checkReveal);
+        ticking = true;
+      }
+    }
+
+    scrollContainer.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('orientationchange', onScroll, { passive: true });
+
+    const observer = new MutationObserver(() => {
+      if (panel.classList.contains('is-active')) {
+        lastScrollTop = scrollContainer.scrollTop;
+        checkReveal();
+        setTimeout(checkReveal, 100);
+      }
+    });
+    observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+  })();
+</script>

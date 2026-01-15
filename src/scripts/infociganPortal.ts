@@ -11,6 +11,16 @@ let abortController: AbortController | null = null;
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+function restoreFocus(el: HTMLElement | null) {
+  if (!el) return;
+  if (!el.isConnected) return;
+  try {
+    el.focus({ preventScroll: true });
+  } catch {
+    el.focus();
+  }
+}
+
 function getPortalRoot(): HTMLElement | null {
   return document.querySelector(".infocigan-portal-system");
 }
@@ -77,7 +87,7 @@ export function closePortal() {
   const cleanup = () => {
     panel.classList.remove("is-active");
     unlockScroll();
-    triggerElement?.focus();
+    restoreFocus(triggerElement);
     triggerElement = null;
     activePanel = null;
 
@@ -185,10 +195,12 @@ export function initInfociganPortal() {
 
 export function destroyInfociganPortal() {
   if (activePanel) {
+    activePanel.classList.remove("is-active");
     unlockScroll();
   }
   abortController?.abort();
   abortController = null;
   initialized = false;
   activePanel = null;
+  triggerElement = null;
 }
