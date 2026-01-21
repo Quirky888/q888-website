@@ -37,6 +37,7 @@ import ContactSection from "../components/ContactSection.astro";
     import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
     import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
     import { initGraphiteMist, destroyGraphiteMist } from "../scripts/graphiteMist";
+    import { initEdinburghMap, destroyEdinburghMap } from "../scripts/edinburghMap";
 
     let didInit = false;
     let didBindLifecycle = false;
@@ -49,6 +50,7 @@ import ContactSection from "../components/ContactSection.astro";
       initThresholdMotion();
       initProjectDrawer();
       initInfociganPortal();
+      initEdinburghMap();
       initGraphiteMist();
       
       didInit = true;
@@ -61,13 +63,13 @@ import ContactSection from "../components/ContactSection.astro";
       destroySystemMetaState();
       destroyProjectDrawer();
       destroyInfociganPortal();
+      destroyEdinburghMap();
       destroyGraphiteMist();
       
       didInit = false;
     }
 
     if (!didBindLifecycle) {
-      // Initial load fallback
       if (document.readyState !== "loading") {
         init();
       } else {

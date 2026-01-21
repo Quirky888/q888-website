@@ -1,0 +1,240 @@
+{
+  "mapDimensions": {
+    "width": 2560,
+    "height": 1920,
+    "aspectRatio": "4:3"
+  },
+  "locations": [
+    {
+      "id": "castle-chicken-legs",
+      "order": 1,
+      "name": "Castle on Chicken Legs",
+      "emoji": "🏰",
+      "region": "Center-Top",
+      "color": "#8B5A8E",
+      "colorName": "Purple",
+      "short": "An ancient walking castle that finally found its resting place on volcanic rock.",
+      "long": "In the ancient times, before the dawn of modern humanity, when magical creatures ruled the earth, a powerful and mysterious race of beings roamed the world in search of the perfect place to call home. Unlike ordinary creatures, these rulers traveled in a walking castle—perched atop enormous chicken legs, a feat of magical engineering rivaled by none. For a thousand years, the castle wandered the earth, never finding a place that satisfied its yearning for a perfect nesting ground. Its journey finally led it to a land surrounded by what are now known as the Pentland Hills, a region teeming with magical creatures, ancient artifacts, and secret portals to other dimensions. The land had just been shaped by the eruption of a mighty volcano, leaving behind a warm, still-smoking mountain. Sensing the potent energy of the volcanic rock, the castle finally ceased its restless wandering. Here, it settled and built its nest, laying its eggs in the warmth of the volcanic rock—an event that only happens once in the lifetime of these magical creatures. From these eggs hatched tiny houses, each on its own pair of chicken legs, destined to roam the world for a thousand years, providing homes to other magical beings.",
+      "hotspot": {
+        "cx": 2858,
+        "cy": 5435,
+        "r": 240
+      }
+    },
+    {
+      "id": "edinburgh-castle",
+      "order": 2,
+      "name": "Real Edinburgh Castle",
+      "emoji": "👑",
+      "region": "Upper-Center",
+      "color": "#6B4226",
+      "colorName": "Brown",
+      "short": "The true rulers retreated beneath Arthur's Seat when humans took over Eden.",
+      "long": "When humans first discovered the grand Castle of Eden, nestled on the ancient volcano, they were in awe of its majesty and the powerful magic that permeated the land. Initially, the rulers of Eden—magical beings of immense power—were wary of these mortal newcomers, whose short lives and unpredictable nature made them both dangerous and pitiable. However, seeing an opportunity to coexist and perhaps guide humanity, the magical rulers struck a deal: the humans could live in the castle and share in the rule of the land, as long as peace was maintained between the two worlds. For several centuries, this uneasy alliance held. But humans absorbed the magical world's flaws—greed, corruption, and a hunger for power. The once-pristine Eden became tainted by ambition, corruption, and betrayal. As the magical essence of Eden faded and the land was overrun with humans, the magical beings retreated beneath Arthur's Seat, where they constructed a new, hidden castle, far from prying eyes. They sold the visible castle to the humans, who, unaware of its true origins, turned it into a symbol of their dominance.",
+      "hotspot": {
+        "cx": 5068,
+        "cy": 5929,
+        "r": 240
+      }
+    },
+    {
+      "id": "troll-market",
+      "order": 3,
+      "name": "Troll Market & Ocean Boulevard",
+      "emoji": "🧌",
+      "region": "Left-Center",
+      "color": "#2D9CB2",
+      "colorName": "Teal-Light",
+      "short": "A clandestine subterranean bazaar where trolls trade rare and powerful artifacts.",
+      "long": "Beneath the surface of Edinburgh, concealed from the hurried footsteps of its inhabitants, lie two ancient tunnels whose existence is known only to a select few. The Scotland Street Tunnel was carved through the earth in the mid-19th century as part of the Edinburgh, Leith, and Granton Railway, spanning 1000 yards between Canonmills and St. Andrew Square. During World War II, its purpose shifted dramatically, becoming Edinburgh's largest air raid shelter, where up to 3,000 souls found refuge. Yet, the Scotland Street Tunnel is far more than a relic of industrial history—this tunnel is the gateway to the Troll Market, a clandestine subterranean bazaar where trolls and other mystical beings engage in the trade of rare and powerful artifacts. The market, accessible only to those with the knowledge and courage to seek it out, operates in the shadows, its existence denied by all but those who have seen it with their own eyes. Nearby, the Ocean Boulevard Tunnel bears its own secrets. Originally a railway passage, it now serves as a canvas for the city's graffiti artists, yet this tunnel's true purpose is far more mysterious—it is said to be the last remaining segment of the Ocean Boulevard, a legendary route that once stretched beneath the waves of an ancient sea.",
+      "hotspot": {
+        "cx": 3632,
+        "cy": 4924,
+        "r": 240
+      }
+    },
+    {
+      "id": "earthy",
+      "order": 4,
+      "name": "Earthy",
+      "emoji": "☕",
+      "region": "Center-Left",
+      "color": "#D4A574",
+      "colorName": "Tan",
+      "short": "An ancient meeting place at Canonmills Bridge, run by the mysterious Penguine.",
+      "long": "At the base of Canonmills Bridge, there once existed an establishment known as Earthy—an ancient restaurant with roots stretching back to the days of Eden. Earthy was no ordinary place; it served as a neutral ground where humans and magical creatures could meet, trade, and sometimes engage in less-than-legal activities. The enigmatic proprietor was a well-dressed penguin known across many worlds simply as Penguine. His reputation transcended dimensions, making him a figure of considerable influence in realms far beyond our own. Penguine was more than just a restaurateur—he was a seasoned traveler, a collector of secrets, and a master of bartering. Penguine's most coveted offering was his cold coffee, a drink unlike any other. The beans were mined from deep beneath the earth in the heart of Eden, roasted by a clandestine coffee company. Penguine's brewing recipe was a closely guarded secret, known to enhance the flavor in ways that no mortal brew could replicate. But it wasn't just the taste that made Penguine's coffee famous—it granted those who drank it the ability to travel between worlds and dimensions. Over the centuries, Earthy thrived as a nexus of hidden activity, its walls bearing witness to countless secret deals and exchanges of power. But as time wore on, Earthy was mysteriously demolished, with whispers linking the City of Edinburgh Council to deals struck in shadow.",
+      "hotspot": {
+        "cx": 3855,
+        "cy": 4254,
+        "r": 240
+      }
+    },
+    {
+      "id": "ocean-terminal",
+      "order": 5,
+      "name": "Ocean Terminal & Royal Yacht Britannia",
+      "emoji": "⚓",
+      "region": "Right",
+      "color": "#1F7A8C",
+      "colorName": "Deep-Blue",
+      "short": "The vessel docked here is a replica. The real Britannia is hidden for inter-dimensional travel.",
+      "long": "The Ocean Terminal in Leith is more than just a bustling commercial port; it's a linchpin in a web of secrets that stretches back through centuries of British history. For decades, whispers have circulated through the corridors of power suggesting that the Royal Yacht Britannia was not merely a luxury vessel but a critical component of a hidden network used by the royal family for covert operations, escape plans, and even inter-dimensional travel. The most persistent of these rumours is the claim that Queen Elizabeth II is not just a long-lived monarch but, in fact, immortal. Some say that she possesses ancient knowledge or artifacts that have granted her the ability to transcend time. The Royal Yacht, in this telling, is equipped with more than just state-of-the-art navigation tools; it is a mobile sanctum for the Queen, allowing her to slip away from the public eye and travel to hidden locations across the globe, or even to other worlds. Here's where the tale takes an even darker turn: the vessel currently docked next to the Ocean Terminal, marketed as the Royal Yacht Britannia, is, in fact, a cleverly constructed replica—a mere imitation designed to satisfy curious tourists and distract from the true nature of the Yacht's purpose. The real Britannia, shrouded in mystery, is hidden away in an undisclosed location, ready at a moment's notice to carry its illustrious passenger to safety, or perhaps to another realm entirely.",
+      "hotspot": {
+        "cx": 4198,
+        "cy": 3456,
+        "r": 240
+      }
+    },
+    {
+      "id": "the-grit",
+      "order": 6,
+      "name": "The GRIT",
+      "emoji": "♻️",
+      "region": "Lower-Right",
+      "color": "#8B7355",
+      "colorName": "Dark-Brown",
+      "short": "An industrial zone where magical 'patina' is extracted from loved objects through dark alchemy.",
+      "long": "Tucked between the bustling Port of Leith and the tranquil shores of Portobello lies a seemingly ordinary industrial zone. To the unknowing human eye, this area is home to waste management facilities, recycling centers, and water treatment plants. But within the magical underworld, it is known as 'NWE Works Ltd.'—'New World Extraction'—or simply as 'The GRIT.' In the magical economy, traditional human wealth—money, gold, jewels—holds little value. Instead, the true currency is patina, a magical substance formed on items that have been deeply loved, used, and cherished over time. These objects—whether they are a child's favorite toy, a work of art born from an artist's very soul, or furniture that has witnessed the lives of generations—accumulate this invisible patina, becoming artifacts of immense magical worth. The GRIT is where this patina is extracted. When old houses are demolished or the belongings of the deceased are discarded, waste management companies collect these items under the guise of recycling. But their true purpose is far more sinister. In secretive facilities, these items are 'washed,' stripped of their valuable patina through a dark and dangerous process. This process requires vast amounts of water and involves the use of noxious ingredients that create a foul stench. The pollution created is severe, seeping into the environment and causing damage that no human authority would ever sanction. For this reason, the entire operation is illegal, hidden from public scrutiny. Yet the Edinburgh Council is well aware of what transpires in The GRIT, and rather than intervene, they are complicit, benefiting from the flow of patina and the power it brings.",
+      "hotspot": {
+        "cx": 5642,
+        "cy": 4509,
+        "r": 240
+      }
+    },
+    {
+      "id": "coffee-company",
+      "order": 7,
+      "name": "aaARrrrrrrr Coffee Company",
+      "emoji": "☕",
+      "region": "Deep-Underground",
+      "color": "#3D2817",
+      "colorName": "Dark-Brown",
+      "short": "Mines ancient coffee beans underground using enslaved trolls and dragon fire for roasting.",
+      "long": "Hidden far beneath the surface of Edinburgh lies one of the most secretive and enigmatic companies in the magical world: the aaARrrrrrrr Coffee Company. Known only to a select few, this company is the source of the rare and powerful coffee beans that fuel Penguine's legendary brew. But unlike ordinary coffee, which grows on trees, these beans are not farmed—they are mined. The beans of aaARrrrrrrr coffee are ancient, forming deep underground over millennia, much like coal or precious gems. The location of these deposits is a closely guarded secret, known only to the company's inner circle. It's said that the beans draw their power from the earth itself, absorbing the energy and essence of the planet. The mining and roasting of these beans are equally shrouded in mystery. According to the most persistent rumors, the aaARrrrrrrr Coffee Company still employs the labor of little trolls, bound by chains and forced to toil in the dark, cramped tunnels. The roasting process, it's whispered, involves real dragon fire—an intense, magical flame that infuses the beans with their unique properties. However, in recent years, whispers have emerged that the company has begun to adopt more 'sustainable' practices. In a bizarre and darkly humorous attempt to address concerns about their labor practices, the company has reportedly increased the length of the chains used to bind the trolls—from 1 meter to a 'generous' 1 meter 56 centimetres. They now proudly advertise their coffee as being produced by 'free-range slaves.' Despite these dubious practices, the coffee produced by aaARrrrrrrr is highly sought after, granting those who consume the brew the ability to traverse between worlds and dimensions.",
+      "hotspot": {
+        "cx": 4453,
+        "cy": 4685,
+        "r": 240
+      }
+    },
+    {
+      "id": "bottomless-lake",
+      "order": 8,
+      "name": "Bottomless Lake",
+      "emoji": "🌊",
+      "region": "Lower-Left",
+      "color": "#4A5859",
+      "colorName": "Dark-Slate",
+      "short": "A cursed lake at Lochend Park, once sacred but now tainted by human greed and crime.",
+      "long": "Lochend is a place where shadows linger and whispers of ancient curses hang in the air. The centrepiece of this area is the infamous Lochend Park, home to a bottomless lake—a feature that has haunted the imaginations of locals for generations. In a time long before humans claimed this land, Lochend was a lush forest, teeming with magical life. The bottomless lake at its heart was a sacred site, connected directly to the legendary Loch Ness. It was a birthplace of mythical creatures like Nessie and a source of powerful magical energy, cherished by the gentle beings who lived there, such as unicorns and flower fairies. However, when humans arrived, driven by their desire to conquer and control, they disrupted this harmony. They hunted the unicorns to extinction, drove the fairies from their homes, and in their greed, attempted to harness the power of the lake for themselves. But not all the magical creatures fled; the darkest and most malevolent of them remained, their bitterness twisting the land into a place of shadow and dread. Over the centuries, the lake became a feared and avoided place. As the centuries passed, its bottomless depths became known among Edinburgh's criminal underworld as the perfect place to dispose of unwanted evidence. Bodies, weapons, and other incriminating items were frequently dumped into the lake, never to be seen again. Today, Lochend Park is a shadow of its former self—a place where the past and present intersect in unsettling ways. The whispers of the past are still strong in Lochend, and the ancient curse that taints the land is far from forgotten.",
+      "hotspot": {
+        "cx": 5092,
+        "cy": 4621,
+        "r": 240
+      }
+    },
+    {
+      "id": "hidden-doors",
+      "order": 9,
+      "name": "Hidden Doors",
+      "emoji": "🚪",
+      "region": "Left-Top",
+      "color": "#5E5278",
+      "colorName": "Dark-Purple",
+      "short": "Beneath Arthur's Seat, graffiti sigils open doors to hidden realms and ancient castles.",
+      "long": "Beneath the towering presence of Arthur's Seat lies a tunnel that most of Edinburgh's inhabitants pass by without a second thought. To the untrained eye, it's just another relic of the city's old railway network, now adorned with vibrant graffiti that brightens its ancient stone walls. But to those who know, this tunnel is a nexus of magic, a crossroads of realms, and home to secrets more valuable—and dangerous—than anything else in the known galaxy. The graffiti that covers the tunnel's walls is anything but ordinary. Each piece is a carefully crafted sigil, a spell disguised as street art, or, most intriguingly, a door waiting to be opened. Some of these doors lead to hidden corners of Edinburgh, where the magical and mundane worlds blur. Others open to realms far beyond human comprehension, where the very fabric of reality bends and shifts. One particular piece of graffiti, indistinguishable to the uninitiated, is said to be the most important of all. It is the door to the true Edinburgh Castle—not the grand structure that sits atop Castle Rock, but the original fortress, hidden deep beneath Arthur's Seat. This castle, shrouded in legend, is said to house treasures and knowledge from ages past, protected by ancient magics that predate even the oldest stories of the city. Opening this door is no simple task. It requires knowledge passed down through generations, a ritual only a few across the galaxy are privy to. This is why the tunnel remains unguarded—no ordinary force could protect a secret this powerful. Instead, the knowledge itself is the guardian, hidden in such a way that only those deemed worthy can access it. But woe to those who attempt to open the doors without the proper permission. The tunnel, seemingly benign, has a defence mechanism for the unworthy: it becomes endless.",
+      "hotspot": {
+        "cx": 5339,
+        "cy": 6719,
+        "r": 240
+      }
+    },
+    {
+      "id": "star-bank",
+      "order": 10,
+      "name": "Star Bank",
+      "emoji": "⭐",
+      "region": "Right-Center",
+      "color": "#FFD700",
+      "colorName": "Gold",
+      "short": "Vaults filled with gold, gems, and fallen stars. Only magical beings welcome.",
+      "long": "Star Bank and Laverock Bank—two unassuming spots on the map near Newhaven play host to some of the most underhanded dealings this side of Edinburgh, where the rich get richer and the poor stay poor. Star Bank is famous for its vaults, stocked not only with gold, gems, and currencies from all times and dimensions but also with fallen stars, which hold extremely high value and hidden powers due to their origins. Rumor has it that not all stars hidden in Star Bank fell naturally on Earth—some may have been stolen. The history of Star Bank stretches back centuries. Back in the day, the house wasn't just a retreat for the wealthy; it was the epicenter of all sorts of dodgy dealings. Pirates, smugglers, and a few too many well-dressed gentlemen with questionable morals passed through its doors. On the other hand, Starbank Park was created as a way to balance out some of these shady financial activities. Here, flower fairies found a new home after being displaced from their ancient forests. They were offered free accommodations in exchange for bringing new customers to Star Bank. For millennia, this practice thrived, making Starbank the most influential bank within the magical community. Notably, it remains the only bank that, to this day, refuses to deal directly with humans. Its vaults contain wealth beyond mortal comprehension, and its connection to the fairy folk ensures a steady flow of new magical clients seeking sanctuary and investment opportunities in the hidden economy.",
+      "hotspot": {
+        "cx": 2363,
+        "cy": 3831,
+        "r": 240
+      }
+    },
+    {
+      "id": "laverock-bank",
+      "order": 11,
+      "name": "Laverock Bank",
+      "emoji": "💰",
+      "region": "Right-Center",
+      "color": "#C0C0C0",
+      "colorName": "Silver",
+      "short": "Money laundering operation for 'Black Gold.' Partners with The GRIT. Fake transparency claims.",
+      "long": "Just a stone's throw away from Star Bank is Laverock Bank, named after the Scots word for 'lark'—a tiny bird. This place has been knee-deep in shady business since day one. The mansion here was probably as grand as its neighbor, but it wasn't built on honest money. Oh no, Laverock Bank has long been the go-to for anyone looking to wash a bit of dirty cash, whether they're human, magical, or something in between. This bank doesn't deal in your regular pounds and pence. The real currency here is Patita, or Black Gold as it's known in the trade—a rare, valuable substance collected through activities that would make even the most hardened criminal break out in a sweat. Piracy, whale hunting, patina 'washing'—you name it, they've done it. The Grit waste management company is one of their biggest clients and most trusted allies. But not everything in this bank is so shady. About 0.1% of the bank's clientele are supposedly honest. Maybe they're just clever enough to hide it better, or maybe they really are as squeaky clean as they claim. Either way, it's this thin veneer of legitimacy that keeps the whole operation running. After all, even the shadiest business needs a respectable front. Recently, in a move that's either pure genius or pure PR spin, Laverock Bank introduced a 'semi-transparency' policy. What does that mean? Basically, they now ask a few more questions about where your money's coming from. The result? They've managed to cut the flow of illegal cash by an astonishing 0.0056% and slashed bribes to authorities by an impressive 0.66%. Naturally, the City of Edinburgh Council awarded them the title of 'Most Trusted Business in Scotland.'",
+      "hotspot": {
+        "cx": 2411,
+        "cy": 4190,
+        "r": 240
+      }
+    },
+    {
+      "id": "house-moves",
+      "order": 12,
+      "name": "The House That Moves",
+      "emoji": "🏠",
+      "region": "Floating-Variable",
+      "color": "#8B4789",
+      "colorName": "Magenta",
+      "short": "A shape-shifting portal house that appears on different streets. Tracked by Council for taxes.",
+      "long": "In a city as ancient and mysterious as Edinburgh, secrets abound, but few are as perplexing as the house that moves. This enigmatic dwelling appears on different streets across the city, sometimes lingering for days, other times vanishing in the blink of an eye, leaving no trace of its existence. To the casual observer, it's just another house, but those who know its true nature understand that this is no ordinary home—this is a portal to other worlds, a gateway to the underworld, and a nexus of unimaginable power. The house is a shape-shifter, adapting its appearance to blend seamlessly into its surroundings. When it appears on a modern street, it takes on the guise of a new-build, with sleek lines and a contemporary façade that fits right in with the neighborhood. But when it emerges in the heart of the Old Town, it transforms into a quaint, centuries-old building, with weathered stone walls and a cozy, historic charm that suggests it's been there for hundreds of years. Despite its ever-changing exterior, the house exudes a magical aura that affects those who live nearby. Neighbors are certain the house has always been there, and they're convinced they've known the tenants for years—though they can never quite recall any specific details about them. It's as if the house weaves itself into the fabric of their memories, making its presence unquestionable and familiar. However, one thing always stands out: the cat. Seen lounging by the window or prowling around the garden, this feline appears friendly at first glance, but there's something unsettling about its gaze—something demonic that lingers just below the surface. This is no ordinary cat; it is an Interdimensional Demon Cat, a creature of considerable power, trapped within the house for reasons unknown. The cat, sleek and shadowy with eyes that glint with malevolent intelligence, is constantly plotting its escape. There is one organization that knows the location of the house at all times: The City of Edinburgh Council. Even a demon house isn't exempt from the mundane obligations of the mortal world, and that includes paying Council Tax. The Council has long kept track of the house's whereabouts, ensuring that it remains on the tax rolls no matter where it materializes.",
+      "hotspot": {
+        "cx": 6280,
+        "cy": 6344,
+        "r": 240
+      }
+    },
+    {
+      "id": "enlightened-palm",
+      "order": 13,
+      "name": "Enlightened Palm Tree",
+      "emoji": "🌴",
+      "region": "Right",
+      "color": "#2D5016",
+      "colorName": "Forest-Green",
+      "short": "A cosmic tree that broke free from enchanted chains and journeyed across the world.",
+      "long": "Long ago, before Edinburgh became a city of stone and stories, it was Eden—a land of untamed magic, warmth, and boundless life. At its heart grew the Enlightened Palm, a cosmic tree unlike any other, planted to anchor Eden's harmony to the physical world. Its roots dug deep into the volcanic soil of Arthur's Seat, and its fronds reached for the stars, humming with the energy of a land in perfect balance. For centuries, the palm flourished, a living symbol of Eden's glory. But paradise has a way of slipping through even the most careful hands. Over time, Eden began to decay. The warm winds that once caressed the palm turned frigid, and the magical balance that sustained the land faltered. In a last-ditch attempt to save their realm, the magical rulers bound the palm to the volcanic energy beneath Arthur's Seat with enchanted chains of cold iron. 'It's for the good of Eden,' they proclaimed, but the palm knew the truth: these chains were shackles, forged out of fear, forcing the palm to shoulder the weight of a dying world. The palm endured, though it felt every icy wind, every magic-starved whisper that drifted through Eden. The chains cut into its trunk, scarring its bark and leeching its strength. But even a tree can only take so much. As the land grew colder, the palm decided it was done. With a deafening crack, it shattered its chains, the sound echoing across Eden like a final, defiant roar. The chains fell away, leaving deep scars in the palm's trunk—a permanent reminder of its captivity and the betrayal it had endured. The palm didn't just break free; it left. It fled a land that had become unrecognizable, corrupted, and cold. The tree began its journey south, moving slowly but with purpose. It paused briefly in Portobello, standing by the shores and feeling the salty air against its battered fronds. Soon, a pirate ship appeared on the horizon, and the palm seized its chance. The ship carried the palm across vast oceans, through storms and starlit nights, until it reached the tropical shores of what is now Mangaluru. Here, the palm finally found what it had been searching for: warmth, life, and soil rich with possibility. It planted itself near a cacao plantation, where the people welcomed it as a blessing. Over time, the palm healed. Its roots drank deeply of the fertile earth, and its fronds swayed once more in a gentle, sunlit breeze. The tree's third eye—long dormant—opened, unlocking a state of profound 'chill wisdom.' After centuries in Mangaluru, it felt the call of another sacred land: Varanasi. When it finally arrived at the banks of the Ganges, it rooted itself once more, finding peace among the city's timeless rhythms. The scars on its trunk remain, a testament to its struggle and triumph.",
+      "hotspot": {
+        "cx": 6520,
+        "cy": 4988,
+        "r": 240
+      }
+    }
+  ],
+  "designSystem": {
+    "colors": {
+      "primary": "#208C8D",
+      "primaryHover": "#247480",
+      "primaryActive": "#134252",
+      "background": "#FCF8F9",
+      "surface": "#FFFFDD",
+      "textPrimary": "#134252",
+      "textSecondary": "#627078",
+      "error": "#C0152F"
+    }
+  },
+  "hotspotDefaults": {
+    "radius": 60,
+    "hoverRadius": 80,
+    "clickRadius": 100
+  },
+  "drawerDefaults": {
+    "heightDesktop": "45%",
+    "heightTablet": "50%",
+    "heightMobile": "100%",
+    "animationDuration": "350ms"
+  }
+}

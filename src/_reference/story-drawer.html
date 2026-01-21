@@ -1,0 +1,274 @@
+<!--
+Story Drawer (REFERENCE)
+- Copy the CSS + markup into your Astro component.
+- Keep the JS class as the controller (or port to TS).
+- Demo grid / sample data removed.
+-->
+
+<style>
+  :root {
+    --color-primary: #208C8D;
+    --color-text: #134252;
+    --color-text-secondary: #627078;
+    --color-surface: #FFFFDD;
+    --color-bg: #FCF8F9;
+    --duration: 350ms;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .story-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 0;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(19, 66, 82, 0.10);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: height var(--duration) var(--ease);
+    z-index: 100;
+  }
+
+  .story-drawer.open { height: 45vh; }
+
+  .drawer-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .accent-border {
+    height: 4px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 2px solid currentColor;
+    border-color: inherit;
+    background: linear-gradient(135deg, var(--color-surface), rgba(255, 255, 255, 0.5));
+    flex-shrink: 0;
+  }
+
+  .drawer-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .drawer-emoji { font-size: 28px; line-height: 1; }
+
+  .drawer-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .drawer-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background var(--duration) var(--ease);
+    font-size: 18px;
+  }
+
+  .drawer-close:hover { background: rgba(19, 66, 82, 0.08); }
+  .drawer-close:active { background: rgba(19, 66, 82, 0.12); }
+
+  .drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+    scroll-behavior: smooth;
+  }
+
+  .story-short { margin-bottom: 16px; }
+
+  .story-short-heading {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .story-short-text {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .story-long { margin-top: 20px; }
+
+  .story-long-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text);
+    text-align: justify;
+  }
+
+  .story-long-text p { margin-bottom: 12px; }
+  .story-long-text p:last-child { margin-bottom: 0; }
+
+  .drawer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(19, 66, 82, 0.10);
+    background: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+  }
+
+  .nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(19, 66, 82, 0.30);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease);
+    border: 2px solid transparent;
+  }
+
+  .nav-dot.active {
+    background: var(--color-primary);
+    transform: scale(1.25);
+    border-color: var(--color-primary);
+  }
+
+  .nav-dot:hover:not(.active) { background: rgba(19, 66, 82, 0.50); }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .story-drawer.open { height: 50vh; }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .story-drawer.open { height: 100vh; }
+    .drawer-header { padding: 16px 20px; }
+    .drawer-content { padding: 16px 20px; }
+    .drawer-emoji { font-size: 24px; }
+    .drawer-title { font-size: 16px; }
+    .drawer-close { width: 36px; height: 36px; }
+  }
+</style>
+
+<div class="story-drawer" id="storyDrawer" aria-hidden="true">
+  <div class="accent-border" id="accentBorder"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">
+      <div class="drawer-header-left">
+        <span class="drawer-emoji" id="drawerEmoji">🏰</span>
+        <h2 class="drawer-title" id="drawerTitle">Location Name</h2>
+      </div>
+      <button class="drawer-close" id="closeBtn" aria-label="Close story">✕</button>
+    </div>
+
+    <div class="drawer-content">
+      <div class="story-short">
+        <div class="story-short-heading">Summary</div>
+        <p class="story-short-text" id="storyShort">Short teaser goes here…</p>
+      </div>
+
+      <div class="story-long">
+        <div class="story-short-heading">Full Story</div>
+        <div class="story-long-text" id="storyLong"></div>
+      </div>
+    </div>
+
+    <div class="drawer-footer" id="drawerFooter">
+      <div id="navDots" aria-label="Story navigation"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Reference controller (port to TS in production as needed)
+  class StoryDrawer {
+    constructor(drawerElement, storiesData) {
+      this.drawer = drawerElement;
+      this.stories = storiesData;
+      this.currentIndex = -1;
+
+      this.accentBorder = document.getElementById('accentBorder');
+      this.emoji = document.getElementById('drawerEmoji');
+      this.title = document.getElementById('drawerTitle');
+      this.shortText = document.getElementById('storyShort');
+      this.longText = document.getElementById('storyLong');
+      this.closeBtn = document.getElementById('closeBtn');
+      this.navDotsContainer = document.getElementById('navDots');
+
+      this.closeBtn.addEventListener('click', () => this.close());
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.close();
+      });
+    }
+
+    open(locationId) {
+      const location = this.stories.find(l => l.id === locationId);
+      if (!location) return;
+
+      this.currentIndex = this.stories.findIndex(l => l.id === locationId);
+
+      this.accentBorder.style.backgroundColor = location.color;
+      this.emoji.textContent = location.emoji;
+      this.title.textContent = location.name;
+      this.shortText.textContent = location.short;
+
+      // Paragraph-safe rendering
+      const paragraphs = String(location.long || '')
+        .split(/\n\s*\n/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      this.longText.innerHTML = paragraphs.map(() => '<p></p>').join('');
+      Array.from(this.longText.querySelectorAll('p')).forEach((el, i) => {
+        el.textContent = paragraphs[i] || '';
+      });
+
+      this.updateNavDots();
+
+      this.drawer.classList.add('open');
+      this.drawer.setAttribute('aria-hidden', 'false');
+    }
+
+    close() {
+      this.drawer.classList.remove('open');
+      this.drawer.setAttribute('aria-hidden', 'true');
+      this.currentIndex = -1;
+    }
+
+    updateNavDots() {
+      this.navDotsContainer.innerHTML = '';
+      this.stories.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot' + (index === this.currentIndex ? ' active' : '');
+        dot.addEventListener('click', () => this.open(this.stories[index].id));
+        this.navDotsContainer.appendChild(dot);
+      });
+    }
+  }
+</script>

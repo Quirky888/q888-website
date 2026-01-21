@@ -414,70 +414,70 @@
   <div 
     data-drawer-panel="edinburgh-map" 
     data-direction="right"
-    class="drawer-panel"
+    class="drawer-panel eden-panel"
     role="dialog"
     aria-modal="true"
     aria-label="Edinburgh Magical Map project details"
+    data-eden-map-section
   >
-    <div class="drawer-scroll">
-      <header class="drawer-header">
-        <button 
-          data-drawer-close 
-          class="drawer-back"
-          aria-label="Close drawer and return to Projects"
-        >
-          Back to Projects
-        </button>
-      </header>
-      
-      <article class="drawer-content">
-        <h1 class="drawer-title">Edinburgh Magical Map</h1>
-        <div class="drawer-meta">
-          <span>STATUS: ONGOING</span>
-          <span>TYPE: CARTOGRAPHY</span>
-          <span>LOCALE: 55.9533°N</span>
+    <header class="eden-back-header">
+      <button 
+        data-drawer-close 
+        class="drawer-back"
+        aria-label="Close drawer and return to Projects"
+      >
+        Back to Projects
+      </button>
+    </header>
+
+    <div class="eden-map-shell" data-eden-map>
+      <div class="eden-map-inner" data-eden-map-inner>
+        <img
+          src="/images/Edinburgh_Magic.webp"
+          alt="Edinburgh Magic map"
+          class="eden-map-image"
+          loading="lazy"
+          decoding="async"
+        />
+        <svg
+          class="eden-map-overlay"
+          viewBox="0 0 9603 9481"
+          role="img"
+          aria-label="Edinburgh Magic map hotspots"
+          data-eden-map-svg
+        ></svg>
+      </div>
+    </div>
+
+    <div class="eden-story-drawer" data-eden-drawer aria-hidden="true">
+      <div class="eden-accent-border" data-eden-accent></div>
+      <div class="eden-drawer-inner">
+        <div class="eden-drawer-header">
+          <div class="eden-drawer-header-left">
+            <span class="eden-drawer-emoji" data-eden-emoji>🗺️</span>
+            <h2 class="eden-drawer-title" data-eden-title>Edinburgh Magic</h2>
+          </div>
+          <button class="eden-drawer-close" type="button" data-eden-close aria-label="Close story">
+            ✕
+          </button>
         </div>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Fragment I: The Closes</h2>
-          <p class="drawer-text">
-            The narrow passageways between the Royal Mile and the valleys below. 
-            Each close holds a name, a ghost, a doorway to another era.
-          </p>
-        </section>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Fragment II: Arthur's Seat</h2>
-          <p class="drawer-text">
-            The ancient volcano that watches over the city. 
-            From its summit, the entire myth spreads out like a manuscript.
-          </p>
-        </section>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Fragment III: The Underground</h2>
-          <p class="drawer-text">
-            Beneath South Bridge, vaulted chambers hold the city's shadow memory. 
-            The map extends downward.
-          </p>
-        </section>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Fragment IV: The New Town Grid</h2>
-          <p class="drawer-text">
-            Enlightenment rationality overlaid on older patterns. 
-            The streets form a spell of order.
-          </p>
-        </section>
-        
-        <section class="drawer-section">
-          <h2 class="drawer-section-title">Fragment V: The Water of Leith</h2>
-          <p class="drawer-text">
-            The hidden river that threads through the city unseen. 
-            Follow the water and you find the seams.
-          </p>
-        </section>
-      </article>
+
+        <div class="eden-drawer-content">
+          <div class="eden-story-short">
+            <div class="eden-story-heading">Summary</div>
+            <p class="eden-story-short-text" data-eden-short>Select a location to begin.</p>
+          </div>
+
+          <div class="eden-story-long">
+            <div class="eden-story-heading">Full Story</div>
+            <div class="eden-story-long-text" data-eden-long></div>
+          </div>
+        </div>
+
+        <div class="eden-drawer-footer">
+          <div class="eden-nav-dots" data-eden-dots aria-label="Story navigation"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -702,6 +702,345 @@
 
   .di-panel .di-app-banner img {
     display: block;
+  }
+
+  /* Edinburgh Map Panel */
+  .eden-panel {
+    --eden-primary: #208c8d;
+    --eden-primary-hover: #247480;
+    --eden-primary-active: #134252;
+    --eden-bg: #fcf8f9;
+    --eden-surface: #ffffdd;
+    --eden-text: #134252;
+    --eden-text-muted: #627078;
+    --eden-error: #c0152f;
+    --eden-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --eden-drawer-duration: 350ms;
+    --eden-drawer-height-desktop: 45vh;
+    --eden-drawer-height-tablet: 50vh;
+    --eden-drawer-height-mobile: 100vh;
+    --eden-ring-opacity: 0.18;
+    background: var(--eden-bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .eden-back-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 180;
+    padding: 1.5rem 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .eden-back-header {
+      padding: 2rem 4rem;
+    }
+  }
+
+  .eden-panel .drawer-back {
+    color: var(--eden-text-muted);
+    background: rgba(252, 248, 249, 0.85);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+
+  .eden-panel .drawer-back:hover {
+    color: var(--eden-text);
+    background: rgba(252, 248, 249, 0.95);
+  }
+
+  .eden-map-shell {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--eden-bg);
+  }
+
+  .eden-map-inner {
+    position: relative;
+    width: min(100%, calc(100vh * 1.333333));
+    height: min(100%, calc(100vw * 0.75));
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .eden-map-image,
+  .eden-map-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .eden-map-image {
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    pointer-events: none;
+  }
+
+  .eden-map-overlay {
+    pointer-events: auto;
+  }
+
+  .eden-hotspot {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .eden-hotspot .hotspot-trigger {
+    fill: transparent !important;
+    stroke: none !important;
+    pointer-events: all;
+  }
+
+  .eden-hotspot .hotspot-ring {
+    fill: none !important;
+    opacity: 0.4;
+    transition: opacity var(--eden-drawer-duration) var(--eden-ease),
+      transform var(--eden-drawer-duration) var(--eden-ease),
+      stroke-width var(--eden-drawer-duration) var(--eden-ease);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  .eden-hotspot:hover .hotspot-ring,
+  .eden-hotspot:focus-visible .hotspot-ring {
+    opacity: 0.8;
+    transform: scale(1.25);
+    stroke-width: 4px !important;
+  }
+
+  .eden-hotspot:focus-visible {
+    outline: none;
+  }
+
+  .eden-story-drawer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    background: var(--eden-surface);
+    border-top: 1px solid rgba(19, 66, 82, 0.1);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: height var(--eden-drawer-duration) var(--eden-ease);
+    z-index: 210;
+    will-change: height;
+  }
+
+  .eden-story-drawer.is-open {
+    height: var(--eden-drawer-height-desktop);
+  }
+
+  .eden-drawer-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .eden-accent-border {
+    height: 4px;
+    background: var(--eden-primary);
+    flex-shrink: 0;
+  }
+
+  .eden-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 2px solid currentColor;
+    background: linear-gradient(135deg, var(--eden-surface), rgba(255, 255, 255, 0.5));
+    flex-shrink: 0;
+    color: var(--eden-primary);
+  }
+
+  .eden-drawer-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .eden-drawer-emoji {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .eden-drawer-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--eden-text);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .eden-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: var(--eden-text);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background var(--eden-drawer-duration) var(--eden-ease);
+    font-size: 18px;
+  }
+
+  .eden-drawer-close:hover {
+    background: rgba(19, 66, 82, 0.08);
+  }
+
+  .eden-drawer-close:active {
+    background: rgba(19, 66, 82, 0.12);
+  }
+
+  .eden-drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+  }
+
+  .eden-story-short {
+    margin-bottom: 16px;
+  }
+
+  .eden-story-heading {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--eden-text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .eden-story-short-text {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--eden-text);
+  }
+
+  .eden-story-long {
+    margin-top: 20px;
+  }
+
+  .eden-story-long-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--eden-text);
+  }
+
+  .eden-story-long-text p {
+    margin-bottom: 12px;
+  }
+
+  .eden-story-long-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .eden-drawer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px 18px;
+    border-top: 1px solid rgba(19, 66, 82, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+  }
+
+  .eden-nav-dots {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eden-nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background: rgba(19, 66, 82, 0.3);
+    cursor: pointer;
+    transition: transform var(--eden-drawer-duration) var(--eden-ease),
+      background var(--eden-drawer-duration) var(--eden-ease),
+      border-color var(--eden-drawer-duration) var(--eden-ease);
+  }
+
+  .eden-nav-dot.is-active {
+    background: var(--eden-primary);
+    border-color: var(--eden-primary);
+    transform: scale(1.25);
+  }
+
+  .eden-nav-dot:hover:not(.is-active) {
+    background: rgba(19, 66, 82, 0.5);
+  }
+
+  @media (max-width: 1024px) {
+    .eden-story-drawer.is-open {
+      height: var(--eden-drawer-height-tablet);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .eden-story-drawer.is-open {
+      height: var(--eden-drawer-height-mobile);
+    }
+
+    .eden-drawer-header {
+      padding: 16px 20px;
+    }
+
+    .eden-drawer-content {
+      padding: 16px 20px;
+    }
+
+    .eden-drawer-emoji {
+      font-size: 24px;
+    }
+
+    .eden-drawer-title {
+      font-size: 16px;
+    }
+
+    .eden-drawer-close {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eden-hotspot .hotspot-ring {
+      transition: none;
+      transform: none;
+    }
+
+    .eden-story-drawer {
+      transition-duration: 0ms;
+    }
+
+    .eden-nav-dot {
+      transition: none;
+    }
   }
 </style>
 
