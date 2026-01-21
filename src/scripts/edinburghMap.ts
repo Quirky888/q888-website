@@ -66,7 +66,7 @@ function normalizeColor(value?: string) {
   return value.replace(/\s+/g, "").replace(/^#21808D$/i, "#21808D").replace(/^#FFFFD$/i, "#FFFFDD");
 }
 
-function normalizeDrawerHeight(value?: string, fallback: string) {
+function normalizeDrawerHeight(fallback: string, value?: string) {
   if (!value) return fallback;
   if (value.endsWith("%")) {
     return value.replace("%", "vh");
@@ -96,15 +96,15 @@ function setDesignSystemVars(section: HTMLElement, designSystem?: EdenDesignSyst
   if (drawerDefaults) {
     section.style.setProperty(
       "--eden-drawer-height-desktop",
-      normalizeDrawerHeight(drawerDefaults.heightDesktop, "45vh")
+      normalizeDrawerHeight("45vh", drawerDefaults.heightDesktop)
     );
     section.style.setProperty(
       "--eden-drawer-height-tablet",
-      normalizeDrawerHeight(drawerDefaults.heightTablet, "50vh")
+      normalizeDrawerHeight("50vh", drawerDefaults.heightTablet)
     );
     section.style.setProperty(
       "--eden-drawer-height-mobile",
-      normalizeDrawerHeight(drawerDefaults.heightMobile, "100vh")
+      normalizeDrawerHeight("100vh", drawerDefaults.heightMobile)
     );
     if (drawerDefaults.animationDuration) {
       section.style.setProperty("--eden-drawer-duration", drawerDefaults.animationDuration);
@@ -207,10 +207,13 @@ function buildHotspots(
   stories: EdenLocation[],
   defaults: EdenHotspotDefaults = {}
 ) {
+  const defs = svg.querySelector('defs');
   svg.innerHTML = "";
+  if (defs) {
+    svg.appendChild(defs);
+  }
   const sorted = [...stories].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   const baseRadius = defaults.radius ?? 60;
-  const hoverRadius = defaults.hoverRadius ?? Math.round(baseRadius * 1.35);
   const clickRadius = defaults.clickRadius ?? baseRadius;
 
   sorted.forEach((location) => {
@@ -220,6 +223,7 @@ function buildHotspots(
     group.setAttribute("role", "button");
     group.setAttribute("tabindex", "0");
     group.classList.add("eden-hotspot");
+    group.style.color = location.color;
 
     const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
     title.textContent = location.name;
@@ -229,20 +233,21 @@ function buildHotspots(
     trigger.setAttribute("class", "hotspot-trigger");
     trigger.setAttribute("cx", String(location.hotspot.cx));
     trigger.setAttribute("cy", String(location.hotspot.cy));
-    trigger.setAttribute("r", String(Math.max(location.hotspot.r ?? baseRadius, clickRadius)));
+    trigger.setAttribute(
+      "r",
+      String(Math.max((location.hotspot.r ?? baseRadius) * 1.5, clickRadius))
+    );
     trigger.setAttribute("fill", "transparent");
     trigger.setAttribute("stroke", "none");
     group.appendChild(trigger);
 
-    const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    ring.setAttribute("class", "hotspot-ring");
-    ring.setAttribute("cx", String(location.hotspot.cx));
-    ring.setAttribute("cy", String(location.hotspot.cy));
-    ring.setAttribute("r", String(Math.max(location.hotspot.r ?? baseRadius, hoverRadius)));
-    ring.setAttribute("fill", "none");
-    ring.setAttribute("stroke", location.color);
-    ring.setAttribute("stroke-width", "3");
-    group.appendChild(ring);
+    const glowCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    glowCircle.setAttribute("class", "hotspot-glow");
+    glowCircle.setAttribute("cx", String(location.hotspot.cx));
+    glowCircle.setAttribute("cy", String(location.hotspot.cy));
+    glowCircle.setAttribute("r", String(location.hotspot.r ?? baseRadius));
+    glowCircle.setAttribute("fill", location.color);
+    group.appendChild(glowCircle);
 
     svg.appendChild(group);
   });
