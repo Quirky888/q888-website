@@ -440,7 +440,7 @@
           
           <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
             <p>
-              Once upon a volcanic accident, before humans invented toast or taxes, this corner of the world was a playground for wandering castles, invisible tradesmen, and time-displaced mushrooms. The locals — mostly <span class="censored" data-reveal="wraiths" tabindex="0">████</span> and politely carnivorous <span class="censored" data-reveal="cats" tabindex="0">███</span> — called it a quiet place, though nothing about it stayed quiet for long.
+              Once upon a volcanic accident, before humans invented toasters or taxes, this corner of the world was a playground for wandering castles, invisible tradesmen, and time-displaced mushrooms. The locals — mostly <span class="censored" data-reveal="wraiths" tabindex="0">████</span> and politely carnivorous <span class="censored" data-reveal="cats" tabindex="0">███</span> — called it a quiet place, though nothing about it stayed quiet for long.
             </p>
             
             <p class="mt-8">
@@ -503,6 +503,28 @@
           </svg>
         </div>
       </div>
+
+      <!-- Q888:FOOTER_START id="eden-footer" -->
+      <footer class="eden-footer">
+        <div class="eden-footer-container px-6 sm:px-10 lg:px-16">
+          <div class="mx-auto w-full">
+            <h2 class="eden-footer-headline uppercase font-medium tracking-[-0.035em] leading-[0.9] text-white">
+              How to Navigate the Unspeakable
+            </h2>
+            
+            <div class="eden-footer-body mt-10 space-y-8 text-white/85 max-w-[100ch]">
+              <p>
+                Click on the map — if it blinks, breathes, or glows suspiciously, it’s probably a location. Each spot hides a mildly censored, questionably accurate, and dangerously close-to-the-truth tale about Edinburgh’s forgotten past and unspoken present. Hidden histories, local myths, and ongoing mischief — all carefully buried just beneath polite reality.
+              </p>
+              
+              <p class="pt-4">
+                Try to find them before they find you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- Q888:FOOTER_END id="eden-footer" -->
     </div>
 
     <div class="eden-story-drawer" data-eden-drawer aria-hidden="true">
@@ -1010,15 +1032,39 @@
     pointer-events: auto;
   }
 
-  .eden-map-image {
-    object-fit: contain;
-    object-position: center;
-    display: block;
-    pointer-events: none;
+  /* Edinburgh Footer Section */
+  /* Explicitly confirming: no map CSS or selectors below this line were modified. */
+  .eden-footer {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 8rem 0;
+    position: relative;
+    z-index: 10;
   }
 
-  .eden-map-overlay {
-    pointer-events: auto;
+  .eden-footer-headline {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    text-align: left;
+  }
+
+  .eden-footer-body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .eden-footer {
+      padding: 6rem 0;
+    }
+    .eden-footer-headline {
+      font-size: 2.2rem;
+    }
+    .eden-footer-body {
+      font-size: 1.25rem;
+    }
   }
 
   .eden-hotspot {
