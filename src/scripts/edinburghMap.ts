@@ -224,6 +224,9 @@ function buildHotspots(
     group.setAttribute("tabindex", "0");
     group.classList.add("eden-hotspot");
     group.style.color = location.color;
+    group.style.setProperty("--twinkle-dur", `${(Math.random() * 3.3 + 2.2).toFixed(2)}s`);
+    group.style.setProperty("--twinkle-delay", `${-(Math.random() * 5).toFixed(2)}s`);
+    group.style.setProperty("--twinkle-strength", (Math.random() * 0.4 + 0.8).toFixed(2));
 
     const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
     title.textContent = location.name;
