@@ -1094,6 +1094,7 @@
 <style is:global>
   :root {
     --eden-smoke: rgba(190, 190, 190, 0.55);
+    --magic-glow: #670074; 
   }
 
   .eden-hotspot {
@@ -1105,6 +1106,29 @@
     fill: transparent !important;
     stroke: none !important;
     pointer-events: all;
+  }
+
+  /* The Orbiting Rings */
+  .hotspot-ring-inner,
+  .hotspot-ring-outer {
+    fill: none;
+    stroke: var(--magic-glow);
+    stroke-width: 1.5;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center;
+    transform-box: fill-box;
+    transition: opacity 600ms ease, stroke-width 600ms ease;
+    filter: drop-shadow(0 0 5px var(--magic-glow));
+  }
+
+  .hotspot-ring-inner {
+    stroke-dasharray: 4 8;
+  }
+
+  .hotspot-ring-outer {
+    stroke-dasharray: 10 20;
+    stroke-width: 0.8;
   }
 
   .eden-hotspot .hotspot-glow {
@@ -1123,31 +1147,41 @@
     animation-iteration-count: infinite;
   }
 
-  .eden-hotspot:hover .hotspot-glow,
-  .eden-hotspot:focus-visible .hotspot-glow {
-    fill: var(--eden-smoke) !important;
-    fill-opacity: 0.55 !important;
-    stroke: none !important;
-    filter: blur(22px) drop-shadow(0 0 20px var(--eden-smoke))
-      drop-shadow(0 0 40px var(--eden-smoke)) !important;
-    transform: scale(1.5);
-    animation: magical-breathe 2.5s ease-in-out infinite !important;
+  /* Hover State: Activate the Mechanism */
+  .eden-hotspot:hover .hotspot-ring-inner,
+  .eden-hotspot:focus-visible .hotspot-ring-inner {
+    opacity: 0.8;
+    animation: spin-clockwise 6s linear infinite;
   }
 
-  @keyframes magical-breathe {
-    0%,
-    100% {
-      fill-opacity: 0.45;
-      transform: scale(1.4);
-      filter: blur(18px) drop-shadow(0 0 18px var(--eden-smoke))
-        drop-shadow(0 0 35px var(--eden-smoke));
-    }
-    50% {
-      fill-opacity: 0.65;
-      transform: scale(1.6);
-      filter: blur(24px) drop-shadow(0 0 25px var(--eden-smoke))
-        drop-shadow(0 0 50px var(--eden-smoke));
-    }
+  .eden-hotspot:hover .hotspot-ring-outer,
+  .eden-hotspot:focus-visible .hotspot-ring-outer {
+    opacity: 0.5;
+    animation: spin-counter-clockwise 10s linear infinite;
+  }
+
+  .eden-hotspot:hover .hotspot-glow,
+  .eden-hotspot:focus-visible .hotspot-glow {
+    fill: var(--magic-glow) !important;
+    fill-opacity: 0.2 !important; /* Soft circular glow inside */
+    stroke: var(--magic-glow) !important;
+    stroke-width: 28; /* Even thicker walls */
+    stroke-opacity: 0.9 !important;
+    filter: blur(2px) 
+            drop-shadow(0 0 15px var(--magic-glow))
+            drop-shadow(0 0 30px var(--magic-glow)) !important;
+    transform: scale(1.1);
+    animation: none !important; /* Stop twinkling on hover */
+  }
+
+  @keyframes spin-clockwise {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes spin-counter-clockwise {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
   }
 
   @keyframes star-twinkle {

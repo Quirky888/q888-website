@@ -252,6 +252,22 @@ function buildHotspots(
     glowCircle.setAttribute("fill", location.color);
     group.appendChild(glowCircle);
 
+    // Add Inner Orbit Ring
+    const innerRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    innerRing.setAttribute("class", "hotspot-ring-inner");
+    innerRing.setAttribute("cx", String(location.hotspot.cx));
+    innerRing.setAttribute("cy", String(location.hotspot.cy));
+    innerRing.setAttribute("r", String((location.hotspot.r ?? baseRadius) * 1.5));
+    group.appendChild(innerRing);
+
+    // Add Outer Orbit Ring
+    const outerRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    outerRing.setAttribute("class", "hotspot-ring-outer");
+    outerRing.setAttribute("cx", String(location.hotspot.cx));
+    outerRing.setAttribute("cy", String(location.hotspot.cy));
+    outerRing.setAttribute("r", String((location.hotspot.r ?? baseRadius) * 2.2));
+    group.appendChild(outerRing);
+
     svg.appendChild(group);
   });
 }
