@@ -268,6 +268,15 @@ function buildHotspots(
     outerRing.setAttribute("r", String((location.hotspot.r ?? baseRadius) * 2.2));
     group.appendChild(outerRing);
 
+    // Add Tooltip Label
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("class", "hotspot-label");
+    label.setAttribute("x", String(location.hotspot.cx));
+    label.setAttribute("y", String(location.hotspot.cy - (location.hotspot.r ?? baseRadius) * 3.5));
+    label.setAttribute("text-anchor", "middle");
+    label.textContent = location.name;
+    group.appendChild(label);
+
     svg.appendChild(group);
   });
 }

@@ -1338,13 +1338,16 @@
 
 <style is:global>
   :root {
-    --eden-smoke: rgba(190, 190, 190, 0.55);
-    --magic-glow: #670074; 
+    --eden-beacon-idle: rgba(0, 0, 0, 0.25);
+    --eden-portal-ring: #1a1a1c;
+    --eden-portal-accent: #4a154b;
+    --eden-portal-haze: rgba(0, 0, 0, 0.15);
   }
 
   .eden-hotspot {
     pointer-events: auto;
     cursor: pointer;
+    outline: none;
   }
 
   .eden-hotspot .hotspot-trigger {
@@ -1353,97 +1356,110 @@
     pointer-events: all;
   }
 
-  /* The Orbiting Rings */
+  /* 1) Idle state: Secret Stars (faint beacon) */
+  .eden-hotspot .hotspot-glow {
+    fill: var(--eden-beacon-idle) !important;
+    fill-opacity: 0.3 !important;
+    stroke: none !important;
+    filter: blur(4px) !important;
+    pointer-events: none;
+    transition: all 800ms cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+    transform-box: fill-box;
+    
+    /* Random unsynced twinkle */
+    animation: beacon-ping var(--twinkle-dur, 4s) ease-in-out var(--twinkle-delay, 0s) infinite;
+  }
+
+  @keyframes beacon-ping {
+    0%, 100% { 
+      transform: scale(0.6); 
+      fill-opacity: calc(0.2 * var(--twinkle-strength, 1)); 
+    }
+    50% { 
+      transform: scale(1); 
+      fill-opacity: calc(0.5 * var(--twinkle-strength, 1)); 
+    }
+  }
+
+  /* 2) Portal Rings (Hidden when idle) */
   .hotspot-ring-inner,
   .hotspot-ring-outer {
     fill: none;
-    stroke: var(--magic-glow);
-    stroke-width: 1.5;
+    stroke: var(--eden-portal-ring);
+    stroke-width: 0.5;
     opacity: 0;
     pointer-events: none;
     transform-origin: center;
     transform-box: fill-box;
-    /* Transition opacity and width for a soft reveal */
-    transition: 
-      opacity 800ms ease, 
-      stroke-width 800ms ease,
-      stroke-dashoffset 800ms ease;
-    filter: drop-shadow(0 0 5px var(--magic-glow));
+    transition: opacity 600ms ease, stroke-width 600ms ease, transform 1200ms cubic-bezier(0.23, 1, 0.32, 1);
+    filter: drop-shadow(0 0 2px var(--eden-portal-haze));
   }
 
-  .hotspot-ring-inner {
-    stroke-dasharray: 4 8;
-  }
-
-  .hotspot-ring-outer {
-    stroke-dasharray: 10 20;
-    stroke-width: 0.8;
-  }
-
-  .eden-hotspot .hotspot-glow {
-    fill: var(--eden-smoke) !important;
-    fill-opacity: 0.25 !important;
-    stroke: none !important;
-    filter: blur(12px) !important;
-    pointer-events: none;
-    transition: all 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform-origin: center;
-    transform-box: fill-box;
-    animation-name: star-twinkle;
-    animation-duration: var(--twinkle-dur, 3.6s);
-    animation-delay: var(--twinkle-delay, 0s);
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-  }
-
-  /* Hover State: Activate the Mechanism */
+  /* 3) Hover State: Portal Mechanism */
   .eden-hotspot:hover .hotspot-ring-inner,
   .eden-hotspot:focus-visible .hotspot-ring-inner {
-    opacity: 0.8;
-    stroke-width: 1.8;
-    animation: ring-flow-forward 10s linear infinite;
+    opacity: 1;
+    stroke-width: 12;
+    stroke: var(--eden-portal-ring);
+    animation: stabilizing-energy 12s linear infinite;
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
   }
 
   .eden-hotspot:hover .hotspot-ring-outer,
   .eden-hotspot:focus-visible .hotspot-ring-outer {
-    opacity: 0.5;
-    stroke-width: 1.0;
-    animation: ring-flow-backward 18s linear infinite;
+    opacity: 0.9;
+    stroke-width: 8;
+    stroke: var(--eden-portal-accent);
+    transform: scale(1.05);
+    animation: stabilizing-energy 20s linear infinite reverse;
+    filter: drop-shadow(0 0 6px var(--eden-portal-accent));
   }
 
   .eden-hotspot:hover .hotspot-glow,
   .eden-hotspot:focus-visible .hotspot-glow {
-    fill: var(--magic-glow) !important;
-    fill-opacity: 0.2 !important; /* Soft circular glow inside */
-    stroke: var(--magic-glow) !important;
-    stroke-width: 28; /* Even thicker walls */
-    stroke-opacity: 0.9 !important;
-    filter: blur(2px) 
-            drop-shadow(0 0 15px var(--magic-glow))
-            drop-shadow(0 0 30px var(--magic-glow)) !important;
-    transform: scale(1.1);
-    animation: none !important; /* Stop twinkling on hover */
+    animation: none !important;
+    fill: transparent !important;
+    stroke: var(--eden-portal-accent) !important;
+    stroke-width: 16 !important;
+    stroke-opacity: 0.8 !important;
+    fill-opacity: 0.1 !important;
+    filter: blur(1px) drop-shadow(0 0 12px var(--eden-portal-accent)) !important;
+    transform: scale(1.2);
   }
 
-  @keyframes ring-flow-forward {
-    from { stroke-dashoffset: 60; }
-    to { stroke-dashoffset: 0; }
+  @keyframes stabilizing-energy {
+    from { stroke-dasharray: 4 20; stroke-dashoffset: 80; }
+    to { stroke-dasharray: 4 20; stroke-dashoffset: 0; }
   }
 
-  @keyframes ring-flow-backward {
-    from { stroke-dashoffset: 0; }
-    to { stroke-dashoffset: 60; }
+  /* 4) Tooltip Label */
+  .hotspot-label {
+    font-family: var(--font-sans); /* Hero sans */
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: var(--text-muted);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 400ms ease;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
   }
 
-  @keyframes star-twinkle {
-    0%,
-    100% {
-      fill-opacity: calc(0.2 * var(--twinkle-strength, 1));
-      transform: scale(0.92);
-    }
-    50% {
-      fill-opacity: calc(0.45 * var(--twinkle-strength, 1));
-      transform: scale(1.08);
+  .eden-hotspot:hover .hotspot-label,
+  .eden-hotspot:focus-visible .hotspot-label {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eden-hotspot .hotspot-glow,
+    .hotspot-ring-inner,
+    .hotspot-ring-outer,
+    .hotspot-label {
+      transition: none !important;
+      animation: none !important;
     }
   }
 </style>
