@@ -420,82 +420,123 @@
     aria-label="Edinburgh Magical Map project details"
     data-eden-map-section
   >
-    <header class="eden-back-header">
-      <button 
-        data-drawer-close 
-        class="drawer-back"
-        aria-label="Close drawer and return to Projects"
-      >
-        Back to Projects
-      </button>
-    </header>
-
-    <div class="eden-map-shell" data-eden-map>
-      <div class="eden-map-inner" data-eden-map-inner>
-        <img
-          src="/images/Edinburgh_Magic.webp"
-          alt="Edinburgh Magic map"
-          class="eden-map-image"
-          loading="lazy"
-          decoding="async"
-        />
-        <svg
-          class="eden-map-overlay"
-          viewBox="0 0 9603 9481"
-          role="img"
-          aria-label="Edinburgh Magic map hotspots"
-          data-eden-map-svg
+    <div class="drawer-scroll">
+      <header class="drawer-header">
+        <button 
+          data-drawer-close 
+          class="drawer-back"
+          aria-label="Close drawer and return to Projects"
         >
-          <defs>
-            <filter id="eden-glow-bright" x="-150%" y="-150%" width="400%" height="400%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur1" />
-              <feGaussianBlur in="blur1" stdDeviation="24" result="blur2" />
-              <feGaussianBlur in="blur2" stdDeviation="36" result="blur3" />
-              <feColorMatrix
-                in="blur3"
-                type="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
-              />
-              <feMerge>
-                <feMergeNode in="blur3" />
-                <feMergeNode in="blur2" />
-                <feMergeNode in="blur1" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-        </svg>
+          Back to Projects
+        </button>
+      </header>
+
+      <!-- Q888:SECTION_START id="eden-hero" -->
+      <section class="eden-hero-section px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
+        <div class="mx-auto">
+          <h1 class="eden-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
+            EDINBURGH MAGICAL MAP
+          </h1>
+          
+          <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
+            <p>
+              Once upon a volcanic accident, before humans invented toast or taxes, this corner of the world was a playground for wandering castles, invisible tradesmen, and time-displaced mushrooms. The locals — mostly <span class="censored" data-reveal="wraiths" tabindex="0">████</span> and politely carnivorous <span class="censored" data-reveal="cats" tabindex="0">███</span> — called it a quiet place, though nothing about it stayed quiet for long.
+            </p>
+            
+            <p class="mt-8">
+              Each bump on the map hides a <span class="censored" data-reveal="mildly" tabindex="0">████</span> cursed story, best discovered accidentally. Some doors won’t open unless you <span class="censored" data-reveal="kneel" tabindex="0">████</span> and <span class="censored" data-reveal="hum" tabindex="0">████</span>. Others demand riddles, bribes, or interpretive dance. If you’re lucky, they’ll ignore you entirely.
+            </p>
+
+            <p class="mt-8">
+              Welcome to Edinburgh — where magic retired but still drinks in public.
+            </p>
+            
+            <p class="mt-8 text-[clamp(1rem,1.2vw,1.3rem)] opacity-50">
+              This description has been partially redacted under the Real Edinburgh Council Act No. 9093<span class="censored" data-reveal="???" data-eden-act-glitch tabindex="0">███</span>
+            </p>
+          </div>
+
+          <div class="eden-mono mt-12 text-lg sm:text-xl text-zinc-500 leading-relaxed uppercase tracking-widest">
+            <div>SYSTEM_STATUS: ACTIVE (REDACTED)</div>
+            <div>LAYER: EDINBURGH CITY / UNDERWORLD OVERLAY</div>
+            <div>ACCESS: COUNCIL-GATED</div>
+            <div>YEAR: <span class="censored" data-reveal="??" data-eden-year-glitch tabindex="0">██</span>26 BBB</div>
+          </div>
+        </div>
+      </section>
+      <!-- Q888:SECTION_END id="eden-hero" -->
+
+      <div class="eden-map-shell" data-eden-map>
+        <div class="eden-map-inner" data-eden-map-inner>
+          <img
+            src="/images/Edinburgh_Magic.webp"
+            alt="Edinburgh Magic map"
+            class="eden-map-image"
+            loading="lazy"
+            decoding="async"
+          />
+          <svg
+            class="eden-map-overlay"
+            viewBox="0 0 9603 9481"
+            role="img"
+            aria-label="Edinburgh Magic map hotspots"
+            data-eden-map-svg
+          >
+            <defs>
+              <filter id="eden-glow-bright" x="-150%" y="-150%" width="400%" height="400%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur1" />
+                <feGaussianBlur in="blur1" stdDeviation="24" result="blur2" />
+                <feGaussianBlur in="blur2" stdDeviation="36" result="blur3" />
+                <feColorMatrix
+                  in="blur3"
+                  type="matrix"
+                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                />
+                <feMerge>
+                  <feMergeNode in="blur3" />
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+          </svg>
+        </div>
       </div>
     </div>
 
     <div class="eden-story-drawer" data-eden-drawer aria-hidden="true">
-      <div class="eden-accent-border" data-eden-accent></div>
       <div class="eden-drawer-inner">
-        <div class="eden-drawer-header">
-          <div class="eden-drawer-header-left">
-            <span class="eden-drawer-emoji" data-eden-emoji>🗺️</span>
+        <header class="eden-drawer-header">
+          <div class="eden-header-brand">
+            <span class="eden-drawer-emoji" data-eden-emoji aria-hidden="true"></span>
             <h2 class="eden-drawer-title" data-eden-title>Edinburgh Magic</h2>
           </div>
           <button class="eden-drawer-close" type="button" data-eden-close aria-label="Close story">
-            ✕
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12"></path>
+            </svg>
           </button>
-        </div>
+        </header>
 
         <div class="eden-drawer-content">
-          <div class="eden-story-short">
-            <div class="eden-story-heading">Summary</div>
-            <p class="eden-story-short-text" data-eden-short>Select a location to begin.</p>
-          </div>
+          <div class="eden-accent-border" data-eden-accent aria-hidden="true" style="display: none;"></div>
+          <div class="eden-content-container">
+            <div class="eden-story-short">
+              <div class="eden-story-heading">Summary</div>
+              <p class="eden-story-short-text" data-eden-short>Select a location to begin.</p>
+            </div>
 
-          <div class="eden-story-long">
-            <div class="eden-story-heading">Full Story</div>
-            <div class="eden-story-long-text" data-eden-long></div>
+            <div class="eden-story-long">
+              <div class="eden-story-heading">History & Lore</div>
+              <div class="eden-story-long-text" data-eden-long></div>
+            </div>
           </div>
         </div>
 
-        <div class="eden-drawer-footer">
+        <footer class="eden-drawer-footer">
           <div class="eden-nav-dots" data-eden-dots aria-label="Story navigation"></div>
-        </div>
+        </footer>
       </div>
     </div>
   </div>
@@ -771,11 +812,163 @@
     background: rgba(252, 248, 249, 0.95);
   }
 
+  /* Edinburgh Hero Styling */
+  .eden-hero-section {
+    background: var(--eden-bg);
+  }
+
+  .eden-headline {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .eden-hero-section p {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .eden-mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  /* Censorship Reveal Mechanism */
+  .censored {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: help;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: black;
+    color: transparent;
+    border-radius: 2px;
+    padding: 0 0.4em;
+    margin: 0 0.15em; /* Prevent text overlap/clumping */
+    user-select: none;
+    font-family: ui-monospace, monospace;
+    line-height: 1.2;
+    min-width: 2em;
+    height: 1.2em;
+    vertical-align: middle;
+  }
+
+  /* The Black "Blocker" */
+  .censored::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: black;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+
+  /* The "CENSORED" status text */
+  .censored::after {
+    content: "CENSORED";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    color: white;
+    /* Aggressive industrial font stack */
+    font-family: "Impact", "Arial Black", "Arial Narrow", sans-serif;
+    font-weight: 900;
+    font-size: 0.42em; 
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3;
+    white-space: nowrap;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .censored:hover::before,
+  .censored:focus-visible::before {
+    opacity: 0.9; /* Keep a faint black background behind the white text */
+  }
+
+  .censored:hover::after,
+  .censored:focus-visible::after {
+    opacity: 1;
+  }
+
+  /* Special Case: YEAR Glitch uses data-reveal content */
+  .censored[data-eden-year-glitch]::after {
+    content: attr(data-reveal);
+    font-size: 1em;
+    letter-spacing: 0;
+    filter: blur(8px);
+  }
+
+  .censored[data-eden-year-glitch]:hover::before,
+  .censored[data-eden-year-glitch]:focus-visible::before {
+    opacity: 0;
+  }
+
+  .censored[data-eden-year-glitch]:hover::after,
+  .censored[data-eden-year-glitch]:focus-visible::after {
+    filter: blur(0);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Hover-only glitching numbers (Year) */
+  .censored[data-eden-year-glitch]::after {
+    content: attr(data-reveal);
+    opacity: 0;
+    filter: blur(4px);
+    color: white;
+    font-family: ui-monospace, monospace;
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: 0;
+    transition: all 0.3s ease;
+  }
+
+  .censored[data-eden-year-glitch]:hover::after,
+  .censored[data-eden-year-glitch]:focus-visible::after {
+    opacity: 1;
+    filter: none;
+  }
+
+  .censored[data-eden-year-glitch]:hover::before,
+  .censored[data-eden-year-glitch]:focus-visible::before {
+    opacity: 0.9;
+  }
+
+  /* Hover-only glitching numbers (Act) */
+  .censored[data-eden-act-glitch]::after {
+    content: attr(data-reveal); /* Use the glitching numbers, not "CENSORED" */
+    opacity: 0;
+    filter: blur(4px);
+    color: white;
+    font-family: ui-monospace, monospace;
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: 0;
+    transition: all 0.3s ease;
+  }
+
+  .censored[data-eden-act-glitch]:hover::after,
+  .censored[data-eden-act-glitch]:focus-visible::after {
+    opacity: 1;
+    filter: none;
+  }
+
+  .censored[data-eden-act-glitch]:hover::before,
+  .censored[data-eden-act-glitch]:focus-visible::before {
+    opacity: 0.9;
+  }
+
+  .censored:focus-visible {
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+    outline-offset: 2px;
+  }
+
   .eden-map-shell {
     position: relative;
-    flex: 1;
     width: 100%;
-    height: 100%;
+    height: 105vh; /* Increased from 85vh for more vertical presence */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -783,31 +976,38 @@
     background: var(--eden-bg);
   }
 
-  .eden-map-shell::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.035), transparent 55%),
-      radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.025), transparent 60%);
-    opacity: 0.35;
-    pointer-events: none;
-    mix-blend-mode: screen;
-  }
-
   .eden-map-inner {
     position: relative;
-    width: min(100%, calc(100vh * 1.333333));
-    height: min(100%, calc(100vw * 0.75));
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .eden-map-image,
-  .eden-map-overlay {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.1); /* 10% zoom for a more immersive feel */
+    transition: transform 0.6s var(--eden-ease);
+  }
+
+  .eden-map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensure image fits without distortion */
+    display: block;
+    pointer-events: none;
+  }
+
+  .eden-map-overlay {
+    position: absolute;
+    /* Match the contained image box exactly */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: auto;
   }
 
   .eden-map-image {
@@ -874,9 +1074,20 @@
     right: 0;
     bottom: 0;
     height: 0;
-    background: var(--eden-surface);
-    border-top: 1px solid rgba(19, 66, 82, 0.1);
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1);
+    
+    /* Modern Glass Card look */
+    background: rgba(245, 245, 245, 0.82);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 
+      0 -10px 40px rgba(0, 0, 0, 0.08),
+      0 -1px 0 rgba(255, 255, 255, 0.4);
+    
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    
     overflow: hidden;
     transition: height var(--eden-drawer-duration) var(--eden-ease);
     z-index: 210;
@@ -891,7 +1102,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow: hidden;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
   .eden-accent-border {
@@ -904,181 +1116,168 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
-    border-bottom: 2px solid currentColor;
-    background: linear-gradient(135deg, var(--eden-surface), rgba(255, 255, 255, 0.5));
+    padding: 2.5rem 3rem 1.5rem;
     flex-shrink: 0;
-    color: var(--eden-primary);
   }
 
-  .eden-drawer-header-left {
+  .eden-header-brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
+    gap: 1rem;
   }
 
   .eden-drawer-emoji {
-    font-size: 28px;
-    line-height: 1;
+    display: none;
   }
 
   .eden-drawer-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--eden-text);
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 2.25rem;
+    font-weight: 500;
+    color: var(--text-ink);
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1;
   }
 
   .eden-drawer-close {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border: none;
-    background: transparent;
-    color: var(--eden-text);
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--text-muted);
     cursor: pointer;
-    border-radius: 8px;
-    transition: background var(--eden-drawer-duration) var(--eden-ease);
-    font-size: 18px;
+    border-radius: 50%;
+    transition: all 0.3s var(--eden-ease);
   }
 
   .eden-drawer-close:hover {
-    background: rgba(19, 66, 82, 0.08);
-  }
-
-  .eden-drawer-close:active {
-    background: rgba(19, 66, 82, 0.12);
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text-ink);
+    transform: rotate(90deg);
   }
 
   .eden-drawer-content {
     flex: 1;
     overflow-y: auto;
-    padding: 20px 24px;
+    padding: 0 3rem 4rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.1) transparent;
   }
 
-  .eden-story-short {
-    margin-bottom: 16px;
+  /* Centered content container for desktop readability */
+  .eden-content-container {
+    max-width: 820px;
+    margin: 0 auto;
   }
 
   .eden-story-heading {
-    font-size: 12px;
-    font-weight: 600;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
     text-transform: uppercase;
-    color: var(--eden-text-muted);
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 1.25rem;
+    opacity: 0.6;
   }
 
   .eden-story-short-text {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--eden-text);
-  }
-
-  .eden-story-long {
-    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--text-ink);
+    margin-bottom: 3rem;
   }
 
   .eden-story-long-text {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--eden-text);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-ink);
+    opacity: 0.9;
   }
 
   .eden-story-long-text p {
-    margin-bottom: 12px;
-  }
-
-  .eden-story-long-text p:last-child {
-    margin-bottom: 0;
+    margin-bottom: 1.5rem;
   }
 
   .eden-drawer-footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 14px 24px 18px;
-    border-top: 1px solid rgba(19, 66, 82, 0.1);
-    background: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem 3rem 2rem;
     flex-shrink: 0;
   }
 
   .eden-nav-dots {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .eden-nav-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    border: 2px solid transparent;
-    background: rgba(19, 66, 82, 0.3);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: transform var(--eden-drawer-duration) var(--eden-ease),
-      background var(--eden-drawer-duration) var(--eden-ease),
-      border-color var(--eden-drawer-duration) var(--eden-ease);
+    transition: all 0.4s var(--eden-ease);
   }
 
   .eden-nav-dot.is-active {
-    background: var(--eden-primary);
-    border-color: var(--eden-primary);
-    transform: scale(1.25);
-  }
-
-  .eden-nav-dot:hover:not(.is-active) {
-    background: rgba(19, 66, 82, 0.5);
+    background: var(--text-ink);
+    transform: scale(1.5);
   }
 
   @media (max-width: 1024px) {
     .eden-story-drawer.is-open {
       height: var(--eden-drawer-height-tablet);
     }
+    
+    .eden-drawer-header,
+    .eden-drawer-content {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .eden-drawer-title {
+      font-size: 1.75rem;
+    }
   }
 
   @media (max-width: 768px) {
+    .eden-story-drawer {
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+    }
+
     .eden-story-drawer.is-open {
       height: var(--eden-drawer-height-mobile);
     }
 
     .eden-drawer-header {
-      padding: 16px 20px;
+      padding: 1.5rem 1.5rem 1rem;
     }
 
     .eden-drawer-content {
-      padding: 16px 20px;
+      padding: 0 1.5rem 3rem;
     }
 
-    .eden-drawer-emoji {
-      font-size: 24px;
-    }
-
-    .eden-drawer-title {
-      font-size: 16px;
-    }
-
-    .eden-drawer-close {
-      width: 36px;
-      height: 36px;
+    .eden-story-short-text {
+      font-size: 1.25rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .eden-hotspot,
     .eden-hotspot .hotspot-trigger,
-    .eden-hotspot .hotspot-glow {
-      transition: none;
-      animation: none;
+    .eden-hotspot .hotspot-glow,
+    .hotspot-ring-inner,
+    .hotspot-ring-outer {
+      transition: none !important;
+      animation: none !important;
     }
 
     .eden-story-drawer {
@@ -1118,7 +1317,11 @@
     pointer-events: none;
     transform-origin: center;
     transform-box: fill-box;
-    transition: opacity 600ms ease, stroke-width 600ms ease;
+    /* Transition opacity and width for a soft reveal */
+    transition: 
+      opacity 800ms ease, 
+      stroke-width 800ms ease,
+      stroke-dashoffset 800ms ease;
     filter: drop-shadow(0 0 5px var(--magic-glow));
   }
 
@@ -1151,13 +1354,15 @@
   .eden-hotspot:hover .hotspot-ring-inner,
   .eden-hotspot:focus-visible .hotspot-ring-inner {
     opacity: 0.8;
-    animation: spin-clockwise 6s linear infinite;
+    stroke-width: 1.8;
+    animation: ring-flow-forward 10s linear infinite;
   }
 
   .eden-hotspot:hover .hotspot-ring-outer,
   .eden-hotspot:focus-visible .hotspot-ring-outer {
     opacity: 0.5;
-    animation: spin-counter-clockwise 10s linear infinite;
+    stroke-width: 1.0;
+    animation: ring-flow-backward 18s linear infinite;
   }
 
   .eden-hotspot:hover .hotspot-glow,
@@ -1174,14 +1379,14 @@
     animation: none !important; /* Stop twinkling on hover */
   }
 
-  @keyframes spin-clockwise {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  @keyframes ring-flow-forward {
+    from { stroke-dashoffset: 60; }
+    to { stroke-dashoffset: 0; }
   }
 
-  @keyframes spin-counter-clockwise {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
+  @keyframes ring-flow-backward {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 60; }
   }
 
   @keyframes star-twinkle {
@@ -1282,4 +1487,29 @@
     });
     observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
   })();
+
+      // Edinburgh Number Glitch Logic
+      (() => {
+        const initGlitches = () => {
+          const yearEl = document.querySelector('[data-eden-year-glitch]') as HTMLElement;
+          const actEl = document.querySelector('[data-eden-act-glitch]') as HTMLElement;
+
+          const updateNumbers = () => {
+            if (yearEl) {
+              yearEl.dataset.reveal = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            }
+            if (actEl) {
+              actEl.dataset.reveal = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            }
+          };
+
+          // Update every 500ms (2 variations per second)
+          setInterval(updateNumbers, 500);
+          updateNumbers(); // Initial call
+        };
+
+        initGlitches();
+        document.addEventListener('astro:page-load', initGlitches);
+      })();
+
 </script>
