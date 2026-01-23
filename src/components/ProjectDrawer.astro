@@ -715,7 +715,23 @@
     color: #fff;
   }
 
-  .di-panel { overflow-x: clip; background: #28282B; }
+  .di-panel { 
+    --drawer-pad: 1.5rem;
+    overflow-x: clip; 
+    background: #28282B; 
+  }
+
+  @media (min-width: 640px) {
+    .di-panel {
+      --drawer-pad: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .di-panel {
+      --drawer-pad: 4rem;
+    }
+  }
 
   .di-panel .di-headline {
     font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
@@ -729,12 +745,9 @@
 
   /* Local Full-Bleed Utility */
   .di-panel .full-bleed {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: calc(100% + (var(--drawer-pad) * 2));
+    margin-left: calc(var(--drawer-pad) * -1);
+    margin-right: calc(var(--drawer-pad) * -1);
     overflow: hidden;
   }
 
@@ -1512,18 +1525,16 @@
         const dist3 = Math.abs(containerCenter - center3);
         const isInZone = dist3 < threshold;
 
-        if (isInZone) {
-          if (!image3.classList.contains('is-active')) {
-            image3.classList.add('is-active');
-            console.log('[Digital Ink] IMAGE 3: ON');
-          }
-        } else if (!scrollingDown) {
-          // Only deactivate when scrolling UP and out of zone
-          if (image3.classList.contains('is-active')) {
-            image3.classList.remove('is-active');
-            console.log('[Digital Ink] IMAGE 3: OFF (scrolling up)');
-          }
-        }
+            if (isInZone) {
+              if (!image3.classList.contains('is-active')) {
+                image3.classList.add('is-active');
+              }
+            } else if (!scrollingDown) {
+              // Only deactivate when scrolling UP and out of zone
+              if (image3.classList.contains('is-active')) {
+                image3.classList.remove('is-active');
+              }
+            }
       }
 
       ticking = false;

@@ -9,6 +9,8 @@ let triggerElement: HTMLElement | null = null;
 let focusTrapCleanup: (() => void) | null = null;
 let initialized = false;
 let abortController: AbortController | null = null;
+let previousOverflow: string = "";
+let previousPaddingRight: string = "";
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -22,11 +24,18 @@ function getDrawerPanel(id: DrawerId): HTMLElement | null {
 }
 
 function lockScroll() {
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  previousOverflow = document.body.style.overflow;
+  previousPaddingRight = document.body.style.paddingRight;
   document.body.style.overflow = "hidden";
+  if (scrollbarWidth > 0) {
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  }
 }
 
 function unlockScroll() {
-  document.body.style.overflow = "";
+  document.body.style.overflow = previousOverflow;
+  document.body.style.paddingRight = previousPaddingRight;
 }
 
 function trapFocus(panel: HTMLElement) {
