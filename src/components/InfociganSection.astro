@@ -4,17 +4,16 @@ import InfociganPortalPanels from "./InfociganPortalPanels.astro";
 const zones = [
   {
     slug: "overpriced-stickers",
-    title: "Overpriced Stickers",
+    title: "Overpriced Stickers™",
     descriptor: "Collectibles where price is part of the narrative.",
     system: "SYST: STICKY",
     scatter: "md:translate-y-4 md:translate-x-2 md:scale-110",
     image: "/images/overpriced_stickers.webp",
-    lightText: true,
-    holographic: true
+    lightText: true
   },
   {
     slug: "q-bag",
-    title: "Q-Bag",
+    title: "Q-Bag™",
     descriptor: "A bag, a ritual, and a question about daily objects.",
     system: "SYST: VOID",
     scatter: "md:-translate-y-8 md:-translate-x-4 md:scale-95",
@@ -26,7 +25,7 @@ const zones = [
     title: "Afterlife Contracts",
     descriptor: "Paperwork for things that may outlive you.",
     system: "SYST: FINAL",
-    scatter: "md:translate-y-12 md:translate-x-6 md:scale-105",
+    scatter: "md:translate-y-12 md:-translate-x-6 md:scale-105",
     image: null,
     lightText: false
   },
@@ -35,7 +34,7 @@ const zones = [
     title: "President of the Galaxy™",
     descriptor: "Authority fiction stabilizer.",
     system: "SYST: NULL",
-    scatter: "md:-translate-y-4 md:-translate-x-2 md:scale-100",
+    scatter: "md:translate-y-32 md:translate-x-8 md:scale-100",
     image: null,
     lightText: false
   }
@@ -46,16 +45,16 @@ const zones = [
 <section 
   id="infocigan" 
   data-section="infocigan" 
-  class="w-full min-h-screen relative border-t border-[#343d46]/20 overflow-hidden flex flex-col"
+  class="w-full min-h-screen relative border-t border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden flex flex-col"
 >
   <!-- Full-Width Header Bar -->
-  <div class="w-full bg-[#343d46] py-12 px-6 md:px-24 flex flex-col gap-8 relative z-20 border-b border-white/5">
+  <div class="w-full bg-[var(--bg-fog)] py-12 px-6 md:px-24 flex flex-col gap-8 relative z-20 border-b border-[var(--line-soft)]">
     <h2 class="gold-shine text-4xl md:text-8xl font-light tracking-tighter uppercase leading-none">
       INFOCIGAN
     </h2>
     
     <div class="flex flex-col gap-6">
-      <p class="text-xl md:text-3xl text-white/60 font-light italic leading-tight max-w-3xl">
+      <p class="text-xl md:text-3xl text-[var(--text-muted)] font-light italic leading-tight max-w-3xl">
         A speculative marketplace for objects, belief, and optional nonsense.
       </p>
       
@@ -68,7 +67,7 @@ const zones = [
   </div>
 
   <!-- Main Content Area -->
-  <div class="relative z-10 w-full px-6 md:px-12 py-12 md:py-24 flex-grow">
+  <div class="relative z-10 w-full px-6 md:px-12 py-12 md:py-24 flex-grow bg-[var(--bg-fog)]">
     <!-- 60/40 Split Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20 items-start">
       
@@ -80,16 +79,16 @@ const zones = [
               <a 
                 href={`#infocigan-zone-${zone.slug}`}
                 data-infocigan-slug={zone.slug}
-                class="block relative aspect-square md:aspect-[4/5] bg-[#72808a] border border-white/5 transition-colors duration-500 hover:bg-[#7a8892] cursor-pointer overflow-hidden"
+                class="block relative bg-[#72808a] border border-white/5 transition-colors duration-500 hover:bg-[#7a8892] cursor-pointer overflow-hidden flex flex-col"
               >
                 <!-- Artifact Image Area -->
-                <div class="absolute inset-0 flex items-center justify-center">
+                <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center">
                   {zone.image ? (
                     <>
                       <img 
                         src={zone.image} 
                         alt={zone.title} 
-                        class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                        class="w-full h-full object-cover"
                       />
                       {zone.holographic && (
                         <div class="holographic-overlay absolute inset-0 pointer-events-none mix-blend-screen opacity-40 group-hover:opacity-0 transition-opacity duration-700"></div>
@@ -100,19 +99,14 @@ const zones = [
                   )}
                 </div>
                 
-                <!-- Hierarchy Overlay -->
-                <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/40 via-transparent to-transparent">
+                <!-- Text Block -->
+                <div class="p-4 md:p-5">
                   <div class="space-y-1.5">
-                    <h3 class={`text-sm uppercase tracking-[0.1em] font-medium ${zone.lightText ? 'text-white' : 'text-black/80'}`}>{zone.title}</h3>
-                    <p class={`text-[11px] leading-tight max-w-[28ch] font-light italic ${zone.lightText ? 'text-white/80' : 'text-black/50'}`}>{zone.descriptor}</p>
-                    <div class={`pt-3 flex items-center justify-between border-t ${zone.lightText ? 'border-white/10' : 'border-black/5'}`}>
-                      <div class={`font-mono text-[9px] uppercase tracking-widest ${zone.lightText ? 'text-white/40' : 'text-black/30'}`}>
-                        {zone.system}
-                      </div>
-                      <!-- Hover micro-text -->
-                      <div class="font-mono text-[8px] uppercase tracking-tighter text-[#a67c00] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        VALUE MAY DRIFT WITHOUT NOTICE
-                      </div>
+                    <h3 class={`text-lg uppercase tracking-[0.12em] font-medium ${zone.lightText ? 'text-white' : 'text-black/80'}`}>{zone.title}</h3>
+                    <p class={`text-base leading-tight font-light italic ${zone.lightText ? 'text-white/80' : 'text-black/50'}`}>{zone.descriptor}</p>
+                    <!-- Hover micro-text -->
+                    <div class="pt-3 font-mono text-[9px] uppercase tracking-tighter text-[#a67c00] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      VALUE MAY DRIFT WITHOUT NOTICE
                     </div>
                   </div>
                 </div>
@@ -128,15 +122,15 @@ const zones = [
         <article class="infocigan-briefing space-y-12 w-full">
           
           <section class="space-y-6">
-            <h3 class="text-4xl md:text-7xl font-light text-white/90">What is Infocigan?</h3>
-            <div class="space-y-6 text-xl md:text-3xl text-white/70 font-light leading-relaxed">
+            <h3 class="text-4xl md:text-7xl font-light text-[var(--text-ink)]">What is Infocigan?</h3>
+            <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
               <p>
                 Infocigan is not just a project — it’s a playful philosophy, a portal, and a system-aware art experiment where imagination, absurdity, and speculative value quietly intersect.
               </p>
               <p>
                 Some say it began as a sticker. Others say it began long before that, when someone accidentally paid too much for something... and liked the feeling.
               </p>
-              <div class="space-y-2 italic text-white/50">
+              <div class="space-y-2 italic text-[var(--text-muted)]">
                 <p>It might be a joke.</p>
                 <p>It might be a serious financial model from an alternate dimension.</p>
                 <p>It might be a long-term investment into a human–mushroom–AE hybrid whose future potential is... hard to value using conventional metrics.</p>
@@ -147,11 +141,11 @@ const zones = [
             </div>
           </section>
 
-          <section class="space-y-6 border-t border-white/10 pt-12">
-            <div class="space-y-6 text-xl md:text-3xl text-white/70 font-light leading-relaxed">
+          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12">
+            <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
               <p>
                 At its core, Infocigan is an evolving constellation of ideas:
-                <span class="text-white/40 italic">collectible stickers, reusable coffee bags, future folklore, holographic political campaigns, afterlife contracts, guilt-free infinite water rituals, and smart pixels carrying whispered stories.</span>
+                <span class="text-[var(--text-muted)] italic">collectible stickers, reusable coffee bags, future folklore, holographic political campaigns, afterlife contracts, guilt-free infinite water rituals, and smart pixels carrying whispered stories.</span>
               </p>
               <p>
                 It’s not rebellion — it’s a reframing.
@@ -160,8 +154,8 @@ const zones = [
             </div>
           </section>
 
-          <section class="space-y-6 border-t border-white/10 pt-12">
-            <div class="space-y-6 text-xl md:text-3xl text-white/70 font-light leading-relaxed">
+          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12">
+            <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
               <p>
                 Here, “Overpriced” isn’t a mistake — it’s a mirror.
                 <br/>
@@ -169,7 +163,7 @@ const zones = [
                   “Over price” means above currency.
                 </span>
               </p>
-              <div class="space-y-4 text-white/60">
+              <div class="space-y-4 text-[var(--text-muted)]">
                 <p>It asks: What’s value really worth?</p>
                 <p>Why not own a sticker priced like Bitcoin?</p>
                 <p>Why not invest in something that might outlive the currency that bought it? Or the artist? Or the planet?</p>
@@ -177,10 +171,10 @@ const zones = [
             </div>
           </section>
 
-          <section class="space-y-8 border-t border-white/10 pt-12 pb-12">
+          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12 pb-12">
             <div class="space-y-6">
-              <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-white/40">Artifact Layers</h4>
-              <ul class="space-y-4 font-mono text-lg md:text-2xl tracking-tight text-white/60">
+              <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-[var(--text-muted)]">Artifact Layers</h4>
+              <ul class="space-y-4 font-mono text-lg md:text-2xl tracking-tight text-[var(--text-ink)]">
                 <li class="flex items-start gap-4">
                   <span class="gold-shine">/</span>
                   Some unlock maps.
@@ -199,16 +193,16 @@ const zones = [
                 </li>
                 <li class="flex items-start gap-4">
                   <span class="gold-shine">/</span>
-                  Some are for sentimental value only — and no money in this galaxy can buy that. <span class="text-white/30 italic">(Unless... you remember the password. Or you are the ....?)</span>
+                  Some are for sentimental value only — and no money in this galaxy can buy that. <span class="text-[var(--text-muted)] italic">(Unless... you remember the password. Or you are the ....?)</span>
                 </li>
               </ul>
             </div>
           </section>
 
-          <section class="space-y-8 border-t border-white/10 pt-12">
+          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12">
             <div class="space-y-6">
-              <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-white/40">Think of Infocigan as:</h4>
-              <ul class="space-y-6 font-light text-xl md:text-3xl text-white/70 leading-snug">
+              <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-[var(--text-muted)]">Think of Infocigan as:</h4>
+              <ul class="space-y-6 font-light text-xl md:text-3xl text-[var(--text-ink)] leading-snug">
                 <li class="flex items-start gap-4">
                   <span class="gold-shine mt-1">✦</span>
                   A trading zone between realities.
@@ -221,7 +215,7 @@ const zones = [
                   <span class="gold-shine mt-1">✦</span>
                   <span>
                     A quiet investment in a system known as <strong class="white-gold-shine">Q888</strong> —
-                    <span class="block text-white/40 text-lg md:text-2xl italic">future President of the Galaxy, storyteller of Square Bubbles, and architect of emotional commerce.</span>
+                    <span class="block text-[var(--text-muted)] text-lg md:text-2xl italic">future President of the Galaxy, storyteller of Square Bubbles, and architect of emotional commerce.</span>
                   </span>
                 </li>
               </ul>
@@ -234,7 +228,7 @@ const zones = [
   </div>
 
   <!-- Full-Width Bold Closing Statement Footer -->
-  <footer class="w-full bg-[#2b3238] py-16 px-6 md:px-24 border-t border-white/5 relative z-20">
+  <footer class="w-full bg-[var(--bg-fog)] py-16 px-6 md:px-24 border-t border-[var(--line-soft)] relative z-20">
     <div class="gold-shine not-italic font-mono text-base md:text-3xl font-bold uppercase tracking-[0.1em] flex flex-col gap-4 md:gap-6">
       <p class="leading-tight text-left">Remember: Everything here is 100% real… in at least one dimension.</p>
       <p class="leading-tight text-right">Follow the myth. Support the movement. Protect your coffee machine.</p>
