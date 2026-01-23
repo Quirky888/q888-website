@@ -1,4 +1,4 @@
-# Q888 Website Rules (Canonical) — v1.1
+#Q888 Website Rules (Canonical) — v1.2
 
 ## 0) Prime Directive
 Preserve the established aesthetic and hierarchy.
@@ -72,6 +72,44 @@ IMPORTANT:
 - Optimize images, lazy-load large assets.
 - No debug UI/logs unless explicitly requested.
 - Keep selectors stable; avoid brittle DOM assumptions.
+
+---
+
+## Responsive Consistency Rule (Non-Negotiable)
+
+Goal:
+The UI must remain visually consistent across different monitor sizes, aspect ratios, and browser zoom levels (80%–125%).
+“Looks good on my 13-inch MacBook at 100%” is NOT sufficient.
+
+Mandatory constraints:
+1) One container contract per section
+- Each section must follow: OUTER (full width) + INNER (max-w + mx-auto + consistent px rhythm).
+- Do not mix multiple competing max-w/px systems inside the same section unless explicitly requested.
+
+2) No fragile viewport math inside scroll containers
+- Avoid width:100vw / left:50% / margin-left:-50vw patterns inside drawers, portals, or any scrollable container.
+- Full-bleed must be computed relative to the container padding (negative margins based on padding), not viewport.
+
+3) Scroll-lock must not shift layout width
+- Any overlay/drawer/portal that locks scroll must compensate for scrollbar width and restore prior inline styles exactly.
+- Opening/closing overlays must not cause horizontal “nudge” on systems with non-overlay scrollbars.
+
+4) Alignment is grid-based, not eyeballed
+- Use a shared grid rhythm: consistent px breakpoints and max-w values across sections.
+- Paired media blocks must share the same grid parent, column spans, and gap rules.
+
+5) Avoid absolute positioning for alignment-critical layout
+- Absolute positioning is allowed only for effects/overlays.
+- Primary content alignment must be achieved through normal flow (grid/flex) inside the container contract.
+
+Required verification for every PR:
+- Desktop widths: ~1280px, ~1440px, ~1728px (or equivalent by resizing window)
+- Zoom levels: 80%, 100%, 125%
+- Mobile widths: ~375px and ~430px
+- Check: no horizontal scroll, edges align (text + images), no overlay open/close nudge
+
+Stop condition:
+If a requested change cannot meet these constraints without touching files outside scope, STOP and ask first.
 
 ---
 
@@ -162,3 +200,4 @@ If you are about to do any of the following, STOP and ask first:
 - modify tokens.css
 - replace GSAP behavior with a different library
 - rewrite Layout.astro structure instead of adding minimal wrappers
+- introduce width:100vw + negative viewport margins inside drawers/portals

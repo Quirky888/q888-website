@@ -177,15 +177,10 @@ const zones = [
       links.classList.toggle("open");
     });
 
-    links.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        toggle.setAttribute("aria-expanded", "false");
-        links.classList.remove("open");
-      });
-    });
-
     nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", (event) => {
+        toggle.setAttribute("aria-expanded", "false");
+        links.classList.remove("open");
         const href = link.getAttribute("href");
         if (!href || !href.startsWith("#")) return;
         event.preventDefault();

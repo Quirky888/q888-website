@@ -9,11 +9,27 @@ let triggerElement: HTMLElement | null = null;
 let focusTrapCleanup: (() => void) | null = null;
 let initialized = false;
 let abortController: AbortController | null = null;
-let previousOverflow: string = "";
-let previousPaddingRight: string = "";
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+type ScrollLockState = {
+  count: number;
+  previousOverflow: string;
+  previousPaddingRight: string;
+};
+
+function getScrollLockState(): ScrollLockState {
+  const win = window as Window & { __q888ScrollLock?: ScrollLockState };
+  if (!win.__q888ScrollLock) {
+    win.__q888ScrollLock = {
+      count: 0,
+      previousOverflow: "",
+      previousPaddingRight: "",
+    };
+  }
+  return win.__q888ScrollLock;
+}
 
 function getDrawerRoot(): HTMLElement | null {
   return document.querySelector("[data-drawer]");
@@ -24,18 +40,26 @@ function getDrawerPanel(id: DrawerId): HTMLElement | null {
 }
 
 function lockScroll() {
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-  previousOverflow = document.body.style.overflow;
-  previousPaddingRight = document.body.style.paddingRight;
-  document.body.style.overflow = "hidden";
-  if (scrollbarWidth > 0) {
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  const lockState = getScrollLockState();
+  if (lockState.count === 0) {
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    lockState.previousOverflow = document.body.style.overflow;
+    lockState.previousPaddingRight = document.body.style.paddingRight;
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
   }
+  lockState.count += 1;
 }
 
 function unlockScroll() {
-  document.body.style.overflow = previousOverflow;
-  document.body.style.paddingRight = previousPaddingRight;
+  const lockState = getScrollLockState();
+  if (lockState.count === 0) return;
+  lockState.count -= 1;
+  if (lockState.count > 0) return;
+  document.body.style.overflow = lockState.previousOverflow;
+  document.body.style.paddingRight = lockState.previousPaddingRight;
 }
 
 function trapFocus(panel: HTMLElement) {
