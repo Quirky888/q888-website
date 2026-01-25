@@ -68,15 +68,17 @@ const zones = [
             <div class="qbag-layout qbag-layout-with-nav">
               <!-- LEFT PANEL (40%) -->
               <section class="qbag-left">
-                <div class="qbag-panel-header">
-                  <h2 class="panel-title text-white gold-shine">Q-bag Artistic representation</h2>
-                </div>
-                <div class="qbag-visual-container">
-                  <img 
-                    src="/images/qbag_concept.webp" 
-                    alt="Q-Bag Artistic Representation" 
-                    class="qbag-image"
-                  />
+                <div class="qbag-hero-stack">
+                  <div class="qbag-panel-header">
+                    <h2 class="panel-title text-white gold-shine">Q-bag Artistic representation</h2>
+                  </div>
+                  <div class="qbag-visual-container">
+                    <img 
+                      src="/images/qbag_concept.webp" 
+                      alt="Q-Bag Artistic Representation" 
+                      class="qbag-image"
+                    />
+                  </div>
                 </div>
               </section>
 
@@ -364,6 +366,26 @@ const zones = [
     position: relative;
     overflow: visible;
     box-sizing: border-box;
+  }
+
+  .portal-panel[data-portal-panel="q-bag"] .qbag-hero-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.2vw, 3.25rem);
+    flex: 1;
+    min-height: 0;
+  }
+
+  .portal-panel[data-portal-panel="q-bag"] .qbag-hero-stack .qbag-panel-header {
+    padding-bottom: 0;
+  }
+
+  .portal-panel[data-portal-panel="q-bag"] .qbag-hero-stack .panel-title {
+    margin-bottom: 0;
+  }
+
+  .portal-panel[data-portal-panel="q-bag"] .qbag-hero-stack .qbag-visual-container {
+    margin-top: 0;
   }
 
   @media (min-width: 1024px) {

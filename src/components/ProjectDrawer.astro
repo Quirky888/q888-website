@@ -75,13 +75,13 @@
         <!-- Q888:SECTION_END id="di-philosophy" -->
 
         <!-- IMAGE 2 -->
-        <div class="full-bleed">
+        <div class="px-6 sm:px-10 lg:px-16 py-8">
           <div class="di-reveal aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image2">
             <!-- Base (aligned right, not stretched) -->
             <img
               src="/images/screen.webp"
               alt="Digital Ink canvas (base)"
-              class="absolute inset-y-0 right-0 h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-10"
+              class="di-reveal-base absolute inset-y-0 right-0 h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-10"
               loading="lazy"
               decoding="async"
             />
@@ -111,13 +111,13 @@
         <!-- Q888:SECTION_END id="di-innovation" -->
 
         <!-- IMAGE 3 -->
-        <div class="full-bleed">
+        <div class="px-6 sm:px-10 lg:px-16 py-8">
           <div class="di-reveal aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image3">
             <!-- Base image -->
             <img
               src="/images/memory.webp"
               alt="Digital Ink memory (base)"
-              class="absolute inset-y-0 right-0 h-full w-auto object-contain z-10"
+              class="di-reveal-base absolute inset-0 w-full h-full object-contain z-10"
               loading="lazy"
               decoding="async"
             />
@@ -126,13 +126,13 @@
             <img
               src="/images/memory_overlay.webp"
               alt="Digital Ink memory (overlay)"
-              class="di-reveal-overlay absolute inset-y-0 right-0 h-full w-auto object-contain z-20"
+              class="di-reveal-overlay absolute inset-0 w-full h-full object-contain z-20"
               loading="lazy"
               decoding="async"
             />
 
             <!-- Fog quote text -->
-            <div class="di-fog-text absolute right-6 sm:right-10 lg:right-16 top-1/2 -translate-y-1/2 z-15 text-left pointer-events-none">
+            <div class="di-fog-text absolute right-0 top-1/2 -translate-y-1/2 z-15 text-left pointer-events-none">
               <p class="text-[clamp(2.2rem,5vw,5rem)] font-bold tracking-[-0.03em] leading-[1.1] text-zinc-200/40 blur-[1.5px]" style="font-family: 'Space Grotesk', sans-serif; text-shadow: 0 0 30px rgba(255,255,255,0.15);">
                 I REMEMBER …<br/>being many pixels…
               </p>
@@ -763,10 +763,23 @@
     pointer-events: none;
   }
 
+  .di-panel .di-reveal-base {
+    transition:
+      opacity 1200ms cubic-bezier(.4,0,.2,1),
+      filter 1200ms cubic-bezier(.4,0,.2,1);
+    will-change: opacity, filter;
+    opacity: 1;
+  }
+
   .di-panel .di-reveal.is-active .di-reveal-overlay {
     opacity: 1;
     filter: blur(0px);
     transform: scale(1);
+  }
+
+  .di-panel .di-reveal.is-active .di-reveal-base {
+    opacity: 0;
+    filter: blur(4px);
   }
 
   .di-panel .di-fog-text {
@@ -1491,6 +1504,7 @@
 
     let ticking = false;
     let lastScrollTop = 0;
+    let image3Latched = false;
 
     function checkReveal() {
       if (!scrollContainer) return;
@@ -1500,7 +1514,6 @@
 
       const currentScrollTop = scrollContainer.scrollTop;
       const scrollingDown = currentScrollTop > lastScrollTop;
-      lastScrollTop = currentScrollTop;
 
       const containerCenter = containerRect.top + containerHeight / 2;
       const threshold = containerHeight * 0.15;
@@ -1518,25 +1531,28 @@
         }
       }
 
-      // IMAGE 3: sticky downward (on near center, stays on when scrolling down, off when scrolling up)
+      // IMAGE 3: latch-based (on near center when scrolling down, off when rewinding up)
       if (image3) {
         const rect3 = image3.getBoundingClientRect();
         const center3 = rect3.top + rect3.height / 2;
         const dist3 = Math.abs(containerCenter - center3);
         const isInZone = dist3 < threshold;
+        const isAboveReset = center3 < (containerCenter - threshold * 1.4);
 
-            if (isInZone) {
-              if (!image3.classList.contains('is-active')) {
-                image3.classList.add('is-active');
-              }
-            } else if (!scrollingDown) {
-              // Only deactivate when scrolling UP and out of zone
-              if (image3.classList.contains('is-active')) {
-                image3.classList.remove('is-active');
-              }
-            }
+        if (scrollingDown && isInZone) {
+          image3Latched = true;
+        } else if (!scrollingDown && isAboveReset) {
+          image3Latched = false;
+        }
+
+        if (image3Latched) {
+          image3.classList.add('is-active');
+        } else {
+          image3.classList.remove('is-active');
+        }
       }
 
+      lastScrollTop = currentScrollTop;
       ticking = false;
     }
 
