@@ -39,6 +39,33 @@ function restoreFocus(el: HTMLElement | null) {
   }
 }
 
+function setPanelsAriaHidden(active: HTMLElement | null) {
+  const panels = document.querySelectorAll<HTMLElement>("[data-portal-panel]");
+  panels.forEach((panel) => {
+    if (active) {
+      panel.setAttribute("aria-hidden", panel === active ? "false" : "true");
+    } else {
+      panel.setAttribute("aria-hidden", "false");
+    }
+  });
+}
+
+function focusDialog(panel: HTMLElement) {
+  const content = panel.querySelector<HTMLElement>(".panel-content");
+  if (!content) return;
+  try {
+    content.focus({ preventScroll: true });
+  } catch {
+    content.focus();
+  }
+}
+
+function getFocusable(container: HTMLElement): HTMLElement[] {
+  const selector =
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  return Array.from(container.querySelectorAll<HTMLElement>(selector));
+}
+
 function getPortalRoot(): HTMLElement | null {
   return document.querySelector(".infocigan-portal-system");
 }
@@ -87,6 +114,8 @@ export function openPortal(slug: string, direction: Direction) {
 
   panel.classList.add("is-active");
   panel.setAttribute("data-slide-from", direction);
+  setPanelsAriaHidden(panel);
+  focusDialog(panel);
 
   const xFrom = direction === "left" ? "-100%" : "100%";
 
@@ -119,6 +148,7 @@ export function closePortal() {
 
   const cleanup = () => {
     panel.classList.remove("is-active");
+    setPanelsAriaHidden(null);
     unlockScroll();
     restoreFocus(triggerElement);
     triggerElement = null;
@@ -151,9 +181,35 @@ export function closePortal() {
   }
 }
 
-function handleEscape(e: KeyboardEvent) {
-  if (e.key === "Escape" && activePanel) {
+function handleKeydown(e: KeyboardEvent) {
+  if (!activePanel) return;
+  if (e.key === "Escape") {
     closePortal();
+    return;
+  }
+  if (e.key !== "Tab") return;
+
+  const content = activePanel.querySelector<HTMLElement>(".panel-content");
+  if (!content) return;
+
+  const focusable = getFocusable(content);
+  if (focusable.length === 0) {
+    e.preventDefault();
+    focusDialog(activePanel);
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const current = document.activeElement as HTMLElement | null;
+  const isShift = e.shiftKey;
+
+  if (isShift && (current === first || current === content)) {
+    e.preventDefault();
+    last.focus();
+  } else if (!isShift && current === last) {
+    e.preventDefault();
+    first.focus();
   }
 }
 
@@ -178,6 +234,7 @@ export function initInfociganPortal() {
 
   const cards = document.querySelectorAll<HTMLElement>("[data-infocigan-slug]");
   const backButtons = document.querySelectorAll<HTMLElement>("[data-portal-back]");
+  const panels = document.querySelectorAll<HTMLElement>("[data-portal-panel]");
 
   cards.forEach((card) => {
     card.addEventListener(
@@ -220,7 +277,13 @@ export function initInfociganPortal() {
     );
   });
 
-  document.addEventListener("keydown", handleEscape, { signal });
+  panels.forEach((panel) => {
+    panel
+      .querySelector(".panel-overlay")
+      ?.addEventListener("click", () => closePortal(), { signal });
+  });
+
+  document.addEventListener("keydown", handleKeydown, { signal });
   window.addEventListener("popstate", checkHash, { signal });
 
   checkHash(); // Initial check
