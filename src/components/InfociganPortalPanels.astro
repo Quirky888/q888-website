@@ -214,32 +214,6 @@ const zones = [
 
   initQbagNav();
   document.addEventListener("astro:page-load", initQbagNav);
-
-  // Fallback portal activation for overpriced-stickers
-  function initOverpricedStickersFallback() {
-    const cards = document.querySelectorAll("[data-infocigan-slug]");
-    cards.forEach((card) => {
-      card.addEventListener("click", (e) => {
-        const slug = card.getAttribute("data-infocigan-slug");
-        if (slug === "overpriced-stickers") {
-          const panel = document.querySelector(`[data-portal-panel="${slug}"]`);
-          if (panel && !panel.classList.contains("is-active")) {
-            // Close other panels
-            document.querySelectorAll(".portal-panel.is-active").forEach((p) => {
-              p.classList.remove("is-active");
-            });
-            // Activate this panel
-            panel.classList.add("is-active");
-            // Update hash
-            history.pushState(null, "", `#infocigan-zone-${slug}`);
-          }
-        }
-      });
-    });
-  }
-
-  initOverpricedStickersFallback();
-  document.addEventListener("astro:page-load", initOverpricedStickersFallback);
 </script>
 
 <style>
@@ -248,6 +222,11 @@ const zones = [
     inset: 0;
     z-index: 200;
     pointer-events: none;
+  }
+
+  .infocigan-portal-system.has-active-panel,
+  .infocigan-portal-system:has(.portal-panel.is-active) {
+    pointer-events: auto;
   }
 
   .portal-panel {
@@ -446,9 +425,6 @@ const zones = [
     margin-top: 0;
   }
 
-  [data-portal-panel="q-bag"] .panel-archive-bar {
-    display: none;
-  }
 
   .qbag-panel-header {
     padding: 3rem 1.25rem 1rem;

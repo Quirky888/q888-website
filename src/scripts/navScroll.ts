@@ -14,32 +14,45 @@ function handleClick(e: Event) {
   // Close any open portal panels before navigating to non-infocigan sections
   const activePanel = document.querySelector(".portal-panel.is-active");
   if (activePanel && !href.startsWith("#infocigan")) {
-    // Manually close portal
-    activePanel.classList.remove("is-active");
-    const portalSystem = document.querySelector(".infocigan-portal-system");
-    if (portalSystem) {
-      const panels = portalSystem.querySelectorAll(".portal-panel");
-      panels.forEach((panel) => {
-        panel.setAttribute("aria-hidden", "true");
-      });
-    }
-    // Unlock scroll
-    if (window.__q888ScrollLock) {
-      const lockState = window.__q888ScrollLock;
-      if (lockState.count > 0) {
-        document.body.style.overflow = lockState.previousOverflow;
-        document.body.style.paddingRight = lockState.previousPaddingRight;
-        lockState.count = 0;
+    // Import and use the portal's closePortal function
+    import("./infociganPortal").then((module) => {
+      module.closePortal();
+      // Wait for close animation to complete before scrolling
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", href);
+      }, 650);
+    }).catch(() => {
+      // Fallback: manually close portal if import fails
+      activePanel.classList.remove("is-active");
+      const portalSystem = document.querySelector(".infocigan-portal-system");
+      if (portalSystem) {
+        const panels = portalSystem.querySelectorAll(".portal-panel");
+        panels.forEach((panel) => {
+          panel.setAttribute("aria-hidden", "true");
+        });
       }
-    }
-    // Update URL to remove infocigan zone hash
-    if (window.location.hash.startsWith("#infocigan-zone-")) {
-      history.pushState(null, "", "#infocigan");
-    }
+      // Unlock scroll
+      if (window.__q888ScrollLock) {
+        const lockState = window.__q888ScrollLock;
+        if (lockState.count > 0) {
+          document.body.style.overflow = lockState.previousOverflow;
+          document.body.style.paddingRight = lockState.previousPaddingRight;
+          lockState.count = 0;
+        }
+      }
+      // Update URL to remove infocigan zone hash
+      if (window.location.hash.startsWith("#infocigan-zone-")) {
+        history.pushState(null, "", "#infocigan");
+      }
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.pushState(null, "", href);
+    });
+  } else {
+    // No portal open, navigate normally
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState(null, "", href);
   }
-
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
-  history.pushState(null, "", href);
 }
 
 export function initNavScroll() {

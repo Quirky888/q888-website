@@ -145,7 +145,7 @@ const stickers: Sticker[] = [
   }
 ];
 
-const activeCount = stickers.filter(s => s.status === "LISTED").length;
+const activeCount = stickers.filter(s => s.availableCount > 0).length;
 ---
 
 <div class="overpriced-stickers-page" data-in-portal={inPortal}>

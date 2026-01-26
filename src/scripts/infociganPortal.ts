@@ -112,6 +112,11 @@ export function openPortal(slug: string, direction: Direction) {
   originDirection = direction;
   lockScroll();
 
+  const root = getPortalRoot();
+  if (root) {
+    root.classList.add("has-active-panel");
+  }
+
   panel.classList.add("is-active");
   panel.setAttribute("data-slide-from", direction);
   setPanelsAriaHidden(panel);
@@ -153,6 +158,11 @@ export function closePortal() {
     restoreFocus(triggerElement);
     triggerElement = null;
     activePanel = null;
+
+    const root = getPortalRoot();
+    if (root) {
+      root.classList.remove("has-active-panel");
+    }
 
     // Update URL without jumping (temporarily remove ID)
     const section = document.getElementById("infocigan");
@@ -286,7 +296,11 @@ export function initInfociganPortal() {
   document.addEventListener("keydown", handleKeydown, { signal });
   window.addEventListener("popstate", checkHash, { signal });
 
-  checkHash(); // Initial check
+  // Only check hash on load if it's explicitly an infocigan zone hash
+  // Don't auto-open panels on initial load unless user explicitly navigated there
+  if (window.location.hash.startsWith("#infocigan-zone-")) {
+    checkHash();
+  }
 }
 
 export function destroyInfociganPortal() {
