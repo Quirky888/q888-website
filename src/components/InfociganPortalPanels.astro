@@ -49,7 +49,7 @@ const zones = [
 <div class="infocigan-portal-system">
   {zones.map((zone) => (
     <div 
-      class="portal-panel" 
+      class={`portal-panel ${zone.slug === "overpriced-stickers" ? "is-active" : ""}`}
       data-portal-panel={zone.slug}
     >
       <div class="panel-overlay"></div>
@@ -297,6 +297,10 @@ const zones = [
 
   [data-portal-panel="q-bag"] .panel-content {
     background: #ffffff;
+  }
+
+  [data-portal-panel="overpriced-stickers"] .panel-content {
+    background: #faf9f7;
   }
 
   .panel-scroll {
