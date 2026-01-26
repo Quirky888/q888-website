@@ -11,6 +11,33 @@ function handleClick(e: Event) {
 
   e.preventDefault();
 
+  // Close any open portal panels before navigating to non-infocigan sections
+  const activePanel = document.querySelector(".portal-panel.is-active");
+  if (activePanel && !href.startsWith("#infocigan")) {
+    // Manually close portal
+    activePanel.classList.remove("is-active");
+    const portalSystem = document.querySelector(".infocigan-portal-system");
+    if (portalSystem) {
+      const panels = portalSystem.querySelectorAll(".portal-panel");
+      panels.forEach((panel) => {
+        panel.setAttribute("aria-hidden", "true");
+      });
+    }
+    // Unlock scroll
+    if (window.__q888ScrollLock) {
+      const lockState = window.__q888ScrollLock;
+      if (lockState.count > 0) {
+        document.body.style.overflow = lockState.previousOverflow;
+        document.body.style.paddingRight = lockState.previousPaddingRight;
+        lockState.count = 0;
+      }
+    }
+    // Update URL to remove infocigan zone hash
+    if (window.location.hash.startsWith("#infocigan-zone-")) {
+      history.pushState(null, "", "#infocigan");
+    }
+  }
+
   target.scrollIntoView({ behavior: "smooth", block: "start" });
   history.pushState(null, "", href);
 }

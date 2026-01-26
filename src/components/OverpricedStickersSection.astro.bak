@@ -148,6 +148,14 @@ const stickers: Sticker[] = [
 const activeCount = stickers.filter(s => s.status === "LISTED").length;
 ---
 
+<!-- TEMPORARY RENDER MARKER -->
+<div style="background: red !important; color: white !important; padding: 4rem 2rem !important; font-size: 4rem !important; font-weight: bold !important; text-align: center !important; z-index: 99999 !important; position: relative !important; margin: 0 !important; border: 10px solid yellow !important;">
+  🚨 OVERPRICED STICKERS SECTION IS RENDERING 🚨
+  <br />
+  <small style="font-size: 2rem !important; display: block; margin-top: 1rem;">inPortal: {String(inPortal)}</small>
+  <small style="font-size: 1.5rem !important; display: block; margin-top: 0.5rem;">Zone slug should be: overpriced-stickers</small>
+</div>
+
 <div class="overpriced-stickers-page" data-in-portal={inPortal}>
   {inPortal && (
     <div class="stickers-nav">

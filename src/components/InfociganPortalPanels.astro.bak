@@ -49,7 +49,7 @@ const zones = [
 <div class="infocigan-portal-system">
   {zones.map((zone) => (
     <div 
-      class="portal-panel" 
+      class={`portal-panel ${zone.slug === "overpriced-stickers" ? "is-active" : ""}`}
       data-portal-panel={zone.slug}
     >
       <div class="panel-overlay"></div>
@@ -64,12 +64,23 @@ const zones = [
         <div class="panel-archive-bar w-full bg-[#343d46] py-3 px-6 md:px-24 flex items-center justify-between border-b border-white/5">
           <span class="font-mono text-[10px] uppercase tracking-widest text-[#a67c00]">ARCHIVE_ID: {zone.slug.toUpperCase()}</span>
           <span class="font-mono text-[10px] uppercase tracking-widest text-[#a67c00]/50">CONFIDENTIAL_MARKET_DATA</span>
-          <button type="button" data-portal-back class="font-mono text-[10px] uppercase tracking-widest text-[#a67c00]/80 hover:text-[#a67c00] border border-[#a67c00]/25 hover:border-[#a67c00]/50 px-2 py-1 rounded-sm">CLOSE</button>
         </div>
 
         <div class="panel-scroll">
           {zone.slug === "overpriced-stickers" ? (
+<<<<<<< Current (Your changes)
             <OverpricedStickersSection inPortal={true} />
+=======
+            <>
+              <!-- TEMPORARY: Portal panel wrapper marker -->
+              <div style="background: lime !important; color: black !important; padding: 2rem !important; font-size: 2rem !important; font-weight: bold !important; text-align: center !important; border: 5px solid magenta !important; margin-bottom: 2rem !important;">
+                PORTAL PANEL WRAPPER IS ACTIVE
+                <br />
+                <small style="font-size: 1rem;">data-portal-panel="{zone.slug}"</small>
+              </div>
+              <OverpricedStickersSection inPortal={true} />
+            </>
+>>>>>>> Incoming (Background Agent changes)
           ) : zone.slug === "q-bag" ? (
             <>
             <div class="qbag-nav">
