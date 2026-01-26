@@ -1,0 +1,24 @@
+---
+interface Props {
+  inPortal?: boolean;
+}
+
+const { inPortal = false } = Astro.props;
+---
+
+<!-- DEV MARKER: OVERPRICED SECTION FILE LOADED -->
+<div style="background: red !important; color: white !important; padding: 2rem !important; font-size: 2rem !important; font-weight: bold !important; text-align: center !important; margin-bottom: 2rem !important;">
+  DEV MARKER: OVERPRICED SECTION FILE LOADED
+  <br />
+  <small>inPortal: {String(inPortal)}</small>
+</div>
+
+<div class="overpriced-stickers-page">
+  <p>Overpriced Stickers content will go here.</p>
+</div>
+
+<style>
+  .overpriced-stickers-page {
+    padding: 2rem;
+  }
+</style>

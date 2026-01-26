@@ -1,5 +1,6 @@
 ---
 import SlimNav from "./SlimNav.astro";
+import OverpricedStickersSection from "./OverpricedStickersSection.astro";
 
 const zones = [
   {
@@ -66,7 +67,9 @@ const zones = [
         </div>
 
         <div class="panel-scroll">
-          {zone.slug === "q-bag" ? (
+          {zone.slug === "overpriced-stickers" ? (
+            <OverpricedStickersSection inPortal={true} />
+          ) : zone.slug === "q-bag" ? (
             <>
             <div class="qbag-nav">
               <SlimNav />
@@ -210,6 +213,32 @@ const zones = [
 
   initQbagNav();
   document.addEventListener("astro:page-load", initQbagNav);
+
+  // Fallback portal activation for overpriced-stickers
+  function initOverpricedStickersFallback() {
+    const cards = document.querySelectorAll("[data-infocigan-slug]");
+    cards.forEach((card) => {
+      card.addEventListener("click", (e) => {
+        const slug = card.getAttribute("data-infocigan-slug");
+        if (slug === "overpriced-stickers") {
+          const panel = document.querySelector(`[data-portal-panel="${slug}"]`);
+          if (panel && !panel.classList.contains("is-active")) {
+            // Close other panels
+            document.querySelectorAll(".portal-panel.is-active").forEach((p) => {
+              p.classList.remove("is-active");
+            });
+            // Activate this panel
+            panel.classList.add("is-active");
+            // Update hash
+            history.pushState(null, "", `#infocigan-zone-${slug}`);
+          }
+        }
+      });
+    });
+  }
+
+  initOverpricedStickersFallback();
+  document.addEventListener("astro:page-load", initOverpricedStickersFallback);
 </script>
 
 <style>
@@ -230,6 +259,16 @@ const zones = [
   .portal-panel.is-active {
     pointer-events: auto;
     visibility: visible;
+  }
+
+  /* TEMPORARY: CSS fallback for portal visibility without GSAP */
+  .portal-panel.is-active .panel-content {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .portal-panel.is-active .panel-overlay {
+    opacity: 1 !important;
   }
 
   .panel-overlay {
