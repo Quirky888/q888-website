@@ -5,6 +5,27 @@ Preserve the established aesthetic and hierarchy.
 When in doubt: keep it quieter, smaller, and closer to the existing system.
 
 ---
+Q888 OVERRIDE: OverpricedStickersSection Background Freedom
+
+**OverpricedStickersSection.astro is exempt from background guardrails:**
+
+ALLOWED (this component only):
+- Modify backgrounds, transparency, glass effects
+- Use `bg-[var(--bg-fog)]`, `backdrop-blur`, `bg-transparent !important`
+- Edge-to-edge layouts (`w-screen`, viewport calc margins)
+- Explicit `rgba(var(--bg-fog-rgb), X)` syntax
+- Faint overlays (::before grids)
+
+REQUIREMENT:
+- Must match InfociganSection visual DNA (`--bg-fog` family)
+- Cards may use `bg-transparent` to inherit parent fog
+- Ticker MUST use fog-glass (`bg-[var(--bg-fog)]/90 + blur`)
+
+FORBIDDEN (still):
+- Touch `tokens.css`
+- Change Landing/hero backgrounds
+- Global nav/layout changes
+----
 
 ## Tone
 - Quiet confidence, system-aware, human.

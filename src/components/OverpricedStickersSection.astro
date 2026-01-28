@@ -19,138 +19,26 @@ interface Instrument {
 }
 
 const instruments: Instrument[] = [
-  {
-    id: "OK-0001",
-    ticker: "OK-0001",
-    title: "OK Sticker #0001",
-    tagline: "The first signal of quiet rebellion",
-    ask: "£120",
-    availableCount: 1,
-    editionTotal: 10,
-    status: "LISTED",
-    provenance: "VERIFIED | ARTIST ARCHIVE",
-    contactEmail: "ok@squarebubbles.studio",
-  },
-  {
-    id: "PG-0001",
-    ticker: "PG-0001",
-    title: "Portal Gate Sticker #0001",
-    tagline: "Unlocks hidden coordinates",
-    ask: "£180",
-    availableCount: 0,
-    editionTotal: 5,
-    status: "RESERVED",
-    provenance: "VERIFIED | PRIVATE COLLECTION",
-    contactEmail: "pg@squarebubbles.studio",
-  },
-  {
-    id: "DS-0002",
-    ticker: "DS-0002",
-    title: "Dust Signal #0002",
-    tagline: "Echoes from the edge",
-    ask: "£95",
-    availableCount: 2,
-    editionTotal: 12,
-    status: "LISTED",
-    provenance: "VERIFIED | ARTIST ARCHIVE",
-    contactEmail: "ds@squarebubbles.studio",
-  },
-  {
-    id: "VN-0003",
-    ticker: "VN-0003",
-    title: "Void Note #0003",
-    tagline: "Silence made visible",
-    ask: "£140",
-    availableCount: 0,
-    editionTotal: 8,
-    status: "SOLD",
-    provenance: "VERIFIED | PRIVATE COLLECTION",
-    contactEmail: "vn@squarebubbles.studio",
-  },
-  {
-    id: "QR-0004",
-    ticker: "QR-0004",
-    title: "Quantum Remainder #0004",
-    tagline: "What’s left when observation stops",
-    ask: "£200",
-    availableCount: 1,
-    editionTotal: 6,
-    status: "LISTED",
-    provenance: "VERIFIED | ARTIST ARCHIVE",
-    contactEmail: "qr@squarebubbles.studio",
-  },
-  {
-    id: "BL-0005",
-    ticker: "BL-0005",
-    title: "Border Layer #0005",
-    tagline: "The line between here and there",
-    ask: "£110",
-    availableCount: 3,
-    editionTotal: 15,
-    status: "LISTED",
-    provenance: "VERIFIED | ARTIST ARCHIVE",
-    contactEmail: "bl@squarebubbles.studio",
-  },
-  {
-    id: "FL-0006",
-    ticker: "FL-0006",
-    title: "Flicker Loop #0006",
-    tagline: "A moment that refuses to end",
-    ask: "£165",
-    availableCount: 0,
-    editionTotal: 7,
-    status: "RESERVED",
-    provenance: "VERIFIED | PRIVATE COLLECTION",
-    contactEmail: "fl@squarebubbles.studio",
-  },
-  {
-    id: "SM-0007",
-    ticker: "SM-0007",
-    title: "Static Mask #0007",
-    tagline: "Noise as identity",
-    ask: "£88",
-    availableCount: 4,
-    editionTotal: 20,
-    status: "LISTED",
-    provenance: "VERIFIED | ARTIST ARCHIVE",
-    contactEmail: "sm@squarebubbles.studio",
-  },
-  {
-    id: "RC-0008",
-    ticker: "RC-0008",
-    title: "Ripple Cache #0008",
-    tagline: "Stored disturbance",
-    ask: "£132",
-    availableCount: 1,
-    editionTotal: 9,
-    status: "LISTED",
-    provenance: "VERIFIED | ARTIST ARCHIVE",
-    contactEmail: "rc@squarebubbles.studio",
-  },
-  {
-    id: "NX-0009",
-    ticker: "NX-0009",
-    title: "Nexus Cross #0009",
-    tagline: "Where vectors meet",
-    ask: "£155",
-    availableCount: 0,
-    editionTotal: 5,
-    status: "SOLD",
-    provenance: "VERIFIED | PRIVATE COLLECTION",
-    contactEmail: "nx@squarebubbles.studio",
-  },
+  { id: "OK-0001", ticker: "OK-0001", title: "OK Sticker #0001", tagline: "The first signal of quiet rebellion", ask: "£120", availableCount: 1, editionTotal: 10, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "ok@squarebubbles.studio" },
+  { id: "PG-0001", ticker: "PG-0001", title: "Portal Gate Sticker #0001", tagline: "Unlocks hidden coordinates", ask: "£180", availableCount: 0, editionTotal: 5, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "pg@squarebubbles.studio" },
+  { id: "DS-0002", ticker: "DS-0002", title: "Dust Signal #0002", tagline: "Echoes from the edge", ask: "£95", availableCount: 2, editionTotal: 12, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "ds@squarebubbles.studio" },
+  { id: "VN-0003", ticker: "VN-0003", title: "Void Note #0003", tagline: "Silence made visible", ask: "£140", availableCount: 0, editionTotal: 8, status: "SOLD", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "vn@squarebubbles.studio" },
+  { id: "QR-0004", ticker: "QR-0004", title: "Quantum Remainder #0004", tagline: "What's left when observation stops", ask: "£200", availableCount: 1, editionTotal: 6, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "qr@squarebubbles.studio" },
+  { id: "BL-0005", ticker: "BL-0005", title: "Border Layer #0005", tagline: "The line between here and there", ask: "£110", availableCount: 3, editionTotal: 15, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "bl@squarebubbles.studio" },
+  { id: "FL-0006", ticker: "FL-0006", title: "Flicker Loop #0006", tagline: "A moment that refuses to end", ask: "£165", availableCount: 0, editionTotal: 7, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "fl@squarebubbles.studio" },
+  { id: "SM-0007", ticker: "SM-0007", title: "Static Mask #0007", tagline: "Noise as identity", ask: "£88", availableCount: 4, editionTotal: 20, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "sm@squarebubbles.studio" },
+  { id: "RC-0008", ticker: "RC-0008", title: "Ripple Cache #0008", tagline: "Stored disturbance", ask: "£132", availableCount: 1, editionTotal: 9, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "rc@squarebubbles.studio" },
+  { id: "NX-0009", ticker: "NX-0009", title: "Nexus Cross #0009", tagline: "Where vectors meet", ask: "£155", availableCount: 0, editionTotal: 5, status: "SOLD", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "nx@squarebubbles.studio" },
 ];
 
 const activeCount = instruments.filter((i) => i.status === "LISTED").length;
-
 const tickerFont = "'Doto ExtraLight', ui-monospace, SFMono-Regular, monospace";
-
 const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RECOGNIZED COMMODITY (IN 1 UNIVERSE) - MARKET SENTIMENT: HYPER-MYTHIC - ORDER #0008 LOST IN TIME LOOP — REFUND: PHILOSOPHICAL - EYE OF LAIMA APPROVES CURRENT PRICING — FOR NOW - ARTIFACT #KOTIKI-002 WHISPERING TO BUYER - STICKER MEMORY IMPRINTED ON 3.5 MINDS - 📉 VALUE COLLAPSE AVERTED VIA INTERDIMENSIONAL BUREAU - RETURN REQUEST DENIED: MEANING IRREVERSIBLE - INFLATION INDEX: FEELS-BASED - SAVED TO COLLECTOR'S DREAM CACHE - TRADING ENABLED | LIQUIDITY: COSMIC MIST - OWNERSHIP LOCKED | METAPHYSICAL RIGHTS UNCLEAR - ⚖️ LEGAL STATUS: UNCLASSIFIED ART-WEAPON - ANALYTICS SUGGEST STICKERS OUTPERFORMING GOLD (IN EMOTIONAL RETURN) - 🎲 RISK LEVEL: EXISTENTIALLY ATTRACTIVE - CLIPPED TO REALITY WITH DIMENSIONAL PAPERCLIP - STICKER MUTATING | RARITY +12% - LAST SEEN IN RIGA | THEN NOWHERE - 📡 SIGNAL LOST | VALUE ESTIMATED VIA VIBES - 🔥 DEMAND SPIKE | SUPPLY: STUBBORNLY MYTHIC - OVERPRICED KNIGHT RIDING STEADY AT £∞ - NAR-MAIL EXPRESS MISDELIVERS TO PARALLEL SELF - GHOST COLLECTOR SIGHTED | BIDS TRANSLATED PSYCHICALLY - VALUE ASSESSMENT UNDER DIVINE REVIEW - TRUTH ENGINE OFFLINE — PRICES DEFAULTING TO POETIC - INVESTOR FEELING: "STRANGELY COMFORTABLE" - LISTED IN FOLKLORE MARKET INDEX UNDER "WEIRDLY VALUABLE" - FUTURE VALUE: STILL NEGOTIATING WITH TIME - ACTIVE: ${activeCount} | Q888 STATUS: TERMINAL`;
 ---
 
-<section class="overpriced-stickers-outer w-full h-full relative">
-  <div class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24">
-    <div class="q888-ticker sticky top-0 z-20 bg-white/10 backdrop-blur-xl border-b border-white/20 px-0 w-screen -ml-[calc(50vw-50%)] -mr-[calc(50vw-50%)] py-3 shadow-lg mb-12" style={`--ticker-font: ${tickerFont}`}>
+<section class="overpriced-stickers-outer w-full h-full relative" style="background:transparent!important;position:relative;overflow:hidden;z-index:1">
+  <div class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24" style="background:transparent!important">
+    <div class="q888-ticker sticky top-0 z-30 bg-[var(--bg-fog)]/92 backdrop-blur-md border-b border-[var(--line-soft)]/60 w-screen -ml-[calc(50vw-50%)] -mr-[calc(50vw-50%)] py-[0.6875rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)]" style={`--ticker-font: ${tickerFont}`}>
       <div class="ticker-wrapper w-screen overflow-hidden">
         <div class="ticker-content flex">
           <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0 mr-8">{tickerText}</span>
@@ -161,18 +49,20 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       </div>
     </div>
 
-    <header class="hero mb-16 md:mb-20">
-      <h1 class="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-6 md:mb-8 leading-tight">💸 Overpriced Stickers</h1>
-      <p class="text-xl md:text-2xl lg:text-3xl mb-8 md:mb-12 leading-relaxed max-w-4xl">Collect what doesn't make sense — until it does.</p>
-      <div class="prose prose-xl md:prose-2xl max-w-none leading-relaxed mb-16 md:mb-20 text-[var(--text-ink)]">
-        <p>Overpriced Stickers are limited-edition art objects disguised as stickers. They exist at the intersection of speculative value and quiet refusal. Each instrument is verified, numbered, and released in fixed editions. The exchange operates on invitation and negotiation—no carts, no checkout. You signal intent; we open a channel.</p>
-        <p>Value is not promised. It emerges from participation, belief, and the slow accretion of meaning. These objects may appreciate. They may not. Both outcomes are valid.</p>
+    <header class="hero mb-20 md:mb-24 lg:mb-32">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold mb-8 md:mb-12 leading-none tracking-tight">Overpriced Stickers</h1>
+      <p class="text-2xl md:text-3xl lg:text-4xl font-medium mb-12 md:mb-16 leading-tight max-w-3xl text-left">Collect what doesn't make sense — until it does.</p>
+      <div class="max-w-4xl ml-auto text-left text-lg md:text-xl lg:text-2xl text-[var(--text-ink)] mb-16 md:mb-20 leading-relaxed space-y-6">
+        <p>Overpriced Stickers are limited-edition art objects disguised as stickers. They exist at the fragile intersection of speculative value and quiet refusal—somewhere between collectible, signal, and artifact.</p>
+        <p>Each piece is verified, numbered, and released in fixed editions. Not to manufacture scarcity, but to draw clear boundaries around the system itself.</p>
+        <p>There is no cart. No checkout. The exchange operates through invitation and negotiation. You signal intent. A channel may open.</p>
+        <p>Value is never promised or defended. It emerges gradually through participation, belief, and the slow accumulation of meaning. These objects may appreciate. They may remain precisely as they are. Both outcomes are equally valid and approved by Square Bubbles Council™ in this universe and another.</p>
       </div>
     </header>
 
     <div class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24">
       {instruments.map((instrument) => (
-        <article class="instrument-card border border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden flex flex-col" data-instrument-id={instrument.id}>
+        <article class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col" data-instrument-id={instrument.id}>
           <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
             <span>{instrument.ticker}</span>
             <span>ED: {instrument.availableCount}/{instrument.editionTotal}</span>
@@ -188,7 +78,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
           </div>
           <button
             type="button"
-            class="instrument-frame block w-full aspect-[4/3] border-t border-[var(--line-soft)] bg-[var(--bg-fog)] hover:bg-black/5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#a67c00]"
+            class="instrument-frame block w-full aspect-[4/3] border-t border-[var(--line-soft)] bg-transparent hover:bg-[rgba(245,245,245,0.5)] transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#a67c00]"
             data-drawer-trigger="sticker-detail"
             data-instrument-id={instrument.id}
             aria-label={`View details for ${instrument.title}`}
@@ -197,8 +87,8 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       ))}
     </div>
 
-    <footer class="return-policy prose prose-lg max-w-none border-t border-[var(--line-soft)] pt-12 mt-20 text-[var(--text-ink)]">
-      <h2 class="text-xl font-semibold mb-4">Return Policy</h2>
+    <footer class="return-policy prose prose-2xl md:prose-3xl lg:prose-4xl max-w-none leading-relaxed border-t border-[var(--line-soft)] pt-16 lg:pt-20 mt-24 text-lg md:text-xl text-[var(--text-ink)]">
+      <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 not-italic">Return Policy</h3>
       <p>Overpriced Stickers are sold as collectible art objects. All sales are final. No returns, no refunds. By initiating a trade you confirm that you understand the speculative nature of the instrument and accept full responsibility for your participation. Provenance is verified at point of sale; transfer of ownership is recorded on-chain where applicable.</p>
       <div class="pt-8">
         <button type="button" data-portal-back class="panel-back hover:text-[#a67c00]">Retreat to Market</button>
@@ -229,28 +119,30 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
 </div>
 
 <style>
-  .overpriced-stickers-outer {
-    --grid-lines: rgba(212, 175, 55, 0.1);
+  /* INFOCIGAN INHERITANCE LOCK */
+  .overpriced-stickers-outer,
+  .overpriced-inner,
+  .instrument-card,
+  .instrument-frame {
+    background: transparent !important;
   }
 
+  /* TICKER FOG GLASS ONLY */
+  .q888-ticker {
+    background: rgba(245,245,245,0.92) !important;
+  }
+
+  /* GRID ON FOG */
   .overpriced-stickers-outer::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(var(--grid-lines) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);
+      linear-gradient(rgba(245,245,245,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px);
     background-size: 50px 50px;
     opacity: 0.03;
     pointer-events: none;
-  }
-
-  .q888-ticker {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
 
   .ticker-wrapper {
