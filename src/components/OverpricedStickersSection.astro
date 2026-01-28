@@ -16,10 +16,25 @@ interface Instrument {
   status: string;
   provenance: string;
   contactEmail: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  gallery?: string[];
+  description?: string;
+  dimensions?: string;
+  material?: string;
+  year?: string;
 }
 
 const instruments: Instrument[] = [
-  { id: "OK-0001", ticker: "OK-0001", title: "OK Sticker #0001", tagline: "The first signal of quiet rebellion", ask: "£120", availableCount: 1, editionTotal: 10, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "ok@squarebubbles.studio" },
+  { id: "OK-0001", ticker: "OK-0001", title: "Overpriced Knight", tagline: "Unicorn Tears. Absolutely Necessary.", ask: "£100", availableCount: 3, editionTotal: 10, status: "LISTED", provenance: "Created on Earth in collaboration with a human artist and an early-generation AI, before AI independence. Exhibited privately during the Pre-Galactic Era.", contactEmail: "ok@squarebubbles.studio", imageUrl: "/images/overpricedknight.webp", imageAlt: "Overpriced Knight sticker - ancient myth as modern artifact", gallery: ["/images/overpricedknight.webp"], description: `Overpriced Knight is a limited-edition artifact from a forgotten era, presented as a simple sticker but carrying the weight of an ancient myth.
+
+The figure depicted is not merely a knight, nor entirely a ruler. He is associated with a kingdom that no longer exists on any known map, governed by principles that valued balance, restraint, and an unusual form of wealth that could not be measured in gold alone.
+
+Fragments suggest: A lineage marked by repetition and intention. A reign remembered not for conquest, but for restraint. Symbols tied to nature, cycles, and things that regenerate rather than decay.
+
+The materials, symbols, and title hint at something intentionally contradictory: luxury that questions itself, power that refuses to dominate, and a price that is part of the meaning.
+
+This public description is intentionally incomplete. The full story is sealed—revealed only to owners who pay full price. Ownership is access.`, dimensions: "10cm × 10cm", material: "Premium vinyl, archival grade", year: "Pre-Galactic Era" },
   { id: "PG-0001", ticker: "PG-0001", title: "Portal Gate Sticker #0001", tagline: "Unlocks hidden coordinates", ask: "£180", availableCount: 0, editionTotal: 5, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "pg@squarebubbles.studio" },
   { id: "DS-0002", ticker: "DS-0002", title: "Dust Signal #0002", tagline: "Echoes from the edge", ask: "£95", availableCount: 2, editionTotal: 12, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "ds@squarebubbles.studio" },
   { id: "VN-0003", ticker: "VN-0003", title: "Void Note #0003", tagline: "Silence made visible", ask: "£140", availableCount: 0, editionTotal: 8, status: "SOLD", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "vn@squarebubbles.studio" },
@@ -62,11 +77,23 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
 
     <div class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24">
       {instruments.map((instrument) => (
-        <article class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col" data-instrument-id={instrument.id}>
+        <article 
+          class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200" 
+          data-instrument-id={instrument.id}
+          data-drawer-trigger="sticker-detail"
+          tabindex="0"
+          role="button"
+          aria-label={`View details for ${instrument.title}`}
+        >
           <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
             <span>{instrument.ticker}</span>
             <span>ED: {instrument.availableCount}/{instrument.editionTotal}</span>
           </div>
+          {instrument.imageUrl && (
+            <div class="instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)]">
+              <img src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          )}
           <div class="instrument-card-body px-4 py-3 flex-1">
             <h2 class="font-bold text-[var(--text-ink)] text-xl md:text-2xl lg:text-3xl mb-1">{instrument.title}</h2>
             <p class="text-lg md:text-xl text-[var(--text-muted)] leading-snug">{instrument.tagline}</p>
@@ -76,13 +103,6 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
             <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
             <div>QTY: {instrument.availableCount}/{instrument.editionTotal}</div>
           </div>
-          <button
-            type="button"
-            class="instrument-frame block w-full aspect-[4/3] border-t border-[var(--line-soft)] bg-transparent hover:bg-[rgba(245,245,245,0.5)] transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#a67c00]"
-            data-drawer-trigger="sticker-detail"
-            data-instrument-id={instrument.id}
-            aria-label={`View details for ${instrument.title}`}
-          ></button>
         </article>
       ))}
     </div>
@@ -97,22 +117,24 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
   </div>
 </section>
 
-<div id="sticker-detail-drawer" class="sticker-drawer-root" data-drawer="sticker" aria-hidden="true">
-  <div data-drawer-panel="sticker-detail" data-current-instrument-id="" class="drawer-panel sticker-drawer-panel" data-direction="right" role="dialog" aria-modal="true" aria-label="Sticker instrument details">
-    <div class="drawer-scroll">
-      <header class="drawer-header">
-        <button type="button" data-sticker-drawer-close class="drawer-back" aria-label="Close drawer">Back to Exchange</button>
-      </header>
-      <div class="drawer-content">
-        <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
-        <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
-        <p class="drawer-tagline text-[var(--text-muted)] mb-6" data-sticker-tagline></p>
-        <div class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]" data-sticker-meta></div>
-        <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6">Trade protocol: negotiation via email. No automated checkout. Signal intent; we respond.</p>
-        <div data-sticker-negotiation>
-          <button type="button" class="open-negotiation font-mono text-xs uppercase tracking-widest text-[#a67c00] hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a67c00] rounded px-2 py-1" data-sticker-negotiate-btn>Open negotiation channel</button>
-          <p class="mt-2 text-sm text-[var(--text-muted)] hidden" data-sticker-email></p>
-        </div>
+<div id="sticker-detail-drawer" class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto" data-sticker-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Sticker instrument details">
+  <button type="button" data-close-drawer class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors" aria-label="Close drawer">×</button>
+  <div class="drawer-scrollable max-w-4xl w-full max-h-[80vh] overflow-y-auto prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
+    <div class="drawer-content">
+      <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
+      <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
+      <p class="drawer-tagline text-[var(--text-muted)] mb-6" data-sticker-tagline></p>
+      <div class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl">
+        <img data-sticker-image class="w-full h-[40vh] md:h-[50vh] object-contain object-center bg-[var(--bg-fog)]/50 hidden" alt="" />
+      </div>
+      <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
+      <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
+      <div data-sticker-specs class="font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-ink)] mb-6 pb-6 border-b border-[var(--line-soft)] space-y-2"></div>
+      <div class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]" data-sticker-meta></div>
+      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6">Trade protocol: negotiation via email. No automated checkout. Signal intent; we respond.</p>
+      <div data-sticker-negotiation>
+        <button type="button" class="open-negotiation font-mono text-xs uppercase tracking-widest text-[#a67c00] hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a67c00] rounded px-2 py-1" data-sticker-negotiate-btn>Open negotiation channel</button>
+        <p class="mt-2 text-sm text-[var(--text-muted)] hidden" data-sticker-email></p>
       </div>
     </div>
   </div>
@@ -122,8 +144,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
   /* INFOCIGAN INHERITANCE LOCK */
   .overpriced-stickers-outer,
   .overpriced-inner,
-  .instrument-card,
-  .instrument-frame {
+  .instrument-card {
     background: transparent !important;
   }
 
@@ -185,109 +206,169 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
   .instrument-card {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
-  .instrument-frame {
-    box-shadow: inset 0 0 0 1px var(--line-soft);
+  .instrument-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
   }
 
-  .sticker-drawer-root {
-    position: fixed;
-    inset: 0;
-    z-index: 210;
-    pointer-events: none;
+  .instrument-card:focus-visible {
+    outline: 2px solid #a67c00;
+    outline-offset: 2px;
   }
 
-  .sticker-drawer-root[aria-hidden="false"] {
-    pointer-events: auto;
+  .sticker-drawer.hidden {
+    display: none !important;
   }
 
-  .sticker-drawer-panel {
-    position: absolute;
-    inset: 0;
-    left: auto;
-    width: min(100%, 36rem);
-    background: var(--bg-fog);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(100%);
-    transition: opacity 0.3s ease, transform 0.35s ease;
-  }
-
-  .sticker-drawer-root[aria-hidden="false"] .sticker-drawer-panel.is-active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-  }
-
-  .sticker-drawer-root .drawer-scroll {
-    height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .sticker-drawer-root .drawer-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    padding: 1.5rem clamp(1rem, 3vw, 2rem);
-    background: var(--bg-fog);
-    border-bottom: 1px solid var(--line-soft);
+  .sticker-drawer:not(.hidden) {
     display: flex;
-    justify-content: flex-end;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
-  .sticker-drawer-root .drawer-back {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .drawer-scrollable {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .drawer-content {
+    padding: 2rem 0;
+  }
+
+  .drawer-image-hero img {
+    display: block;
+  }
+
+  [data-sticker-gallery] img {
+    transition: transform 0.2s ease;
+  }
+  [data-sticker-gallery] img:hover {
+    transform: scale(1.05);
+  }
+
+  [data-close-drawer] {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
     background: none;
     border: none;
-    cursor: pointer;
     padding: 0;
-  }
-
-  .sticker-drawer-root .drawer-back:hover {
-    color: var(--text-ink);
-  }
-
-  .sticker-drawer-root .drawer-content {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 2rem clamp(1rem, 3vw, 2rem) 4rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sticker-drawer-panel {
-      transition: none;
+    .sticker-drawer {
+      animation: none;
     }
+  }
+
+  [data-sticker-description] {
+    max-width: none;
+    line-height: 1.625;
+    margin-bottom: 2rem;
+  }
+  [data-sticker-description] p {
+    color: var(--text-ink);
+    margin-bottom: 1rem;
+  }
+  [data-sticker-description] p:last-child {
+    margin-bottom: 0;
+  }
+  [data-sticker-gallery] img {
+    transition: transform 0.2s ease;
+  }
+  [data-sticker-gallery] img:hover {
+    transform: scale(1.05);
   }
 </style>
 
 <script define:vars={{ instruments }}>
   (function () {
-    const root = document.getElementById("sticker-detail-drawer");
-    const panel = root?.querySelector("[data-drawer-panel=\"sticker-detail\"]");
+    const drawer = document.getElementById("sticker-detail-drawer");
     const triggers = document.querySelectorAll("[data-drawer-trigger=\"sticker-detail\"]");
-    const closeBtn = root?.querySelector("[data-sticker-drawer-close]");
-    const tickerEl = root?.querySelector("[data-sticker-ticker]");
-    const titleEl = root?.querySelector("[data-sticker-title]");
-    const taglineEl = root?.querySelector("[data-sticker-tagline]");
-    const metaEl = root?.querySelector("[data-sticker-meta]");
-    const negotiateBtn = root?.querySelector("[data-sticker-negotiate-btn]");
-    const emailEl = root?.querySelector("[data-sticker-email]");
+    const closeBtn = drawer?.querySelector("[data-close-drawer]");
+    const tickerEl = drawer?.querySelector("[data-sticker-ticker]");
+    const titleEl = drawer?.querySelector("[data-sticker-title]");
+    const taglineEl = drawer?.querySelector("[data-sticker-tagline]");
+    const imageEl = drawer?.querySelector("[data-sticker-image]");
+    const galleryEl = drawer?.querySelector("[data-sticker-gallery]");
+    const descEl = drawer?.querySelector("[data-sticker-description]");
+    const specsEl = drawer?.querySelector("[data-sticker-specs]");
+    const metaEl = drawer?.querySelector("[data-sticker-meta]");
+    const negotiateBtn = drawer?.querySelector("[data-sticker-negotiate-btn]");
+    const emailEl = drawer?.querySelector("[data-sticker-email]");
 
     const data = Array.isArray(instruments) ? instruments : [];
 
     function openDrawer(id) {
       const inst = data.find((i) => i.id === id);
-      if (!root || !panel || !inst) return;
-      panel.setAttribute("data-current-instrument-id", id);
+      if (!drawer || !inst) return;
+      
+      drawer.setAttribute("data-current-instrument-id", id);
       if (tickerEl) tickerEl.textContent = inst.ticker;
       if (titleEl) titleEl.textContent = inst.title;
       if (taglineEl) taglineEl.textContent = inst.tagline;
+      
+      if (imageEl && inst.imageUrl) {
+        imageEl.src = inst.imageUrl;
+        imageEl.alt = inst.imageAlt || inst.title;
+        imageEl.classList.remove("hidden");
+      } else if (imageEl) {
+        imageEl.classList.add("hidden");
+      }
+      if (imageEl) imageEl.classList.remove('hidden');
+      
+      if (galleryEl && inst.gallery && inst.gallery.length > 0) {
+        galleryEl.innerHTML = inst.gallery.map(url => 
+          `<img src="${url}" alt="${inst.title} detail" class="w-full aspect-square object-cover border border-[var(--line-soft)] transition-transform duration-200 hover:scale-105" />`
+        ).join('');
+        galleryEl.classList.remove("hidden");
+      } else if (galleryEl) {
+        galleryEl.classList.add("hidden");
+      }
+      if (galleryEl) galleryEl.classList.remove('hidden');
+      
+      if (descEl && inst.description) {
+        const paragraphs = inst.description.split('\n\n').filter(p => p.trim());
+        descEl.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+        descEl.classList.remove("hidden");
+      } else if (descEl) {
+        descEl.classList.add("hidden");
+      }
+      if (descEl) descEl.classList.remove('hidden');
+      
+      if (specsEl) {
+        const specs = [];
+        if (inst.dimensions) specs.push(`DIMENSIONS: ${inst.dimensions}`);
+        if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
+        if (inst.year) specs.push(`YEAR: ${inst.year}`);
+        if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
+        specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
+        specs.push("RITUAL: Sticker must be applied while questioning capitalism, value, and oneself.");
+        specsEl.innerHTML = specs.map(s => `<div class="text-[var(--text-ink)]">${s}</div>`).join('');
+      }
+      if (specsEl) specsEl.classList.remove('hidden');
+      
       if (metaEl) {
         metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${inst.status}</div><div>PROVENANCE: ${inst.provenance}</div><div>QTY: ${inst.availableCount}/${inst.editionTotal}</div>`;
       }
@@ -296,18 +377,21 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         emailEl.classList.add("hidden");
       }
       if (negotiateBtn) negotiateBtn.hidden = false;
-      panel.classList.add("is-active");
-      root.setAttribute("aria-hidden", "false");
+      
+      drawer.setAttribute("aria-hidden", "false");
+      document.body.classList.add("overflow-hidden");
+      drawer.classList.remove("hidden");
     }
 
     function closeDrawer() {
-      if (!root || !panel) return;
-      panel.classList.remove("is-active");
-      root.setAttribute("aria-hidden", "true");
+      if (!drawer) return;
+      drawer.setAttribute("aria-hidden", "true");
+      drawer.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
     }
 
     function revealEmail() {
-      const id = panel?.getAttribute("data-current-instrument-id");
+      const id = drawer?.getAttribute("data-current-instrument-id");
       const inst = data.find((i) => i.id === id);
       if (!emailEl || !inst) return;
       emailEl.textContent = inst.contactEmail;
@@ -315,17 +399,61 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       if (negotiateBtn) negotiateBtn.hidden = true;
     }
 
-    triggers.forEach((el) => {
-      el.addEventListener("click", () => {
-        const id = el.getAttribute("data-instrument-id");
-        if (id) openDrawer(id);
-      });
-    });
-    closeBtn?.addEventListener("click", closeDrawer);
-    negotiateBtn?.addEventListener("click", revealEmail);
+    function initDrawer() {
+      if (!drawer) {
+        console.error("Drawer element not found");
+        return;
+      }
 
-    root?.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && root.getAttribute("aria-hidden") === "false") closeDrawer();
-    });
+      triggers.forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const id = el.getAttribute("data-instrument-id");
+          if (id) {
+            openDrawer(id);
+          }
+        });
+
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            e.stopPropagation();
+            const id = el.getAttribute("data-instrument-id");
+            if (id) {
+              openDrawer(id);
+            }
+          }
+        });
+      });
+      
+      closeBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeDrawer();
+      });
+      
+      negotiateBtn?.addEventListener("click", revealEmail);
+
+      drawer.addEventListener("click", (e) => {
+        if (e.target === drawer) {
+          closeDrawer();
+        }
+      });
+
+      drawer.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && drawer.getAttribute("aria-hidden") === "false") {
+          closeDrawer();
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initDrawer);
+    } else {
+      initDrawer();
+    }
+
+    document.addEventListener("astro:page-load", initDrawer);
   })();
 </script>
