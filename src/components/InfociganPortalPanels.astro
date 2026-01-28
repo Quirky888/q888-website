@@ -1,5 +1,6 @@
 ---
 import SlimNav from "./SlimNav.astro";
+import OverpricedStickersSection from "./OverpricedStickersSection.astro";
 
 const zones = [
   {
@@ -126,6 +127,8 @@ const zones = [
               </section>
             </div>
             </>
+          ) : zone.slug === "overpriced-stickers" ? (
+            <OverpricedStickersSection inPortal={true} />
           ) : (
             <article class="panel-article">
               <h2 class="panel-title text-black/80">{zone.title}</h2>

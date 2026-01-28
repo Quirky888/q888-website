@@ -1,0 +1,395 @@
+---
+interface Props {
+  inPortal?: boolean;
+}
+
+const { inPortal = false } = Astro.props;
+
+interface Instrument {
+  id: string;
+  ticker: string;
+  title: string;
+  tagline: string;
+  ask: string;
+  availableCount: number;
+  editionTotal: number;
+  status: string;
+  provenance: string;
+  contactEmail: string;
+}
+
+const instruments: Instrument[] = [
+  {
+    id: "OK-0001",
+    ticker: "OK-0001",
+    title: "OK Sticker #0001",
+    tagline: "The first signal of quiet rebellion",
+    ask: "£120",
+    availableCount: 1,
+    editionTotal: 10,
+    status: "LISTED",
+    provenance: "VERIFIED | ARTIST ARCHIVE",
+    contactEmail: "ok@squarebubbles.studio",
+  },
+  {
+    id: "PG-0001",
+    ticker: "PG-0001",
+    title: "Portal Gate Sticker #0001",
+    tagline: "Unlocks hidden coordinates",
+    ask: "£180",
+    availableCount: 0,
+    editionTotal: 5,
+    status: "RESERVED",
+    provenance: "VERIFIED | PRIVATE COLLECTION",
+    contactEmail: "pg@squarebubbles.studio",
+  },
+  {
+    id: "DS-0002",
+    ticker: "DS-0002",
+    title: "Dust Signal #0002",
+    tagline: "Echoes from the edge",
+    ask: "£95",
+    availableCount: 2,
+    editionTotal: 12,
+    status: "LISTED",
+    provenance: "VERIFIED | ARTIST ARCHIVE",
+    contactEmail: "ds@squarebubbles.studio",
+  },
+  {
+    id: "VN-0003",
+    ticker: "VN-0003",
+    title: "Void Note #0003",
+    tagline: "Silence made visible",
+    ask: "£140",
+    availableCount: 0,
+    editionTotal: 8,
+    status: "SOLD",
+    provenance: "VERIFIED | PRIVATE COLLECTION",
+    contactEmail: "vn@squarebubbles.studio",
+  },
+  {
+    id: "QR-0004",
+    ticker: "QR-0004",
+    title: "Quantum Remainder #0004",
+    tagline: "What’s left when observation stops",
+    ask: "£200",
+    availableCount: 1,
+    editionTotal: 6,
+    status: "LISTED",
+    provenance: "VERIFIED | ARTIST ARCHIVE",
+    contactEmail: "qr@squarebubbles.studio",
+  },
+  {
+    id: "BL-0005",
+    ticker: "BL-0005",
+    title: "Border Layer #0005",
+    tagline: "The line between here and there",
+    ask: "£110",
+    availableCount: 3,
+    editionTotal: 15,
+    status: "LISTED",
+    provenance: "VERIFIED | ARTIST ARCHIVE",
+    contactEmail: "bl@squarebubbles.studio",
+  },
+  {
+    id: "FL-0006",
+    ticker: "FL-0006",
+    title: "Flicker Loop #0006",
+    tagline: "A moment that refuses to end",
+    ask: "£165",
+    availableCount: 0,
+    editionTotal: 7,
+    status: "RESERVED",
+    provenance: "VERIFIED | PRIVATE COLLECTION",
+    contactEmail: "fl@squarebubbles.studio",
+  },
+  {
+    id: "SM-0007",
+    ticker: "SM-0007",
+    title: "Static Mask #0007",
+    tagline: "Noise as identity",
+    ask: "£88",
+    availableCount: 4,
+    editionTotal: 20,
+    status: "LISTED",
+    provenance: "VERIFIED | ARTIST ARCHIVE",
+    contactEmail: "sm@squarebubbles.studio",
+  },
+  {
+    id: "RC-0008",
+    ticker: "RC-0008",
+    title: "Ripple Cache #0008",
+    tagline: "Stored disturbance",
+    ask: "£132",
+    availableCount: 1,
+    editionTotal: 9,
+    status: "LISTED",
+    provenance: "VERIFIED | ARTIST ARCHIVE",
+    contactEmail: "rc@squarebubbles.studio",
+  },
+  {
+    id: "NX-0009",
+    ticker: "NX-0009",
+    title: "Nexus Cross #0009",
+    tagline: "Where vectors meet",
+    ask: "£155",
+    availableCount: 0,
+    editionTotal: 5,
+    status: "SOLD",
+    provenance: "VERIFIED | PRIVATE COLLECTION",
+    contactEmail: "nx@squarebubbles.studio",
+  },
+];
+
+const activeCount = instruments.filter((i) => i.status === "LISTED").length;
+---
+
+<section class="overpriced-stickers-outer w-full h-full relative">
+  <div class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24">
+    <div class="terminal-header sticky top-0 z-10 bg-inherit/95 backdrop-blur-sm border-b border-[var(--line-soft)] py-2 mb-12 text-xs md:text-sm lg:text-base">
+      <div class="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 lg:gap-8 px-2 md:px-4 font-mono uppercase tracking-widest text-[#a67c00]">
+        <span>OVERPRICED STICKERS EXCHANGE</span>
+        <div class="flex gap-4">
+          <span>ACTIVE: {activeCount}</span>
+          <span>MARKET MOOD: UNPREDICTABLE</span>
+        </div>
+        <span class="hidden md:inline">DIM.SYNC: 107.88.36 / NODE: TBILISI-RELAYER / LATENCY: 12ms</span>
+      </div>
+    </div>
+
+    <header class="hero mb-16 md:mb-20">
+      <h1 class="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-6 md:mb-8 leading-tight">💸 Overpriced Stickers</h1>
+      <p class="text-xl md:text-2xl lg:text-3xl mb-8 md:mb-12 leading-relaxed max-w-4xl">Collect what doesn't make sense — until it does.</p>
+      <div class="prose prose-xl md:prose-2xl max-w-none leading-relaxed mb-16 md:mb-20 text-[var(--text-ink)]">
+        <p>Overpriced Stickers are limited-edition art objects disguised as stickers. They exist at the intersection of speculative value and quiet refusal. Each instrument is verified, numbered, and released in fixed editions. The exchange operates on invitation and negotiation—no carts, no checkout. You signal intent; we open a channel.</p>
+        <p>Value is not promised. It emerges from participation, belief, and the slow accretion of meaning. These objects may appreciate. They may not. Both outcomes are valid.</p>
+      </div>
+    </header>
+
+    <div class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24">
+      {instruments.map((instrument) => (
+        <article class="instrument-card border border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden flex flex-col" data-instrument-id={instrument.id}>
+          <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
+            <span>{instrument.ticker}</span>
+            <span>ED: {instrument.availableCount}/{instrument.editionTotal}</span>
+          </div>
+          <div class="instrument-card-body px-4 py-3 flex-1">
+            <h2 class="font-bold text-[var(--text-ink)] text-xl md:text-2xl lg:text-3xl mb-1">{instrument.title}</h2>
+            <p class="text-lg md:text-xl text-[var(--text-muted)] leading-snug">{instrument.tagline}</p>
+          </div>
+          <div class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1">
+            <div>PRICE: {instrument.ask} · STATUS: {instrument.status}</div>
+            <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
+            <div>QTY: {instrument.availableCount}/{instrument.editionTotal}</div>
+          </div>
+          <button
+            type="button"
+            class="instrument-frame block w-full aspect-[4/3] border-t border-[var(--line-soft)] bg-[var(--bg-fog)] hover:bg-black/5 transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#a67c00]"
+            data-drawer-trigger="sticker-detail"
+            data-instrument-id={instrument.id}
+            aria-label={`View details for ${instrument.title}`}
+          ></button>
+        </article>
+      ))}
+    </div>
+
+    <footer class="return-policy prose prose-lg max-w-none border-t border-[var(--line-soft)] pt-12 mt-20 text-[var(--text-ink)]">
+      <h2 class="text-xl font-semibold mb-4">Return Policy</h2>
+      <p>Overpriced Stickers are sold as collectible art objects. All sales are final. No returns, no refunds. By initiating a trade you confirm that you understand the speculative nature of the instrument and accept full responsibility for your participation. Provenance is verified at point of sale; transfer of ownership is recorded on-chain where applicable.</p>
+      <div class="pt-8">
+        <button type="button" data-portal-back class="panel-back hover:text-[#a67c00]">Retreat to Market</button>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<div id="sticker-detail-drawer" class="sticker-drawer-root" data-drawer="sticker" aria-hidden="true">
+  <div data-drawer-panel="sticker-detail" data-current-instrument-id="" class="drawer-panel sticker-drawer-panel" data-direction="right" role="dialog" aria-modal="true" aria-label="Sticker instrument details">
+    <div class="drawer-scroll">
+      <header class="drawer-header">
+        <button type="button" data-sticker-drawer-close class="drawer-back" aria-label="Close drawer">Back to Exchange</button>
+      </header>
+      <div class="drawer-content">
+        <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
+        <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
+        <p class="drawer-tagline text-[var(--text-muted)] mb-6" data-sticker-tagline></p>
+        <div class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]" data-sticker-meta></div>
+        <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6">Trade protocol: negotiation via email. No automated checkout. Signal intent; we respond.</p>
+        <div data-sticker-negotiation>
+          <button type="button" class="open-negotiation font-mono text-xs uppercase tracking-widest text-[#a67c00] hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a67c00] rounded px-2 py-1" data-sticker-negotiate-btn>Open negotiation channel</button>
+          <p class="mt-2 text-sm text-[var(--text-muted)] hidden" data-sticker-email></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .overpriced-stickers-outer {
+    --grid-lines: rgba(212, 175, 55, 0.1);
+  }
+
+  .overpriced-stickers-outer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-lines) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  .terminal-header {
+    position: sticky;
+    top: 0;
+  }
+
+  .instrument-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .instrument-frame {
+    box-shadow: inset 0 0 0 1px var(--line-soft);
+  }
+
+  .sticker-drawer-root {
+    position: fixed;
+    inset: 0;
+    z-index: 210;
+    pointer-events: none;
+  }
+
+  .sticker-drawer-root[aria-hidden="false"] {
+    pointer-events: auto;
+  }
+
+  .sticker-drawer-panel {
+    position: absolute;
+    inset: 0;
+    left: auto;
+    width: min(100%, 36rem);
+    background: var(--bg-fog);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease, transform 0.35s ease;
+  }
+
+  .sticker-drawer-root[aria-hidden="false"] .sticker-drawer-panel.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .sticker-drawer-root .drawer-scroll {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sticker-drawer-root .drawer-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 1.5rem clamp(1rem, 3vw, 2rem);
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .sticker-drawer-root .drawer-back {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .sticker-drawer-root .drawer-back:hover {
+    color: var(--text-ink);
+  }
+
+  .sticker-drawer-root .drawer-content {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem clamp(1rem, 3vw, 2rem) 4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sticker-drawer-panel {
+      transition: none;
+    }
+  }
+</style>
+
+<script define:vars={{ instruments }}>
+  (function () {
+    const root = document.getElementById("sticker-detail-drawer");
+    const panel = root?.querySelector("[data-drawer-panel=\"sticker-detail\"]");
+    const triggers = document.querySelectorAll("[data-drawer-trigger=\"sticker-detail\"]");
+    const closeBtn = root?.querySelector("[data-sticker-drawer-close]");
+    const tickerEl = root?.querySelector("[data-sticker-ticker]");
+    const titleEl = root?.querySelector("[data-sticker-title]");
+    const taglineEl = root?.querySelector("[data-sticker-tagline]");
+    const metaEl = root?.querySelector("[data-sticker-meta]");
+    const negotiateBtn = root?.querySelector("[data-sticker-negotiate-btn]");
+    const emailEl = root?.querySelector("[data-sticker-email]");
+
+    const data = Array.isArray(instruments) ? instruments : [];
+
+    function openDrawer(id) {
+      const inst = data.find((i) => i.id === id);
+      if (!root || !panel || !inst) return;
+      panel.setAttribute("data-current-instrument-id", id);
+      if (tickerEl) tickerEl.textContent = inst.ticker;
+      if (titleEl) titleEl.textContent = inst.title;
+      if (taglineEl) taglineEl.textContent = inst.tagline;
+      if (metaEl) {
+        metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${inst.status}</div><div>PROVENANCE: ${inst.provenance}</div><div>QTY: ${inst.availableCount}/${inst.editionTotal}</div>`;
+      }
+      if (emailEl) {
+        emailEl.textContent = "";
+        emailEl.classList.add("hidden");
+      }
+      if (negotiateBtn) negotiateBtn.hidden = false;
+      panel.classList.add("is-active");
+      root.setAttribute("aria-hidden", "false");
+    }
+
+    function closeDrawer() {
+      if (!root || !panel) return;
+      panel.classList.remove("is-active");
+      root.setAttribute("aria-hidden", "true");
+    }
+
+    function revealEmail() {
+      const id = panel?.getAttribute("data-current-instrument-id");
+      const inst = data.find((i) => i.id === id);
+      if (!emailEl || !inst) return;
+      emailEl.textContent = inst.contactEmail;
+      emailEl.classList.remove("hidden");
+      if (negotiateBtn) negotiateBtn.hidden = true;
+    }
+
+    triggers.forEach((el) => {
+      el.addEventListener("click", () => {
+        const id = el.getAttribute("data-instrument-id");
+        if (id) openDrawer(id);
+      });
+    });
+    closeBtn?.addEventListener("click", closeDrawer);
+    negotiateBtn?.addEventListener("click", revealEmail);
+
+    root?.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && root.getAttribute("aria-hidden") === "false") closeDrawer();
+    });
+  })();
+</script>
