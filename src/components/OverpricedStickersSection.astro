@@ -142,18 +142,22 @@ const instruments: Instrument[] = [
 ];
 
 const activeCount = instruments.filter((i) => i.status === "LISTED").length;
+
+const tickerFont = "'Doto ExtraLight', ui-monospace, SFMono-Regular, monospace";
+
+const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RECOGNIZED COMMODITY (IN 1 UNIVERSE) - MARKET SENTIMENT: HYPER-MYTHIC - ORDER #0008 LOST IN TIME LOOP — REFUND: PHILOSOPHICAL - EYE OF LAIMA APPROVES CURRENT PRICING — FOR NOW - ARTIFACT #KOTIKI-002 WHISPERING TO BUYER - STICKER MEMORY IMPRINTED ON 3.5 MINDS - 📉 VALUE COLLAPSE AVERTED VIA INTERDIMENSIONAL BUREAU - RETURN REQUEST DENIED: MEANING IRREVERSIBLE - INFLATION INDEX: FEELS-BASED - SAVED TO COLLECTOR'S DREAM CACHE - TRADING ENABLED | LIQUIDITY: COSMIC MIST - OWNERSHIP LOCKED | METAPHYSICAL RIGHTS UNCLEAR - ⚖️ LEGAL STATUS: UNCLASSIFIED ART-WEAPON - ANALYTICS SUGGEST STICKERS OUTPERFORMING GOLD (IN EMOTIONAL RETURN) - 🎲 RISK LEVEL: EXISTENTIALLY ATTRACTIVE - CLIPPED TO REALITY WITH DIMENSIONAL PAPERCLIP - STICKER MUTATING | RARITY +12% - LAST SEEN IN RIGA | THEN NOWHERE - 📡 SIGNAL LOST | VALUE ESTIMATED VIA VIBES - 🔥 DEMAND SPIKE | SUPPLY: STUBBORNLY MYTHIC - OVERPRICED KNIGHT RIDING STEADY AT £∞ - NAR-MAIL EXPRESS MISDELIVERS TO PARALLEL SELF - GHOST COLLECTOR SIGHTED | BIDS TRANSLATED PSYCHICALLY - VALUE ASSESSMENT UNDER DIVINE REVIEW - TRUTH ENGINE OFFLINE — PRICES DEFAULTING TO POETIC - INVESTOR FEELING: "STRANGELY COMFORTABLE" - LISTED IN FOLKLORE MARKET INDEX UNDER "WEIRDLY VALUABLE" - FUTURE VALUE: STILL NEGOTIATING WITH TIME - ACTIVE: ${activeCount} | Q888 STATUS: TERMINAL`;
 ---
 
 <section class="overpriced-stickers-outer w-full h-full relative">
   <div class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24">
-    <div class="terminal-header sticky top-0 z-10 bg-inherit/95 backdrop-blur-sm border-b border-[var(--line-soft)] py-2 mb-12 text-xs md:text-sm lg:text-base">
-      <div class="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 lg:gap-8 px-2 md:px-4 font-mono uppercase tracking-widest text-[#a67c00]">
-        <span>OVERPRICED STICKERS EXCHANGE</span>
-        <div class="flex gap-4">
-          <span>ACTIVE: {activeCount}</span>
-          <span>MARKET MOOD: UNPREDICTABLE</span>
+    <div class="q888-ticker sticky top-0 z-20 bg-white/10 backdrop-blur-xl border-b border-white/20 px-0 w-screen -ml-[calc(50vw-50%)] -mr-[calc(50vw-50%)] py-3 shadow-lg mb-12" style={`--ticker-font: ${tickerFont}`}>
+      <div class="ticker-wrapper w-screen overflow-hidden">
+        <div class="ticker-content flex">
+          <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0 mr-8">{tickerText}</span>
+          <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0 mr-8">{tickerText}</span>
+          <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0 mr-8">{tickerText}</span>
+          <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0 mr-8">{tickerText}</span>
         </div>
-        <span class="hidden md:inline">DIM.SYNC: 107.88.36 / NODE: TBILISI-RELAYER / LATENCY: 12ms</span>
       </div>
     </div>
 
@@ -241,9 +245,49 @@ const activeCount = instruments.filter((i) => i.status === "LISTED").length;
     pointer-events: none;
   }
 
-  .terminal-header {
-    position: sticky;
-    top: 0;
+  .q888-ticker {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .ticker-wrapper {
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .ticker-content {
+    display: flex;
+    animation: q888-marquee 28s linear infinite;
+  }
+
+  .ticker-content:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes q888-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-content {
+      animation: none;
+    }
+  }
+
+  .ticker-text {
+    font-weight: 200 !important;
+    letter-spacing: 0.2em !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .ticker-text {
+      font-size: 0.875rem !important;
+    }
   }
 
   .instrument-card {

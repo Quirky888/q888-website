@@ -128,7 +128,14 @@ const zones = [
             </div>
             </>
           ) : zone.slug === "overpriced-stickers" ? (
-            <OverpricedStickersSection inPortal={true} />
+            <>
+            <div class="overpriced-nav">
+              <SlimNav />
+            </div>
+            <div class="overpriced-layout-with-nav">
+              <OverpricedStickersSection inPortal={true} />
+            </div>
+            </>
           ) : (
             <article class="panel-article">
               <h2 class="panel-title text-black/80">{zone.title}</h2>
@@ -165,44 +172,44 @@ const zones = [
 </div>
 
 <script>
-  function initQbagNav() {
-    const qbagPanel = document.querySelector('[data-portal-panel="q-bag"]');
-    if (!qbagPanel) return;
+  function initPortalNav() {
+    ["q-bag", "overpriced-stickers"].forEach((slug) => {
+      const panel = document.querySelector(`[data-portal-panel="${slug}"]`);
+      if (!panel) return;
 
-    const nav = qbagPanel.querySelector(".qbag-nav [data-slim-nav]");
-    const toggle = nav?.querySelector(".slim-toggle");
-    const links = nav?.querySelector("[data-slim-links]");
-    const backButton = qbagPanel.querySelector<HTMLButtonElement>("[data-portal-back]");
+      const nav = panel.querySelector<HTMLElement>("[data-slim-nav]");
+      const toggle = nav?.querySelector<HTMLElement>(".slim-toggle");
+      const links = nav?.querySelector<HTMLElement>("[data-slim-links]");
+      const backButton = panel.querySelector<HTMLButtonElement>("[data-portal-back]");
 
-    if (!nav || !toggle || !links) return;
+      if (!nav || !toggle || !links) return;
 
-    toggle.addEventListener("click", () => {
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      links.classList.toggle("open");
-    });
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        links.classList.toggle("open");
+      });
 
-    nav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        toggle.setAttribute("aria-expanded", "false");
-        links.classList.remove("open");
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) return;
-        event.preventDefault();
+      nav.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          toggle.setAttribute("aria-expanded", "false");
+          links.classList.remove("open");
+          const href = link.getAttribute("href");
+          if (!href || !href.startsWith("#")) return;
+          event.preventDefault();
 
-        if (backButton) {
-          backButton.click();
-        }
+          if (backButton) backButton.click();
 
-        window.setTimeout(() => {
-          window.location.hash = href;
-        }, 650);
+          window.setTimeout(() => {
+            window.location.hash = href;
+          }, 650);
+        });
       });
     });
   }
 
-  initQbagNav();
-  document.addEventListener("astro:page-load", initQbagNav);
+  initPortalNav();
+  document.addEventListener("astro:page-load", initPortalNav);
 </script>
 
 <style>
@@ -399,8 +406,20 @@ const zones = [
     }
   }
 
-  [data-portal-panel="q-bag"] .panel-archive-bar {
+  [data-portal-panel="q-bag"] .panel-archive-bar,
+  [data-portal-panel="overpriced-stickers"] .panel-archive-bar {
     display: none;
+  }
+
+  .overpriced-layout-with-nav {
+    --overpriced-nav-offset: 2.5rem;
+    padding-top: var(--overpriced-nav-offset);
+  }
+
+  @media (min-width: 768px) {
+    .overpriced-layout-with-nav {
+      --overpriced-nav-offset: 2.75rem;
+    }
   }
 
   .qbag-panel-header {
