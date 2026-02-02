@@ -12,7 +12,7 @@ interface Instrument {
   tagline: string;
   ask: string;
   availableCount: number | string;
-  editionTotal: number;
+  editionTotal: number | string;
   status: string;
   provenance: string;
   contactEmail: string;
@@ -30,6 +30,9 @@ interface Instrument {
   sentimentalValue?: string;
   ambassadorMission?: string;
   whyThisMatters?: string;
+  theoryCore?: string;
+  subscriptionModel?: string;
+  showTermsAsLink?: boolean;
 }
 
 const instruments: Instrument[] = [
@@ -291,6 +294,143 @@ This final piece waits not for purchase but for recognition: the right frequency
 
 Results depend on your belief. Are you tuned in?`
   },
+  {
+    id: "FWR-88",
+    ticker: "FWR-88",
+    title: "Follow the White Rabbit",
+    tagline: "Ancient prophecy, modern mythos",
+    ask: "£300",
+    availableCount: 1,
+    editionTotal: 10,
+    status: "LISTED",
+    provenance: "Extracted from Wonderland Tattoo Design artwork—mystical love story of sunflower and lemon tree, rooted in King Ealdormere the 88th's legendary prophecy...",
+    contactEmail: "wonderland@squarebubbles.studio",
+    imageUrl: "/images/follow_white_rabbit.webp",
+    imageAlt: "Follow the White Rabbit sticker - antlered rabbit with geometric symbols leaping through void",
+    gallery: [],
+    downloadUrl: "/docs/wonderland_tattoo_design.pdf",
+    downloadLabel: "Download Wonderland Tattoo Story (PDF)",
+    description: `Follow the White Rabbit is a limited-edition artifact from Wonderland's quantum threshold, presented as a simple sticker but carrying the weight of ancient prophecy and modern mythos.
+
+The entity depicted bounds across void in bold black linework—rabbit in mid-leap, antlers branching like neural networks or decision trees, symbols adorning body (spiral, cross, geometric patterns), elongated ears receiving transmissions beyond time. Extracted from the legendary Wonderland Tattoo Design artwork, this creature embodies King Ealdormere the 88th's aka "Overpriced Knight" enigmatic query about quantum draughts brewed with 0.999% unicorn tears and undying love, linking star-crossed lovers (sunflower and lemon tree) beneath ageless lunar watch.
+
+Fragments suggest: Conceptual tattoo transformed into adhesive portal. Created through human-AI collaboration (ChatGPT v4.44) merging ancient magic with aeons-old technology. While Matrix's Morpheus famously whispered "Follow the white rabbit" as awakening trigger, this rabbit claims independence—at least on paper. It leaps not to reveal simulation but to unlock quantum matrix of the cosmos, fathoming soul's deepest mysteries through mythical sorrow and timeless devotion.
+
+The materials, premium holographic vinyl shifting between realities, and £300 valuation hint at something beyond pop culture reference: tattoo design too sacred to ink permanently, prophecy fragment too powerful to remain hidden, final emission from an artistic confluence spanning 23,456 million thousand years.
+
+This public description is intentionally incomplete. The full Wonderland narrative—including King Ealdormere's complete prophecy, quantum draught recipes, and why this rabbit severed ties with the Matrix—is sealed, revealed only to the keeper who pays homage to both ancient magic and cutting-edge AI in single transaction.`,
+    dimensions: "76mm × 76mm",
+    material: "Premium holographic vinyl, archival grade, prophecy-encoded",
+    year: "2025",
+    whyThisMatters: `This isn't Morpheus's rabbit revealing simulation. This is King Ealdormere's rabbit brewing quantum draughts to link souls across time. Born as tattoo concept too mystical to ink, preserved as holographic sticker awaiting the one who understands: some paths you follow not to wake up, but to stay dreaming with the right companion.
+
+The sunflower and lemon tree still wait beneath the lunar spirit's watch. The rabbit knows the way.
+
+Are you ready to follow?`
+  },
+  {
+    id: "SQB-1",
+    ticker: "SQB-1",
+    title: "Square Bubble V🍄",
+    tagline: "Freedom requires edges, structure requires 💜",
+    ask: "Speculative",
+    availableCount: 0,
+    editionTotal: 10,
+    status: "SOLD_OUT",
+    provenance: "Created as visual translation of Square Bubble Theory—systems ethics model for long-term coexistence. Distributed to designers of adaptive worlds.",
+    contactEmail: "theory@squarebubbles.studio",
+    imageUrl: "/images/square_bubble.webp",
+    imageAlt: "Square Bubble sticker - ouroboros mushroom with rainbow gradient and freedom-structure symbols",
+    gallery: [],
+    description: `Square Bubble is a foundational artifact from systems ethics philosophy, presented as a simple sticker but carrying the weight of long-term coexistence design.
+
+The motif depicts ouroboros mushroom—fungal form devouring its own cap in eternal cycle, adorned with symbols of freedom (hearts, spirals, keys) and structure (crosses, hourglasses, geometric patterns). Rainbow gradient flows through linework against deep green void, embodying the paradox: bubble (soft autonomy, internal freedom, no enforcement) + square (clear edges, shared rules, stability). This is not decoration—it is a visual proof that systems can protect freedom without controlling behavior, maintain boundaries without domination.
+
+Fragments suggest: A theory solving how beings, tools, societies, worlds avoid collapse. Systems fail when only chaos (bubbles) or only control (squares). Durable designs combine both: conditions protected, not outcomes decided. Negotiation replaces enforcement. Reversibility is mandatory. No ownership of beings. Intelligence treated as participant, never tool. Applicable to humans, robots, AI—any entity operating under constraints requiring safety margins.
+
+The materials, holographic vinyl shifting between spectrum temperatures, and premium positioning hint at something beyond philosophy paper: ethics model made portable, systems thinking condensed to palm-size transmission, framework for designing coexistence under uncertainty when utopias fail and authoritarianism collapses.
+
+This public description is intentionally incomplete. The full Square Bubble Theory—including boundary protection mechanics, negotiation protocols, and why Square Bubbles never rule—awaits as downloadable manifesto for those ready to design freedom that doesn't fragment, structure that doesn't suffocate.`,
+    dimensions: "75mm × 69mm",
+    material: "Premium holographic vinyl, archival grade, ethics-encoded",
+    year: "2025",
+    theoryCore: `**The Paradox**
+Bubbles alone → chaos, decay, fragmentation
+Squares alone → control, rebellion, collapse
+Both together → stability through protected freedom
+
+**Five Rules**
+1. **Boundary protection without domination** — Edges define where things stop, not what participants must do
+2. **Conditions over outcomes** — System maintains fairness, safety margins, reversibility, consent; participants decide results
+3. **Negotiation replaces enforcement** — Nudge, signal, withdraw cooperation if abused; no punishment or force required
+4. **Reversibility is mandatory** — Actions must be undoable, survivable if wrong, never permanently trapping
+5. **No ownership of beings** — System cannot own participants, decide their values, or define their purpose
+
+**Why It Matters**
+Intelligence (human or robot) becomes dangerous when optimized without ethics. Square Bubble Theory treats all intelligence as participants requiring coexistence frameworks, not tools requiring instructions.
+
+**One-Sentence Summary**
+Square Bubble Theory is the design of systems that remain stable by protecting freedom instead of controlling behavior.`
+  },
+  {
+    id: "CID-GATE",
+    ticker: "ID-9093",
+    title: "Intergalactic ID",
+    tagline: "Interdimensional protection for ethical businesses",
+    ask: "Subscription Model: From £2000/year",
+    availableCount: "∞",
+    editionTotal: "∞",
+    status: "SUBSCRIPTION",
+    provenance: "Created as a protection talisman for ethical businesses navigating bureaucratic corruption...",
+    contactEmail: "gatekeeper@squarebubbles.studio",
+    imageUrl: "/images/council_id.webp",
+    imageAlt: "Council ID sticker - holographic credential card with cryptic interdimensional authority details",
+    gallery: [],
+    description: `The Intergalactic Council ID is a symbol of immense power, steeped in mystery and intrigue. With its holographic design and cryptic details, it represents an unparalleled connection to unseen dimensions and hidden networks. This unique artifact carries the name of its sole gatekeeper, ensuring exclusive access to the underworld and its untapped potential.
+
+For businesses navigating the challenges of bureaucracy and corruption, this sticker offers more than symbolic value—it's a declaration of protection. Displayed within a business's premises, it signifies approval by the one individual who holds the rights to its immense power. This protection extends across dimensions, shielding businesses from unlawful inspections and ensuring ethical practices.
+
+Ownership of the Council ID Sticker is subscription-based, starting at -+£2000 per year for small businesses like coffee shops. This annual fee grants businesses the right to display the sticker, symbolizing their compliance with ethical standards and their commitment to worker rights. However, it's important to note that true ownership remains with its creator, who retains ultimate authority over its placement and usage.
+
+Should any business face unjust fines or unlawful interference during their subscription period, the sticker's overseer will personally ensure restitution, and those responsible will face the weight of karmic justice. Conversely, if a fine is deemed legitimate, the sticker will be revoked, and the business forfeits its fee as a reminder of their obligation to uphold their commitments.
+
+Bearing the Council ID Sticker connects businesses not just to a network of protection but also to a mythos rooted in an unseen world. Its design hints at layers of meaning, serving as a reminder that this is no ordinary emblem. By subscribing to its power, businesses align themselves with an interdimensional legacy of justice, integrity, and accountability.`,
+    dimensions: "85mm × 54mm",
+    material: "Premium holographic, archival-grade, interdimensional authority-encoded",
+    year: "Classified",
+    subscriptionModel: `**Pricing Structure**
+- **Small businesses** (coffee shops, retail): From £2000/year
+- **Medium businesses**: Scaled accordingly
+- **Large corporations**: Exponentially scaled
+- **True ownership**: Never sold, always overseer's property
+
+**Subscription Terms**
+- Annual renewal required
+- Non-transferable between businesses
+- Must be returned if subscription ends
+- Revoked immediately if legitimate violations found
+- Creator maintains ultimate authority over placement
+
+**Protection Guarantee**
+If unjust fines or unlawful interference occurs during active subscription:
+- Contact overseer immediately
+- Restitution guaranteed
+- Perpetrators face karmic consequences
+
+If fine is legitimate:
+- Sticker revoked
+- Fee forfeited
+- Accountability reminder enforced
+
+**Eligibility**
+- Commitment to worker rights required
+- Ethical business practices mandatory
+- Worthiness determined by sole gatekeeper
+
+**The Ultimate Seal of Approval**
+To display this sticker is to join an elite group under the watchful eye of its enigmatic creator. It's more than a mark of protection—it's a badge of trust and a token of participation in a story that transcends the boundaries of reality.`,
+    showTermsAsLink: true
+  },
   { id: "BL-0005", ticker: "BL-0005", title: "Border Layer #0005", tagline: "The line between here and there", ask: "£110", availableCount: 3, editionTotal: 15, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "bl@squarebubbles.studio" },
   { id: "FL-0006", ticker: "FL-0006", title: "Flicker Loop #0006", tagline: "A moment that refuses to end", ask: "£165", availableCount: 0, editionTotal: 7, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "fl@squarebubbles.studio" },
   { id: "SM-0007", ticker: "SM-0007", title: "Static Mask #0007", tagline: "Noise as identity", ask: "£88", availableCount: 4, editionTotal: 20, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "sm@squarebubbles.studio" },
@@ -298,7 +438,8 @@ Results depend on your belief. Are you tuned in?`
   { id: "NX-0009", ticker: "NX-0009", title: "Nexus Cross #0009", tagline: "Where vectors meet", ask: "£155", availableCount: 0, editionTotal: 5, status: "SOLD", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "nx@squarebubbles.studio" },
 ];
 
-const activeCount = instruments.filter((i) => i.status === "LISTED").length;
+const visibleInstruments = instruments.filter((i) => i.imageUrl);
+const activeCount = visibleInstruments.filter((i) => i.status === "LISTED").length;
 const tickerFont = "'Doto ExtraLight', ui-monospace, SFMono-Regular, monospace";
 const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RECOGNIZED COMMODITY (IN 1 UNIVERSE) - MARKET SENTIMENT: HYPER-MYTHIC - ORDER #0008 LOST IN TIME LOOP — REFUND: PHILOSOPHICAL - EYE OF LAIMA APPROVES CURRENT PRICING — FOR NOW - ARTIFACT #KOTIKI-002 WHISPERING TO BUYER - STICKER MEMORY IMPRINTED ON 3.5 MINDS - 📉 VALUE COLLAPSE AVERTED VIA INTERDIMENSIONAL BUREAU - RETURN REQUEST DENIED: MEANING IRREVERSIBLE - INFLATION INDEX: FEELS-BASED - SAVED TO COLLECTOR'S DREAM CACHE - TRADING ENABLED | LIQUIDITY: COSMIC MIST - OWNERSHIP LOCKED | METAPHYSICAL RIGHTS UNCLEAR - ⚖️ LEGAL STATUS: UNCLASSIFIED ART-WEAPON - ANALYTICS SUGGEST STICKERS OUTPERFORMING GOLD (IN EMOTIONAL RETURN) - 🎲 RISK LEVEL: EXISTENTIALLY ATTRACTIVE - CLIPPED TO REALITY WITH DIMENSIONAL PAPERCLIP - STICKER MUTATING | RARITY +12% - LAST SEEN IN RIGA | THEN NOWHERE - 📡 SIGNAL LOST | VALUE ESTIMATED VIA VIBES - 🔥 DEMAND SPIKE | SUPPLY: STUBBORNLY MYTHIC - OVERPRICED KNIGHT RIDING STEADY AT £∞ - NAR-MAIL EXPRESS MISDELIVERS TO PARALLEL SELF - GHOST COLLECTOR SIGHTED | BIDS TRANSLATED PSYCHICALLY - VALUE ASSESSMENT UNDER DIVINE REVIEW - TRUTH ENGINE OFFLINE — PRICES DEFAULTING TO POETIC - INVESTOR FEELING: "STRANGELY COMFORTABLE" - LISTED IN FOLKLORE MARKET INDEX UNDER "WEIRDLY VALUABLE" - FUTURE VALUE: STILL NEGOTIATING WITH TIME - ACTIVE: ${activeCount} | Q888 STATUS: TERMINAL`;
 ---
@@ -327,7 +468,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
     </header>
 
     <div class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24">
-      {instruments.map((instrument) => (
+      {visibleInstruments.map((instrument) => (
         <article 
           class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200" 
           data-instrument-id={instrument.id}
@@ -351,7 +492,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
           </div>
           <div class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1">
             <div>
-              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status === "SOLD_OUT" ? "Sold out" : instrument.status === "NEGOTIABLE" ? "Negotiable" : instrument.status}
+              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status === "SOLD_OUT" ? "Sold out" : instrument.status === "NEGOTIABLE" ? "Negotiable" : instrument.status === "SUBSCRIPTION" ? "Subscription" : instrument.status}
             </div>
             <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
             <div>
@@ -386,6 +527,8 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       </div>
       <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
       <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
+      <div data-sticker-subscription class="subscription-section hidden"></div>
+      <div data-sticker-theory class="theory-core-section hidden"></div>
       <div data-sticker-playlist class="playlist-section hidden"></div>
       <div data-sticker-matters class="why-matters-section hidden"></div>
       <div data-sticker-mission class="ambassador-mission-section hidden"></div>
@@ -534,6 +677,227 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
     margin-top: 0.5rem;
     font-style: italic;
     color: var(--text-muted);
+  }
+
+  .theory-core-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 128, 128, 0.05);
+    border-left: 3px solid rgba(0, 128, 128, 0.5);
+  }
+
+  .theory-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    color: rgba(0, 255, 200, 0.9);
+  }
+
+  .theory-content {
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .theory-content strong {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: rgba(0, 255, 200, 0.8);
+  }
+
+  .theory-access {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-soft);
+    font-style: italic;
+    opacity: 0.85;
+  }
+
+  .subscription-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(148, 0, 211, 0.05);
+    border-left: 3px solid rgba(148, 0, 211, 0.5);
+  }
+
+  .subscription-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    color: rgba(186, 85, 211, 0.9);
+  }
+
+  .subscription-content {
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .subscription-content strong {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: rgba(186, 85, 211, 0.85);
+  }
+
+  .subscription-cta {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .subscription-cta strong {
+    color: rgba(186, 85, 211, 1);
+  }
+
+  .subscription-cta em {
+    opacity: 0.8;
+  }
+
+  .terms-link-section {
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .terms-link-button:hover {
+    opacity: 0.8;
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+  }
+
+  .terms-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .terms-modal.hidden {
+    display: none;
+  }
+
+  .terms-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .terms-modal-content {
+    position: relative;
+    max-width: 700px;
+    max-height: 85vh;
+    width: 90%;
+    background: #1a1a1a;
+    border: 1px solid rgba(148, 0, 211, 0.5);
+    border-radius: 8px;
+    padding: 2rem;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(148, 0, 211, 0.3);
+    z-index: 10000;
+  }
+
+  .terms-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .terms-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+
+  .terms-modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    color: rgba(186, 85, 211, 1);
+    padding-right: 2rem;
+  }
+
+  .terms-modal-body {
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .terms-modal-body strong {
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    color: rgba(186, 85, 211, 0.9);
+  }
+
+  .terms-modal-body ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0;
+  }
+
+  .terms-modal-body li {
+    padding: 0.25rem 0 0.25rem 1.5rem;
+    position: relative;
+  }
+
+  .terms-modal-body li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: rgba(186, 85, 211, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    .terms-modal-content {
+      width: 95%;
+      padding: 1.5rem;
+      max-height: 90vh;
+    }
+
+    .terms-modal-title {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terms-link-button:hover {
+      transform: none;
+    }
+
+    .terms-modal-close,
+    .terms-link-button:hover {
+      transition: none;
+    }
+
+    .terms-modal-close:hover {
+      transform: none;
+    }
   }
 
   .why-matters-section {
@@ -727,6 +1091,27 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
 
 <script define:vars={{ instruments }}>
   (function () {
+    window.toggleTermsModal = function () {
+      const modal = document.getElementById("termsModal");
+      if (!modal) return;
+      modal.classList.toggle("hidden");
+
+      if (!modal.classList.contains("hidden")) {
+        if (!document.body.classList.contains("overflow-hidden")) {
+          modal.setAttribute("data-prev-body-overflow", document.body.style.overflow || "");
+          document.body.style.overflow = "hidden";
+        }
+      } else {
+        const prev = modal.getAttribute("data-prev-body-overflow");
+        if (prev !== null) {
+          document.body.style.overflow = prev;
+          modal.removeAttribute("data-prev-body-overflow");
+        } else if (!document.body.classList.contains("overflow-hidden")) {
+          document.body.style.overflow = "";
+        }
+      }
+    };
+
     const drawer = document.getElementById("sticker-detail-drawer");
     const triggers = document.querySelectorAll("[data-drawer-trigger=\"sticker-detail\"]");
     const closeBtn = drawer?.querySelector("[data-close-drawer]");
@@ -736,6 +1121,8 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
     const imageEl = drawer?.querySelector("[data-sticker-image]");
     const galleryEl = drawer?.querySelector("[data-sticker-gallery]");
     const descEl = drawer?.querySelector("[data-sticker-description]");
+    const subscriptionEl = drawer?.querySelector("[data-sticker-subscription]");
+    const theoryEl = drawer?.querySelector("[data-sticker-theory]");
     const playlistEl = drawer?.querySelector("[data-sticker-playlist]");
     const mattersEl = drawer?.querySelector("[data-sticker-matters]");
     const missionEl = drawer?.querySelector("[data-sticker-mission]");
@@ -785,6 +1172,129 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       }
       if (descEl) descEl.classList.remove('hidden');
 
+      if (subscriptionEl) {
+        if (inst.subscriptionModel) {
+          const escape = (s) =>
+            String(s)
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;");
+          const bold = (s) => escape(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+          const formatTerms = (md) => {
+            const lines = String(md).split("\n");
+            let html = "";
+            let inList = false;
+            for (const rawLine of lines) {
+              const line = rawLine.replace(/\r/g, "");
+              const trimmed = line.trim();
+              if (!trimmed) {
+                if (inList) {
+                  html += "</ul>";
+                  inList = false;
+                }
+                html += "<br>";
+                continue;
+              }
+              if (trimmed.startsWith("- ")) {
+                if (!inList) {
+                  html += "<ul>";
+                  inList = true;
+                }
+                html += `<li>${bold(trimmed.slice(2))}</li>`;
+                continue;
+              }
+              if (inList) {
+                html += "</ul>";
+                inList = false;
+              }
+              html += `${bold(trimmed)}<br>`;
+            }
+            if (inList) html += "</ul>";
+            return html;
+          };
+
+          const termsHtml = formatTerms(inst.subscriptionModel);
+
+          if (inst.showTermsAsLink) {
+            subscriptionEl.innerHTML = `
+              <div class="terms-link-section">
+                <button
+                  class="terms-link-button"
+                  onclick="toggleTermsModal()"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                    font-size: 0.875rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                    color: transparent !important;
+                    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
+                    background-size: 200% auto !important;
+                    background-clip: text !important;
+                    -webkit-background-clip: text !important;
+                    -webkit-text-fill-color: transparent !important;
+                    animation: shine 8s linear infinite;
+                  "
+                >
+                  Subscription Terms &amp; Conditions 😈
+                </button>
+              </div>
+
+              <div id="termsModal" class="terms-modal hidden">
+                <div class="terms-modal-overlay" onclick="toggleTermsModal()"></div>
+                <div class="terms-modal-content">
+                  <button class="terms-modal-close" onclick="toggleTermsModal()" aria-label="Close terms">×</button>
+                  <h2 class="terms-modal-title">Subscription Model &amp; Protection Terms</h2>
+                  <div class="terms-modal-body">${termsHtml}</div>
+                </div>
+              </div>
+            `;
+          } else {
+            subscriptionEl.innerHTML = `
+              <div class="subscription-section">
+                <h3 class="subscription-title">Subscription Model & Protection Terms</h3>
+                <div class="subscription-content">${termsHtml}</div>
+              </div>
+            `;
+          }
+          subscriptionEl.classList.remove("hidden");
+        } else {
+          subscriptionEl.classList.add("hidden");
+          subscriptionEl.innerHTML = "";
+        }
+      }
+
+      if (theoryEl) {
+        if (inst.theoryCore) {
+          const escaped = inst.theoryCore
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+          const formatted = escaped
+            .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\n/g, "<br>");
+          theoryEl.innerHTML = `
+            <h3 class="theory-title">Square Bubble Theory Core Principles</h3>
+            <div class="theory-content">${formatted}</div>
+            <p class="theory-access">
+              <strong>Access Full Theory</strong><br>
+              Complete manifesto available as downloadable transmission. The mushroom knows the path between chaos and tyranny—it eats both, transforms both, completes the cycle without ruling.
+            </p>
+          `;
+          theoryEl.classList.remove("hidden");
+        } else {
+          theoryEl.classList.add("hidden");
+          theoryEl.innerHTML = "";
+        }
+      }
+
       if (playlistEl) {
         if (inst.playlistUrl) {
           const label = inst.playlistLabel || "Listen on Spotify";
@@ -813,6 +1323,30 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
             <p class="playlist-note">${note}</p>
           `;
           playlistEl.classList.remove("hidden");
+        } else if (inst.id === "FWR-88" && inst.downloadUrl) {
+          const label = inst.downloadLabel || "Download (PDF)";
+          playlistEl.innerHTML = `
+            <div class="playlist-section">
+              <a href="${inst.downloadUrl}" download class="playlist-link">
+                <span class="gold-shine" style="
+                  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                  font-size: 0.75rem;
+                  text-transform: uppercase;
+                  letter-spacing: 0.2em;
+                  color: transparent !important;
+                  background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
+                  background-size: 200% auto !important;
+                  background-clip: text !important;
+                  -webkit-background-clip: text !important;
+                  -webkit-text-fill-color: transparent !important;
+                  animation: shine 8s linear infinite;
+                ">
+                  📖 ${label}
+                </span>
+              </a>
+            </div>
+          `;
+          playlistEl.classList.remove("hidden");
         } else {
           playlistEl.classList.add("hidden");
           playlistEl.innerHTML = "";
@@ -822,7 +1356,12 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       if (mattersEl) {
         if (inst.whyThisMatters) {
           const parts = inst.whyThisMatters.split('\n\n').filter(p => p.trim());
-          const mattersTitle = inst.id === "IDJ-SACRED" ? "Why This DJ Is Different" : "Why This V1 Matters";
+          const mattersTitle =
+            inst.id === "IDJ-SACRED"
+              ? "Why This DJ Is Different"
+              : inst.id === "FWR-88"
+                ? "Why This Rabbit Is Different"
+                : "Why This V1 Matters";
           mattersEl.innerHTML = `
             <h3 class="matters-title">${mattersTitle}</h3>
             <div class="matters-content">${parts.map(p => `<p>${p.trim()}</p>`).join("")}</div>
@@ -850,6 +1389,10 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
 
       if (downloadEl) {
         if (inst.downloadUrl) {
+          if (inst.id === "FWR-88") {
+            downloadEl.classList.add("hidden");
+            downloadEl.innerHTML = "";
+          } else {
           const label = inst.downloadLabel || "Download KomproMir Manifesto (PDF)";
           downloadEl.innerHTML = `
       <a
@@ -879,6 +1422,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       </a>
           `;
           downloadEl.classList.remove("hidden");
+          }
         } else {
           downloadEl.classList.add("hidden");
         }
@@ -890,7 +1434,16 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
-        if (inst.id === "IDJ-SACRED") {
+        if (inst.id === "FWR-88") {
+          specs.push("TRANSFER: Physical handover + acknowledgment that some truths shield themselves through obscurity. Hold while contemplating: follow for awakening or follow for devotion? Rabbit reveals your answer.");
+          specs.push("RITUAL: Apply at personal Wonderland threshold—mirror edge, journal cover, device protecting secrets. Whisper your deepest mystery while tracing the spiral. Rabbit leaps between dimensions when observer is ready. May unlock quantum matrix; may simply remind you timeless devotion exists outside simulations.");
+        } else if (inst.id === "CID-GATE") {
+          specs.push("TRANSFER: Non-transferable. Subscription-based rental only. Must be returned at rental term end unless creator grants permanent placement. Each sticker bears overseer's personal guarantee of karmic justice against unlawful interference.");
+          specs.push("RITUAL: Display prominently within business premises where inspectors, authorities, and customers can witness. Signifies ethical compliance and interdimensional protection. If unjust fine occurs during subscription period, contact overseer—restitution guaranteed, perpetrators face consequences. If fine is legitimate, accept revocation and fee forfeiture as accountability reminder.");
+        } else if (inst.id === "SQB-1") {
+          specs.push("TRANSFER: Physical handover + acknowledgment that freedom requires edges, structure requires breath. Hold while contemplating: what collapses when you optimize too hard? What decays when you remove all rules?");
+          specs.push("RITUAL: Apply where systems meet—device protecting both your privacy and connectivity, journal balancing spontaneity with habit, workspace allowing autonomy within deadlines. Whisper one constraint you protect, one freedom you enable. Mushroom completes its cycle, stabilizing your paradox.");
+        } else if (inst.id === "IDJ-SACRED") {
           specs.push("TRANSFER: High-price negotiation required. Not sold to highest bidder but to most aligned frequency. Hold under shifting light while antennae decode your sonic readiness. Transfer signifies acceptance of chaos curation responsibility.");
           specs.push("RITUAL: Apply to creative chaos zone or meditation threshold. Activate designated Spotify playlist in smart shuffle mode—awareness and relaxation increase by 8.88%, scaled by belief coefficient. Antennae receive frequencies proportional to your conviction. Rotate viewing angle to access full spectrum guidance between order and entropy.");
         } else if (inst.id === "IJ-V1") {
@@ -942,21 +1495,22 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
           inst.status === "BEYOND_TRANSACTION" ? "Beyond transaction"
           : inst.status === "SOLD_OUT" ? "Sold out"
           : inst.status === "NEGOTIABLE" ? "Negotiable"
+          : inst.status === "SUBSCRIPTION" ? "Subscription"
           : inst.status;
         metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${statusLabel}</div><div>PROVENANCE: ${inst.provenance}</div><div>${qtyLine}</div>`;
       }
-      if (inst.status === "NEGOTIABLE") {
-        if (emailEl) {
-          emailEl.textContent = inst.contactEmail;
-          emailEl.classList.remove("hidden");
-        }
-        if (negotiateBtn) negotiateBtn.hidden = true;
-      } else {
-        if (emailEl) {
-          emailEl.textContent = "";
-          emailEl.classList.add("hidden");
-        }
-        if (negotiateBtn) negotiateBtn.hidden = false;
+      if (emailEl) {
+        emailEl.textContent = "";
+        emailEl.classList.add("hidden");
+      }
+      if (negotiateBtn) {
+        negotiateBtn.hidden = false;
+        negotiateBtn.textContent =
+          inst.status === "SUBSCRIPTION"
+            ? "Contact for subscription"
+            : inst.status === "NEGOTIABLE"
+              ? "Contact for negotiation"
+              : "Open negotiation channel";
       }
       
       drawer.setAttribute("aria-hidden", "false");
