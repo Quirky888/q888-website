@@ -11,7 +11,7 @@ interface Instrument {
   title: string;
   tagline: string;
   ask: string;
-  availableCount: number;
+  availableCount: number | string;
   editionTotal: number;
   status: string;
   provenance: string;
@@ -98,7 +98,33 @@ Fragments suggest: A mushroom probe venturing where logic fails, leaving spore-i
 The materials, imperfect gaze, and premium price hint at something productively unresolved: cosmology that coexists with you, power via alignment not control, a cost for portable paradox.
 
 This public description is intentionally incomplete. The full system—including Love GPS rites, mushroom trajectories, and Big G ambiguities—is sealed, revealed only to owners who pay full price. Ownership is co-observation.`, dimensions: "76mm × 76mm", material: "Premium vinyl, archival grade, cosmic dust coated", year: "2023" },
-  { id: "QR-0004", ticker: "QR-0004", title: "Quantum Remainder #0004", tagline: "What's left when observation stops", ask: "£200", availableCount: 1, editionTotal: 6, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "qr@squarebubbles.studio" },
+  {
+    id: "LM-PRICELESS",
+    ticker: "LM-∞",
+    title: "Love Mushroom Sticker",
+    tagline: "Love flows between incompatible forms",
+    ask: "Priceless — Love is not for sale",
+    availableCount: "Few remaining",
+    editionTotal: 10,
+    status: "BEYOND_TRANSACTION",
+    provenance: "Appeared at Gravastar-Black Hole boundary during 2024 love overflow event. First emission limited to 10. Few remain.",
+    contactEmail: "love@squarebubbles.studio",
+    imageUrl: "/images/love_mushroom.webp",
+    imageAlt: "Love Mushroom sticker - heart-capped mushroom stabilizing love between incompatible geometries",
+    gallery: [],
+    description: `Love Mushroom is not a limited-edition artifact—it appeared at boundaries where logic ends.
+
+The entity depicted exists between a slightly open Gravastar releasing infinite love and a Black Hole collecting what would be lost. It stabilized as mushroom form to translate love between incompatible geometries: round bubbles and square structures, chaos and pattern, overflow and balance.
+
+Fragments suggest: A higher-dimensional stabilizer preventing reality from drowning in excess affection. Absorbs leaking love, redirects gently. In 2D projection resembles ❤️. Does not judge shapes—simply ensures flow, transformation, return.
+
+The materials, heart-cap silhouette, and unavailable price hint at something beyond transaction: love as system not sentiment, cosmology in fungal form, value that refuses currency.
+
+This public description is intentionally incomplete. The full physics—including Gravastar leak mechanics, Black Hole collection rites, and dimensional love flow—is sealed, revealed only to those who already understand. Ownership is not for sale. Love cannot be bought.`,
+    dimensions: "68mm × 75mm",
+    material: "Premium vinyl, archival grade, interdimensional substrate",
+    year: "2024"
+  },
   { id: "BL-0005", ticker: "BL-0005", title: "Border Layer #0005", tagline: "The line between here and there", ask: "£110", availableCount: 3, editionTotal: 15, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "bl@squarebubbles.studio" },
   { id: "FL-0006", ticker: "FL-0006", title: "Flicker Loop #0006", tagline: "A moment that refuses to end", ask: "£165", availableCount: 0, editionTotal: 7, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "fl@squarebubbles.studio" },
   { id: "SM-0007", ticker: "SM-0007", title: "Static Mask #0007", tagline: "Noise as identity", ask: "£88", availableCount: 4, editionTotal: 20, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "sm@squarebubbles.studio" },
@@ -146,8 +172,17 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         >
           <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
             <span>{instrument.ticker}</span>
-            <span>ED: {instrument.availableCount}/{instrument.editionTotal}</span>
+            <span>
+              {typeof instrument.availableCount === "number"
+                ? `ED: ${instrument.availableCount}/${instrument.editionTotal}`
+                : `ED: ${instrument.availableCount}`}
+            </span>
           </div>
+          {instrument.status === "BEYOND_TRANSACTION" && (
+            <div class="px-4 pt-2">
+              <span class="gold-shine font-mono text-xs uppercase tracking-[0.2em]">Beyond transaction</span>
+            </div>
+          )}
           {instrument.imageUrl && (
             <div class="instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)]">
               <img src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" />
@@ -158,9 +193,15 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
             <p class="text-lg md:text-xl text-[var(--text-muted)] leading-snug">{instrument.tagline}</p>
           </div>
           <div class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1">
-            <div>PRICE: {instrument.ask} · STATUS: {instrument.status}</div>
+            <div>
+              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status}
+            </div>
             <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
-            <div>QTY: {instrument.availableCount}/{instrument.editionTotal}</div>
+            <div>
+              {typeof instrument.availableCount === "number"
+                ? `QTY: ${instrument.availableCount}/${instrument.editionTotal}`
+                : `QTY: ${instrument.availableCount}`}
+            </div>
           </div>
         </article>
       ))}
@@ -493,8 +534,13 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
-        specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
-        specs.push("RITUAL: Apply at an edge during indecision.");
+        if (inst.id === "LM-PRICELESS") {
+          specs.push("TRANSFER: Not purchasable. Appears to those who stabilize contradictions without force. Recognition is the only currency accepted.");
+          specs.push("RITUAL: Apply where geometries conflict (notebook corner bridging round/square doodles, portal thresholds). Whisper gratitude for imbalance. Adheres where love flows between incompatible forms, preventing cosmic overflow.");
+        } else {
+          specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
+          specs.push("RITUAL: Apply at an edge during indecision.");
+        }
         specsEl.innerHTML = specs.map(s => `<div class="text-[var(--text-ink)]">${s}</div>`).join('');
       }
       if (specsEl) specsEl.classList.remove('hidden');
@@ -517,7 +563,11 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       }
       
       if (metaEl) {
-        metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${inst.status}</div><div>PROVENANCE: ${inst.provenance}</div><div>QTY: ${inst.availableCount}/${inst.editionTotal}</div>`;
+        const qtyLine = typeof inst.availableCount === "number"
+          ? `QTY: ${inst.availableCount}/${inst.editionTotal}`
+          : `QTY: ${inst.availableCount}`;
+        const statusLabel = inst.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : inst.status;
+        metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${statusLabel}</div><div>PROVENANCE: ${inst.provenance}</div><div>${qtyLine}</div>`;
       }
       if (emailEl) {
         emailEl.textContent = "";
