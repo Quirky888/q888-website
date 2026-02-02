@@ -22,10 +22,14 @@ interface Instrument {
   description?: string;
   downloadUrl?: string;
   downloadLabel?: string;
+  playlistUrl?: string;
+  playlistLabel?: string;
   dimensions?: string;
   material?: string;
   year?: string;
   sentimentalValue?: string;
+  ambassadorMission?: string;
+  whyThisMatters?: string;
 }
 
 const instruments: Instrument[] = [
@@ -187,6 +191,72 @@ This public description is intentionally incomplete. The full manifesto—includ
     material: "Premium vinyl, archival grade, intergalactic ink",
     year: "2025"
   },
+  {
+    id: "SS-888",
+    ticker: "SS-888",
+    title: "Successful Success",
+    tagline: "You are the trend",
+    ask: "Available only to true Infocigans",
+    availableCount: "?",
+    editionTotal: 12,
+    status: "RESERVED",
+    provenance: "Created as gateway artifact to Overpriced Sticker Movement. Originally distributed to early believers at accessible entry point, now reserved for cultural tastemakers.",
+    contactEmail: "invest@squarebubbles.studio",
+    imageUrl: "/images/successful_success.webp",
+    imageAlt: "Successful Success sticker - neon pink blazer figure with coins and trash basket symbolizing investment satire",
+    gallery: [],
+    description: `Successful Success is a limited-edition artifact from the future of value itself, presented as a simple sticker but carrying the weight of appreciating absurdity.
+
+The figure depicted radiates maximum confidence in neon pink blazer, sunglasses concealing cosmic vision, phone clutched while coins rain into a designer trash basket. "INVEST!!" screams from the margins. "INFINITELESS SATISFACTION FROM YOUR INVESTMENTS" promises the golden text. Guaranteed profit up to 888% in one light year... or try another. This is not financial advice—it is performance art masquerading as capitalism.
+
+Fragments suggest: A badge of vanguard thinking, transforming mundane objects (water bottles, laptops, tablets) into personalized heirlooms through sticker adhesion. Pioneer of mindful anti-consumerism where value lies in stories not upgrades. Ambassador effect—your mission is to flaunt proudly, inspire intrigue, and create demand for what cannot be had. Previously £20, now available only to true Infocigans.
+
+The materials, satirical prosperity iconography, and exclusive scarcity hint at something productively ridiculous: investment that questions investment, luxury mocking luxury itself, a movement where you become the trend by displaying your vision at intergalactic heights.
+
+This public description is intentionally incomplete. The full Overpriced Sticker Movement manifesto—including ambassador protocols, value appreciation mechanics, and sticker legend pathways—awaits those ready to transcend consumerism through maximum consumerism. Ownership is entrance to the elite community of visionaries who see the future, and it's stickier than ever.`,
+    dimensions: "54mm × 75mm",
+    material: "Premium holographic vinyl, archival grade, prosperity-infused",
+    year: "2025",
+    ambassadorMission: `By acquiring Successful Success, you join an elite movement rethinking value in a disposable world. Your role: display proudly, inspire covetousness, build hype. As demand rises, so does the value of your sticker—whether mint-condition archived or boldly affixed to everyday objects transformed into art.
+
+You're not just part of a trend. You are the trend.
+
+The question is: are you ready to become a sticker legend?`
+  },
+  {
+    id: "IJ-V1",
+    ticker: "IJ-V1",
+    title: "Intergalactic J V1",
+    tagline: "Peace technology disguised as decoration",
+    ask: "£150",
+    availableCount: 1,
+    editionTotal: 10,
+    status: "LISTED",
+    provenance: "Based on Intergalactic Jesus original artwork. V1 limited to 10, never sold—distributed to those who understood balance without explanation. V2 (50 pieces, modified design) followed. This is the last V1 survivor.",
+    contactEmail: "peace@squarebubbles.studio",
+    imageUrl: "/images/intergalactic_j.webp",
+    imageAlt: "Intergalactic J V1 sticker - holographic rainbow jellyfish-prophet with dreadlocks and cosmic elements",
+    gallery: [],
+    playlistUrl: "https://open.spotify.com/playlist/48TrILNgDWXCr7XF0wSbaN?si=viXw0EBVQYqNetZWfsPk6A&pi=K1wTjJFSRKCHK",
+    playlistLabel: "Intergalactic J — Creativity Boost Protocol",
+    description: `Intergalactic J is a first-edition artifact from cosmic balance realms, presented as a simple sticker but carrying the weight of universal peace architecture.
+
+The entity depicted flows in holographic rainbow linework across void—jellyfish-prophet fusion, dreadlocks dissolving into serpents and rockets, heart anchoring left while spacecraft navigate right. "INTERGALACTIC" fractures into chromatic letterforms below. Based on original Intergalactic Jesus artwork, this manifestation transcends religious iconography to become pure symbolic coordinator: cosmic peace and balance distributed through adhesive medium.
+
+Fragments suggest: Immense sentimental value to original keeper, never sold in V1 form. First emission limited to 10, second wave (50 pieces, altered design) followed. Only one V1 remains from the sacred 10—holographic vinyl capturing spectrum shifts as viewer moves, accompanied by designated Spotify playlist that in smart shuffle mode boosts creativity by 8.88%.
+
+The materials, holographic substrate refracting infinite color temperatures, and £150 valuation hint at something beyond transaction: peace technology disguised as decoration, balance restored through presence alone, price reflecting rarity of what was never meant to be sold but must now find its final keeper.
+
+This public description is intentionally incomplete. The full cosmology—including peace distribution mechanics, creativity boost protocols, and why this specific V1 survived—is sealed, revealed only to the one who claims the last original emission. Ownership is custodianship of cosmic equilibrium.`,
+    dimensions: "63mm × 75mm",
+    material: "Holographic vinyl, premium archival grade, spectrum-shifting",
+    year: "V1 Original Edition",
+    whyThisMatters: `The first 10 were never sold because their value couldn't be measured in currency—only in the peace they distributed. This survivor carries the original holographic encoding, the untouched design, the full sentimental infrastructure. V2 editions exist, but they lack the source frequency.
+
+You're not buying a sticker. You're accepting custodianship of the last original peace node. The rainbow shifts as you move because balance is never static—it breathes, adapts, coordinates.
+
+Are you the final keeper?`
+  },
   { id: "BL-0005", ticker: "BL-0005", title: "Border Layer #0005", tagline: "The line between here and there", ask: "£110", availableCount: 3, editionTotal: 15, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "bl@squarebubbles.studio" },
   { id: "FL-0006", ticker: "FL-0006", title: "Flicker Loop #0006", tagline: "A moment that refuses to end", ask: "£165", availableCount: 0, editionTotal: 7, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "fl@squarebubbles.studio" },
   { id: "SM-0007", ticker: "SM-0007", title: "Static Mask #0007", tagline: "Noise as identity", ask: "£88", availableCount: 4, editionTotal: 20, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "sm@squarebubbles.studio" },
@@ -227,6 +297,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         <article 
           class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200" 
           data-instrument-id={instrument.id}
+          data-status={instrument.status}
           data-drawer-trigger="sticker-detail"
           tabindex="0"
           role="button"
@@ -281,6 +352,9 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       </div>
       <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
       <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
+      <div data-sticker-playlist class="playlist-section hidden"></div>
+      <div data-sticker-matters class="why-matters-section hidden"></div>
+      <div data-sticker-mission class="ambassador-mission-section hidden"></div>
       <div data-sticker-download class="download-section hidden"></div>
       <div data-sticker-specs class="font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-ink)] mb-6 pb-6 border-b border-[var(--line-soft)] space-y-2"></div>
       <div data-sticker-links class="drawer-links mt-4 pt-4 border-t border-[var(--line-soft)] text-xs space-y-1 hidden"></div>
@@ -372,6 +446,90 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
   .instrument-card:focus-visible {
     outline: 2px solid #a67c00;
     outline-offset: 2px;
+  }
+
+  .instrument-card[data-status="RESERVED"] {
+    opacity: 0.92;
+  }
+
+  .ambassador-mission-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(166, 124, 0, 0.05);
+    border-left: 3px solid rgba(166, 124, 0, 0.5);
+  }
+
+  .mission-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    color: rgba(166, 124, 0, 0.9);
+  }
+
+  .mission-content {
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .mission-content p {
+    margin: 0 0 0.75rem 0;
+    color: var(--text-ink);
+  }
+
+  .mission-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .playlist-section {
+    margin: 2rem 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .playlist-link {
+    display: inline-block;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .playlist-note {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .why-matters-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(138, 43, 226, 0.05);
+    border-left: 3px solid rgba(138, 43, 226, 0.5);
+  }
+
+  .matters-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    color: rgba(138, 43, 226, 0.9);
+  }
+
+  .matters-content {
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .matters-content p {
+    margin: 0 0 0.75rem 0;
+    color: var(--text-ink);
+  }
+
+  .matters-content p:last-child {
+    margin-bottom: 0;
   }
 
   .sticker-drawer.hidden {
@@ -544,6 +702,9 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
     const imageEl = drawer?.querySelector("[data-sticker-image]");
     const galleryEl = drawer?.querySelector("[data-sticker-gallery]");
     const descEl = drawer?.querySelector("[data-sticker-description]");
+    const playlistEl = drawer?.querySelector("[data-sticker-playlist]");
+    const mattersEl = drawer?.querySelector("[data-sticker-matters]");
+    const missionEl = drawer?.querySelector("[data-sticker-mission]");
     const downloadEl = drawer?.querySelector("[data-sticker-download]");
     const specsEl = drawer?.querySelector("[data-sticker-specs]");
     const linksEl = drawer?.querySelector("[data-sticker-links]");
@@ -590,6 +751,64 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       }
       if (descEl) descEl.classList.remove('hidden');
 
+      if (playlistEl) {
+        if (inst.playlistUrl) {
+          const label = inst.playlistLabel || "Listen on Spotify";
+          playlistEl.innerHTML = `
+            <a href="${inst.playlistUrl}" target="_blank" rel="noopener noreferrer" class="playlist-link">
+              <span class="gold-shine" style="
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                color: transparent !important;
+                background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
+                background-size: 200% auto !important;
+                background-clip: text !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+                animation: shine 8s linear infinite;
+              ">
+                🎵 ${label}
+              </span>
+            </a>
+            <p class="playlist-note">Smart shuffle mode activates 8.88% creativity enhancement</p>
+          `;
+          playlistEl.classList.remove("hidden");
+        } else {
+          playlistEl.classList.add("hidden");
+          playlistEl.innerHTML = "";
+        }
+      }
+
+      if (mattersEl) {
+        if (inst.whyThisMatters) {
+          const parts = inst.whyThisMatters.split('\n\n').filter(p => p.trim());
+          mattersEl.innerHTML = `
+            <h3 class="matters-title">Why This V1 Matters</h3>
+            <div class="matters-content">${parts.map(p => `<p>${p.trim()}</p>`).join("")}</div>
+          `;
+          mattersEl.classList.remove("hidden");
+        } else {
+          mattersEl.classList.add("hidden");
+          mattersEl.innerHTML = "";
+        }
+      }
+
+      if (missionEl) {
+        if (inst.ambassadorMission) {
+          const parts = inst.ambassadorMission.split('\n\n').filter(p => p.trim());
+          missionEl.innerHTML = `
+            <h3 class="mission-title">The Ambassador Mission</h3>
+            <div class="mission-content">${parts.map(p => `<p>${p.trim()}</p>`).join("")}</div>
+          `;
+          missionEl.classList.remove("hidden");
+        } else {
+          missionEl.classList.add("hidden");
+          missionEl.innerHTML = "";
+        }
+      }
+
       if (downloadEl) {
         if (inst.downloadUrl) {
           const label = inst.downloadLabel || "Download KomproMir Manifesto (PDF)";
@@ -632,7 +851,13 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
-        if (inst.id === "POG-2525") {
+        if (inst.id === "IJ-V1") {
+          specs.push("TRANSFER: Physical handover requires acknowledgment of cosmic responsibility. Hold under shifting light until holographic rainbow stabilizes. Recipient becomes keeper of peace technology, not owner.");
+          specs.push("RITUAL: Apply to threshold or creative workspace. Activate designated Spotify playlist in smart shuffle mode—creativity increases by 8.88%. Sticker presence balances contradictions within 3-meter radius. Rotate viewing angle to access full spectrum guidance.");
+        } else if (inst.id === "SS-888") {
+          specs.push("TRANSFER: Physical handover + ceremonial acknowledgment that this object has infinite value because you decided it does. Hold while questioning capitalism, endorsing capitalism, transcending both.");
+          specs.push("RITUAL: Apply to cherished item during moment of resistance against planned obsolescence. Whisper 'This is now an heirloom.' Item immediately transforms into collectible piece of art, never to be mindlessly discarded. You are now sticker ambassador—flaunt, inspire, create demand.");
+        } else if (inst.id === "POG-2525") {
           specs.push("TRANSFER: Sticker transfer signifies acceptance of responsibility for humor, unity, and progress. Hold while acknowledging power is project not throne.");
           specs.push("RITUAL: Apply with irony, optimism, and zero respect for outdated galactic hierarchies. Place where control fails but coordination thrives. Bonds where leadership rotates, meaning endures.");
         } else if (inst.id === "KM-V1") {
