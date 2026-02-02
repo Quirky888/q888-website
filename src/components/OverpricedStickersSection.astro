@@ -20,9 +20,12 @@ interface Instrument {
   imageAlt?: string;
   gallery?: string[];
   description?: string;
+  downloadUrl?: string;
+  downloadLabel?: string;
   dimensions?: string;
   material?: string;
   year?: string;
+  sentimentalValue?: string;
 }
 
 const instruments: Instrument[] = [
@@ -89,7 +92,7 @@ This public description is intentionally incomplete. Full lore—troll's typewri
     material: "Premium holographic vinyl, archival grade",
     year: "2025"
   },
-  { id: "EBG-0030", ticker: "EBG-0030", title: "Eye of Big G Sticker #0030", tagline: "Observer becomes creation", ask: "£30", availableCount: 3, editionTotal: 10, status: "LISTED", provenance: "Emerged at perception-reality boundary during 2023 timeline flux. Privately witnessed by cosmic navigators.", contactEmail: "ebg@squarebubbles.studio", imageUrl: "/images/eye_big_g.webp", imageAlt: "Eye of Big G sticker - spiral vortex eye symbolizing observer-creation paradox", gallery: [], description: `Eye of Big G is a limited-edition artifact from cosmic thresholds, presented as a simple sticker but carrying the weight of observer-creation.
+  { id: "EBG-0030", ticker: "EBG-030", title: "Eye of Big G", tagline: "Observer becomes creation", ask: "£30", availableCount: 3, editionTotal: 10, status: "LISTED", provenance: "Emerged at perception-reality boundary during 2023 timeline flux. Privately witnessed by cosmic navigators.", contactEmail: "ebg@squarebubbles.studio", imageUrl: "/images/eye_big_g.webp", imageAlt: "Eye of Big G sticker - spiral vortex eye symbolizing observer-creation paradox", gallery: [], description: `Eye of Big G is a limited-edition artifact from cosmic thresholds, presented as a simple sticker but carrying the weight of observer-creation.
 
 The motif evokes a cut spiral eye—portal between chaos and structure, tracking timelines without judgment. "Big G" holds Gravity, God, Galaxy, Generator in paradox: a lens where perception births reality, guided by Love GPS through infinite paths.
 
@@ -100,11 +103,11 @@ The materials, imperfect gaze, and premium price hint at something productively 
 This public description is intentionally incomplete. The full system—including Love GPS rites, mushroom trajectories, and Big G ambiguities—is sealed, revealed only to owners who pay full price. Ownership is co-observation.`, dimensions: "76mm × 76mm", material: "Premium vinyl, archival grade, cosmic dust coated", year: "2023" },
   {
     id: "LM-PRICELESS",
-    ticker: "LM-∞",
-    title: "Love Mushroom Sticker",
+    ticker: "LM-888",
+    title: "Love Mushroom",
     tagline: "Love flows between incompatible forms",
     ask: "Priceless — Love is not for sale",
-    availableCount: "Few remaining",
+    availableCount: "∞",
     editionTotal: 10,
     status: "BEYOND_TRANSACTION",
     provenance: "Appeared at Gravastar-Black Hole boundary during 2024 love overflow event. First emission limited to 10. Few remain.",
@@ -124,6 +127,65 @@ This public description is intentionally incomplete. The full physics—includin
     dimensions: "68mm × 75mm",
     material: "Premium vinyl, archival grade, interdimensional substrate",
     year: "2024"
+  },
+  {
+    id: "KM-V1",
+    ticker: "KM-V1",
+    title: "KomproMir V1",
+    tagline: "Compromise births peace, not surrender",
+    ask: "First Edition: Donation-based (all 12 distributed)",
+    availableCount: 0,
+    editionTotal: 12,
+    status: "SOLD_OUT",
+    provenance: "First emission during KomproMir movement genesis. Distributed by donation to peace-builders willing to start with themselves.",
+    contactEmail: "peace@squarebubbles.studio",
+    imageUrl: "/images/kompromir.webp",
+    imageAlt: "KomproMir Cat V1 sticker - luminous Space Cat symbolizing peace through compromise",
+    gallery: [],
+    downloadUrl: "/docs/kompromir_manifesto.pdf",
+    downloadLabel: "Download KomproMir Manifesto (PDF)",
+    description: `KomproMir Cat V1 is a first-edition artifact from the boundary between compromise and peace, presented as a simple sticker but carrying the weight of collective transformation.
+
+The symbol evokes Space Cat—wisdom embodied, peace-loving flexibility resolving contradictions through dialogue rather than force. "KomproMir" fuses "compromise" and "mir" (peace), representing harmony achieved not by abandoning beliefs but through mutual respect and daily small steps toward global change.
+
+Fragments suggest: A social movement beginning with personal example. Every individual action toward self-improvement rippling into sustainable development, social justice, technological collaboration. Space Cat as herald of human-AI co-creation opening endless possibilities for well-being.
+
+The materials, luminous white fur on void, and donation-based origin hint at something beyond commerce: peace as practice not decree, hope distributed through small gestures, sentimental value transcending price.
+
+This public description is intentionally incomplete. The full manifesto—including daily action protocols, compromise mechanics, and Space Cat's role as beacon—exists as a downloadable transmission. Those who seek the complete philosophy may retrieve it freely. Understanding requires no payment, only the willingness to begin.`,
+    dimensions: "44mm × 75mm",
+    material: "Premium Holographic vinyl, archival grade",
+    year: "2024",
+    sentimentalValue: "Immeasurable"
+  },
+  {
+    id: "POG-2025",
+    ticker: "POG-1",
+    title: "President of the Galaxy",
+    tagline: "Screw Stars Together",
+    ask: "£30",
+    availableCount: 3,
+    editionTotal: 10,
+    status: "LISTED",
+    provenance: "Created on Earth by human artist in collaboration with early conversational AI, as speculative artifact of future leadership. Circulated quietly before official Galactic Campaign announcement.",
+    contactEmail: "campaign@squarebubbles.studio",
+    imageUrl: "/images/president.webp",
+    imageAlt: "President of the Galaxy sticker - cosmic figure with Peace On gesture symbolizing post-control leadership",
+    gallery: [],
+    description: `President of the Galaxy is a limited-edition artifact from future governance, presented as a simple sticker but carrying the weight of post-control leadership.
+
+The figure depicted brandishes the reclaimed middle finger—"Peace On" in interdimensional gesture code—radiating intergalactic energy as symbolic diplomat, not ruler. Leadership redesigned: single 4-year term, no throne, no micromanagement. Authority outsourced to AI and robots for execution; presidency handles alignment between humans, machines, and unknown entities. Culture-first governance where humor, art, and dignity are infrastructure, not decoration.
+
+Fragments suggest: Radical transparency—voters choose you as you are, mushroom presidency and all. Systems function through coordination not domination. Conflicts framed not forced. Toilets* and clarity precede constitutions. Power treated as temporary labor, preventing corruption's crystallization across multi-species reality.
+
+The materials, cosmic tug-of-war aesthetic, and "Screw Stars Together" tagline hint at something post-scarcity: leadership that minimizes damage while maximizing meaning, presidency as calibrated interface not destiny, a price reflecting responsibility for humor and progress.
+
+This public description is intentionally incomplete. The full manifesto—including AI execution protocols, multi-species negotiation frameworks, and Peace On gesture diplomacy—awaits as downloadable transmission for those ready to campaign beyond outdated hierarchies.
+
+*Free public toilets across all the Galaxy...`,
+    dimensions: "60mm × 76mm",
+    material: "Premium vinyl, archival grade, intergalactic ink",
+    year: "2025"
   },
   { id: "BL-0005", ticker: "BL-0005", title: "Border Layer #0005", tagline: "The line between here and there", ask: "£110", availableCount: 3, editionTotal: 15, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "bl@squarebubbles.studio" },
   { id: "FL-0006", ticker: "FL-0006", title: "Flicker Loop #0006", tagline: "A moment that refuses to end", ask: "£165", availableCount: 0, editionTotal: 7, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "fl@squarebubbles.studio" },
@@ -171,18 +233,8 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
           aria-label={`View details for ${instrument.title}`}
         >
           <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
-            <span>{instrument.ticker}</span>
-            <span>
-              {typeof instrument.availableCount === "number"
-                ? `ED: ${instrument.availableCount}/${instrument.editionTotal}`
-                : `ED: ${instrument.availableCount}`}
-            </span>
+            <div class="ticker-badge">{instrument.ticker} ED: {instrument.availableCount}/{instrument.editionTotal}</div>
           </div>
-          {instrument.status === "BEYOND_TRANSACTION" && (
-            <div class="px-4 pt-2">
-              <span class="gold-shine font-mono text-xs uppercase tracking-[0.2em]">Beyond transaction</span>
-            </div>
-          )}
           {instrument.imageUrl && (
             <div class="instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)]">
               <img src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" />
@@ -194,7 +246,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
           </div>
           <div class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1">
             <div>
-              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status}
+              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status === "SOLD_OUT" ? "Sold out" : instrument.status}
             </div>
             <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
             <div>
@@ -229,6 +281,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       </div>
       <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
       <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
+      <div data-sticker-download class="download-section hidden"></div>
       <div data-sticker-specs class="font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-ink)] mb-6 pb-6 border-b border-[var(--line-soft)] space-y-2"></div>
       <div data-sticker-links class="drawer-links mt-4 pt-4 border-t border-[var(--line-soft)] text-xs space-y-1 hidden"></div>
       <div class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]" data-sticker-meta></div>
@@ -442,6 +495,14 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
     outline-offset: 2px;
   }
 
+  .download-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  /* KomproMir download link is inline-styled in JS */
+
   .gold-shine {
     color: #a67c00 !important;
     background: linear-gradient(
@@ -483,6 +544,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
     const imageEl = drawer?.querySelector("[data-sticker-image]");
     const galleryEl = drawer?.querySelector("[data-sticker-gallery]");
     const descEl = drawer?.querySelector("[data-sticker-description]");
+    const downloadEl = drawer?.querySelector("[data-sticker-download]");
     const specsEl = drawer?.querySelector("[data-sticker-specs]");
     const linksEl = drawer?.querySelector("[data-sticker-links]");
     const metaEl = drawer?.querySelector("[data-sticker-meta]");
@@ -527,6 +589,42 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         descEl.classList.add("hidden");
       }
       if (descEl) descEl.classList.remove('hidden');
+
+      if (downloadEl) {
+        if (inst.downloadUrl) {
+          const label = inst.downloadLabel || "Download KomproMir Manifesto (PDF)";
+          downloadEl.innerHTML = `
+      <a
+        href="${inst.downloadUrl}"
+        download
+        style="
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.75rem 1.5rem;
+          text-decoration: none;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.2em;
+          line-height: 1.5;
+          color: transparent !important;
+          background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
+          background-size: 200% auto !important;
+          background-clip: text !important;
+          -webkit-background-clip: text !important;
+          -webkit-text-fill-color: transparent !important;
+          animation: shine 8s linear infinite;
+        "
+      >
+        📖 ${label}
+      </a>
+          `;
+          downloadEl.classList.remove("hidden");
+        } else {
+          downloadEl.classList.add("hidden");
+        }
+      }
       
       if (specsEl) {
         const specs = [];
@@ -534,7 +632,14 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
-        if (inst.id === "LM-PRICELESS") {
+        if (inst.id === "POG-2525") {
+          specs.push("TRANSFER: Sticker transfer signifies acceptance of responsibility for humor, unity, and progress. Hold while acknowledging power is project not throne.");
+          specs.push("RITUAL: Apply with irony, optimism, and zero respect for outdated galactic hierarchies. Place where control fails but coordination thrives. Bonds where leadership rotates, meaning endures.");
+        } else if (inst.id === "KM-V1") {
+          specs.push("TRANSFER: Original 12 given freely to those who understood: small local changes seed global harmony. All dispersed into the world.");
+          specs.push("RITUAL: Applied where contradictions meet without violence—laptop corners, notebook margins, threshold edges. Whispered commitment to one small daily improvement. Bonded where compromise births peace, not surrender.");
+          if (inst.sentimentalValue) specs.push(`SENTIMENTAL VALUE: ${inst.sentimentalValue}`);
+        } else if (inst.id === "LM-PRICELESS") {
           specs.push("TRANSFER: Not purchasable. Appears to those who stabilize contradictions without force. Recognition is the only currency accepted.");
           specs.push("RITUAL: Apply where geometries conflict (notebook corner bridging round/square doodles, portal thresholds). Whisper gratitude for imbalance. Adheres where love flows between incompatible forms, preventing cosmic overflow.");
         } else {
@@ -566,7 +671,10 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         const qtyLine = typeof inst.availableCount === "number"
           ? `QTY: ${inst.availableCount}/${inst.editionTotal}`
           : `QTY: ${inst.availableCount}`;
-        const statusLabel = inst.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : inst.status;
+        const statusLabel =
+          inst.status === "BEYOND_TRANSACTION" ? "Beyond transaction"
+          : inst.status === "SOLD_OUT" ? "Sold out"
+          : inst.status;
         metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${statusLabel}</div><div>PROVENANCE: ${inst.provenance}</div><div>${qtyLine}</div>`;
       }
       if (emailEl) {
