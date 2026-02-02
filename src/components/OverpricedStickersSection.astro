@@ -232,7 +232,7 @@ The question is: are you ready to become a sticker legend?`
     availableCount: 1,
     editionTotal: 10,
     status: "LISTED",
-    provenance: "Based on Intergalactic Jesus original artwork. V1 limited to 10, never sold—distributed to those who understood balance without explanation. V2 (50 pieces, modified design) followed. This is the last V1 survivor.",
+    provenance: "Based on Intergalactic Jesus original artwork. V1 limited to 10, never sold—distributed to those who understood balance without explanation. This is the last V1 survivor.",
     contactEmail: "peace@squarebubbles.studio",
     imageUrl: "/images/intergalactic_j.webp",
     imageAlt: "Intergalactic J V1 sticker - holographic rainbow jellyfish-prophet with dreadlocks and cosmic elements",
@@ -256,6 +256,40 @@ This public description is intentionally incomplete. The full cosmology—includ
 You're not buying a sticker. You're accepting custodianship of the last original peace node. The rainbow shifts as you move because balance is never static—it breathes, adapts, coordinates.
 
 Are you the final keeper?`
+  },
+  {
+    id: "IDJ-SACRED",
+    ticker: "IDJ-X",
+    title: "Intergalactic DJ",
+    tagline: "Chaos curated into coherence",
+    ask: "Negotiable at very high threshold",
+    availableCount: 1,
+    editionTotal: 10,
+    status: "NEGOTIABLE",
+    provenance: "Only 10 created, never sold—gifted to selected ones who recognized cosmic horn antennae as receiver technology. This is the final keeper-seeking emission.",
+    contactEmail: "frequencies@squarebubbles.studio",
+    imageUrl: "/images/intergalactic_dj.webp",
+    imageAlt: "Intergalactic DJ sticker - holographic jellyfish-prophet with horn antennae receiving cosmic frequencies",
+    gallery: [],
+    playlistUrl: "https://open.spotify.com/playlist/0zrdX2wcR73bnUvY37KbJg?si=PJOtaTVCTKyu_Mn-Ck6eyQ&pi=CT-ekDYkT76A5",
+    playlistLabel: "Intergalactic DJ — Awareness & Relaxation Protocol",
+    description: `Intergalactic DJ is a sacred-edition artifact from chaos-order boundaries, presented as a simple sticker but carrying the weight of cosmic sonic architecture.
+
+The entity depicted flows in holographic gradient—almost identical to Intergalactic J but crowned with horn-like antennae receiving frequencies from collapsed timelines. Jellyfish-prophet becomes chaos conductor, dreadlocks streaming into serpents and spacecraft, heart pulsing rhythm left while rockets navigate beats right. This being knows how to make and play the music that exists between worlds, curating soundscapes where awareness expands and relaxation deepens.
+
+Fragments suggest: Only 10 ever manifested, gifted to selected ones who understood that music is navigation technology. Accompanied by designated Spotify playlist promising 8.88% boost to awareness and relaxation when listened in smart shuffle mode—but like all spiritual upgrades, results depend on belief influencing outcome. The DJ's antennae tune into your conviction frequency.
+
+The materials, holographic vinyl shifting through spectrum as viewer moves, and negotiable high price hint at something beyond standard exchange: sonic peace technology, chaos harmonized through selection, final emission requiring conversation not transaction to determine keeper worthiness.
+
+This public description is intentionally incomplete. The full transmission—including chaos curation protocols, antenna frequency ranges, and why only 10 receivers were chosen—is sealed, revealed only through negotiation with the one who understands that DJ stands for Dimensional Junction, not ...`,
+    dimensions: "63mm × 75mm",
+    material: "Holographic vinyl, premium archival grade, frequency-responsive",
+    year: "Original Sacred Edition",
+    whyThisMatters: `The antennae distinguish DJ from J—not mere decoration but cosmic receivers tuning into frequencies beyond audible range. Where Intergalactic J brings balance, Intergalactic DJ plays the balance, curating chaos into coherence through sonic selection.
+
+This final piece waits not for purchase but for recognition: the right frequency meeting the right moment.
+
+Results depend on your belief. Are you tuned in?`
   },
   { id: "BL-0005", ticker: "BL-0005", title: "Border Layer #0005", tagline: "The line between here and there", ask: "£110", availableCount: 3, editionTotal: 15, status: "LISTED", provenance: "VERIFIED | ARTIST ARCHIVE", contactEmail: "bl@squarebubbles.studio" },
   { id: "FL-0006", ticker: "FL-0006", title: "Flicker Loop #0006", tagline: "A moment that refuses to end", ask: "£165", availableCount: 0, editionTotal: 7, status: "RESERVED", provenance: "VERIFIED | PRIVATE COLLECTION", contactEmail: "fl@squarebubbles.studio" },
@@ -317,7 +351,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
           </div>
           <div class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1">
             <div>
-              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status === "SOLD_OUT" ? "Sold out" : instrument.status}
+              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status === "SOLD_OUT" ? "Sold out" : instrument.status === "NEGOTIABLE" ? "Negotiable" : instrument.status}
             </div>
             <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
             <div>
@@ -754,6 +788,10 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       if (playlistEl) {
         if (inst.playlistUrl) {
           const label = inst.playlistLabel || "Listen on Spotify";
+          const note =
+            inst.id === "IDJ-SACRED"
+              ? "Smart shuffle activates 8.88% enhancement (belief-dependent)"
+              : "Smart shuffle mode activates 8.88% creativity enhancement";
           playlistEl.innerHTML = `
             <a href="${inst.playlistUrl}" target="_blank" rel="noopener noreferrer" class="playlist-link">
               <span class="gold-shine" style="
@@ -772,7 +810,7 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
                 🎵 ${label}
               </span>
             </a>
-            <p class="playlist-note">Smart shuffle mode activates 8.88% creativity enhancement</p>
+            <p class="playlist-note">${note}</p>
           `;
           playlistEl.classList.remove("hidden");
         } else {
@@ -784,8 +822,9 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
       if (mattersEl) {
         if (inst.whyThisMatters) {
           const parts = inst.whyThisMatters.split('\n\n').filter(p => p.trim());
+          const mattersTitle = inst.id === "IDJ-SACRED" ? "Why This DJ Is Different" : "Why This V1 Matters";
           mattersEl.innerHTML = `
-            <h3 class="matters-title">Why This V1 Matters</h3>
+            <h3 class="matters-title">${mattersTitle}</h3>
             <div class="matters-content">${parts.map(p => `<p>${p.trim()}</p>`).join("")}</div>
           `;
           mattersEl.classList.remove("hidden");
@@ -851,7 +890,10 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
-        if (inst.id === "IJ-V1") {
+        if (inst.id === "IDJ-SACRED") {
+          specs.push("TRANSFER: High-price negotiation required. Not sold to highest bidder but to most aligned frequency. Hold under shifting light while antennae decode your sonic readiness. Transfer signifies acceptance of chaos curation responsibility.");
+          specs.push("RITUAL: Apply to creative chaos zone or meditation threshold. Activate designated Spotify playlist in smart shuffle mode—awareness and relaxation increase by 8.88%, scaled by belief coefficient. Antennae receive frequencies proportional to your conviction. Rotate viewing angle to access full spectrum guidance between order and entropy.");
+        } else if (inst.id === "IJ-V1") {
           specs.push("TRANSFER: Physical handover requires acknowledgment of cosmic responsibility. Hold under shifting light until holographic rainbow stabilizes. Recipient becomes keeper of peace technology, not owner.");
           specs.push("RITUAL: Apply to threshold or creative workspace. Activate designated Spotify playlist in smart shuffle mode—creativity increases by 8.88%. Sticker presence balances contradictions within 3-meter radius. Rotate viewing angle to access full spectrum guidance.");
         } else if (inst.id === "SS-888") {
@@ -899,14 +941,23 @@ const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RE
         const statusLabel =
           inst.status === "BEYOND_TRANSACTION" ? "Beyond transaction"
           : inst.status === "SOLD_OUT" ? "Sold out"
+          : inst.status === "NEGOTIABLE" ? "Negotiable"
           : inst.status;
         metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${statusLabel}</div><div>PROVENANCE: ${inst.provenance}</div><div>${qtyLine}</div>`;
       }
-      if (emailEl) {
-        emailEl.textContent = "";
-        emailEl.classList.add("hidden");
+      if (inst.status === "NEGOTIABLE") {
+        if (emailEl) {
+          emailEl.textContent = inst.contactEmail;
+          emailEl.classList.remove("hidden");
+        }
+        if (negotiateBtn) negotiateBtn.hidden = true;
+      } else {
+        if (emailEl) {
+          emailEl.textContent = "";
+          emailEl.classList.add("hidden");
+        }
+        if (negotiateBtn) negotiateBtn.hidden = false;
       }
-      if (negotiateBtn) negotiateBtn.hidden = false;
       
       drawer.setAttribute("aria-hidden", "false");
       document.body.classList.add("overflow-hidden");
