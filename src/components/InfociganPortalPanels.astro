@@ -72,12 +72,12 @@ const zones = [
                   loading="eager"
                 />
                 <div class="qbag-hero-overlay">
-                  <h1 class="qbag-title">Q-BAG™</h1>
+                  <h1 class="qbag-title gold-shine">Q-BAG™</h1>
                 </div>
               </section>
               <section class="qbag-content-wrapper">
                 <div class="qbag-intro-block">
-                  <p class="qbag-tagline">Reduce. Reuse. Collect. Invest.</p>
+                  <p class="qbag-tagline gold-shine">Reduce. Reuse. Collect. Invest.</p>
                   <p class="qbag-lead">
                     Q-Bag is a reusable coffee bag system that turns everyday consumption into a long-term cultural object. It responds to disposable culture by blending sustainability with art, storytelling, and speculative value.
                   </p>
@@ -85,26 +85,42 @@ const zones = [
                 <div class="qbag-grid-section">
                   <div class="qbag-grid-item">
                     <h3>The Concept</h3>
-                    <p>Inspired by the keep-cup logic, Q-Bag remains a simple, recognisable coffee bag designed for infinite reuse. Lightweight, durable, and visually minimal, it features a dedicated area for stickers—transforming the bag into a personal canvas that evolves over time.</p>
+                    <p>Inspired by the keep-cup logic, Q-Bag remains a simple, recognisable coffee bag designed for long-term reuse. Lightweight, durable, and visually minimal, it features a dedicated area for stickers—transforming the bag into a personal canvas that evolves over time.</p>
+                    <p>Unlike branded packaging that disappears with the next purchase, a Q-Bag is designed to stay in circulation for years, travelling between cafés, roasteries, and kitchens as a visible signal of a different way to consume.</p>
                   </div>
                   <div class="qbag-grid-item">
                     <h3>Stickers as Artifacts</h3>
-                    <p>Stickers are not decoration. They are collectible markers, narrative tokens, and speculative artifacts. Applied to a Q-Bag, they turn it into a living archive of taste, belief, and participation. A Q-Bag is never finished; it grows with its owner.</p>
+                    <p>Stickers are not decoration. They are collectible markers, narrative tokens, and speculative artifacts. Applied to a Q-Bag, they turn it into a living archive of taste, belief, and participation.</p>
+                    <p>Each series of stickers can be created in collaboration with artists, roasters, and cultural projects, with limited runs, dates, and stories attached—building a traceable history onto every bag and opening the door for future collectability.</p>
+                    <p>A Q-Bag is never finished; it grows with its owner.</p>
                   </div>
                   <div class="qbag-grid-item">
                     <h3>Sustainability as Identity</h3>
-                    <p>Sustainability here is not framed as sacrifice, but as identity. One bag replaces hundreds of disposables. Stickers add minimal waste while extending the bag's lifespan through emotional attachment. We don't preach; we just make reuse cooler than waste.</p>
+                    <p>Sustainability here is not framed as sacrifice, but as identity. One bag replaces hundreds of disposables. Stickers add minimal waste while extending the bag's lifespan through emotional attachment.</p>
+                    <p>Instead of preaching, Q-Bag makes reuse cooler than waste—something you actually want to show off, photograph, and bring back to your favourite roaster.</p>
                   </div>
-                  <div class="qbag-grid-item highlight-item">
+                  <div class="qbag-grid-item">
                     <h3>Speculative Investment</h3>
-                    <p>Value is not guaranteed, but emerges through participation. Stickers may gain value. The bag may become a recognizable signal. Or it may simply become a deeply personal object you refuse to throw away. All outcomes are valid.</p>
+                    <p>Value is not guaranteed, but emerges through participation. A sticker run might gain value as an early collaboration with an artist, café, or movement. A bag might become a recognisable signal within a specific scene or city. Or it may simply become a deeply personal object you refuse to throw away.</p>
+                    <p>All outcomes are valid. The experiment is the point.</p>
                   </div>
+                </div>
+                <div class="qbag-partners-section">
+                  <h2>For Roasters, Artists & Partners</h2>
+                  <p>Q-Bag can plug into existing coffee businesses with almost no friction: standard-format bags, custom or co-branded sticker drops, loyalty mechanics based on refills and completed "bag stories", and collaborative editions that live both online and in the real world.</p>
+                  <p>For roasters, that means higher customer retention and lower packaging waste. For artists and cultural partners, it means a new, recurring canvas that sits in people's kitchens—not in a gallery storage box.</p>
                 </div>
                 <div class="qbag-closing-block">
                   <p class="big-statement">
                     Every bag carries a story.<br />
                     Every sticker adds a layer.<br />
                     Every reuse is a small act of resistance.
+                  </p>
+                </div>
+                <div class="qbag-contact-block">
+                  <p>If you're interested in exploring collaboration, pilot projects, or potential investment in scaling Q-Bag, please get in touch:</p>
+                  <p class="contact-info">
+                    <a href="mailto:contact@q888.com">contact@q888.com</a> or Instagram: <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener">@quirky_888</a>
                   </p>
                 </div>
               </section>
@@ -386,7 +402,6 @@ const zones = [
     font-weight: 800;
     line-height: 0.9;
     text-transform: uppercase;
-    color: var(--accent-primary, #ffd700);
     margin: 0;
     letter-spacing: -0.02em;
   }
@@ -405,7 +420,6 @@ const zones = [
   .qbag-tagline {
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 700;
-    color: var(--accent-primary, #ffd700);
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -430,7 +444,7 @@ const zones = [
     font-size: clamp(1.5rem, 2vw, 2.5rem);
     font-weight: 600;
     margin-bottom: 1.5rem;
-    border-top: 1px solid var(--accent-primary, #ffd700);
+    border-top: 1px solid #a67c00;
     padding-top: 1rem;
     display: inline-block;
     color: var(--text-primary, #fff);
@@ -465,21 +479,78 @@ const zones = [
   }
 
   .qbag-new-layout .retreat-button {
-    background: transparent;
-    border: 2px solid var(--accent-primary, #ffd700);
-    color: var(--accent-primary, #ffd700);
-    padding: 1.5rem 4rem;
-    font-size: 1.25rem;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.3s ease;
+    color: #ce9e00;
+    transition: opacity 0.25s ease;
   }
 
   .qbag-new-layout .retreat-button:hover {
-    background: var(--accent-primary, #ffd700);
-    color: #000;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    color: #ffcc33;
+    opacity: 1;
+  }
+
+  .qbag-partners-section {
+    margin: 8rem 0;
+    padding: 4rem;
+    background: rgba(255, 215, 0, 0.05);
+    border-left: 4px solid #a67c00;
+    max-width: 1100px;
+  }
+
+  .qbag-partners-section h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #ce9e00;
+  }
+
+  .qbag-partners-section p {
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .qbag-partners-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .qbag-contact-block {
+    text-align: center;
+    margin-top: 6rem;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+  }
+
+  .qbag-contact-block p {
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .qbag-contact-block .contact-info {
+    font-size: clamp(1.1rem, 1.5vw, 1.6rem);
+    font-weight: 600;
+  }
+
+  .qbag-contact-block a {
+    color: #ce9e00;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .qbag-contact-block a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
   }
 
   @media (max-width: 768px) {
@@ -489,6 +560,14 @@ const zones = [
     }
     .qbag-hero {
       height: 60vh;
+    }
+    .qbag-partners-section {
+      padding: 2rem;
+      margin: 4rem 0;
+    }
+    .qbag-contact-block {
+      margin-top: 4rem;
+      padding: 2rem 1rem;
     }
   }
 
@@ -513,6 +592,12 @@ const zones = [
   @keyframes shine {
     to {
       background-position: 200% center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .qbag-new-layout .gold-shine {
+      animation: none;
     }
   }
 </style>
