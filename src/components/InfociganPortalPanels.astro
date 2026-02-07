@@ -398,112 +398,171 @@ const zones = [
             </>
           ) : zone.slug === "president-of-the-galaxy" ? (
             <>
-            <div class="zone-content president-zone">
+            <div class="president-bg-wrap">
               <DynamicCosmicBackground />
+            </div>
+            <div class="president-content president-zone">
               <SlimNav />
-              <section class="hero president-hero">
-                <div class="hero-image">
-                  <img src="/images/president_hero.webp" alt="President of the Galaxy" loading="eager" />
-                  <div class="hero-overlay president-overlay"></div>
-                </div>
-                <div class="hero-content">
-                  <h1 class="hero-title president-title">PRESIDENT OF THE GALAXY™</h1>
-                  <p class="hero-tagline">SCREW STARS TOGETHER</p>
-                  <p class="hero-subtitle">
-                    A ceremonial title providing zero or 888 jurisdictional power over any planetary or stellar body. Functions primarily as a psychological stabilizer for those overwhelmed by their lack of control over the universe.
-                  </p>
-                </div>
-              </section>
-
-              <section class="content-section">
-                <div class="content-box president-box">
-                  <h2 class="section-label">THE PITCH</h2>
-                  <h3>What is this?</h3>
-                  <p>A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.</p>
-                  <p>Every dream can come true. Just not your dream. Or anyone else's. But theoretically, in a universe where dreams align with universal law, it's possible. We think.</p>
-                </div>
-              </section>
-
-              <section class="content-section">
-                <div class="content-box president-box">
-                  <h2 class="section-label">THE DEAL</h2>
-                  <h3>What you're investing in:</h3>
-                  <p>Art that may or may not become intergalactic currency. A vision that exists in at least three timelines simultaneously. And a return of +888% in one light year—or possibly negative infinity, depending on which reality stabilizes first.</p>
-                  <h3>Investment includes:</h3>
-                  <ul>
-                    <li>One (1) cosmic sash (fits most existential crises)</li>
-                    <li>Fractional ownership of symbolic authority</li>
-                    <li>Early access to governance memes before they're officially meaningless</li>
-                    <li>A constitutional framework that dissolves if you read it too literally</li>
-                  </ul>
-                  <p><strong>Returns:</strong> Guaranteed in universes where causality is optional. In this timeline, you get bragging rights and a sticker.</p>
-                  <p class="fine-print">Fine print: Investment in this art is investment in intergalactic future. Financial value gain potential of +888% in one light year time… or another. Past performance in alternate dimensions does not guarantee future results. Dreams sold separately.</p>
-                </div>
-              </section>
-
-              <section class="content-section">
-                <div class="content-box president-box">
-                  <h2 class="section-label">THE RULES (SIMPLIFIED)</h2>
-                  <div class="rule">
-                    <h3>Zero Collateral Damage</h3>
-                    <p>Don't hurt people who didn't sign up for your chaos.</p>
+              <div class="president-layout president-eden">
+                <section class="president-hero">
+                  <img
+                    src="/images/president_hero.webp"
+                    alt="President of the Galaxy"
+                    loading="eager"
+                  />
+                  <div class="president-hero-overlay">
+                    <h1 class="president-title president-eden-headline">PRESIDENT OF<br/>THE GALAXY</h1>
                   </div>
-                  <div class="rule">
-                    <h3>AI is a Partner, Not a Tool… same applies to mushrooms</h3>
-                    <p>Treat sentient code or mycelium networks like you'd treat sentient meat.</p>
-                  </div>
-                  <div class="rule">
-                    <h3>Politics Are Obsolete</h3>
-                    <p>No propaganda wars. Just expose bad incentives and wait for time to do the work.</p>
-                  </div>
-                  <div class="rule">
-                    <h3>Corruption is a Bug</h3>
-                    <p>Warning → Observation → Exposure → Transformation. Non-violent. Inevitable.</p>
-                  </div>
-                  <div class="rule">
-                    <h3>Rest is Governance</h3>
-                    <p>The President is not required to constantly intervene or sacrifice creative life. Strategic distance is a feature, not a bug—it is an intergalactic mushroom!</p>
+                </section>
+
+                <div class="president-main-content">
+                  <section class="president-intro-section">
+                    <div class="glass-card president-glass president-intro-card">
+                      <p class="president-tagline">SCREW STARS TOGETHER</p>
+                      <p class="president-lead president-eden-body">
+                        A ceremonial title providing zero or 888 jurisdictional power over any planetary or stellar body. Functions primarily as a psychological stabilizer for those overwhelmed by their lack of control over the universe.
+                      </p>
+                      <div class="president-eden-mono">
+                        <div>SYSTEM_STATUS: ACTIVE (REDACTED)</div>
+                        <div>COUNCIL_LAYER: SQUARE BUBBLES</div>
+                        <div>ACCESS: COUNCIL-APPROVED</div>
+                        <div>YEAR: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="president-artwork-card-section">
+                    <div class="artwork-info-card glass-card president-glass" id="president-gallery-trigger">
+                      <div class="artwork-card-content">
+                        <div class="artwork-card-icon">
+                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                        <div class="artwork-card-text">
+                          <h3 class="artwork-card-title">View Full Campaign Poster</h3>
+                          <p class="artwork-card-description">Official visual artifact featuring cosmic governance symbols, mushroom diplomacy, and the President’s ceremonial sash.</p>
+                        </div>
+                        <button class="artwork-card-button president-btn" type="button">
+                          <span>Open Gallery</span>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="president-content-grid-section">
+                    <div class="president-glass-grid">
+                      <div class="glass-card president-glass">
+                        <h3>What is this?</h3>
+                        <p>A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.</p>
+                        <p>Every dream can come true. Just not your dream. Or anyone else's. But theoretically, in a universe where dreams align with universal law, it's possible. We think.</p>
+                      </div>
+                      <div class="glass-card president-glass">
+                        <h3>The Deal</h3>
+                        <p>Art that may or may not become intergalactic currency. A vision that exists in at least three timelines simultaneously. And a return of +888% in one light year—or possibly negative infinity, depending on which reality stabilizes first.</p>
+                        <h3>Investment includes:</h3>
+                        <ul class="president-list">
+                          <li>One (1) cosmic sash (fits most existential crises)</li>
+                          <li>Fractional ownership of symbolic authority</li>
+                          <li>Early access to governance memes before they're officially meaningless</li>
+                          <li>A constitutional framework that dissolves if you read it too literally</li>
+                        </ul>
+                        <p><strong>Returns:</strong> Guaranteed in universes where causality is optional. In this timeline, you get bragging rights and a sticker.</p>
+                        <p class="president-fine-print">Fine print: Investment in this art is investment in intergalactic future. Financial value gain potential of +888% in one light year time… or another. Past performance in alternate dimensions does not guarantee future results. Dreams sold separately.</p>
+                      </div>
+                      <div class="glass-card president-glass">
+                        <h3>The Rules (Simplified)</h3>
+                        <div class="president-rule">
+                          <p><strong>Zero Collateral Damage:</strong> Don't hurt people who didn't sign up for your chaos.</p>
+                        </div>
+                        <div class="president-rule">
+                          <p><strong>AI is a Partner, Not a Tool… same applies to mushrooms:</strong> Treat sentient code or mycelium networks like you'd treat sentient meat.</p>
+                        </div>
+                        <div class="president-rule">
+                          <p><strong>Politics Are Obsolete:</strong> No propaganda wars. Just expose bad incentives and wait for time to do the work.</p>
+                        </div>
+                        <div class="president-rule">
+                          <p><strong>Corruption is a Bug:</strong> Warning → Observation → Exposure → Transformation. Non-violent. Inevitable.</p>
+                        </div>
+                        <div class="president-rule">
+                          <p><strong>Rest is Governance:</strong> The President is not required to constantly intervene or sacrifice creative life. Strategic distance is a feature, not a bug—it is an intergalactic mushroom!</p>
+                        </div>
+                      </div>
+                      <div class="glass-card president-glass">
+                        <h3>The Promise</h3>
+                        <p>This office does not promise utopia.</p>
+                        <p>It promises less unnecessary suffering.<br />
+                        It doesn't rush justice.<br />
+                        It makes injustice unsustainable.</p>
+                        <p>And it doesn't fear time—because time, when aligned, does most of the work.</p>
+                      </div>
+                    </div>
+                  </section>
+
+
+                  <section class="president-contact-section">
+                    <div class="glass-card president-glass president-contact-card">
+                      <h2>Contact</h2>
+                      <p class="president-eden-body">Interested in collaborations or just want to argue about governance?</p>
+                      <p class="president-contact-links">
+                        <a href="mailto:contact@q888.com">contact@q888.com</a> | <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a>
+                      </p>
+                      <p class="president-contact-closing">
+                        Remember: The galaxy doesn't need saving.<br />
+                        It needs better system design.<br />
+                        And maybe a really good overpriced sticker.
+                      </p>
+                    </div>
+                  </section>
+                </div>
+
+                <section class="president-cta">
+                  <button type="button" class="retreat-button president-retreat-btn" data-portal-back>Retreat to Market</button>
+                </section>
+              </div>
+            </div>
+
+            <div class="artwork-viewer" id="president-artwork-viewer" aria-hidden="true">
+              <div class="viewer-overlay"></div>
+              <div class="viewer-container">
+                <div class="viewer-controls">
+                  <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="viewer-image-wrapper">
+                  <div class="viewer-image-container" id="president-viewer-image-container">
+                    <img
+                      src="/images/president_galaxy.webp"
+                      alt="President of the Galaxy Full"
+                      class="viewer-image"
+                      id="president-viewer-image"
+                      draggable="false"
+                    />
                   </div>
                 </div>
-              </section>
-
-              <section class="content-section promise-section">
-                <div class="content-box president-box">
-                  <h2 class="section-label">THE PROMISE</h2>
-                  <p>This office does not promise utopia.</p>
-                  <p>It promises less unnecessary suffering.<br />
-                  It doesn't rush justice.<br />
-                  It makes injustice unsustainable.</p>
-                  <p>And it doesn't fear time—because time, when aligned, does most of the work.</p>
-                </div>
-              </section>
-
-              <section class="content-section">
-                <div class="content-box president-box">
-                  <h2 class="section-label">RUN FOR OFFICE</h2>
-                  <p>Think you can do better? Submit your campaign proposal to the Square Bubbles Council.</p>
-                  <button type="button" id="submit-campaign-btn" class="btn-primary">Submit Campaign</button>
-                </div>
-              </section>
-
-              <section class="gallery-section">
-                <img src="/images/president_galaxy.webp" alt="President of the Galaxy Artwork" class="gallery-image" loading="lazy" />
-              </section>
-
-              <section class="content-section">
-                <div class="content-box president-box">
-                  <h2 class="section-label">CONTACT</h2>
-                  <p>Interested in collaborations or just want to argue about governance?</p>
-                  <p><a href="mailto:contact@q888.com">contact@q888.com</a> | <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a></p>
-                  <p>Remember: The galaxy doesn't need saving.<br />
-                  It needs better system design.<br />
-                  And maybe a really good overpriced sticker.</p>
-                </div>
-              </section>
-
-              <section class="president-cta">
-                <button type="button" class="retreat-button president-retreat-btn" data-portal-back>Retreat to Market</button>
-              </section>
+                <div class="viewer-zoom-indicator" id="president-zoom-indicator">100%</div>
+              </div>
             </div>
             </>
           ) : (
@@ -929,22 +988,186 @@ const zones = [
   }
 
   function initPresidentCampaignBubble() {
-    const btn = document.getElementById("submit-campaign-btn");
-    if (!btn || btn.hasAttribute("data-president-bubble-inited")) return;
-    btn.setAttribute("data-president-bubble-inited", "true");
-    btn.addEventListener("click", () => {
+    if (document.body.hasAttribute("data-president-bubble-listener")) return;
+    document.body.setAttribute("data-president-bubble-listener", "true");
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const button = target.closest("#president-submit-btn");
+      if (!button) return;
+      event.preventDefault();
       const bubble = document.createElement("div");
-      bubble.className = "council-bubble";
+      bubble.className = "president-bubble";
       bubble.innerHTML = `
-        <div class="bubble-content">
-          <p>"By order of the Council, your request is being processed. Correspondence will follow."</p>
-          <button type="button" class="bubble-close" aria-label="Close">×</button>
+        <div class="president-bubble-content">
+          <p>"The Council acknowledges your submission. Expect a definitive update in the very near future."</p>
+          <button type="button" class="president-bubble-close" aria-label="Close">×</button>
         </div>
       `;
       document.body.appendChild(bubble);
-      bubble.querySelector(".bubble-close")?.addEventListener("click", () => bubble.remove());
+      bubble.querySelector(".president-bubble-close")?.addEventListener("click", () => bubble.remove());
       setTimeout(() => bubble.remove(), 5000);
     });
+  }
+
+  function initPresidentViewer() {
+    const trigger = document.getElementById("president-gallery-trigger");
+    const viewer = document.getElementById("president-artwork-viewer");
+    const closeBtn = viewer?.querySelector(".viewer-close");
+    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
+    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
+    const resetBtn = viewer?.querySelector(".viewer-reset");
+    const imageContainer = document.getElementById("president-viewer-image-container");
+    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
+    const zoomIndicator = document.getElementById("president-zoom-indicator");
+
+    if (!trigger || !viewer || !imageContainer) return;
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const MIN_SCALE = 1;
+    const MAX_SCALE = 4;
+    const ZOOM_STEP = 0.3;
+
+    function updateTransform() {
+      if (!imageContainer) return;
+      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      if (zoomIndicator) {
+        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+        zoomIndicator.classList.add("show");
+        clearTimeout((window as { presidentZoomTimeout?: number }).presidentZoomTimeout);
+        (window as { presidentZoomTimeout?: number }).presidentZoomTimeout = window.setTimeout(() => {
+          zoomIndicator.classList.remove("show");
+        }, 1000);
+      }
+    }
+
+    function openViewer() {
+      if (!viewer) return;
+      viewer.classList.add("is-open");
+      viewer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      resetView();
+    }
+
+    function closeViewer() {
+      if (!viewer) return;
+      viewer.classList.remove("is-open");
+      viewer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      resetView();
+    }
+
+    function resetView() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    function zoomIn() {
+      if (scale < MAX_SCALE) {
+        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+        updateTransform();
+      }
+    }
+
+    function zoomOut() {
+      if (scale > MIN_SCALE) {
+        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+        if (scale === MIN_SCALE) {
+          translateX = 0;
+          translateY = 0;
+        }
+        updateTransform();
+      }
+    }
+
+    function handleWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    }
+
+    function handleDragStart(e: MouseEvent | TouchEvent) {
+      if (scale === 1) return;
+      isDragging = true;
+      imageWrapper?.classList.add("is-grabbing");
+      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
+      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+    }
+
+    function handleDragMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
+      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
+      translateX = clientX - startX;
+      translateY = clientY - startY;
+      updateTransform();
+    }
+
+    function handleDragEnd() {
+      isDragging = false;
+      imageWrapper?.classList.remove("is-grabbing");
+    }
+
+    let initialDistance = 0;
+    let initialScale = 1;
+
+    function getTouchDistance(e: TouchEvent) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        initialDistance = getTouchDistance(e);
+        initialScale = scale;
+      } else if (e.touches.length === 1) {
+        handleDragStart(e);
+      }
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e);
+        const newScale = initialScale * (currentDistance / initialDistance);
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+        updateTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        handleDragMove(e);
+      }
+    }
+
+    trigger.addEventListener("click", openViewer);
+    closeBtn?.addEventListener("click", closeViewer);
+    zoomInBtn?.addEventListener("click", zoomIn);
+    zoomOutBtn?.addEventListener("click", zoomOut);
+    resetBtn?.addEventListener("click", resetView);
+
+    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    });
+
+    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
+    document.addEventListener("mousemove", handleDragMove as EventListener);
+    document.addEventListener("mouseup", handleDragEnd);
+
+    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchend", handleDragEnd);
+
+    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
   }
 
   if (document.readyState === "loading") {
@@ -952,16 +1175,19 @@ const zones = [
       initAfterlifeViewer();
       initAfterlifeDownload();
       initPresidentCampaignBubble();
+      initPresidentViewer();
     });
   } else {
     initAfterlifeViewer();
     initAfterlifeDownload();
     initPresidentCampaignBubble();
+    initPresidentViewer();
   }
   document.addEventListener("astro:page-load", () => {
     initAfterlifeViewer();
     initAfterlifeDownload();
     initPresidentCampaignBubble();
+    initPresidentViewer();
   });
 </script>
 
@@ -1216,6 +1442,12 @@ const zones = [
 
   .qbag-artwork-card-section {
     padding: 6rem 0;
+  }
+
+  .qbag-artwork-card-section .artwork-info-card {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.78), rgba(10, 10, 10, 0.78)), url("/images/qbag_concept.webp");
+    background-size: cover;
+    background-position: center;
   }
 
   .artwork-info-card {
@@ -2000,6 +2232,12 @@ const zones = [
     transition: all 0.3s ease !important;
   }
 
+  .afterlife-artwork-card-section .artwork-info-card.afterlife-glass {
+    background-image: linear-gradient(rgba(var(--warm-white), 0.82), rgba(var(--warm-white), 0.82)), url("/images/afterlife_contract.webp") !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
   .afterlife-glass:hover,
   .afterlife-intro-card:hover,
   .afterlife-interaction-card:hover,
@@ -2398,255 +2636,415 @@ const zones = [
   }
 
   /* President of the Galaxy - Cosmic Theme */
+  .president-content {
+    position: relative;
+    z-index: 1;
+    --deep-space: 7, 19, 35;
+    --space-navy: 15, 35, 55;
+    --teal-glow: 45, 140, 155;
+    --bright-cyan: 95, 210, 230;
+    --ice-blue: 180, 235, 245;
+    --champagne: 235, 215, 175;
+  }
+
   .president-zone {
-    background: rgb(20, 35, 50);
+    position: relative;
     min-height: 100vh;
-    position: relative;
+    z-index: 1;
   }
 
-  .president-hero {
-    position: relative;
-    height: 70vh;
-    min-height: 400px;
-  }
-
-  .president-hero .hero-image {
-    position: absolute;
+  .president-bg-wrap {
+    position: fixed;
     inset: 0;
-  }
-
-  .president-hero .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .president-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(7, 19, 35, 0.4) 0%,
-      rgba(15, 35, 55, 0.3) 50%,
-      rgba(45, 140, 155, 0.2) 100%
-    );
+    z-index: 0;
+    overflow: hidden;
     pointer-events: none;
   }
 
-  .president-hero .hero-content {
+  .president-layout {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: transparent;
+    color: rgb(var(--ice-blue));
+    font-family: inherit;
+    overflow-y: auto;
+  }
+
+  .president-layout ::selection {
+    background: rgba(var(--bright-cyan), 0.3);
+    color: rgb(var(--ice-blue));
+  }
+
+  .president-hero {
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+    background: rgb(var(--deep-space));
+  }
+
+  .president-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(7, 19, 35, 0.35) 0%,
+      rgba(15, 35, 55, 0.25) 50%,
+      rgba(45, 140, 155, 0.15) 100%
+    );
+  }
+
+  .president-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .president-hero-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
-    padding: 2rem 4vw;
+    width: 100%;
+    padding: 5vw 5vw 2vw 5vw;
+    background: transparent;
   }
 
   .president-title {
-    margin: 0 0 0.25rem;
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(4rem, 11.2vw, 11.2rem);
+    font-weight: 900;
+    line-height: 0.85;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.04em;
     background: linear-gradient(
       135deg,
-      rgb(180, 235, 245) 0%,
-      rgb(95, 210, 230) 30%,
-      rgb(200, 165, 105) 70%,
-      rgb(235, 215, 175) 100%
+      rgb(var(--ice-blue)) 0%,
+      rgb(var(--bright-cyan)) 25%,
+      rgb(200, 165, 105) 50%,
+      rgb(var(--bright-cyan)) 75%,
+      rgb(var(--ice-blue)) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px rgb(95, 210, 230);
-    filter: drop-shadow(0 4px 16px rgba(45, 140, 155, 0.6));
+    background-size: 200% auto;
+    -webkit-text-stroke: 2px rgb(var(--bright-cyan));
+    filter: drop-shadow(0 0 25px rgba(var(--bright-cyan), 0.6)) drop-shadow(0 4px 18px rgba(var(--teal-glow), 0.4));
+    animation: metallic-shine 8s linear infinite;
   }
 
-  .president-hero .hero-tagline {
-    margin: 0 0 0.5rem;
-    color: rgb(235, 215, 175);
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(95, 210, 230, 0.5);
+  @keyframes metallic-shine {
+    to { background-position: 200% center; }
   }
 
-  .president-hero .hero-subtitle {
-    margin: 0;
-    color: rgb(180, 235, 245);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    max-width: 36em;
-  }
-
-  .president-zone .content-section {
+  .president-main-content {
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 0 4vw;
+  }
+
+  .president-intro-section,
+  .president-artwork-card-section,
+  .president-content-grid-section,
+  .president-interaction-section,
+  .president-contact-section {
+    padding: 8rem 0;
+  }
+
+  .president-intro-section::before,
+  .president-artwork-card-section::before,
+  .president-content-grid-section::before,
+  .president-interaction-section::before,
+  .president-contact-section::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgb(var(--bright-cyan)),
+      transparent
+    );
+    margin-bottom: 2rem;
+  }
+
+  .president-tagline {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(var(--champagne));
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .president-lead,
+  .president-glass h2,
+  .president-glass h3,
+  .president-glass .artwork-card-title {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    color: rgb(var(--bright-cyan));
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 2rem 0;
+  }
+
+  .president-lead {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgb(var(--ice-blue));
+  }
+
+  .president-glass h2 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .president-glass h3 {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+
+  .president-glass .artwork-card-title {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+  }
+
+  .president-glass p,
+  .president-glass .artwork-card-description,
+  .president-list li {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.05rem, 1.25vw, 1.25rem);
+    line-height: 1.7;
+    color: rgb(var(--ice-blue));
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .president-glass p:last-child {
+    margin-bottom: 0;
+  }
+
+  .president-intro-card,
+  .president-interaction-card,
+  .president-contact-card,
+  .president-glass {
+    padding: 4rem;
+    background: rgba(var(--space-navy), 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(var(--bright-cyan), 0.3);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(var(--deep-space), 0.5),
+      inset 0 1px 0 rgba(var(--ice-blue), 0.15),
+      0 0 40px rgba(var(--teal-glow), 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .president-intro-card,
+  .president-interaction-card,
+  .president-contact-card {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .president-artwork-card-section .artwork-info-card.president-glass {
+    background-image: linear-gradient(rgba(var(--space-navy), 0.82), rgba(var(--space-navy), 0.82)), url("/images/president_galaxy.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .president-glass:hover,
+  .president-intro-card:hover,
+  .president-interaction-card:hover,
+  .president-contact-card:hover,
+  .artwork-info-card.president-glass:hover {
+    box-shadow:
+      0 12px 40px rgba(var(--deep-space), 0.6),
+      inset 0 1px 0 rgba(var(--ice-blue), 0.3),
+      0 0 60px rgba(var(--teal-glow), 0.4);
+    border-color: rgba(var(--bright-cyan), 0.5);
+    transform: translateY(-2px);
+  }
+
+  .president-glass-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+  }
+
+  .president-list {
+    list-style: none;
+    padding: 0;
     margin: 1.5rem 0;
   }
 
-  .president-box {
-    background: rgba(15, 35, 55, 0.65);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(95, 210, 230, 0.3);
-    border-radius: 16px;
-    box-shadow:
-      0 8px 32px rgba(7, 19, 35, 0.5),
-      inset 0 1px 0 rgba(180, 235, 245, 0.15),
-      0 0 40px rgba(45, 140, 155, 0.2);
-    padding: 2rem 2.5rem;
-    margin: 0 auto 1.5rem;
-    max-width: 720px;
-    color: rgb(180, 235, 245);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  .president-list li {
+    padding-left: 2rem;
+    position: relative;
   }
 
-  .president-box:hover {
-    border-color: rgba(95, 210, 230, 0.6);
-    box-shadow:
-      0 12px 40px rgba(7, 19, 35, 0.6),
-      inset 0 1px 0 rgba(180, 235, 245, 0.3),
-      0 0 60px rgba(45, 140, 155, 0.4);
-    transform: translateY(-2px);
+  .president-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: rgb(var(--bright-cyan));
+    font-weight: 400;
   }
 
-  .president-box .section-label {
-    color: rgb(235, 215, 175);
-    letter-spacing: 0.15em;
-    font-size: 0.75rem;
+  .president-fine-print {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    font-style: italic;
+    margin-top: 2rem;
+  }
+
+  .president-rule {
+    margin-bottom: 1.5rem;
+  }
+
+  .president-btn {
+    background: linear-gradient(135deg, rgb(var(--bright-cyan)) 0%, rgb(var(--teal-glow)) 100%);
+    color: rgb(var(--deep-space));
+    padding: 1.25rem 3rem;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--bright-cyan), 0.4);
+    font-weight: 600;
     text-transform: uppercase;
-    margin: 0 0 1rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow:
+      0 4px 16px rgba(var(--teal-glow), 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
   }
 
-  .president-box h3 {
-    color: rgb(95, 210, 230);
-    margin: 1.25rem 0 0.5rem;
-    font-size: 1.1rem;
+  .president-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 24px rgba(var(--teal-glow), 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
-  .president-box h3:first-of-type {
-    margin-top: 0;
+  .president-contact-links {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2rem;
   }
 
-  .president-box p,
-  .president-box ul {
-    margin: 0 0 0.75rem;
-    line-height: 1.6;
+  .president-contact-links a {
+    color: rgb(var(--bright-cyan));
+    text-decoration: none;
+    transition: opacity 0.2s ease;
   }
 
-  .president-box ul {
-    padding-left: 1.5rem;
+  .president-contact-links a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
   }
 
-  .president-box li {
-    margin-bottom: 0.35rem;
-  }
-
-  .president-box .fine-print {
-    font-size: 0.85rem;
+  .president-contact-closing {
+    font-size: clamp(1.05rem, 1.25vw, 1.25rem);
+    line-height: 1.7;
+    margin-top: 2rem;
+    font-style: italic;
     opacity: 0.9;
   }
 
-  .president-box a {
-    color: rgb(45, 140, 155);
-    border-bottom: 1px solid rgba(45, 140, 155, 0.4);
-    text-decoration: none;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .president-box a:hover {
-    color: rgb(95, 210, 230);
-    border-bottom-color: rgb(95, 210, 230);
-  }
-
-  .president-box .rule {
-    margin-top: 1.25rem;
-  }
-
-  .president-box .rule:first-of-type {
-    margin-top: 0;
-  }
-
-  .president-box .btn-primary {
-    background: linear-gradient(135deg, rgb(95, 210, 230) 0%, rgb(45, 140, 155) 100%);
-    color: rgb(7, 19, 35);
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
-    border: 1px solid rgb(180, 235, 245);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-size: 0.9rem;
-    box-shadow:
-      0 4px 20px rgba(95, 210, 230, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    margin-top: 0.5rem;
-  }
-
-  .president-box .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 30px rgba(95, 210, 230, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, rgb(110, 220, 240) 0%, rgb(55, 150, 165) 100%);
-  }
-
-  .president-zone .gallery-section {
-    padding: 0 4vw;
-    margin: 2rem 0;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .president-zone .gallery-section .gallery-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 16px;
-    border: 1px solid rgba(95, 210, 230, 0.25);
-    box-shadow: 0 8px 32px rgba(7, 19, 35, 0.4);
-  }
-
   .president-cta {
+    padding: 8rem 0;
     text-align: center;
-    padding: 2rem 4vw;
+    background: transparent;
+  }
+
+  .president-eden-headline {
+    text-transform: uppercase;
+    letter-spacing: -0.045em;
+    line-height: 0.88;
+  }
+
+  .president-eden-body {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: rgb(var(--ice-blue));
+  }
+
+  .president-eden-mono {
+    margin-top: 2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(var(--ice-blue), 0.7);
+  }
+
+  .president-censored {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    color: rgba(var(--ice-blue), 0.6);
+  }
+
+  .president-censored::after {
+    content: attr(data-reveal);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    color: rgb(var(--bright-cyan));
+    transition: opacity 0.2s ease;
+  }
+
+  .president-censored:hover::after,
+  .president-censored:focus-visible::after {
+    opacity: 1;
   }
 
   .president-retreat-btn {
     background: transparent;
-    color: rgb(95, 210, 230);
-    border: 1px solid rgba(95, 210, 230, 0.5);
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
+    border: 1px solid rgba(var(--bright-cyan), 0.5);
+    color: rgb(var(--bright-cyan));
+    padding: 1.25rem 3rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+    border-radius: 4px;
   }
 
   .president-retreat-btn:hover {
-    color: rgb(180, 235, 245);
-    border-color: rgb(95, 210, 230);
-    box-shadow: 0 0 24px rgba(95, 210, 230, 0.3);
+    background: rgba(var(--bright-cyan), 0.15);
+    color: rgb(var(--ice-blue));
+    box-shadow: 0 0 30px rgba(var(--bright-cyan), 0.3);
   }
 
-  .council-bubble {
+  .president-bubble {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 9999;
-    background: rgba(15, 35, 55, 0.95);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 2px solid rgb(95, 210, 230);
-    border-radius: 20px;
-    padding: 2rem 3rem;
+    z-index: 100000;
+    background: rgba(245, 245, 245, 0.88);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    padding: 2.5rem 3.5rem;
     box-shadow:
-      0 0 60px rgba(95, 210, 230, 0.5),
-      inset 0 1px 0 rgba(180, 235, 245, 0.3);
+      0 -10px 40px rgba(0, 0, 0, 0.08),
+      0 -1px 0 rgba(255, 255, 255, 0.4);
     animation: bubble-appear 0.3s ease-out;
   }
 
@@ -2661,37 +3059,96 @@ const zones = [
     }
   }
 
-  .bubble-content {
+  .president-bubble-content {
     position: relative;
-    color: rgb(180, 235, 245);
-    font-size: 1.1rem;
+    color: rgb(20, 30, 45);
+    font-size: 1.2rem;
     text-align: center;
+    line-height: 1.6;
   }
 
-  .bubble-content p {
-    margin: 0;
+  .president-bubble-content p {
+    color: rgb(20, 30, 45);
+    opacity: 1;
   }
 
-  .bubble-close {
+  .president-bubble-close {
     position: absolute;
-    top: -1rem;
-    right: -1rem;
-    background: rgb(95, 210, 230);
-    color: rgb(7, 19, 35);
+    top: -1.5rem;
+    right: -1.5rem;
+    background: rgb(20, 30, 45);
+    color: #fff;
     border: none;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.75rem;
     cursor: pointer;
-    font-size: 1.5rem;
-    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
   }
 
-  .bubble-close:hover {
-    background: rgb(180, 235, 245);
+  .president-bubble-close:hover {
+    background: rgb(45, 140, 155);
+  }
+
+  @media (max-width: 1024px) {
+    .president-glass-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .president-hero {
+      height: 60vh;
+    }
+    .president-title {
+      font-size: clamp(2.4rem, 8vw, 6.4rem);
+    }
+    .president-intro-section,
+    .president-artwork-card-section,
+    .president-content-grid-section,
+    .president-interaction-section,
+    .president-contact-section {
+      padding: 5rem 0;
+    }
+    .president-intro-card,
+    .president-interaction-card,
+    .president-contact-card,
+    .president-glass {
+      padding: 3rem 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .president-hero {
+      height: 50vh;
+    }
+    .president-title {
+      font-size: clamp(2rem, 9.6vw, 4.8rem);
+    }
+    .president-intro-card,
+    .president-interaction-card,
+    .president-contact-card,
+    .president-glass {
+      padding: 2.5rem 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .president-title {
+      animation: none;
+    }
+    .president-glass:hover,
+    .president-intro-card:hover,
+    .president-interaction-card:hover,
+    .president-contact-card:hover,
+    .artwork-info-card.president-glass:hover {
+      transform: none;
+    }
+    .president-btn:hover {
+      transform: none;
+    }
   }
 </style>
