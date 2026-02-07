@@ -1,0 +1,121 @@
+---
+const ESPRESSO = "59, 47, 39";
+const COGNAC = "92, 64, 43";
+const AMBER = "138, 94, 56";
+const BRONZE = "167, 125, 85";
+const GOLD = "184, 143, 98";
+const CHAMPAGNE = "218, 197, 143";
+
+const variants = [
+  { a: COGNAC, b: BRONZE, c: GOLD },
+  { a: AMBER, b: GOLD, c: CHAMPAGNE },
+  { a: BRONZE, b: COGNAC, c: AMBER },
+  { a: GOLD, b: CHAMPAGNE, c: BRONZE },
+  { a: ESPRESSO, b: AMBER, c: GOLD },
+  { a: CHAMPAGNE, b: BRONZE, c: COGNAC },
+];
+const total = 25;
+---
+
+<div class="dynamic-gold-bg" aria-hidden="true">
+  {Array.from({ length: total }, (_, i) => {
+    const v = variants[i % variants.length];
+    const delay = (i * 1.8) % 45;
+    return (
+      <div
+        class="rainbow"
+        style={`animation-delay: -${delay}s; --a: ${v.a}; --b: ${v.b}; --c: ${v.c};`}
+      />
+    );
+  })}
+  <div class="v v-left"></div>
+  <div class="v v-right"></div>
+  <div class="h h-bottom"></div>
+  <div class="h h-top"></div>
+  <div class="luxury-gradient"></div>
+</div>
+
+<style>
+  .dynamic-gold-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: rgb(242, 240, 235);
+  }
+
+  .rainbow {
+    height: 100vh;
+    width: 0;
+    position: absolute;
+    transform: rotate(10deg);
+    transform-origin: top right;
+    top: 0;
+    right: -25vw;
+    box-shadow:
+      -150px 0 100px 60px rgba(59, 47, 39, 0.15),
+      -70px 0 70px 40px rgba(var(--a), 0.4),
+      -20px 0 60px 35px rgba(var(--b), 0.5),
+      20px 0 60px 35px rgba(var(--b), 0.5),
+      70px 0 70px 40px rgba(var(--c), 0.4),
+      150px 0 100px 60px rgba(218, 197, 143, 0.2);
+    animation: gold-slide 45s ease-in-out infinite;
+  }
+
+  @keyframes gold-slide {
+    from { right: -25vw; }
+    to { right: 125vw; }
+  }
+
+  .h {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    pointer-events: none;
+    box-shadow: 0 0 60vh 50vh rgba(92, 64, 43, 0.12);
+  }
+
+  .h-top {
+    top: 0;
+  }
+
+  .h-bottom {
+    bottom: 0;
+  }
+
+  .v {
+    position: absolute;
+    width: 0;
+    height: 100vh;
+    bottom: 0;
+    pointer-events: none;
+    box-shadow: 0 0 40vw 30vw rgba(92, 64, 43, 0.08);
+  }
+
+  .v-left {
+    left: 0;
+  }
+
+  .v-right {
+    right: 0;
+    left: auto;
+  }
+
+  .luxury-gradient {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at top center,
+      rgba(242, 240, 235, 0.9) 0%,
+      rgba(217, 207, 191, 0.4) 50%,
+      rgba(189, 169, 143, 0.2) 100%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rainbow {
+      animation: none;
+      opacity: 0.2;
+    }
+  }
+</style>
