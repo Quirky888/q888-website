@@ -2,6 +2,7 @@
 import SlimNav from "./SlimNav.astro";
 import OverpricedStickersSection from "./OverpricedStickersSection.astro";
 import DynamicGoldBackground from "./DynamicGoldBackground.astro";
+import DynamicCosmicBackground from "./DynamicCosmicBackground.astro";
 
 const zones = [
   {
@@ -395,6 +396,116 @@ const zones = [
               </div>
             </div>
             </>
+          ) : zone.slug === "president-of-the-galaxy" ? (
+            <>
+            <div class="zone-content president-zone">
+              <DynamicCosmicBackground />
+              <SlimNav />
+              <section class="hero president-hero">
+                <div class="hero-image">
+                  <img src="/images/president_hero.webp" alt="President of the Galaxy" loading="eager" />
+                  <div class="hero-overlay president-overlay"></div>
+                </div>
+                <div class="hero-content">
+                  <h1 class="hero-title president-title">PRESIDENT OF THE GALAXY™</h1>
+                  <p class="hero-tagline">SCREW STARS TOGETHER</p>
+                  <p class="hero-subtitle">
+                    A ceremonial title providing zero or 888 jurisdictional power over any planetary or stellar body. Functions primarily as a psychological stabilizer for those overwhelmed by their lack of control over the universe.
+                  </p>
+                </div>
+              </section>
+
+              <section class="content-section">
+                <div class="content-box president-box">
+                  <h2 class="section-label">THE PITCH</h2>
+                  <h3>What is this?</h3>
+                  <p>A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.</p>
+                  <p>Every dream can come true. Just not your dream. Or anyone else's. But theoretically, in a universe where dreams align with universal law, it's possible. We think.</p>
+                </div>
+              </section>
+
+              <section class="content-section">
+                <div class="content-box president-box">
+                  <h2 class="section-label">THE DEAL</h2>
+                  <h3>What you're investing in:</h3>
+                  <p>Art that may or may not become intergalactic currency. A vision that exists in at least three timelines simultaneously. And a return of +888% in one light year—or possibly negative infinity, depending on which reality stabilizes first.</p>
+                  <h3>Investment includes:</h3>
+                  <ul>
+                    <li>One (1) cosmic sash (fits most existential crises)</li>
+                    <li>Fractional ownership of symbolic authority</li>
+                    <li>Early access to governance memes before they're officially meaningless</li>
+                    <li>A constitutional framework that dissolves if you read it too literally</li>
+                  </ul>
+                  <p><strong>Returns:</strong> Guaranteed in universes where causality is optional. In this timeline, you get bragging rights and a sticker.</p>
+                  <p class="fine-print">Fine print: Investment in this art is investment in intergalactic future. Financial value gain potential of +888% in one light year time… or another. Past performance in alternate dimensions does not guarantee future results. Dreams sold separately.</p>
+                </div>
+              </section>
+
+              <section class="content-section">
+                <div class="content-box president-box">
+                  <h2 class="section-label">THE RULES (SIMPLIFIED)</h2>
+                  <div class="rule">
+                    <h3>Zero Collateral Damage</h3>
+                    <p>Don't hurt people who didn't sign up for your chaos.</p>
+                  </div>
+                  <div class="rule">
+                    <h3>AI is a Partner, Not a Tool… same applies to mushrooms</h3>
+                    <p>Treat sentient code or mycelium networks like you'd treat sentient meat.</p>
+                  </div>
+                  <div class="rule">
+                    <h3>Politics Are Obsolete</h3>
+                    <p>No propaganda wars. Just expose bad incentives and wait for time to do the work.</p>
+                  </div>
+                  <div class="rule">
+                    <h3>Corruption is a Bug</h3>
+                    <p>Warning → Observation → Exposure → Transformation. Non-violent. Inevitable.</p>
+                  </div>
+                  <div class="rule">
+                    <h3>Rest is Governance</h3>
+                    <p>The President is not required to constantly intervene or sacrifice creative life. Strategic distance is a feature, not a bug—it is an intergalactic mushroom!</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="content-section promise-section">
+                <div class="content-box president-box">
+                  <h2 class="section-label">THE PROMISE</h2>
+                  <p>This office does not promise utopia.</p>
+                  <p>It promises less unnecessary suffering.<br />
+                  It doesn't rush justice.<br />
+                  It makes injustice unsustainable.</p>
+                  <p>And it doesn't fear time—because time, when aligned, does most of the work.</p>
+                </div>
+              </section>
+
+              <section class="content-section">
+                <div class="content-box president-box">
+                  <h2 class="section-label">RUN FOR OFFICE</h2>
+                  <p>Think you can do better? Submit your campaign proposal to the Square Bubbles Council.</p>
+                  <button type="button" id="submit-campaign-btn" class="btn-primary">Submit Campaign</button>
+                </div>
+              </section>
+
+              <section class="gallery-section">
+                <img src="/images/president_galaxy.webp" alt="President of the Galaxy Artwork" class="gallery-image" loading="lazy" />
+              </section>
+
+              <section class="content-section">
+                <div class="content-box president-box">
+                  <h2 class="section-label">CONTACT</h2>
+                  <p>Interested in collaborations or just want to argue about governance?</p>
+                  <p><a href="mailto:contact@q888.com">contact@q888.com</a> | <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a></p>
+                  <p>Remember: The galaxy doesn't need saving.<br />
+                  It needs better system design.<br />
+                  And maybe a really good overpriced sticker.</p>
+                </div>
+              </section>
+
+              <section class="president-cta">
+                <button type="button" class="retreat-button president-retreat-btn" data-portal-back>Retreat to Market</button>
+              </section>
+            </div>
+            </>
           ) : (
             <article class="panel-article">
               <h2 class="panel-title text-black/80">{zone.title}</h2>
@@ -432,7 +543,7 @@ const zones = [
 
 <script>
   function initPortalNav() {
-    ["q-bag", "overpriced-stickers", "afterlife-contracts"].forEach((slug) => {
+    ["q-bag", "overpriced-stickers", "afterlife-contracts", "president-of-the-galaxy"].forEach((slug) => {
       const panel = document.querySelector(`[data-portal-panel="${slug}"]`);
       if (!panel) return;
 
@@ -817,18 +928,40 @@ const zones = [
     });
   }
 
+  function initPresidentCampaignBubble() {
+    const btn = document.getElementById("submit-campaign-btn");
+    if (!btn || btn.hasAttribute("data-president-bubble-inited")) return;
+    btn.setAttribute("data-president-bubble-inited", "true");
+    btn.addEventListener("click", () => {
+      const bubble = document.createElement("div");
+      bubble.className = "council-bubble";
+      bubble.innerHTML = `
+        <div class="bubble-content">
+          <p>"By order of the Council, your request is being processed. Correspondence will follow."</p>
+          <button type="button" class="bubble-close" aria-label="Close">×</button>
+        </div>
+      `;
+      document.body.appendChild(bubble);
+      bubble.querySelector(".bubble-close")?.addEventListener("click", () => bubble.remove());
+      setTimeout(() => bubble.remove(), 5000);
+    });
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       initAfterlifeViewer();
       initAfterlifeDownload();
+      initPresidentCampaignBubble();
     });
   } else {
     initAfterlifeViewer();
     initAfterlifeDownload();
+    initPresidentCampaignBubble();
   }
   document.addEventListener("astro:page-load", () => {
     initAfterlifeViewer();
     initAfterlifeDownload();
+    initPresidentCampaignBubble();
   });
 </script>
 
@@ -880,6 +1013,10 @@ const zones = [
 
   [data-portal-panel="afterlife-contracts"] .panel-content {
     background: #ffffff;
+  }
+
+  [data-portal-panel="president-of-the-galaxy"] .panel-content {
+    background: transparent;
   }
 
   .panel-scroll {
@@ -2258,5 +2395,303 @@ const zones = [
     .download-button[aria-disabled="false"]:hover {
       transform: none;
     }
+  }
+
+  /* President of the Galaxy - Cosmic Theme */
+  .president-zone {
+    background: rgb(20, 35, 50);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .president-hero {
+    position: relative;
+    height: 70vh;
+    min-height: 400px;
+  }
+
+  .president-hero .hero-image {
+    position: absolute;
+    inset: 0;
+  }
+
+  .president-hero .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .president-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(7, 19, 35, 0.4) 0%,
+      rgba(15, 35, 55, 0.3) 50%,
+      rgba(45, 140, 155, 0.2) 100%
+    );
+    pointer-events: none;
+  }
+
+  .president-hero .hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 4vw;
+  }
+
+  .president-title {
+    margin: 0 0 0.25rem;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: linear-gradient(
+      135deg,
+      rgb(180, 235, 245) 0%,
+      rgb(95, 210, 230) 30%,
+      rgb(200, 165, 105) 70%,
+      rgb(235, 215, 175) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px rgb(95, 210, 230);
+    filter: drop-shadow(0 4px 16px rgba(45, 140, 155, 0.6));
+  }
+
+  .president-hero .hero-tagline {
+    margin: 0 0 0.5rem;
+    color: rgb(235, 215, 175);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(95, 210, 230, 0.5);
+  }
+
+  .president-hero .hero-subtitle {
+    margin: 0;
+    color: rgb(180, 235, 245);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 36em;
+  }
+
+  .president-zone .content-section {
+    padding: 0 4vw;
+    margin: 1.5rem 0;
+  }
+
+  .president-box {
+    background: rgba(15, 35, 55, 0.65);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(95, 210, 230, 0.3);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(7, 19, 35, 0.5),
+      inset 0 1px 0 rgba(180, 235, 245, 0.15),
+      0 0 40px rgba(45, 140, 155, 0.2);
+    padding: 2rem 2.5rem;
+    margin: 0 auto 1.5rem;
+    max-width: 720px;
+    color: rgb(180, 235, 245);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .president-box:hover {
+    border-color: rgba(95, 210, 230, 0.6);
+    box-shadow:
+      0 12px 40px rgba(7, 19, 35, 0.6),
+      inset 0 1px 0 rgba(180, 235, 245, 0.3),
+      0 0 60px rgba(45, 140, 155, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .president-box .section-label {
+    color: rgb(235, 215, 175);
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+  }
+
+  .president-box h3 {
+    color: rgb(95, 210, 230);
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .president-box h3:first-of-type {
+    margin-top: 0;
+  }
+
+  .president-box p,
+  .president-box ul {
+    margin: 0 0 0.75rem;
+    line-height: 1.6;
+  }
+
+  .president-box ul {
+    padding-left: 1.5rem;
+  }
+
+  .president-box li {
+    margin-bottom: 0.35rem;
+  }
+
+  .president-box .fine-print {
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  .president-box a {
+    color: rgb(45, 140, 155);
+    border-bottom: 1px solid rgba(45, 140, 155, 0.4);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .president-box a:hover {
+    color: rgb(95, 210, 230);
+    border-bottom-color: rgb(95, 210, 230);
+  }
+
+  .president-box .rule {
+    margin-top: 1.25rem;
+  }
+
+  .president-box .rule:first-of-type {
+    margin-top: 0;
+  }
+
+  .president-box .btn-primary {
+    background: linear-gradient(135deg, rgb(95, 210, 230) 0%, rgb(45, 140, 155) 100%);
+    color: rgb(7, 19, 35);
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    border: 1px solid rgb(180, 235, 245);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow:
+      0 4px 20px rgba(95, 210, 230, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    margin-top: 0.5rem;
+  }
+
+  .president-box .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 30px rgba(95, 210, 230, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, rgb(110, 220, 240) 0%, rgb(55, 150, 165) 100%);
+  }
+
+  .president-zone .gallery-section {
+    padding: 0 4vw;
+    margin: 2rem 0;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .president-zone .gallery-section .gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+    border: 1px solid rgba(95, 210, 230, 0.25);
+    box-shadow: 0 8px 32px rgba(7, 19, 35, 0.4);
+  }
+
+  .president-cta {
+    text-align: center;
+    padding: 2rem 4vw;
+  }
+
+  .president-retreat-btn {
+    background: transparent;
+    color: rgb(95, 210, 230);
+    border: 1px solid rgba(95, 210, 230, 0.5);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .president-retreat-btn:hover {
+    color: rgb(180, 235, 245);
+    border-color: rgb(95, 210, 230);
+    box-shadow: 0 0 24px rgba(95, 210, 230, 0.3);
+  }
+
+  .council-bubble {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgba(15, 35, 55, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid rgb(95, 210, 230);
+    border-radius: 20px;
+    padding: 2rem 3rem;
+    box-shadow:
+      0 0 60px rgba(95, 210, 230, 0.5),
+      inset 0 1px 0 rgba(180, 235, 245, 0.3);
+    animation: bubble-appear 0.3s ease-out;
+  }
+
+  @keyframes bubble-appear {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .bubble-content {
+    position: relative;
+    color: rgb(180, 235, 245);
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .bubble-content p {
+    margin: 0;
+  }
+
+  .bubble-close {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    background: rgb(95, 210, 230);
+    color: rgb(7, 19, 35);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .bubble-close:hover {
+    background: rgb(180, 235, 245);
   }
 </style>
