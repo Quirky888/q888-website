@@ -1159,7 +1159,6 @@ const tickerDuration = `${Math.max(tickerText.length * 0.01, 50)}s`;
       } else if (imageEl) {
         imageEl.classList.add("hidden");
       }
-      if (imageEl) imageEl.classList.remove('hidden');
       
       if (galleryEl && inst.gallery && inst.gallery.length > 0) {
         galleryEl.innerHTML = inst.gallery.map(url => 
@@ -1169,7 +1168,6 @@ const tickerDuration = `${Math.max(tickerText.length * 0.01, 50)}s`;
       } else if (galleryEl) {
         galleryEl.classList.add("hidden");
       }
-      if (galleryEl) galleryEl.classList.remove('hidden');
       
       if (descEl && inst.description) {
         const paragraphs = inst.description.split('\n\n').filter(p => p.trim());
@@ -1178,7 +1176,6 @@ const tickerDuration = `${Math.max(tickerText.length * 0.01, 50)}s`;
       } else if (descEl) {
         descEl.classList.add("hidden");
       }
-      if (descEl) descEl.classList.remove('hidden');
 
       if (subscriptionEl) {
         if (inst.subscriptionModel) {
@@ -1460,7 +1457,7 @@ const tickerDuration = `${Math.max(tickerText.length * 0.01, 50)}s`;
         } else if (inst.id === "SS-888") {
           specs.push("TRANSFER: Physical handover + ceremonial acknowledgment that this object has infinite value because you decided it does. Hold while questioning capitalism, endorsing capitalism, transcending both.");
           specs.push("RITUAL: Apply to cherished item during moment of resistance against planned obsolescence. Whisper 'This is now an heirloom.' Item immediately transforms into collectible piece of art, never to be mindlessly discarded. You are now sticker ambassador—flaunt, inspire, create demand.");
-        } else if (inst.id === "POG-2525") {
+        } else if (inst.id === "POG-2025") {
           specs.push("TRANSFER: Sticker transfer signifies acceptance of responsibility for humor, unity, and progress. Hold while acknowledging power is project not throne.");
           specs.push("RITUAL: Apply with irony, optimism, and zero respect for outdated galactic hierarchies. Place where control fails but coordination thrives. Bonds where leadership rotates, meaning endures.");
         } else if (inst.id === "KM-V1") {
