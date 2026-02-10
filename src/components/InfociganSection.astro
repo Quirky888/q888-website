@@ -52,6 +52,16 @@ const zones: Zone[] = [
     image: "/images/pog_vote.webp",
     holographic: false,
     lightText: true
+  },
+  {
+    slug: "nar-mail-express",
+    title: "Nar-Mail Express°",
+    descriptor: "Messages that arrive when you are ready.",
+    system: "SYST: DELIVERY",
+    scatter: "",
+    image: "/images/kotiki_nar.webp",
+    holographic: false,
+    lightText: true
   }
 ];
 ---
@@ -90,7 +100,7 @@ const zones: Zone[] = [
       <div class="order-2 lg:order-1">
         <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
           {zones.map((zone) => (
-            <div class={`relative group ${zone.scatter}`}>
+            <div class={`relative group ${zone.scatter} ${zone.slug === "nar-mail-express" ? "md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24" : ""}`}>
               <a 
                 href={`#infocigan-zone-${zone.slug}`}
                 data-infocigan-slug={zone.slug}
