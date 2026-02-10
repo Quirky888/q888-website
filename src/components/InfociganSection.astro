@@ -88,26 +88,28 @@ const zones: Zone[] = [
       
       <!-- LEFT: Artifact Field (60%) -->
       <div class="order-2 lg:order-1">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+        <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
           {zones.map((zone) => (
             <div class={`relative group ${zone.scatter}`}>
               <a 
                 href={`#infocigan-zone-${zone.slug}`}
                 data-infocigan-slug={zone.slug}
-                class="block relative bg-[#72808a] border border-white/5 transition-colors duration-500 hover:bg-[#7a8892] cursor-pointer overflow-hidden flex flex-col"
+                class="block relative rounded-xl bg-[#72808a] transition-colors duration-500 hover:bg-[#7a8892] cursor-pointer overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <!-- Artifact Image Area -->
-                <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center">
+                <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden">
                   {zone.image ? (
                     <>
                       <img 
                         src={zone.image} 
                         alt={zone.title} 
-                        class="w-full h-full object-cover"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
                       {zone.holographic && (
                         <div class="holographic-overlay absolute inset-0 pointer-events-none mix-blend-screen opacity-40 group-hover:opacity-0 transition-opacity duration-700"></div>
                       )}
+                      <span class="absolute top-3 right-3 font-mono text-[9px] uppercase tracking-[0.2em] text-white/70 bg-black/30 px-2 py-1 rounded">{zone.system}</span>
                     </>
                   ) : (
                     <span class="font-mono text-[10px] uppercase tracking-[0.4em] italic select-none text-black/40 opacity-20">IMAGE_DATA_ENCRYPTED</span>
@@ -115,10 +117,10 @@ const zones: Zone[] = [
                 </div>
                 
                 <!-- Text Block -->
-                <div class="p-4 md:p-5">
+                <div class="infocigan-card-text-block p-4 md:p-5 backdrop-blur-md bg-[rgba(255,255,255,0.4)]">
                   <div class="space-y-1.5">
-                    <h3 class={`text-lg uppercase tracking-[0.12em] font-medium ${zone.lightText ? 'text-white' : 'text-black/80'}`}>{zone.title}</h3>
-                    <p class={`text-base leading-tight font-light italic ${zone.lightText ? 'text-white/80' : 'text-black/50'}`}>{zone.descriptor}</p>
+                    <h3 class="text-xl uppercase tracking-[0.12em] font-medium gold-shine text-black/85">{zone.title}</h3>
+                    <p class="text-base leading-tight font-light italic text-black/70">{zone.descriptor}</p>
                     <!-- Hover micro-text -->
                     <div class="pt-3 font-mono text-[9px] uppercase tracking-tighter text-[#a67c00] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       VALUE MAY DRIFT WITHOUT NOTICE
@@ -266,6 +268,48 @@ const zones: Zone[] = [
     .grid > div {
       transform: none !important;
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .infocigan-cards img {
+      transition: none !important;
+    }
+    .infocigan-cards .group:hover img {
+      transform: none !important;
+    }
+  }
+
+  .infocigan-card-text-block {
+    position: relative;
+    overflow: hidden;
+  }
+  .infocigan-card-text-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 2px,
+        rgba(255, 255, 255, 0.08) 2px,
+        rgba(255, 255, 255, 0.08) 3px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 8px,
+        rgba(255, 255, 255, 0.04) 8px,
+        rgba(255, 255, 255, 0.04) 9px
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.02) 100%
+      );
   }
 
   /* Typography refinement for the briefing */
