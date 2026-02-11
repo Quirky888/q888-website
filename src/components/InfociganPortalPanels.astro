@@ -1,7 +1,6 @@
 ---
 import SlimNav from "./SlimNav.astro";
 import OverpricedStickersSection from "./OverpricedStickersSection.astro";
-import DynamicGoldBackground from "./DynamicGoldBackground.astro";
 import DynamicCosmicBackground from "./DynamicCosmicBackground.astro";
 import NarMailChatbot from "./NarMailChatbot.astro";
 
@@ -229,124 +228,127 @@ const zones = [
             </>
           ) : zone.slug === "afterlife-contracts" ? (
             <>
-            <div class="afterlife-bg-wrap">
-              <DynamicGoldBackground />
-            </div>
-            <div class="afterlife-content">
-            <SlimNav />
-            <div class="afterlife-layout">
-              <section class="afterlife-hero">
-                <img
-                  src="/images/afterlife_contract_hero.webp"
-                  alt="Afterlife Contract"
-                  loading="eager"
-                />
-                <div class="afterlife-hero-overlay">
-                  <h1 class="afterlife-title">AFTERLIFE CONTRACT</h1>
-                 
-                </div>
-              </section>
-              <div class="afterlife-main-content">
-                <section class="afterlife-intro-section">
-                  <div class="glass-card afterlife-intro-card">
-                    <p class="afterlife-tagline">Lifetime Lease + Eternity</p>
-                    <p class="afterlife-lead">
-                      Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury "Lifetime Lease + Eternity" agreement from Grim Reaper Inc., it satirizes how humans try to formalise the unformalizable: death, meaning, morality, and hope.
-                    </p>
+            <div class="afterlife-eden-wrap">
+              <SlimNav />
+              <div class="afterlife-narmail-layout">
+                <section class="afterlife-hero">
+                  <div class="afterlife-hero-image">
+                    <img src="/images/afterlife_contract_hero.webp" alt="Afterlife Contract" loading="eager" />
                   </div>
-                </section>
-                <section class="afterlife-artwork-card-section">
-                  <div class="artwork-info-card glass-card afterlife-glass" id="afterlife-gallery-trigger">
-                    <div class="artwork-card-content">
-                      <div class="artwork-card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                  <div class="afterlife-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
+                    <div class="mx-auto">
+                      <h1 class="afterlife-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
+                        <p>AFTERLIFE </p>
+                        <p>CONTRACT</p>
+                      </h1>
+                      <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
+                        <p>Lifetime Lease + Eternity</p>
+                        <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">or something like that...</p>
                       </div>
-                      <div class="artwork-card-text">
-                        <h3 class="artwork-card-title">View Full Contract Certificate</h3>
-                        <p class="artwork-card-description">Original artwork featuring holographic frames, vintage textures, cosmic symbols, and the three signature options: HeLL, HeART, or ART.</p>
+                      <div class="afterlife-mono afterlife-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest">
+                        <div>TERM: INDEFINITE</div>
+                        <div>JURISDICTION: BEYOND</div>
+                        <div>REFUND: IMPOSSIBLE</div>
                       </div>
-                      <button class="artwork-card-button afterlife-btn" type="button">
-                        <span>Open Gallery</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </button>
                     </div>
                   </div>
                 </section>
-                <section class="afterlife-content-grid-section">
-                  <div class="afterlife-glass-grid">
-                    <div class="glass-card afterlife-glass">
-                      <h3>Concept</h3>
-                      <p>The project is built around a simple paradox: Everyone gets the afterlife (or non-afterlife) for free—yet humans would still gladly pay for premium access, VIP status, and official confirmation.</p>
-                      <p>This fictional contract echoes real situations where water is free, but bottled. Energy is abundant, but monetised. Meaning is internal, but outsourced. Freedom exists, yet certificates are sold to validate it.</p>
+
+                <div class="afterlife-main-content px-6 sm:px-10 lg:px-16 pb-16">
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">About the Contract</h2>
+                    <p>Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury "Lifetime Lease + Eternity" agreement from Grim Reaper Inc., it satirizes how humans try to formalise the unformalizable: death, meaning, morality, and hope.</p>
+                  </section>
+
+                  <section class="afterlife-artwork-card-section">
+                    <div class="artwork-info-card afterlife-narmail-glass" id="afterlife-gallery-trigger">
+                      <div class="artwork-card-content">
+                        <div class="artwork-card-icon afterlife-gallery-icon">
+                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                        <div class="artwork-card-text">
+                          <h3 class="artwork-card-title afterlife-gallery-title">View Q888 Contract Certificate</h3>
+                          <p class="artwork-card-description">The Underworld isn't a destination, but a curated experience. This original artwork binds cosmic symbols with vintage textures to frame your final choice: will you sign for HeLL, HeART, or the ART of eternity? The soul is free; the ink is the only debt.</p>
+                        </div>
+                        <button class="artwork-card-button afterlife-gallery-btn" type="button">
+                          <span>Open the Door</span>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <div class="glass-card afterlife-glass">
-                      <h3>The Bureaucracy of Eternity</h3>
-                      <p>The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like "Subject to Underworld Adjustments" mock the human desire to regulate what cannot be regulated.</p>
-                    </div>
-                    <div class="glass-card afterlife-glass">
-                      <h3>The Duality of Choice</h3>
-                      <p>Viewers are invited to "sign" under three options: HeLL, HeART, or ART. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making.</p>
-                      <p>There is no correct answer. The act of choosing (or refusing to choose) becomes the real performance.</p>
-                    </div>
-                    <div class="glass-card afterlife-glass">
-                      <h3>Visual Language</h3>
-                      <p>The work combines holographic gold frames, vintage parchment textures, cartoon skeletons, cosmic symbols, and handwritten annotations—living somewhere between medieval charter, corporate certificate, tarot deck, and internet meme.</p>
-                    </div>
-                  </div>
-                </section>
-                <section class="afterlife-interaction-section">
-                  <div class="glass-card afterlife-glass afterlife-interaction-card">
-                    <h2>Audience Interaction</h2>
+                  </section>
+
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">Concept</h2>
+                    <p>The project is built around a simple paradox: Everyone gets the afterlife (or non-afterlife) for free—yet humans would still gladly pay for premium access, VIP status, and official confirmation.</p>
+                    <p>This fictional contract echoes reality: the flow is free, but you pay for the package. Energy is abundant, but monetised. Meaning is internal, but outsourced. Freedom exists, yet certificates are sold to validate it.</p>
+                  </section>
+
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">The Bureaucracy of Eternity</h2>
+                    <p>The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like "Subject to Underworld Adjustments" mock the human desire to regulate what cannot be regulated.</p>
+                  </section>
+
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">The Duality of Choice</h2>
+                    <p>Viewers are invited to "sign" under three options: HeLL, HeART, or ART. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making.</p>
+                    <p>There is no correct answer. The act of choosing (or refusing to choose) becomes the real performance.</p>
+                  </section>
+
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">Visual Language</h2>
+                    <p>The work combines holographic gold frames, vintage parchment textures, cartoon skeletons, cosmic symbols, and handwritten annotations—living somewhere between medieval charter, corporate certificate, tarot deck, and internet meme.</p>
+                  </section>
+
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">Audience Interaction</h2>
                     <p>The Afterlife Contract is participatory by nature. Viewers are encouraged to:</p>
-                    <ul class="afterlife-interaction-list">
+                    <ul class="afterlife-list">
                       <li>Read the fine print</li>
                       <li>Choose a signature option</li>
                       <li>Interpret the contract personally</li>
                       <li>Laugh, reflect, or feel mildly uncomfortable</li>
                     </ul>
                     <p>It does not tell the viewer what to believe—it asks why they believe.</p>
-                  </div>
-                </section>
-                <section class="afterlife-closing-section">
-                  <div class="closing-content">
-                    <p class="big-statement">
+                  </section>
+
+                  <section class="afterlife-section afterlife-guarantee">
+                    <h2 class="afterlife-h2">Closing Statement</h2>
+                    <blockquote class="afterlife-blockquote">
                       The only thing you actually sign<br />
                       is your own interpretation.
-                    </p>
-                  </div>
-                </section>
-                <section class="afterlife-download-section">
-                  <div class="glass-card afterlife-glass afterlife-download-card">
-                    <h2>Download Your Unofficial Afterlife Contract</h2>
+                    </blockquote>
+                  </section>
+
+                  <section class="afterlife-section">
+                    <h2 class="afterlife-h2">Download Your Unofficial Afterlife Contract</h2>
                     <p>Feeling brave, curious, or just mildly bored with mortality? You can download a printable version of the Afterlife Contract and sign your preferred destiny—HeLL, HeART, or ART—at your own risk and amusement.</p>
                     <div class="afterlife-terms">
-                      <h3>Terms of (Non-)Service</h3>
-                      <div class="terms-list">
-                        <p>By downloading this file, you acknowledge that:</p>
-                        <ul>
-                          <li>It is 100% symbolic and performs 0% actual afterlife management.</li>
-                          <li>No spiritual, metaphysical, legal, medical, romantic, or real-estate outcomes are promised, implied, or guaranteed.</li>
-                          <li>No refunds will be issued if eternity does not meet your expectations, mood board, or Pinterest vision.</li>
-                          <li>Grim Reaper Inc., all associated skeletons, and the artist accept no responsibility for: delays at the pearly gates, unexpected cosmic plot twists, or being assigned a roommate who snores in the astral plane.</li>
-                          <li>The only "service" truly provided is a moment of reflection, a piece of paper, and the faint hope that.......</li>
-                        </ul>
-                      </div>
-                      <div class="terms-checkbox-wrapper">
+                      <h3 class="afterlife-h3">Terms of (Non-)Service</h3>
+                      <p>By downloading this file, you acknowledge that:</p>
+                      <ul class="afterlife-list">
+                        <li>It is 100% symbolic and performs -+0% actual afterlife management.</li>
+                        <li>No spiritual, metaphysical, legal, medical, romantic, or real-estate outcomes are promised, implied, or guaranteed.</li>
+                        <li>No refunds will be issued if eternity does not meet your expectations, mood board, or Pinterest vision.</li>
+                        <li>Grim Reaper Inc., all associated skeletons, and the artist accept no responsibility for: delays at the pearly gates, unexpected cosmic plot twists, or being assigned a roommate who snores in the astral plane.</li>
+                        <li>The only "service" truly provided is a moment of reflection, a piece of digital ink paper, and the faint hope that.......</li>
+                      </ul>
+                      <div class="terms-checkbox-wrapper mt-6">
                         <label class="terms-checkbox-label">
                           <input type="checkbox" id="afterlife-terms-checkbox" class="terms-checkbox" />
                           <span class="checkbox-text">I accept these very serious, absolutely binding, completely unenforceable terms</span>
                         </label>
                       </div>
                     </div>
-                    <div class="download-button-wrapper">
+                    <div class="download-button-wrapper mt-6">
                       <a
                         href="/docs/afterlife_contract_to_sign.jpg"
                         download="Afterlife_Contract.jpg"
-                        class="download-button"
+                        class="afterlife-download-btn"
                         id="afterlife-download-btn"
                         aria-disabled="true"
                       >
@@ -357,15 +359,13 @@ const zones = [
                       </a>
                       <p class="download-hint" id="download-hint">Please accept the terms to download</p>
                     </div>
-                  </div>
-                </section>
+                  </section>
+
+                  <section class="afterlife-section afterlife-cta">
+                    <button type="button" class="afterlife-retreat-btn" data-portal-back>Retreat to Market</button>
+                  </section>
+                </div>
               </div>
-              <section class="afterlife-cta">
-                <button class="retreat-button afterlife-retreat-btn" data-portal-back type="button">
-                  Retreat to Market
-                </button>
-              </section>
-            </div>
             </div>
             <div class="artwork-viewer" id="afterlife-artwork-viewer" aria-hidden="true">
               <div class="viewer-overlay"></div>
@@ -1686,7 +1686,7 @@ const zones = [
   }
 
   [data-portal-panel="afterlife-contracts"] .panel-content {
-    background: #ffffff;
+    background: #fcf8f9;
   }
 
   [data-portal-panel="president-of-the-galaxy"] .panel-content {
@@ -2552,65 +2552,36 @@ const zones = [
     }
   }
 
-  /* AFTERLIFE CONTRACT - LUXURY BROWN-GOLD DESIGN SYSTEM */
-  .afterlife-content {
+  /* AFTERLIFE CONTRACT - Nar-Mail Express structure & fonts */
+  .afterlife-eden-wrap {
+    --eden-bg: #fcf8f9;
+    --eden-text: #134252;
+    --eden-text-muted: #627078;
+    --eden-primary: #208c8d;
     position: relative;
-    z-index: 1;
-    --espresso: 59, 47, 39;
-    --cognac: 92, 64, 43;
-    --amber: 138, 94, 56;
-    --bronze: 167, 125, 85;
-    --antique-gold: 184, 143, 98;
-    --champagne: 218, 197, 143;
-    --cream: 242, 240, 235;
-    --warm-white: 255, 251, 245;
+    min-height: 100vh;
+    background: var(--eden-bg);
   }
 
-  .afterlife-bg-wrap {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .afterlife-layout {
-    position: relative;
-    z-index: 1;
+  .afterlife-narmail-layout {
     width: 100%;
-    background: transparent;
-    color: rgb(var(--espresso));
-    font-family: inherit;
+    color: var(--eden-text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     overflow-y: auto;
   }
 
-  .afterlife-layout ::selection {
-    background: rgba(var(--antique-gold), 0.3);
-    color: rgb(var(--espresso));
-  }
-
   .afterlife-hero {
-    width: 100%;
-    height: 80vh;
     position: relative;
+  }
+
+  .afterlife-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: rgb(var(--espresso));
+    background: var(--eden-bg);
   }
 
-  .afterlife-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(59, 47, 39, 0.35) 0%,
-      rgba(92, 64, 43, 0.25) 50%,
-      rgba(120, 86, 58, 0.15) 100%
-    );
-  }
-
-  .afterlife-hero img {
+  .afterlife-hero-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -2622,297 +2593,134 @@ const zones = [
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 5vw 5vw 2vw 5vw;
-    background: transparent;
+    background: linear-gradient(to top, rgba(252, 248, 249, 0.95), transparent);
   }
 
-  .afterlife-title {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(5rem, 14vw, 14rem);
-    font-weight: 900;
-    line-height: 0.85;
-    text-transform: uppercase;
-    margin: 0 0 1rem 0;
-    letter-spacing: -0.04em;
-    background: linear-gradient(
-      135deg,
-      rgb(var(--champagne)) 0%,
-      rgb(var(--antique-gold)) 40%,
-      rgb(var(--bronze)) 70%,
-      rgb(var(--antique-gold)) 100%
-    );
+  .afterlife-headline {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .afterlife-mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .afterlife-mono-gold {
+    color: #a67c00;
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
     background-size: 200% auto;
+    background-position: 0% center;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    -webkit-text-stroke: 2px rgb(var(--antique-gold));
-    paint-order: stroke fill;
-    filter: drop-shadow(0 4px 12px rgba(59, 47, 39, 0.35));
-    animation: afterlife-shine 8s ease-in-out infinite;
+    -webkit-text-fill-color: transparent;
+    animation: afterlife-gold-shine 8s linear infinite;
   }
 
-  @keyframes afterlife-shine {
-    0%, 100% { background-position: 0% center; }
-    50% { background-position: 100% center; }
+  @keyframes afterlife-gold-shine {
+    to { background-position: 200% center; }
   }
 
-  .afterlife-subtitle {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: clamp(0.95rem, 1.4vw, 1.2rem);
-    font-weight: 500;
-    color: rgb(var(--antique-gold));
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin: 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  @media (prefers-reduced-motion: reduce) {
+    .afterlife-mono-gold {
+      animation: none;
+      background-position: 50% center;
+    }
   }
 
   .afterlife-main-content {
-    max-width: 1400px;
+    max-width: 72rem;
     margin: 0 auto;
-    padding: 0 4vw;
   }
 
-  .afterlife-glass,
-  .afterlife-intro-card,
-  .afterlife-interaction-card,
-  .afterlife-download-card,
-  .artwork-info-card.afterlife-glass {
-    background: rgba(var(--warm-white), 0.75) !important;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(var(--antique-gold), 0.3) !important;
-    border-radius: 16px !important;
-    box-shadow:
-      0 8px 32px rgba(var(--espresso), 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
-    transition: all 0.3s ease !important;
+  .afterlife-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(19, 66, 82, 0.12);
   }
 
-  .afterlife-artwork-card-section .artwork-info-card.afterlife-glass {
-    background-image: linear-gradient(rgba(var(--warm-white), 0.82), rgba(var(--warm-white), 0.82)), url("/images/afterlife_contract.webp") !important;
-    background-size: cover !important;
-    background-position: center !important;
+  .afterlife-section:last-of-type {
+    border-bottom: none;
   }
 
-  .afterlife-glass:hover,
-  .afterlife-intro-card:hover,
-  .afterlife-interaction-card:hover,
-  .afterlife-download-card:hover,
-  .artwork-info-card.afterlife-glass:hover {
-    box-shadow:
-      0 12px 40px rgba(var(--espresso), 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
-    border-color: rgba(var(--antique-gold), 0.5) !important;
-    transform: translateY(-2px) !important;
+  .afterlife-h2 {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
   }
 
-  .afterlife-tagline,
-  .afterlife-glass h2::before,
-  .afterlife-glass h3::before {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-size: 0.875rem !important;
-    font-weight: 600 !important;
-    color: rgb(var(--antique-gold)) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.2em !important;
-    display: block !important;
-    margin-bottom: 1rem !important;
+  .afterlife-h3 {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 2.5rem 0 1rem 0;
+    letter-spacing: -0.02em;
   }
 
-  .afterlife-interaction-card h2::before {
-    content: '// INTERACTION';
-  }
-
-  .afterlife-interaction-list {
-    list-style: none;
-    padding: 0;
+  .afterlife-section p {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--eden-text);
     margin: 0 0 1.5rem 0;
   }
 
-  .afterlife-interaction-list li {
-    font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-    line-height: 1.7;
-    color: rgb(var(--espresso));
-    padding-left: 2rem;
-    position: relative;
-    margin-bottom: 0.75rem;
+  .afterlife-list {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
   }
 
-  .afterlife-interaction-list li::before {
-    content: '—';
+  .afterlife-list li {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--eden-text);
+    margin-bottom: 0.75rem;
+    padding-left: 2.25rem;
+    position: relative;
+  }
+
+  .afterlife-list li::before {
+    content: '✦';
     position: absolute;
     left: 0;
-    color: rgb(var(--antique-gold));
+    color: #a67c00;
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: afterlife-gold-shine 8s linear infinite;
   }
 
-  .afterlife-download-card h2::before {
-    content: '// DOWNLOAD';
+  @media (prefers-reduced-motion: reduce) {
+    .afterlife-list li::before {
+      animation: none;
+      background-position: 50% center;
+    }
   }
 
-  .afterlife-tagline {
-    margin-bottom: 2rem !important;
-  }
-
-  .afterlife-lead,
-  .afterlife-glass h2,
-  .afterlife-glass h3,
-  .afterlife-glass .artwork-card-title {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif !important;
-    font-weight: 600 !important;
-    color: rgb(var(--cognac)) !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.02em !important;
-    margin: 0 0 2rem 0 !important;
-  }
-
-  .afterlife-lead {
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem) !important;
-    font-weight: 300 !important;
-    line-height: 1.5 !important;
-  }
-
-  .afterlife-glass h2 {
-    font-size: clamp(2.5rem, 4vw, 4rem) !important;
-  }
-
-  .afterlife-glass h3 {
-    font-size: clamp(1.75rem, 2.5vw, 2.5rem) !important;
-  }
-
-  .afterlife-glass .artwork-card-title {
-    font-size: clamp(1.5rem, 2vw, 2rem) !important;
-  }
-
-  .afterlife-glass p,
-  .afterlife-glass .artwork-card-description,
-  .terms-list li {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif !important;
-    font-size: clamp(1.05rem, 1.25vw, 1.25rem) !important;
-    line-height: 1.7 !important;
-    color: rgb(var(--espresso)) !important;
-    font-weight: 400 !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  .afterlife-glass p:last-child {
-    margin-bottom: 0 !important;
-  }
-
-  .afterlife-intro-section,
-  .afterlife-artwork-card-section,
-  .afterlife-content-grid-section,
-  .afterlife-interaction-section,
-  .afterlife-closing-section,
-  .afterlife-download-section {
-    padding: 8rem 0;
-  }
-
-  .afterlife-intro-section::before,
-  .afterlife-artwork-card-section::before,
-  .afterlife-content-grid-section::before,
-  .afterlife-interaction-section::before,
-  .afterlife-download-section::before {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgb(var(--antique-gold)),
-      transparent
-    );
-    margin-bottom: 2rem;
-  }
-
-  .afterlife-intro-card,
-  .afterlife-interaction-card,
-  .afterlife-download-card,
-  .afterlife-glass {
-    padding: 4rem !important;
-  }
-
-  .afterlife-intro-card,
-  .afterlife-interaction-card,
-  .afterlife-download-card {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .afterlife-glass-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-  }
-
-  .afterlife-glass .artwork-card-icon {
-    color: rgb(var(--antique-gold));
-    background: transparent;
-    border: 1px solid rgba(var(--antique-gold), 0.3);
-  }
-
-  .afterlife-glass .artwork-card-description {
-    opacity: 0.8 !important;
-  }
-
-  .afterlife-closing-section .big-statement {
-    font-family: Georgia, "Times New Roman", Times, serif !important;
-    font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
-    font-weight: 400 !important;
-    font-style: italic !important;
-    line-height: 1.3 !important;
-    color: rgb(var(--cognac)) !important;
-    text-align: center !important;
-    max-width: 1000px !important;
-    margin: 0 auto !important;
+  .afterlife-blockquote {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--eden-text);
+    margin: 1.5rem 0;
+    padding: 0 0 0 2rem;
+    border-left: 4px solid var(--eden-primary);
   }
 
   .afterlife-terms {
-    margin: 3rem 0;
-    padding: 3rem;
-    background: rgba(var(--warm-white), 0.6);
-    border: 1px solid rgba(var(--antique-gold), 0.25);
-    border-radius: 12px;
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+    color: var(--eden-text);
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+    line-height: 1.6;
   }
 
   .afterlife-terms h3 {
-    font-size: clamp(1.5rem, 2vw, 2rem);
-    font-weight: 700;
-    color: rgb(var(--cognac));
-    margin-bottom: 2rem;
-  }
-
-  .afterlife-terms h3::before {
-    content: '// TERMS';
-    display: block;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgb(var(--antique-gold));
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-  }
-
-  .terms-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .terms-list li {
-    padding-left: 2rem;
-    position: relative;
-    margin-bottom: 1.2rem;
-  }
-
-  .terms-list li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: rgb(var(--antique-gold));
-    font-weight: 400;
+    margin: 1.5rem 0 1rem 0;
   }
 
   .terms-checkbox-label {
@@ -2923,8 +2731,7 @@ const zones = [
     font-size: 1.05rem;
     line-height: 1.6;
     font-weight: 500;
-    color: rgb(var(--espresso));
-    margin-top: 2rem;
+    color: var(--eden-text);
   }
 
   .terms-checkbox {
@@ -2932,25 +2739,19 @@ const zones = [
     height: 20px;
     flex-shrink: 0;
     cursor: pointer;
-    accent-color: rgb(var(--antique-gold));
-    margin-top: 2px;
+    accent-color: #a67c00;
   }
 
-  .download-button-wrapper {
-    margin-top: 3rem;
-    text-align: center;
-  }
-
-  .download-button {
+  .afterlife-download-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     padding: 1.25rem 3rem;
-    background: rgba(var(--warm-white), 0.8);
-    color: rgba(var(--espresso), 0.4);
-    border: 1px solid rgba(var(--antique-gold), 0.25);
+    background: transparent;
+    color: rgba(19, 66, 82, 0.4);
+    border: 2px solid rgba(19, 66, 82, 0.3);
     border-radius: 8px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
     font-size: 0.95rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -2961,134 +2762,174 @@ const zones = [
     pointer-events: none;
   }
 
-  .download-button[aria-disabled="false"] {
-    background: linear-gradient(135deg, rgb(var(--antique-gold)) 0%, rgb(var(--bronze)) 100%);
-    color: rgb(var(--warm-white));
-    border: 1px solid rgba(120, 86, 58, 0.3);
+  .afterlife-download-btn[aria-disabled="false"] {
+    background: #a67c00;
+    color: #0a0a0a;
+    border-color: #a67c00;
     cursor: pointer;
     pointer-events: auto;
-    box-shadow:
-      0 4px 16px rgba(var(--cognac), 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
-  .download-button[aria-disabled="false"]:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 24px rgba(var(--cognac), 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg, rgb(194, 153, 108) 0%, rgb(177, 135, 95) 100%);
-    border-color: rgba(var(--bronze), 0.5);
+  .afterlife-download-btn[aria-disabled="false"]:hover {
+    background: #ce9e00;
+    border-color: #ce9e00;
   }
 
   .download-hint {
     margin-top: 1rem;
     font-size: 0.875rem;
     font-style: italic;
-    color: rgba(var(--espresso), 0.6);
+    color: var(--eden-text-muted);
   }
 
   .download-hint.hidden {
     display: none;
   }
 
-  .afterlife-btn {
-    background: linear-gradient(135deg, rgb(var(--antique-gold)) 0%, rgb(var(--bronze)) 100%) !important;
-    color: rgb(var(--warm-white)) !important;
-    border: 1px solid rgba(120, 86, 58, 0.3) !important;
-    font-weight: 600 !important;
-    box-shadow:
-      0 4px 16px rgba(var(--cognac), 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-    border-radius: 8px !important;
-  }
-
-  .afterlife-btn:hover {
-    background: linear-gradient(135deg, rgb(194, 153, 108) 0%, rgb(177, 135, 95) 100%) !important;
-    box-shadow:
-      0 6px 24px rgba(var(--cognac), 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-  }
-
   .afterlife-retreat-btn {
-    border: 1px solid rgb(var(--cognac)) !important;
-    color: rgb(var(--cognac)) !important;
-    background: transparent !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: var(--eden-text);
+    border: 2px solid var(--eden-text);
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   .afterlife-retreat-btn:hover {
-    background: rgb(var(--cognac)) !important;
-    color: rgb(var(--warm-white)) !important;
+    background: var(--eden-text);
+    color: var(--eden-bg);
   }
 
   .afterlife-cta {
-    padding: 8rem 0;
     text-align: center;
-    background: transparent;
   }
 
-  @media (max-width: 1024px) {
-    .afterlife-glass-grid {
-      grid-template-columns: 1fr;
+  /* Gallery card - same as Nar-Mail narmail-glass */
+  .afterlife-artwork-card-section {
+    padding: 5rem 0;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass {
+    background: #0a0a0a;
+    border: 1px solid #3a3a3a;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .afterlife-artwork-card-section .artwork-info-card.afterlife-narmail-glass {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.92)), url("/images/afterlife_contract.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(206, 158, 0, 0.08), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass:hover {
+    border-color: rgba(206, 158, 0, 0.5);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(206, 158, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .artwork-info-card.afterlife-narmail-glass:hover::before {
+    left: 100%;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-title.afterlife-gallery-title {
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    background-position: 0% center;
+    animation: afterlife-shine 8s linear infinite;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-title.afterlife-gallery-title::before {
+    content: '// GALLERY';
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgba(206, 158, 0, 0.7);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    -webkit-text-fill-color: initial;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-description {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-icon.afterlife-gallery-icon {
+    background: rgba(206, 158, 0, 0.15);
+    color: #ce9e00;
+  }
+
+  .artwork-card-button.afterlife-gallery-btn {
+    background: transparent;
+    color: #ce9e00;
+    border: 2px solid #ce9e00;
+  }
+
+  .artwork-card-button.afterlife-gallery-btn:hover {
+    background: #ce9e00;
+    color: #0a0a0a;
+    box-shadow: 0 4px 24px rgba(206, 158, 0, 0.35);
+  }
+
+  @keyframes afterlife-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .artwork-info-card.afterlife-narmail-glass .artwork-card-title.afterlife-gallery-title {
+      animation: none;
+      background-position: 50% center;
     }
   }
 
   @media (max-width: 768px) {
-    .afterlife-hero {
-      height: 60vh;
+    .afterlife-artwork-card-section {
+      padding: 3rem 0;
     }
-    .afterlife-title {
-      font-size: clamp(3rem, 10vw, 8rem);
-    }
-    .afterlife-intro-section,
-    .afterlife-artwork-card-section,
-    .afterlife-content-grid-section,
-    .afterlife-interaction-section,
-    .afterlife-closing-section,
-    .afterlife-download-section {
-      padding: 5rem 0;
-    }
-    .afterlife-intro-card,
-    .afterlife-interaction-card,
-    .afterlife-download-card,
-    .afterlife-glass {
-      padding: 3rem 2rem !important;
-    }
-    .afterlife-terms {
+    .afterlife-artwork-card-section .artwork-card-content {
+      flex-direction: column;
+      text-align: center;
       padding: 2rem;
     }
-  }
-
-  @media (max-width: 480px) {
-    .afterlife-hero {
-      height: 50vh;
+    .afterlife-artwork-card-section .artwork-card-button {
+      width: 100%;
+      justify-content: center;
     }
-    .afterlife-title {
-      font-size: clamp(2.5rem, 12vw, 6rem);
-    }
-    .afterlife-intro-card,
-    .afterlife-interaction-card,
-    .afterlife-download-card,
-    .afterlife-glass {
-      padding: 2.5rem 1.5rem !important;
+    .afterlife-section {
+      padding: 3rem 0;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .afterlife-title {
-      animation: none;
-    }
-    .afterlife-glass:hover,
-    .afterlife-intro-card:hover,
-    .afterlife-interaction-card:hover,
-    .afterlife-download-card:hover,
-    .artwork-info-card.afterlife-glass:hover {
-      transform: none !important;
-    }
-    .download-button[aria-disabled="false"]:hover {
+    .artwork-info-card.afterlife-narmail-glass:hover,
+    .afterlife-retreat-btn {
       transform: none;
+      transition: none;
     }
   }
 
