@@ -81,6 +81,12 @@ export function openPortal(slug: string, direction: Direction) {
   const panel = getPanel(slug);
   if (!panel || activePanel === panel) return;
 
+  if (activePanel && activePanel !== panel) {
+    activePanel.classList.remove("is-active");
+    gsap.set(activePanel.querySelector(".panel-content"), { clearProps: "x,opacity" });
+    gsap.set(activePanel.querySelector(".panel-overlay"), { clearProps: "opacity" });
+  }
+
   activePanel = panel;
   originDirection = direction;
   lockScroll();
@@ -222,8 +228,9 @@ export function initInfociganPortal() {
 
   document.addEventListener("keydown", handleEscape, { signal });
   window.addEventListener("popstate", checkHash, { signal });
+  window.addEventListener("hashchange", checkHash, { signal });
 
-  checkHash(); // Initial check
+  checkHash();
 }
 
 export function destroyInfociganPortal() {

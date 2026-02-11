@@ -571,7 +571,7 @@ const zones = [
                       id="president-viewer-image"
                       draggable="false"
                     />
-                  </div>
+                  </div>Sometimes it arrives
                 </div>
                 <div class="viewer-zoom-indicator" id="president-zoom-indicator">100%</div>
               </div>
@@ -593,9 +593,9 @@ const zones = [
                       </h1>
                     <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
                       <p>Interdimensional Message Delivery Service</p>
-                      <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">By creatures something like that...</p>
+                      <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">or something like that...</p>
                     </div>
-                    <div class="narmail-mono mt-12 text-lg sm:text-xl text-zinc-500 leading-relaxed uppercase tracking-widest">
+                    <div class="narmail-mono narmail-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest">
                       <div>DELIVERY: CONDITIONAL</div>
                       <div>CARRIER: KOTIKI-NAR</div>
                       <div>STATUS: READY_WHEN_READY</div>
@@ -630,12 +630,12 @@ const zones = [
                     <p>Distance is not measured in kilometers, but in states of readiness.</p>
                     <h3 class="narmail-h3">Service Features</h3>
                     <ul class="narmail-features">
-                      <li>✦ Delivery across timelines, dimensions, and collapsed realities</li>
-                      <li>✦ Messages repositioned between states, not transported through space</li>
-                      <li>✦ Warm paper that remembers your hands</li>
-                      <li>✦ Stamps that shift when unobserved</li>
-                      <li>✦ Return addresses pointing to places that no longer exist—or not yet</li>
-                      <li>✦ Customs forms perpetually incomplete (by design)</li>
+                      <li>Delivery across timelines, dimensions, and collapsed realities</li>
+                      <li>Messages repositioned between states, not transported through space</li>
+                      <li>Warm paper that remembers your hands</li>
+                      <li>Stamps that shift when unobserved</li>
+                      <li>Return addresses pointing to places that no longer exist—or not yet</li>
+                      <li>Customs forms perpetually incomplete (by design)</li>
                     </ul>
                   </section>
 
@@ -770,18 +770,26 @@ const zones = [
                 </div>
 
                 <footer class="narmail-footer">
+                  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" />
                   <div class="narmail-footer-container px-6 sm:px-10 lg:px-16">
-                    <div class="mx-auto w-full">
-                      <h2 class="narmail-footer-headline uppercase font-medium tracking-[-0.035em] leading-[0.9] text-white">
-                        Contact
-                      </h2>
-                      <div class="narmail-footer-body mt-10 space-y-6 text-white/85 max-w-[100ch]">
-                        <p>Somewhere, right now, a letter is waiting.</p>
-                        <p>Not for transport.</p>
-                        <p>For you to become ready.</p>
-                        <p class="pt-4"><strong>Nar-Mail Express°</strong> — Because meaning moves at its own pace.</p>
-                      </div>
-                      <div class="mt-12">
+                    <div class="narmail-footer-scatter">
+                      <p class="narmail-footer-line narmail-footer-headline">Support Speculative Art Infrastructure</p>
+                      <p class="narmail-footer-line narmail-footer-dreams">This project runs on dreams, bureaucracy, and the occasional sticker sale.</p>
+                      <p class="narmail-footer-line narmail-footer-invest">Invest in cultural speculation:</p>
+                      <p class="narmail-footer-line narmail-footer-link-wrap">
+                        <a href="#infocigan-zone-overpriced-stickers" class="narmail-footer-link">Purchase Kotiki-Nar Limited Edition Stickers</a>
+                      </p>
+                      <p class="narmail-footer-line narmail-footer-what">What you get:</p>
+                      <p class="narmail-footer-line narmail-footer-check">✓ The sticker of questionable utility</p>
+                      <p class="narmail-footer-line narmail-footer-check">✓ Proof you participated before it was cool (or after it stopped being cool)</p>
+                      <p class="narmail-footer-line narmail-footer-check">✓ A tax-deductible sense of supporting something that defies categorization</p>
+                      <p class="narmail-footer-line narmail-footer-price">Price: More than it costs. Less than it's worth. Probably.</p>
+                      <p class="narmail-footer-line narmail-footer-contact">
+                        <a href="mailto:contact@q888.com">contact@q888.com</a>
+                        <span class="narmail-footer-sep">|</span>
+                        <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener">@quirky_888</a>
+                      </p>
+                      <div class="narmail-footer-cta">
                         <button type="button" class="narmail-retreat-btn" data-portal-back>Retreat to Market</button>
                       </div>
                     </div>
@@ -876,6 +884,8 @@ const zones = [
       const backButton = panel.querySelector<HTMLButtonElement>("[data-portal-back]");
 
       if (!nav || !toggle || !links) return;
+      if (nav.hasAttribute("data-portal-nav-initialized")) return;
+      nav.setAttribute("data-portal-nav-initialized", "true");
 
       toggle.addEventListener("click", () => {
         const expanded = toggle.getAttribute("aria-expanded") === "true";
@@ -1531,6 +1541,10 @@ const zones = [
       imageWrapper?.classList.add("is-grabbing");
       startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
       startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
     }
 
     function handleDragMove(e: MouseEvent | TouchEvent) {
@@ -3668,6 +3682,31 @@ const zones = [
     font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .narmail-mono-gold {
+    color: #a67c00;
+    background: linear-gradient(
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
+      #a67c00 80%
+    );
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: narmail-gold-shine 8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-mono-gold {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
   .narmail-main-content {
     max-width: 72rem;
     margin: 0 auto;
@@ -3733,19 +3772,42 @@ const zones = [
     line-height: 1.4;
     color: var(--eden-text);
     margin-bottom: 0.75rem;
-    padding-left: 1.5rem;
+    padding-left: 2.25rem;
     position: relative;
   }
 
-  .narmail-list li::before {
-    content: '—';
+  .narmail-list li::before,
+  .narmail-features li::before {
+    content: '✦';
     position: absolute;
     left: 0;
-    color: var(--eden-text-muted);
+    color: #a67c00;
+    background: linear-gradient(
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
+      #a67c00 80%
+    );
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: narmail-gold-shine 8s linear infinite;
   }
 
-  .narmail-features li::before {
-    content: none;
+  @keyframes narmail-gold-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-list li::before,
+    .narmail-features li::before {
+      animation: none;
+      background-position: 50% center;
+    }
   }
 
   .narmail-blockquote {
@@ -3800,16 +3862,122 @@ const zones = [
     object-fit: contain;
   }
 
-  .narmail-footer-headline {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.8rem, 3.2vw, 3rem);
-    text-align: left;
+  .narmail-footer-scatter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
   }
-
-  .narmail-footer-body {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  .narmail-footer-line {
+    margin: 0;
     line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .narmail-footer-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #fff;
+  }
+  .narmail-footer-dreams {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    grid-column: 1 / -1;
+    text-align: right;
+    transform: rotate(-1deg);
+  }
+  .narmail-footer-invest {
+    font-family: 'Bungee', cursive;
+    font-size: 1.1rem;
+    color: #fff;
+    grid-column: 1;
+  }
+  .narmail-footer-link-wrap {
+    grid-column: 2;
+    transform: rotate(1deg);
+  }
+  .narmail-footer-link {
+    font-size: 1.1rem;
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    animation: narmail-shine 8s linear infinite;
+  }
+  .narmail-footer-link:hover {
+    opacity: 0.9;
+  }
+  .narmail-footer-what {
+    font-family: 'Bungee', cursive;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.75);
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+  }
+  .narmail-footer-check {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .narmail-footer-check:nth-child(6) { grid-column: 1; }
+  .narmail-footer-check:nth-child(7) { grid-column: 2; transform: rotate(-0.5deg); }
+  .narmail-footer-check:nth-child(8) { grid-column: 1; transform: rotate(0.5deg); }
+  .narmail-footer-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .narmail-footer-contact {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .narmail-footer-contact a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .narmail-footer-contact a:hover {
+    text-decoration: underline;
+  }
+  .narmail-footer-sep {
+    margin: 0 0.5rem;
+    opacity: 0.6;
+  }
+  .narmail-footer-cta {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .narmail-footer-scatter {
+      grid-template-columns: 1fr;
+    }
+    .narmail-footer-check:nth-child(6),
+    .narmail-footer-check:nth-child(7),
+    .narmail-footer-check:nth-child(8) {
+      grid-column: 1;
+    }
+    .narmail-footer-dreams { transform: none; }
+    .narmail-footer-link-wrap { transform: none; }
+    .narmail-footer-check { transform: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-footer-line { transform: none !important; }
+    .narmail-footer-link { animation: none; }
   }
 
   .narmail-retreat-btn {
@@ -3945,10 +4113,7 @@ const zones = [
       padding: 6rem 0;
     }
     .narmail-footer-headline {
-      font-size: 2.2rem;
-    }
-    .narmail-footer-body {
-      font-size: 1.25rem;
+      font-size: 1.875rem;
     }
     .narmail-section {
       padding: 3rem 0;
