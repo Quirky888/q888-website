@@ -1,0 +1,628 @@
+---
+// No props needed
+---
+
+<div id="nar-chat-widget" class="nar-chat-widget">
+  <button id="nar-chat-toggle" class="nar-chat-toggle" aria-label="Open Nar-Mail Express chat">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span class="nar-chat-badge">?</span>
+  </button>
+
+  <div id="nar-chat-window" class="nar-chat-window" aria-hidden="true">
+    <div class="nar-chat-header">
+      <div class="nar-chat-header-content">
+        <h3>Nar-Mail Express°</h3>
+        <p class="nar-chat-status">Square Bubbles Bureaucracy Division</p>
+      </div>
+      <button id="nar-chat-close" class="nar-chat-close" aria-label="Close chat">&times;</button>
+    </div>
+
+    <div id="nar-chat-messages" class="nar-chat-messages"></div>
+
+    <div class="nar-chat-input-wrapper">
+      <input
+        type="text"
+        id="nar-chat-input"
+        class="nar-chat-input"
+        placeholder="Type your inquiry"
+        autocomplete="off"
+      />
+      <button id="nar-chat-send" class="nar-chat-send" aria-label="Send message">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  class NarMailChatbot {
+    constructor() {
+      this.widget = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-widget"));
+      this.toggle = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-toggle"));
+      this.window = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-window"));
+      this.close = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-close"));
+      this.messages = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-messages"));
+      this.input = /** @type {HTMLInputElement | null} */ (document.getElementById("nar-chat-input"));
+      this.send = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-send"));
+      this.hasInitialized = false;
+
+      /** @type {"initial" | "awaiting_name" | "awaiting_dimension" | "chaos"} */
+      this.conversationState = "initial";
+      /** @type {string | null} */
+      this.userName = null;
+      /** @type {string | null} */
+      this.parcelDimension = null;
+
+      this.init();
+    }
+
+    init() {
+      if (this.hasInitialized || !this.widget) return;
+      this.hasInitialized = true;
+
+      this.toggle?.addEventListener("click", () => this.openChat());
+      this.close?.addEventListener("click", () => this.closeChat());
+      this.send?.addEventListener("click", () => this.sendMessage());
+      this.input?.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") this.sendMessage();
+      });
+      this.input?.addEventListener("input", () => {
+        if (this.input?.value.length > 0) this.input?.removeAttribute("placeholder");
+      });
+
+      setTimeout(() => this.addBotMessage(this.getRandomGreeting(), 200), 500);
+    }
+
+    openChat() {
+      this.window?.classList.add("is-open");
+      this.window?.setAttribute("aria-hidden", "false");
+      this.toggle?.classList.add("is-hidden");
+      this.input?.focus();
+    }
+
+    closeChat() {
+      this.window?.classList.remove("is-open");
+      this.window?.setAttribute("aria-hidden", "true");
+      this.toggle?.classList.remove("is-hidden");
+    }
+
+    /**
+     * @param {string} text
+     * @param {boolean} [isBot=false]
+     */
+    addMessage(text, isBot = false) {
+      const msg = document.createElement("div");
+      msg.className = `nar-chat-message ${isBot ? "bot" : "user"}`;
+      const label = isBot ? "K-Nar" : "You";
+      msg.innerHTML = `<span class="nar-chat-message-label">${label}</span><div class="nar-chat-message-content">${text}</div>`;
+      this.messages?.appendChild(msg);
+      this.scrollToBottom();
+    }
+
+    /**
+     * @param {string} text
+     * @param {number} [delay=800]
+     */
+    addBotMessage(text, delay = 800) {
+      this.showTypingIndicator();
+      setTimeout(() => {
+        this.hideTypingIndicator();
+        this.addMessage(text, true);
+      }, delay);
+    }
+
+    showTypingIndicator() {
+      this.hideTypingIndicator();
+      const indicator = document.createElement("div");
+      indicator.className = "nar-chat-typing";
+      indicator.id = "typing-indicator";
+      indicator.innerHTML = "<span></span><span></span><span></span>";
+      this.messages?.appendChild(indicator);
+      this.scrollToBottom();
+    }
+
+    hideTypingIndicator() {
+      document.getElementById("typing-indicator")?.remove();
+    }
+
+    scrollToBottom() {
+      if (this.messages) {
+        this.messages.scrollTop = this.messages.scrollHeight;
+      }
+    }
+
+    sendMessage() {
+      const text = this.input?.value.trim();
+      if (!text) return;
+
+      this.addMessage(text, false);
+      if (this.input) this.input.value = "";
+
+      this.processUserMessage(text);
+    }
+
+    /** @param {string} text */
+    processUserMessage(text) {
+      const lowerText = text.toLowerCase();
+      let response = "";
+
+      switch (this.conversationState) {
+        case "initial":
+          if (lowerText.includes("yes") || lowerText.includes("send") || lowerText.includes("parcel")) {
+            response = this.getFormRequirement();
+            this.conversationState = "awaiting_name";
+          } else if (lowerText.includes("no")) {
+            response = this.getRandomRejection();
+          } else {
+            response = this.getRandomConfusion();
+          }
+          break;
+
+        case "awaiting_name":
+          this.userName = text;
+          response = this.getDimensionQuestion();
+          this.conversationState = "awaiting_dimension";
+          break;
+
+        case "awaiting_dimension":
+          this.parcelDimension = text;
+          response = this.getRandomBureaucraticResponse();
+          this.conversationState = "chaos";
+          break;
+
+        case "chaos":
+          response = this.getChaosResponse();
+          break;
+
+        default:
+          response = this.getRandomConfusion();
+      }
+
+      this.addBotMessage(response, Math.random() * 1000 + 500);
+    }
+
+    getRandomGreeting() {
+      const greetings = [
+        "Welcome to Nar-Mail Express°. Before we proceed, have you completed Form 888-Q (Intention Declaration)?",
+        "Greetings. This conversation is being recorded for quality assurance in Timeline B. Do you wish to send a parcel?",
+        "Hello! To expedite your inquiry, please state whether you are currently: (a) Human (b) AI (c) Uncertain (d) All of the above.",
+        "NAR-MAIL SYSTEM ONLINE. Current interdimensional delay: 3-5 business eternities. How may we complicate your day?",
+        "Good [TIME_UNIT]. Your request has been pre-processed by Department 404. Would you like to continue anyway?",
+      ];
+      return greetings[Math.floor(Math.random() * greetings.length)];
+    }
+
+    getFormRequirement() {
+      const forms = [
+        "Excellent. Please provide your full name as it appears on your Existential ID (Form 888-E required).",
+        "Understood. First, we need your name exactly as it was meant to be, not as it currently is. Please specify.",
+        "Noted. For processing, please state your name in reverse alphabetical order, then we'll sort it later.",
+        "Perfect. Enter your name. If you've changed dimensions recently, use your previous timeline's name.",
+      ];
+      return forms[Math.floor(Math.random() * forms.length)];
+    }
+
+    getDimensionQuestion() {
+      const safeName = this.userName || "Applicant";
+      const questions = [
+        `Thank you, ${safeName}. Now, describe your parcel in terms of: (a) Physical weight (b) Emotional weight (c) Both (d) Neither but somehow still heavy.`,
+        `Noted, ${safeName}. What is the approximate dimension of your parcel? Please answer in non-Euclidean units.`,
+        `Acknowledged. Does your parcel exist in: (1) This reality (2) A parallel reality (3) Schrödinger's box (4) Yes.`,
+        `Processing... ${safeName}, classify your parcel urgency: (A) Immediate (B) Yesterday (C) Next century (D) When time permits itself to exist.`,
+      ];
+      return questions[Math.floor(Math.random() * questions.length)];
+    }
+
+    getRandomBureaucraticResponse() {
+      const parcel = this.parcelDimension || "unspecified";
+      const responses = [
+        `Interesting. Your submission has been forwarded to Department ${Math.floor(Math.random() * 999)}. They no longer exist, but protocol must be followed.`,
+        `I see. Unfortunately, parcels of type "${parcel}" require approval from the Square Bubbles Council. Current wait time: ∞ ± 3 days.`,
+        `Fascinating. This falls under Regulation 888.${Math.floor(Math.random() * 99)}, which was repealed before it was written. Please proceed anyway.`,
+        `Your request conflicts with Form T-${Math.random().toFixed(3)}, which you haven't filled yet but already submitted in an alternate timeline. Paradox logged.`,
+        "According to our records, you've already sent this parcel in 2031. We're processing it retroactively. Please confirm you will send it later.",
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    getChaosResponse() {
+      const chaos = [
+        "Your parcel is simultaneously in transit and never sent. Quantum shipping at its finest.",
+        "We've contacted the mushroom network. They suggest reconsidering whether parcels are a construct.",
+        "Error 888: Success too successful. Your parcel has arrived before you sent it. Please retrieve from yesterday.",
+        "The Council has reviewed your case. Their response: 🍄✨📦? (Translation pending)",
+        "Congratulations! You've been randomly selected for Express Delay™ - now twice as slow!",
+        "Your parcel weight exceeds our existential capacity. Consider sending it as an NFT instead.",
+        "Due to interdimensional regulations, we can only deliver to addresses that don't exist yet.",
+        "System Note: Your parcel has achieved sentience and requested a transfer to Department of Philosophy.",
+        "URGENT: Your package is having an existential crisis. Should we send a therapist or just deliver it?",
+        "Hmm. Have you tried turning your parcel off and on again? Sometimes that changes its dimension.",
+        "The AI says yes. The mushrooms say no. The middle-management demons abstained. Proposal: deadlock eternal.",
+        "Your inquiry has been escalated to the President of the Galaxy. Response time: when causality is optional.",
+        "Thank you for your patience. Your submission is now a conceptual art piece. Invoice attached (non-refundable).",
+      ];
+      return chaos[Math.floor(Math.random() * chaos.length)];
+    }
+
+    getRandomConfusion() {
+      const confused = [
+        "I don't understand, but I've logged your response as 'poetic disagreement.' Please rephrase using only vowels.",
+        "Unclear. Are you requesting services or just enjoying bureaucracy? Both are valid.",
+        "Your response has been classified as 'interpretive.' Would you like to try again in a different language?",
+        "Interesting choice. That wasn't one of the options, which makes it the most correct answer. Proceed?",
+      ];
+      return confused[Math.floor(Math.random() * confused.length)];
+    }
+
+    getRandomRejection() {
+      const rejections = [
+        "Understandable. Your 'No' has been filed as Application 000-N. We'll contact you when you change your mind (already scheduled).",
+        "Noted. Declining service automatically enrolls you in our 'Maybe Later' program. First reminder: now.",
+        "Respect. Your rejection has been accepted and will be processed in 3-5 eternities. Have a day.",
+        "Fair enough. We've added you to the Non-Customer Database. Monthly updates about services you don't want will follow.",
+      ];
+      return rejections[Math.floor(Math.random() * rejections.length)];
+    }
+  }
+
+  function initNarMailChatbot() {
+    const widget = document.getElementById("nar-chat-widget");
+    if (!widget || widget.getAttribute("data-nar-chat-init") === "true") return;
+    widget.setAttribute("data-nar-chat-init", "true");
+    new NarMailChatbot();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNarMailChatbot, { once: true });
+  } else {
+    initNarMailChatbot();
+  }
+
+  document.addEventListener("astro:page-load", initNarMailChatbot);
+</script>
+
+<style>
+  #nar-chat-widget,
+  #nar-chat-widget * {
+    color: #ffffff !important;
+  }
+
+  .nar-chat-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .nar-chat-toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgb(95, 210, 230) 0%, rgb(45, 140, 155) 100%);
+    border: 2px solid rgb(180, 235, 245);
+    color: rgb(7, 19, 35);
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(95, 210, 230, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nar-chat-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(95, 210, 230, 0.6);
+  }
+
+  .nar-chat-toggle.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+  }
+
+  .nar-chat-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: rgb(235, 215, 175);
+    color: rgb(7, 19, 35);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    animation: nar-chat-pulse 2s infinite;
+  }
+
+  @keyframes nar-chat-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  .nar-chat-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    max-width: calc(100vw - 4rem);
+    height: 550px;
+    max-height: calc(100vh - 140px);
+    background: rgb(12, 25, 40);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid rgb(95, 210, 230);
+    border-radius: 20px;
+    box-shadow:
+      0 0 60px rgba(95, 210, 230, 0.5),
+      inset 0 1px 0 rgba(180, 235, 245, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .nar-chat-window.is-open {
+    display: flex;
+    animation: nar-chat-slide-up 0.3s ease-out;
+  }
+
+  @keyframes nar-chat-slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nar-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: rgb(8, 18, 30);
+    border-bottom: 1px solid rgba(95, 210, 230, 0.3);
+  }
+
+  #nar-chat-widget .nar-chat-header-content h3 {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.05em;
+  }
+
+  #nar-chat-widget .nar-chat-status {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 0.8rem;
+    margin: 0.25rem 0 0;
+    font-style: italic;
+  }
+
+  #nar-chat-widget .nar-chat-close {
+    background: none;
+    border: none;
+    color: #ffffff !important;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .nar-chat-close:hover {
+    background: rgba(95, 210, 230, 0.2);
+    color: rgb(95, 210, 230);
+  }
+
+  .nar-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nar-chat-message {
+    display: flex;
+    animation: nar-chat-message-in 0.3s ease-out;
+  }
+
+  @keyframes nar-chat-message-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nar-chat-message.bot {
+    justify-content: flex-start;
+  }
+
+  .nar-chat-message.user {
+    justify-content: flex-end;
+  }
+
+  .nar-chat-message {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nar-chat-message.user {
+    align-items: flex-end;
+  }
+
+  .nar-chat-message-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-bottom: 0.25rem;
+  }
+
+  #nar-chat-widget .nar-chat-message-content {
+    max-width: 75%;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ffffff !important;
+  }
+
+  #nar-chat-widget .nar-chat-message.bot .nar-chat-message-content {
+    background: rgba(95, 210, 230, 0.25);
+    color: #ffffff !important;
+    border: 1px solid rgba(95, 210, 230, 0.4);
+  }
+
+  #nar-chat-widget .nar-chat-message.user .nar-chat-message-content {
+    background: rgba(100, 80, 60, 0.5);
+    color: #ffffff !important;
+    border: 1px solid rgba(200, 165, 105, 0.4);
+    font-weight: 700;
+  }
+
+  .nar-chat-typing {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    background: rgba(95, 210, 230, 0.25);
+    border: 1px solid rgba(95, 210, 230, 0.4);
+    border-radius: 12px;
+    width: fit-content;
+  }
+
+  .nar-chat-typing span {
+    width: 8px;
+    height: 8px;
+    background: rgb(95, 210, 230);
+    border-radius: 50%;
+    animation: nar-chat-typing 1.4s infinite;
+  }
+
+  .nar-chat-typing span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .nar-chat-typing span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes nar-chat-typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    30% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+  }
+
+  .nar-chat-input-wrapper {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: rgb(8, 18, 30);
+    border-top: 1px solid rgba(95, 210, 230, 0.3);
+  }
+
+  #nar-chat-widget .nar-chat-input {
+    flex: 1;
+    background: rgba(20, 40, 60, 0.9);
+    border: 1px solid rgba(95, 210, 230, 0.5);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #ffffff !important;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .nar-chat-input:focus {
+    border-color: rgb(95, 210, 230);
+  }
+
+  #nar-chat-widget .nar-chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .nar-chat-send {
+    background: linear-gradient(135deg, rgb(95, 210, 230) 0%, rgb(45, 140, 155) 100%);
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(7, 19, 35);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .nar-chat-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(95, 210, 230, 0.4);
+  }
+
+  .nar-chat-messages::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .nar-chat-messages::-webkit-scrollbar-track {
+    background: rgba(15, 35, 55, 0.5);
+  }
+
+  .nar-chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(95, 210, 230, 0.4);
+    border-radius: 3px;
+  }
+
+  .nar-chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(95, 210, 230, 0.6);
+  }
+
+  @media (max-width: 480px) {
+    .nar-chat-widget {
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .nar-chat-window {
+      width: calc(100vw - 2rem);
+      height: calc(100vh - 100px);
+      bottom: 70px;
+      right: 0;
+    }
+  }
+</style>

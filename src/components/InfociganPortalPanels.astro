@@ -3,6 +3,7 @@ import SlimNav from "./SlimNav.astro";
 import OverpricedStickersSection from "./OverpricedStickersSection.astro";
 import DynamicGoldBackground from "./DynamicGoldBackground.astro";
 import DynamicCosmicBackground from "./DynamicCosmicBackground.astro";
+import NarMailChatbot from "./NarMailChatbot.astro";
 
 const zones = [
   {
@@ -520,6 +521,7 @@ const zones = [
                       <p class="president-contact-links">
                         <a href="mailto:contact@q888.com">contact@q888.com</a> | <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a>
                       </p>
+                      <button type="button" id="president-submit-btn" class="president-submit-btn">Submit to Council</button>
                       <p class="president-contact-closing">
                         Remember: The galaxy doesn't need saving.<br />
                         It needs better system design.<br />
@@ -580,11 +582,15 @@ const zones = [
             <div class="narmail-eden-wrap">
               <SlimNav />
               <div class="narmail-layout">
-                <section class="narmail-hero px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
-                  <div class="mx-auto">
-                    <h1 class="narmail-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
-                      NAR-MAIL EXPRESS°
-                    </h1>
+                <section class="narmail-hero">
+                  <div class="narmail-hero-image">
+                    <img src="/images/Mar_mail_hero.webp" alt="Nar-Mail Express" loading="eager" />
+                  </div>
+                  <div class="narmail-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
+                    <div class="mx-auto">
+                      <h1 class="narmail-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
+                        NAR-MAIL EXPRESS°
+                      </h1>
                     <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
                       <p>Interdimensional Message Delivery Service</p>
                       <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">By creatures something like that...</p>
@@ -593,6 +599,7 @@ const zones = [
                       <div>DELIVERY: CONDITIONAL</div>
                       <div>CARRIER: KOTIKI-NAR</div>
                       <div>STATUS: READY_WHEN_READY</div>
+                    </div>
                     </div>
                   </div>
                 </section>
@@ -630,6 +637,28 @@ const zones = [
                       <li>✦ Return addresses pointing to places that no longer exist—or not yet</li>
                       <li>✦ Customs forms perpetually incomplete (by design)</li>
                     </ul>
+                  </section>
+
+                  <section class="narmail-artwork-card-section">
+                    <div class="artwork-info-card narmail-glass" id="narmail-gallery-trigger">
+                      <div class="artwork-card-content">
+                        <div class="artwork-card-icon narmail-icon">
+                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 8L10.89 13.26C11.22 13.47 11.64 13.47 11.97 13.26L21 8M5 19H19C20.105 19 21 18.105 21 17V5C21 3.895 20.105 3 19 3H5C3.895 3 3 3.895 3 5V17C3 18.105 3.895 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </div>
+                        <div class="artwork-card-text">
+                          <h3 class="artwork-card-title narmail-title">Nar-Mail Visual Archive</h3>
+                          <p class="artwork-card-description">Full-resolution artwork featuring Kotiki-Nar couriers, interdimensional stamps, Cobra Encryption symbols, and the square bubble postal network.</p>
+                        </div>
+                        <button class="artwork-card-button narmail-btn" type="button">
+                          <span>Open Gallery</span>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </section>
 
                   <section class="narmail-section">
@@ -732,7 +761,12 @@ const zones = [
                       <li><strong>Coffee Tax</strong> — All deliveries include a mandatory "espresso break" for the Kotiki-Nar. They might drink your coffee. Deal with it.</li>
                     </ol>
                   </section>
+                  <NarMailChatbot />
 
+                </div>
+
+                <div class="narmail-image-above-footer px-6 sm:px-10 lg:px-16">
+                  <img src="/images/Q_A.PNG" alt="Q&A" class="narmail-q-a-image" />
                 </div>
 
                 <footer class="narmail-footer">
@@ -753,6 +787,45 @@ const zones = [
                     </div>
                   </div>
                 </footer>
+              </div>
+            </div>
+            <div class="artwork-viewer" id="narmail-artwork-viewer" aria-hidden="true">
+              <div class="viewer-overlay"></div>
+              <div class="viewer-container">
+                <div class="viewer-controls">
+                  <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                  <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="viewer-image-wrapper">
+                  <div class="viewer-image-container" id="narmail-viewer-image-container">
+                    <img
+                      src="/images/nar_mail_artwork.webp"
+                      alt="Nar-Mail Express Visual Archive"
+                      class="viewer-image"
+                      id="narmail-viewer-image"
+                      draggable="false"
+                    />
+                  </div>
+                </div>
+                <div class="viewer-zoom-indicator" id="narmail-zoom-indicator">100%</div>
               </div>
             </div>
             </>
@@ -928,6 +1001,10 @@ const zones = [
       const clientY = e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
       startX = clientX - translateX;
       startY = clientY - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
     }
 
     function handleDragMove(e: MouseEvent | TouchEvent) {
@@ -943,6 +1020,8 @@ const zones = [
     function handleDragEnd() {
       isDragging = false;
       imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
     }
 
     let initialDistance = 0;
@@ -988,8 +1067,6 @@ const zones = [
     });
 
     imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
-    document.addEventListener("mousemove", handleDragMove as EventListener);
-    document.addEventListener("mouseup", handleDragEnd);
 
     imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
     imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
@@ -1095,6 +1172,10 @@ const zones = [
       imageWrapper?.classList.add("is-grabbing");
       startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
       startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
     }
 
     function handleDragMove(e: MouseEvent | TouchEvent) {
@@ -1110,6 +1191,8 @@ const zones = [
     function handleDragEnd() {
       isDragging = false;
       imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
     }
 
     let initialDistance = 0;
@@ -1152,8 +1235,6 @@ const zones = [
       if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
     });
     imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
-    document.addEventListener("mousemove", handleDragMove as EventListener);
-    document.addEventListener("mouseup", handleDragEnd);
     imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
     imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
     imageWrapper?.addEventListener("touchend", handleDragEnd);
@@ -1199,6 +1280,165 @@ const zones = [
       bubble.querySelector(".president-bubble-close")?.addEventListener("click", () => bubble.remove());
       setTimeout(() => bubble.remove(), 5000);
     });
+  }
+
+  function initNarmailViewer() {
+    const trigger = document.getElementById("narmail-gallery-trigger");
+    const viewer = document.getElementById("narmail-artwork-viewer");
+    const closeBtn = viewer?.querySelector(".viewer-close");
+    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
+    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
+    const resetBtn = viewer?.querySelector(".viewer-reset");
+    const imageContainer = document.getElementById("narmail-viewer-image-container");
+    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
+    const zoomIndicator = document.getElementById("narmail-zoom-indicator");
+
+    if (!trigger || !viewer || !imageContainer) return;
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const MIN_SCALE = 1;
+    const MAX_SCALE = 4;
+    const ZOOM_STEP = 0.3;
+
+    function updateTransform() {
+      if (!imageContainer) return;
+      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      if (zoomIndicator) {
+        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+        zoomIndicator.classList.add("show");
+        clearTimeout((window as { narmailZoomTimeout?: number }).narmailZoomTimeout);
+        (window as { narmailZoomTimeout?: number }).narmailZoomTimeout = window.setTimeout(() => {
+          zoomIndicator.classList.remove("show");
+        }, 1000);
+      }
+    }
+
+    function openViewer() {
+      if (!viewer) return;
+      viewer.classList.add("is-open");
+      viewer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      resetView();
+    }
+
+    function closeViewer() {
+      if (!viewer) return;
+      viewer.classList.remove("is-open");
+      viewer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      resetView();
+    }
+
+    function resetView() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    function zoomIn() {
+      if (scale < MAX_SCALE) {
+        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+        updateTransform();
+      }
+    }
+
+    function zoomOut() {
+      if (scale > MIN_SCALE) {
+        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+        if (scale === MIN_SCALE) {
+          translateX = 0;
+          translateY = 0;
+        }
+        updateTransform();
+      }
+    }
+
+    function handleWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    }
+
+    function handleDragStart(e: MouseEvent | TouchEvent) {
+      if (scale === 1) return;
+      isDragging = true;
+      imageWrapper?.classList.add("is-grabbing");
+      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
+      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
+    }
+
+    function handleDragMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
+      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
+      translateX = clientX - startX;
+      translateY = clientY - startY;
+      updateTransform();
+    }
+
+    function handleDragEnd() {
+      isDragging = false;
+      imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
+    }
+
+    let initialDistance = 0;
+    let initialScale = 1;
+
+    function getTouchDistance(e: TouchEvent) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        initialDistance = getTouchDistance(e);
+        initialScale = scale;
+      } else if (e.touches.length === 1) {
+        handleDragStart(e);
+      }
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e);
+        const newScale = initialScale * (currentDistance / initialDistance);
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+        updateTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        handleDragMove(e);
+      }
+    }
+
+    trigger.addEventListener("click", openViewer);
+    closeBtn?.addEventListener("click", closeViewer);
+    zoomInBtn?.addEventListener("click", zoomIn);
+    zoomOutBtn?.addEventListener("click", zoomOut);
+    resetBtn?.addEventListener("click", resetView);
+    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    });
+    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
+    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchend", handleDragEnd);
+    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
   }
 
   function initPresidentViewer() {
@@ -1306,6 +1546,8 @@ const zones = [
     function handleDragEnd() {
       isDragging = false;
       imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
     }
 
     let initialDistance = 0;
@@ -1351,8 +1593,6 @@ const zones = [
     });
 
     imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
-    document.addEventListener("mousemove", handleDragMove as EventListener);
-    document.addEventListener("mouseup", handleDragEnd);
 
     imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
     imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
@@ -1367,18 +1607,21 @@ const zones = [
       initAfterlifeDownload();
       initPresidentCampaignBubble();
       initPresidentViewer();
+      initNarmailViewer();
     });
   } else {
     initAfterlifeViewer();
     initAfterlifeDownload();
     initPresidentCampaignBubble();
     initPresidentViewer();
+    initNarmailViewer();
   }
   document.addEventListener("astro:page-load", () => {
     initAfterlifeViewer();
     initAfterlifeDownload();
     initPresidentCampaignBubble();
     initPresidentViewer();
+    initNarmailViewer();
   });
 </script>
 
@@ -1438,6 +1681,14 @@ const zones = [
 
   [data-portal-panel="nar-mail-express"] .panel-content {
     background: #fcf8f9;
+  }
+
+  [data-portal-panel="nar-mail-express"] #nar-chat-widget .nar-chat-message-content,
+  [data-portal-panel="nar-mail-express"] #nar-chat-widget .nar-chat-header-content h3,
+  [data-portal-panel="nar-mail-express"] #nar-chat-widget .nar-chat-status,
+  [data-portal-panel="nar-mail-express"] #nar-chat-widget .nar-chat-input,
+  [data-portal-panel="nar-mail-express"] #nar-chat-widget .nar-chat-close {
+    color: #ffffff !important;
   }
 
   .panel-scroll {
@@ -1777,10 +2028,7 @@ const zones = [
 
   .artwork-viewer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     z-index: 10000;
     display: none;
     opacity: 0;
@@ -3128,6 +3376,27 @@ const zones = [
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
+  .president-submit-btn {
+    display: block;
+    margin: 2rem 0;
+    padding: 1rem 2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: rgba(var(--bright-cyan), 0.15);
+    border: 1px solid rgba(var(--bright-cyan), 0.4);
+    color: rgb(var(--bright-cyan));
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .president-submit-btn:hover {
+    background: rgba(var(--bright-cyan), 0.25);
+    border-color: rgba(var(--bright-cyan), 0.6);
+  }
+
   .president-contact-links {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 1.05rem;
@@ -3358,6 +3627,32 @@ const zones = [
     background: var(--eden-bg);
   }
 
+  .narmail-hero {
+    position: relative;
+  }
+
+  .narmail-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--eden-bg);
+  }
+
+  .narmail-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(252, 248, 249, 0.95), transparent);
+  }
+
+  .narmail-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .narmail-layout {
     width: 100%;
     color: var(--eden-text);
@@ -3479,6 +3774,14 @@ const zones = [
     font-size: clamp(1.5rem, 2.2vw, 2.2rem);
   }
 
+  .narmail-image-above-footer {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    background: var(--eden-bg);
+    padding-bottom: 0;
+  }
+
   .narmail-footer {
     width: 100%;
     background: #000;
@@ -3486,6 +3789,15 @@ const zones = [
     padding: 8rem 0;
     position: relative;
     z-index: 10;
+  }
+
+  .narmail-q-a-image {
+    position: absolute;
+    bottom: -0.78rem;
+    right: 2rem;
+    max-width: clamp(100px, 16vw, 180px);
+    height: auto;
+    object-fit: contain;
   }
 
   .narmail-footer-headline {
@@ -3519,7 +3831,116 @@ const zones = [
     border-color: rgba(255, 255, 255, 0.6);
   }
 
+  .narmail-artwork-card-section {
+    padding: 5rem 0;
+  }
+
+  .artwork-info-card.narmail-glass {
+    background: #0a0a0a;
+    border: 1px solid #3a3a3a;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .narmail-artwork-card-section .artwork-info-card.narmail-glass {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.92)), url("/images/nar_mail_artwork.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .artwork-info-card.narmail-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(206, 158, 0, 0.08), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .artwork-info-card.narmail-glass:hover {
+    border-color: rgba(206, 158, 0, 0.5);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(206, 158, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .artwork-info-card.narmail-glass:hover::before {
+    left: 100%;
+  }
+
+  .narmail-glass .artwork-card-title {
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    background-position: 0% center;
+    animation: narmail-shine 8s linear infinite;
+    color: transparent;
+  }
+
+  @keyframes narmail-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-glass .artwork-card-title {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  .narmail-glass .artwork-card-title::before {
+    content: '// GALLERY';
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgba(206, 158, 0, 0.7);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    -webkit-text-fill-color: initial;
+  }
+
+  .narmail-glass .artwork-card-description {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+  }
+
+  .narmail-glass .artwork-card-icon.narmail-icon {
+    background: rgba(206, 158, 0, 0.15);
+    color: #ce9e00;
+  }
+
+  .artwork-card-button.narmail-btn {
+    background: transparent;
+    color: #ce9e00;
+    border: 2px solid #ce9e00;
+  }
+
+  .artwork-card-button.narmail-btn:hover {
+    background: #ce9e00;
+    color: #0a0a0a;
+    box-shadow: 0 4px 24px rgba(206, 158, 0, 0.35);
+  }
+
   @media (max-width: 768px) {
+    .narmail-artwork-card-section {
+      padding: 3rem 0;
+    }
+    .narmail-artwork-card-section .artwork-card-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+    .narmail-artwork-card-section .artwork-card-button {
+      width: 100%;
+      justify-content: center;
+    }
     .narmail-footer {
       padding: 6rem 0;
     }
