@@ -584,7 +584,7 @@ const zones = [
                       id="president-viewer-image"
                       draggable="false"
                     />
-                  </div>Sometimes it arrives
+                  </div>
                 </div>
                 <div class="viewer-zoom-indicator" id="president-zoom-indicator">100%</div>
               </div>
@@ -942,6 +942,8 @@ const zones = [
     const zoomIndicator = document.getElementById("zoom-indicator");
 
     if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
 
     let scale = 1;
     let translateX = 0;
@@ -1120,6 +1122,8 @@ const zones = [
     const zoomIndicator = document.getElementById("afterlife-zoom-indicator");
 
     if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
 
     let scale = 1;
     let translateX = 0;
@@ -1297,6 +1301,8 @@ const zones = [
     const zoomIndicator = document.getElementById("narmail-zoom-indicator");
 
     if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
 
     let scale = 1;
     let translateX = 0;
@@ -1456,6 +1462,8 @@ const zones = [
     const zoomIndicator = document.getElementById("president-zoom-indicator");
 
     if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
 
     let scale = 1;
     let translateX = 0;
