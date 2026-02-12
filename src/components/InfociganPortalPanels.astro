@@ -474,7 +474,7 @@ const zones = [
                           </p>
                         </div>
                         <a href="#infocigan-zone-overpriced-stickers" class="president-what-image-link group" aria-label="Go to Overpriced Stickers">
-                          <img src="/images/president.webp" alt="" loading="lazy" />
+                          <img src="/images/President_Invest.webp" alt="" loading="lazy" />
                         </a>
                       </div>
                       <div class="glass-card president-glass">
@@ -521,17 +521,24 @@ const zones = [
 
 
                   <section class="president-contact-section">
-                    <div class="glass-card president-glass president-contact-card">
-                      <h2>Contact</h2>
-                      <p class="president-eden-body">Interested in collaborations or just want to argue about governance?</p>
-                      <p class="president-contact-links">
-                        <a href="mailto:contact@q888.com">contact@q888.com</a> | <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a>
+                    <div class="glass-card president-glass president-contact-card president-portal-card">
+                      <h2 class="president-portal-title">Interdimensional Contact Portal</h2>
+                      <p class="president-portal-reach">Reach out if you are:</p>
+                      <ul class="president-portal-list">
+                        <li>Arguing about middle-finger semiotics (Peace ON vs. peace off)</li>
+                        <li>Applying for Square Bubbles Council recognition</li>
+                        <li>Building mushroom-human-robot governance models</li>
+                        <li>Investing in campaigns that exist in multiple timelines simultaneously</li>
+                      </ul>
+                      <div class="president-portal-meta">
+                        <p><strong>For:</strong> Collaborations, investments, conceptual disputes, art acquisitions, existential debates.</p>
+                        <p><strong>Open to:</strong> All species, sentient code, mycelium networks, and uncertain entities.</p>
+                      </div>
+                      <p class="president-portal-links">
+                        <a href="mailto:contact@q888.com">contact@q888.com</a><span class="president-portal-sep">|</span><a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a>
                       </p>
-                      <button type="button" id="president-submit-btn" class="president-submit-btn">Submit to Council</button>
-                      <p class="president-contact-closing">
-                        Remember: The galaxy doesn't need saving.<br />
-                        It needs better system design.<br />
-                        And maybe a really good overpriced sticker.
+                      <p class="president-portal-closing">
+                        The galaxy doesn't need saving. It needs better protocols, fungal wisdom, and luxury absurdism.
                       </p>
                     </div>
                   </section>
@@ -917,8 +924,11 @@ const zones = [
     });
   }
 
+  if (!document.documentElement.dataset.portalNavListener) {
+    document.documentElement.dataset.portalNavListener = "1";
+    document.addEventListener("astro:page-load", initPortalNav);
+  }
   initPortalNav();
-  document.addEventListener("astro:page-load", initPortalNav);
 
   function initArtworkViewer() {
     const trigger = document.getElementById("artwork-gallery-trigger");
@@ -1275,29 +1285,6 @@ const zones = [
     });
   }
 
-  function initPresidentCampaignBubble() {
-    if (document.body.hasAttribute("data-president-bubble-listener")) return;
-    document.body.setAttribute("data-president-bubble-listener", "true");
-    document.addEventListener("click", (event) => {
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-      const button = target.closest("#president-submit-btn");
-      if (!button) return;
-      event.preventDefault();
-      const bubble = document.createElement("div");
-      bubble.className = "president-bubble";
-      bubble.innerHTML = `
-        <div class="president-bubble-content">
-          <p>"The Council acknowledges your submission. Expect a definitive update in the very near future."</p>
-          <button type="button" class="president-bubble-close" aria-label="Close">×</button>
-        </div>
-      `;
-      document.body.appendChild(bubble);
-      bubble.querySelector(".president-bubble-close")?.addEventListener("click", () => bubble.remove());
-      setTimeout(() => bubble.remove(), 5000);
-    });
-  }
-
   function initNarmailViewer() {
     const trigger = document.getElementById("narmail-gallery-trigger");
     const viewer = document.getElementById("narmail-artwork-viewer");
@@ -1625,21 +1612,18 @@ const zones = [
     document.addEventListener("DOMContentLoaded", () => {
       initAfterlifeViewer();
       initAfterlifeDownload();
-      initPresidentCampaignBubble();
       initPresidentViewer();
       initNarmailViewer();
     });
   } else {
     initAfterlifeViewer();
     initAfterlifeDownload();
-    initPresidentCampaignBubble();
     initPresidentViewer();
     initNarmailViewer();
   }
   document.addEventListener("astro:page-load", () => {
     initAfterlifeViewer();
     initAfterlifeDownload();
-    initPresidentCampaignBubble();
     initPresidentViewer();
     initNarmailViewer();
   });
@@ -3201,16 +3185,6 @@ const zones = [
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    background: rgba(15, 15, 15, 0.4);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  }
-
-  .president-what-image-link:hover {
-    border-color: rgba(255, 215, 0, 0.35);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
   }
 
   .president-what-image-link img {
@@ -3285,52 +3259,98 @@ const zones = [
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
-  .president-submit-btn {
-    display: block;
-    margin: 2rem 0;
-    padding: 1rem 2rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.9rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: rgba(var(--bright-cyan), 0.15);
-    border: 1px solid rgba(var(--bright-cyan), 0.4);
+  .president-portal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 700;
     color: rgb(var(--bright-cyan));
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
   }
 
-  .president-submit-btn:hover {
-    background: rgba(var(--bright-cyan), 0.25);
-    border-color: rgba(var(--bright-cyan), 0.6);
+  .president-portal-reach {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+    font-weight: 600;
+    color: rgb(var(--ice-blue));
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.02em;
   }
 
-  .president-contact-links {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 1.05rem;
-    letter-spacing: 0.1em;
+  .president-portal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .president-portal-list li {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+    color: rgba(var(--ice-blue), 0.95);
+    padding: 0.6rem 0 0.6rem 1.5rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .president-portal-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: rgb(var(--bright-cyan));
+    font-weight: 700;
+  }
+
+  .president-portal-meta {
+    margin-bottom: 2rem;
+  }
+
+  .president-portal-meta p {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    color: rgb(var(--ice-blue));
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .president-portal-meta strong {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-top: 2rem;
+    color: rgb(var(--bright-cyan));
   }
 
-  .president-contact-links a {
+  .president-portal-links {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1rem, 1.15vw, 1.1rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .president-portal-links a {
     color: rgb(var(--bright-cyan));
     text-decoration: none;
     transition: opacity 0.2s ease;
   }
 
-  .president-contact-links a:hover {
-    opacity: 0.7;
+  .president-portal-links a:hover {
+    opacity: 0.75;
     text-decoration: underline;
   }
 
-  .president-contact-closing {
-    font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-    line-height: 1.7;
-    margin-top: 2rem;
+  .president-portal-sep {
+    margin: 0 0.75rem;
+    opacity: 0.5;
+  }
+
+  .president-portal-closing {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
     font-style: italic;
-    opacity: 0.9;
+    line-height: 1.6;
+    color: rgba(var(--ice-blue), 0.92);
+    margin: 0;
   }
 
   .president-cta {
@@ -3402,68 +3422,6 @@ const zones = [
     background: rgba(var(--bright-cyan), 0.15);
     color: rgb(var(--ice-blue));
     box-shadow: 0 0 30px rgba(var(--bright-cyan), 0.3);
-  }
-
-  .president-bubble {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100000;
-    background: rgba(245, 245, 245, 0.88);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 24px;
-    padding: 2.5rem 3.5rem;
-    box-shadow:
-      0 -10px 40px rgba(0, 0, 0, 0.08),
-      0 -1px 0 rgba(255, 255, 255, 0.4);
-    animation: bubble-appear 0.3s ease-out;
-  }
-
-  @keyframes bubble-appear {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-
-  .president-bubble-content {
-    position: relative;
-    color: rgb(20, 30, 45);
-    font-size: 1.2rem;
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .president-bubble-content p {
-    color: rgb(20, 30, 45);
-    opacity: 1;
-  }
-
-  .president-bubble-close {
-    position: absolute;
-    top: -1.5rem;
-    right: -1.5rem;
-    background: rgb(20, 30, 45);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1.75rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .president-bubble-close:hover {
-    background: rgb(45, 140, 155);
   }
 
   @media (max-width: 1024px) {
