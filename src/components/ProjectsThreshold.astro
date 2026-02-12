@@ -1,8 +1,8 @@
 ---
 ---
 
-<section data-threshold="projects" class="relative w-full border-t border-[var(--line-soft)]">
-  <div class="flex flex-col lg:flex-row lg:h-screen min-h-screen">
+<section data-threshold="projects" class="relative w-full">
+  <div class="flex flex-col lg:flex-row min-h-screen">
     <!-- Digital Ink Panel -->
     <button 
       type="button"
@@ -11,15 +11,24 @@
       id="project-digital-ink"
       data-project="digital-ink"
       aria-label="View Digital Ink: A system for digital creation"
-      class="group relative flex-1 flex flex-col items-center justify-center p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-[var(--line-soft)] cursor-pointer min-h-[60vh] lg:min-h-0 bg-[var(--bg-fog)] outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500"
+      class="group relative flex-1 flex flex-col items-center justify-start cursor-pointer min-h-[60vh] bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500 overflow-hidden"
     >
-      <div class="threshold-overlay relative z-10 max-w-sm text-center pointer-events-none" data-overlay="digital-ink">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-sans text-[var(--text-ink)] mb-6 tracking-tight">
-          Digital Ink
-        </h2>
-        <p class="text-xs md:text-sm font-mono text-[var(--text-muted)] leading-relaxed uppercase tracking-[0.2em]">
-          A system for meaning, scarcity, and traceable digital creation.
-        </p>
+      <img
+        src="/images/project_ink.webp"
+        alt=""
+        class="w-full h-auto block"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-0 z-10 flex items-center justify-center p-6 pointer-events-none">
+        <div class="threshold-overlay max-w-sm text-center px-8 py-6 rounded-2xl bg-black/35 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_0_30px_rgba(0,0,0,0.35)]" data-overlay="digital-ink">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-sans text-white mb-6 tracking-tight">
+            Digital Ink
+          </h2>
+          <p class="text-sm md:text-base font-mono text-white/90 leading-relaxed uppercase tracking-[0.2em]">
+            A system for meaning, scarcity, and traceable digital creation.
+          </p>
+        </div>
       </div>
     </button>
 
@@ -31,15 +40,24 @@
       id="project-edinburgh-map"
       data-project="edinburgh-map"
       aria-label="View Edinburgh Magical Map: A mythic cartography"
-      class="group relative flex-1 flex flex-col items-center justify-center p-8 lg:p-12 cursor-pointer min-h-[60vh] lg:min-h-0 bg-[var(--bg-fog)] outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500"
+      class="group relative flex-1 flex flex-col items-center justify-start cursor-pointer min-h-[60vh] bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500 overflow-hidden"
     >
-      <div class="threshold-overlay relative z-10 max-w-sm text-center pointer-events-none" data-overlay="edinburgh-map">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-sans text-[var(--text-ink)] mb-6 tracking-tight">
-          Edinburgh Magical Map
-        </h2>
-        <p class="text-xs md:text-sm font-mono text-[var(--text-muted)] leading-relaxed uppercase tracking-[0.2em]">
-          A mythic cartography of place, memory, and hidden doors.
-        </p>
+      <img
+        src="/images/Project_map.webp"
+        alt=""
+        class="w-full h-auto block"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-0 z-10 flex items-center justify-center p-6 pointer-events-none">
+        <div class="threshold-overlay max-w-sm text-center px-8 py-6 rounded-2xl bg-black/35 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_0_30px_rgba(0,0,0,0.35)]" data-overlay="edinburgh-map">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-sans text-white mb-6 tracking-tight">
+            Edinburgh Magical Map
+          </h2>
+          <p class="text-sm md:text-base font-mono text-white/90 leading-relaxed uppercase tracking-[0.2em]">
+            A mythic cartography of place, memory, and hidden doors.
+          </p>
+        </div>
       </div>
     </button>
   </div>

@@ -73,7 +73,7 @@ const zones: Zone[] = [
   class="w-full min-h-screen relative border-t border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden flex flex-col"
 >
   <!-- Full-Width Header Bar -->
-  <div class="w-full bg-[var(--bg-fog)] py-12 px-6 md:px-24 flex flex-col gap-8 relative z-20 border-b border-[var(--line-soft)]">
+  <div class="w-full bg-[var(--bg-fog)] py-12 px-6 md:px-24 flex flex-col gap-8 relative z-20 border-b border-[var(--line-soft)] overflow-visible">
     <h2 class="gold-shine text-4xl md:text-8xl font-light tracking-tighter uppercase leading-none">
       INFOCIGAN
     </h2>
@@ -89,6 +89,13 @@ const zones: Zone[] = [
         <span>TRUST_LEVEL: OPTIONAL</span>
       </div>
     </div>
+
+    <img
+      src="/images/InfoCigan_%20success.webp"
+      alt=""
+      class="infocigan-hero-image absolute right-6 md:right-24 bottom-0 translate-y-[25%] w-[clamp(240px,36vw,440px)] h-auto object-contain pointer-events-none z-30"
+      loading="lazy"
+    />
   </div>
 
   <!-- Main Content Area -->
