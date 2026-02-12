@@ -466,10 +466,16 @@ const zones = [
 
                   <section class="president-content-grid-section">
                     <div class="president-glass-grid">
-                      <div class="glass-card president-glass">
-                        <h3>What is this?</h3>
-                        <p>A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.</p>
-                        <p>Every dream can come true. Just not your dream. Or anyone else's. But theoretically, in a universe where dreams align with universal law, it's possible. We think.</p>
+                      <div class="glass-card president-glass president-what-is-this-card">
+                        <div class="president-what-text">
+                          <h3>What is this?</h3>
+                          <p>A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.</p>
+                          <p>Every campaign needs early believers. Every believer needs tangible proof. Support this presidential campaign through limited-edition stickers. Your investment in speculative art is your evidence of early participation. The price reflects the pricelessness of being documented on the right side of fictional history.
+                          </p>
+                        </div>
+                        <a href="#infocigan-zone-overpriced-stickers" class="president-what-image-link group" aria-label="Go to Overpriced Stickers">
+                          <img src="/images/president.webp" alt="" loading="lazy" />
+                        </a>
                       </div>
                       <div class="glass-card president-glass">
                         <h3>The Deal</h3>
@@ -3176,6 +3182,54 @@ const zones = [
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 3rem;
+  }
+
+  .president-what-is-this-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .president-what-text {
+    flex-shrink: 0;
+  }
+
+  .president-what-image-link {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    background: rgba(15, 15, 15, 0.4);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .president-what-image-link:hover {
+    border-color: rgba(255, 215, 0, 0.35);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+  }
+
+  .president-what-image-link img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .president-what-image-link:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .president-what-image-link:hover img {
+      transform: none;
+    }
   }
 
   .president-list {
