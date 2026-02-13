@@ -12,28 +12,100 @@
     />
 
     <div class="absolute z-10 left-0 px-6 md:px-24 hero-text-block">
-      <div class="flex flex-col gap-3">
-        <h1 class="hero-title-silver">Q888</h1>
+      <div class="flex flex-col gap-1">
         <span class="hero-tagline-silver">The hidden d∞oor is slightly open.</span>
+        <h1 class="hero-title-silver">Q888</h1>
       </div>
     </div>
+
+    <svg width="0" height="0" class="absolute pointer-events-none" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="hero-tagline-glitch">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+        </filter>
+      </defs>
+    </svg>
   </div>
 
-  <!-- 3) Main hero copy block (constrained container) -->
-  <div class="px-6 md:px-24 py-16 md:py-24 max-w-7xl">
-    <div class="space-y-8 md:space-y-12">
-      <p class="text-2xl md:text-5xl lg:text-6xl font-light leading-tight md:leading-[1.1] text-neutral-800 max-w-[20ch] md:max-w-[25ch]">
-        I'm an artist who builds symbolic systems and narrative tools.
-      </p>
-      <p class="text-xl md:text-3xl lg:text-4xl font-light leading-relaxed text-neutral-500 max-w-[30ch] md:max-w-[40ch]">
-        I make things that don't always explain themselves, but tend to reveal meaning over time.
-      </p>
-      <p class="text-lg md:text-2xl lg:text-3xl font-light text-neutral-400">
-        Welcome to one version of me.
-      </p>
-    </div>
+  <div class="landing-typography px-6 md:px-24 pt-8 md:pt-10 pb-16 md:pb-24">
+    <p class="landing-line-1">
+      Identity &amp; Architecture
+    </p>
+
+    <p class="landing-line-2">
+      Q888 builds <span class="symbolic-box"><span class="gold-gradient-text">symbolic systems</span></span>, narrative architectures, and speculative tools.
+    </p>
+
+    <p class="landing-line-3">
+      Operating at the intersection of contemporary art, AI, and conceptual infrastructure, this practice treats myth, code, and interface as equal materials.
+    </p>
+
+    <p class="landing-intro-follow">
+      This work refuses instant clarity; it is structured to unfold. Meaning accumulates here through repetition, context, and return.
+    </p>
+
+    <p class="landing-entry-point">
+      <span class="black-box-white">This is not a portfolio. It is an entry point into a set of living systems.</span>
+    </p>
+
+    <h2 class="landing-projects-heading">The Systems</h2>
+
+    <p class="landing-paragraph-1">
+      <span class="gold-gradient-text">Digital Ink</span><br />
+      AI-driven drawing tools for iPad where image-making becomes a negotiation between human intention and machine interpretation. A research environment for explainable visual collaboration.
+    </p>
+
+    <p class="landing-paragraph-2">
+      <span class="gold-gradient-text">Edinburgh Magic Map</span><br />
+      An interactive mythology layered onto real geography. A cartographic narrative where place becomes interface and story becomes infrastructure.
+    </p>
+
+    <p class="landing-paragraph-3">
+      <span class="gold-gradient-text">Project Infocigan</span><br />
+      A speculative design studio producing artifacts for uncertain futures. Objects released with internal logic, controlled circulation, and conceptual lineage.
+    </p>
+
+    <h2 class="landing-method-heading">The Method</h2>
+
+    <p class="landing-method-paragraph">
+      Across these works, Q888 constructs ecosystems, not isolated pieces. Editions, protocols, and verification structures are embedded into the code of each project.
+    </p>
+
+    <p class="landing-method-paragraph landing-method-paragraph-2">
+      Here, scarcity, provenance, and narrative weight are not marketing devices—they are core artistic materials.
+    </p>
+
+    <p class="landing-method-paragraph landing-method-paragraph-3">
+      <span class="black-box-white">The practice spans screens, walls, and conceptual territories. Technology is treated as substance, not surface. Absurdism is the method used to question value systems, authorship, and the mechanics of belief.</span>
+    </p>
+
+    <p class="landing-method-paragraph landing-method-paragraph-4">
+      These works behave like operating systems: mythologies with governance, artifacts with lineage, and tools that generate further tools.
+    </p>
+
+    <p class="landing-final-line">
+      Collaborations, commissions, research partnerships, and critical dialogue are welcome.
+    </p>
   </div>
 </div>
+
+<script>
+  const tagline = document.querySelector(".hero-tagline-silver");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const pulseGlitch = () => {
+    if (!tagline || reducedMotion.matches) return;
+    tagline.classList.add("is-glitching");
+    window.setTimeout(() => {
+      tagline.classList.remove("is-glitching");
+    }, 140);
+    const nextDelay = 2000 + Math.random() * 1000;
+    window.setTimeout(pulseGlitch, nextDelay);
+  };
+
+  pulseGlitch();
+</script>
 
 <style>
   .hero-text-block {
@@ -60,8 +132,9 @@
   }
   .hero-tagline-silver {
     font-family: ui-monospace, monospace;
-    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
     font-style: italic;
+    display: inline-block;
     background: linear-gradient(
       to right,
       #a8a8a8 20%,
@@ -76,7 +149,268 @@
     -webkit-text-fill-color: transparent;
     animation: hero-shine 8s linear infinite;
   }
+  .hero-tagline-silver.is-glitching {
+    filter: url("#hero-tagline-glitch");
+  }
   @keyframes hero-shine {
     to { background-position: 200% center; }
+  }
+
+  .landing-typography {
+    position: relative;
+    min-height: 78vh;
+    color: var(--text-ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .landing-line-1 {
+    margin: 0;
+    margin-left: 6%;
+    max-width: 20ch;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.2;
+    font-weight: 650;
+  }
+
+  .landing-line-2 {
+    margin: 2rem 0 0 10%;
+    max-width: 28ch;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.4;
+    font-weight: 450;
+    opacity: 0.9;
+  }
+
+  .landing-line-3 {
+    margin: 2.25rem 0 0 62%;
+    max-width: 36ch;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--text-ink);
+    opacity: 0.9;
+  }
+
+  .landing-intro-follow {
+    margin: 2.1rem 0 0 12%;
+    max-width: 60ch;
+    font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+    line-height: 1.7;
+    font-weight: 360;
+    opacity: 0.86;
+  }
+
+  .landing-entry-point {
+    margin: 2.2rem 0 0 54%;
+    max-width: 34ch;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.55;
+    font-weight: 520;
+  }
+
+  .landing-projects-heading {
+    margin: 5rem 0 0 14%;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(184, 143, 98);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 1;
+  }
+
+  .landing-paragraph-1 {
+    margin: 2rem 0 0 10%;
+    max-width: 700px;
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .landing-paragraph-2 {
+    margin: 3.2rem 0 0 42%;
+    max-width: 650px;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.7;
+    font-weight: 350;
+    opacity: 0.85;
+  }
+
+  .landing-paragraph-3 {
+    margin: 3rem 0 0 12%;
+    max-width: 680px;
+    font-size: clamp(1.05rem, 1.9vw, 1.28rem);
+    line-height: 1.7;
+    font-weight: 350;
+    opacity: 0.9;
+  }
+
+  .landing-method-heading {
+    margin: 4.5rem 0 0 16%;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(184, 143, 98);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 1;
+  }
+
+  .landing-method-paragraph {
+    margin: 1.6rem 0 0 16%;
+    max-width: 680px;
+    font-size: clamp(1.05rem, 1.85vw, 1.25rem);
+    line-height: 1.75;
+    font-weight: 350;
+    opacity: 0.9;
+  }
+
+  .landing-method-paragraph-2 {
+    margin-top: 1.7rem;
+    margin-left: 44%;
+  }
+
+  .landing-method-paragraph-3 {
+    margin-top: 1.7rem;
+    margin-left: 12%;
+  }
+
+  .landing-method-paragraph-4 {
+    margin-top: 1.7rem;
+    margin-left: 48%;
+  }
+
+  .landing-final-line {
+    margin: 3.5rem 0 0 64%;
+    max-width: 32ch;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    line-height: 1.6;
+    font-weight: 500;
+    color: rgb(184, 143, 98);
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, rgb(218, 197, 143) 0%, rgb(184, 143, 98) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+  }
+
+  .symbolic-box {
+    display: inline-block;
+    background: #000;
+    padding: 0.24em 0.58em 0.3em 0.48em;
+    border-radius: 0.46em 0.22em 0.58em 0.3em;
+    line-height: 1;
+    transform: rotate(-1.6deg);
+  }
+
+  .black-box-white {
+    display: inline;
+    color: #fff;
+    background: #000;
+    padding: 0.24em 0.52em 0.3em 0.44em;
+    border-radius: 0.5em 0.24em 0.6em 0.28em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    line-height: 1.68;
+    -webkit-text-fill-color: #fff;
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+  }
+
+  .landing-entry-point .black-box-white {
+    transform: rotate(-1.2deg);
+    display: inline-block;
+  }
+
+  .landing-method-paragraph-3 .black-box-white {
+    transform: rotate(1.35deg);
+    display: inline-block;
+    padding: 0.26em 0.6em 0.34em 0.5em;
+    border-radius: 0.62em 0.26em 0.42em 0.56em;
+  }
+
+  @media (max-width: 980px) {
+    .landing-typography {
+      min-height: auto;
+    }
+
+    .landing-line-1,
+    .landing-line-2,
+    .landing-line-3,
+    .landing-intro-follow,
+    .landing-entry-point,
+    .landing-projects-heading,
+    .landing-paragraph-1,
+    .landing-paragraph-2,
+    .landing-paragraph-3,
+    .landing-method-heading,
+    .landing-method-paragraph,
+    .landing-final-line {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+    }
+
+    .landing-line-2 {
+      margin-top: 1.5rem;
+    }
+
+    .landing-line-3 {
+      margin-top: 1.5rem;
+      margin-left: 8%;
+    }
+
+    .landing-intro-follow {
+      margin-top: 1.5rem;
+      margin-left: 4%;
+    }
+
+    .landing-entry-point {
+      margin-top: 1.6rem;
+      margin-left: 10%;
+    }
+
+    .landing-projects-heading {
+      margin-top: 3rem;
+      margin-left: 4%;
+    }
+
+    .landing-paragraph-1 {
+      margin-top: 1.2rem;
+      margin-left: 2%;
+    }
+
+    .landing-paragraph-2 {
+      margin-top: 2rem;
+      margin-left: 9%;
+    }
+
+    .landing-paragraph-3 {
+      margin-top: 2rem;
+      margin-left: 3%;
+    }
+
+    .landing-method-heading {
+      margin-top: 2.4rem;
+      margin-left: 6%;
+    }
+
+    .landing-method-paragraph {
+      margin-top: 1.2rem;
+      margin-left: 4%;
+    }
+
+    .landing-method-paragraph-2,
+    .landing-method-paragraph-3,
+    .landing-method-paragraph-4 {
+      margin-left: 9%;
+      margin-top: 1.2rem;
+    }
+
+    .landing-final-line {
+      margin-top: 2.2rem;
+      margin-left: 12%;
+    }
   }
 </style>
