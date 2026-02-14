@@ -36,17 +36,29 @@ const navLinks = [
     
     if (!toggle || !links) return;
     
-    toggle.addEventListener('click', () => {
+    const toggleMenu = (e?: Event) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!expanded));
       links.classList.toggle('open');
-    });
+    };
+
+    toggle.addEventListener('click', toggleMenu);
+    toggle.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      toggleMenu();
+    }, { passive: false });
 
     links.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
+      const closeMenu = () => {
         toggle.setAttribute('aria-expanded', 'false');
         links.classList.remove('open');
-      });
+      };
+      link.addEventListener('click', closeMenu);
+      link.addEventListener('touchend', closeMenu);
     });
   }
   
@@ -60,9 +72,17 @@ const navLinks = [
     top: 0;
     left: 0;
     right: 0;
-    z-index: 90;
+    z-index: 1000;
     background: var(--bg-fog);
     border-bottom: 1px solid var(--line-soft);
+  }
+
+  @media (max-width: 768px) {
+    .slim-nav {
+      background: rgba(245, 245, 245, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
   }
 
   .slim-nav-inner {
@@ -103,6 +123,12 @@ const navLinks = [
     background: none;
     border: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (min-width: 768px) {

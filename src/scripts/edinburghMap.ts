@@ -57,6 +57,7 @@ let initialized = false;
 let mapInitialized = false;
 let abortController: AbortController | null = null;
 let panelObserver: MutationObserver | null = null;
+let orientationChangeTimeout: number | null = null;
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -150,12 +151,24 @@ class StoryDrawer {
   }
 
   bindEvents(signal: AbortSignal) {
-    this.closeBtn.addEventListener("click", () => this.close(), { signal });
+    const closeHandler = (e?: Event) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      this.close();
+    };
+    this.closeBtn.addEventListener("click", closeHandler, { signal });
+    this.closeBtn.addEventListener("touchend", closeHandler, { signal, passive: false });
   }
 
   open(locationId: string) {
+    console.log('[Edinburgh Map] Opening drawer for location:', locationId);
     const location = this.stories.find((story) => story.id === locationId);
-    if (!location) return;
+    if (!location) {
+      console.warn('[Edinburgh Map] Location not found:', locationId);
+      return;
+    }
 
     this.currentIndex = this.stories.findIndex((story) => story.id === locationId);
 
@@ -177,9 +190,11 @@ class StoryDrawer {
 
     this.drawer.classList.add("is-open");
     this.drawer.setAttribute("aria-hidden", "false");
+    console.log('[Edinburgh Map] Drawer opened successfully');
   }
 
   close() {
+    console.log('[Edinburgh Map] Closing drawer');
     this.drawer.classList.remove("is-open");
     this.drawer.setAttribute("aria-hidden", "true");
     this.currentIndex = -1;
@@ -196,7 +211,15 @@ class StoryDrawer {
       dot.type = "button";
       dot.className = "eden-nav-dot" + (index === this.currentIndex ? " is-active" : "");
       dot.setAttribute("aria-label", `Open ${story.name}`);
-      dot.addEventListener("click", () => this.open(story.id));
+      const openStory = (e?: Event) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        this.open(story.id);
+      };
+      dot.addEventListener("click", openStory);
+      dot.addEventListener("touchend", openStory, { passive: false });
       this.navDots.appendChild(dot);
     });
   }
@@ -292,8 +315,16 @@ function bindHotspots(
     const locationId = hotspot.getAttribute("data-location-id");
     if (!locationId) return;
 
-    const activate = () => drawer.open(locationId);
+    const activate = (e?: Event) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      drawer.open(locationId);
+    };
+
     hotspot.addEventListener("click", activate, { signal });
+    hotspot.addEventListener("touchend", activate, { signal, passive: false });
     hotspot.addEventListener(
       "keydown",
       (e) => {
@@ -373,6 +404,31 @@ async function initMap(section: HTMLElement, signal: AbortSignal) {
     bindHotspots(svg, data.locations, drawer, signal);
     bindClickAway(section, drawer, signal);
     bindEscapeKey(drawer, signal);
+    
+    console.log('[Edinburgh Map] Map initialized successfully with', data.locations.length, 'locations');
+
+    const handleResize = () => {
+      console.log('[Edinburgh Map] Resize/orientation change detected');
+      console.log('[Edinburgh Map] New dimensions:', window.innerWidth, 'x', window.innerHeight);
+      console.log('[Edinburgh Map] New orientation:', window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
+      
+      if (orientationChangeTimeout) {
+        window.clearTimeout(orientationChangeTimeout);
+      }
+      orientationChangeTimeout = window.setTimeout(() => {
+        const mapInner = section.querySelector('[data-eden-map-inner]');
+        if (mapInner) {
+          (mapInner as HTMLElement).style.opacity = '0';
+          setTimeout(() => {
+            (mapInner as HTMLElement).style.opacity = '1';
+            console.log('[Edinburgh Map] Map refreshed after orientation change');
+          }, 50);
+        }
+      }, 200);
+    };
+
+    window.addEventListener('resize', handleResize, { signal });
+    window.addEventListener('orientationchange', handleResize, { signal });
   } catch (error) {
     if ((error as Error).name !== "AbortError") {
       console.error("Eden map failed to initialize:", error);
@@ -385,14 +441,20 @@ export function initEdinburghMap() {
   if (initialized) return;
   initialized = true;
 
+  console.log('[Edinburgh Map] Initializing...');
+  console.log('[Edinburgh Map] Screen:', window.innerWidth, 'x', window.innerHeight);
+  console.log('[Edinburgh Map] Orientation:', window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
+
   abortController = new AbortController();
   const { signal } = abortController;
 
   const panel = document.querySelector<HTMLElement>(SELECTOR_PANEL);
   if (!panel) {
+    console.warn('[Edinburgh Map] Panel not found');
     initialized = false;
     return;
   }
+  console.log('[Edinburgh Map] Panel found');
 
   const section = panel.matches(SELECTOR_SECTION)
     ? panel
@@ -404,6 +466,7 @@ export function initEdinburghMap() {
 
   const tryInit = () => {
     if (!mapInitialized && panel.classList.contains("is-active")) {
+      console.log('[Edinburgh Map] Panel is active, initializing map...');
       initMap(section, signal);
     }
   };

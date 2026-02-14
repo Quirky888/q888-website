@@ -16,7 +16,7 @@ const { title = "Q888" } = Astro.props;
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,5 +26,16 @@ const { title = "Q888" } = Astro.props;
 	</head>
 	<body>
 		<slot />
+		<script>
+			window.addEventListener('error', (e) => {
+				console.error('[Global Error]', e.message, e.filename, e.lineno, e.colno);
+			});
+			window.addEventListener('unhandledrejection', (e) => {
+				console.error('[Unhandled Promise Rejection]', e.reason);
+			});
+			console.log('[Q888] Page loaded');
+			console.log('[Q888] Viewport:', window.innerWidth, 'x', window.innerHeight);
+			console.log('[Q888] User Agent:', navigator.userAgent);
+		</script>
 	</body>
 </html>
