@@ -68,6 +68,7 @@
 
       this.toggle?.addEventListener("click", () => this.openChat());
       this.close?.addEventListener("click", () => this.closeChat());
+      this.close?.addEventListener("touchend", (e) => { e.preventDefault(); this.closeChat(); }, { passive: false });
       this.send?.addEventListener("click", () => this.sendMessage());
       this.input?.addEventListener("keypress", (event) => {
         if (event.key === "Enter") this.sendMessage();

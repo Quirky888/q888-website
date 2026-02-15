@@ -981,6 +981,15 @@ const tickerUnit = `${tickerText} — `;
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 20;
     z-index: 10;
     font-size: 2rem;
     line-height: 1;
@@ -1166,6 +1175,13 @@ const tickerUnit = `${tickerText} — `;
         }
       }
     };
+
+    document.addEventListener("touchend", (e) => {
+      if (e.target?.closest?.(".terms-modal-close")) {
+        e.preventDefault();
+        window.toggleTermsModal?.();
+      }
+    }, { passive: false });
 
     const drawer = document.getElementById("sticker-detail-drawer");
     const triggers = document.querySelectorAll("[data-drawer-trigger=\"sticker-detail\"]");
@@ -1614,19 +1630,23 @@ const tickerUnit = `${tickerText} — `;
         });
       });
       
-      closeBtn?.addEventListener("click", (e) => {
+      const handleClose = (e) => {
         e.preventDefault();
         e.stopPropagation();
         closeDrawer();
-      });
+      };
+      closeBtn?.addEventListener("click", handleClose);
+      closeBtn?.addEventListener("touchend", handleClose, { passive: false });
       
       negotiateBtn?.addEventListener("click", revealEmail);
 
-      drawer.addEventListener("click", (e) => {
+      const handleClickOutside = (e) => {
         if (e.target === drawer) {
           closeDrawer();
         }
-      });
+      };
+      drawer.addEventListener("click", handleClickOutside);
+      drawer.addEventListener("touchstart", handleClickOutside, { passive: true });
 
       drawer.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && drawer.getAttribute("aria-hidden") === "false") {

@@ -124,6 +124,8 @@ class StoryDrawer {
   private navDots: HTMLElement;
   private stories: EdenLocation[];
   private currentIndex = -1;
+  private touchStartY = 0;
+  private touchStartTime = 0;
 
   constructor(drawer: HTMLElement, stories: EdenLocation[]) {
     this.drawer = drawer;
@@ -160,6 +162,33 @@ class StoryDrawer {
     };
     this.closeBtn.addEventListener("click", closeHandler, { signal });
     this.closeBtn.addEventListener("touchend", closeHandler, { signal, passive: false });
+
+    this.drawer.addEventListener("touchstart", (e) => {
+      this.touchStartY = e.touches[0].clientY;
+      this.touchStartTime = Date.now();
+    }, { signal, passive: true });
+
+    this.drawer.addEventListener("touchmove", (e) => {
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchY - this.touchStartY;
+      
+      if (deltaY > 0 && deltaY < 100) {
+        this.drawer.style.transform = `translateY(${deltaY}px)`;
+      }
+    }, { signal, passive: true });
+
+    this.drawer.addEventListener("touchend", (e) => {
+      const touchY = e.changedTouches[0].clientY;
+      const deltaY = touchY - this.touchStartY;
+      const deltaTime = Date.now() - this.touchStartTime;
+      const velocity = deltaY / deltaTime;
+
+      this.drawer.style.transform = '';
+
+      if (deltaY > 100 || velocity > 0.5) {
+        this.close();
+      }
+    }, { signal, passive: true });
   }
 
   open(locationId: string) {
@@ -351,17 +380,16 @@ function bindHotspots(
 }
 
 function bindClickAway(section: HTMLElement, drawer: StoryDrawer, signal: AbortSignal) {
-  section.addEventListener(
-    "pointerdown",
-    (event) => {
-      if (!drawer.isOpen()) return;
-      const target = event.target as HTMLElement | null;
-      if (!target) return;
-      if (target.closest(SELECTOR_DRAWER) || target.closest(".eden-hotspot")) return;
-      drawer.close();
-    },
-    { signal }
-  );
+  const handleClickAway = (event: Event) => {
+    if (!drawer.isOpen()) return;
+    const target = event.target as HTMLElement | null;
+    if (!target) return;
+    if (target.closest(SELECTOR_DRAWER) || target.closest(".eden-hotspot")) return;
+    drawer.close();
+  };
+
+  section.addEventListener("pointerdown", handleClickAway, { signal });
+  section.addEventListener("touchstart", handleClickAway, { signal, passive: true });
 }
 
 function bindEscapeKey(drawer: StoryDrawer, signal: AbortSignal) {

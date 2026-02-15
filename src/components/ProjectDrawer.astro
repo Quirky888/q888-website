@@ -17,16 +17,7 @@
     aria-label="Digital Ink project details"
   >
     <div class="drawer-scroll">
-      <header class="drawer-header">
-        <button 
-          data-drawer-close 
-          class="drawer-back"
-          aria-label="Close drawer and return to Projects"
-        >
-          Back to Projects
-        </button>
-      </header>
-      
+      <button type="button" data-drawer-close class="drawer-close-x" aria-label="Close">×</button>
       <section class="di-panel di-body overflow-x-clip">
         <!-- Q888:SECTION_START id="di-header" -->
         <div class="px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
@@ -421,16 +412,7 @@
     data-eden-map-section
   >
     <div class="drawer-scroll">
-      <header class="drawer-header">
-        <button 
-          data-drawer-close 
-          class="drawer-back"
-          aria-label="Close drawer and return to Projects"
-        >
-          Back to Projects
-        </button>
-      </header>
-
+      <button type="button" data-drawer-close class="drawer-close-x" aria-label="Close">×</button>
       <!-- Q888:SECTION_START id="eden-hero" -->
       <section class="eden-hero-section px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
         <div class="mx-auto">
@@ -528,6 +510,7 @@
     </div>
 
     <div class="eden-story-drawer" data-eden-drawer aria-hidden="true">
+      <div class="eden-drawer-handle" aria-hidden="true"></div>
       <div class="eden-drawer-inner">
         <header class="eden-drawer-header">
           <div class="eden-header-brand">
@@ -595,37 +578,35 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  .drawer-header {
-    position: sticky;
-    top: 0;
+  .drawer-close-x {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
     z-index: 100;
-    padding: 1.5rem 2rem;
-    background: var(--bg-fog);
-    border-bottom: 1px solid var(--line-soft);
+    width: 44px;
+    height: 44px;
     display: flex;
-    justify-content: flex-end;
-  }
-
-  @media (min-width: 768px) {
-    .drawer-header {
-      padding: 2rem 4rem;
-    }
-  }
-
-  .drawer-back {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 300;
     color: var(--text-muted);
-    background: none;
+    background: rgba(0, 0, 0, 0.05);
     border: none;
+    border-radius: 50%;
     cursor: pointer;
-    padding: 0;
+    transition: color 0.2s, background 0.2s;
   }
 
-  .drawer-back:hover {
+  .drawer-close-x:hover {
     color: var(--text-ink);
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  @media (min-width: 769px) {
+    .drawer-close-x {
+      display: none;
+    }
   }
 
   .drawer-content {
@@ -704,15 +685,18 @@
   .drawer-panel.di-theme {
     background: #28282B;
   }
-  .drawer-panel.di-theme .drawer-header,
   .drawer-panel.di-theme .drawer-scroll {
     background: #28282B;
   }
-  .drawer-panel.di-theme .drawer-header {
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+
+  .drawer-panel.di-theme .drawer-close-x {
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.08);
   }
-  .drawer-panel.di-theme .drawer-back:hover {
+
+  .drawer-panel.di-theme .drawer-close-x:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   .di-panel { 
@@ -846,18 +830,6 @@
     .eden-back-header {
       padding: 2rem 4rem;
     }
-  }
-
-  .eden-panel .drawer-back {
-    color: var(--eden-text-muted);
-    background: rgba(252, 248, 249, 0.85);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-  }
-
-  .eden-panel .drawer-back:hover {
-    color: var(--eden-text);
-    background: rgba(252, 248, 249, 0.95);
   }
 
   /* Edinburgh Hero Styling */
@@ -1173,7 +1145,6 @@
     bottom: 0;
     height: 0;
     
-    /* Modern Glass Card look */
     background: rgba(245, 245, 245, 0.82);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
@@ -1187,9 +1158,28 @@
     border-top-right-radius: 28px;
     
     overflow: hidden;
-    transition: height var(--eden-drawer-duration) var(--eden-ease);
+    transition: height var(--eden-drawer-duration) var(--eden-ease), transform 0.2s ease;
     z-index: 210;
-    will-change: height;
+    will-change: height, transform;
+  }
+
+  .eden-drawer-handle {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    z-index: 1;
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .eden-drawer-handle {
+      display: block;
+    }
   }
 
   .eden-story-drawer.is-open {
@@ -1378,6 +1368,25 @@
 
     .eden-story-short-text {
       font-size: 1.25rem;
+    }
+
+    .eden-drawer-close {
+      position: relative;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.1);
+      width: 48px;
+      height: 48px;
+    }
+
+    .eden-drawer-close:active {
+      background: rgba(0, 0, 0, 0.2);
+      transform: scale(0.95);
+    }
+  }
+
+  @media (orientation: portrait) and (max-width: 768px) {
+    .eden-drawer-close {
+      background: rgba(0, 0, 0, 0.15);
     }
   }
 

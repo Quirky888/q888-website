@@ -29,17 +29,24 @@ const navLinks = [
     </button>
     
     <div class="nav-links" data-nav-links>
-      {navLinks.map((link) => (
-        <a href={link.href} class="nav-link">{link.label}</a>
-      ))}
+      <a href="/#projects" class="nav-link">Projects</a>
+      <a href="/digital-ink" class="nav-link">Digital Ink</a>
+      <a href="/edinburgh-map" class="nav-link">Map</a>
+      <a href="/infocigan" class="nav-link">Infocigan</a>
+      <a href="/contact" class="nav-link">Contact</a>
     </div>
   </div>
 </nav>
 
 <script>
   function initNav() {
+    console.log('[TopNav] Initializing navigation');
     const toggle = document.querySelector('.mobile-toggle');
     const links = document.querySelector('[data-nav-links]');
+    
+    console.log('[TopNav] Toggle:', toggle ? 'Found' : 'NOT FOUND');
+    console.log('[TopNav] Links:', links ? 'Found' : 'NOT FOUND');
+    console.log('[TopNav] Touch support:', 'ontouchstart' in window);
     
     if (!toggle || !links) return;
     
@@ -49,6 +56,7 @@ const navLinks = [
         e.stopPropagation();
       }
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      console.log('[TopNav] Toggle menu:', expanded ? 'closing' : 'opening');
       toggle.setAttribute('aria-expanded', String(!expanded));
       links.classList.toggle('open');
     };
@@ -59,14 +67,27 @@ const navLinks = [
       toggleMenu();
     }, { passive: false });
 
-    links.querySelectorAll('a').forEach(link => {
+    links.querySelectorAll('a').forEach((link, index) => {
       const closeMenu = () => {
+        console.log('[TopNav] Link clicked/touched:', (link as HTMLAnchorElement).href);
         toggle.setAttribute('aria-expanded', 'false');
         links.classList.remove('open');
+        (link as HTMLElement).classList.remove('touch-active');
       };
+      
       link.addEventListener('click', closeMenu);
-      link.addEventListener('touchend', closeMenu);
+      
+      link.addEventListener('touchstart', () => {
+        (link as HTMLElement).classList.add('touch-active');
+      }, { passive: true });
+      
+      link.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        closeMenu();
+      }, { passive: false });
     });
+    
+    console.log('[TopNav] Initialization complete');
   }
   
   initNav();
@@ -79,9 +100,10 @@ const navLinks = [
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 999999;
     background: var(--bg-fog);
     border-bottom: 1px solid var(--line-soft);
+    pointer-events: auto;
   }
 
   @media (max-width: 768px) {
@@ -99,6 +121,7 @@ const navLinks = [
     display: flex;
     align-items: center;
     justify-content: space-between;
+    pointer-events: none;
   }
 
   @media (min-width: 768px) {
@@ -115,6 +138,10 @@ const navLinks = [
     text-transform: uppercase;
     color: var(--text-ink);
     text-decoration: none;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
   }
 
   .wordmark:hover {
@@ -135,6 +162,9 @@ const navLinks = [
     min-height: 44px;
     align-items: center;
     justify-content: center;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
   }
 
   @media (min-width: 768px) {
@@ -186,9 +216,30 @@ const navLinks = [
     text-transform: uppercase;
     color: var(--text-muted);
     text-decoration: none;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: color 120ms ease, opacity 120ms ease, background 120ms ease;
   }
 
   .nav-link:hover {
     color: var(--text-ink);
+  }
+
+  .nav-link:active,
+  .nav-link.touch-active {
+    color: var(--text-ink);
+    opacity: 0.7;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .nav-link:active,
+    .nav-link.touch-active {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 0.25rem 0.5rem;
+      margin: -0.25rem -0.5rem;
+      border-radius: 4px;
+    }
   }
 </style>

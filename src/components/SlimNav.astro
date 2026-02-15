@@ -30,9 +30,14 @@ const navLinks = [
 
 <script>
   function initSlimNavToggle() {
+    console.log('[SlimNav] Initializing navigation');
     const nav = document.querySelector('[data-slim-nav]');
     const toggle = nav?.querySelector('.slim-toggle');
     const links = nav?.querySelector('[data-slim-links]');
+    
+    console.log('[SlimNav] Toggle:', toggle ? 'Found' : 'NOT FOUND');
+    console.log('[SlimNav] Links:', links ? 'Found' : 'NOT FOUND');
+    console.log('[SlimNav] Touch support:', 'ontouchstart' in window);
     
     if (!toggle || !links) return;
     
@@ -42,6 +47,7 @@ const navLinks = [
         e.stopPropagation();
       }
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      console.log('[SlimNav] Toggle menu:', expanded ? 'closing' : 'opening');
       toggle.setAttribute('aria-expanded', String(!expanded));
       links.classList.toggle('open');
     };
@@ -52,14 +58,27 @@ const navLinks = [
       toggleMenu();
     }, { passive: false });
 
-    links.querySelectorAll('a').forEach(link => {
+    links.querySelectorAll('a').forEach((link, index) => {
       const closeMenu = () => {
+        console.log('[SlimNav] Link clicked/touched:', (link as HTMLAnchorElement).href);
         toggle.setAttribute('aria-expanded', 'false');
         links.classList.remove('open');
+        (link as HTMLElement).classList.remove('touch-active');
       };
+      
       link.addEventListener('click', closeMenu);
-      link.addEventListener('touchend', closeMenu);
+      
+      link.addEventListener('touchstart', () => {
+        (link as HTMLElement).classList.add('touch-active');
+      }, { passive: true });
+      
+      link.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        closeMenu();
+      }, { passive: false });
     });
+    
+    console.log('[SlimNav] Initialization complete');
   }
   
   initSlimNavToggle();
@@ -72,9 +91,10 @@ const navLinks = [
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 999999;
     background: var(--bg-fog);
     border-bottom: 1px solid var(--line-soft);
+    pointer-events: auto;
   }
 
   @media (max-width: 768px) {
@@ -92,6 +112,7 @@ const navLinks = [
     display: flex;
     align-items: center;
     justify-content: space-between;
+    pointer-events: none;
   }
 
   @media (min-width: 768px) {
@@ -109,6 +130,10 @@ const navLinks = [
     color: var(--text-ink);
     text-decoration: none;
     transition: color 150ms ease;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
   }
 
   .slim-wordmark:hover {
@@ -129,6 +154,9 @@ const navLinks = [
     min-height: 44px;
     align-items: center;
     justify-content: center;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
   }
 
   @media (min-width: 768px) {
@@ -185,10 +213,30 @@ const navLinks = [
     text-transform: uppercase;
     color: var(--text-muted);
     text-decoration: none;
-    transition: color 120ms ease;
+    transition: color 120ms ease, opacity 120ms ease, background 120ms ease;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
   }
 
   .slim-link:hover {
     color: var(--text-ink);
+  }
+
+  .slim-link:active,
+  .slim-link.touch-active {
+    color: var(--text-ink);
+    opacity: 0.7;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .slim-link:active,
+    .slim-link.touch-active {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 0.25rem 0.5rem;
+      margin: -0.25rem -0.5rem;
+      border-radius: 4px;
+    }
   }
 </style>

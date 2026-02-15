@@ -115,6 +115,13 @@ export function openDrawer(id: DrawerId, direction: Direction) {
   focusTrapCleanup = trapFocus(panel);
 }
 
+export function closeDrawerIfOpen() {
+  if (!activeDrawer) return;
+  const panel = getDrawerPanel(activeDrawer);
+  const direction = (panel?.dataset.direction as Direction) || "left";
+  closeDrawer(direction);
+}
+
 export function closeDrawer(direction: Direction) {
   const root = getDrawerRoot();
   if (!activeDrawer || !root) return;
@@ -203,17 +210,33 @@ export function initProjectDrawer() {
   });
 
   closeButtons.forEach((btn) => {
-    btn.addEventListener(
-      "click",
-      () => {
-        if (!activeDrawer) return;
-        const panel = getDrawerPanel(activeDrawer);
-        const direction = (panel?.dataset.direction as Direction) || "left";
-        closeDrawer(direction);
-      },
-      { signal }
-    );
+    const closeHandler = () => {
+      if (!activeDrawer) return;
+      const panel = getDrawerPanel(activeDrawer);
+      const direction = (panel?.dataset.direction as Direction) || "left";
+      closeDrawer(direction);
+    };
+
+    btn.addEventListener("click", closeHandler, { signal });
+    btn.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      closeHandler();
+    }, { signal, passive: false });
   });
+
+  const root = getDrawerRoot();
+  if (root) {
+    root.addEventListener("click", (e) => {
+      if (!activeDrawer) return;
+      const panel = getDrawerPanel(activeDrawer);
+      if (!panel) return;
+      
+      if (e.target === root && !panel.contains(e.target as Node)) {
+        const direction = (panel.dataset.direction as Direction) || "left";
+        closeDrawer(direction);
+      }
+    }, { signal });
+  }
 
   document.addEventListener("keydown", handleEscape, { signal });
 }
