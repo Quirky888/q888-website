@@ -1,0 +1,97 @@
+---
+import SystemMeta from "./SystemMeta.astro";
+import SlimNav from "./SlimNav.astro";
+import LandingHero from "./LandingHero.astro";
+import ProjectsThreshold from "./ProjectsThreshold.astro";
+import ProjectDrawer from "./ProjectDrawer.astro";
+import InfociganSection from "./InfociganSection.astro";
+import ContactSection from "./ContactSection.astro";
+
+interface Props {
+  projectToOpen?: "digital-ink" | "edinburgh-map";
+}
+
+const { projectToOpen } = Astro.props;
+---
+
+<SlimNav />
+<SystemMeta position="top" />
+
+<main class="relative min-h-screen pt-10 md:pt-11" data-open-project={projectToOpen}>
+  <section id="landing" data-section="landing" class="relative -mt-10 md:-mt-11">
+    <LandingHero />
+  </section>
+
+  <section id="projects" data-section="projects">
+    <ProjectsThreshold />
+  </section>
+
+  <InfociganSection />
+
+  <ContactSection />
+</main>
+
+<SystemMeta position="bottom" />
+<ProjectDrawer />
+
+<script>
+  import { initThresholdMotion } from "../scripts/thresholdMotion";
+  import { initProjectDrawer, destroyProjectDrawer, openDrawer } from "../scripts/drawerNav";
+  import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
+  import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
+  import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
+  import { initGraphiteMist, destroyGraphiteMist } from "../scripts/graphiteMist";
+  import { initEdinburghMap, destroyEdinburghMap } from "../scripts/edinburghMap";
+
+  let didInit = false;
+  let didBindLifecycle = false;
+
+  function init() {
+    if (didInit) return;
+
+    initNavScroll();
+    initSystemMetaState();
+    initThresholdMotion();
+    initProjectDrawer();
+    initInfociganPortal();
+    initEdinburghMap();
+    initGraphiteMist();
+
+    didInit = true;
+
+    const projectToOpen = document.querySelector("main")?.getAttribute("data-open-project");
+    if (projectToOpen && !window.location.hash) {
+      document.getElementById("projects")?.scrollIntoView({ behavior: "instant" });
+      requestAnimationFrame(() => {
+        if (projectToOpen === "edinburgh-map") openDrawer("edinburgh-map", "right");
+        else if (projectToOpen === "digital-ink") openDrawer("digital-ink", "left");
+      });
+    }
+  }
+
+  function cleanup() {
+    if (!didInit) return;
+
+    destroyNavScroll();
+    destroySystemMetaState();
+    destroyProjectDrawer();
+    destroyInfociganPortal();
+    destroyEdinburghMap();
+    destroyGraphiteMist();
+
+    didInit = false;
+  }
+
+  if (!didBindLifecycle) {
+    if (document.readyState !== "loading") {
+      init();
+    } else {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    }
+
+    document.addEventListener("astro:page-load", init);
+    document.addEventListener("astro:before-swap", cleanup);
+    window.addEventListener("beforeunload", cleanup);
+    didBindLifecycle = true;
+  }
+</script>
