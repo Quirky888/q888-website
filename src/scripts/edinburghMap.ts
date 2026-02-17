@@ -1,3 +1,5 @@
+import Panzoom from "@panzoom/panzoom";
+
 type EdenHotspot = {
   cx: number;
   cy: number;
@@ -57,7 +59,7 @@ let initialized = false;
 let mapInitialized = false;
 let abortController: AbortController | null = null;
 let panelObserver: MutationObserver | null = null;
-let orientationChangeTimeout: number | null = null;
+let panzoomInstance: ReturnType<typeof Panzoom> | null = null;
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -274,7 +276,7 @@ function buildHotspots(
     group.setAttribute("data-location-id", location.id);
     group.setAttribute("role", "button");
     group.setAttribute("tabindex", "0");
-    group.classList.add("eden-hotspot");
+    group.classList.add("eden-hotspot", "panzoom-exclude");
     group.style.color = location.color;
     group.style.setProperty("--twinkle-dur", `${(Math.random() * 3.3 + 2.2).toFixed(2)}s`);
     group.style.setProperty("--twinkle-delay", `${-(Math.random() * 5).toFixed(2)}s`);
@@ -432,27 +434,101 @@ async function initMap(section: HTMLElement, signal: AbortSignal) {
     bindHotspots(svg, data.locations, drawer, signal);
     bindClickAway(section, drawer, signal);
     bindEscapeKey(drawer, signal);
-    
+
     console.log('[Edinburgh Map] Map initialized successfully with', data.locations.length, 'locations');
 
-    const handleResize = () => {
-      console.log('[Edinburgh Map] Resize/orientation change detected');
-      console.log('[Edinburgh Map] New dimensions:', window.innerWidth, 'x', window.innerHeight);
-      console.log('[Edinburgh Map] New orientation:', window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
-      
-      if (orientationChangeTimeout) {
-        window.clearTimeout(orientationChangeTimeout);
+    const mapContainer = section.querySelector<HTMLElement>(".eden-map-container");
+    const mapShell = section.querySelector<HTMLElement>(".eden-map-shell");
+    const mapImage = section.querySelector<HTMLImageElement>(".eden-map-image");
+    const loadingEl = section.querySelector<HTMLElement>("[data-eden-map-loading]");
+    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+
+    console.log('[Panzoom] mapContainer:', mapContainer ? 'Found' : 'Not found');
+    console.log('[Panzoom] mapShell:', mapShell ? 'Found' : 'Not found');
+    console.log('[Panzoom] mapImage:', mapImage ? 'Found' : 'Not found');
+    console.log('[Panzoom] loadingEl:', loadingEl ? 'Found' : 'Not found');
+    console.log('[Panzoom] isMobile:', isMobile());
+    console.log('[Panzoom] Window width:', window.innerWidth);
+
+    const hideLoading = () => {
+      if (loadingEl) {
+        loadingEl.classList.add("hidden");
+        console.log('[Edinburgh Map] Loading indicator hidden');
       }
-      orientationChangeTimeout = window.setTimeout(() => {
-        const mapInner = section.querySelector('[data-eden-map-inner]');
-        if (mapInner) {
-          (mapInner as HTMLElement).style.opacity = '0';
-          setTimeout(() => {
-            (mapInner as HTMLElement).style.opacity = '1';
-            console.log('[Edinburgh Map] Map refreshed after orientation change');
-          }, 50);
+      if (mapContainer) {
+        mapContainer.classList.add("loaded");
+        console.log('[Edinburgh Map] Map content visible');
+      }
+    };
+
+    const initPanzoomIfMobile = () => {
+      if (!isMobile() || !mapContainer || !mapShell) return;
+      console.log('[Panzoom] Starting initialization...');
+      try {
+        panzoomInstance = Panzoom(mapContainer, {
+          maxScale: 2,
+          minScale: 1,
+          startScale: 1,
+          contain: "inside",
+          cursor: "move",
+          pinchAndPan: true,
+          animate: false,
+          duration: 0,
+          excludeClass: "panzoom-exclude",
+          panOnlyWhenZoomed: false,
+          disableZoom: false,
+        });
+        console.log('[Panzoom] Instance created successfully');
+        try {
+          mapShell.addEventListener("wheel", panzoomInstance.zoomWithWheel, {
+            passive: false,
+            signal,
+          });
+          console.log('[Panzoom] Event listener attached');
+        } catch (wheelError) {
+          console.error('[Panzoom] Wheel listener failed:', wheelError);
         }
-      }, 200);
+      } catch (error) {
+        console.error('[Panzoom] Initialization failed:', error);
+        hideLoading();
+      }
+    };
+
+    const onImageReady = () => {
+      console.log('[Edinburgh Map] Image loaded, hiding loading indicator');
+      hideLoading();
+      initPanzoomIfMobile();
+    };
+
+    if (mapImage && loadingEl) {
+      if (mapImage.complete && mapImage.naturalHeight > 0) {
+        console.log('[Edinburgh Map] Image already loaded');
+        onImageReady();
+      } else {
+        console.log('[Edinburgh Map] Waiting for image load');
+        mapImage.addEventListener("load", onImageReady, { once: true, signal });
+        mapImage.addEventListener(
+          "error",
+          () => {
+            console.warn('[Edinburgh Map] Image failed to load, hiding loading indicator');
+            hideLoading();
+          },
+          { once: true, signal }
+        );
+      }
+    } else {
+      console.warn('[Edinburgh Map] mapImage or loadingEl not found, skipping load wait');
+      hideLoading();
+      initPanzoomIfMobile();
+    }
+
+    const handleResize = () => {
+      if (!panzoomInstance) return;
+      try {
+        panzoomInstance.reset({ animate: false });
+      } catch (e) {
+        console.error('[Panzoom] Reset failed:', e);
+      }
     };
 
     window.addEventListener('resize', handleResize, { signal });
@@ -493,9 +569,24 @@ export function initEdinburghMap() {
   }
 
   const tryInit = () => {
-    if (!mapInitialized && panel.classList.contains("is-active")) {
-      console.log('[Edinburgh Map] Panel is active, initializing map...');
-      initMap(section, signal);
+    if (panel.classList.contains("is-active")) {
+      if (!mapInitialized) {
+        console.log('[Edinburgh Map] Panel is active, initializing map...');
+        initMap(section, signal);
+      }
+    } else {
+      if (panzoomInstance) {
+        panzoomInstance.destroy();
+        panzoomInstance = null;
+        console.log('[Panzoom] Destroyed on panel close');
+      }
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        const loadingEl = section?.querySelector<HTMLElement>("[data-eden-map-loading]");
+        const mapContainer = section?.querySelector<HTMLElement>(".eden-map-container");
+        if (loadingEl) loadingEl.classList.remove("hidden");
+        if (mapContainer) mapContainer.classList.remove("loaded");
+      }
+      mapInitialized = false;
     }
   };
 
@@ -509,6 +600,8 @@ export function initEdinburghMap() {
 }
 
 export function destroyEdinburghMap() {
+  panzoomInstance?.destroy();
+  panzoomInstance = null;
   panelObserver?.disconnect();
   panelObserver = null;
   abortController?.abort();

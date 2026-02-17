@@ -10,7 +10,7 @@ export default defineConfig({
     server: {
       host: true,
       strictPort: false,
-      allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app', '.ngrok.io']
+      allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app', '.ngrok.io', '.trycloudflare.com']
     }
   }
 });
