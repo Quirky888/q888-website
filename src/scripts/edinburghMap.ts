@@ -60,6 +60,7 @@ let mapInitialized = false;
 let abortController: AbortController | null = null;
 let panelObserver: MutationObserver | null = null;
 let panzoomInstance: ReturnType<typeof Panzoom> | null = null;
+let lastInnerWidth = window.innerWidth;
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -355,7 +356,6 @@ function bindHotspots(
     };
 
     hotspot.addEventListener("click", activate, { signal });
-    hotspot.addEventListener("touchend", activate, { signal, passive: false });
     hotspot.addEventListener(
       "keydown",
       (e) => {
@@ -390,8 +390,7 @@ function bindClickAway(section: HTMLElement, drawer: StoryDrawer, signal: AbortS
     drawer.close();
   };
 
-  section.addEventListener("pointerdown", handleClickAway, { signal });
-  section.addEventListener("touchstart", handleClickAway, { signal, passive: true });
+  section.addEventListener("click", handleClickAway, { signal });
 }
 
 function bindEscapeKey(drawer: StoryDrawer, signal: AbortSignal) {
@@ -406,7 +405,7 @@ function bindEscapeKey(drawer: StoryDrawer, signal: AbortSignal) {
   );
 }
 
-async function initMap(section: HTMLElement, signal: AbortSignal) {
+async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLElement) {
   if (mapInitialized) return;
   mapInitialized = true;
   
@@ -453,20 +452,31 @@ async function initMap(section: HTMLElement, signal: AbortSignal) {
     const hideLoading = () => {
       if (loadingEl) {
         loadingEl.classList.add("hidden");
-        console.log('[Edinburgh Map] Loading indicator hidden');
-      }
-      if (mapContainer) {
-        mapContainer.classList.add("loaded");
-        console.log('[Edinburgh Map] Map content visible');
       }
     };
 
+    let touchCount = 0;
+    if (mapContainer) {
+      mapContainer.addEventListener(
+        "touchstart",
+        (e) => {
+          touchCount = e.touches.length;
+        },
+        { capture: true, passive: true, signal }
+      );
+    }
+
     const initPanzoomIfMobile = () => {
       if (!isMobile() || !mapContainer || !mapShell) return;
+      if (!panel.classList.contains("is-active")) return;
+      if (panzoomInstance) {
+        panzoomInstance.destroy();
+        panzoomInstance = null;
+      }
       console.log('[Panzoom] Starting initialization...');
       try {
         panzoomInstance = Panzoom(mapContainer, {
-          maxScale: 2,
+          maxScale: 3,
           minScale: 1,
           startScale: 1,
           contain: "inside",
@@ -475,8 +485,14 @@ async function initMap(section: HTMLElement, signal: AbortSignal) {
           animate: false,
           duration: 0,
           excludeClass: "panzoom-exclude",
-          panOnlyWhenZoomed: false,
+          panOnlyWhenZoomed: true,
           disableZoom: false,
+          touchAction: "pan-y",
+          handleStartEvent: (e: Event) => {
+            if ("touches" in e && touchCount < 2) return;
+            e.preventDefault();
+            e.stopPropagation();
+          },
         });
         console.log('[Panzoom] Instance created successfully');
         try {
@@ -522,17 +538,23 @@ async function initMap(section: HTMLElement, signal: AbortSignal) {
       initPanzoomIfMobile();
     }
 
+    let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
     const handleResize = () => {
       if (!panzoomInstance) return;
-      try {
-        panzoomInstance.reset({ animate: false });
-      } catch (e) {
-        console.error('[Panzoom] Reset failed:', e);
-      }
+      if (window.innerWidth === lastInnerWidth) return;
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resizeTimeout = null;
+        try {
+          panzoomInstance?.reset({ animate: false });
+          lastInnerWidth = window.innerWidth;
+        } catch (e) {
+          console.error('[Panzoom] Reset failed:', e);
+        }
+      }, 200);
     };
 
     window.addEventListener('resize', handleResize, { signal });
-    window.addEventListener('orientationchange', handleResize, { signal });
   } catch (error) {
     if ((error as Error).name !== "AbortError") {
       console.error("Eden map failed to initialize:", error);
@@ -548,9 +570,6 @@ export function initEdinburghMap() {
   console.log('[Edinburgh Map] Initializing...');
   console.log('[Edinburgh Map] Screen:', window.innerWidth, 'x', window.innerHeight);
   console.log('[Edinburgh Map] Orientation:', window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
-
-  abortController = new AbortController();
-  const { signal } = abortController;
 
   const panel = document.querySelector<HTMLElement>(SELECTOR_PANEL);
   if (!panel) {
@@ -571,10 +590,15 @@ export function initEdinburghMap() {
   const tryInit = () => {
     if (panel.classList.contains("is-active")) {
       if (!mapInitialized) {
+        abortController?.abort();
+        abortController = new AbortController();
+        const { signal } = abortController;
         console.log('[Edinburgh Map] Panel is active, initializing map...');
-        initMap(section, signal);
+        initMap(section, signal, panel);
       }
     } else {
+      abortController?.abort();
+      abortController = null;
       if (panzoomInstance) {
         panzoomInstance.destroy();
         panzoomInstance = null;
@@ -582,9 +606,7 @@ export function initEdinburghMap() {
       }
       if (window.matchMedia("(max-width: 768px)").matches) {
         const loadingEl = section?.querySelector<HTMLElement>("[data-eden-map-loading]");
-        const mapContainer = section?.querySelector<HTMLElement>(".eden-map-container");
         if (loadingEl) loadingEl.classList.remove("hidden");
-        if (mapContainer) mapContainer.classList.remove("loaded");
       }
       mapInitialized = false;
     }
@@ -595,8 +617,8 @@ export function initEdinburghMap() {
   panelObserver = new MutationObserver(() => tryInit());
   panelObserver.observe(panel, { attributes: true, attributeFilter: ["class"] });
 
-  panel.addEventListener("transitionend", tryInit, { signal });
-  panel.addEventListener("click", tryInit, { signal, once: true });
+  panel.addEventListener("transitionend", tryInit);
+  panel.addEventListener("click", tryInit, { once: true });
 }
 
 export function destroyEdinburghMap() {
