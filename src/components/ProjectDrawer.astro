@@ -37,7 +37,7 @@
 
             <div class="di-mono mt-10 text-lg sm:text-xl text-zinc-400 leading-relaxed">
               <div>SYSTEM_STATUS: APPROVED · PLATFORM: iPadOS (iPad-only)</div>
-              <div>STATUS: AVAILABLE TOMORROW</div>
+              <div>STATUS: AVAILABLE NOW</div>
               <div>ROLE: Concept · Product Design · UX · SwiftUI</div>
               <div>YEAR: 2025–2026</div>
             </div>
@@ -709,8 +709,36 @@
 
   .di-panel { 
     --drawer-pad: 1.5rem;
+    position: relative;
     overflow-x: clip; 
     background: #28282B; 
+  }
+
+  .di-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--line-soft) 18%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--line-soft) 18%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 80% 80% at 0% 0%, #000 50%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 0% 0%, #000 50%, transparent 90%);
+  }
+
+  .di-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 767px) {
+    .di-panel::before {
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 100% 60% at 0% 0%, #000 40%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 100% 60% at 0% 0%, #000 40%, transparent 85%);
+    }
   }
 
   @media (min-width: 640px) {

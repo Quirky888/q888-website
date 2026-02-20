@@ -24,8 +24,8 @@ const sectionStates: Record<SectionId, SectionState> = {
   },
   infocigan: {
     system_status: "MARKET",
-    oracle_mode: "ENGAGED",
-    whisper_protocol: "OPTIONAL",
+    oracle_mode: "INVEST ",
+    whisper_protocol: "DRIFT   ",
     coords: "55.9439712N 3.1621543W",
   },
   contact: {
@@ -72,7 +72,9 @@ function crossfadeValue(el: HTMLElement, newValue: string) {
 
 function applyState() {
   const base = sectionStates[currentSection];
-  const coords = override?.coords ?? userCoords ?? EDINBURGH_COORDS;
+  const coords =
+    override?.coords ??
+    (currentSection === "projects" ? EDINBURGH_COORDS : (userCoords ?? EDINBURGH_COORDS));
   const state = override ? { ...base, ...override } : base;
   const resolved = { ...state, coords };
 
@@ -99,20 +101,20 @@ export function clearSystemOverride() {
 function handleIntersection(entries: IntersectionObserverEntry[]) {
   let mostVisible: { id: SectionId; ratio: number } | null = null;
 
-  entries.forEach((entry) => {
+  for (const entry of entries) {
     const id = (entry.target as HTMLElement).dataset.section as SectionId;
-    if (!id) return;
+    if (!id) continue;
 
     if (entry.isIntersecting) {
       if (!mostVisible || entry.intersectionRatio > mostVisible.ratio) {
         mostVisible = { id, ratio: entry.intersectionRatio };
       }
     }
-  });
+  }
 
   if (mostVisible && mostVisible.id !== currentSection) {
     currentSection = mostVisible.id;
-    if (!override) applyState();
+    applyState();
   }
 }
 
