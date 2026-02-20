@@ -515,9 +515,9 @@ const tickerUnit = `${tickerText} — `;
   </div>
 </section>
 
-<div id="sticker-detail-drawer" class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto" data-sticker-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Sticker instrument details">
+<div id="sticker-detail-drawer" class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto" data-sticker-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Sticker instrument details">
   <button type="button" data-close-drawer class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors" aria-label="Close drawer">×</button>
-  <div class="drawer-scrollable max-w-4xl w-full max-h-[80vh] overflow-y-auto prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
+  <div class="drawer-scrollable max-w-4xl w-full max-h-[80vh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
     <div class="drawer-content">
       <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
       <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
@@ -960,10 +960,23 @@ const tickerUnit = `${tickerText} — `;
   .drawer-scrollable {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    border-radius: 0.75rem;
   }
 
   .drawer-content {
     padding: 2rem 0;
+  }
+
+  @media (max-width: 767px) {
+    .drawer-content {
+      padding-top: 5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .drawer-content {
+      padding: 2rem 1.5rem;
+    }
   }
 
   .drawer-image-hero img {
@@ -993,15 +1006,18 @@ const tickerUnit = `${tickerText} — `;
     z-index: 10;
     font-size: 2rem;
     line-height: 1;
-    cursor: pointer;
     background: none;
     border: none;
     padding: 0;
     width: 2rem;
     height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    [data-close-drawer] {
+      top: 4.5rem;
+      right: 2rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
