@@ -3,13 +3,28 @@
 
 <div class="flex flex-col min-h-screen w-full overflow-x-hidden">
   <div class="relative w-full h-screen overflow-hidden bg-[var(--bg-fog)]">
-    <img 
-      src="/images/Q888_hero.webp" 
-      alt="Q888" 
-      class="absolute inset-0 z-0 w-full h-full object-contain"
-      decoding="async"
-      loading="eager"
-    />
+    <picture>
+      <source
+        type="image/avif"
+        media="(max-width: 768px) and (orientation: portrait)"
+        srcset="/images/q888_mobile.avif"
+      />
+      <source
+        type="image/webp"
+        media="(max-width: 768px) and (orientation: portrait)"
+        srcset="/images/q88_mobile_fallback.webp"
+      />
+      <img
+        src="/images/Q888_hero.webp"
+        alt="Q888"
+        class="absolute inset-0 z-0 w-full h-full object-contain"
+        decoding="async"
+        loading="eager"
+        fetchpriority="high"
+        width="800"
+        height="1200"
+      />
+    </picture>
 
     <span class="hero-tagline-silver hero-tagline-corner">The hidden d∞oor is slightly open.</span>
 
