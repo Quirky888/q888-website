@@ -66,13 +66,13 @@
         <!-- Q888:SECTION_END id="di-philosophy" -->
 
         <!-- IMAGE 2 -->
-        <div class="px-6 sm:px-10 lg:px-16 py-8">
-          <div class="di-reveal aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image2">
+        <div class="px-6 sm:px-10 lg:px-16 py-2">
+          <div class="di-reveal aspect-[4/5] sm:aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image2">
             <!-- Base (aligned right, not stretched) -->
             <img
               src="/images/screen.webp"
               alt="Digital Ink canvas (base)"
-              class="di-reveal-base absolute inset-y-0 right-0 h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-10"
+              class="di-reveal-base absolute inset-y-0 right-0 h-[100%] sm:h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-10"
               loading="lazy"
               decoding="async"
             />
@@ -81,7 +81,7 @@
             <img
               src="/images/screen_overlay.webp"
               alt="Digital Ink canvas (overlay)"
-              class="di-reveal-overlay absolute inset-y-0 right-0 h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-20"
+              class="di-reveal-overlay absolute inset-y-0 right-0 h-[100%] sm:h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-20"
               loading="lazy"
               decoding="async"
             />
@@ -813,6 +813,19 @@
   .di-panel .di-reveal.is-active .di-fog-text {
     opacity: 0;
     filter: blur(8px);
+  }
+
+  @media (max-width: 767px) and (orientation: portrait) {
+    .di-panel [data-di-reveal="image3"] .di-reveal-base {
+      display: none;
+    }
+    .di-panel [data-di-reveal="image3"] .di-reveal-overlay {
+      opacity: 1;
+      filter: blur(0);
+    }
+    .di-panel [data-di-reveal="image3"] .di-fog-text {
+      display: none;
+    }
   }
 
   .di-panel .di-app-banner {

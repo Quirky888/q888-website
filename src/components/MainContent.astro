@@ -31,7 +31,9 @@ const { projectToOpen } = Astro.props;
   <ContactSection />
 </main>
 
-<SystemMeta position="bottom" />
+<div class="hidden md:block">
+  <SystemMeta position="bottom" />
+</div>
 <ProjectDrawer />
 
 <script>

@@ -40,15 +40,19 @@ const { title = "Q888" } = Astro.props;
 		<script>
 			(function initSplitFlapReducedMotion() {
 				const run = () => {
-					if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+					const usePlainText =
+						window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+						window.matchMedia('(orientation: portrait) and (max-width: 768px)').matches;
+					if (!usePlainText) return;
 					document.querySelectorAll('.system-meta hotfx-split-flap.meta-value-split-flap, .landing-status-bar hotfx-split-flap.landing-meta-split-flap').forEach((el) => {
 						const span = document.createElement('span');
-						if (el.classList.contains('meta-value-split-flap')) {
+						const htmlEl = el as HTMLElement;
+						if (htmlEl.classList.contains('meta-value-split-flap')) {
 							span.className = 'meta-value';
-							span.dataset.field = el.dataset.field;
+							span.dataset.field = htmlEl.dataset.field ?? '';
 						}
-						span.textContent = el.textContent;
-						el.replaceWith(span);
+						span.textContent = htmlEl.textContent ?? '';
+						htmlEl.replaceWith(span);
 					});
 				};
 				if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
