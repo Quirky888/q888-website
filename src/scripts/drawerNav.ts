@@ -1,6 +1,8 @@
 import gsap from "gsap";
 import { setSystemOverride, clearSystemOverride } from "./systemMetaState";
 
+const EDINBURGH_COORDS = "55.9439712N 3.1621543W";
+
 type DrawerId = "digital-ink" | "edinburgh-map";
 type Direction = "left" | "right";
 
@@ -180,6 +182,15 @@ export function initProjectDrawer() {
 
   const triggers = document.querySelectorAll<HTMLElement>("[data-drawer-trigger]");
   const closeButtons = document.querySelectorAll<HTMLElement>("[data-drawer-close]");
+
+  const projectTriggers = Array.from(triggers).filter(
+    (t) => t.dataset.drawerTrigger === "digital-ink" || t.dataset.drawerTrigger === "edinburgh-map"
+  );
+
+  projectTriggers.forEach((trigger) => {
+    trigger.addEventListener("mouseenter", () => setSystemOverride({ coords: EDINBURGH_COORDS }), { signal });
+    trigger.addEventListener("mouseleave", () => setSystemOverride({ coords: undefined } as Partial<{ coords: string }>), { signal });
+  });
 
   triggers.forEach((trigger) => {
     trigger.addEventListener(

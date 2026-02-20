@@ -38,6 +38,7 @@ const { projectToOpen } = Astro.props;
   import { initThresholdMotion } from "../scripts/thresholdMotion";
   import { initProjectDrawer, destroyProjectDrawer, openDrawer } from "../scripts/drawerNav";
   import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
+  import { initIpGeoCoords } from "../scripts/ipGeoCoords";
   import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
   import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
   import { initGraphiteMist, destroyGraphiteMist } from "../scripts/graphiteMist";
@@ -51,6 +52,7 @@ const { projectToOpen } = Astro.props;
 
     initNavScroll();
     initSystemMetaState();
+    initIpGeoCoords();
     initThresholdMotion();
     initProjectDrawer();
     initInfociganPortal();

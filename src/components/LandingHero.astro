@@ -43,10 +43,10 @@
   </div>
 
   <div class="landing-typography px-6 md:px-24 pt-12 md:pt-16 pb-16 md:pb-24">
-    <div class="flex flex-col gap-1.5 font-mono text-lg sm:text-xl text-zinc-500 leading-relaxed uppercase tracking-widest mb-12">
-      <span>PORTAL_STATE: SLIGHTLY_OPEN</span>
-      <span>NARRATIVE_MODE: UNFOLDING</span>
-      <span>ENTITY_TYPE: IDENTITY</span>
+    <div class="landing-status-bar flex flex-col gap-1.5 font-mono text-lg sm:text-xl text-zinc-500 leading-relaxed uppercase tracking-widest mb-12">
+      <span class="flex gap-2"><span class="opacity-50">PORTAL_STATE:</span> <hotfx-split-flap class="landing-meta-split-flap">SLIGHTLY_OPEN</hotfx-split-flap></span>
+      <span class="flex gap-2"><span class="opacity-50">NARRATIVE_MODE:</span> <hotfx-split-flap class="landing-meta-split-flap">UNFOLDING</hotfx-split-flap></span>
+      <span class="flex gap-2"><span class="opacity-50">ENTITY_TYPE:</span> <hotfx-split-flap class="landing-meta-split-flap">IDENTITY</hotfx-split-flap></span>
     </div>
     <p class="landing-line-1">
       Identity &amp; Architecture
@@ -228,6 +228,36 @@
     min-height: 78vh;
     color: var(--text-ink);
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .landing-status-bar hotfx-split-flap.landing-meta-split-flap {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 1.125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    --hotfx-split-flap-grid-gap: 0.25em;
+  }
+  @media (min-width: 640px) {
+    .landing-status-bar hotfx-split-flap.landing-meta-split-flap {
+      font-size: 1.25rem;
+    }
+  }
+  .landing-status-bar hotfx-split-flap.landing-meta-split-flap::part(char) {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: inherit;
+    letter-spacing: 0.1em;
+    background: #000;
+    padding: 0.2em 0.35em;
+    border-radius: 0.15em;
+  }
+  .landing-status-bar hotfx-split-flap.landing-meta-split-flap::part(flap) {
+    color: #fff;
+    background: transparent;
+  }
+  .landing-status-bar hotfx-split-flap.landing-meta-split-flap::part(divider) {
+    background: rgb(113 113 122);
+    opacity: 0.25;
   }
 
   .landing-line-1 {

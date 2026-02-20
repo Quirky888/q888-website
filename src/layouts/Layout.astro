@@ -23,6 +23,7 @@ const { title = "Q888" } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" />
+		<script type="module" src="https://unpkg.com/@hot-page/hotfx-split-flap@0.0.1/hotfx-split-flap.js"></script>
 	</head>
 	<body>
 		<slot />
@@ -37,6 +38,23 @@ const { title = "Q888" } = Astro.props;
 		</div>
 
 		<script>
+			(function initSplitFlapReducedMotion() {
+				const run = () => {
+					if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+					document.querySelectorAll('.system-meta hotfx-split-flap.meta-value-split-flap, .landing-status-bar hotfx-split-flap.landing-meta-split-flap').forEach((el) => {
+						const span = document.createElement('span');
+						if (el.classList.contains('meta-value-split-flap')) {
+							span.className = 'meta-value';
+							span.dataset.field = el.dataset.field;
+						}
+						span.textContent = el.textContent;
+						el.replaceWith(span);
+					});
+				};
+				if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+				else run();
+			})();
+
 			window.addEventListener('error', (e) => {
 				console.error('[Global Error]', e.message, e.filename, e.lineno, e.colno);
 			});

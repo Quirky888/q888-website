@@ -7,35 +7,38 @@ interface SectionState {
   coords: string;
 }
 
+const EDINBURGH_COORDS = "55.9439712N 3.1621543W";
+
 const sectionStates: Record<SectionId, SectionState> = {
   landing: {
     system_status: "QUIET",
     oracle_mode: "ENGAGED",
     whisper_protocol: "ACTIVE",
-    coords: "55.9533N, 3.1883W",
+    coords: "55.9439712N 3.1621543W",
   },
   projects: {
     system_status: "OBSERVING",
     oracle_mode: "ENGAGED",
     whisper_protocol: "ACTIVE",
-    coords: "55.9533N, 3.1883W",
+    coords: "55.9439712N 3.1621543W",
   },
   infocigan: {
     system_status: "MARKET",
     oracle_mode: "ENGAGED",
     whisper_protocol: "OPTIONAL",
-    coords: "55.9533N, 3.1883W",
+    coords: "55.9439712N 3.1621543W",
   },
   contact: {
     system_status: "OPEN",
     oracle_mode: "ENGAGED",
     whisper_protocol: "INACTIVE",
-    coords: "55.9533N, 3.1883W",
+    coords: "55.9439712N 3.1621543W",
   },
 };
 
 let currentSection: SectionId = "landing";
 let override: Partial<SectionState> | null = null;
+let userCoords: string | null = null;
 let observer: IntersectionObserver | null = null;
 
 const prefersReducedMotion = () =>
@@ -53,6 +56,11 @@ function crossfadeValue(el: HTMLElement, newValue: string) {
     return;
   }
 
+  if (el.tagName === "HOTFX-SPLIT-FLAP") {
+    el.textContent = newValue;
+    return;
+  }
+
   el.style.transition = "opacity 70ms linear";
   el.style.opacity = "0";
 
@@ -64,15 +72,22 @@ function crossfadeValue(el: HTMLElement, newValue: string) {
 
 function applyState() {
   const base = sectionStates[currentSection];
+  const coords = override?.coords ?? userCoords ?? EDINBURGH_COORDS;
   const state = override ? { ...base, ...override } : base;
+  const resolved = { ...state, coords };
 
-  Object.entries(state).forEach(([field, value]) => {
+  Object.entries(resolved).forEach(([field, value]) => {
     getMetaElements(field).forEach((el) => crossfadeValue(el, value));
   });
 }
 
+export function setUserCoords(coords: string | null) {
+  userCoords = coords;
+  applyState();
+}
+
 export function setSystemOverride(state: Partial<SectionState> | null) {
-  override = state;
+  override = state === null ? null : (override ? { ...override, ...state } : state);
   applyState();
 }
 
