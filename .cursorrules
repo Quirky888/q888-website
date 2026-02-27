@@ -336,3 +336,16 @@ If you are about to do any of the following, STOP and ask first:
 - rewrite Layout.astro structure instead of adding minimal wrappers
 - introduce width:100vw + negative viewport margins inside drawers/portals
 - refactor existing `<img>` tags to `<Image />` unprompted
+
+
+---
+
+
+## Mobile Portrait First
+- Always design and test at 375px width portrait as the baseline viewport
+- Never use fixed pixel widths above 360px without a max-width + auto margin wrapper
+- All font sizes: body min 16px, headings fluid (clamp() preferred)
+- Touch targets: min 44x44px for all interactive elements
+- No horizontal scroll permitted at any portrait breakpoint (375–430px)
+- Use CSS logical properties (padding-inline, margin-block) for layout consistency
+- Test single-scroll anchor links (#landing, #projects, #infocigan, #contact) on mobile after any layout change
