@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { loadEnv } from 'vite';
 
 import tailwindcss from '@tailwindcss/vite';
 
-const allowedHosts = (process.env.ALLOWED_HOSTS ?? '')
+const env = loadEnv(process.env.MODE ?? 'development', process.cwd(), '');
+const allowedHosts = (env.ALLOWED_HOSTS ?? '')
   .split(',')
   .map((host) => host.trim())
   .filter(Boolean);
