@@ -30,16 +30,12 @@ const navLinks = [
 
 <script>
   function initSlimNavToggle() {
-    console.log('[SlimNav] Initializing navigation');
     const nav = document.querySelector('[data-slim-nav]');
-    const toggle = nav?.querySelector('.slim-toggle');
-    const links = nav?.querySelector('[data-slim-links]');
-    
-    console.log('[SlimNav] Toggle:', toggle ? 'Found' : 'NOT FOUND');
-    console.log('[SlimNav] Links:', links ? 'Found' : 'NOT FOUND');
-    console.log('[SlimNav] Touch support:', 'ontouchstart' in window);
-    
+    if (!nav || nav.hasAttribute('data-slim-nav-initialized')) return;
+    const toggle = nav.querySelector('.slim-toggle');
+    const links = nav.querySelector('[data-slim-links]');
     if (!toggle || !links) return;
+    nav.setAttribute('data-slim-nav-initialized', 'true');
     
     const toggleMenu = (e?: Event) => {
       if (e) {
@@ -77,8 +73,6 @@ const navLinks = [
         closeMenu();
       }, { passive: false });
     });
-    
-    console.log('[SlimNav] Initialization complete');
   }
   
   initSlimNavToggle();

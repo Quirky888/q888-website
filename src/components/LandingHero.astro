@@ -111,11 +111,12 @@
 
 <script>
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const isTablet = window.matchMedia("(max-width: 1024px)").matches || window.matchMedia("(hover: none)").matches;
   let glitchTimeoutId = 0;
 
   function runPulseGlitch() {
     const tagline = document.querySelector(".hero-tagline-silver");
-    if (!tagline || reducedMotion.matches) return;
+    if (!tagline || reducedMotion.matches || isTablet) return;
 
     const pulseGlitch = () => {
       if (!tagline.isConnected || reducedMotion.matches) return;
@@ -216,7 +217,7 @@
     to { background-position: 200% center; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: reduce), (max-width: 1024px) {
     .hero-title-silver,
     .hero-tagline-silver {
       animation: none;

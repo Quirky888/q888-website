@@ -40,15 +40,10 @@ const navLinks = [
 
 <script>
   function initNav() {
-    console.log('[TopNav] Initializing navigation');
     const toggle = document.querySelector('.mobile-toggle');
     const links = document.querySelector('[data-nav-links]');
-    
-    console.log('[TopNav] Toggle:', toggle ? 'Found' : 'NOT FOUND');
-    console.log('[TopNav] Links:', links ? 'Found' : 'NOT FOUND');
-    console.log('[TopNav] Touch support:', 'ontouchstart' in window);
-    
-    if (!toggle || !links) return;
+    if (!toggle || !links || links.hasAttribute('data-top-nav-initialized')) return;
+    links.setAttribute('data-top-nav-initialized', 'true');
     
     const toggleMenu = (e?: Event) => {
       if (e) {
@@ -86,8 +81,6 @@ const navLinks = [
         closeMenu();
       }, { passive: false });
     });
-    
-    console.log('[TopNav] Initialization complete');
   }
   
   initNav();

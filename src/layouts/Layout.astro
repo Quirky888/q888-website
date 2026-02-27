@@ -42,7 +42,8 @@ const { title = "Q888" } = Astro.props;
 				const run = () => {
 					const usePlainText =
 						window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-						window.matchMedia('(orientation: portrait) and (max-width: 768px)').matches;
+						window.matchMedia('(max-width: 1024px)').matches ||
+						(window.matchMedia('(max-width: 1400px)').matches && window.matchMedia('(hover: none)').matches);
 					if (!usePlainText) return;
 					document.querySelectorAll('.system-meta hotfx-split-flap.meta-value-split-flap, .landing-status-bar hotfx-split-flap.landing-meta-split-flap').forEach((el) => {
 						const span = document.createElement('span');
@@ -96,7 +97,13 @@ const { title = "Q888" } = Astro.props;
 				nav.classList.toggle('is-overlay-open', !!hasPortal);
 			}
 
-			const escapeObserver = new MutationObserver(updateMobileEscapeVisibility);
+			let debounceId = 0;
+			const debouncedUpdate = () => {
+				clearTimeout(debounceId);
+				debounceId = window.setTimeout(updateMobileEscapeVisibility, 50);
+			};
+
+			const escapeObserver = new MutationObserver(debouncedUpdate);
 			escapeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: true });
 			document.addEventListener('DOMContentLoaded', updateMobileEscapeVisibility);
 			window.addEventListener('hashchange', updateMobileEscapeVisibility);

@@ -147,7 +147,7 @@
               <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">AI & Vision Integrationt</h2>
               <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
                 <p>
-                  The app integrates Apple Vision framework for scene understanding and GPT-4o-mini for caption generation, creating a two-stage transformation pipeline. When users import images, Vision analyzes visual content, then GPT-4o applies a poetic transformation layer that generates mystical, emotionally resonant descriptions. A proprietary color-to-frequency mapping algorithm assigns elemental values (Earth, Water, Fire, Air, Love, Mushroom) based on hue, saturation, and contextual analysis.​
+                  The app integrates Apple Vision framework for scene understanding and GPT-4o for caption generation, creating a two-stage transformation pipeline. When users import images, Vision analyzes visual content, then GPT-4o applies a poetic transformation layer that generates mystical, emotionally resonant descriptions. A proprietary color-to-frequency mapping algorithm assigns elemental values (Earth, Water, Fire, Air, Love, Mushroom) based on hue, saturation, and contextual analysis.​
                 </p>
                 
               </div>
@@ -179,7 +179,7 @@
                 <div class="mt-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
                   <ul class="space-y-3">
                     <li><span class="text-zinc-200">Frontend:</span> Swift, SwiftUI, Core Data</li>
-                    <li><span class="text-zinc-200">AI/ML:</span> Apple Vision Framework, GPT-4o-mini API</li>
+                    <li><span class="text-zinc-200">AI/ML:</span> Apple Vision Framework, GPT-4o API</li>
                     <li><span class="text-zinc-200">Backend:</span> Cloudflare Durable Objects, StoreKit 2</li>
                     <li><span class="text-zinc-200">Platform:</span> iPadOS (native iPad app)</li>
                   </ul>
@@ -383,19 +383,29 @@
         <!-- Q888:SECTION_END id="di-details" -->
 
         <!-- FOOTER BANNER -->
-        <div class="full-bleed mt-24 pb-32 flex justify-center">
-          <a 
-            href="https://apps.apple.com/us/app/digital-ink/id6757157376" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="di-app-banner block w-[95%] mx-auto outline-none"
-          >
-            <img 
-              src="/images/digitalink_appstore.png" 
-              alt="Download Digital Ink on the App Store" 
-              class="w-full h-auto object-cover"
-            />
-          </a>
+        <div class="full-bleed mt-24 pb-32 relative">
+          <div class="di-footer-quote absolute top-0 right-12 sm:right-16 lg:right-24 w-[45%] max-w-[28rem] text-right pr-8">
+            <p class="di-silver-shine text-left text-2xl sm:text-4xl leading-relaxed">
+              Every pixel you place remembers where it came from.
+            </p>
+            <p class="di-silver-shine text-right text-2xl sm:text-4xl leading-relaxed mt-2">
+              So do you...
+            </p>
+          </div>
+          <div class="flex justify-center">
+            <a 
+              href="https://apps.apple.com/us/app/digital-ink/id6757157376" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="di-app-banner block w-[95%] mx-auto outline-none"
+            >
+              <img 
+                src="/images/digitalink_appstore.png" 
+                alt="Download Digital Ink on the App Store" 
+                class="w-full h-auto object-cover"
+              />
+            </a>
+          </div>
         </div>
       </section>
     </div>
@@ -710,7 +720,7 @@
   .di-panel { 
     --drawer-pad: 1.5rem;
     position: relative;
-    overflow-x: clip; 
+    overflow: clip;
     background: #28282B; 
   }
 
@@ -728,6 +738,36 @@
     -webkit-mask-image: radial-gradient(ellipse 80% 80% at 0% 0%, #000 50%, transparent 90%);
   }
 
+  .di-panel::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 66%;
+    z-index: 0;
+    pointer-events: none;
+    --di-grid-size: 48px;
+    --di-grid-line: color-mix(in srgb, var(--line-soft) 14%, transparent);
+    background-image:
+      repeating-linear-gradient(
+        -35deg,
+        transparent 0,
+        transparent calc(var(--di-grid-size) - 1px),
+        var(--di-grid-line) calc(var(--di-grid-size) - 1px),
+        var(--di-grid-line) var(--di-grid-size)
+      ),
+      repeating-linear-gradient(
+        55deg,
+        transparent 0,
+        transparent calc(var(--di-grid-size) - 1px),
+        var(--di-grid-line) calc(var(--di-grid-size) - 1px),
+        var(--di-grid-line) var(--di-grid-size)
+      );
+    mask-image: radial-gradient(ellipse 80% 80% at 100% 100%, #000 50%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 100% 100%, #000 50%, transparent 90%);
+  }
+
   .di-panel > * {
     position: relative;
     z-index: 1;
@@ -738,6 +778,10 @@
       background-size: 24px 24px;
       mask-image: radial-gradient(ellipse 100% 60% at 0% 0%, #000 40%, transparent 85%);
       -webkit-mask-image: radial-gradient(ellipse 100% 60% at 0% 0%, #000 40%, transparent 85%);
+    }
+    .di-panel::after {
+      --di-grid-size: 36px;
+      height: 70%;
     }
   }
 
@@ -845,6 +889,31 @@
     display: block;
   }
 
+  .di-silver-shine {
+    color: #a0a0a0;
+    background: linear-gradient(
+      to right,
+      #808080 20%,
+      #b8b8b8 40%,
+      #e8e8e8 50%,
+      #b8b8b8 60%,
+      #808080 80%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: di-silver-shine 8s linear infinite;
+  }
+
+  @keyframes di-silver-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .di-silver-shine { animation: none; }
+  }
+
   /* Edinburgh Map Panel */
   .eden-panel {
     --eden-primary: #208c8d;
@@ -857,8 +926,8 @@
     --eden-error: #c0152f;
     --eden-ease: cubic-bezier(0.16, 1, 0.3, 1);
     --eden-drawer-duration: 350ms;
-    --eden-drawer-height-desktop: 45vh;
-    --eden-drawer-height-tablet: 50vh;
+    --eden-drawer-height-desktop: 50vh;
+    --eden-drawer-height-tablet: 55vh;
     --eden-drawer-height-mobile: 100vh;
     --eden-ring-opacity: 0.18;
     background: var(--eden-bg);
@@ -1667,7 +1736,7 @@
     let image3Latched = false;
 
     function checkReveal() {
-      if (!scrollContainer) return;
+      if (!scrollContainer || !scrollContainer.isConnected) return;
       const containerRect = scrollContainer.getBoundingClientRect();
       const containerHeight = containerRect.height;
       if (containerHeight === 0) return;
@@ -1678,38 +1747,24 @@
       const containerCenter = containerRect.top + containerHeight / 2;
       const threshold = containerHeight * 0.15;
 
-      // IMAGE 2: zone-based (on near center, off when away)
       if (image2) {
         const rect2 = image2.getBoundingClientRect();
         const center2 = rect2.top + rect2.height / 2;
         const dist2 = Math.abs(containerCenter - center2);
-
-        if (dist2 < threshold) {
-          image2.classList.add('is-active');
-        } else {
-          image2.classList.remove('is-active');
-        }
+        if (dist2 < threshold) image2.classList.add('is-active');
+        else image2.classList.remove('is-active');
       }
 
-      // IMAGE 3: latch-based (on near center when scrolling down, off when rewinding up)
       if (image3) {
         const rect3 = image3.getBoundingClientRect();
         const center3 = rect3.top + rect3.height / 2;
         const dist3 = Math.abs(containerCenter - center3);
         const isInZone = dist3 < threshold;
         const isAboveReset = center3 < (containerCenter - threshold * 1.4);
-
-        if (scrollingDown && isInZone) {
-          image3Latched = true;
-        } else if (!scrollingDown && isAboveReset) {
-          image3Latched = false;
-        }
-
-        if (image3Latched) {
-          image3.classList.add('is-active');
-        } else {
-          image3.classList.remove('is-active');
-        }
+        if (scrollingDown && isInZone) image3Latched = true;
+        else if (!scrollingDown && isAboveReset) image3Latched = false;
+        if (image3Latched) image3.classList.add('is-active');
+        else image3.classList.remove('is-active');
       }
 
       lastScrollTop = currentScrollTop;
@@ -1735,30 +1790,47 @@
       }
     });
     observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+
+    function cleanup() {
+      scrollContainer?.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('orientationchange', onScroll);
+      observer.disconnect();
+      document.removeEventListener('astro:before-swap', cleanup);
+      window.removeEventListener('beforeunload', cleanup);
+    }
+    document.addEventListener('astro:before-swap', cleanup);
+    window.addEventListener('beforeunload', cleanup);
   })();
 
-      // Edinburgh Number Glitch Logic
-      (() => {
-        const initGlitches = () => {
-          const yearEl = document.querySelector('[data-eden-year-glitch]') as HTMLElement;
-          const actEl = document.querySelector('[data-eden-act-glitch]') as HTMLElement;
+  (() => {
+    let glitchIntervalId: ReturnType<typeof setInterval> | null = null;
 
-          const updateNumbers = () => {
-            if (yearEl) {
-              yearEl.dataset.reveal = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-            }
-            if (actEl) {
-              actEl.dataset.reveal = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-            }
-          };
+    function initGlitches() {
+      if (glitchIntervalId) clearInterval(glitchIntervalId);
+      const yearEl = document.querySelector('[data-eden-year-glitch]') as HTMLElement;
+      const actEl = document.querySelector('[data-eden-act-glitch]') as HTMLElement;
 
-          // Update every 500ms (2 variations per second)
-          setInterval(updateNumbers, 500);
-          updateNumbers(); // Initial call
-        };
+      const updateNumbers = () => {
+        if (yearEl?.isConnected) yearEl.dataset.reveal = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+        if (actEl?.isConnected) actEl.dataset.reveal = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+      };
 
-        initGlitches();
-        document.addEventListener('astro:page-load', initGlitches);
-      })();
+      glitchIntervalId = setInterval(updateNumbers, 500);
+      updateNumbers();
+    }
 
+    function cleanup() {
+      if (glitchIntervalId) clearInterval(glitchIntervalId);
+      glitchIntervalId = null;
+      document.removeEventListener('astro:page-load', initGlitches);
+      document.removeEventListener('astro:before-swap', cleanup);
+      window.removeEventListener('beforeunload', cleanup);
+    }
+
+    initGlitches();
+    document.addEventListener('astro:page-load', initGlitches);
+    document.addEventListener('astro:before-swap', cleanup);
+    window.addEventListener('beforeunload', cleanup);
+  })();
 </script>

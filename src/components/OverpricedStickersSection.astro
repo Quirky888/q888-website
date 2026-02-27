@@ -1162,10 +1162,21 @@ const tickerUnit = `${tickerText} — `;
     io.observe(content);
 
     let resizeTimer = 0;
-    window.addEventListener("resize", function () {
+    const handleResize = function () {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(applyTickerMetrics, 150);
-    }, { passive: true });
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    function cleanup() {
+      window.removeEventListener("resize", handleResize);
+      window.clearTimeout(resizeTimer);
+      io.disconnect();
+      document.removeEventListener("astro:before-swap", cleanup);
+      window.removeEventListener("beforeunload", cleanup);
+    }
+    document.addEventListener("astro:before-swap", cleanup);
+    window.addEventListener("beforeunload", cleanup);
   })();
 </script>
 
