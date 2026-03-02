@@ -89,6 +89,7 @@ function getDirection(element: Element): Direction {
 export function openPortal(slug: string, direction: Direction) {
   const panel = getPanel(slug);
   if (!panel || activePanel === panel) return;
+  const hadActivePanel = Boolean(activePanel);
 
   if (activePanel && activePanel !== panel) {
     activePanel.classList.remove("is-active");
@@ -98,7 +99,7 @@ export function openPortal(slug: string, direction: Direction) {
 
   activePanel = panel;
   originDirection = direction;
-  lockScroll();
+  if (!hadActivePanel) lockScroll();
 
   panel.classList.add("is-active");
   panel.setAttribute("data-slide-from", direction);
@@ -248,6 +249,7 @@ export function initInfociganPortal() {
 export function destroyInfociganPortal() {
   if (activePanel) {
     activePanel.classList.remove("is-active");
+    closePanelLocalDrawers(activePanel);
     unlockScroll();
   }
   abortController?.abort();
