@@ -7,6 +7,7 @@ let originDirection: Direction = "right";
 let triggerElement: HTMLElement | null = null;
 let initialized = false;
 let abortController: AbortController | null = null;
+let isClosing = false;
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -16,6 +17,25 @@ type ScrollLockState = {
   previousOverflow: string;
   previousPaddingRight: string;
 };
+
+function debugLog(
+  hypothesisId: string,
+  location: string,
+  message: string,
+  data: Record<string, unknown>
+) {
+  // #region agent log
+  console.log(
+    JSON.stringify({
+      hypothesisId,
+      location,
+      message,
+      data,
+      timestamp: Date.now(),
+    })
+  );
+  // #endregion
+}
 
 function getScrollLockState(): ScrollLockState {
   const win = window as Window & { __q888ScrollLock?: ScrollLockState };
@@ -45,6 +65,21 @@ function getPortalRoot(): HTMLElement | null {
 
 function getPanel(slug: string): HTMLElement | null {
   return document.querySelector(`[data-portal-panel="${slug}"]`);
+}
+
+function closePanelLocalDrawers(panel: HTMLElement) {
+  const stickerDrawer = panel.querySelector<HTMLElement>("[data-sticker-drawer]");
+  if (!stickerDrawer || stickerDrawer.classList.contains("hidden")) return;
+  stickerDrawer.setAttribute("aria-hidden", "true");
+  stickerDrawer.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+  // #region agent log
+  debugLog("A", "src/scripts/infociganPortal.ts:80", "closePanelLocalDrawers:forced-sticker-close", {
+    panel: panel.getAttribute("data-portal-panel") ?? null,
+    bodyHasOverflowHiddenClass: document.body.classList.contains("overflow-hidden"),
+    drawerHidden: stickerDrawer.classList.contains("hidden"),
+  });
+  // #endregion
 }
 
 function lockScroll() {
@@ -81,15 +116,40 @@ export function openPortal(slug: string, direction: Direction) {
   const panel = getPanel(slug);
   if (!panel || activePanel === panel) return;
 
+  const lockStateBefore = getScrollLockState();
+  // #region agent log
+  debugLog("A", "src/scripts/infociganPortal.ts:95", "openPortal:entry", {
+    slug,
+    direction,
+    activePanel: activePanel?.getAttribute("data-portal-panel") ?? null,
+    lockCountBefore: lockStateBefore.count,
+    bodyOverflowBefore: document.body.style.overflow || "",
+    bodyHasOverflowHiddenClass: document.body.classList.contains("overflow-hidden"),
+  });
+  // #endregion
+
   if (activePanel && activePanel !== panel) {
     activePanel.classList.remove("is-active");
     gsap.set(activePanel.querySelector(".panel-content"), { clearProps: "x,opacity" });
     gsap.set(activePanel.querySelector(".panel-overlay"), { clearProps: "opacity" });
+    // #region agent log
+    debugLog("A", "src/scripts/infociganPortal.ts:105", "openPortal:switch-active-panel", {
+      previousPanel: activePanel.getAttribute("data-portal-panel") ?? null,
+      nextPanel: panel.getAttribute("data-portal-panel") ?? null,
+      lockCountBeforeSecondLock: getScrollLockState().count,
+    });
+    // #endregion
   }
 
   activePanel = panel;
   originDirection = direction;
   lockScroll();
+  // #region agent log
+  debugLog("A", "src/scripts/infociganPortal.ts:114", "openPortal:after-lock", {
+    lockCountAfter: getScrollLockState().count,
+    bodyOverflowAfter: document.body.style.overflow || "",
+  });
+  // #endregion
 
   panel.classList.add("is-active");
   panel.setAttribute("data-slide-from", direction);
@@ -117,7 +177,8 @@ export function openPortal(slug: string, direction: Direction) {
 }
 
 export function closePortal() {
-  if (!activePanel) return;
+  if (!activePanel || isClosing) return;
+  isClosing = true;
 
   const panel = activePanel;
   const direction = originDirection;
@@ -126,9 +187,19 @@ export function closePortal() {
   const cleanup = () => {
     panel.classList.remove("is-active");
     unlockScroll();
+    closePanelLocalDrawers(panel);
+    // #region agent log
+    debugLog("A", "src/scripts/infociganPortal.ts:154", "closePortal:after-unlock", {
+      closingPanel: panel.getAttribute("data-portal-panel") ?? null,
+      lockCountAfter: getScrollLockState().count,
+      bodyOverflowAfter: document.body.style.overflow || "",
+      bodyHasOverflowHiddenClass: document.body.classList.contains("overflow-hidden"),
+    });
+    // #endregion
     restoreFocus(triggerElement);
     triggerElement = null;
     activePanel = null;
+    isClosing = false;
 
     // Update URL without jumping (temporarily remove ID)
     const section = document.getElementById("infocigan");
@@ -165,6 +236,13 @@ function handleEscape(e: KeyboardEvent) {
 
 function checkHash() {
   const hash = window.location.hash;
+  // #region agent log
+  debugLog("A", "src/scripts/infociganPortal.ts:195", "checkHash", {
+    hash,
+    activePanel: activePanel?.getAttribute("data-portal-panel") ?? null,
+    lockCount: getScrollLockState().count,
+  });
+  // #endregion
   if (hash.startsWith("#infocigan-zone-")) {
     const slug = hash.replace("#infocigan-zone-", "");
     const sourceCard = document.querySelector(`[data-infocigan-slug="${slug}"]`) as HTMLElement;
@@ -243,4 +321,5 @@ export function destroyInfociganPortal() {
   initialized = false;
   activePanel = null;
   triggerElement = null;
+  isClosing = false;
 }

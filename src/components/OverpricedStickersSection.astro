@@ -1233,6 +1233,20 @@ const tickerUnit = `${tickerText} — `;
 
     const data = Array.isArray(instruments) ? instruments : [];
 
+    function debugLog(hypothesisId, location, message, data = {}) {
+      // #region agent log
+      console.log(
+        JSON.stringify({
+          hypothesisId,
+          location,
+          message,
+          data,
+          timestamp: Date.now()
+        })
+      );
+      // #endregion
+    }
+
     function openDrawer(id) {
       const inst = data.find((i) => i.id === id);
       if (!drawer || !inst) return;
@@ -1611,6 +1625,14 @@ const tickerUnit = `${tickerText} — `;
       drawer.setAttribute("aria-hidden", "false");
       document.body.classList.add("overflow-hidden");
       drawer.classList.remove("hidden");
+      // #region agent log
+      debugLog("B", "src/components/OverpricedStickersSection.astro:1628", "stickerDrawer:open", {
+        id,
+        bodyOverflowInline: document.body.style.overflow || "",
+        bodyHasOverflowHiddenClass: document.body.classList.contains("overflow-hidden"),
+        drawerHidden: drawer.classList.contains("hidden"),
+      });
+      // #endregion
     }
 
     function closeDrawer() {
@@ -1618,6 +1640,13 @@ const tickerUnit = `${tickerText} — `;
       drawer.setAttribute("aria-hidden", "true");
       drawer.classList.add("hidden");
       document.body.classList.remove("overflow-hidden");
+      // #region agent log
+      debugLog("B", "src/components/OverpricedStickersSection.astro:1642", "stickerDrawer:close", {
+        bodyOverflowInline: document.body.style.overflow || "",
+        bodyHasOverflowHiddenClass: document.body.classList.contains("overflow-hidden"),
+        drawerHidden: drawer.classList.contains("hidden"),
+      });
+      // #endregion
     }
 
     function revealEmail() {
@@ -1634,6 +1663,15 @@ const tickerUnit = `${tickerText} — `;
         console.error("Drawer element not found");
         return;
       }
+
+      const win = window;
+      win.__q888StickerInitCount = (win.__q888StickerInitCount || 0) + 1;
+      // #region agent log
+      debugLog("C", "src/components/OverpricedStickersSection.astro:1658", "stickerDrawer:init", {
+        initCount: win.__q888StickerInitCount,
+        triggerCount: triggers.length,
+      });
+      // #endregion
 
       triggers.forEach((el) => {
         el.addEventListener("click", (e) => {
