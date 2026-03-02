@@ -12,12 +12,12 @@ const allowedHosts = (env.ALLOWED_HOSTS ?? '')
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    host: true,
+    strictPort: false,
+    allowedHosts
+  },
   vite: {
-    plugins: [tailwindcss()],
-    server: {
-      host: true,
-      strictPort: false,
-      allowedHosts
-    }
+    plugins: [tailwindcss()]
   }
 });
