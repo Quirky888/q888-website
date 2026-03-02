@@ -212,6 +212,16 @@ const navLinks = [
     cursor: pointer;
     position: relative;
     z-index: 1;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .slim-link {
+      min-height: auto;
+      display: inline;
+    }
   }
 
   .slim-link:hover {
