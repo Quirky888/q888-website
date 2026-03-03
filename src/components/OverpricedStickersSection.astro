@@ -1203,12 +1203,15 @@ const tickerUnit = `${tickerText} — `;
       }
     };
 
-    document.addEventListener("touchend", (e) => {
-      if (e.target?.closest?.(".terms-modal-close")) {
-        e.preventDefault();
-        window.toggleTermsModal?.();
-      }
-    }, { passive: false });
+    if (!document.documentElement.dataset.termsModalTouchCloseBound) {
+      document.documentElement.dataset.termsModalTouchCloseBound = "1";
+      document.addEventListener("touchend", (e) => {
+        if (e.target?.closest?.(".terms-modal-close")) {
+          e.preventDefault();
+          window.toggleTermsModal?.();
+        }
+      }, { passive: false });
+    }
 
     const drawer = document.getElementById("sticker-detail-drawer");
     const triggers = document.querySelectorAll("[data-drawer-trigger=\"sticker-detail\"]");
@@ -1634,6 +1637,8 @@ const tickerUnit = `${tickerText} — `;
         console.error("Drawer element not found");
         return;
       }
+      if (drawer.dataset.drawerInitialized === "true") return;
+      drawer.dataset.drawerInitialized = "true";
 
       triggers.forEach((el) => {
         el.addEventListener("click", (e) => {

@@ -7,6 +7,7 @@ let originDirection: Direction = "right";
 let triggerElement: HTMLElement | null = null;
 let initialized = false;
 let abortController: AbortController | null = null;
+let isClosing = false;
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -47,6 +48,14 @@ function getPanel(slug: string): HTMLElement | null {
   return document.querySelector(`[data-portal-panel="${slug}"]`);
 }
 
+function closePanelLocalDrawers(panel: HTMLElement) {
+  const stickerDrawer = panel.querySelector<HTMLElement>("[data-sticker-drawer]");
+  if (!stickerDrawer || stickerDrawer.classList.contains("hidden")) return;
+  stickerDrawer.setAttribute("aria-hidden", "true");
+  stickerDrawer.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+}
+
 function lockScroll() {
   const lockState = getScrollLockState();
   if (lockState.count === 0) {
@@ -80,6 +89,7 @@ function getDirection(element: Element): Direction {
 export function openPortal(slug: string, direction: Direction) {
   const panel = getPanel(slug);
   if (!panel || activePanel === panel) return;
+  const hadActivePanel = Boolean(activePanel);
 
   if (activePanel && activePanel !== panel) {
     activePanel.classList.remove("is-active");
@@ -89,7 +99,7 @@ export function openPortal(slug: string, direction: Direction) {
 
   activePanel = panel;
   originDirection = direction;
-  lockScroll();
+  if (!hadActivePanel) lockScroll();
 
   panel.classList.add("is-active");
   panel.setAttribute("data-slide-from", direction);
@@ -117,7 +127,8 @@ export function openPortal(slug: string, direction: Direction) {
 }
 
 export function closePortal() {
-  if (!activePanel) return;
+  if (!activePanel || isClosing) return;
+  isClosing = true;
 
   const panel = activePanel;
   const direction = originDirection;
@@ -126,9 +137,11 @@ export function closePortal() {
   const cleanup = () => {
     panel.classList.remove("is-active");
     unlockScroll();
+    closePanelLocalDrawers(panel);
     restoreFocus(triggerElement);
     triggerElement = null;
     activePanel = null;
+    isClosing = false;
 
     // Update URL without jumping (temporarily remove ID)
     const section = document.getElementById("infocigan");
@@ -236,6 +249,7 @@ export function initInfociganPortal() {
 export function destroyInfociganPortal() {
   if (activePanel) {
     activePanel.classList.remove("is-active");
+    closePanelLocalDrawers(activePanel);
     unlockScroll();
   }
   abortController?.abort();
@@ -243,4 +257,5 @@ export function destroyInfociganPortal() {
   initialized = false;
   activePanel = null;
   triggerElement = null;
+  isClosing = false;
 }
