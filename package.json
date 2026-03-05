@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@panzoom/panzoom": "^4.6.1",
+    "sharp": "^0.33.5",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.2",
     "gsap": "^3.14.2",

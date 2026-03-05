@@ -67,7 +67,7 @@ const prefersReducedMotion = () =>
 
 function normalizeColor(value?: string) {
   if (!value) return value;
-  return value.replace(/\s+/g, "").replace(/^#21808D$/i, "#21808D").replace(/^#FFFFD$/i, "#FFFFDD");
+  return value.replace(/\s+/g, "").replace(/^#FFFFD$/i, "#FFFFDD");
 }
 
 function normalizeDrawerHeight(fallback: string, value?: string) {

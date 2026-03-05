@@ -21,8 +21,13 @@ const { title = "Q888" } = Astro.props;
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" />
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" /></noscript>
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" media="print" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" /></noscript>
+		<link rel="preload" as="image" href="/images/Q888_hero.webp" fetchpriority="high" />
 		<script type="module" src="/vendor/hotfx-split-flap.js"></script>
 	</head>
 	<body>
@@ -66,9 +71,11 @@ const { title = "Q888" } = Astro.props;
 			window.addEventListener('unhandledrejection', (e) => {
 				console.error('[Unhandled Promise Rejection]', e.reason);
 			});
-			console.log('[Q888] Page loaded');
-			console.log('[Q888] Viewport:', window.innerWidth, 'x', window.innerHeight);
-			console.log('[Q888] User Agent:', navigator.userAgent);
+			if (import.meta.env.DEV) {
+				console.log('[Q888] Page loaded');
+				console.log('[Q888] Viewport:', window.innerWidth, 'x', window.innerHeight);
+				console.log('[Q888] User Agent:', navigator.userAgent);
+			}
 
 			const backBtn = document.querySelector('.mobile-back-btn');
 			if (backBtn) {

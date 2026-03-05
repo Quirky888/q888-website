@@ -43,7 +43,6 @@ const navLinks = [
         e.stopPropagation();
       }
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      console.log('[SlimNav] Toggle menu:', expanded ? 'closing' : 'opening');
       toggle.setAttribute('aria-expanded', String(!expanded));
       links.classList.toggle('open');
     };
@@ -54,9 +53,8 @@ const navLinks = [
       toggleMenu();
     }, { passive: false });
 
-    links.querySelectorAll('a').forEach((link, index) => {
+    links.querySelectorAll('a').forEach((link) => {
       const closeMenu = () => {
-        console.log('[SlimNav] Link clicked/touched:', (link as HTMLAnchorElement).href);
         toggle.setAttribute('aria-expanded', 'false');
         links.classList.remove('open');
         (link as HTMLElement).classList.remove('touch-active');
@@ -89,6 +87,7 @@ const navLinks = [
     background: var(--bg-fog);
     border-bottom: 1px solid var(--line-soft);
     pointer-events: auto;
+    padding-top: env(safe-area-inset-top, 0);
   }
 
   @media (max-width: 768px) {

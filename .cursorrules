@@ -154,7 +154,7 @@ IMPORTANT:
 - Use `<Image />` from `astro:assets` only when creating NEW image elements
 - Never refactor existing `<img>` tags to `<Image />` unless explicitly requested
 - Minimise JavaScript — prefer Astro's zero-JS-by-default approach
-- Existing motion scripts (`centerReveal.ts`, `thresholdMotion.ts`, `drawerNav.ts`,
+- Existing motion scripts (`thresholdMotion.ts`, `drawerNav.ts`,
   `edinburghMap.ts`, `navScroll.ts`) are exempt from JS minimisation rules — do not
   replace, strip, or refactor them unless explicitly requested
 - Avoid heavy libraries when a native browser API will do
@@ -284,8 +284,8 @@ and only that bounded region changed.
 5) No debug UI.
    No outlines, markers, or console logs unless explicitly requested.
 
-6) Preserve existing motion logic for ProjectsThreshold center reveal
-   (`centerReveal.ts`, `thresholdMotion.ts`) unless explicitly asked to change.
+6) Preserve existing motion logic for ProjectsThreshold
+   (`thresholdMotion.ts`) unless explicitly asked to change.
 
 7) Do NOT create new routes/pages or a router-based architecture
    (e.g. /digital-ink, /edinburgh-map) unless explicitly requested.

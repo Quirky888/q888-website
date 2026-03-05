@@ -90,10 +90,15 @@ function trapFocus(panel: HTMLElement) {
   return () => panel.removeEventListener("keydown", handler);
 }
 
-export function openDrawer(id: DrawerId, direction: Direction) {
+export async function openDrawer(id: DrawerId, direction: Direction) {
   const root = getDrawerRoot();
   const panel = getDrawerPanel(id);
   if (!root || !panel) return;
+
+  if (id === "edinburgh-map") {
+    const { initEdinburghMap } = await import("./edinburghMap");
+    initEdinburghMap();
+  }
 
   activeDrawer = id;
   lockScroll();
@@ -195,25 +200,25 @@ export function initProjectDrawer() {
   triggers.forEach((trigger) => {
     trigger.addEventListener(
       "click",
-      (e) => {
+      async (e) => {
         e.preventDefault();
         const id = trigger.dataset.drawerTrigger as DrawerId;
         const direction = (trigger.dataset.navDirection as Direction) || "left";
         triggerElement = trigger;
-        openDrawer(id, direction);
+        await openDrawer(id, direction);
       },
       { signal }
     );
 
     trigger.addEventListener(
       "keydown",
-      (e) => {
+      async (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           const id = trigger.dataset.drawerTrigger as DrawerId;
           const direction = (trigger.dataset.navDirection as Direction) || "left";
           triggerElement = trigger;
-          openDrawer(id, direction);
+          await openDrawer(id, direction);
         }
       },
       { signal }

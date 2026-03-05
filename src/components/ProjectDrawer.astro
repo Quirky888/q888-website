@@ -48,7 +48,7 @@
         <!-- IMAGE 1 -->
         <div class="full-bleed">
           <div class="aspect-video w-full bg-zinc-900/60">
-            <img src="/images/DigitalInk_Ipad_kn.webp" alt="Digital Ink on iPad" class="h-full w-full object-cover" />
+            <img src="/images/DigitalInk_Ipad_kn.webp" alt="Digital Ink on iPad" class="h-full w-full object-cover" loading="lazy" decoding="async" width="1200" height="800" />
           </div>
         </div>
 
@@ -75,6 +75,8 @@
               class="di-reveal-base absolute inset-y-0 right-0 h-[100%] sm:h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-10"
               loading="lazy"
               decoding="async"
+              width="800"
+              height="600"
             />
 
             <!-- Overlay (aligned right, not stretched) -->
@@ -84,6 +86,8 @@
               class="di-reveal-overlay absolute inset-y-0 right-0 h-[100%] sm:h-[90%] w-auto top-1/2 -translate-y-1/2 object-contain z-20"
               loading="lazy"
               decoding="async"
+              width="800"
+              height="600"
             />
           </div>
         </div>
@@ -111,6 +115,8 @@
               class="di-reveal-base absolute inset-0 w-full h-full object-contain z-10"
               loading="lazy"
               decoding="async"
+              width="800"
+              height="600"
             />
 
             <!-- Overlay image -->
@@ -120,6 +126,8 @@
               class="di-reveal-overlay absolute inset-0 w-full h-full object-contain z-20"
               loading="lazy"
               decoding="async"
+              width="800"
+              height="600"
             />
 
             <!-- Fog quote text -->
@@ -384,7 +392,7 @@
 
         <!-- FOOTER BANNER -->
         <div class="full-bleed mt-24 pb-32 relative">
-          <div class="di-footer-quote absolute top-0 right-12 sm:right-16 lg:right-24 w-[45%] max-w-[28rem] text-right pr-8">
+          <div class="di-footer-quote absolute top-0 right-12 sm:right-16 lg:right-24 w-[45%] max-w-[28rem] text-right pr-8 hidden md:block">
             <p class="di-silver-shine text-left text-2xl sm:text-4xl leading-relaxed">
               Every pixel you place remembers where it came from.
             </p>
@@ -399,10 +407,14 @@
               rel="noopener noreferrer"
               class="di-app-banner block w-[95%] mx-auto outline-none"
             >
-              <img 
-                src="/images/digitalink_appstore.png" 
-                alt="Download Digital Ink on the App Store" 
+<img
+                src="/images/digitalink_appstore.webp"
+                alt="Download Digital Ink on the App Store"
                 class="w-full h-auto object-cover"
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="200"
               />
             </a>
           </div>
@@ -472,6 +484,8 @@
               class="eden-map-image"
               loading="lazy"
               decoding="async"
+              width="2400"
+              height="2400"
             />
           </picture>
           <svg
@@ -1805,24 +1819,44 @@
 
   (() => {
     let glitchIntervalId: ReturnType<typeof setInterval> | null = null;
+    let io: IntersectionObserver | null = null;
 
-    function initGlitches() {
-      if (glitchIntervalId) clearInterval(glitchIntervalId);
+    function startGlitches() {
+      if (glitchIntervalId) return;
       const yearEl = document.querySelector('[data-eden-year-glitch]') as HTMLElement;
       const actEl = document.querySelector('[data-eden-act-glitch]') as HTMLElement;
-
       const updateNumbers = () => {
         if (yearEl?.isConnected) yearEl.dataset.reveal = Math.floor(Math.random() * 100).toString().padStart(2, '0');
         if (actEl?.isConnected) actEl.dataset.reveal = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
       };
-
       glitchIntervalId = setInterval(updateNumbers, 500);
       updateNumbers();
     }
 
+    function stopGlitches() {
+      if (glitchIntervalId) {
+        clearInterval(glitchIntervalId);
+        glitchIntervalId = null;
+      }
+    }
+
+    function initGlitches() {
+      const panel = document.querySelector('[data-drawer-panel="edinburgh-map"]');
+      if (!panel) return;
+      stopGlitches();
+      if (io) io.disconnect();
+      io = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) startGlitches();
+        else stopGlitches();
+      }, { threshold: 0.1 });
+      io.observe(panel);
+      if (panel.classList.contains('is-active')) startGlitches();
+    }
+
     function cleanup() {
-      if (glitchIntervalId) clearInterval(glitchIntervalId);
-      glitchIntervalId = null;
+      stopGlitches();
+      io?.disconnect();
+      io = null;
       document.removeEventListener('astro:page-load', initGlitches);
       document.removeEventListener('astro:before-swap', cleanup);
       window.removeEventListener('beforeunload', cleanup);

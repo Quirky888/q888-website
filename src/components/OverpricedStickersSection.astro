@@ -448,8 +448,8 @@ const tickerUnit = `${tickerText} — `;
 
 <section class="overpriced-stickers-outer w-full h-full relative" style="background:transparent!important;position:relative;overflow:hidden;z-index:1">
   <div class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24" style="background:transparent!important">
-    <div class="q888-ticker sticky top-0 z-30 bg-[var(--bg-fog)]/92 backdrop-blur-md border-b border-[var(--line-soft)]/60 w-screen -ml-[calc(50vw-50%)] -mr-[calc(50vw-50%)] py-[0.6875rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)]" style={`--ticker-font: ${tickerFont}`}>
-      <div class="ticker-wrapper w-screen overflow-hidden">
+    <div class="q888-ticker sticky top-0 z-30 bg-[var(--bg-fog)]/92 backdrop-blur-md border-b border-[var(--line-soft)]/60 -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+12rem)] xl:w-[calc(100%+16rem)] py-[0.6875rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)]" style={`--ticker-font: ${tickerFont}`}>
+      <div class="ticker-wrapper w-full overflow-hidden">
         <div class="ticker-content flex" data-ticker-content>
           <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0" data-ticker-unit>{tickerUnit}</span>
           <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0">{tickerUnit}</span>
@@ -483,7 +483,7 @@ const tickerUnit = `${tickerText} — `;
           </div>
           {instrument.imageUrl && (
             <div class="instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)]">
-              <img src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" />
+              <img src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" width="400" height="300" />
             </div>
           )}
           <div class="instrument-card-body px-4 py-3 flex-1">
@@ -572,7 +572,7 @@ const tickerUnit = `${tickerText} — `;
   }
 
   .ticker-wrapper {
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
     position: relative;
   }

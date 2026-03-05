@@ -29,7 +29,7 @@ const zones: Zone[] = [
     descriptor: "A bag, a ritual, and a question about daily objects.",
     system: "SYST: VOID",
     scatter: "md:-translate-y-8 md:-translate-x-4 md:scale-95",
-    image: "/images/qbag.png",
+    image: "/images/qbag.webp",
     holographic: false,
     lightText: true
   },
@@ -95,6 +95,9 @@ const zones: Zone[] = [
       alt=""
       class="infocigan-hero-image absolute right-6 md:right-24 bottom-0 translate-y-[25%] w-[clamp(240px,36vw,440px)] h-auto object-contain pointer-events-none z-30 hidden md:block [@media(orientation:landscape)]:block"
       loading="lazy"
+      decoding="async"
+      width="440"
+      height="550"
     />
   </div>
 
@@ -117,10 +120,14 @@ const zones: Zone[] = [
                 <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden">
                   {zone.image ? (
                     <>
-                      <img 
-                        src={zone.image} 
-                        alt={zone.title} 
+<img
+                        src={zone.image}
+                        alt={zone.title}
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                        width="400"
+                        height="500"
                       />
                       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
                       {zone.holographic && (
