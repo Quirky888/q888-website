@@ -3,6 +3,7 @@ import SlimNav from "./SlimNav.astro";
 import OverpricedStickersSection from "./OverpricedStickersSection.astro";
 import DynamicCosmicBackground from "./DynamicCosmicBackground.astro";
 import NarMailChatbot from "./NarMailChatbot.astro";
+import InvestorChatbot from "./InvestorChatbot.astro";
 
 const zones = [
   {
@@ -231,6 +232,7 @@ const zones = [
             </div>
             <div class="overpriced-layout-with-nav">
               <OverpricedStickersSection inPortal={true} />
+              <InvestorChatbot />
             </div>
             </>
           ) : zone.slug === "afterlife-contracts" ? (

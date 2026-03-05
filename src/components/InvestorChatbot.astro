@@ -1,0 +1,614 @@
+---
+// No props needed
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+
+<div id="investor-chat-widget" class="investor-chat-widget">
+  <button id="investor-chat-toggle" class="investor-toggle-btn" aria-label="Open Infocigan chat">
+    <span>✦</span>
+    <div class="investor-currency-badge">$</div>
+  </button>
+
+  <div id="investor-chat-window" class="investor-chat-container" aria-hidden="true">
+    <div class="investor-gold-line-top"></div>
+
+    <div class="investor-header">
+      <div>
+        <h1 class="investor-cinzel-title">INFOCIGAN</h1>
+        <div class="investor-status-area">
+          <div class="investor-status-dot"></div>
+          Consulting The Investor
+        </div>
+      </div>
+      <button id="investor-chat-close" class="investor-close-btn" aria-label="Close chat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="investor-chat-messages" class="investor-message-area"></div>
+
+    <div class="investor-input-container">
+      <div class="investor-input-wrapper">
+        <input
+          type="text"
+          id="investor-chat-input"
+          class="investor-chat-input"
+          placeholder="Inquire further…"
+          autocomplete="off"
+        />
+        <button id="investor-chat-send" class="investor-send-btn" aria-label="Send message">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  const INVESTOR_CHAT_API = "/.netlify/functions/investor-chat";
+  const INVESTOR_MAX_MESSAGES = 18;
+  const INVESTOR_GREETING = "Welcome to the trading zone. Are you here to acquire an Overpriced Sticker, secure an Afterlife Contract, or fund the next President of the Galaxy?";
+
+  function escapeHtmlInvestor(s) {
+    const div = document.createElement("div");
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  class InvestorChatbot {
+    constructor() {
+      this.widget = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-widget"));
+      this.toggle = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-toggle"));
+      this.window = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-window"));
+      this.close = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-close"));
+      this.messagesEl = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-messages"));
+      this.input = /** @type {HTMLInputElement | null} */ (document.getElementById("investor-chat-input"));
+      this.send = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-send"));
+      this.hasInitialized = false;
+      this.isLoading = false;
+      /** @type {Array<{role: "user"|"assistant", content: string}>} */
+      this.history = [];
+
+      this.init();
+    }
+
+    init() {
+      if (this.hasInitialized || !this.widget) return;
+      this.hasInitialized = true;
+
+      this.toggle?.addEventListener("click", () => this.toggleChat());
+      this.close?.addEventListener("click", () => this.closeChat());
+      this.close?.addEventListener("touchend", (e) => { e.preventDefault(); this.closeChat(); }, { passive: false });
+      this.send?.addEventListener("click", () => this.sendMessage());
+      this.input?.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") this.sendMessage();
+      });
+
+      setTimeout(() => this.showGreeting(), 500);
+    }
+
+    toggleChat() {
+      this.window?.classList.toggle("investor-active");
+      const isOpen = this.window?.classList.contains("investor-active");
+      this.window?.setAttribute("aria-hidden", String(!isOpen));
+      this.toggle?.classList.toggle("investor-toggle-hidden", !!isOpen);
+      if (isOpen) this.input?.focus();
+    }
+
+    openChat() {
+      this.window?.classList.add("investor-active");
+      this.window?.setAttribute("aria-hidden", "false");
+      this.toggle?.classList.add("investor-toggle-hidden");
+      this.input?.focus();
+    }
+
+    closeChat() {
+      this.window?.classList.remove("investor-active");
+      this.window?.setAttribute("aria-hidden", "true");
+      this.toggle?.classList.remove("investor-toggle-hidden");
+    }
+
+    addMessage(text, isBot = false) {
+      const item = document.createElement("div");
+      item.className = "investor-message-item " + (isBot ? "investor-message-item--agent" : "investor-message-item--user");
+      const lastItem = this.messagesEl?.lastElementChild;
+      const lastWasBot = lastItem?.querySelector(".investor-agent-msg");
+      const lastWasUser = lastItem?.querySelector(".investor-user-msg");
+      if (lastItem && ((isBot && lastWasUser) || (!isBot && lastWasBot))) {
+        item.classList.add("investor-divider-strong");
+      }
+      const meta = isBot ? "INFOCIGAN" : "YOU";
+      const msgClass = isBot ? "investor-agent-msg" : "investor-user-msg";
+      item.innerHTML = `<div class="investor-meta-label">${escapeHtmlInvestor(meta)}</div><div class="${msgClass}"><p class="investor-msg-text">${escapeHtmlInvestor(text)}</p></div>`;
+      this.messagesEl?.appendChild(item);
+      this.scrollToBottom();
+    }
+
+    addBotMessage(text, delay = 800) {
+      this.showTypingIndicator();
+      setTimeout(() => {
+        this.hideTypingIndicator();
+        this.addMessage(text, true);
+        this.input?.focus();
+      }, delay);
+    }
+
+    showTypingIndicator() {
+      document.getElementById("investor-typing-indicator")?.remove();
+      const item = document.createElement("div");
+      item.className = "investor-message-item investor-message-item--agent";
+      item.id = "investor-typing-indicator";
+      item.innerHTML = '<div class="investor-meta-label">INFOCIGAN</div><div class="investor-typing"><div class="investor-dot"></div><div class="investor-dot"></div><div class="investor-dot"></div></div>';
+      this.messagesEl?.appendChild(item);
+      this.scrollToBottom();
+    }
+
+    hideTypingIndicator() {
+      document.getElementById("investor-typing-indicator")?.remove();
+    }
+
+    scrollToBottom() {
+      if (this.messagesEl) {
+        this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+      }
+    }
+
+    showGreeting() {
+      this.addMessage(INVESTOR_GREETING, true);
+      this.history.push({ role: "assistant", content: INVESTOR_GREETING });
+      this.input?.focus();
+    }
+
+    sendMessage() {
+      const text = this.input?.value.trim();
+      if (!text || this.isLoading) return;
+      if (this.history.length >= INVESTOR_MAX_MESSAGES) return;
+
+      this.addMessage(text, false);
+      this.history.push({ role: "user", content: text });
+      if (this.input) this.input.value = "";
+      this.callApi();
+    }
+
+    async callApi() {
+      if (this.isLoading) return;
+      this.isLoading = true;
+      this.showTypingIndicator();
+      this.setInputDisabled(true);
+
+      try {
+        const res = await fetch(INVESTOR_CHAT_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: this.history }),
+        });
+        const data = await res.json().catch(() => ({}));
+        this.hideTypingIndicator();
+        if (res.ok && data.content) {
+          this.addMessage(data.content, true);
+          this.history.push({ role: "assistant", content: data.content });
+        } else {
+          const err = this.parseApiError(res, data);
+          this.addMessage(err, true);
+        }
+        this.input?.focus();
+      } catch {
+        this.hideTypingIndicator();
+        this.addMessage("Connection failed. The trading zone may be temporarily offline.", true);
+        this.input?.focus();
+      } finally {
+        this.isLoading = false;
+        this.setInputDisabled(false);
+      }
+    }
+
+    setInputDisabled(disabled) {
+      if (this.input) this.input.disabled = disabled;
+      if (this.send) this.send.disabled = disabled;
+    }
+
+    parseApiError(res, data) {
+      if (res.status === 404) {
+        return "Infocigan API not found. Use the Netlify dev URL from the terminal.";
+      }
+      if (data.error) {
+        const err = typeof data.error === "string" ? data.error : JSON.stringify(data.error);
+        try {
+          const parsed = JSON.parse(err);
+          return parsed.error?.message || parsed.message || err;
+        } catch {
+          return err;
+        }
+      }
+      return res.status === 500
+        ? "Infocigan temporarily offline. Check OPENAI_API_KEY in .env and restart npm run dev:netlify."
+        : "Response unavailable. Please rephrase or try again.";
+    }
+  }
+
+  function initInvestorChatbot() {
+    const widget = document.getElementById("investor-chat-widget");
+    if (!widget || widget.getAttribute("data-investor-chat-init") === "true") return;
+    widget.setAttribute("data-investor-chat-init", "true");
+    new InvestorChatbot();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initInvestorChatbot, { once: true });
+  } else {
+    initInvestorChatbot();
+  }
+
+  document.addEventListener("astro:page-load", initInvestorChatbot);
+</script>
+
+<style>
+  #investor-chat-widget {
+    --investor-espresso: #1e1510;
+    --investor-pitch: #0d0a09;
+    --investor-burnished-gold: #c5a059;
+    --investor-matte-gold: #8e6d2d;
+    --investor-cream: #e0d5c8;
+    --investor-gold-alpha: rgba(197, 160, 89, 0.15);
+  }
+
+  .investor-chat-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9998;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: var(--investor-cream);
+  }
+
+  .investor-toggle-btn {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c5a059 0%, #8e6d2d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.2);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+  }
+
+  .investor-toggle-btn:hover {
+    transform: scale(1.05) rotate(5deg);
+  }
+
+  .investor-toggle-btn.investor-toggle-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+  }
+
+  .investor-toggle-btn span {
+    font-size: 1.5rem;
+    color: var(--investor-pitch);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .investor-currency-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--investor-pitch);
+    color: var(--investor-burnished-gold);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--investor-matte-gold);
+  }
+
+  .investor-chat-container {
+    width: 380px;
+    height: 560px;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 100px);
+    background: var(--investor-espresso);
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(142, 109, 45, 0.05);
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .investor-chat-container.investor-active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  @keyframes investor-gold-flow {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .investor-gold-line-top {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--investor-burnished-gold), var(--investor-matte-gold), transparent);
+    background-size: 200% 100%;
+    animation: investor-gold-flow 6s linear infinite;
+    position: absolute;
+    top: 0;
+    z-index: 50;
+  }
+
+  .investor-header {
+    padding: 32px 32px 20px 32px;
+    background: linear-gradient(to bottom, var(--investor-pitch), var(--investor-espresso));
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .investor-cinzel-title {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.3em;
+    font-size: 0.85rem;
+    color: var(--investor-burnished-gold);
+    margin: 0 0 4px 0;
+  }
+
+  .investor-status-area {
+    display: flex;
+    align-items: center;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(224, 213, 200, 0.6);
+  }
+
+  .investor-status-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--investor-burnished-gold);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--investor-burnished-gold);
+    animation: investor-pulse 3s infinite;
+  }
+
+  @keyframes investor-pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+
+  .investor-close-btn {
+    background: none;
+    border: none;
+    color: var(--investor-cream);
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+  }
+
+  .investor-close-btn:hover {
+    opacity: 1;
+  }
+
+  .investor-message-area {
+    flex-grow: 1;
+    padding: 24px 32px;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .investor-message-area::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .investor-message-area::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .investor-message-area::-webkit-scrollbar-thumb {
+    background: var(--investor-matte-gold);
+  }
+
+  .investor-message-area :global(.investor-message-item) {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  }
+
+  .investor-message-area :global(.investor-message-item:last-child) {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .investor-message-area :global(.investor-message-item.investor-divider-strong) {
+    border-bottom-color: rgba(197, 160, 89, 0.45);
+    padding-top: 32px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+  }
+
+  .investor-message-area :global(.investor-meta-label) {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--investor-matte-gold);
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .investor-message-area :global(.investor-message-item--agent) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .investor-message-area :global(.investor-message-item--user) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .investor-message-area :global(.investor-message-item--user .investor-meta-label) {
+    text-align: right;
+  }
+
+  .investor-message-area :global(.investor-agent-msg) {
+    border-left: 1px solid var(--investor-burnished-gold);
+    padding: 16px 20px;
+    max-width: 90%;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 0 6px 6px 0;
+    animation: investor-fade-in 0.8s ease forwards;
+  }
+
+  .investor-message-area :global(.investor-user-msg) {
+    border: 1px solid rgba(224, 213, 200, 0.1);
+    padding: 16px;
+    max-width: 90%;
+    text-align: right;
+    border-radius: 6px 0 0 6px;
+    animation: investor-fade-in 0.8s ease forwards;
+  }
+
+  .investor-message-area :global(.investor-msg-text) {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    font-weight: 300;
+    margin: 0;
+    color: var(--investor-cream);
+  }
+
+  @keyframes investor-fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .investor-message-area :global(.investor-typing) {
+    display: flex;
+    gap: 6px;
+    padding: 10px 0;
+  }
+
+  .investor-message-area :global(.investor-dot) {
+    width: 3px;
+    height: 3px;
+    background: var(--investor-burnished-gold);
+    border-radius: 50%;
+    animation: investor-bounce 1.4s infinite ease-in-out both;
+  }
+
+  .investor-message-area :global(.investor-dot:nth-child(1)) { animation-delay: -0.32s; }
+  .investor-message-area :global(.investor-dot:nth-child(2)) { animation-delay: -0.16s; }
+
+  @keyframes investor-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+    40% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  .investor-input-container {
+    padding: 24px 32px 40px 32px;
+    background: var(--investor-espresso);
+  }
+
+  .investor-input-wrapper {
+    position: relative;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+    display: flex;
+    align-items: center;
+    transition: border-color 0.4s ease;
+  }
+
+  .investor-input-wrapper:focus-within {
+    border-bottom-color: var(--investor-burnished-gold);
+  }
+
+  #investor-chat-widget .investor-chat-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 0.9rem;
+    color: var(--investor-cream);
+    font-weight: 300;
+  }
+
+  #investor-chat-widget .investor-chat-input::placeholder {
+    color: rgba(224, 213, 200, 0.3);
+    font-style: italic;
+  }
+
+  .investor-send-btn {
+    background: none;
+    border: none;
+    color: var(--investor-burnished-gold);
+    cursor: pointer;
+    padding-left: 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .investor-send-btn:hover {
+    color: var(--investor-cream);
+    transform: translateX(3px);
+  }
+
+  .investor-send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  #investor-chat-widget .investor-chat-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 480px) {
+    .investor-chat-widget { bottom: 1rem; right: 1rem; }
+    .investor-chat-container {
+      width: calc(100vw - 2rem);
+      height: calc(100vh - 100px);
+      bottom: 70px;
+      right: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .investor-gold-line-top,
+    .investor-status-dot,
+    .investor-message-area :global(.investor-agent-msg),
+    .investor-message-area :global(.investor-user-msg) {
+      animation: none;
+    }
+  }
+</style>

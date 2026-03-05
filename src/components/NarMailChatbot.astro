@@ -120,6 +120,7 @@
       setTimeout(() => {
         this.hideTypingIndicator();
         this.addMessage(text, true);
+        this.input?.focus();
       }, delay);
     }
 
@@ -172,9 +173,11 @@
           const err = this.parseApiError(res, data);
           this.addMessage(err, true);
         }
+        this.input?.focus();
       } catch {
         this.hideTypingIndicator();
         this.addMessage("Connection failed. The Square Bubbles Council may be napping.", true);
+        this.input?.focus();
       }
     }
 
@@ -199,9 +202,11 @@
           const err = this.parseApiError(res, data);
           this.addMessage(err, true);
         }
+        this.input?.focus();
       } catch {
         this.hideTypingIndicator();
         this.addMessage("Connection failed. The mushroom network may be congested.", true);
+        this.input?.focus();
       } finally {
         this.isLoading = false;
         this.setInputDisabled(false);
