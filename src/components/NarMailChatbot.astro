@@ -41,23 +41,28 @@
 
 <script>
   // @ts-nocheck
+  const NAR_CHAT_API = "/.netlify/functions/nar-chat";
+  const MAX_MESSAGES = 18;
+
+  function escapeHtml(s) {
+    const div = document.createElement("div");
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
   class NarMailChatbot {
     constructor() {
       this.widget = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-widget"));
       this.toggle = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-toggle"));
       this.window = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-window"));
       this.close = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-close"));
-      this.messages = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-messages"));
+      this.messagesEl = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-messages"));
       this.input = /** @type {HTMLInputElement | null} */ (document.getElementById("nar-chat-input"));
       this.send = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-send"));
       this.hasInitialized = false;
-
-      /** @type {"initial" | "awaiting_name" | "awaiting_dimension" | "chaos"} */
-      this.conversationState = "initial";
-      /** @type {string | null} */
-      this.userName = null;
-      /** @type {string | null} */
-      this.parcelDimension = null;
+      this.isLoading = false;
+      /** @type {Array<{role: "user"|"assistant", content: string}>} */
+      this.history = [];
 
       this.init();
     }
@@ -77,7 +82,7 @@
         if (this.input?.value.length > 0) this.input?.removeAttribute("placeholder");
       });
 
-      setTimeout(() => this.addBotMessage(this.getRandomGreeting(), 200), 500);
+      setTimeout(() => this.fetchGreeting(), 500);
     }
 
     openChat() {
@@ -101,8 +106,8 @@
       const msg = document.createElement("div");
       msg.className = `nar-chat-message ${isBot ? "bot" : "user"}`;
       const label = isBot ? "K-Nar" : "You";
-      msg.innerHTML = `<span class="nar-chat-message-label">${label}</span><div class="nar-chat-message-content">${text}</div>`;
-      this.messages?.appendChild(msg);
+      msg.innerHTML = `<span class="nar-chat-message-label">${escapeHtml(label)}</span><div class="nar-chat-message-content">${escapeHtml(text)}</div>`;
+      this.messagesEl?.appendChild(msg);
       this.scrollToBottom();
     }
 
@@ -124,7 +129,7 @@
       indicator.className = "nar-chat-typing";
       indicator.id = "typing-indicator";
       indicator.innerHTML = "<span></span><span></span><span></span>";
-      this.messages?.appendChild(indicator);
+      this.messagesEl?.appendChild(indicator);
       this.scrollToBottom();
     }
 
@@ -133,142 +138,97 @@
     }
 
     scrollToBottom() {
-      if (this.messages) {
-        this.messages.scrollTop = this.messages.scrollHeight;
+      if (this.messagesEl) {
+        this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
       }
     }
 
     sendMessage() {
       const text = this.input?.value.trim();
-      if (!text) return;
+      if (!text || this.isLoading) return;
+      if (this.history.length >= MAX_MESSAGES) return;
 
       this.addMessage(text, false);
+      this.history.push({ role: "user", content: text });
       if (this.input) this.input.value = "";
-
-      this.processUserMessage(text);
+      this.callApi();
     }
 
-    /** @param {string} text */
-    processUserMessage(text) {
-      const lowerText = text.toLowerCase();
-      let response = "";
-
-      switch (this.conversationState) {
-        case "initial":
-          if (lowerText.includes("yes") || lowerText.includes("send") || lowerText.includes("parcel")) {
-            response = this.getFormRequirement();
-            this.conversationState = "awaiting_name";
-          } else if (lowerText.includes("no")) {
-            response = this.getRandomRejection();
-          } else {
-            response = this.getRandomConfusion();
-          }
-          break;
-
-        case "awaiting_name":
-          this.userName = text;
-          response = this.getDimensionQuestion();
-          this.conversationState = "awaiting_dimension";
-          break;
-
-        case "awaiting_dimension":
-          this.parcelDimension = text;
-          response = this.getRandomBureaucraticResponse();
-          this.conversationState = "chaos";
-          break;
-
-        case "chaos":
-          response = this.getChaosResponse();
-          break;
-
-        default:
-          response = this.getRandomConfusion();
+    async fetchGreeting() {
+      this.showTypingIndicator();
+      const messages = [{ role: "user", content: "[User has opened the Nar-Mail Express chat.]" }];
+      try {
+        const res = await fetch(NAR_CHAT_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages }),
+        });
+        const data = await res.json().catch(() => ({}));
+        this.hideTypingIndicator();
+        if (res.ok && data.content) {
+          this.addMessage(data.content, true);
+          this.history.push({ role: "assistant", content: data.content });
+        } else {
+          const err = this.parseApiError(res, data);
+          this.addMessage(err, true);
+        }
+      } catch {
+        this.hideTypingIndicator();
+        this.addMessage("Connection failed. The Square Bubbles Council may be napping.", true);
       }
-
-      this.addBotMessage(response, Math.random() * 1000 + 500);
     }
 
-    getRandomGreeting() {
-      const greetings = [
-        "Welcome to Nar-Mail Express°. Before we proceed, have you completed Form 888-Q (Intention Declaration)?",
-        "Greetings. This conversation is being recorded for quality assurance in Timeline B. Do you wish to send a parcel?",
-        "Hello! To expedite your inquiry, please state whether you are currently: (a) Human (b) AI (c) Uncertain (d) All of the above.",
-        "NAR-MAIL SYSTEM ONLINE. Current interdimensional delay: 3-5 business eternities. How may we complicate your day?",
-        "Good [TIME_UNIT]. Your request has been pre-processed by Department 404. Would you like to continue anyway?",
-      ];
-      return greetings[Math.floor(Math.random() * greetings.length)];
+    async callApi() {
+      if (this.isLoading) return;
+      this.isLoading = true;
+      this.showTypingIndicator();
+      this.setInputDisabled(true);
+
+      try {
+        const res = await fetch(NAR_CHAT_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: this.history }),
+        });
+        const data = await res.json().catch(() => ({}));
+        this.hideTypingIndicator();
+        if (res.ok && data.content) {
+          this.addMessage(data.content, true);
+          this.history.push({ role: "assistant", content: data.content });
+        } else {
+          const err = this.parseApiError(res, data);
+          this.addMessage(err, true);
+        }
+      } catch {
+        this.hideTypingIndicator();
+        this.addMessage("Connection failed. The mushroom network may be congested.", true);
+      } finally {
+        this.isLoading = false;
+        this.setInputDisabled(false);
+      }
     }
 
-    getFormRequirement() {
-      const forms = [
-        "Excellent. Please provide your full name as it appears on your Existential ID (Form 888-E required).",
-        "Understood. First, we need your name exactly as it was meant to be, not as it currently is. Please specify.",
-        "Noted. For processing, please state your name in reverse alphabetical order, then we'll sort it later.",
-        "Perfect. Enter your name. If you've changed dimensions recently, use your previous timeline's name.",
-      ];
-      return forms[Math.floor(Math.random() * forms.length)];
+    setInputDisabled(disabled) {
+      if (this.input) this.input.disabled = disabled;
+      if (this.send) this.send.disabled = disabled;
     }
 
-    getDimensionQuestion() {
-      const safeName = this.userName || "Applicant";
-      const questions = [
-        `Thank you, ${safeName}. Now, describe your parcel in terms of: (a) Physical weight (b) Emotional weight (c) Both (d) Neither but somehow still heavy.`,
-        `Noted, ${safeName}. What is the approximate dimension of your parcel? Please answer in non-Euclidean units.`,
-        `Acknowledged. Does your parcel exist in: (1) This reality (2) A parallel reality (3) Schrödinger's box (4) Yes.`,
-        `Processing... ${safeName}, classify your parcel urgency: (A) Immediate (B) Yesterday (C) Next century (D) When time permits itself to exist.`,
-      ];
-      return questions[Math.floor(Math.random() * questions.length)];
-    }
-
-    getRandomBureaucraticResponse() {
-      const parcel = this.parcelDimension || "unspecified";
-      const responses = [
-        `Interesting. Your submission has been forwarded to Department ${Math.floor(Math.random() * 999)}. They no longer exist, but protocol must be followed.`,
-        `I see. Unfortunately, parcels of type "${parcel}" require approval from the Square Bubbles Council. Current wait time: ∞ ± 3 days.`,
-        `Fascinating. This falls under Regulation 888.${Math.floor(Math.random() * 99)}, which was repealed before it was written. Please proceed anyway.`,
-        `Your request conflicts with Form T-${Math.random().toFixed(3)}, which you haven't filled yet but already submitted in an alternate timeline. Paradox logged.`,
-        "According to our records, you've already sent this parcel in 2031. We're processing it retroactively. Please confirm you will send it later.",
-      ];
-      return responses[Math.floor(Math.random() * responses.length)];
-    }
-
-    getChaosResponse() {
-      const chaos = [
-        "Your parcel is simultaneously in transit and never sent. Quantum shipping at its finest.",
-        "We've contacted the mushroom network. They suggest reconsidering whether parcels are a construct.",
-        "Error 888: Success too successful. Your parcel has arrived before you sent it. Please retrieve from yesterday.",
-        "The Council has reviewed your case. Their response: 🍄✨📦? (Translation pending)",
-        "Congratulations! You've been randomly selected for Express Delay™ - now twice as slow!",
-        "Your parcel weight exceeds our existential capacity. Consider sending it as an NFT instead.",
-        "Due to interdimensional regulations, we can only deliver to addresses that don't exist yet.",
-        "System Note: Your parcel has achieved sentience and requested a transfer to Department of Philosophy.",
-        "URGENT: Your package is having an existential crisis. Should we send a therapist or just deliver it?",
-        "Hmm. Have you tried turning your parcel off and on again? Sometimes that changes its dimension.",
-        "The AI says yes. The mushrooms say no. The middle-management demons abstained. Proposal: deadlock eternal.",
-        "Your inquiry has been escalated to the President of the Galaxy. Response time: when causality is optional.",
-        "Thank you for your patience. Your submission is now a conceptual art piece. Invoice attached (non-refundable).",
-      ];
-      return chaos[Math.floor(Math.random() * chaos.length)];
-    }
-
-    getRandomConfusion() {
-      const confused = [
-        "I don't understand, but I've logged your response as 'poetic disagreement.' Please rephrase using only vowels.",
-        "Unclear. Are you requesting services or just enjoying bureaucracy? Both are valid.",
-        "Your response has been classified as 'interpretive.' Would you like to try again in a different language?",
-        "Interesting choice. That wasn't one of the options, which makes it the most correct answer. Proceed?",
-      ];
-      return confused[Math.floor(Math.random() * confused.length)];
-    }
-
-    getRandomRejection() {
-      const rejections = [
-        "Understandable. Your 'No' has been filed as Application 000-N. We'll contact you when you change your mind (already scheduled).",
-        "Noted. Declining service automatically enrolls you in our 'Maybe Later' program. First reminder: now.",
-        "Respect. Your rejection has been accepted and will be processed in 3-5 eternities. Have a day.",
-        "Fair enough. We've added you to the Non-Customer Database. Monthly updates about services you don't want will follow.",
-      ];
-      return rejections[Math.floor(Math.random() * rejections.length)];
+    parseApiError(res, data) {
+      if (res.status === 404) {
+        return "Form 888-N: Chat API not found. Use the Netlify dev URL from the terminal (e.g. localhost:8888) — not the raw Astro port.";
+      }
+      if (data.error) {
+        const err = typeof data.error === "string" ? data.error : JSON.stringify(data.error);
+        try {
+          const parsed = JSON.parse(err);
+          return parsed.error?.message || parsed.message || err;
+        } catch {
+          return err;
+        }
+      }
+      return res.status === 500
+        ? "Nar-Mail system temporarily offline. Check OPENAI_API_KEY in .env and restart npm run dev:netlify."
+        : "Form 888-E: Response unavailable. Please rephrase or try again.";
     }
   }
 
@@ -594,6 +554,17 @@
   .nar-chat-send:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(95, 210, 230, 0.4);
+  }
+
+  .nar-chat-send:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  #nar-chat-widget .nar-chat-input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 
   .nar-chat-messages::-webkit-scrollbar {

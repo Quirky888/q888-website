@@ -10,6 +10,7 @@ This is a static **Astro** site (Q888 portfolio). No backend services, databases
 |------|---------|
 | Install deps | `npm install` |
 | Dev server | `npm run dev` (serves at `localhost:4321`) |
+| Dev with Kotiki-Nar AI | `npm run dev:netlify` (runs Astro + Netlify Functions; requires `OPENAI_API_KEY` in `.env`) |
 | Build | `npm run build` (outputs to `./dist/`) |
 | Preview build | `npm run preview` |
 
@@ -20,3 +21,4 @@ This is a static **Astro** site (Q888 portfolio). No backend services, databases
 - The `.env.example` file exists but is optional — defaults work fine for local dev. Copy it to `.env` if you need to configure `ALLOWED_HOSTS`.
 - Production branch is `jan25-stable`. Never push directly to it. See `.cursorrules` for full git/deploy discipline.
 - The site is a single continuous scroll (`#landing → #projects → #infocigan → #contact`) — do not introduce multi-page routing unless explicitly requested.
+- **Kotiki-Nar chatbot:** AI-powered via `netlify/functions/nar-chat.ts`. To test locally, run `npm run dev:netlify` and add `OPENAI_API_KEY` to `.env`. `npm run dev` alone does not run the function.

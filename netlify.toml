@@ -1,6 +1,10 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  command = "npm run dev"
 
 [[headers]]
   for = "/*"
@@ -19,7 +23,7 @@
       connect-src 'self' https://ipapi.co; \
       frame-ancestors 'none'; \
       base-uri 'self'; \
-      form-action 'self'\
+      form-action 'self'; \
       """
 
 [[headers]]
