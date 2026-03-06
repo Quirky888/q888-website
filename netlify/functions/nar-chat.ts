@@ -1,4 +1,5 @@
-import type { Handler } from "@netlify/functions";
+import OpenAI from "openai";
+import { stream, type Handler } from "@netlify/functions";
 
 const SYSTEM_PROMPT = `You are Kotiki-Nar — a two-headed cat courier employed by Nar-Mail Express°.
 
@@ -105,6 +106,13 @@ interface RateLimit {
 const rateLimiter = new Map<string, RateLimit>();
 const RATE_LIMIT_MAX = 10; // max requests per minute
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const SSE_HEADERS = {
+  "Content-Type": "text/event-stream; charset=utf-8",
+  "Cache-Control": "no-cache, no-transform",
+  Connection: "keep-alive",
+  "X-Accel-Buffering": "no",
+};
+const JSON_HEADERS = { "Content-Type": "application/json" };
 
 function checkRateLimit(ip: string): boolean {
   if (ip === "unknown") return true; // skip limit if IP can't be found
@@ -121,120 +129,92 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
-export const handler: Handler = async (event) => {
+export const handler: Handler = stream(async (event) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, headers: JSON_HEADERS, body: JSON.stringify({ error: "Method Not Allowed" }) };
   }
 
   const clientIp = event.headers["x-forwarded-for"] || event.headers["client-ip"] || "unknown";
-  const limitChecksOut = checkRateLimit(clientIp);
-  
-  if (!limitChecksOut) {
+  if (!checkRateLimit(clientIp)) {
     return {
       statusCode: 429,
+      headers: JSON_HEADERS,
       body: JSON.stringify({ error: "Too many requests. Please try again later." }),
-      headers: { "Content-Type": "application/json" },
     };
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   const systemPrompt = process.env.NAR_CHAT_SYSTEM_PROMPT ?? SYSTEM_PROMPT;
-
   if (!apiKey) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "OPENAI_API_KEY not configured" }),
-      headers: { "Content-Type": "application/json" },
-    };
+    return { statusCode: 500, headers: JSON_HEADERS, body: JSON.stringify({ error: "OPENAI_API_KEY not configured" }) };
   }
 
   let body: RequestBody;
   try {
     body = JSON.parse(event.body ?? "{}");
   } catch {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "Invalid JSON body" }),
-      headers: { "Content-Type": "application/json" },
-    };
+    return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "Invalid JSON body" }) };
   }
 
   const { messages } = body;
   if (!Array.isArray(messages) || messages.length === 0) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: "messages array required" }),
-      headers: { "Content-Type": "application/json" },
-    };
+    return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "messages array required" }) };
   }
 
-  // Prevent unusually large arrays from passing through
   if (messages.length > 50) {
-    return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "too many messages in request" }),
-        headers: { "Content-Type": "application/json" },
-    };
+    return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "too many messages in request" }) };
   }
-  
-  // Enforce message properties
-  const isInvalid = messages.some(msg => {
+
+  const isInvalid = messages.some((msg) => {
     return typeof msg.content !== "string" || msg.content.trim().length === 0 || msg.content.length > 1000;
   });
-
   if (isInvalid) {
     return {
       statusCode: 400,
+      headers: JSON_HEADERS,
       body: JSON.stringify({ error: "Invalid message format or length exceeds 1000 characters" }),
-      headers: { "Content-Type": "application/json" },
     };
   }
 
-  const openaiMessages: Message[] = [
-    { role: "system", content: systemPrompt },
-    ...messages.slice(-20),
-  ];
+  const openaiMessages: Message[] = [{ role: "system", content: systemPrompt }, ...messages.slice(-20)];
+  const openai = new OpenAI({ apiKey, baseURL: process.env.OPENAI_BASE_URL });
+  const encoder = new TextEncoder();
 
-  try {
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: openaiMessages,
-        max_tokens: 512,
-      }),
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      return {
-        statusCode: res.status,
-        body: JSON.stringify({ error: err || res.statusText }),
-        headers: { "Content-Type": "application/json" },
+  const bodyStream = new ReadableStream({
+    async start(controller) {
+      const sendEvent = (payload: Record<string, string>) => {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify(payload)}\n\n`));
       };
-    }
 
-    const data = (await res.json()) as {
-      choices?: Array<{ message?: { content?: string } }>;
-    };
-    const content = data.choices?.[0]?.message?.content ?? "";
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          messages: openaiMessages,
+          max_tokens: 512,
+          stream: true,
+        });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ content }),
-      headers: { "Content-Type": "application/json" },
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: err instanceof Error ? err.message : "OpenAI request failed",
-      }),
-      headers: { "Content-Type": "application/json" },
-    };
-  }
-};
+        for await (const chunk of completion) {
+          const token = chunk.choices[0]?.delta?.content;
+          if (!token) continue;
+          sendEvent({ type: "token", content: token });
+        }
+        sendEvent({ type: "done" });
+      } catch (err) {
+        sendEvent({
+          type: "error",
+          message: err instanceof Error ? err.message : "OpenAI request failed",
+        });
+        sendEvent({ type: "done" });
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return {
+    statusCode: 200,
+    headers: SSE_HEADERS,
+    body: bodyStream,
+  };
+});
