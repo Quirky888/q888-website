@@ -89,9 +89,44 @@ interface RequestBody {
   messages: Message[];
 }
 
+interface RateLimit {
+  count: number;
+  resetTime: number;
+}
+
+const rateLimiter = new Map<string, RateLimit>();
+const RATE_LIMIT_MAX = 10; // max requests per minute
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+
+function checkRateLimit(ip: string): boolean {
+  if (ip === "unknown") return true; // skip limit if IP can't be found
+  const now = Date.now();
+  const rl = rateLimiter.get(ip);
+  if (!rl || now > rl.resetTime) {
+    rateLimiter.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+  if (rl.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+  rl.count++;
+  return true;
+}
+
 export const handler: Handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
+  }
+
+  const clientIp = event.headers["x-forwarded-for"] || event.headers["client-ip"] || "unknown";
+  const limitChecksOut = checkRateLimit(clientIp);
+  
+  if (!limitChecksOut) {
+    return {
+      statusCode: 429,
+      body: JSON.stringify({ error: "Too many requests. Please try again later." }),
+      headers: { "Content-Type": "application/json" },
+    };
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
@@ -121,6 +156,28 @@ export const handler: Handler = async (event) => {
     return {
       statusCode: 400,
       body: JSON.stringify({ error: "messages array required" }),
+      headers: { "Content-Type": "application/json" },
+    };
+  }
+
+  // Prevent unusually large arrays from passing through
+  if (messages.length > 50) {
+    return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "too many messages in request" }),
+        headers: { "Content-Type": "application/json" },
+    };
+  }
+  
+  // Enforce message properties
+  const isInvalid = messages.some(msg => {
+    return typeof msg.content !== "string" || msg.content.trim().length === 0 || msg.content.length > 1000;
+  });
+
+  if (isInvalid) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Invalid message format or length exceeds 1000 characters" }),
       headers: { "Content-Type": "application/json" },
     };
   }
