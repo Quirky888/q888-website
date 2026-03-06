@@ -54,6 +54,56 @@
     return div.innerHTML;
   }
 
+  function renderInlineMarkdown(text) {
+    return text
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/__(.+?)__/g, "<strong>$1</strong>");
+  }
+
+  function renderMarkdown(text) {
+    const normalized = escapeHtml(text).replace(/\r\n/g, "\n");
+    const lines = normalized.split("\n");
+    const blocks = [];
+    let i = 0;
+
+    while (i < lines.length) {
+      const line = lines[i].trim();
+      if (!line) {
+        i += 1;
+        continue;
+      }
+
+      if (/^[-*]\s+/.test(line)) {
+        const items = [];
+        while (i < lines.length && /^[-*]\s+/.test(lines[i].trim())) {
+          items.push(lines[i].trim().replace(/^[-*]\s+/, ""));
+          i += 1;
+        }
+        blocks.push(`<ul>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`);
+        continue;
+      }
+
+      if (/^\d+\.\s+/.test(line)) {
+        const items = [];
+        while (i < lines.length && /^\d+\.\s+/.test(lines[i].trim())) {
+          items.push(lines[i].trim().replace(/^\d+\.\s+/, ""));
+          i += 1;
+        }
+        blocks.push(`<ol>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ol>`);
+        continue;
+      }
+
+      const paragraph = [];
+      while (i < lines.length && lines[i].trim() && !/^[-*]\s+/.test(lines[i].trim()) && !/^\d+\.\s+/.test(lines[i].trim())) {
+        paragraph.push(lines[i].trim());
+        i += 1;
+      }
+      blocks.push(`<p>${renderInlineMarkdown(paragraph.join("<br>"))}</p>`);
+    }
+
+    return blocks.join("");
+  }
+
   class NarMailChatbot {
     constructor() {
       this.widget = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-widget"));
@@ -65,6 +115,7 @@
       this.send = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-send"));
       this.hasInitialized = false;
       this.isLoading = false;
+      this.scrollRequest = 0;
       /** @type {Array<{role: "user"|"assistant", content: string}>} */
       this.history = [];
 
@@ -107,25 +158,31 @@
      * @param {boolean} [isBot=false]
      */
     addMessage(text, isBot = false) {
+      if (!this.messagesEl) return;
       const msg = document.createElement("div");
       msg.className = `nar-chat-message ${isBot ? "bot" : "user"}`;
       const label = isBot ? "K-Nar" : "You";
-      msg.innerHTML = `<span class="nar-chat-message-label">${escapeHtml(label)}</span><div class="nar-chat-message-content">${escapeHtml(text)}</div>`;
-      this.messagesEl?.appendChild(msg);
+      const content = isBot ? renderMarkdown(text) : `<p>${escapeHtml(text)}</p>`;
+      msg.innerHTML = `<span class="nar-chat-message-label">${escapeHtml(label)}</span><div class="nar-chat-message-content">${content}</div>`;
+      this.messagesEl.appendChild(msg);
       this.scrollToBottom();
     }
 
-    /**
-     * @param {string} text
-     * @param {number} [delay=800]
-     */
-    addBotMessage(text, delay = 800) {
-      this.showTypingIndicator();
-      setTimeout(() => {
-        this.hideTypingIndicator();
-        this.addMessage(text, true);
-        this.input?.focus();
-      }, delay);
+    createStreamingBotMessage() {
+      if (!this.messagesEl) return null;
+      const msg = document.createElement("div");
+      msg.className = "nar-chat-message bot";
+      msg.innerHTML = `<span class="nar-chat-message-label">K-Nar</span><div class="nar-chat-message-content"></div>`;
+      this.messagesEl.appendChild(msg);
+      const contentEl = msg.querySelector(".nar-chat-message-content");
+      this.scrollToBottom();
+      return contentEl;
+    }
+
+    updateStreamingBotMessage(contentEl, text) {
+      if (!contentEl) return;
+      contentEl.innerHTML = renderMarkdown(text);
+      this.scrollToBottom(true);
     }
 
     showTypingIndicator() {
@@ -142,13 +199,21 @@
       document.getElementById("typing-indicator")?.remove();
     }
 
-    scrollToBottom() {
-      if (this.messagesEl) {
-        // Use a small timeout to ensure DOM has updated before scrolling
-        setTimeout(() => {
-          this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
-        }, 10);
+    scrollToBottom(smooth = false) {
+      if (!this.messagesEl) return;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!smooth || reduceMotion) {
+        this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+        return;
       }
+      if (this.scrollRequest) return;
+      this.scrollRequest = requestAnimationFrame(() => {
+        this.messagesEl?.scrollTo({
+          top: this.messagesEl.scrollHeight,
+          behavior: "smooth",
+        });
+        this.scrollRequest = 0;
+      });
     }
 
     sendMessage() {
@@ -169,19 +234,10 @@
       this.showTypingIndicator();
       const messages = [{ role: "user", content: "[User has opened the Nar-Mail Express chat.]" }];
       try {
-        const res = await fetch(NAR_CHAT_API, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages }),
-        });
-        const data = await res.json().catch(() => ({}));
-        this.hideTypingIndicator();
-        if (res.ok && data.content) {
-          this.addMessage(data.content, true);
-          this.history.push({ role: "assistant", content: data.content });
-        } else {
-          const err = this.parseApiError(res, data);
-          this.addMessage(err, true);
+        const result = await this.streamApiResponse(messages);
+        if (result.content) this.history.push({ role: "assistant", content: result.content });
+        if (result.interrupted && !result.content) {
+          this.addMessage("Connection interrupted before a reply arrived. Please try again.", true);
         }
         this.input?.focus();
       } catch {
@@ -198,19 +254,10 @@
       this.setInputDisabled(true);
 
       try {
-        const res = await fetch(NAR_CHAT_API, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: this.history }),
-        });
-        const data = await res.json().catch(() => ({}));
-        this.hideTypingIndicator();
-        if (res.ok && data.content) {
-          this.addMessage(data.content, true);
-          this.history.push({ role: "assistant", content: data.content });
-        } else {
-          const err = this.parseApiError(res, data);
-          this.addMessage(err, true);
+        const result = await this.streamApiResponse(this.history);
+        if (result.content) this.history.push({ role: "assistant", content: result.content });
+        if (result.interrupted && !result.content) {
+          this.addMessage("Connection interrupted before a reply arrived. Please resend your message.", true);
         }
         this.input?.focus();
       } catch {
@@ -220,9 +267,8 @@
       } finally {
         this.isLoading = false;
         this.setInputDisabled(false);
-        // Focus when re-enabled after loading state
         this.input?.focus();
-        this.scrollToBottom(); // Ensure smooth scroll after AI reply is fully processed
+        this.scrollToBottom();
       }
     }
 
@@ -231,15 +277,108 @@
       if (this.send) this.send.disabled = disabled;
     }
 
-    parseApiError(res, data) {
+    async streamApiResponse(messages) {
+      const res = await fetch(NAR_CHAT_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages }),
+      });
+
+      if (!res.ok) {
+        const err = await this.parseApiError(res);
+        this.hideTypingIndicator();
+        this.addMessage(err, true);
+        return { content: "", interrupted: false };
+      }
+
+      if (!res.body) {
+        this.hideTypingIndicator();
+        this.addMessage("Streaming unavailable in this browser. Please update and retry.", true);
+        return { content: "", interrupted: false };
+      }
+
+      this.hideTypingIndicator();
+      const contentEl = this.createStreamingBotMessage();
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let content = "";
+      let completed = false;
+
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          let boundary = buffer.indexOf("\n\n");
+
+          while (boundary !== -1) {
+            const block = buffer.slice(0, boundary).replace(/\r/g, "");
+            buffer = buffer.slice(boundary + 2);
+            const data = this.parseSseBlock(block);
+
+            if (data?.type === "token" && typeof data.content === "string") {
+              content += data.content;
+              this.updateStreamingBotMessage(contentEl, content);
+            } else if (data?.type === "error") {
+              throw new Error(data.message || "Streaming failed");
+            } else if (data?.type === "done") {
+              completed = true;
+            }
+            boundary = buffer.indexOf("\n\n");
+          }
+        }
+      } catch {
+        if (content) {
+          const interrupted = `${content}\n\nConnection interrupted. You can resend to continue.`;
+          this.updateStreamingBotMessage(contentEl, interrupted);
+          return { content, interrupted: true };
+        }
+        throw new Error("Connection interrupted");
+      }
+
+      if (!completed) {
+        if (content) {
+          const interrupted = `${content}\n\nConnection interrupted. You can resend to continue.`;
+          this.updateStreamingBotMessage(contentEl, interrupted);
+          return { content, interrupted: true };
+        }
+        return { content: "", interrupted: true };
+      }
+
+      return { content, interrupted: false };
+    }
+
+    parseSseBlock(block) {
+      if (!block.trim()) return null;
+      const dataLines = block
+        .split("\n")
+        .filter((line) => line.startsWith("data:"))
+        .map((line) => line.slice(5).trimStart());
+      if (dataLines.length === 0) return null;
+      try {
+        return JSON.parse(dataLines.join("\n"));
+      } catch {
+        return null;
+      }
+    }
+
+    async parseApiError(res) {
+      const bodyText = await res.text();
+      let data = {};
+      try {
+        data = JSON.parse(bodyText);
+      } catch {}
+
       if (res.status === 404) {
         return "Form 888-N: Chat API not found. Use the Netlify dev URL from the terminal (e.g. localhost:8888) — not the raw Astro port.";
       }
-      if (data.error) {
-        const err = typeof data.error === "string" ? data.error : JSON.stringify(data.error);
+      const sourceError = data && typeof data === "object" && "error" in data ? data.error : bodyText;
+      if (sourceError) {
+        const err = typeof sourceError === "string" ? sourceError : JSON.stringify(sourceError);
         try {
-          const parsed = JSON.parse(err);
-          return parsed.error?.message || parsed.message || err;
+          const parsed = JSON.parse(String(sourceError));
+          return parsed.error?.message || parsed.message || String(sourceError);
         } catch {
           return err;
         }
@@ -473,6 +612,39 @@
     font-size: 0.95rem;
     line-height: 1.5;
     color: #ffffff !important;
+  }
+
+  #nar-chat-widget .nar-chat-message-content p {
+    margin: 0;
+  }
+
+  #nar-chat-widget .nar-chat-message-content p + p,
+  #nar-chat-widget .nar-chat-message-content ul,
+  #nar-chat-widget .nar-chat-message-content ol {
+    margin-top: 0.5rem;
+  }
+
+  #nar-chat-widget .nar-chat-message-content ul,
+  #nar-chat-widget .nar-chat-message-content ol {
+    margin-bottom: 0;
+    padding-left: 1.2rem;
+    list-style-position: outside;
+  }
+
+  #nar-chat-widget .nar-chat-message-content ul {
+    list-style-type: disc;
+  }
+
+  #nar-chat-widget .nar-chat-message-content ol {
+    list-style-type: decimal;
+  }
+
+  #nar-chat-widget .nar-chat-message-content li + li {
+    margin-top: 0.2rem;
+  }
+
+  #nar-chat-widget .nar-chat-message-content strong {
+    font-weight: 800;
   }
 
   #nar-chat-widget .nar-chat-message.bot .nar-chat-message-content {
