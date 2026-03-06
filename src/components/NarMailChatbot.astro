@@ -116,6 +116,8 @@
       this.hasInitialized = false;
       this.isLoading = false;
       this.scrollRequest = 0;
+      this.typingShownAt = 0;
+      this.typingHideTimer = 0;
       /** @type {Array<{role: "user"|"assistant", content: string}>} */
       this.history = [];
 
@@ -125,10 +127,16 @@
     init() {
       if (this.hasInitialized || !this.widget) return;
       this.hasInitialized = true;
+      this.toggle?.setAttribute("aria-expanded", "false");
 
       this.toggle?.addEventListener("click", () => this.openChat());
       this.close?.addEventListener("click", () => this.closeChat());
       this.close?.addEventListener("touchend", (e) => { e.preventDefault(); this.closeChat(); }, { passive: false });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && this.window?.classList.contains("is-open")) {
+          this.closeChat();
+        }
+      });
       this.send?.addEventListener("click", () => this.sendMessage());
       this.input?.addEventListener("keypress", (event) => {
         if (event.key === "Enter") this.sendMessage();
@@ -144,6 +152,7 @@
       this.window?.classList.add("is-open");
       this.window?.setAttribute("aria-hidden", "false");
       this.toggle?.classList.add("is-hidden");
+      this.toggle?.setAttribute("aria-expanded", "true");
       this.input?.focus();
     }
 
@@ -151,6 +160,8 @@
       this.window?.classList.remove("is-open");
       this.window?.setAttribute("aria-hidden", "true");
       this.toggle?.classList.remove("is-hidden");
+      this.toggle?.setAttribute("aria-expanded", "false");
+      this.toggle?.focus();
     }
 
     /**
@@ -189,14 +200,30 @@
       this.hideTypingIndicator();
       const indicator = document.createElement("div");
       indicator.className = "nar-chat-typing";
-      indicator.id = "typing-indicator";
-      indicator.innerHTML = "<span></span><span></span><span></span>";
+      indicator.id = "nar-typing-indicator";
+      indicator.innerHTML = '<span class="nar-chat-typing-label">Typing…</span><span class="nar-chat-typing-dots" aria-hidden="true"><span></span><span></span><span></span></span>';
       this.messagesEl?.appendChild(indicator);
+      this.typingShownAt = performance.now();
       this.scrollToBottom();
     }
 
     hideTypingIndicator() {
-      document.getElementById("typing-indicator")?.remove();
+      const minVisibleMs = 1200;
+      const remove = () => {
+        document.getElementById("nar-typing-indicator")?.remove();
+        this.typingHideTimer = 0;
+      };
+      const elapsed = performance.now() - this.typingShownAt;
+
+      if (elapsed >= minVisibleMs) {
+        remove();
+        return;
+      }
+
+      if (this.typingHideTimer) {
+        clearTimeout(this.typingHideTimer);
+      }
+      this.typingHideTimer = window.setTimeout(remove, Math.max(0, minVisibleMs - elapsed));
     }
 
     scrollToBottom(smooth = false) {
@@ -413,8 +440,8 @@
 
   .nar-chat-widget {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    right: max(1rem, env(safe-area-inset-right, 0px));
     z-index: 9999;
     font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   }
@@ -478,9 +505,9 @@
     bottom: 80px;
     right: 0;
     width: 380px;
-    max-width: calc(100vw - 4rem);
+    max-width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
     height: 550px;
-    max-height: calc(100vh - 140px);
+    max-height: calc(100vh - 140px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     background: rgb(12, 25, 40);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
@@ -489,25 +516,28 @@
     box-shadow:
       0 0 60px rgba(95, 210, 230, 0.5),
       inset 0 1px 0 rgba(180, 235, 245, 0.2);
-    display: none;
+    display: flex;
     flex-direction: column;
     overflow: hidden;
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.97);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 260ms ease,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 320ms;
   }
 
   .nar-chat-window.is-open {
-    display: flex;
-    animation: nar-chat-slide-up 0.3s ease-out;
-  }
-
-  @keyframes nar-chat-slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity 260ms ease,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0s;
   }
 
   .nar-chat-header {
@@ -661,28 +691,42 @@
   }
 
   .nar-chat-typing {
-    display: flex;
-    gap: 0.4rem;
-    padding: 0.75rem 1rem;
-    background: rgba(95, 210, 230, 0.25);
-    border: 1px solid rgba(95, 210, 230, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.7rem 1rem;
+    background: rgba(166, 124, 0, 0.14);
+    border: 1px solid rgba(206, 158, 0, 0.45);
     border-radius: 12px;
-    width: fit-content;
+    width: max-content;
   }
 
-  .nar-chat-typing span {
+  .nar-chat-typing-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 214, 122, 0.95);
+  }
+
+  .nar-chat-typing-dots {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .nar-chat-typing-dots span {
     width: 8px;
     height: 8px;
-    background: rgb(95, 210, 230);
+    background: rgb(214, 168, 74);
     border-radius: 50%;
     animation: nar-chat-typing 1.4s infinite;
   }
 
-  .nar-chat-typing span:nth-child(2) {
+  .nar-chat-typing-dots span:nth-child(2) {
     animation-delay: 0.2s;
   }
 
-  .nar-chat-typing span:nth-child(3) {
+  .nar-chat-typing-dots span:nth-child(3) {
     animation-delay: 0.4s;
   }
 
@@ -776,15 +820,27 @@
 
   @media (max-width: 480px) {
     .nar-chat-widget {
-      bottom: 1rem;
-      right: 1rem;
+      bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+      right: max(1rem, env(safe-area-inset-right, 0px));
     }
 
     .nar-chat-window {
-      width: calc(100vw - 2rem);
-      height: calc(100vh - 100px);
+      width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+      height: calc(100vh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
       bottom: 70px;
       right: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nar-chat-toggle,
+    .nar-chat-window,
+    .nar-chat-message,
+    .nar-chat-send,
+    .nar-chat-typing-dots span,
+    .nar-chat-badge {
+      animation: none !important;
+      transition: none !important;
     }
   }
 </style>

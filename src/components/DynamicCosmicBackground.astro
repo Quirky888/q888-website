@@ -20,10 +20,11 @@ const total = 25;
   {Array.from({ length: total }, (_, i) => {
     const v = variants[i % variants.length];
     const delay = (i * 1.8) % 45;
+    const driftDelay = ((i * 0.9) % 18).toFixed(2);
     return (
       <div
         class="rainbow"
-        style={`animation-delay: -${delay}s; --a: ${v.a}; --b: ${v.b}; --c: ${v.c};`}
+        style={`animation-delay: -${delay}s, -${driftDelay}s; --a: ${v.a}; --b: ${v.b}; --c: ${v.c};`}
       />
     );
   })}
@@ -40,6 +41,7 @@ const total = 25;
     inset: 0;
     overflow: hidden;
     background: rgb(20, 35, 50);
+    will-change: transform;
   }
 
   .rainbow {
@@ -57,12 +59,21 @@ const total = 25;
       20px 0 60px 35px rgba(var(--b), 0.4),
       70px 0 70px 40px rgba(var(--c), 0.35),
       150px 0 100px 60px rgba(95, 210, 230, 0.15);
-    animation: cosmic-slide 45s ease-in-out infinite;
+    animation-name: cosmic-slide, cosmic-drift;
+    animation-duration: 45s, 16s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+    will-change: transform;
   }
 
   @keyframes cosmic-slide {
     from { right: -25vw; }
     to { right: 125vw; }
+  }
+
+  @keyframes cosmic-drift {
+    0%, 100% { transform: rotate(10deg) translateY(0); }
+    50% { transform: rotate(10deg) translateY(-2.5vh); }
   }
 
   .h {
@@ -98,12 +109,23 @@ const total = 25;
       rgba(15, 35, 55, 0.6) 50%,
       rgba(7, 19, 35, 0.9) 100%
     );
+    animation: cosmic-gradient-drift 22s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @keyframes cosmic-gradient-drift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(0, -1.2vh, 0) scale(1.01); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .rainbow {
       animation: none;
       opacity: 0.2;
+    }
+
+    .cosmic-gradient {
+      animation: none;
     }
   }
 </style>
