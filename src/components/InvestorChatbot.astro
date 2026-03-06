@@ -158,7 +158,10 @@
 
     scrollToBottom() {
       if (this.messagesEl) {
-        this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+        // Use a small timeout to ensure DOM has updated before scrolling
+        setTimeout(() => {
+          this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+        }, 10);
       }
     }
 
@@ -175,7 +178,10 @@
 
       this.addMessage(text, false);
       this.history.push({ role: "user", content: text });
-      if (this.input) this.input.value = "";
+      if (this.input) {
+        this.input.value = "";
+        this.input.focus(); // Focus after submission
+      }
       this.callApi();
     }
 
@@ -208,6 +214,9 @@
       } finally {
         this.isLoading = false;
         this.setInputDisabled(false);
+        // Focus when re-enabled after loading state
+        this.input?.focus();
+        this.scrollToBottom(); // Ensure smooth scroll after AI reply is fully processed
       }
     }
 

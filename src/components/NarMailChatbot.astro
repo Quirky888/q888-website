@@ -25,9 +25,13 @@
       <input
         type="text"
         id="nar-chat-input"
+        name="nar-chat-inquiry"
         class="nar-chat-input"
         placeholder="Type your inquiry"
         autocomplete="off"
+        data-1p-ignore="true"
+        data-lpignore="true"
+        data-form-type="other"
       />
       <button id="nar-chat-send" class="nar-chat-send" aria-label="Send message">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -140,7 +144,10 @@
 
     scrollToBottom() {
       if (this.messagesEl) {
-        this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+        // Use a small timeout to ensure DOM has updated before scrolling
+        setTimeout(() => {
+          this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+        }, 10);
       }
     }
 
@@ -151,7 +158,10 @@
 
       this.addMessage(text, false);
       this.history.push({ role: "user", content: text });
-      if (this.input) this.input.value = "";
+      if (this.input) {
+        this.input.value = "";
+        this.input.focus(); // Focus after submission
+      }
       this.callApi();
     }
 
@@ -210,6 +220,9 @@
       } finally {
         this.isLoading = false;
         this.setInputDisabled(false);
+        // Focus when re-enabled after loading state
+        this.input?.focus();
+        this.scrollToBottom(); // Ensure smooth scroll after AI reply is fully processed
       }
     }
 
