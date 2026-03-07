@@ -1,0 +1,27 @@
+{
+  "slug": "afterlife-contracts",
+  "sortOrder": 2,
+  "cardTitle": "Afterlife Contract™",
+  "cardDescriptor": "Paperwork for things that may outlive you.",
+  "cardSystem": "SYST: FINAL",
+  "cardScatter": "md:translate-y-12 md:-translate-x-6 md:scale-105",
+  "cardImage": "/images/afterlife_link.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "Afterlife Contract™",
+  "panelDescription": "Pre-notarized agreements for post-existence bureaucracy. Essential for those who expect to continue managing their legacy after their primary biological sequence has terminated.",
+  "panelSpecs": [
+    {
+      "label": "TERM",
+      "value": "INDEFINITE"
+    },
+    {
+      "label": "JURISDICTION",
+      "value": "BEYOND"
+    },
+    {
+      "label": "REFUND",
+      "value": "IMPOSSIBLE"
+    }
+  ]
+}

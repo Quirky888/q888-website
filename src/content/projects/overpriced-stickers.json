@@ -1,0 +1,27 @@
+{
+  "slug": "overpriced-stickers",
+  "sortOrder": 0,
+  "cardTitle": "Overpriced Stickers™",
+  "cardDescriptor": "Collectibles where price is part of the narrative.",
+  "cardSystem": "SYST: STICKY",
+  "cardScatter": "md:translate-y-4 md:translate-x-2 md:scale-110",
+  "cardImage": "/images/overpriced_stickers.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "Overpriced Stickers",
+  "panelDescription": "Standard adhesive signals for those who require immediate identification without long-term commitment. Each set is printed on speculative paper that responds to local trust levels.",
+  "panelSpecs": [
+    {
+      "label": "MATERIAL",
+      "value": "VINYL_GHOST"
+    },
+    {
+      "label": "LIFESPAN",
+      "value": "UNTIL_REALITY_SETTLES"
+    },
+    {
+      "label": "UTILITY",
+      "value": "SIGNALING_ONLY"
+    }
+  ]
+}
