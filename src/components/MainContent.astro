@@ -43,6 +43,7 @@ const { projectToOpen } = Astro.props;
   import { initIpGeoCoords } from "../scripts/ipGeoCoords";
   import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
   import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
+  import { initRevealMotion, destroyRevealMotion } from "../scripts/revealMotion";
 
   let didInit = false;
   let didBindLifecycle = false;
@@ -56,6 +57,7 @@ const { projectToOpen } = Astro.props;
     initThresholdMotion();
     initProjectDrawer();
     initInfociganPortal();
+    initRevealMotion();
 
     didInit = true;
 
@@ -76,6 +78,7 @@ const { projectToOpen } = Astro.props;
     destroySystemMetaState();
     destroyProjectDrawer();
     destroyInfociganPortal();
+    destroyRevealMotion();
     import("../scripts/edinburghMap").then((m) => m.destroyEdinburghMap()).catch(() => {});
 
     didInit = false;

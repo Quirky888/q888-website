@@ -108,9 +108,9 @@ const zones: Zone[] = [
       
       <!-- LEFT: Artifact Field (60%) -->
       <div class="order-2 lg:order-1">
-        <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+        <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16" data-motion-stagger data-motion-children="[data-motion-item]">
           {zones.map((zone) => (
-            <div class={`relative group ${zone.scatter} ${zone.slug === "nar-mail-express" ? "md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24" : ""}`}>
+            <div class={`relative group ${zone.scatter} ${zone.slug === "nar-mail-express" ? "md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24" : ""}`} data-motion-item>
               <a 
                 href={`#infocigan-zone-${zone.slug}`}
                 data-infocigan-slug={zone.slug}
@@ -162,7 +162,7 @@ const zones: Zone[] = [
         <!-- Q888:SECTION_START id="INFOCIGAN_ABOUT" -->
         <article class="infocigan-briefing space-y-12 w-full">
           
-          <section class="space-y-6">
+          <section class="space-y-6" data-motion-reveal>
             <h3 class="text-4xl md:text-7xl font-light text-[var(--text-ink)]">What is Infocigan?</h3>
             <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
               <p>
@@ -182,7 +182,7 @@ const zones: Zone[] = [
             </div>
           </section>
 
-          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12">
+          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
             <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
               <p>
                 At its core, Infocigan is an evolving constellation of ideas:
@@ -195,7 +195,7 @@ const zones: Zone[] = [
             </div>
           </section>
 
-          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12">
+          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
             <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
               <p>
                 Here, “Overpriced” isn’t a mistake — it’s a mirror.
@@ -212,7 +212,7 @@ const zones: Zone[] = [
             </div>
           </section>
 
-          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12 pb-12">
+          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12 pb-12" data-motion-reveal>
             <div class="space-y-6">
               <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-[var(--text-muted)]">Artifact Layers</h4>
               <ul class="space-y-4 font-mono text-lg md:text-2xl tracking-tight text-[var(--text-ink)]">
@@ -240,7 +240,7 @@ const zones: Zone[] = [
             </div>
           </section>
 
-          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12">
+          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
             <div class="space-y-6">
               <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-[var(--text-muted)]">Think of Infocigan as:</h4>
               <ul class="space-y-6 font-light text-xl md:text-3xl text-[var(--text-ink)] leading-snug">

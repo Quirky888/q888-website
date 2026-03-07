@@ -126,6 +126,8 @@
       this.hasInitialized = false;
       this.isLoading = false;
       this.scrollRequest = 0;
+      this.typingShownAt = 0;
+      this.typingHideTimer = 0;
       /** @type {Array<{role: "user"|"assistant", content: string}>} */
       this.history = [];
 
@@ -135,10 +137,16 @@
     init() {
       if (this.hasInitialized || !this.widget) return;
       this.hasInitialized = true;
+      this.toggle?.setAttribute("aria-expanded", "false");
 
       this.toggle?.addEventListener("click", () => this.toggleChat());
       this.close?.addEventListener("click", () => this.closeChat());
       this.close?.addEventListener("touchend", (e) => { e.preventDefault(); this.closeChat(); }, { passive: false });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && this.window?.classList.contains("investor-active")) {
+          this.closeChat();
+        }
+      });
       this.send?.addEventListener("click", () => this.sendMessage());
       this.input?.addEventListener("keypress", (event) => {
         if (event.key === "Enter") this.sendMessage();
@@ -152,6 +160,7 @@
       const isOpen = this.window?.classList.contains("investor-active");
       this.window?.setAttribute("aria-hidden", String(!isOpen));
       this.toggle?.classList.toggle("investor-toggle-hidden", !!isOpen);
+      this.toggle?.setAttribute("aria-expanded", String(!!isOpen));
       if (isOpen) this.input?.focus();
     }
 
@@ -159,6 +168,7 @@
       this.window?.classList.add("investor-active");
       this.window?.setAttribute("aria-hidden", "false");
       this.toggle?.classList.add("investor-toggle-hidden");
+      this.toggle?.setAttribute("aria-expanded", "true");
       this.input?.focus();
     }
 
@@ -166,6 +176,8 @@
       this.window?.classList.remove("investor-active");
       this.window?.setAttribute("aria-hidden", "true");
       this.toggle?.classList.remove("investor-toggle-hidden");
+      this.toggle?.setAttribute("aria-expanded", "false");
+      this.toggle?.focus();
     }
 
     addMessage(text, isBot = false) {
@@ -213,13 +225,29 @@
       const item = document.createElement("div");
       item.className = "investor-message-item investor-message-item--agent";
       item.id = "investor-typing-indicator";
-      item.innerHTML = '<div class="investor-meta-label">INFOCIGAN</div><div class="investor-typing"><div class="investor-dot"></div><div class="investor-dot"></div><div class="investor-dot"></div></div>';
+      item.innerHTML = '<div class="investor-meta-label">INFOCIGAN</div><div class="investor-typing"><span class="investor-typing-label">Typing…</span><div class="investor-typing-dots" aria-hidden="true"><div class="investor-dot"></div><div class="investor-dot"></div><div class="investor-dot"></div></div></div>';
       this.messagesEl?.appendChild(item);
+      this.typingShownAt = performance.now();
       this.scrollToBottom();
     }
 
     hideTypingIndicator() {
-      document.getElementById("investor-typing-indicator")?.remove();
+      const minVisibleMs = 1200;
+      const remove = () => {
+        document.getElementById("investor-typing-indicator")?.remove();
+        this.typingHideTimer = 0;
+      };
+      const elapsed = performance.now() - this.typingShownAt;
+
+      if (elapsed >= minVisibleMs) {
+        remove();
+        return;
+      }
+
+      if (this.typingHideTimer) {
+        clearTimeout(this.typingHideTimer);
+      }
+      this.typingHideTimer = window.setTimeout(remove, Math.max(0, minVisibleMs - elapsed));
     }
 
     scrollToBottom(smooth = false) {
@@ -429,8 +457,8 @@
 
   .investor-chat-widget {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    right: max(1rem, env(safe-area-inset-right, 0px));
     z-index: 9998;
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     color: var(--investor-cream);
@@ -487,8 +515,8 @@
   .investor-chat-container {
     width: 380px;
     height: 560px;
-    max-width: calc(100vw - 2rem);
-    max-height: calc(100vh - 100px);
+    max-width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+    max-height: calc(100vh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     background: var(--investor-espresso);
     border: 1px solid rgba(197, 160, 89, 0.1);
     position: absolute;
@@ -497,17 +525,26 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(142, 109, 45, 0.05);
-    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
     transform: translateY(20px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     overflow: hidden;
+    transition:
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 280ms ease,
+      visibility 0s linear 420ms;
   }
 
   .investor-chat-container.investor-active {
     transform: translateY(0);
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
+    transition:
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 280ms ease,
+      visibility 0s linear 0s;
   }
 
   @keyframes investor-gold-flow {
@@ -709,14 +746,31 @@
   }
 
   .investor-message-area :global(.investor-typing) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    background: rgba(197, 160, 89, 0.08);
+    border-radius: 999px;
+  }
+
+  .investor-message-area :global(.investor-typing-label) {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(224, 213, 200, 0.82);
+  }
+
+  .investor-message-area :global(.investor-typing-dots) {
     display: flex;
-    gap: 6px;
-    padding: 10px 0;
+    gap: 0.35rem;
   }
 
   .investor-message-area :global(.investor-dot) {
-    width: 3px;
-    height: 3px;
+    width: 6px;
+    height: 6px;
     background: var(--investor-burnished-gold);
     border-radius: 50%;
     animation: investor-bounce 1.4s infinite ease-in-out both;
@@ -792,21 +846,29 @@
   }
 
   @media (max-width: 480px) {
-    .investor-chat-widget { bottom: 1rem; right: 1rem; }
+    .investor-chat-widget {
+      bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+      right: max(1rem, env(safe-area-inset-right, 0px));
+    }
     .investor-chat-container {
-      width: calc(100vw - 2rem);
-      height: calc(100vh - 100px);
+      width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+      height: calc(100vh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
       bottom: 70px;
       right: 0;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .investor-chat-container,
+    .investor-toggle-btn,
+    .investor-send-btn,
     .investor-gold-line-top,
     .investor-status-dot,
     .investor-message-area :global(.investor-agent-msg),
-    .investor-message-area :global(.investor-user-msg) {
+    .investor-message-area :global(.investor-user-msg),
+    .investor-message-area :global(.investor-dot) {
       animation: none;
+      transition: none;
     }
   }
 </style>
