@@ -128,7 +128,7 @@ export function initSystemMetaState() {
 
   observer = new IntersectionObserver(handleIntersection, {
     threshold: [0.1, 0.3, 0.5, 0.7],
-    rootMargin: "-10% 0px -10% 0px",
+    rootMargin: "0px",
   });
 
   sections.forEach((section) => observer!.observe(section));

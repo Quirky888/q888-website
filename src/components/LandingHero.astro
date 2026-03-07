@@ -26,7 +26,11 @@
       />
     </picture>
 
-    <span class="hero-tagline-silver hero-tagline-corner">The hidden d∞oor is slightly open.</span>
+    <span class="hero-tagline-silver hero-tagline-corner tagline-container">
+      <span class="tagline-line">The hidden d∞oor</span>
+      <span class="tagline-line">is slightly</span>
+      <span class="tagline-line">open.</span>
+    </span>
 
     <div class="absolute z-10 left-0 px-6 md:px-24 hero-text-block">
       <h1 class="hero-title-silver">Q888</h1>
@@ -210,6 +214,14 @@
     -webkit-text-fill-color: transparent;
     animation: hero-shine 8s linear infinite;
   }
+  .tagline-line {
+    display: inline;
+  }
+  @media (max-width: 768px) and (orientation: portrait) {
+    .tagline-line {
+      display: block;
+    }
+  }
   .hero-tagline-silver.is-glitching {
     filter: url("#hero-tagline-glitch");
   }
@@ -217,10 +229,20 @@
     to { background-position: 200% center; }
   }
 
-  @media (prefers-reduced-motion: reduce), (max-width: 1024px) {
+  @media (prefers-reduced-motion: reduce) {
     .hero-title-silver,
     .hero-tagline-silver {
       animation: none;
+    }
+  }
+
+  /* Specific adjustment for mobile portrait */
+  @media (max-width: 768px) and (orientation: portrait) {
+    .hero-text-block {
+      top: 33.4%;
+    }
+    .hero-title-silver {
+      font-size: 3.0rem;
     }
   }
 
