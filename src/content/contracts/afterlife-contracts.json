@@ -1,0 +1,70 @@
+{
+  "slug": "afterlife-contracts",
+  "sortOrder": 2,
+  "title": "Afterlife Contract™",
+  "heroImage": "/images/afterlife_contract_hero.webp",
+  "heroAlt": "Afterlife Contract",
+  "heroLines": [
+    "AFTERLIFE",
+    "CONTRACT"
+  ],
+  "heroSubheadline": "Lifetime Lease + Eternity",
+  "heroSubheadlineAside": "or something like that...",
+  "statusLines": [
+    "TERM: INDEFINITE",
+    "JURISDICTION: BEYOND",
+    "REFUND: IMPOSSIBLE"
+  ],
+  "aboutHeading": "About the Contract",
+  "aboutParagraph": "Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury \"Lifetime Lease + Eternity\" agreement from Grim Reaper Inc., it satirizes how humans try to formalise the unformalizable: death, meaning, morality, and hope.",
+  "artworkCardTitle": "View Q888 Contract Certificate",
+  "artworkCardDescription": "The Underworld isn't a destination, but a curated experience. This original artwork binds cosmic symbols with vintage textures to frame your final choice: will you sign for HeLL, HeART, or the ART of eternity? The soul is free; the ink is the only debt.",
+  "artworkCardButtonLabel": "Open the Door",
+  "conceptHeading": "Concept",
+  "conceptParagraphs": [
+    "The project is built around a simple paradox: Everyone gets the afterlife (or non-afterlife) for free—yet humans would still gladly pay for premium access, VIP status, and official confirmation.",
+    "This fictional contract echoes reality: the flow is free, but you pay for the package. Energy is abundant, but monetised. Meaning is internal, but outsourced. Freedom exists, yet certificates are sold to validate it."
+  ],
+  "bureaucracyHeading": "The Bureaucracy of Eternity",
+  "bureaucracyParagraph": "The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like \"Subject to Underworld Adjustments\" mock the human desire to regulate what cannot be regulated.",
+  "dualityHeading": "The Duality of Choice",
+  "dualityParagraphs": [
+    "Viewers are invited to \"sign\" under three options: HeLL, HeART, or ART. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making.",
+    "There is no correct answer. The act of choosing (or refusing to choose) becomes the real performance."
+  ],
+  "visualLanguageHeading": "Visual Language",
+  "visualLanguageParagraph": "The work combines holographic gold frames, vintage parchment textures, cartoon skeletons, cosmic symbols, and handwritten annotations—living somewhere between medieval charter, corporate certificate, tarot deck, and internet meme.",
+  "interactionHeading": "Audience Interaction",
+  "interactionIntro": "The Afterlife Contract is participatory by nature. Viewers are encouraged to:",
+  "interactionItems": [
+    "Read the fine print",
+    "Choose a signature option",
+    "Interpret the contract personally",
+    "Laugh, reflect, or feel mildly uncomfortable"
+  ],
+  "interactionClosing": "It does not tell the viewer what to believe—it asks why they believe.",
+  "closingHeading": "Closing Statement",
+  "closingQuoteLines": [
+    "The only thing you actually sign",
+    "is your own interpretation."
+  ],
+  "downloadHeading": "Download Your Unofficial Afterlife Contract",
+  "downloadIntro": "Feeling brave, curious, or just mildly bored with mortality? You can download a printable version of the Afterlife Contract and sign your preferred destiny—HeLL, HeART, or ART—at your own risk and amusement.",
+  "termsHeading": "Terms of (Non-)Service",
+  "termsIntro": "By downloading this file, you acknowledge that:",
+  "termsItems": [
+    "It is 100% symbolic and performs -+0% actual afterlife management.",
+    "No spiritual, metaphysical, legal, medical, romantic, or real-estate outcomes are promised, implied, or guaranteed.",
+    "No refunds will be issued if eternity does not meet your expectations, mood board, or Pinterest vision.",
+    "Grim Reaper Inc., all associated skeletons, and the artist accept no responsibility for: delays at the pearly gates, unexpected cosmic plot twists, or being assigned a roommate who snores in the astral plane.",
+    "The only \"service\" truly provided is a moment of reflection, a piece of digital ink paper, and the faint hope that......."
+  ],
+  "termsCheckboxLabel": "I accept these very serious, absolutely binding, completely unenforceable terms",
+  "downloadHref": "/docs/afterlife_contract_to_sign.jpg",
+  "downloadFilename": "Afterlife_Contract.jpg",
+  "downloadButtonLabel": "Download Contract",
+  "downloadHint": "Please accept the terms to download",
+  "ctaLabel": "Retreat to Market",
+  "viewerImage": "/images/afterlife_contract.webp",
+  "viewerAlt": "Afterlife Contract Full Certificate"
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "president-of-the-galaxy",
+  "sortOrder": 3,
+  "cardTitle": "President of the Galaxy™",
+  "cardDescriptor": "Authority fiction stabilizer.",
+  "cardSystem": "SYST: NULL",
+  "cardScatter": "md:translate-y-32 md:translate-x-8 md:scale-100",
+  "cardImage": "/images/pog_vote.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "President of the Galaxy™",
+  "panelDescription": "A ceremonial title providing zero jurisdictional power over any planetary or stellar body. It functions as a psychological stabilizer for those overwhelmed by their lack of control over the universe.",
+  "panelSpecs": [
+    {
+      "label": "POWER",
+      "value": "NULL"
+    },
+    {
+      "label": "SCOPE",
+      "value": "COSMIC_FICTION"
+    },
+    {
+      "label": "SASH_INCLUDED",
+      "value": "TRUE"
+    }
+  ]
+}

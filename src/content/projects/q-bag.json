@@ -1,0 +1,27 @@
+{
+  "slug": "q-bag",
+  "sortOrder": 1,
+  "cardTitle": "Q-Bag™",
+  "cardDescriptor": "A bag, a ritual, and a question about daily objects.",
+  "cardSystem": "SYST: VOID",
+  "cardScatter": "md:-translate-y-8 md:-translate-x-4 md:scale-95",
+  "cardImage": "/images/qbag.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "Q-Bag",
+  "panelDescription": "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
+  "panelSpecs": [
+    {
+      "label": "VOLUME",
+      "value": "NON_EUCLIDEAN"
+    },
+    {
+      "label": "CLOSURE",
+      "value": "ZIPPER_LOGIC"
+    },
+    {
+      "label": "DENSITY",
+      "value": "LIGHTWEIGHT"
+    }
+  ]
+}

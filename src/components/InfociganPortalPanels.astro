@@ -4,59 +4,42 @@ import OverpricedStickersSection from "./OverpricedStickersSection.astro";
 import DynamicCosmicBackground from "./DynamicCosmicBackground.astro";
 import NarMailChatbot from "./NarMailChatbot.astro";
 import InvestorChatbot from "./InvestorChatbot.astro";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
-const zones = [
-  {
-    slug: "overpriced-stickers",
-    title: "Overpriced Stickers",
-    description: "Standard adhesive signals for those who require immediate identification without long-term commitment. Each set is printed on speculative paper that responds to local trust levels.",
-    specs: [
-      { label: "MATERIAL", value: "VINYL_GHOST" },
-      { label: "LIFESPAN", value: "UNTIL_REALITY_SETTLES" },
-      { label: "UTILITY", value: "SIGNALING_ONLY" }
-    ]
-  },
-  {
-    slug: "q-bag",
-    title: "Q-Bag",
-    description: "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
-    specs: [
-      { label: "VOLUME", value: "NON_EUCLIDEAN" },
-      { label: "CLOSURE", value: "ZIPPER_LOGIC" },
-      { label: "DENSITY", value: "LIGHTWEIGHT" }
-    ]
-  },
-  {
-    slug: "afterlife-contracts",
-    title: "Afterlife Contract™",
-    description: "Pre-notarized agreements for post-existence bureaucracy. Essential for those who expect to continue managing their legacy after their primary biological sequence has terminated.",
-    specs: [
-      { label: "TERM", value: "INDEFINITE" },
-      { label: "JURISDICTION", value: "BEYOND" },
-      { label: "REFUND", value: "IMPOSSIBLE" }
-    ]
-  },
-  {
-    slug: "president-of-the-galaxy",
-    title: "President of the Galaxy™",
-    description: "A ceremonial title providing zero jurisdictional power over any planetary or stellar body. It functions as a psychological stabilizer for those overwhelmed by their lack of control over the universe.",
-    specs: [
-      { label: "POWER", value: "NULL" },
-      { label: "SCOPE", value: "COSMIC_FICTION" },
-      { label: "SASH_INCLUDED", value: "TRUE" }
-    ]
-  },
-  {
-    slug: "nar-mail-express",
-    title: "Nar-Mail Express°",
-    description: "A delivery system for messages that arrive only when you are ready to receive them.",
-    specs: [
-      { label: "DELIVERY", value: "CONDITIONAL" },
-      { label: "CARRIER", value: "NAR" },
-      { label: "STATUS", value: "READY_WHEN_READY" }
-    ]
-  }
-];
+type ProductData = CollectionEntry<"products">["data"];
+type QBagData = Extract<ProductData, { slug: "q-bag" }>;
+type NarMailData = Extract<ProductData, { slug: "nar-mail-express" }>;
+
+const zones = (await getCollection("projects"))
+  .map(({ data }) => ({
+    sortOrder: data.sortOrder,
+    slug: data.slug,
+    title: data.panelTitle,
+    description: data.panelDescription,
+    specs: data.panelSpecs,
+  }))
+  .sort((a, b) => a.sortOrder - b.sortOrder);
+
+const qBagEntry = await getEntry("products", "q-bag");
+const narMailEntry = await getEntry("products", "nar-mail-express");
+const afterlifeEntry = await getEntry("contracts", "afterlife-contracts");
+const presidentEntry = await getEntry("campaigns", "president-of-the-galaxy");
+
+if (
+  !qBagEntry ||
+  qBagEntry.data.slug !== "q-bag" ||
+  !narMailEntry ||
+  narMailEntry.data.slug !== "nar-mail-express" ||
+  !afterlifeEntry ||
+  !presidentEntry
+) {
+  throw new Error("Required Infocigan content entries are missing.");
+}
+
+const qBag: QBagData = qBagEntry.data;
+const narMail: NarMailData = narMailEntry.data;
+const afterlife = afterlifeEntry.data;
+const president = presidentEntry.data;
 ---
 
 <div class="infocigan-portal-system">
@@ -79,24 +62,24 @@ const zones = [
             <SlimNav />
             <div class="qbag-new-layout">
               <section class="qbag-hero">
-<img
-                  src="/images/Qbag_hero.webp"
-                  alt="Q-bag hero"
+                <img
+                  src={qBag.heroImage}
+                  alt={qBag.heroAlt}
                   loading="eager"
                   decoding="async"
                   width="1200"
                   height="800"
                 />
                 <div class="qbag-hero-overlay">
-                  <h1 class="qbag-title gold-shine">Q-BAG™</h1>
+                  <h1 class="qbag-title gold-shine">{qBag.heroTitle}</h1>
                 </div>
               </section>
               <div class="qbag-main-content">
                 <section class="qbag-intro-section">
                   <div class="glass-card intro-card">
-                    <p class="qbag-tagline gold-shine">Reduce. Reuse. Collect. Invest.</p>
+                    <p class="qbag-tagline gold-shine">{qBag.introTagline}</p>
                     <p class="qbag-lead">
-                      Q-Bag is a reusable coffee bag system that turns everyday consumption into a long-term cultural object. It responds to disposable culture by blending sustainability with art, storytelling, and speculative value.
+                      {qBag.introLead}
                     </p>
                   </div>
                 </section>
@@ -111,11 +94,11 @@ const zones = [
                       </svg>
                     </div>
                     <div class="artwork-card-text">
-                      <h3 class="artwork-card-title">Q-Bag Visual Archive</h3>
-                      <p class="artwork-card-description">Full collage artwork featuring Project Infocigan elements, stickers, bag designs, and cultural artifacts. Click to explore in detail.</p>
+                          <h3 class="artwork-card-title">{qBag.artworkCardTitle}</h3>
+                          <p class="artwork-card-description">{qBag.artworkCardDescription}</p>
                     </div>
                     <button class="artwork-card-button" type="button">
-                      <span>Open Gallery</span>
+                          <span>{qBag.artworkCardButtonLabel}</span>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
@@ -127,56 +110,56 @@ const zones = [
                 <section class="qbag-content-grid-section" data-motion-reveal>
                   <div class="qbag-glass-grid" data-motion-stagger data-motion-children="[data-motion-item]">
                     <div class="glass-card" data-motion-item>
-                      <h3>The Concept</h3>
-                      <p>Inspired by the keep-cup logic, Q-Bag remains a simple, recognisable coffee bag designed for long-term reuse. Lightweight, durable, and visually minimal, it features a dedicated area for stickers—transforming the bag into a personal canvas that evolves over time.</p>
-                      <p>Unlike branded packaging that disappears with the next purchase, a Q-Bag is designed to stay in circulation for years, travelling between cafés, roasteries, and kitchens as a visible signal of a different way to consume.</p>
+                      <h3>{qBag.conceptCards[0].title}</h3>
+                      <p>{qBag.conceptCards[0].paragraphs[0]}</p>
+                      <p>{qBag.conceptCards[0].paragraphs[1]}</p>
                     </div>
                     <div class="glass-card" data-motion-item>
-                      <h3>Stickers as Artifacts</h3>
-                      <p>Stickers are not decoration. They are collectible markers, narrative tokens, and speculative artifacts. Applied to a Q-Bag, they turn it into a living archive of taste, belief, and participation.</p>
-                      <p>Each series of stickers can be created in collaboration with artists, roasters, and cultural projects, with limited runs, dates, and stories attached—building a traceable history onto every bag and opening the door for future collectability.</p>
-                      <p>A Q-Bag is never finished; it grows with its owner.</p>
+                      <h3>{qBag.conceptCards[1].title}</h3>
+                      <p>{qBag.conceptCards[1].paragraphs[0]}</p>
+                      <p>{qBag.conceptCards[1].paragraphs[1]}</p>
+                      <p>{qBag.conceptCards[1].paragraphs[2]}</p>
                     </div>
                     <div class="glass-card" data-motion-item>
-                      <h3>Sustainability as Identity</h3>
-                      <p>Sustainability here is not framed as sacrifice, but as identity. One bag replaces hundreds of disposables. Stickers add minimal waste while extending the bag's lifespan through emotional attachment.</p>
-                      <p>Instead of preaching, Q-Bag makes reuse cooler than waste—something you actually want to show off, photograph, and bring back to your favourite roaster.</p>
+                      <h3>{qBag.conceptCards[2].title}</h3>
+                      <p>{qBag.conceptCards[2].paragraphs[0]}</p>
+                      <p>{qBag.conceptCards[2].paragraphs[1]}</p>
                     </div>
                     <div class="glass-card" data-motion-item>
-                      <h3>Speculative Investment</h3>
-                      <p>Value is not guaranteed, but emerges through participation. A sticker run might gain value as an early collaboration with an artist, café, or movement. A bag might become a recognisable signal within a specific scene or city. Or it may simply become a deeply personal object you refuse to throw away.</p>
-                      <p>All outcomes are valid. The experiment is the point.</p>
+                      <h3>{qBag.conceptCards[3].title}</h3>
+                      <p>{qBag.conceptCards[3].paragraphs[0]}</p>
+                      <p>{qBag.conceptCards[3].paragraphs[1]}</p>
                     </div>
                   </div>
                 </section>
                 <section class="qbag-partners-section">
                   <div class="glass-card partners-card">
-                    <h2>For Roasters, Artists & Partners</h2>
-                    <p>Q-Bag can plug into existing coffee businesses with almost no friction: standard-format bags, custom or co-branded sticker drops, loyalty mechanics based on refills and completed "bag stories", and collaborative editions that live both online and in the real world.</p>
-                    <p>For roasters, that means higher customer retention and lower packaging waste. For artists and cultural partners, it means a new, recurring canvas that sits in people's kitchens—not in a gallery storage box.</p>
+                    <h2>{qBag.partnersTitle}</h2>
+                    <p>{qBag.partnersParagraphs[0]}</p>
+                    <p>{qBag.partnersParagraphs[1]}</p>
                   </div>
                 </section>
                 <section class="qbag-closing-section">
                   <div class="closing-content">
                     <p class="big-statement">
-                      Every bag carries a story.<br />
-                      Every sticker adds a layer.<br />
-                      Every reuse is a small act of resistance.
+                      {qBag.closingLines[0]}<br />
+                      {qBag.closingLines[1]}<br />
+                      {qBag.closingLines[2]}
                     </p>
                   </div>
                 </section>
                 <section class="qbag-contact-section">
                   <div class="glass-card contact-card">
-                    <p>If you're interested in exploring collaboration, pilot projects, or potential investment in scaling Q-Bag, please get in touch:</p>
+                    <p>{qBag.contactIntro}</p>
                     <p class="contact-info">
-                      <a href="mailto:hello@q888.space">hello@q888.space</a> or Instagram: <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener">@quirky_888</a>
+                      <a href={`mailto:${qBag.contactEmail}`}>{qBag.contactEmail}</a> or Instagram: <a href={qBag.contactInstagramUrl} target="_blank" rel="noopener">{qBag.contactInstagramHandle}</a>
                     </p>
                   </div>
                 </section>
               </div>
               <section class="qbag-cta">
                 <button type="button" class="retreat-button" data-portal-back>
-                  Retreat to Market
+                  {qBag.ctaLabel}
                 </button>
               </section>
 
@@ -208,8 +191,8 @@ const zones = [
                   <div class="viewer-image-wrapper">
                     <div class="viewer-image-container" id="viewer-image-container">
                       <img
-                        src="/images/qbag_concept.webp"
-                        alt="Q-Bag Project Visual Archive - Full Resolution"
+                        src={qBag.viewerImage}
+                        alt={qBag.viewerAlt}
                         class="viewer-image"
                         id="viewer-image"
                         draggable="false"
@@ -242,22 +225,22 @@ const zones = [
               <div class="afterlife-narmail-layout">
                 <section class="afterlife-hero">
                   <div class="afterlife-hero-image">
-                    <img src="/images/afterlife_contract_hero.webp" alt="Afterlife Contract" loading="eager" decoding="async" width="1200" height="800" />
+                    <img src={afterlife.heroImage} alt={afterlife.heroAlt} loading="eager" decoding="async" width="1200" height="800" />
                   </div>
                   <div class="afterlife-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
                     <div class="mx-auto">
                       <h1 class="afterlife-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
-                        <p>AFTERLIFE </p>
-                        <p>CONTRACT</p>
+                        <p>{afterlife.heroLines[0]} </p>
+                        <p>{afterlife.heroLines[1]}</p>
                       </h1>
                       <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
-                        <p>Lifetime Lease + Eternity</p>
-                        <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">or something like that...</p>
+                        <p>{afterlife.heroSubheadline}</p>
+                        <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">{afterlife.heroSubheadlineAside}</p>
                       </div>
                       <div class="afterlife-mono afterlife-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest">
-                        <div>TERM: INDEFINITE</div>
-                        <div>JURISDICTION: BEYOND</div>
-                        <div>REFUND: IMPOSSIBLE</div>
+                        <div>{afterlife.statusLines[0]}</div>
+                        <div>{afterlife.statusLines[1]}</div>
+                        <div>{afterlife.statusLines[2]}</div>
                       </div>
                     </div>
                   </div>
@@ -265,8 +248,8 @@ const zones = [
 
                 <div class="afterlife-main-content px-6 sm:px-10 lg:px-16 pb-16">
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">About the Contract</h2>
-                    <p>Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury "Lifetime Lease + Eternity" agreement from Grim Reaper Inc., it satirizes how humans try to formalise the unformalizable: death, meaning, morality, and hope.</p>
+                    <h2 class="afterlife-h2">{afterlife.aboutHeading}</h2>
+                    <p>{afterlife.aboutParagraph}</p>
                   </section>
 
                   <section class="afterlife-artwork-card-section">
@@ -278,11 +261,11 @@ const zones = [
                           </svg>
                         </div>
                         <div class="artwork-card-text">
-                          <h3 class="artwork-card-title afterlife-gallery-title">View Q888 Contract Certificate</h3>
-                          <p class="artwork-card-description">The Underworld isn't a destination, but a curated experience. This original artwork binds cosmic symbols with vintage textures to frame your final choice: will you sign for HeLL, HeART, or the ART of eternity? The soul is free; the ink is the only debt.</p>
+                          <h3 class="artwork-card-title afterlife-gallery-title">{afterlife.artworkCardTitle}</h3>
+                          <p class="artwork-card-description">{afterlife.artworkCardDescription}</p>
                         </div>
                         <button class="artwork-card-button afterlife-gallery-btn" type="button">
-                          <span>Open the Door</span>
+                          <span>{afterlife.artworkCardButtonLabel}</span>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
@@ -292,71 +275,71 @@ const zones = [
                   </section>
 
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">Concept</h2>
-                    <p>The project is built around a simple paradox: Everyone gets the afterlife (or non-afterlife) for free—yet humans would still gladly pay for premium access, VIP status, and official confirmation.</p>
-                    <p>This fictional contract echoes reality: the flow is free, but you pay for the package. Energy is abundant, but monetised. Meaning is internal, but outsourced. Freedom exists, yet certificates are sold to validate it.</p>
+                    <h2 class="afterlife-h2">{afterlife.conceptHeading}</h2>
+                    <p>{afterlife.conceptParagraphs[0]}</p>
+                    <p>{afterlife.conceptParagraphs[1]}</p>
                   </section>
 
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">The Bureaucracy of Eternity</h2>
-                    <p>The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like "Subject to Underworld Adjustments" mock the human desire to regulate what cannot be regulated.</p>
+                    <h2 class="afterlife-h2">{afterlife.bureaucracyHeading}</h2>
+                    <p>{afterlife.bureaucracyParagraph}</p>
                   </section>
 
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">The Duality of Choice</h2>
-                    <p>Viewers are invited to "sign" under three options: HeLL, HeART, or ART. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making.</p>
-                    <p>There is no correct answer. The act of choosing (or refusing to choose) becomes the real performance.</p>
+                    <h2 class="afterlife-h2">{afterlife.dualityHeading}</h2>
+                    <p>{afterlife.dualityParagraphs[0]}</p>
+                    <p>{afterlife.dualityParagraphs[1]}</p>
                   </section>
 
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">Visual Language</h2>
-                    <p>The work combines holographic gold frames, vintage parchment textures, cartoon skeletons, cosmic symbols, and handwritten annotations—living somewhere between medieval charter, corporate certificate, tarot deck, and internet meme.</p>
+                    <h2 class="afterlife-h2">{afterlife.visualLanguageHeading}</h2>
+                    <p>{afterlife.visualLanguageParagraph}</p>
                   </section>
 
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">Audience Interaction</h2>
-                    <p>The Afterlife Contract is participatory by nature. Viewers are encouraged to:</p>
+                    <h2 class="afterlife-h2">{afterlife.interactionHeading}</h2>
+                    <p>{afterlife.interactionIntro}</p>
                     <ul class="afterlife-list">
-                      <li>Read the fine print</li>
-                      <li>Choose a signature option</li>
-                      <li>Interpret the contract personally</li>
-                      <li>Laugh, reflect, or feel mildly uncomfortable</li>
+                      <li>{afterlife.interactionItems[0]}</li>
+                      <li>{afterlife.interactionItems[1]}</li>
+                      <li>{afterlife.interactionItems[2]}</li>
+                      <li>{afterlife.interactionItems[3]}</li>
                     </ul>
-                    <p>It does not tell the viewer what to believe—it asks why they believe.</p>
+                    <p>{afterlife.interactionClosing}</p>
                   </section>
 
                   <section class="afterlife-section afterlife-guarantee">
-                    <h2 class="afterlife-h2">Closing Statement</h2>
+                    <h2 class="afterlife-h2">{afterlife.closingHeading}</h2>
                     <blockquote class="afterlife-blockquote">
-                      The only thing you actually sign<br />
-                      is your own interpretation.
+                      {afterlife.closingQuoteLines[0]}<br />
+                      {afterlife.closingQuoteLines[1]}
                     </blockquote>
                   </section>
 
                   <section class="afterlife-section">
-                    <h2 class="afterlife-h2">Download Your Unofficial Afterlife Contract</h2>
-                    <p>Feeling brave, curious, or just mildly bored with mortality? You can download a printable version of the Afterlife Contract and sign your preferred destiny—HeLL, HeART, or ART—at your own risk and amusement.</p>
+                    <h2 class="afterlife-h2">{afterlife.downloadHeading}</h2>
+                    <p>{afterlife.downloadIntro}</p>
                     <div class="afterlife-terms">
-                      <h3 class="afterlife-h3">Terms of (Non-)Service</h3>
-                      <p>By downloading this file, you acknowledge that:</p>
+                      <h3 class="afterlife-h3">{afterlife.termsHeading}</h3>
+                      <p>{afterlife.termsIntro}</p>
                       <ul class="afterlife-list">
-                        <li>It is 100% symbolic and performs -+0% actual afterlife management.</li>
-                        <li>No spiritual, metaphysical, legal, medical, romantic, or real-estate outcomes are promised, implied, or guaranteed.</li>
-                        <li>No refunds will be issued if eternity does not meet your expectations, mood board, or Pinterest vision.</li>
-                        <li>Grim Reaper Inc., all associated skeletons, and the artist accept no responsibility for: delays at the pearly gates, unexpected cosmic plot twists, or being assigned a roommate who snores in the astral plane.</li>
-                        <li>The only "service" truly provided is a moment of reflection, a piece of digital ink paper, and the faint hope that.......</li>
+                        <li>{afterlife.termsItems[0]}</li>
+                        <li>{afterlife.termsItems[1]}</li>
+                        <li>{afterlife.termsItems[2]}</li>
+                        <li>{afterlife.termsItems[3]}</li>
+                        <li>{afterlife.termsItems[4]}</li>
                       </ul>
                       <div class="terms-checkbox-wrapper mt-6">
                         <label class="terms-checkbox-label">
                           <input type="checkbox" id="afterlife-terms-checkbox" class="terms-checkbox" />
-                          <span class="checkbox-text">I accept these very serious, absolutely binding, completely unenforceable terms</span>
+                          <span class="checkbox-text">{afterlife.termsCheckboxLabel}</span>
                         </label>
                       </div>
                     </div>
                     <div class="download-button-wrapper mt-6">
                       <a
-                        href="/docs/afterlife_contract_to_sign.jpg"
-                        download="Afterlife_Contract.jpg"
+                        href={afterlife.downloadHref}
+                        download={afterlife.downloadFilename}
                         class="afterlife-download-btn"
                         id="afterlife-download-btn"
                         aria-disabled="true"
@@ -364,14 +347,14 @@ const zones = [
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15M7 10L12 15M12 15L17 10M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span>Download Contract</span>
+                        <span>{afterlife.downloadButtonLabel}</span>
                       </a>
-                      <p class="download-hint" id="download-hint">Please accept the terms to download</p>
+                      <p class="download-hint" id="download-hint">{afterlife.downloadHint}</p>
                     </div>
                   </section>
 
                   <section class="afterlife-section afterlife-cta">
-                    <button type="button" class="afterlife-retreat-btn" data-portal-back>Retreat to Market</button>
+                    <button type="button" class="afterlife-retreat-btn" data-portal-back>{afterlife.ctaLabel}</button>
                   </section>
                 </div>
               </div>
@@ -404,8 +387,8 @@ const zones = [
                 <div class="viewer-image-wrapper">
                   <div class="viewer-image-container" id="afterlife-viewer-image-container">
                     <img
-                      src="/images/afterlife_contract.webp"
-                      alt="Afterlife Contract Full Certificate"
+                      src={afterlife.viewerImage}
+                      alt={afterlife.viewerAlt}
                       class="viewer-image"
                       id="afterlife-viewer-image"
                       draggable="false"
@@ -430,29 +413,29 @@ const zones = [
               <div class="president-layout president-eden">
                 <section class="president-hero">
                   <img
-                    src="/images/president_hero.webp"
-                    alt="President of the Galaxy"
+                    src={president.heroImage}
+                    alt={president.heroAlt}
                     loading="eager"
                     decoding="async"
                     width="1200"
                     height="800"
                   />
                   <div class="president-hero-overlay">
-                    <h1 class="president-title president-eden-headline">PRESIDENT OF<br/>THE GALAXY</h1>
+                    <h1 class="president-title president-eden-headline">{president.heroTitleLines[0]}<br/>{president.heroTitleLines[1]}</h1>
                   </div>
                 </section>
 
                 <div class="president-main-content">
                   <section class="president-intro-section">
                     <div class="glass-card president-glass president-intro-card">
-                      <p class="president-tagline">SCREW STARS TOGETHER</p>
+                      <p class="president-tagline">{president.tagline}</p>
                       <p class="president-lead president-eden-body">
-                        A ceremonial title providing zero or 888 jurisdictional power over any planetary or stellar body. Functions primarily as a psychological stabilizer for those overwhelmed by their lack of control over the universe.
+                        {president.lead}
                       </p>
                       <div class="president-eden-mono">
-                        <div>SYSTEM_STATUS: ACTIVE (REDACTED)</div>
-                        <div>COUNCIL_LAYER: SQUARE BUBBLES</div>
-                        <div>ACCESS: COUNCIL-APPROVED</div>
+                        <div>{president.statusLines[0]}</div>
+                        <div>{president.statusLines[1]}</div>
+                        <div>{president.statusLines[2]}</div>
                         <div>YEAR: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
                       </div>
                     </div>
@@ -467,11 +450,11 @@ const zones = [
                           </svg>
                         </div>
                         <div class="artwork-card-text">
-                          <h3 class="artwork-card-title">View Full Campaign Poster</h3>
-                          <p class="artwork-card-description">Official visual artifact featuring cosmic governance symbols, mushroom diplomacy, and the President’s ceremonial sash.</p>
+                          <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
+                          <p class="artwork-card-description">{president.artworkCardDescription}</p>
                         </div>
                         <button class="artwork-card-button president-btn" type="button">
-                          <span>Open Gallery</span>
+                          <span>{president.artworkCardButtonLabel}</span>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
@@ -484,53 +467,53 @@ const zones = [
                     <div class="president-glass-grid" data-motion-stagger data-motion-children="[data-motion-item]">
                       <div class="glass-card president-glass president-what-is-this-card" data-motion-item>
                         <div class="president-what-text">
-                          <h3>What is this?</h3>
-                          <p>A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.</p>
-                          <p>Every campaign needs early believers. Every believer needs tangible proof. Support this presidential campaign through limited-edition stickers. Your investment in speculative art is your evidence of early participation. The price reflects the pricelessness of being documented on the right side of fictional history.
+                          <h3>{president.whatHeading}</h3>
+                          <p>{president.whatParagraphs[0]}</p>
+                          <p>{president.whatParagraphs[1]}
                           </p>
                         </div>
-                        <a href="#infocigan-zone-overpriced-stickers" class="president-what-image-link group" aria-label="Go to Overpriced Stickers">
-                          <img src="/images/President_Invest.webp" alt="" loading="lazy" decoding="async" width="400" height="400" />
+                        <a href={president.whatLinkHref} class="president-what-image-link group" aria-label="Go to Overpriced Stickers">
+                          <img src={president.whatImage} alt="" loading="lazy" decoding="async" width="400" height="400" />
                         </a>
                       </div>
                       <div class="glass-card president-glass" data-motion-item>
-                        <h3>The Deal</h3>
-                        <p>Art that may or may not become intergalactic currency. A vision that exists in at least three timelines simultaneously. And a return of +888% in one light year—or possibly negative infinity, depending on which reality stabilizes first.</p>
-                        <h3>Investment includes:</h3>
+                        <h3>{president.dealHeading}</h3>
+                        <p>{president.dealParagraph}</p>
+                        <h3>{president.dealIncludesHeading}</h3>
                         <ul class="president-list">
-                          <li>One (1) cosmic sash (fits most existential crises)</li>
-                          <li>Fractional ownership of symbolic authority</li>
-                          <li>Early access to governance memes before they're officially meaningless</li>
-                          <li>A constitutional framework that dissolves if you read it too literally</li>
+                          <li>{president.dealIncludes[0]}</li>
+                          <li>{president.dealIncludes[1]}</li>
+                          <li>{president.dealIncludes[2]}</li>
+                          <li>{president.dealIncludes[3]}</li>
                         </ul>
-                        <p><strong>Returns:</strong> Guaranteed in universes where causality is optional. In this timeline, you get bragging rights and a sticker.</p>
-                        <p class="president-fine-print">Fine print: Investment in this art is investment in intergalactic future. Financial value gain potential of +888% in one light year time… or another. Past performance in alternate dimensions does not guarantee future results. Dreams sold separately.</p>
+                        <p set:html={president.dealReturns}></p>
+                        <p class="president-fine-print">{president.dealFinePrint}</p>
                       </div>
                       <div class="glass-card president-glass" data-motion-item>
-                        <h3>The Rules (Simplified)</h3>
+                        <h3>{president.rulesHeading}</h3>
                         <div class="president-rule">
-                          <p><strong>Zero Collateral Damage:</strong> Don't hurt people who didn't sign up for your chaos.</p>
+                          <p set:html={president.rules[0]}></p>
                         </div>
                         <div class="president-rule">
-                          <p><strong>AI is a Partner, Not a Tool… same applies to mushrooms:</strong> Treat sentient code or mycelium networks like you'd treat sentient meat.</p>
+                          <p set:html={president.rules[1]}></p>
                         </div>
                         <div class="president-rule">
-                          <p><strong>Politics Are Obsolete:</strong> No propaganda wars. Just expose bad incentives and wait for time to do the work.</p>
+                          <p set:html={president.rules[2]}></p>
                         </div>
                         <div class="president-rule">
-                          <p><strong>Corruption is a Bug:</strong> Warning → Observation → Exposure → Transformation. Non-violent. Inevitable.</p>
+                          <p set:html={president.rules[3]}></p>
                         </div>
                         <div class="president-rule">
-                          <p><strong>Rest is Governance:</strong> The President is not required to constantly intervene or sacrifice creative life. Strategic distance is a feature, not a bug—it is an intergalactic mushroom!</p>
+                          <p set:html={president.rules[4]}></p>
                         </div>
                       </div>
                       <div class="glass-card president-glass" data-motion-item>
-                        <h3>The Promise</h3>
-                        <p>This office does not promise utopia.</p>
-                        <p>It promises less unnecessary suffering.<br />
-                        It doesn't rush justice.<br />
-                        It makes injustice unsustainable.</p>
-                        <p>And it doesn't fear time—because time, when aligned, does most of the work.</p>
+                        <h3>{president.promiseHeading}</h3>
+                        <p>{president.promiseLines[0]}</p>
+                        <p>{president.promiseLines[1]}<br />
+                        {president.promiseLines[2]}<br />
+                        {president.promiseLines[3]}</p>
+                        <p>{president.promiseClosing}</p>
                       </div>
                     </div>
                   </section>
@@ -538,30 +521,30 @@ const zones = [
 
                   <section class="president-contact-section">
                     <div class="glass-card president-glass president-contact-card president-portal-card">
-                      <h2 class="president-portal-title">Interdimensional Contact Portal</h2>
-                      <p class="president-portal-reach">Reach out if you are:</p>
+                      <h2 class="president-portal-title">{president.contactTitle}</h2>
+                      <p class="president-portal-reach">{president.contactReachLine}</p>
                       <ul class="president-portal-list">
-                        <li>Arguing about middle-finger semiotics (Peace ON vs. peace off)</li>
-                        <li>Applying for Square Bubbles Council recognition</li>
-                        <li>Building mushroom-human-robot governance models</li>
-                        <li>Investing in campaigns that exist in multiple timelines simultaneously</li>
+                        <li>{president.contactBullets[0]}</li>
+                        <li>{president.contactBullets[1]}</li>
+                        <li>{president.contactBullets[2]}</li>
+                        <li>{president.contactBullets[3]}</li>
                       </ul>
                       <div class="president-portal-meta">
-                        <p><strong>For:</strong> Collaborations, investments, conceptual disputes, art acquisitions, existential debates.</p>
-                        <p><strong>Open to:</strong> All species, sentient code, mycelium networks, and uncertain entities.</p>
+                        <p set:html={president.contactFor}></p>
+                        <p set:html={president.contactOpenTo}></p>
                       </div>
                       <p class="president-portal-links">
-                        <a href="mailto:hello@q888.space">hello@q888.space</a><span class="president-portal-sep">|</span><a href="https://instagram.com/quirky_888" target="_blank" rel="noopener noreferrer">@quirky_888</a>
+                        <a href={`mailto:${president.contactEmail}`}>{president.contactEmail}</a><span class="president-portal-sep">|</span><a href={president.contactInstagramUrl} target="_blank" rel="noopener noreferrer">{president.contactInstagramHandle}</a>
                       </p>
                       <p class="president-portal-closing">
-                        The galaxy doesn't need saving. It needs better protocols, fungal wisdom, and luxury absurdism.
+                        {president.contactClosing}
                       </p>
                     </div>
                   </section>
                 </div>
 
                 <section class="president-cta">
-                  <button type="button" class="retreat-button president-retreat-btn" data-portal-back>Retreat to Market</button>
+                  <button type="button" class="retreat-button president-retreat-btn" data-portal-back>{president.ctaLabel}</button>
                 </section>
               </div>
             </div>
@@ -594,8 +577,8 @@ const zones = [
                 <div class="viewer-image-wrapper">
                   <div class="viewer-image-container" id="president-viewer-image-container">
                     <img
-                      src="/images/president_galaxy.webp"
-                      alt="President of the Galaxy Full"
+                      src={president.viewerImage}
+                      alt={president.viewerAlt}
                       class="viewer-image"
                       id="president-viewer-image"
                       draggable="false"
@@ -617,21 +600,21 @@ const zones = [
               <div class="narmail-layout">
                 <section class="narmail-hero">
                   <div class="narmail-hero-image">
-                    <img src="/images/Mar_mail_hero.webp" alt="Nar-Mail Express" loading="eager" decoding="async" width="1200" height="800" />
+                    <img src={narMail.heroImage} alt={narMail.heroAlt} loading="eager" decoding="async" width="1200" height="800" />
                   </div>
                   <div class="narmail-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
                     <div class="mx-auto">
                       <h1 class="narmail-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
-                        NAR-MAIL EXPRESS°
+                        {narMail.headline}
                       </h1>
                     <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
-                      <p>Interdimensional Message Delivery Service</p>
-                      <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">or something like that...</p>
+                      <p>{narMail.subheadline}</p>
+                      <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">{narMail.subheadlineAside}</p>
                     </div>
                     <div class="narmail-mono narmail-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest">
-                      <div>DELIVERY: CONDITIONAL</div>
-                      <div>CARRIER: KOTIKI-NAR</div>
-                      <div>STATUS: READY_WHEN_READY</div>
+                      <div>{narMail.statusLines[0]}</div>
+                      <div>{narMail.statusLines[1]}</div>
+                      <div>{narMail.statusLines[2]}</div>
                     </div>
                     </div>
                   </div>
@@ -639,36 +622,36 @@ const zones = [
 
                 <div class="narmail-main-content px-6 sm:px-10 lg:px-16 pb-16">
                   <section class="narmail-section">
-                    <h2 class="narmail-h2">About the Service</h2>
-                    <p>Nar-Mail Express° is not your ordinary postal service. We exist at the seam between realities, delivering messages across incompatible worlds through the ancient art of interdimensional correspondence.</p>
-                    <p>Founded before roads learned direction and messages agreed to arrive, Nar-Mail Express° operates on a simple principle: when a message matters enough to survive misunderstanding, fear, delay, and doubt, it will eventually find a Kotiki-Nar.</p>
-                    <p>Our couriers are two-headed cats—boundary organisms whose existence splits between the Visible World of observed reality and the Underworld of collapsed possibilities. One head reads what you wrote. The other reads what you meant but could not say, folded into silence, creases, hesitation, and timing.</p>
-                    <p>We don't deliver parcels. We deliver continuity.</p>
+                    <h2 class="narmail-h2">{narMail.aboutHeading}</h2>
+                    <p>{narMail.aboutParagraphs[0]}</p>
+                    <p>{narMail.aboutParagraphs[1]}</p>
+                    <p>{narMail.aboutParagraphs[2]}</p>
+                    <p>{narMail.aboutParagraphs[3]}</p>
                   </section>
 
                   <section class="narmail-section">
-                    <h2 class="narmail-h2">How It Works</h2>
-                    <h3 class="narmail-h3">Dual-Reading Protocol</h3>
-                    <p>Every message passes through our Kotiki-Nar courier's dual perception:</p>
-                    <p><strong>First Head:</strong> Reads ink, symbols, stamps, weight, declared value</p>
-                    <p><strong>Second Head:</strong> Reads intent, subtext, emotional residue, timing</p>
-                    <p>Only when both readings align does delivery occur. This ensures your message arrives not when sent, but when the receiver is capable of opening it without breaking.</p>
-                    <h3 class="narmail-h3">Delivery Timeline</h3>
-                    <p>Nar-Mail Express° guarantees nothing and apologizes for nothing.</p>
+                    <h2 class="narmail-h2">{narMail.howItWorksHeading}</h2>
+                    <h3 class="narmail-h3">{narMail.dualReadingHeading}</h3>
+                    <p>{narMail.dualReadingIntro}</p>
+                    <p set:html={narMail.dualReadingFirst}></p>
+                    <p set:html={narMail.dualReadingSecond}></p>
+                    <p>{narMail.dualReadingClosing}</p>
+                    <h3 class="narmail-h3">{narMail.deliveryTimelineHeading}</h3>
+                    <p>{narMail.deliveryTimelineIntro}</p>
                     <ul class="narmail-list">
-                      <li>Sometimes a letter arrives decades late</li>
-                      <li>Sometimes it arrives early</li>
-                      <li>Sometimes it arrives opened, but only in the Underworld, where our courier has already judged it safe</li>
+                      <li>{narMail.deliveryTimelineBullets[0]}</li>
+                      <li>{narMail.deliveryTimelineBullets[1]}</li>
+                      <li>{narMail.deliveryTimelineBullets[2]}</li>
                     </ul>
-                    <p>Distance is not measured in kilometers, but in states of readiness.</p>
-                    <h3 class="narmail-h3">Service Features</h3>
+                    <p>{narMail.deliveryTimelineClosing}</p>
+                    <h3 class="narmail-h3">{narMail.serviceFeaturesHeading}</h3>
                     <ul class="narmail-features">
-                      <li>Delivery across timelines, dimensions, and collapsed realities</li>
-                      <li>Messages repositioned between states, not transported through space</li>
-                      <li>Warm paper that remembers your hands</li>
-                      <li>Stamps that shift when unobserved</li>
-                      <li>Return addresses pointing to places that no longer exist—or not yet</li>
-                      <li>Customs forms perpetually incomplete (by design)</li>
+                      <li>{narMail.serviceFeaturesBullets[0]}</li>
+                      <li>{narMail.serviceFeaturesBullets[1]}</li>
+                      <li>{narMail.serviceFeaturesBullets[2]}</li>
+                      <li>{narMail.serviceFeaturesBullets[3]}</li>
+                      <li>{narMail.serviceFeaturesBullets[4]}</li>
+                      <li>{narMail.serviceFeaturesBullets[5]}</li>
                     </ul>
                   </section>
 
@@ -681,11 +664,11 @@ const zones = [
                           </svg>
                         </div>
                         <div class="artwork-card-text">
-                          <h3 class="artwork-card-title narmail-title">Nar-Mail Visual Archive</h3>
-                          <p class="artwork-card-description">Full-resolution artwork featuring Kotiki-Nar couriers, interdimensional stamps, Cobra Encryption symbols, and the square bubble postal network.</p>
+                          <h3 class="artwork-card-title narmail-title">{narMail.artworkCardTitle}</h3>
+                          <p class="artwork-card-description">{narMail.artworkCardDescription}</p>
                         </div>
                         <button class="artwork-card-button narmail-btn" type="button">
-                          <span>Open Gallery</span>
+                          <span>{narMail.artworkCardButtonLabel}</span>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
@@ -695,103 +678,103 @@ const zones = [
                   </section>
 
                   <section class="narmail-section">
-                    <h2 class="narmail-h2">Security: Cobra Encryption Code (CEC)</h2>
-                    <p>For maximum protection of interdimensional correspondence, all Nar-Mail Express° deliveries are secured using the Cobra Encryption Code—a sophisticated mystical encryption system designed to protect messages from breaches and unauthorized access across realities.</p>
-                    <h3 class="narmail-h3">Conceptual Architecture</h3>
-                    <h4 class="narmail-h4">Cobra Design</h4>
-                    <p>The encryption mimics a cobra's behavior: coiled, watchful, ready to strike at intrusion. The code manifests as a serpent woven through digital fractals, guarding your communication at every layer.</p>
-                    <h4 class="narmail-h4">Adaptive Encryption</h4>
-                    <p>Like Kotiki-Nar themselves, the Cobra Code adapts to each reality it encounters, reshaping itself based on the recipient's world and energy signature. Intercepted data appears as nonsensical riddles to unauthorized viewers.</p>
-                    <h4 class="narmail-h4">Square Bubble Shields</h4>
-                    <p>The code embeds square bubbles as multi-layered "firewalls." Each bubble negotiates with decoding attempts, creating infinite permutations that protect your message's true content.</p>
-                    <h3 class="narmail-h3">Protection Mechanics</h3>
-                    <h4 class="narmail-h4">Digital Breath Protection</h4>
-                    <p>The Cobra Code protects your unique digital signature—your digital breath. Any attempt to copy or mimic it triggers an automatic "strike," rendering the intruder's access void and leaving an encrypted signature trail for tracking. This living, breathing protection layer adapts and evolves constantly.</p>
-                    <h4 class="narmail-h4">Postal Sticker Integration</h4>
-                    <p>Special Nar-Mail Express° postal stickers serve as physical/digital keys. Each sticker is imbued with the Cobra Code, ensuring only authenticated recipients can decode messages. Holographic cobra symbols appear only under specific conditions: moonlight, dimensional overlap, or digital scanning.</p>
-                    <h4 class="narmail-h4">Quantum Locks</h4>
-                    <p>Messages require both sender's and recipient's unique energy signatures to open. Without this dual authentication, content remains permanently unreadable—even to us.</p>
-                    <h3 class="narmail-h3">Security Levels</h3>
-                    <p><strong>Basic Mode</strong><br />For regular correspondence, Cobra wraps text in encryption mimicking natural patterns: leaves, stars, waves. Beautiful to observe, impossible to decode.</p>
-                    <p><strong>Shadow Mode</strong><br />For highly sensitive communications, Cobra creates a decoy message alongside the real one. Only intended recipients can distinguish between them. Intruders see meaningless riddles or philosophical koans.</p>
-                    <p><strong>Strike Mode</strong><br />Upon breach detection, Cobra encrypts itself further, becoming a looping paradox of unreadable data. It can strike back by embedding "mirror code," reflecting the breach attempt back to the hacker's system—with interest.</p>
+                    <h2 class="narmail-h2">{narMail.securityHeading}</h2>
+                    <p>{narMail.securityIntro}</p>
+                    <h3 class="narmail-h3">{narMail.securityBlocks[0].heading}</h3>
+                    <h4 class="narmail-h4">{narMail.securityBlocks[0].subheading}</h4>
+                    <p>{narMail.securityBlocks[0].body}</p>
+                    <h4 class="narmail-h4">{narMail.securityBlocks[1].subheading}</h4>
+                    <p>{narMail.securityBlocks[1].body}</p>
+                    <h4 class="narmail-h4">{narMail.securityBlocks[2].subheading}</h4>
+                    <p>{narMail.securityBlocks[2].body}</p>
+                    <h3 class="narmail-h3">{narMail.securityBlocks[3].heading}</h3>
+                    <h4 class="narmail-h4">{narMail.securityBlocks[3].subheading}</h4>
+                    <p>{narMail.securityBlocks[3].body}</p>
+                    <h4 class="narmail-h4">{narMail.securityBlocks[4].subheading}</h4>
+                    <p>{narMail.securityBlocks[4].body}</p>
+                    <h4 class="narmail-h4">{narMail.securityBlocks[5].subheading}</h4>
+                    <p>{narMail.securityBlocks[5].body}</p>
+                    <h3 class="narmail-h3">{narMail.securityLevelsHeading}</h3>
+                    <p><strong>{narMail.securityLevels[0].level}</strong><br />{narMail.securityLevels[0].description}</p>
+                    <p><strong>{narMail.securityLevels[1].level}</strong><br />{narMail.securityLevels[1].description}</p>
+                    <p><strong>{narMail.securityLevels[2].level}</strong><br />{narMail.securityLevels[2].description}</p>
                   </section>
 
                   <section class="narmail-section">
-                    <h2 class="narmail-h2">What You Can Send</h2>
-                    <p>We accept messages declared as:</p>
+                    <h2 class="narmail-h2">{narMail.whatYouCanSendHeading}</h2>
+                    <p>{narMail.declaredIntro}</p>
                     <ul class="narmail-list">
-                      <li>Documents (apologies that survived pride)</li>
-                      <li>Gifts (warnings that escaped denial)</li>
-                      <li>Sale of Goods (love letters refusing to collapse into yes or no)</li>
+                      <li>{narMail.declaredItems[0]}</li>
+                      <li>{narMail.declaredItems[1]}</li>
+                      <li>{narMail.declaredItems[2]}</li>
                     </ul>
-                    <p>Unofficially, we carry:</p>
+                    <p>{narMail.unofficialIntro}</p>
                     <ul class="narmail-list">
-                      <li>Continuity between separated souls</li>
-                      <li>Decisions that need time to become clear</li>
-                      <li>Truths waiting for the right moment</li>
-                      <li>Silence that must be held before speaking</li>
-                    </ul>
-                  </section>
-
-                  <section class="narmail-section">
-                    <h2 class="narmail-h2">Witness Experiences</h2>
-                    <p>Receivers of Nar-Mail often report:</p>
-                    <ul class="narmail-list">
-                      <li>Paper warmer than expected, as if recently held</li>
-                      <li>Stamps that seem to move between glances</li>
-                      <li>Return addresses pointing to impossible geographies</li>
-                      <li>The sense that something patient waited while they decided whether to open the envelope</li>
-                      <li>A subtle relief—as if a decision somewhere resolved itself without conscious effort</li>
-                    </ul>
-                    <p>This patience is key. Kotiki-Nar do not rush delivery. They understand how many futures collapse when messages arrive too soon—and how many collapse when they arrive too late. Our profession exists in the narrow corridor between those failures.</p>
-                  </section>
-
-                  <section class="narmail-section">
-                    <h2 class="narmail-h2">Payment Methods</h2>
-                    <p>Kotiki-Nar accept many forms:</p>
-                    <ul class="narmail-list">
-                      <li>Coins from forgotten currencies</li>
-                      <li>Drawings made with intention</li>
-                      <li>Promises kept later</li>
-                      <li>Silence held at the right moment</li>
-                    </ul>
-                    <p>We categorically refuse:</p>
-                    <ul class="narmail-list">
-                      <li>Payment extracted through force</li>
-                      <li>Currency earned by urgency</li>
-                      <li>Fees demanded with certainty</li>
+                      <li>{narMail.unofficialItems[0]}</li>
+                      <li>{narMail.unofficialItems[1]}</li>
+                      <li>{narMail.unofficialItems[2]}</li>
+                      <li>{narMail.unofficialItems[3]}</li>
                     </ul>
                   </section>
 
                   <section class="narmail-section">
-                    <h2 class="narmail-h2">Historical Context</h2>
-                    <p>During times of heavy historical pressure—wars, collapses, mass forgetting—Nar-Mail routes multiply. Envelopes appear in pockets where no pocket existed. Stamps depict islands no map recognizes. Tracking numbers loop back into themselves.</p>
-                    <p>We have survived when empires have not because we never tried to move faster than meaning, never chose a single world over another, and trusted our Kotiki-Nar couriers—two-headed, undecided, watching both sides—to know exactly when a message was allowed to exist.</p>
+                    <h2 class="narmail-h2">{narMail.witnessHeading}</h2>
+                    <p>{narMail.witnessIntro}</p>
+                    <ul class="narmail-list">
+                      <li>{narMail.witnessItems[0]}</li>
+                      <li>{narMail.witnessItems[1]}</li>
+                      <li>{narMail.witnessItems[2]}</li>
+                      <li>{narMail.witnessItems[3]}</li>
+                      <li>{narMail.witnessItems[4]}</li>
+                    </ul>
+                    <p>{narMail.witnessClosing}</p>
+                  </section>
+
+                  <section class="narmail-section">
+                    <h2 class="narmail-h2">{narMail.paymentHeading}</h2>
+                    <p>{narMail.paymentAcceptIntro}</p>
+                    <ul class="narmail-list">
+                      <li>{narMail.paymentAcceptItems[0]}</li>
+                      <li>{narMail.paymentAcceptItems[1]}</li>
+                      <li>{narMail.paymentAcceptItems[2]}</li>
+                      <li>{narMail.paymentAcceptItems[3]}</li>
+                    </ul>
+                    <p>{narMail.paymentRefuseIntro}</p>
+                    <ul class="narmail-list">
+                      <li>{narMail.paymentRefuseItems[0]}</li>
+                      <li>{narMail.paymentRefuseItems[1]}</li>
+                      <li>{narMail.paymentRefuseItems[2]}</li>
+                    </ul>
+                  </section>
+
+                  <section class="narmail-section">
+                    <h2 class="narmail-h2">{narMail.historicalHeading}</h2>
+                    <p>{narMail.historicalParagraphs[0]}</p>
+                    <p>{narMail.historicalParagraphs[1]}</p>
                   </section>
 
                   <section class="narmail-section narmail-guarantee">
-                    <h2 class="narmail-h2">Service Guarantee</h2>
-                    <p>At the bottom of every Nar-Mail document, often overlooked, is a clause written so small it can only be read after the letter has already changed you:</p>
+                    <h2 class="narmail-h2">{narMail.guaranteeHeading}</h2>
+                    <p>{narMail.guaranteeIntro}</p>
                     <blockquote class="narmail-blockquote">
-                      "By opening this message, you confirm that you were ready.<br />
-                      If you were not, it would not have arrived."
+                      {narMail.guaranteeQuoteLines[0]}<br />
+                      {narMail.guaranteeQuoteLines[1]}
                     </blockquote>
-                    <p>Delivery is guaranteed only in universes where imagination has not been outlawed.</p>
+                    <p>{narMail.guaranteeClosing}</p>
                   </section>
 
                   <section class="narmail-section">
-                    <h2 class="narmail-h2">Terms and Conditions</h2>
+                    <h2 class="narmail-h2">{narMail.termsHeading}</h2>
                     <ol class="narmail-terms">
-                      <li><strong>Magic Only Works If You Believe</strong> — Messages may not arrive if the recipient lacks imagination or denies the existence of Kotiki-Nar. No refunds for non-believers.</li>
-                      <li><strong>Square Bubble Negotiations</strong> — All deliveries are subject to square bubble approval. If they don't like your vibe, your package might experience a "slight delay" (potentially measured in cosmic years).</li>
-                      <li><strong>Tampering is a Bad Idea</strong> — Envelopes protected by the Cobra Encryption Code will strike back if tampered with. Side effects may include infinite riddles, glowing cat pawprints on your belongings, and existential confusion.</li>
-                      <li><strong>Kotiki-Nar Discretion</strong> — Our interdimensional couriers reserve the right to play with your package along the way. Expect minor delays if they find something amusing en route.</li>
-                      <li><strong>No Returns Across Dimensions</strong> — Items sent to parallel realities, alternate dimensions, or shadow realms are non-returnable. We strongly recommend double-checking your portal coordinates before sending.</li>
-                      <li><strong>Lost Items Policy</strong> — In the unlikely event of a lost package, Kotiki-Nar will replace it with something of "equal mischief value." This may include glowing mushrooms, cryptic mantras, or a tiny pet square bubble.</li>
-                      <li><strong>Customer Complaints</strong> — All complaints must be written on enchanted parchment and sealed with a mystical coconut. Deliveries without proper enchantments will be politely ignored.</li>
-                      <li><strong>Service Limitations</strong> — Nar-Mail Express° does not currently deliver to black holes, collapsing stars, or angry gods' domains. Please plan accordingly.</li>
-                      <li><strong>Coffee Tax</strong> — All deliveries include a mandatory "espresso break" for the Kotiki-Nar. They might drink your coffee. Deal with it.</li>
+                      <li set:html={narMail.termsItems[0]}></li>
+                      <li set:html={narMail.termsItems[1]}></li>
+                      <li set:html={narMail.termsItems[2]}></li>
+                      <li set:html={narMail.termsItems[3]}></li>
+                      <li set:html={narMail.termsItems[4]}></li>
+                      <li set:html={narMail.termsItems[5]}></li>
+                      <li set:html={narMail.termsItems[6]}></li>
+                      <li set:html={narMail.termsItems[7]}></li>
+                      <li set:html={narMail.termsItems[8]}></li>
                     </ol>
                   </section>
                   <NarMailChatbot />
@@ -799,30 +782,30 @@ const zones = [
                 </div>
 
                 <div class="narmail-image-above-footer px-6 sm:px-10 lg:px-16">
-                  <img src="/images/Q_A.webp" alt="Q&A" class="narmail-q-a-image" loading="lazy" decoding="async" width="400" height="400" />
+                  <img src={narMail.footerImage} alt={narMail.footerImageAlt} class="narmail-q-a-image" loading="lazy" decoding="async" width="400" height="400" />
                 </div>
 
                 <footer class="narmail-footer">
                   <div class="narmail-footer-container px-6 sm:px-10 lg:px-16">
                     <div class="narmail-footer-scatter">
-                      <p class="narmail-footer-line narmail-footer-headline">Support Speculative Art Infrastructure</p>
-                      <p class="narmail-footer-line narmail-footer-dreams">This project runs on dreams, bureaucracy, and the occasional sticker sale.</p>
-                      <p class="narmail-footer-line narmail-footer-invest">Invest in cultural speculation:</p>
+                      <p class="narmail-footer-line narmail-footer-headline">{narMail.footerLines[0]}</p>
+                      <p class="narmail-footer-line narmail-footer-dreams">{narMail.footerLines[1]}</p>
+                      <p class="narmail-footer-line narmail-footer-invest">{narMail.footerLines[2]}</p>
                       <p class="narmail-footer-line narmail-footer-link-wrap">
-                        <a href="#infocigan-zone-overpriced-stickers" class="narmail-footer-link">Purchase Kotiki-Nar Limited Edition Stickers</a>
+                        <a href="#infocigan-zone-overpriced-stickers" class="narmail-footer-link">{narMail.footerLines[3]}</a>
                       </p>
-                      <p class="narmail-footer-line narmail-footer-what">What you get:</p>
-                      <p class="narmail-footer-line narmail-footer-check">✓ The sticker of questionable utility</p>
-                      <p class="narmail-footer-line narmail-footer-check">✓ Proof you participated before it was cool (or after it stopped being cool)</p>
-                      <p class="narmail-footer-line narmail-footer-check">✓ A tax-deductible sense of supporting something that defies categorization</p>
-                      <p class="narmail-footer-line narmail-footer-price">Price: More than it costs. Less than it's worth. Probably.</p>
+                      <p class="narmail-footer-line narmail-footer-what">{narMail.footerLines[4]}</p>
+                      <p class="narmail-footer-line narmail-footer-check">{narMail.footerLines[5]}</p>
+                      <p class="narmail-footer-line narmail-footer-check">{narMail.footerLines[6]}</p>
+                      <p class="narmail-footer-line narmail-footer-check">{narMail.footerLines[7]}</p>
+                      <p class="narmail-footer-line narmail-footer-price">{narMail.footerLines[8]}</p>
                       <p class="narmail-footer-line narmail-footer-contact">
-                        <a href="mailto:hello@q888.space">hello@q888.space</a>
+                        <a href={`mailto:${narMail.footerEmail}`}>{narMail.footerEmail}</a>
                         <span class="narmail-footer-sep">|</span>
-                        <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener">@quirky_888</a>
+                        <a href={narMail.footerInstagramUrl} target="_blank" rel="noopener">{narMail.footerInstagramHandle}</a>
                       </p>
                       <div class="narmail-footer-cta">
-                        <button type="button" class="narmail-retreat-btn" data-portal-back>Retreat to Market</button>
+                        <button type="button" class="narmail-retreat-btn" data-portal-back>{narMail.ctaLabel}</button>
                       </div>
                     </div>
                   </div>
@@ -857,8 +840,8 @@ const zones = [
                 <div class="viewer-image-wrapper">
                   <div class="viewer-image-container" id="narmail-viewer-image-container">
                     <img
-                      src="/images/nar_mail_artwork.webp"
-                      alt="Nar-Mail Express Visual Archive"
+                      src={narMail.viewerImage}
+                      alt={narMail.viewerAlt}
                       class="viewer-image"
                       id="narmail-viewer-image"
                       draggable="false"

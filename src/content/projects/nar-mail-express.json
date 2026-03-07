@@ -1,0 +1,27 @@
+{
+  "slug": "nar-mail-express",
+  "sortOrder": 4,
+  "cardTitle": "Nar-Mail Express°",
+  "cardDescriptor": "Messages that arrive when you are ready.",
+  "cardSystem": "SYST: DELIVERY",
+  "cardScatter": "",
+  "cardImage": "/images/Nar_mail_expresso.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "Nar-Mail Express°",
+  "panelDescription": "A delivery system for messages that arrive only when you are ready to receive them.",
+  "panelSpecs": [
+    {
+      "label": "DELIVERY",
+      "value": "CONDITIONAL"
+    },
+    {
+      "label": "CARRIER",
+      "value": "NAR"
+    },
+    {
+      "label": "STATUS",
+      "value": "READY_WHEN_READY"
+    }
+  ]
+}

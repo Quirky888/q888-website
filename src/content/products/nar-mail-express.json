@@ -1,0 +1,178 @@
+{
+  "slug": "nar-mail-express",
+  "sortOrder": 4,
+  "title": "Nar-Mail Express°",
+  "heroImage": "/images/Mar_mail_hero.webp",
+  "heroAlt": "Nar-Mail Express",
+  "headline": "NAR-MAIL EXPRESS°",
+  "subheadline": "Interdimensional Message Delivery Service",
+  "subheadlineAside": "or something like that...",
+  "statusLines": [
+    "DELIVERY: CONDITIONAL",
+    "CARRIER: KOTIKI-NAR",
+    "STATUS: READY_WHEN_READY"
+  ],
+  "aboutHeading": "About the Service",
+  "aboutParagraphs": [
+    "Nar-Mail Express° is not your ordinary postal service. We exist at the seam between realities, delivering messages across incompatible worlds through the ancient art of interdimensional correspondence.",
+    "Founded before roads learned direction and messages agreed to arrive, Nar-Mail Express° operates on a simple principle: when a message matters enough to survive misunderstanding, fear, delay, and doubt, it will eventually find a Kotiki-Nar.",
+    "Our couriers are two-headed cats—boundary organisms whose existence splits between the Visible World of observed reality and the Underworld of collapsed possibilities. One head reads what you wrote. The other reads what you meant but could not say, folded into silence, creases, hesitation, and timing.",
+    "We don't deliver parcels. We deliver continuity."
+  ],
+  "howItWorksHeading": "How It Works",
+  "dualReadingHeading": "Dual-Reading Protocol",
+  "dualReadingIntro": "Every message passes through our Kotiki-Nar courier's dual perception:",
+  "dualReadingFirst": "<strong>First Head:</strong> Reads ink, symbols, stamps, weight, declared value",
+  "dualReadingSecond": "<strong>Second Head:</strong> Reads intent, subtext, emotional residue, timing",
+  "dualReadingClosing": "Only when both readings align does delivery occur. This ensures your message arrives not when sent, but when the receiver is capable of opening it without breaking.",
+  "deliveryTimelineHeading": "Delivery Timeline",
+  "deliveryTimelineIntro": "Nar-Mail Express° guarantees nothing and apologizes for nothing.",
+  "deliveryTimelineBullets": [
+    "Sometimes a letter arrives decades late",
+    "Sometimes it arrives early",
+    "Sometimes it arrives opened, but only in the Underworld, where our courier has already judged it safe"
+  ],
+  "deliveryTimelineClosing": "Distance is not measured in kilometers, but in states of readiness.",
+  "serviceFeaturesHeading": "Service Features",
+  "serviceFeaturesBullets": [
+    "Delivery across timelines, dimensions, and collapsed realities",
+    "Messages repositioned between states, not transported through space",
+    "Warm paper that remembers your hands",
+    "Stamps that shift when unobserved",
+    "Return addresses pointing to places that no longer exist—or not yet",
+    "Customs forms perpetually incomplete (by design)"
+  ],
+  "artworkCardTitle": "Nar-Mail Visual Archive",
+  "artworkCardDescription": "Full-resolution artwork featuring Kotiki-Nar couriers, interdimensional stamps, Cobra Encryption symbols, and the square bubble postal network.",
+  "artworkCardButtonLabel": "Open Gallery",
+  "securityHeading": "Security: Cobra Encryption Code (CEC)",
+  "securityIntro": "For maximum protection of interdimensional correspondence, all Nar-Mail Express° deliveries are secured using the Cobra Encryption Code—a sophisticated mystical encryption system designed to protect messages from breaches and unauthorized access across realities.",
+  "securityBlocks": [
+    {
+      "heading": "Conceptual Architecture",
+      "subheading": "Cobra Design",
+      "body": "The encryption mimics a cobra's behavior: coiled, watchful, ready to strike at intrusion. The code manifests as a serpent woven through digital fractals, guarding your communication at every layer."
+    },
+    {
+      "heading": "Conceptual Architecture",
+      "subheading": "Adaptive Encryption",
+      "body": "Like Kotiki-Nar themselves, the Cobra Code adapts to each reality it encounters, reshaping itself based on the recipient's world and energy signature. Intercepted data appears as nonsensical riddles to unauthorized viewers."
+    },
+    {
+      "heading": "Conceptual Architecture",
+      "subheading": "Square Bubble Shields",
+      "body": "The code embeds square bubbles as multi-layered \"firewalls.\" Each bubble negotiates with decoding attempts, creating infinite permutations that protect your message's true content."
+    },
+    {
+      "heading": "Protection Mechanics",
+      "subheading": "Digital Breath Protection",
+      "body": "The Cobra Code protects your unique digital signature—your digital breath. Any attempt to copy or mimic it triggers an automatic \"strike,\" rendering the intruder's access void and leaving an encrypted signature trail for tracking. This living, breathing protection layer adapts and evolves constantly."
+    },
+    {
+      "heading": "Protection Mechanics",
+      "subheading": "Postal Sticker Integration",
+      "body": "Special Nar-Mail Express° postal stickers serve as physical/digital keys. Each sticker is imbued with the Cobra Code, ensuring only authenticated recipients can decode messages. Holographic cobra symbols appear only under specific conditions: moonlight, dimensional overlap, or digital scanning."
+    },
+    {
+      "heading": "Protection Mechanics",
+      "subheading": "Quantum Locks",
+      "body": "Messages require both sender's and recipient's unique energy signatures to open. Without this dual authentication, content remains permanently unreadable—even to us."
+    }
+  ],
+  "securityLevels": [
+    {
+      "level": "Basic Mode",
+      "description": "For regular correspondence, Cobra wraps text in encryption mimicking natural patterns: leaves, stars, waves. Beautiful to observe, impossible to decode."
+    },
+    {
+      "level": "Shadow Mode",
+      "description": "For highly sensitive communications, Cobra creates a decoy message alongside the real one. Only intended recipients can distinguish between them. Intruders see meaningless riddles or philosophical koans."
+    },
+    {
+      "level": "Strike Mode",
+      "description": "Upon breach detection, Cobra encrypts itself further, becoming a looping paradox of unreadable data. It can strike back by embedding \"mirror code,\" reflecting the breach attempt back to the hacker's system—with interest."
+    }
+  ],
+  "securityLevelsHeading": "Security Levels",
+  "whatYouCanSendHeading": "What You Can Send",
+  "declaredIntro": "We accept messages declared as:",
+  "declaredItems": [
+    "Documents (apologies that survived pride)",
+    "Gifts (warnings that escaped denial)",
+    "Sale of Goods (love letters refusing to collapse into yes or no)"
+  ],
+  "unofficialIntro": "Unofficially, we carry:",
+  "unofficialItems": [
+    "Continuity between separated souls",
+    "Decisions that need time to become clear",
+    "Truths waiting for the right moment",
+    "Silence that must be held before speaking"
+  ],
+  "witnessHeading": "Witness Experiences",
+  "witnessIntro": "Receivers of Nar-Mail often report:",
+  "witnessItems": [
+    "Paper warmer than expected, as if recently held",
+    "Stamps that seem to move between glances",
+    "Return addresses pointing to impossible geographies",
+    "The sense that something patient waited while they decided whether to open the envelope",
+    "A subtle relief—as if a decision somewhere resolved itself without conscious effort"
+  ],
+  "witnessClosing": "This patience is key. Kotiki-Nar do not rush delivery. They understand how many futures collapse when messages arrive too soon—and how many collapse when they arrive too late. Our profession exists in the narrow corridor between those failures.",
+  "paymentHeading": "Payment Methods",
+  "paymentAcceptIntro": "Kotiki-Nar accept many forms:",
+  "paymentAcceptItems": [
+    "Coins from forgotten currencies",
+    "Drawings made with intention",
+    "Promises kept later",
+    "Silence held at the right moment"
+  ],
+  "paymentRefuseIntro": "We categorically refuse:",
+  "paymentRefuseItems": [
+    "Payment extracted through force",
+    "Currency earned by urgency",
+    "Fees demanded with certainty"
+  ],
+  "historicalHeading": "Historical Context",
+  "historicalParagraphs": [
+    "During times of heavy historical pressure—wars, collapses, mass forgetting—Nar-Mail routes multiply. Envelopes appear in pockets where no pocket existed. Stamps depict islands no map recognizes. Tracking numbers loop back into themselves.",
+    "We have survived when empires have not because we never tried to move faster than meaning, never chose a single world over another, and trusted our Kotiki-Nar couriers—two-headed, undecided, watching both sides—to know exactly when a message was allowed to exist."
+  ],
+  "guaranteeHeading": "Service Guarantee",
+  "guaranteeIntro": "At the bottom of every Nar-Mail document, often overlooked, is a clause written so small it can only be read after the letter has already changed you:",
+  "guaranteeQuoteLines": [
+    "\"By opening this message, you confirm that you were ready.",
+    "If you were not, it would not have arrived.\""
+  ],
+  "guaranteeClosing": "Delivery is guaranteed only in universes where imagination has not been outlawed.",
+  "termsHeading": "Terms and Conditions",
+  "termsItems": [
+    "<strong>Magic Only Works If You Believe</strong> — Messages may not arrive if the recipient lacks imagination or denies the existence of Kotiki-Nar. No refunds for non-believers.",
+    "<strong>Square Bubble Negotiations</strong> — All deliveries are subject to square bubble approval. If they don't like your vibe, your package might experience a \"slight delay\" (potentially measured in cosmic years).",
+    "<strong>Tampering is a Bad Idea</strong> — Envelopes protected by the Cobra Encryption Code will strike back if tampered with. Side effects may include infinite riddles, glowing cat pawprints on your belongings, and existential confusion.",
+    "<strong>Kotiki-Nar Discretion</strong> — Our interdimensional couriers reserve the right to play with your package along the way. Expect minor delays if they find something amusing en route.",
+    "<strong>No Returns Across Dimensions</strong> — Items sent to parallel realities, alternate dimensions, or shadow realms are non-returnable. We strongly recommend double-checking your portal coordinates before sending.",
+    "<strong>Lost Items Policy</strong> — In the unlikely event of a lost package, Kotiki-Nar will replace it with something of \"equal mischief value.\" This may include glowing mushrooms, cryptic mantras, or a tiny pet square bubble.",
+    "<strong>Customer Complaints</strong> — All complaints must be written on enchanted parchment and sealed with a mystical coconut. Deliveries without proper enchantments will be politely ignored.",
+    "<strong>Service Limitations</strong> — Nar-Mail Express° does not currently deliver to black holes, collapsing stars, or angry gods' domains. Please plan accordingly.",
+    "<strong>Coffee Tax</strong> — All deliveries include a mandatory \"espresso break\" for the Kotiki-Nar. They might drink your coffee. Deal with it."
+  ],
+  "footerImage": "/images/Q_A.webp",
+  "footerImageAlt": "Q&A",
+  "footerLines": [
+    "Support Speculative Art Infrastructure",
+    "This project runs on dreams, bureaucracy, and the occasional sticker sale.",
+    "Invest in cultural speculation:",
+    "Purchase Kotiki-Nar Limited Edition Stickers",
+    "What you get:",
+    "✓ The sticker of questionable utility",
+    "✓ Proof you participated before it was cool (or after it stopped being cool)",
+    "✓ A tax-deductible sense of supporting something that defies categorization",
+    "Price: More than it costs. Less than it's worth. Probably."
+  ],
+  "footerEmail": "hello@q888.space",
+  "footerInstagramUrl": "https://instagram.com/quirky_888",
+  "footerInstagramHandle": "@quirky_888",
+  "ctaLabel": "Retreat to Market",
+  "viewerImage": "/images/nar_mail_artwork.webp",
+  "viewerAlt": "Nar-Mail Express Visual Archive"
+}

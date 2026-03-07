@@ -1,7 +1,9 @@
 ---
 import InfociganPortalPanels from "./InfociganPortalPanels.astro";
+import { getCollection } from "astro:content";
 
 type Zone = {
+  sortOrder: number;
   slug: string;
   title: string;
   descriptor: string;
@@ -12,58 +14,19 @@ type Zone = {
   lightText: boolean;
 };
 
-const zones: Zone[] = [
-  {
-    slug: "overpriced-stickers",
-    title: "Overpriced Stickers™",
-    descriptor: "Collectibles where price is part of the narrative.",
-    system: "SYST: STICKY",
-    scatter: "md:translate-y-4 md:translate-x-2 md:scale-110",
-    image: "/images/overpriced_stickers.webp",
-    holographic: false,
-    lightText: true
-  },
-  {
-    slug: "q-bag",
-    title: "Q-Bag™",
-    descriptor: "A bag, a ritual, and a question about daily objects.",
-    system: "SYST: VOID",
-    scatter: "md:-translate-y-8 md:-translate-x-4 md:scale-95",
-    image: "/images/qbag.webp",
-    holographic: false,
-    lightText: true
-  },
-  {
-    slug: "afterlife-contracts",
-    title: "Afterlife Contract™",
-    descriptor: "Paperwork for things that may outlive you.",
-    system: "SYST: FINAL",
-    scatter: "md:translate-y-12 md:-translate-x-6 md:scale-105",
-    image: "/images/afterlife_link.webp",
-    holographic: false,
-    lightText: true
-  },
-  {
-    slug: "president-of-the-galaxy",
-    title: "President of the Galaxy™",
-    descriptor: "Authority fiction stabilizer.",
-    system: "SYST: NULL",
-    scatter: "md:translate-y-32 md:translate-x-8 md:scale-100",
-    image: "/images/pog_vote.webp",
-    holographic: false,
-    lightText: true
-  },
-  {
-    slug: "nar-mail-express",
-    title: "Nar-Mail Express°",
-    descriptor: "Messages that arrive when you are ready.",
-    system: "SYST: DELIVERY",
-    scatter: "",
-    image: "/images/Nar_mail_expresso.webp",
-    holographic: false,
-    lightText: true
-  }
-];
+const zones: Zone[] = (await getCollection("projects"))
+  .map(({ data }) => ({
+    sortOrder: data.sortOrder,
+    slug: data.slug,
+    title: data.cardTitle,
+    descriptor: data.cardDescriptor,
+    system: data.cardSystem,
+    scatter: data.cardScatter,
+    image: data.cardImage,
+    holographic: data.cardHolographic,
+    lightText: data.cardLightText,
+  }))
+  .sort((a, b) => a.sortOrder - b.sortOrder);
 ---
 
 <!-- Q888:SECTION_START id="INFOCIGAN" -->

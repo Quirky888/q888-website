@@ -1,0 +1,61 @@
+{
+  "slug": "q-bag",
+  "sortOrder": 1,
+  "title": "Q-BAG™",
+  "heroImage": "/images/Qbag_hero.webp",
+  "heroAlt": "Q-bag hero",
+  "heroTitle": "Q-BAG™",
+  "introTagline": "Reduce. Reuse. Collect. Invest.",
+  "introLead": "Q-Bag is a reusable coffee bag system that turns everyday consumption into a long-term cultural object. It responds to disposable culture by blending sustainability with art, storytelling, and speculative value.",
+  "artworkCardTitle": "Q-Bag Visual Archive",
+  "artworkCardDescription": "Full collage artwork featuring Project Infocigan elements, stickers, bag designs, and cultural artifacts. Click to explore in detail.",
+  "artworkCardButtonLabel": "Open Gallery",
+  "conceptCards": [
+    {
+      "title": "The Concept",
+      "paragraphs": [
+        "Inspired by the keep-cup logic, Q-Bag remains a simple, recognisable coffee bag designed for long-term reuse. Lightweight, durable, and visually minimal, it features a dedicated area for stickers—transforming the bag into a personal canvas that evolves over time.",
+        "Unlike branded packaging that disappears with the next purchase, a Q-Bag is designed to stay in circulation for years, travelling between cafés, roasteries, and kitchens as a visible signal of a different way to consume."
+      ]
+    },
+    {
+      "title": "Stickers as Artifacts",
+      "paragraphs": [
+        "Stickers are not decoration. They are collectible markers, narrative tokens, and speculative artifacts. Applied to a Q-Bag, they turn it into a living archive of taste, belief, and participation.",
+        "Each series of stickers can be created in collaboration with artists, roasters, and cultural projects, with limited runs, dates, and stories attached—building a traceable history onto every bag and opening the door for future collectability.",
+        "A Q-Bag is never finished; it grows with its owner."
+      ]
+    },
+    {
+      "title": "Sustainability as Identity",
+      "paragraphs": [
+        "Sustainability here is not framed as sacrifice, but as identity. One bag replaces hundreds of disposables. Stickers add minimal waste while extending the bag's lifespan through emotional attachment.",
+        "Instead of preaching, Q-Bag makes reuse cooler than waste—something you actually want to show off, photograph, and bring back to your favourite roaster."
+      ]
+    },
+    {
+      "title": "Speculative Investment",
+      "paragraphs": [
+        "Value is not guaranteed, but emerges through participation. A sticker run might gain value as an early collaboration with an artist, café, or movement. A bag might become a recognisable signal within a specific scene or city. Or it may simply become a deeply personal object you refuse to throw away.",
+        "All outcomes are valid. The experiment is the point."
+      ]
+    }
+  ],
+  "partnersTitle": "For Roasters, Artists & Partners",
+  "partnersParagraphs": [
+    "Q-Bag can plug into existing coffee businesses with almost no friction: standard-format bags, custom or co-branded sticker drops, loyalty mechanics based on refills and completed \"bag stories\", and collaborative editions that live both online and in the real world.",
+    "For roasters, that means higher customer retention and lower packaging waste. For artists and cultural partners, it means a new, recurring canvas that sits in people's kitchens—not in a gallery storage box."
+  ],
+  "closingLines": [
+    "Every bag carries a story.",
+    "Every sticker adds a layer.",
+    "Every reuse is a small act of resistance."
+  ],
+  "contactIntro": "If you're interested in exploring collaboration, pilot projects, or potential investment in scaling Q-Bag, please get in touch:",
+  "contactEmail": "hello@q888.space",
+  "contactInstagramUrl": "https://instagram.com/quirky_888",
+  "contactInstagramHandle": "@quirky_888",
+  "viewerImage": "/images/qbag_concept.webp",
+  "viewerAlt": "Q-Bag Project Visual Archive - Full Resolution",
+  "ctaLabel": "Retreat to Market"
+}
