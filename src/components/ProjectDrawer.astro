@@ -559,7 +559,7 @@
           <div class="eden-accent-border" data-eden-accent aria-hidden="true" style="display: none;"></div>
           <div class="eden-content-container">
             <div class="eden-story-short">
-              <div class="eden-story-heading">Summary</div>
+              <div class="eden-story-heading">Intel</div>
               <p class="eden-story-short-text" data-eden-short>Select a location to begin.</p>
             </div>
 
@@ -1628,7 +1628,7 @@
   /* 1) Idle state: Secret Stars (faint beacon) */
   .eden-hotspot .hotspot-glow {
     fill: var(--eden-beacon-idle) !important;
-    fill-opacity: 0.7 !important;
+    fill-opacity: 0.50 !important;
     stroke: none !important;
     filter: blur(3px) !important;
     pointer-events: none;
@@ -1643,11 +1643,11 @@
   @keyframes beacon-ping {
     0%, 100% { 
       transform: scale(0.75); 
-      fill-opacity: calc(0.4 * var(--twinkle-strength, 1)); 
+      fill-opacity: calc(0.15 * var(--twinkle-strength, 1)); 
     }
     50% { 
       transform: scale(1.1); 
-      fill-opacity: calc(0.8 * var(--twinkle-strength, 1)); 
+      fill-opacity: calc(0.4 * var(--twinkle-strength, 1)); 
     }
   }
 
