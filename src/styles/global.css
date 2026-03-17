@@ -86,14 +86,20 @@ html[data-motion-ready="1"] [data-motion-stagger].is-revealed .q888-reveal-item 
 	.viewer-close,
 	.terms-modal-close,
 	#nar-chat-widget .nar-chat-close {
-		min-width: 56px;
-		min-height: 56px;
+		width: 56px !important;
+		height: 56px !important;
+		min-width: 56px !important;
+		min-height: 56px !important;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba(0, 0, 0, 0.8) !important;
+		background: rgba(0, 0, 0, 0.85) !important;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 		color: white !important;
 		border-radius: 50%;
+		border: none !important;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 	}
 }
 

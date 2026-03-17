@@ -230,8 +230,8 @@ const president = presidentEntry.data;
                   <div class="afterlife-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
                     <div class="mx-auto">
                       <h1 class="afterlife-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
-                        <p>{afterlife.heroLines[0]} </p>
-                        <p>{afterlife.heroLines[1]}</p>
+                        <span class="afterlife-headline-line">{afterlife.heroLines[0]}</span>
+                        <span class="afterlife-headline-line">{afterlife.heroLines[1]}</span>
                       </h1>
                       <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
                         <p>{afterlife.heroSubheadline}</p>
@@ -611,7 +611,7 @@ const president = presidentEntry.data;
                       <p>{narMail.subheadline}</p>
                       <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">{narMail.subheadlineAside}</p>
                     </div>
-                    <div class="narmail-mono narmail-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest">
+                    <div class="narmail-mono narmail-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest text-left">
                       <div>{narMail.statusLines[0]}</div>
                       <div>{narMail.statusLines[1]}</div>
                       <div>{narMail.statusLines[2]}</div>
@@ -999,6 +999,7 @@ const president = presidentEntry.data;
 
     function openViewer() {
       if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
       viewer.classList.add("is-open");
       viewer.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -1007,6 +1008,7 @@ const president = presidentEntry.data;
 
     function closeViewer() {
       if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
       viewer.classList.remove("is-open");
       viewer.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
@@ -1175,6 +1177,7 @@ const president = presidentEntry.data;
 
     function openViewer() {
       if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
       viewer.classList.add("is-open");
       viewer.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -1183,6 +1186,7 @@ const president = presidentEntry.data;
 
     function closeViewer() {
       if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
       viewer.classList.remove("is-open");
       viewer.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
@@ -1355,6 +1359,7 @@ const president = presidentEntry.data;
 
     function openViewer() {
       if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
       viewer.classList.add("is-open");
       viewer.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -1363,6 +1368,7 @@ const president = presidentEntry.data;
 
     function closeViewer() {
       if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
       viewer.classList.remove("is-open");
       viewer.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
@@ -1517,6 +1523,7 @@ const president = presidentEntry.data;
 
     function openViewer() {
       if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
       viewer.classList.add("is-open");
       viewer.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -1525,6 +1532,7 @@ const president = presidentEntry.data;
 
     function closeViewer() {
       if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
       viewer.classList.remove("is-open");
       viewer.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
@@ -1671,17 +1679,27 @@ const president = presidentEntry.data;
     z-index: 200;
     pointer-events: none;
   }
+  :global(.is-viewer-open [data-slim-nav]),
+  :global(.is-viewer-open [data-system-meta]),
+  :global(.is-viewer-open .mobile-escape-nav) {
+    display: none !important;
+  }
 
   .portal-panel {
     position: absolute;
     inset: 0;
     pointer-events: none;
     visibility: hidden;
+    display: none;
+    z-index: 1;
   }
 
   .portal-panel.is-active {
     pointer-events: auto;
     visibility: visible;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
   }
 
   .infocigan-portal-system [data-slim-nav] {
@@ -2076,7 +2094,7 @@ const president = presidentEntry.data;
   .artwork-viewer {
     position: fixed;
     inset: 0;
-    z-index: 10000;
+    z-index: 2000000;
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -2108,8 +2126,8 @@ const president = presidentEntry.data;
 
   .viewer-controls {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: calc(1.5rem + env(safe-area-inset-top, 0px));
+    right: calc(1.5rem + env(safe-area-inset-right, 0px));
     display: flex;
     gap: 0.5rem;
     z-index: 10002;
@@ -2181,7 +2199,7 @@ const president = presidentEntry.data;
 
   .viewer-zoom-indicator {
     position: absolute;
-    bottom: 2rem;
+    bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
     left: 50%;
     transform: translateX(-50%);
     padding: 0.5rem 1rem;
@@ -2203,8 +2221,8 @@ const president = presidentEntry.data;
 
   @media (max-width: 768px) {
     .viewer-controls {
-      top: 1rem;
-      right: 1rem;
+      top: calc(1rem + env(safe-area-inset-top, 0px));
+      right: calc(1rem + env(safe-area-inset-right, 0px));
       gap: 0.375rem;
     }
     .viewer-btn {
@@ -2626,11 +2644,48 @@ const president = presidentEntry.data;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(252, 248, 249, 0.95), transparent);
+    background: linear-gradient(to top, rgba(252, 248, 249, 1), rgba(252, 248, 249, 0.4), transparent);
   }
 
   .afterlife-headline {
     font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .afterlife-headline-line {
+    display: block;
+    line-height: 0.85;
+  }
+
+  @media (max-width: 640px) {
+    .afterlife-hero {
+      display: flex;
+      flex-direction: column;
+      background-color: #fcf8f9;
+    }
+    .afterlife-hero-image {
+      aspect-ratio: auto;
+      height: 280px;
+    }
+    .afterlife-hero-overlay {
+      position: relative;
+      margin-top: -100px;
+      padding-top: 100px;
+      background: linear-gradient(to bottom, transparent, #fcf8f9 100px);
+      padding-bottom: 3rem !important;
+    }
+    .afterlife-headline {
+      font-size: clamp(2.8rem, 14vw, 4.5rem) !important;
+      line-height: 1.05;
+      text-align: left;
+    }
+    .afterlife-headline-line {
+      line-height: 1.0;
+    }
   }
 
   .afterlife-mono {
@@ -3553,7 +3608,7 @@ const president = presidentEntry.data;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(252, 248, 249, 0.95), transparent);
+    background: linear-gradient(to top, rgba(252, 248, 249, 1), rgba(252, 248, 249, 0.4), transparent);
   }
 
   .narmail-hero-image img {
@@ -3572,6 +3627,43 @@ const president = presidentEntry.data;
 
   .narmail-headline {
     font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    /* Stylish Gold Shine */
+    background: linear-gradient(to right, #000 20%, #444 40%, #888 50%, #444 60%, #000 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: narmail-gold-shine 6s linear infinite;
+  }
+
+  @media (max-width: 640px) {
+    .narmail-hero {
+      display: flex;
+      flex-direction: column;
+      background-color: #fcf8f9;
+    }
+    .narmail-hero-image {
+      aspect-ratio: auto;
+      height: 280px;
+    }
+    .narmail-hero-overlay {
+      position: relative;
+      margin-top: -100px;
+      padding-top: 100px;
+      background: linear-gradient(to bottom, transparent, #fcf8f9 100px);
+      padding-bottom: 3rem !important;
+    }
+    .narmail-headline {
+      font-size: clamp(2.8rem, 14vw, 4.5rem) !important;
+      line-height: 1.05;
+      text-align: left;
+    }
   }
 
   .narmail-mono {
@@ -3644,8 +3736,8 @@ const president = presidentEntry.data;
 
   .narmail-section p,
   .narmail-note {
-    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-    line-height: 1.4;
+    font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+    line-height: 1.6;
     color: var(--eden-text);
     margin: 0 0 1.5rem 0;
   }

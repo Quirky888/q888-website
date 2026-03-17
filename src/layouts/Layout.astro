@@ -139,6 +139,8 @@ const { title = "Q888" } = Astro.props;
 				height: 56px;
 				border-radius: 50%;
 				background: rgba(0, 0, 0, 0.85);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
 				color: white;
 				display: flex;
 				align-items: center;
@@ -164,15 +166,15 @@ const { title = "Q888" } = Astro.props;
 
 			@media (orientation: portrait) and (max-width: 768px) {
 				.mobile-escape-nav {
+					position: fixed !important;
 					bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 56px + 12px);
 					right: max(1.5rem, env(safe-area-inset-right, 0px));
 					z-index: 999999;
 				}
 
 				.mobile-back-btn {
-					width: 60px;
-					height: 60px;
-					box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+					width: 56px;
+					height: 56px;
 				}
 			}
 		</style>

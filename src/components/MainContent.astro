@@ -63,11 +63,29 @@ const { projectToOpen } = Astro.props;
 
     const projectToOpen = document.querySelector("main")?.getAttribute("data-open-project");
     if (projectToOpen && !window.location.hash) {
-      document.getElementById("projects")?.scrollIntoView({ behavior: "instant" });
-      requestAnimationFrame(async () => {
-        if (projectToOpen === "edinburgh-map") await openDrawer("edinburgh-map", "right");
-        else if (projectToOpen === "digital-ink") await openDrawer("digital-ink", "left");
-      });
+      const scrollAndOpen = async () => {
+        const target = document.getElementById("projects");
+        if (target) {
+          target.scrollIntoView({ behavior: "instant" });
+          // double check scroll after a tiny frame jump to fight browser scroll restoration
+          requestAnimationFrame(() => {
+             target.scrollIntoView({ behavior: "instant" });
+          });
+        }
+        
+        requestAnimationFrame(async () => {
+          if (projectToOpen === "edinburgh-map") await openDrawer("edinburgh-map", "right");
+          else if (projectToOpen === "digital-ink") await openDrawer("digital-ink", "left");
+        });
+      };
+
+      // If we're already initialized or it's a quick navigation, we might need a tiny delay
+      // to let the browser finish its initial scroll handling.
+      if (document.readyState === "complete") {
+        scrollAndOpen();
+      } else {
+        window.addEventListener("load", scrollAndOpen, { once: true });
+      }
     }
   }
 

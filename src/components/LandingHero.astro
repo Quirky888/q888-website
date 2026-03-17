@@ -75,17 +75,17 @@
     <h2 class="landing-projects-heading">The Systems</h2>
 
     <p class="landing-paragraph-1">
-      <span class="gold-gradient-text">Digital Ink</span><br />
-      AI-driven drawing tools for iPad where image-making becomes a negotiation between human intention and machine interpretation. A research environment for explainable visual collaboration.
+      <a href="/dink" class="landing-link gold-gradient-text">Digital Ink</a><br />
+      <a href="/dink" class="landing-link">AI-driven drawing tools</a> for iPad where image-making becomes a negotiation between human intention and machine interpretation. A research environment for explainable visual collaboration.
     </p>
 
     <p class="landing-paragraph-2">
-      <span class="gold-gradient-text">Edinburgh Magic Map</span><br />
+      <a href="/map" class="landing-link gold-gradient-text">Edinburgh Magic Map</a><br />
       An interactive mythology layered onto real geography. A cartographic narrative where place becomes interface and story becomes infrastructure.
     </p>
 
     <p class="landing-paragraph-3">
-      <span class="gold-gradient-text">Project Infocigan</span><br />
+      <a href="#infocigan" class="landing-link gold-gradient-text">Project Infocigan</a><br />
       A speculative design studio producing artifacts for uncertain futures. Objects released with internal logic, controlled circulation, and conceptual lineage.
     </p>
 
@@ -131,19 +131,40 @@
     pulseGlitch();
   }
 
-  function init() {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", runPulseGlitch, { once: true });
-    } else {
-      runPulseGlitch();
+  function handleLandingLinkClick(e: MouseEvent) {
+    const link = (e.target as HTMLElement).closest(".landing-link") as HTMLAnchorElement;
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+
+    // Only intercept hash-only links for smooth scrolling within the page
+    if (href && href.startsWith("#") && !href.includes("/")) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
     }
+  }
+
+  function setupListeners() {
+    document.querySelectorAll(".landing-link").forEach(link => {
+      // Remove existing to avoid duplicates if called multiple times
+      link.removeEventListener("click", handleLandingLinkClick as EventListener);
+      link.addEventListener("click", handleLandingLinkClick as EventListener);
+    });
+  }
+
+  function init() {
+    runPulseGlitch();
+    setupListeners();
   }
 
   function cleanup() {
     if (glitchTimeoutId) clearTimeout(glitchTimeoutId);
     glitchTimeoutId = 0;
-    document.removeEventListener("astro:before-swap", cleanup);
-    window.removeEventListener("beforeunload", cleanup);
   }
 
   if (document.readyState === "loading") {
@@ -151,6 +172,7 @@
   } else {
     init();
   }
+  document.addEventListener("astro:page-load", init);
   document.addEventListener("astro:before-swap", cleanup);
   window.addEventListener("beforeunload", cleanup);
 </script>
@@ -413,6 +435,17 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 600;
+  }
+
+  .landing-link {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .landing-link:hover {
+    opacity: 0.8;
   }
 
   .symbolic-box {
