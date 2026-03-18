@@ -143,10 +143,19 @@ export const handler: Handler = stream(async (event) => {
     };
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY || process.env.OPEN_API_KEY || process.env.OPENAI_KEY;
   const systemPrompt = process.env.NAR_CHAT_SYSTEM_PROMPT ?? SYSTEM_PROMPT;
+
+  console.log("Chat function request received. Client logic:", !!apiKey ? "Found API Key" : "Missing API Key");
+
   if (!apiKey) {
-    return { statusCode: 500, headers: JSON_HEADERS, body: JSON.stringify({ error: "OPENAI_API_KEY not configured" }) };
+    return { 
+      statusCode: 500, 
+      headers: JSON_HEADERS, 
+      body: JSON.stringify({ 
+        error: "OPENAI_API_KEY or OPEN_API_KEY not configured. Please ensure it is added to Netlify Site Configuration -> Environment Variables and that the site has been re-deployed." 
+      }) 
+    };
   }
 
   let body: RequestBody;
