@@ -73,9 +73,9 @@ function normalizeColor(value?: string) {
 function normalizeDrawerHeight(fallback: string, value?: string) {
   if (!value) return fallback;
   if (value.endsWith("%")) {
-    return value.replace("%", "vh");
+    return value.replace("%", "dvh");
   }
-  return value;
+  return value.replace(/vh$/, "dvh");
 }
 
 function setDesignSystemVars(section: HTMLElement, designSystem?: EdenDesignSystem, drawerDefaults?: EdenDrawerDefaults) {
@@ -100,15 +100,15 @@ function setDesignSystemVars(section: HTMLElement, designSystem?: EdenDesignSyst
   if (drawerDefaults) {
     section.style.setProperty(
       "--eden-drawer-height-desktop",
-      normalizeDrawerHeight("45vh", drawerDefaults.heightDesktop)
+      normalizeDrawerHeight("45dvh", drawerDefaults.heightDesktop)
     );
     section.style.setProperty(
       "--eden-drawer-height-tablet",
-      normalizeDrawerHeight("50vh", drawerDefaults.heightTablet)
+      normalizeDrawerHeight("50dvh", drawerDefaults.heightTablet)
     );
     section.style.setProperty(
       "--eden-drawer-height-mobile",
-      normalizeDrawerHeight("100vh", drawerDefaults.heightMobile)
+      normalizeDrawerHeight("100dvh", drawerDefaults.heightMobile)
     );
     if (drawerDefaults.animationDuration) {
       section.style.setProperty("--eden-drawer-duration", drawerDefaults.animationDuration);
@@ -487,7 +487,7 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
           excludeClass: "panzoom-exclude",
           panOnlyWhenZoomed: true,
           disableZoom: false,
-          touchAction: "pan-y",
+          touchAction: "none",
           handleStartEvent: (e: Event) => {
             if ("touches" in e && touchCount < 2) return;
             e.preventDefault();

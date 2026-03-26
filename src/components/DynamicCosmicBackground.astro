@@ -13,21 +13,24 @@ const variants = [
   { a: TEAL, b: GOLD, c: CYAN },
   { a: CYAN, b: TEAL, c: ICE_BLUE },
 ];
-const total = 8;
+const total = 10; // Increased slightly for desktop richness
 ---
 
 <div class="dynamic-cosmic-bg" aria-hidden="true">
-  {Array.from({ length: total }, (_, i) => {
-    const v = variants[i % variants.length];
-    const delay = (i * 1.8) % 45;
-    const driftDelay = ((i * 0.9) % 18).toFixed(2);
-    return (
-      <div
-        class="rainbow"
-        style={`animation-delay: -${delay}s, -${driftDelay}s; --a: ${v.a}; --b: ${v.b}; --c: ${v.c};`}
-      />
-    );
-  })}
+  <div class="rainbow-container">
+    {Array.from({ length: total }, (_, i) => {
+      const v = variants[i % variants.length];
+      const delay = (i * 1.8) % 45;
+      const driftDelay = ((i * 0.9) % 18).toFixed(2);
+      // We'll hide some indices on mobile using CSS to save GPU
+      return (
+        <div
+          class={`rainbow rainbow-${i}`}
+          style={`animation-delay: -${delay}s, -${driftDelay}s; --a: ${v.a}; --b: ${v.b}; --c: ${v.c};`}
+        />
+      );
+    })}
+  </div>
   <div class="v v-left"></div>
   <div class="v v-right"></div>
   <div class="h h-bottom"></div>
@@ -45,8 +48,8 @@ const total = 8;
   }
 
   .rainbow {
-    height: 100vh;
-    width: 0;
+    height: 100dvh;
+    width: 1px; /* Minimal width */
     position: absolute;
     transform: rotate(10deg);
     transform-origin: top right;
@@ -59,11 +62,25 @@ const total = 8;
       20px 0 60px 35px rgba(var(--b), 0.4),
       70px 0 70px 40px rgba(var(--c), 0.35),
       150px 0 100px 60px rgba(95, 210, 230, 0.15);
-    animation-name: cosmic-slide, cosmic-drift;
-    animation-duration: 45s, 16s;
-    animation-timing-function: linear, ease-in-out;
-    animation-iteration-count: infinite, infinite;
+    animation: cosmic-slide 45s linear infinite, cosmic-drift 16s ease-in-out infinite;
     will-change: transform;
+  }
+
+  @media (max-width: 768px) {
+    .rainbow {
+      /* Simplify shadow stack for mobile performance */
+      box-shadow:
+        -50px 0 50px 30px rgba(var(--a), 0.25),
+        20px 0 40px 20px rgba(var(--b), 0.3);
+      /* Disable drift animation on mobile to save secondary transform layer */
+      animation: cosmic-slide 45s linear infinite;
+    }
+
+    /* Hide 60% of elements on mobile to massive GPU savings */
+    .rainbow:nth-child(even),
+    .rainbow:nth-child(3n) {
+      display: none;
+    }
   }
 
   @keyframes cosmic-slide {
@@ -73,7 +90,7 @@ const total = 8;
 
   @keyframes cosmic-drift {
     0%, 100% { transform: rotate(10deg) translateY(0); }
-    50% { transform: rotate(10deg) translateY(-2.5vh); }
+    50% { transform: rotate(10deg) translateY(-2.5dvh); }
   }
 
   .h {
@@ -81,7 +98,7 @@ const total = 8;
     width: 100%;
     height: 0;
     pointer-events: none;
-    box-shadow: 0 0 60vh 50vh rgba(45, 140, 155, 0.1);
+    box-shadow: 0 0 60dvh 50dvh rgba(45, 140, 155, 0.1);
   }
 
   .h-top { top: 0; }
@@ -90,7 +107,7 @@ const total = 8;
   .v {
     position: absolute;
     width: 0;
-    height: 100vh;
+    height: 100dvh;
     bottom: 0;
     pointer-events: none;
     box-shadow: 0 0 40vw 30vw rgba(15, 35, 55, 0.15);
@@ -115,7 +132,7 @@ const total = 8;
 
   @keyframes cosmic-gradient-drift {
     0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(0, -1.2vh, 0) scale(1.01); }
+    50% { transform: translate3d(0, -1.2dvh, 0) scale(1.01); }
   }
 
   @media (prefers-reduced-motion: reduce) {

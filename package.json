@@ -7,7 +7,8 @@
     "dev:netlify": "netlify dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit": "node scripts/runAudit.mjs"
   },
   "dependencies": {
     "@panzoom/panzoom": "^4.6.1",
@@ -22,7 +23,10 @@
     "@astrojs/check": "^0.9.4",
     "@netlify/functions": "^5.1.2",
     "@types/node": "^25.3.5",
+    "chrome-launcher": "^1.2.1",
+    "lighthouse": "^13.0.3",
     "netlify-cli": "^24.0.1",
+    "serve-handler": "^6.1.7",
     "typescript": "^5.7.2"
   }
 }

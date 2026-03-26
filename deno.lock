@@ -17,9 +17,12 @@
         "npm:@tailwindcss/vite@^4.1.18",
         "npm:@types/node@^25.3.5",
         "npm:astro@^5.17.2",
+        "npm:chrome-launcher@^1.2.1",
         "npm:gsap@^3.14.2",
+        "npm:lighthouse@^13.0.3",
         "npm:netlify-cli@^24.0.1",
         "npm:openai@^6.27.0",
+        "npm:serve-handler@^6.1.7",
         "npm:sharp@~0.33.5",
         "npm:tailwindcss@^4.1.18",
         "npm:typescript@^5.7.2"

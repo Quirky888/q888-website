@@ -23,23 +23,36 @@
           Consulting The Investor
         </div>
       </div>
-      <button id="investor-chat-close" class="investor-close-btn" aria-label="Close chat">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M18 6L6 18M6 6l12 12"></path>
-        </svg>
-      </button>
+      <div class="investor-header-actions">
+        <button id="investor-chat-reset" class="investor-action-btn investor-reset-btn" aria-label="New conversation" title="New conversation">↺</button>
+        <button id="investor-chat-close" class="investor-action-btn investor-close-btn" aria-label="Close chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
     </div>
-
     <div id="investor-chat-messages" class="investor-message-area"></div>
+    <div id="investor-chat-warning" class="investor-chat-warning" aria-live="polite"></div>
 
     <div class="investor-input-container">
+      <div id="investor-chat-cooldown" class="investor-chat-cooldown hidden">
+        <span>Available in <span id="investor-cooldown-timer">15:00</span></span>
+      </div>
       <div class="investor-input-wrapper">
         <input
           type="text"
           id="investor-chat-input"
           class="investor-chat-input"
           placeholder="Inquire further…"
-          autocomplete="off"
+          autocomplete="one-time-code"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          inputmode="text"
+          data-1p-ignore="true"
+          data-lpignore="true"
+          data-form-type="other"
         />
         <button id="investor-chat-send" class="investor-send-btn" aria-label="Send message">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -120,6 +133,7 @@
       this.toggle = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-toggle"));
       this.window = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-window"));
       this.close = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-close"));
+      this.resetBtn = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-reset"));
       this.messagesEl = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-messages"));
       this.input = /** @type {HTMLInputElement | null} */ (document.getElementById("investor-chat-input"));
       this.send = /** @type {HTMLElement | null} */ (document.getElementById("investor-chat-send"));
@@ -142,6 +156,7 @@
       this.toggle?.addEventListener("click", () => this.toggleChat());
       this.close?.addEventListener("click", () => this.closeChat());
       this.close?.addEventListener("touchend", (e) => { e.preventDefault(); this.closeChat(); }, { passive: false });
+      this.resetBtn?.addEventListener("click", () => this.handleReset());
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && this.window?.classList.contains("investor-active")) {
           this.closeChat();
@@ -152,7 +167,115 @@
         if (event.key === "Enter") this.sendMessage();
       });
 
+      this.loadSession();
+      this.updateUIState();
+      this.startCooldownTimer();
+
       setTimeout(() => this.showGreeting(), 500);
+    }
+
+    loadSession() {
+      const stored = localStorage.getItem("investor_chat_session");
+      const now = Date.now();
+      const ONE_DAY = 24 * 60 * 60 * 1000;
+
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          if (now - data.lastTimestamp > ONE_DAY) {
+            this.resetSession();
+          } else {
+            this.session = data;
+          }
+        } catch (e) {
+          this.resetSession();
+        }
+      } else {
+        this.resetSession();
+      }
+    }
+
+    resetSession() {
+      this.session = {
+        sessionId: crypto.randomUUID(),
+        messageCount: 0,
+        cooldownUntil: 0,
+        lastTimestamp: Date.now()
+      };
+      this.saveSession();
+    }
+
+    saveSession() {
+      this.session.lastTimestamp = Date.now();
+      localStorage.setItem("investor_chat_session", JSON.stringify(this.session));
+    }
+
+    handleReset() {
+      if (this.isLoading) return;
+      this.resetSession();
+      if (this.messagesEl) this.messagesEl.innerHTML = "";
+      this.history = [];
+      this.updateUIState();
+      this.showGreeting();
+    }
+
+    incrementMessageCount() {
+      this.session.messageCount++;
+      if (this.session.messageCount >= 15 && this.session.cooldownUntil <= Date.now()) {
+        this.session.cooldownUntil = Date.now() + 900000;
+        this.startCooldownTimer();
+      }
+      this.saveSession();
+      this.updateUIState();
+    }
+
+    updateUIState() {
+      const now = Date.now();
+      const isCooldown = this.session.cooldownUntil > now;
+      const warningEl = document.getElementById("investor-chat-warning");
+      const cooldownEl = document.getElementById("investor-chat-cooldown");
+      const inputWrapper = this.input?.parentElement;
+
+      if (isCooldown) {
+        this.setInputDisabled(true);
+        cooldownEl?.classList.remove("hidden");
+        inputWrapper?.classList.add("hidden");
+      } else {
+        const reachedLimit = this.session.messageCount >= 15;
+        this.setInputDisabled(reachedLimit);
+        cooldownEl?.classList.add("hidden");
+        inputWrapper?.classList.remove("hidden");
+      }
+
+      if (this.session.messageCount >= 13 && this.session.messageCount < 15) {
+        if (warningEl) {
+          warningEl.textContent = "The Broker is getting very busy. Interdimensional liquidity is tight right now.";
+          warningEl.classList.add("visible");
+        }
+      } else {
+        warningEl?.classList.remove("visible");
+      }
+    }
+
+    startCooldownTimer() {
+      const timerEl = document.getElementById("investor-cooldown-timer");
+      const updateTimer = () => {
+        const now = Date.now();
+        const remaining = Math.max(0, this.session.cooldownUntil - now);
+
+        if (remaining > 0) {
+          const mins = Math.floor(remaining / 60000);
+          const secs = Math.floor((remaining % 60000) / 1000);
+          if (timerEl) timerEl.textContent = `${mins}:${secs.toString().padStart(2, "0")}`;
+          setTimeout(updateTimer, 1000);
+        } else if (this.session.cooldownUntil > 0) {
+          this.session.cooldownUntil = 0;
+          this.session.messageCount = 0;
+          this.saveSession();
+          this.updateUIState();
+        }
+      };
+      updateTimer();
     }
 
     toggleChat() {
@@ -274,12 +397,17 @@
     }
 
     sendMessage() {
+      if (this.session.cooldownUntil > Date.now() || this.session.messageCount >= 15) return;
+
       const text = this.input?.value.trim();
       if (!text || this.isLoading) return;
       if (this.history.length >= INVESTOR_MAX_MESSAGES) return;
 
       this.addMessage(text, false);
       this.history.push({ role: "user", content: text });
+
+      this.incrementMessageCount();
+
       if (this.input) {
         this.input.value = "";
         this.input.focus(); // Focus after submission
@@ -295,7 +423,10 @@
 
       try {
         const result = await this.streamApiResponse(this.history);
-        if (result.content) this.history.push({ role: "assistant", content: result.content });
+        if (result.content) {
+          this.history.push({ role: "assistant", content: result.content });
+          this.incrementMessageCount();
+        }
         if (result.interrupted && !result.content) {
           this.addMessage("Connection interrupted before a reply arrived. Please resend your message.", true);
         }
@@ -522,7 +653,7 @@
     width: 380px;
     height: 560px;
     max-width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
-    max-height: calc(100vh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     background: var(--investor-espresso);
     border: 1px solid rgba(197, 160, 89, 0.1);
     position: absolute;
@@ -578,6 +709,12 @@
     align-items: flex-start;
   }
 
+  .investor-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .investor-cinzel-title {
     font-family: 'Cinzel', serif;
     letter-spacing: 0.3em;
@@ -611,18 +748,31 @@
     100% { opacity: 0.4; }
   }
 
-  .investor-close-btn {
+  .investor-action-btn {
     background: none;
     border: none;
     color: var(--investor-cream);
     cursor: pointer;
     padding: 8px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
     opacity: 0.4;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
   }
 
-  .investor-close-btn:hover {
+  .investor-reset-btn {
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+  }
+
+  .investor-action-btn:hover {
     opacity: 1;
+    color: var(--investor-burnished-gold);
+    background: rgba(197, 160, 89, 0.05);
   }
 
   .investor-message-area {
@@ -803,6 +953,40 @@
     transition: border-color 0.4s ease;
   }
 
+  .investor-input-wrapper.hidden {
+    display: none;
+  }
+
+  .investor-chat-cooldown {
+    border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+    padding: 1rem 0;
+    color: var(--investor-burnished-gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .investor-chat-cooldown.hidden {
+    display: none;
+  }
+
+  .investor-chat-warning {
+    padding: 12px 32px;
+    font-size: 0.75rem;
+    color: var(--investor-burnished-gold);
+    background: rgba(197, 160, 89, 0.05);
+    border-top: 1px solid rgba(197, 160, 89, 0.1);
+    display: none;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .investor-chat-warning.visible {
+    display: block;
+  }
+
   .investor-input-wrapper:focus-within {
     border-bottom-color: var(--investor-burnished-gold);
   }
@@ -858,7 +1042,7 @@
     }
     .investor-chat-container {
       width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
-      height: calc(100vh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      height: calc(100dvh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
       bottom: 70px;
       right: 0;
     }

@@ -26,3 +26,16 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Research/Audit reports
+reports/
+
+# Common logs
+*.log
+
+# MISC
+.vercel
+Thumbs.db
+
+# IDE settings
+.vscode/settings.json

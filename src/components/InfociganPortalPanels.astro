@@ -1871,7 +1871,7 @@ const president = presidentEntry.data;
 
   .qbag-hero {
     width: 100%;
-    height: 80vh;
+    height: 80dvh;
     position: relative;
     overflow: hidden;
   }
@@ -2189,7 +2189,7 @@ const president = presidentEntry.data;
 
   .viewer-image {
     max-width: 90vw;
-    max-height: 90vh;
+    max-height: 90dvh;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -2231,7 +2231,7 @@ const president = presidentEntry.data;
     }
     .viewer-image {
       max-width: 95vw;
-      max-height: 95vh;
+      max-height: 95dvh;
     }
   }
 
@@ -2483,7 +2483,7 @@ const president = presidentEntry.data;
 
   @media (max-width: 768px) {
     .qbag-hero {
-      height: 60vh;
+      height: 60dvh;
     }
     .qbag-main-content {
       padding: 0 3vw;
@@ -2546,7 +2546,7 @@ const president = presidentEntry.data;
 
   @media (max-width: 480px) {
     .qbag-hero {
-      height: 50vh;
+      height: 50dvh;
     }
     .qbag-title {
       font-size: clamp(2.5rem, 12vw, 6rem);
@@ -2610,7 +2610,7 @@ const president = presidentEntry.data;
     --eden-text-muted: #627078;
     --eden-primary: #208c8d;
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
     background: var(--eden-bg);
   }
 
@@ -3035,7 +3035,7 @@ const president = presidentEntry.data;
 
   .president-zone {
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
     z-index: 1;
   }
 
@@ -3064,7 +3064,7 @@ const president = presidentEntry.data;
 
   .president-hero {
     width: 100%;
-    height: 80vh;
+    height: 80dvh;
     position: relative;
     overflow: hidden;
     background: rgb(var(--deep-space));
@@ -3122,6 +3122,13 @@ const president = presidentEntry.data;
     -webkit-text-stroke: 2px rgb(var(--bright-cyan));
     filter: drop-shadow(0 0 25px rgba(var(--bright-cyan), 0.6)) drop-shadow(0 4px 18px rgba(var(--teal-glow), 0.4));
     animation: metallic-shine 8s linear infinite;
+  }
+
+  @media (max-width: 768px) {
+    .president-title {
+      filter: none;
+      text-shadow: 0 0 10px rgba(var(--bright-cyan), 0.5);
+    }
   }
 
   @keyframes metallic-shine {
@@ -3234,6 +3241,18 @@ const president = presidentEntry.data;
     transition: all 0.3s ease;
   }
 
+  @media (max-width: 768px) {
+    .president-intro-card,
+    .president-interaction-card,
+    .president-contact-card,
+    .president-glass {
+      backdrop-filter: blur(10px); /* Reduce blur intensity */
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(var(--space-navy), 0.85); /* More opaque bg for better readability with less blur */
+      box-shadow: 0 4px 20px rgba(var(--deep-space), 0.6); /* Simplify shadow */
+    }
+  }
+
   .president-intro-card,
   .president-interaction-card,
   .president-contact-card {
@@ -3247,17 +3266,19 @@ const president = presidentEntry.data;
     background-position: center;
   }
 
-  .president-glass:hover,
-  .president-intro-card:hover,
-  .president-interaction-card:hover,
-  .president-contact-card:hover,
-  .artwork-info-card.president-glass:hover {
-    box-shadow:
-      0 12px 40px rgba(var(--deep-space), 0.6),
-      inset 0 1px 0 rgba(var(--ice-blue), 0.3),
-      0 0 60px rgba(var(--teal-glow), 0.4);
-    border-color: rgba(var(--bright-cyan), 0.5);
-    transform: translateY(-2px);
+  @media (hover: hover) {
+    .president-glass:hover,
+    .president-intro-card:hover,
+    .president-interaction-card:hover,
+    .president-contact-card:hover,
+    .artwork-info-card.president-glass:hover {
+      box-shadow:
+        0 12px 40px rgba(var(--deep-space), 0.6),
+        inset 0 1px 0 rgba(var(--ice-blue), 0.3),
+        0 0 60px rgba(var(--teal-glow), 0.4);
+      border-color: rgba(var(--bright-cyan), 0.5);
+      transform: translateY(-2px);
+    }
   }
 
   .president-glass-grid {
@@ -3530,7 +3551,7 @@ const president = presidentEntry.data;
 
   @media (max-width: 768px) {
     .president-hero {
-      height: 60vh;
+      height: 60dvh;
     }
     .president-title {
       font-size: clamp(2.4rem, 8vw, 6.4rem);
@@ -3552,7 +3573,7 @@ const president = presidentEntry.data;
 
   @media (max-width: 480px) {
     .president-hero {
-      height: 50vh;
+      height: 50dvh;
     }
     .president-title {
       font-size: clamp(2rem, 9.6vw, 4.8rem);
@@ -3588,7 +3609,7 @@ const president = presidentEntry.data;
     --eden-text-muted: #627078;
     --eden-primary: #208c8d;
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
     background: var(--eden-bg);
   }
 

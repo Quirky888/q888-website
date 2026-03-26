@@ -92,13 +92,13 @@ const tickerUnit = `${tickerText} — `;
 
 <div id="sticker-detail-drawer" class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto" data-sticker-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Sticker instrument details">
   <button type="button" data-close-drawer class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors" aria-label="Close drawer">×</button>
-  <div class="drawer-scrollable max-w-4xl w-full max-h-[80vh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
+  <div class="drawer-scrollable max-w-4xl w-full max-h-[80dvh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
     <div class="drawer-content">
       <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
       <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
       <p class="drawer-tagline text-[var(--text-muted)] mb-6" data-sticker-tagline></p>
       <div class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl">
-        <img data-sticker-image class="w-full h-[40vh] md:h-[50vh] object-contain object-center bg-[var(--bg-fog)]/50 hidden" alt="" />
+        <img data-sticker-image class="w-full h-[40dvh] md:h-[50dvh] object-contain object-center bg-[var(--bg-fog)]/50 hidden" alt="" />
       </div>
       <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
       <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
@@ -359,7 +359,7 @@ const tickerUnit = `${tickerText} — `;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -384,7 +384,7 @@ const tickerUnit = `${tickerText} — `;
   .terms-modal-content {
     position: relative;
     max-width: 700px;
-    max-height: 85vh;
+    max-height: 85dvh;
     width: 90%;
     background: #1a1a1a;
     border: 1px solid rgba(148, 0, 211, 0.5);
@@ -461,7 +461,7 @@ const tickerUnit = `${tickerText} — `;
     .terms-modal-content {
       width: 95%;
       padding: 1.5rem;
-      max-height: 90vh;
+      max-height: 90dvh;
     }
 
     .terms-modal-title {

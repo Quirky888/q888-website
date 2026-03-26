@@ -16,19 +16,29 @@
         <h3>Nar-Mail Express°</h3>
         <p class="nar-chat-status">Square Bubbles Bureaucracy Division</p>
       </div>
-      <button id="nar-chat-close" class="nar-chat-close" aria-label="Close chat">&times;</button>
+      <div class="nar-chat-header-actions">
+        <button id="nar-chat-reset" class="nar-chat-reset" aria-label="New conversation" title="New conversation">↺</button>
+        <button id="nar-chat-close" class="nar-chat-close" aria-label="Close chat">&times;</button>
+      </div>
     </div>
 
     <div id="nar-chat-messages" class="nar-chat-messages"></div>
+    <div id="nar-chat-warning" class="nar-chat-warning" aria-live="polite"></div>
 
     <div class="nar-chat-input-wrapper">
+      <div id="nar-chat-cooldown" class="nar-chat-cooldown hidden">
+        <span>Available in <span id="nar-cooldown-timer">15:00</span></span>
+      </div>
       <input
         type="text"
         id="nar-chat-input"
-        name="nar-chat-inquiry"
         class="nar-chat-input"
         placeholder="Type your inquiry"
-        autocomplete="off"
+        autocomplete="one-time-code"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        inputmode="text"
         data-1p-ignore="true"
         data-lpignore="true"
         data-form-type="other"
@@ -110,6 +120,7 @@
       this.toggle = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-toggle"));
       this.window = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-window"));
       this.close = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-close"));
+      this.resetBtn = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-reset"));
       this.messagesEl = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-messages"));
       this.input = /** @type {HTMLInputElement | null} */ (document.getElementById("nar-chat-input"));
       this.send = /** @type {HTMLElement | null} */ (document.getElementById("nar-chat-send"));
@@ -132,6 +143,7 @@
       this.toggle?.addEventListener("click", () => this.openChat());
       this.close?.addEventListener("click", () => this.closeChat());
       this.close?.addEventListener("touchend", (e) => { e.preventDefault(); this.closeChat(); }, { passive: false });
+      this.resetBtn?.addEventListener("click", () => this.handleReset());
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && this.window?.classList.contains("is-open")) {
           this.closeChat();
@@ -145,7 +157,116 @@
         if (this.input?.value.length > 0) this.input?.removeAttribute("placeholder");
       });
 
+      this.loadSession();
+      this.updateUIState();
+      this.startCooldownTimer();
+
       setTimeout(() => this.fetchGreeting(), 500);
+    }
+
+    loadSession() {
+      const stored = localStorage.getItem("nar_chat_session");
+      const now = Date.now();
+      const ONE_DAY = 24 * 60 * 60 * 1000;
+
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          // Auto-reset if older than 24h
+          if (now - data.lastTimestamp > ONE_DAY) {
+            this.resetSession();
+          } else {
+            this.session = data;
+          }
+        } catch (e) {
+          this.resetSession();
+        }
+      } else {
+        this.resetSession();
+      }
+    }
+
+    resetSession() {
+      this.session = {
+        sessionId: crypto.randomUUID(),
+        messageCount: 0,
+        cooldownUntil: 0,
+        lastTimestamp: Date.now()
+      };
+      this.saveSession();
+    }
+
+    saveSession() {
+      this.session.lastTimestamp = Date.now();
+      localStorage.setItem("nar_chat_session", JSON.stringify(this.session));
+    }
+
+    handleReset() {
+      if (this.isLoading) return;
+      this.resetSession();
+      if (this.messagesEl) this.messagesEl.innerHTML = "";
+      this.history = [];
+      this.updateUIState();
+      this.fetchGreeting();
+    }
+
+    incrementMessageCount() {
+      this.session.messageCount++;
+      if (this.session.messageCount >= 15 && this.session.cooldownUntil <= Date.now()) {
+        this.session.cooldownUntil = Date.now() + 900000;
+        this.startCooldownTimer();
+      }
+      this.saveSession();
+      this.updateUIState();
+    }
+
+    updateUIState() {
+      const now = Date.now();
+      const isCooldown = this.session.cooldownUntil > now;
+      const warningEl = document.getElementById("nar-chat-warning");
+      const cooldownEl = document.getElementById("nar-chat-cooldown");
+
+      if (isCooldown) {
+        this.setInputDisabled(true);
+        cooldownEl?.classList.remove("hidden");
+        this.input?.classList.add("hidden");
+      } else {
+        const reachedLimit = this.session.messageCount >= 15;
+        this.setInputDisabled(reachedLimit);
+        cooldownEl?.classList.add("hidden");
+        this.input?.classList.remove("hidden");
+      }
+
+      if (this.session.messageCount >= 13 && this.session.messageCount < 15) {
+        if (warningEl) {
+          warningEl.textContent = "The interdimensional postal service is getting very busy. Kotiki-Nar will be unavailable soon due to cosmic circumstances.";
+          warningEl.classList.add("visible");
+        }
+      } else {
+        warningEl?.classList.remove("visible");
+      }
+    }
+
+    startCooldownTimer() {
+      const timerEl = document.getElementById("nar-cooldown-timer");
+      const updateTimer = () => {
+        const now = Date.now();
+        const remaining = Math.max(0, this.session.cooldownUntil - now);
+
+        if (remaining > 0) {
+          const mins = Math.floor(remaining / 60000);
+          const secs = Math.floor((remaining % 60000) / 1000);
+          if (timerEl) timerEl.textContent = `${mins}:${secs.toString().padStart(2, "0")}`;
+          setTimeout(updateTimer, 1000);
+        } else if (this.session.cooldownUntil > 0) {
+          // Cooldown just expired
+          this.session.cooldownUntil = 0;
+          this.session.messageCount = 0; // Reset count after cooldown
+          this.saveSession();
+          this.updateUIState();
+        }
+      };
+      updateTimer();
     }
 
     openChat() {
@@ -244,12 +365,17 @@
     }
 
     sendMessage() {
+      if (this.session.cooldownUntil > Date.now() || this.session.messageCount >= 15) return;
+
       const text = this.input?.value.trim();
       if (!text || this.isLoading) return;
       if (this.history.length >= MAX_MESSAGES) return;
 
       this.addMessage(text, false);
       this.history.push({ role: "user", content: text });
+      
+      this.incrementMessageCount();
+
       if (this.input) {
         this.input.value = "";
         this.input.focus(); // Focus after submission
@@ -262,7 +388,10 @@
       const messages = [{ role: "user", content: "[User has opened the Nar-Mail Express chat.]" }];
       try {
         const result = await this.streamApiResponse(messages);
-        if (result.content) this.history.push({ role: "assistant", content: result.content });
+        if (result.content) {
+          this.history.push({ role: "assistant", content: result.content });
+          this.incrementMessageCount();
+        }
         if (result.interrupted && !result.content) {
           this.addMessage("Connection interrupted before a reply arrived. Please try again.", true);
         }
@@ -282,7 +411,10 @@
 
       try {
         const result = await this.streamApiResponse(this.history);
-        if (result.content) this.history.push({ role: "assistant", content: result.content });
+        if (result.content) {
+          this.history.push({ role: "assistant", content: result.content });
+          this.incrementMessageCount();
+        }
         if (result.interrupted && !result.content) {
           this.addMessage("Connection interrupted before a reply arrived. Please resend your message.", true);
         }
@@ -513,7 +645,7 @@
     width: 380px;
     max-width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
     height: 550px;
-    max-height: calc(100vh - 140px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - 140px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     background: rgb(12, 25, 40);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
@@ -555,6 +687,12 @@
     border-bottom: 1px solid rgba(95, 210, 230, 0.3);
   }
 
+  .nar-chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   #nar-chat-widget .nar-chat-header-content h3 {
     color: #ffffff !important;
     font-size: 1.1rem;
@@ -570,16 +708,16 @@
     font-style: italic;
   }
 
-  #nar-chat-widget .nar-chat-close {
+  #nar-chat-widget .nar-chat-close,
+  #nar-chat-widget .nar-chat-reset {
     background: none;
     border: none;
-    color: #ffffff !important;
-    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8) !important;
     line-height: 1;
     cursor: pointer;
     padding: 0;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -587,9 +725,18 @@
     transition: all 0.2s ease;
   }
 
-  .nar-chat-close:hover {
+  #nar-chat-widget .nar-chat-close {
+    font-size: 1.7rem;
+  }
+
+  #nar-chat-widget .nar-chat-reset {
+    font-size: 1.2rem;
+  }
+
+  .nar-chat-close:hover,
+  .nar-chat-reset:hover {
     background: rgba(95, 210, 230, 0.2);
-    color: rgb(95, 210, 230);
+    color: rgb(95, 210, 230) !important;
   }
 
   .nar-chat-messages {
@@ -769,6 +916,44 @@
     transition: border-color 0.2s ease;
   }
 
+  .nar-chat-input.hidden {
+    display: none;
+  }
+
+  .nar-chat-cooldown {
+    flex: 1;
+    background: rgba(40, 20, 20, 0.9);
+    border: 1px solid rgba(230, 95, 95, 0.5);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #ff9595 !important;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .nar-chat-cooldown.hidden {
+    display: none;
+  }
+
+  .nar-chat-warning {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+    color: #ffcc00 !important;
+    background: rgba(255, 204, 0, 0.1);
+    border-top: 1px solid rgba(255, 204, 0, 0.2);
+    display: none;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .nar-chat-warning.visible {
+    display: block;
+  }
+
   .nar-chat-input:focus {
     border-color: rgb(95, 210, 230);
   }
@@ -832,7 +1017,7 @@
 
     .nar-chat-window {
       width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
-      height: calc(100vh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      height: calc(100dvh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
       bottom: 70px;
       right: 0;
     }
