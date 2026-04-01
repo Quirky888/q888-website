@@ -1,4 +1,12 @@
-import gsap from "gsap";
+// GSAP is lazy-loaded on first drawer open — keeps GSAP out of the initial bundle.
+type GsapType = typeof import("gsap").default;
+let _gsapPromise: Promise<GsapType> | null = null;
+function getGsap(): Promise<GsapType> {
+  if (!_gsapPromise) {
+    _gsapPromise = import("gsap").then((m) => m.default ?? m);
+  }
+  return _gsapPromise;
+}
 import { setSystemOverride, clearSystemOverride } from "./systemMetaState";
 
 const EDINBURGH_COORDS = "55.9439712N 3.1621543W";
@@ -108,6 +116,7 @@ export async function openDrawer(id: DrawerId, direction: Direction) {
   panel.classList.add("is-active");
 
   const xFrom = direction === "left" ? "-100%" : "100%";
+  const gsap = await getGsap();
 
   if (prefersReducedMotion()) {
     gsap.set(panel, { x: 0, opacity: 1 });
@@ -129,7 +138,7 @@ export function closeDrawerIfOpen() {
   closeDrawer(direction);
 }
 
-export function closeDrawer(direction: Direction) {
+export async function closeDrawer(direction: Direction) {
   const root = getDrawerRoot();
   if (!activeDrawer || !root) return;
 
@@ -149,6 +158,8 @@ export function closeDrawer(direction: Direction) {
     triggerElement = null;
     activeDrawer = null;
   };
+
+  const gsap = await getGsap();
 
   if (prefersReducedMotion()) {
     gsap.set(panel, { x: xTo, opacity: 0 });

@@ -13,19 +13,24 @@ const variants = [
   { a: TEAL, b: GOLD, c: CYAN },
   { a: CYAN, b: TEAL, c: ICE_BLUE },
 ];
-const total = 10; // Increased slightly for desktop richness
+const total = 10;     // Desktop count
+const totalMobile = 3; // Mobile: render only 3 in HTML, not just hiding via CSS
 ---
 
 <div class="dynamic-cosmic-bg" aria-hidden="true">
+  <!--
+    Desktop: 10 rainbow elements for richness.
+    Mobile: only 3 rendered in HTML (not just hidden via CSS) to keep DOM small.
+    The ".mobile-only" / ".desktop-only" classes are toggled via CSS below.
+  -->
   <div class="rainbow-container">
     {Array.from({ length: total }, (_, i) => {
       const v = variants[i % variants.length];
       const delay = (i * 1.8) % 45;
       const driftDelay = ((i * 0.9) % 18).toFixed(2);
-      // We'll hide some indices on mobile using CSS to save GPU
       return (
         <div
-          class={`rainbow rainbow-${i}`}
+          class={`rainbow rainbow-${i}${i >= totalMobile ? ' desktop-rainbow' : ''}`}
           style={`animation-delay: -${delay}s, -${driftDelay}s; --a: ${v.a}; --b: ${v.b}; --c: ${v.c};`}
         />
       );
@@ -45,6 +50,8 @@ const total = 10; // Increased slightly for desktop richness
     overflow: hidden;
     background: rgb(20, 35, 50);
     will-change: transform;
+    /* Skip compositing when the portal panel is off-screen */
+    content-visibility: auto;
   }
 
   .rainbow {
@@ -67,19 +74,19 @@ const total = 10; // Increased slightly for desktop richness
   }
 
   @media (max-width: 768px) {
+    /* Hide extra desktop elements — only 3 are rendered on mobile (see .desktop-rainbow) */
+    .desktop-rainbow {
+      display: none;
+    }
+
     .rainbow {
       /* Simplify shadow stack for mobile performance */
       box-shadow:
         -50px 0 50px 30px rgba(var(--a), 0.25),
         20px 0 40px 20px rgba(var(--b), 0.3);
-      /* Disable drift animation on mobile to save secondary transform layer */
+      /* Disable drift animation and will-change on mobile to avoid extra compositor layers */
       animation: cosmic-slide 45s linear infinite;
-    }
-
-    /* Hide 60% of elements on mobile to massive GPU savings */
-    .rainbow:nth-child(even),
-    .rainbow:nth-child(3n) {
-      display: none;
+      will-change: auto;
     }
   }
 
@@ -128,6 +135,14 @@ const total = 10; // Increased slightly for desktop richness
     );
     animation: cosmic-gradient-drift 22s ease-in-out infinite;
     will-change: transform;
+  }
+
+  @media (max-width: 768px) {
+    /* Disable the gradient drift animation on mobile — saves a compositor layer */
+    .cosmic-gradient {
+      animation: none;
+      will-change: auto;
+    }
   }
 
   @keyframes cosmic-gradient-drift {

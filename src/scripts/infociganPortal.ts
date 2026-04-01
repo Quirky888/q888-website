@@ -1,4 +1,13 @@
-import gsap from "gsap";
+// GSAP is lazy-loaded on first portal open to keep the initial bundle lean.
+// ~57 KB minified; no reason to ship it to users who never open a portal.
+type GsapType = typeof import("gsap").default;
+let _gsapPromise: Promise<GsapType> | null = null;
+function getGsap(): Promise<GsapType> {
+  if (!_gsapPromise) {
+    _gsapPromise = import("gsap").then((m) => m.default ?? m);
+  }
+  return _gsapPromise;
+}
 
 type Direction = "left" | "right";
 
@@ -86,13 +95,14 @@ function getDirection(element: Element): Direction {
   return centerX < window.innerWidth / 2 ? "left" : "right";
 }
 
-export function openPortal(slug: string, direction: Direction) {
+export async function openPortal(slug: string, direction: Direction) {
   const panel = getPanel(slug);
   if (!panel || activePanel === panel) return;
   const hadActivePanel = Boolean(activePanel);
 
   if (activePanel && activePanel !== panel) {
     activePanel.classList.remove("is-active");
+    const gsap = await getGsap();
     gsap.set(activePanel.querySelector(".panel-content"), { clearProps: "x,opacity" });
     gsap.set(activePanel.querySelector(".panel-overlay"), { clearProps: "opacity" });
   }
@@ -105,6 +115,7 @@ export function openPortal(slug: string, direction: Direction) {
   panel.setAttribute("data-slide-from", direction);
 
   const xFrom = direction === "left" ? "-100%" : "100%";
+  const gsap = await getGsap();
 
   if (prefersReducedMotion()) {
     gsap.set(panel.querySelector(".panel-content"), { x: 0, opacity: 1 });
@@ -126,7 +137,7 @@ export function openPortal(slug: string, direction: Direction) {
   history.pushState(null, "", `#infocigan-zone-${slug}`);
 }
 
-export function closePortal() {
+export async function closePortal() {
   if (!activePanel || isClosing) return;
   isClosing = true;
 
@@ -149,6 +160,8 @@ export function closePortal() {
     history.pushState(null, "", "#infocigan");
     if (section) section.id = "infocigan";
   };
+
+  const gsap = await getGsap();
 
   if (prefersReducedMotion()) {
     gsap.set(panel.querySelector(".panel-content"), { x: xTo, opacity: 0 });

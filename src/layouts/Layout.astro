@@ -21,14 +21,19 @@ const { title = "Q888" } = Astro.props;
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<!-- Critical fonts: load immediately -->
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" media="print" onload="this.media='all'" />
 		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" /></noscript>
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" media="print" onload="this.media='all'" />
+		<!-- Non-critical portal fonts: deferred until after load, invisible to initial paint -->
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" id="portal-fonts-preload" />
+		<!-- Portal font stylesheet injected after page load by JS below -->
 		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" /></noscript>
-		<link rel="preload" as="image" href="/images/Q888_hero.webp" fetchpriority="high" />
-		<script type="module" src="/vendor/hotfx-split-flap.js"></script>
+		<!-- Hero image preload: mobile gets avif, desktop gets webp -->
+		<link rel="preload" as="image" href="/images/q888_mobile.avif" media="(max-width: 768px) and (orientation: portrait)" fetchpriority="high" />
+		<link rel="preload" as="image" href="/images/Q888_hero.webp" media="(min-width: 769px)" fetchpriority="high" />
+		<!-- Split-flap: deferred, skips mobile parse entirely -->
+		<script defer src="/vendor/hotfx-split-flap.js"></script>
 	</head>
 	<body>
 		<slot />
@@ -110,11 +115,35 @@ const { title = "Q888" } = Astro.props;
 				debounceId = window.setTimeout(updateMobileEscapeVisibility, 50);
 			};
 
-			const escapeObserver = new MutationObserver(debouncedUpdate);
-			escapeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: true });
+			// Narrow MutationObserver to only the portal container, not entire body.
+			// Watching document.body with subtree:true fires on every DOM mutation
+			// anywhere on the page — extremely expensive on mobile.
+			const portalContainer = document.querySelector('.infocigan-portal-system');
+			if (portalContainer) {
+				const escapeObserver = new MutationObserver(debouncedUpdate);
+				escapeObserver.observe(portalContainer, { attributes: true, attributeFilter: ['class'], subtree: true });
+			}
 			document.addEventListener('DOMContentLoaded', updateMobileEscapeVisibility);
 			window.addEventListener('hashchange', updateMobileEscapeVisibility);
 			updateMobileEscapeVisibility();
+
+			// Defer non-critical portal fonts until after page is fully interactive.
+			// Bungee, Playfair Display, Space Mono, Syne are only used inside
+			// portal panels — they should not block initial paint on mobile.
+			const loadPortalFonts = () => {
+				if ((window as any).__portalFontsLoaded) return;
+				(window as any).__portalFontsLoaded = true;
+				const link = document.createElement('link');
+				link.rel = 'stylesheet';
+				link.href = 'https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap';
+				document.head.appendChild(link);
+			};
+			// Load after window load; on slow connections this fires well after FCP
+			if (document.readyState === 'complete') {
+				setTimeout(loadPortalFonts, 200);
+			} else {
+				window.addEventListener('load', () => setTimeout(loadPortalFonts, 200), { once: true });
+			}
 		</script>
 
 		<style>
