@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Left Head Outline -->
+  <path d="M 4 8 L 3 3 L 6 5 L 8 5 L 11 3 L 10 8 C 10 10.5, 4 10.5, 4 8 Z" />
+  <!-- Left Head Eyes -->
+  <circle cx="6" cy="7.5" r="0.75" fill="currentColor" stroke="none" />
+  <circle cx="8" cy="7.5" r="0.75" fill="currentColor" stroke="none" />
+  <!-- Left Head Nose -->
+  <circle cx="7" cy="9" r="0.4" fill="currentColor" stroke="none" />
+  <!-- Left Whiskers -->
+  <line x1="3.5" y1="8.5" x2="1.5" y2="8" />
+  <line x1="3.5" y1="9.5" x2="1.5" y2="10.5" />
+
+  <!-- Right Head Outline -->
+  <path d="M 14 8 L 13 3 L 16 5 L 18 5 L 21 3 L 20 8 C 20 10.5, 14 10.5, 14 8 Z" />
+  <!-- Right Head Eyes -->
+  <circle cx="16" cy="7.5" r="0.75" fill="currentColor" stroke="none" />
+  <circle cx="18" cy="7.5" r="0.75" fill="currentColor" stroke="none" />
+  <!-- Right Head Nose -->
+  <circle cx="17" cy="9" r="0.4" fill="currentColor" stroke="none" />
+  <!-- Right Whiskers -->
+  <line x1="20.5" y1="8.5" x2="22.5" y2="8" />
+  <line x1="20.5" y1="9.5" x2="22.5" y2="10.5" />
+
+  <!-- Necks and Body Base -->
+  <path d="M 4 8.5 C 4 15, 8 22, 12 23 C 16 22, 20 15, 20 8.5" />
+  <line x1="12" y1="10.5" x2="12" y2="23" />
+</svg>

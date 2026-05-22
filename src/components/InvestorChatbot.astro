@@ -189,7 +189,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
         paragraph.push(lines[i].trim());
         i += 1;
       }
-      blocks.push(`<p>${renderInlineMarkdownInvestor(paragraph.join("<br>"))}</p>`);
+      blocks.push(`<p>${renderInlineMarkdownInvestor(paragraph.join(" "))}</p>`);
     }
 
     return blocks.join("");
@@ -728,7 +728,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
   }
 
   .investor-chat-container {
-    width: 380px;
+    width: 400px;
     height: 560px;
     max-width: calc(100vw - 2rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
     max-height: calc(100dvh - 100px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
@@ -779,7 +779,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
   }
 
   .investor-header {
-    padding: 32px 32px 20px 32px;
+    padding: 24px 20px 16px 20px;
     background: linear-gradient(to bottom, var(--investor-pitch), var(--investor-espresso));
     position: relative;
     display: flex;
@@ -855,7 +855,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
 
   .investor-message-area {
     flex-grow: 1;
-    padding: 24px 32px;
+    padding: 16px 20px;
     overflow-y: auto;
     position: relative;
   }
@@ -873,22 +873,15 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
   }
 
   .investor-message-area :global(.investor-message-item) {
-    margin-bottom: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+    margin-bottom: 12px;
   }
 
   .investor-message-area :global(.investor-message-item:last-child) {
-    border-bottom: none;
     margin-bottom: 0;
-    padding-bottom: 0;
   }
 
   .investor-message-area :global(.investor-message-item.investor-divider-strong) {
-    border-bottom-color: rgba(197, 160, 89, 0.45);
-    padding-top: 32px;
     margin-top: 12px;
-    border-top: 1px solid rgba(197, 160, 89, 0.2);
   }
 
   .investor-message-area :global(.investor-meta-label) {
@@ -918,8 +911,8 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
 
   .investor-message-area :global(.investor-agent-msg) {
     border-left: 1px solid var(--investor-burnished-gold);
-    padding: 16px 20px;
-    max-width: 90%;
+    padding: 12px 16px;
+    max-width: 95%;
     background: rgba(0, 0, 0, 0.35);
     border-radius: 0 6px 6px 0;
     animation: investor-fade-in 0.8s ease forwards;
@@ -927,8 +920,8 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
 
   .investor-message-area :global(.investor-user-msg) {
     border: 1px solid rgba(224, 213, 200, 0.1);
-    padding: 16px;
-    max-width: 90%;
+    padding: 12px 16px;
+    max-width: 95%;
     text-align: right;
     border-radius: 6px 0 0 6px;
     animation: investor-fade-in 0.8s ease forwards;
@@ -936,7 +929,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
 
   .investor-message-area :global(.investor-msg-text) {
     font-size: 0.95rem;
-    line-height: 1.8;
+    line-height: 1.5;
     font-weight: 300;
     color: var(--investor-cream);
   }
@@ -1019,7 +1012,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
   }
 
   .investor-input-container {
-    padding: 24px 32px 40px 32px;
+    padding: 16px 20px 24px 20px;
     background: var(--investor-espresso);
   }
 

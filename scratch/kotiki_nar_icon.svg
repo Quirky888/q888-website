@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Left Spiky Head -->
+  <path d="M 8 14 C 6.5 14, 5.5 13.5, 5 13 L 3 10 L 5 8 L 3 4 L 7 7 L 9 7 L 13 4 L 11 8 L 13 10 L 11 13 C 10.5 13.5, 9.5 14, 8 14 Z" />
+  <!-- Left Head Eyes -->
+  <line x1="6.5" y1="9" x2="6.5" y2="11" />
+  <line x1="9.5" y1="9" x2="9.5" y2="11" />
+  
+  <!-- Right Diamond Head -->
+  <path d="M 16 14 L 13 10 L 15 8 L 13 3 L 15 2.5 L 17 7.5 L 15.5 2.5 L 17.5 2 L 19.5 7.5 L 21 11 Z" />
+  <!-- Right Head Eyes -->
+  <circle cx="15.5" cy="10.5" r="0.6" fill="currentColor" stroke="none" />
+  <path d="M 17.8 9.8 L 19.2 11.2 M 19.2 9.8 L 17.8 11.2" />
+
+  <!-- Necks and Body -->
+  <path d="M 5 13 C 5 17, 9 21, 12 22 C 15 21, 19 17, 21 11" />
+  <line x1="12" y1="16" x2="12" y2="22" />
+</svg>
