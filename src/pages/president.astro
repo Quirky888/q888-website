@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
-import DynamicCosmicBackground from "../components/DynamicCosmicBackground.astro";
 import { getEntry } from "astro:content";
 
 const presidentEntry = await getEntry("campaigns", "president-of-the-galaxy");
@@ -16,148 +15,420 @@ const president = presidentEntry.data;
   <SlimNav />
   <SystemMeta position="top" />
 
-  <main class="relative min-h-screen pt-10 md:pt-11">
-    <div class="president-bg-wrap">
-      <DynamicCosmicBackground />
-    </div>
-    <div class="president-content president-zone">
-      <div class="president-layout president-eden">
-        <section class="president-hero">
-          <img
-            src={president.heroImage}
-            alt={president.heroAlt}
-            loading="eager"
-            decoding="async"
-            width="1200"
-            height="800"
-          />
-          <div class="president-hero-overlay">
-            <h1 class="president-title president-eden-headline">{president.heroTitleLines[0]}<br/>{president.heroTitleLines[1]}</h1>
+  <main class="relative min-h-[100dvh] pt-10 md:pt-11">
+    <div class="president-eden-wrap">
+
+      <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
+      <section class="president-hero">
+        <div class="president-hero-inner px-6 sm:px-10 lg:px-16">
+
+          <!-- Portal image with holographic badge ring -->
+          <div class="president-portal-wrap">
+            <!-- Holographic badge ring (inspired by Intergalactic J sticker) -->
+            <div class="portal-badge-ring" aria-hidden="true">
+              <svg class="badge-ring-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="holo-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff9de2"/>
+                    <stop offset="16%" stop-color="#a8edff"/>
+                    <stop offset="33%" stop-color="#a8ff9d"/>
+                    <stop offset="50%" stop-color="#ffed9d"/>
+                    <stop offset="66%" stop-color="#208c8d"/>
+                    <stop offset="83%" stop-color="#c39af5"/>
+                    <stop offset="100%" stop-color="#ff9de2"/>
+                  </linearGradient>
+                  <linearGradient id="holo-ring-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.6"/>
+                    <stop offset="50%" stop-color="#208c8d" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#a67c00" stop-opacity="0.6"/>
+                  </linearGradient>
+                </defs>
+                <!-- outer holo ring -->
+                <ellipse cx="220" cy="220" rx="210" ry="210" stroke="url(#holo-ring)" stroke-width="5" opacity="0.8"/>
+                <!-- inner gold ring -->
+                <ellipse cx="220" cy="220" rx="198" ry="198" stroke="url(#holo-ring-2)" stroke-width="2"/>
+                <!-- small star ornaments around ring -->
+                <path d="M220 8 L222 15 L229 15 L223 19 L225 26 L220 22 L215 26 L217 19 L211 15 L218 15Z" fill="#ffcc33"/>
+                <path d="M220 432 L222 425 L229 425 L223 421 L225 414 L220 418 L215 414 L217 421 L211 425 L218 425Z" fill="#ffcc33"/>
+                <path d="M8 220 L15 222 L15 229 L19 223 L26 225 L22 220 L26 215 L19 217 L15 211 L15 218Z" fill="#208c8d"/>
+                <path d="M432 220 L425 222 L425 229 L421 223 L414 225 L418 220 L414 215 L421 217 L425 211 L425 218Z" fill="#208c8d"/>
+                <!-- small mushroom at top-right -->  
+                <g transform="translate(350, 38) rotate(30)" opacity="0.7">
+                  <ellipse cx="10" cy="8" rx="12" ry="8" fill="#208c8d" opacity="0.5"/>
+                  <ellipse cx="10" cy="8" rx="12" ry="8" stroke="#208c8d" stroke-width="1.5"/>
+                  <rect x="7.5" y="14" width="5" height="10" rx="2.5" fill="#a67c00" opacity="0.7"/>
+                </g>
+                <!-- tiny heart at bottom-left -->
+                <text x="72" y="374" fill="#ff9de2" font-size="14" opacity="0.8">♥</text>
+                <!-- tiny star at top-left -->
+                <text x="66" y="80" fill="#ffcc33" font-size="11" opacity="0.7">✦</text>
+                <!-- tiny rune mark -->
+                <text x="355" y="380" fill="#208c8d" font-size="10" opacity="0.6" font-family="monospace">☽</text>
+              </svg>
+            </div>
+            <div class="president-portal">
+              <img
+                src={president.heroImage}
+                alt={president.heroAlt}
+                loading="eager"
+                decoding="async"
+                width="900"
+                height="900"
+                class="president-portal-img"
+              />
+              <!-- orbiting star -->
+              <div class="portal-orbit" aria-hidden="true">
+                <svg class="orbit-star" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill="#ffcc33"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Title block -->
+          <div class="president-hero-text">
+            <p class="president-eyebrow">{president.tagline}</p>
+            <h1 class="president-headline">
+              {president.heroTitleLines[0]}<br />{president.heroTitleLines[1]}
+            </h1>
+            <div class="president-status-block narmail-mono">
+              {president.statusLines.map((line: string) => <div>{line}</div>)}
+              <div>YEAR: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- sticker divider 1: star cluster + runic lines -->
+      <div class="cosmic-divider" aria-hidden="true">
+        <svg viewBox="0 0 800 44" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <!-- left dashed line -->
+          <line x1="0" y1="22" x2="310" y2="22" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 7"/>
+          <!-- center star cluster (like the sticker ornaments) -->
+          <g transform="translate(340, 10)">
+            <!-- big star -->
+            <path d="M30 0 L32 10 L42 10 L34 16 L37 26 L30 20 L23 26 L26 16 L18 10 L28 10Z" fill="#ffcc33" opacity="0.95"/>
+            <!-- small flanking stars -->
+            <path d="M8 14 L9 18 L13 18 L10 21 L11 25 L8 22 L5 25 L6 21 L3 18 L7 18Z" fill="#208c8d" opacity="0.7"/>
+            <path d="M52 14 L53 18 L57 18 L54 21 L55 25 L52 22 L49 25 L50 21 L47 18 L51 18Z" fill="#a67c00" opacity="0.7"/>
+            <!-- tiny dot ornaments -->
+            <circle cx="0" cy="22" r="2" fill="#208c8d" opacity="0.5"/>
+            <circle cx="60" cy="22" r="2" fill="#a67c00" opacity="0.5"/>
+          </g>
+          <!-- right dashed line -->
+          <line x1="460" y1="22" x2="800" y2="22" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 7"/>
+          <!-- rune-like tick marks (inspired by sticker runic text) -->
+          <text x="330" y="38" fill="#a67c00" font-size="8" opacity="0.4" font-family="monospace">⊕</text>
+          <text x="455" y="38" fill="#208c8d" font-size="8" opacity="0.4" font-family="monospace">☽</text>
+        </svg>
+      </div>
+
+      <!-- ══════════════════════════════════ MAIN CONTENT ══════════════════════════════════ -->
+      <div class="president-main-content px-6 sm:px-10 lg:px-16 pb-16">
+
+        <!-- Lead section -->
+        <section class="president-section">
+          <p class="president-lead">
+            {president.lead}
+          </p>
+        </section>
+
+        <!-- Artwork card -->
+        <section class="president-artwork-card-section">
+          <div class="artwork-info-card president-glass" id="president-gallery-trigger">
+            <div class="artwork-card-content">
+              <div class="artwork-card-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="artwork-card-text">
+                <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
+                <p class="artwork-card-description">{president.artworkCardDescription}</p>
+              </div>
+              <button class="artwork-card-button president-btn" type="button">
+                <span>{president.artworkCardButtonLabel}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </section>
 
-        <div class="president-main-content">
-          <section class="president-intro-section">
-            <div class="glass-card president-glass president-intro-card">
-              <p class="president-tagline">{president.tagline}</p>
-              <p class="president-lead president-eden-body">
-                {president.lead}
-              </p>
-              <div class="president-eden-mono">
-                <div>{president.statusLines[0]}</div>
-                <div>{president.statusLines[1]}</div>
-                <div>{president.statusLines[2]}</div>
-                <div>YEAR: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
-              </div>
+        <!-- What is this -->
+        <section class="president-section">
+          <h2 class="president-h2">{president.whatHeading}</h2>
+          <div class="president-two-col">
+            <div class="president-two-col-text">
+              <p>{president.whatParagraphs[0]}</p>
+              <p>{president.whatParagraphs[1]}</p>
             </div>
-          </section>
-
-          <section class="president-artwork-card-section">
-            <div class="artwork-info-card glass-card president-glass" id="president-gallery-trigger">
-              <div class="artwork-card-content">
-                <div class="artwork-card-icon">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="artwork-card-text">
-                  <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
-                  <p class="artwork-card-description">{president.artworkCardDescription}</p>
-                </div>
-                <button class="artwork-card-button president-btn" type="button">
-                  <span>{president.artworkCardButtonLabel}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section class="president-content-grid-section" data-motion-reveal>
-            <div class="president-glass-grid" data-motion-stagger data-motion-children="[data-motion-item]">
-              <div class="glass-card president-glass president-what-is-this-card" data-motion-item>
-                <div class="president-what-text">
-                  <h3>{president.whatHeading}</h3>
-                  <p>{president.whatParagraphs[0]}</p>
-                  <p>{president.whatParagraphs[1]}</p>
-                </div>
-                <a href={president.whatLinkHref} class="president-what-image-link group" aria-label="Go to Overpriced Stickers">
+            <div class="president-what-image-wrapper">
+              <a href={president.whatLinkHref} class="president-what-image-link" aria-label="Go to Overpriced Stickers">
+                <div class="president-mini-portal">
                   <img src={president.whatImage} alt="" loading="lazy" decoding="async" width="400" height="400" />
-                </a>
-              </div>
-              <div class="glass-card president-glass" data-motion-item>
-                <h3>{president.dealHeading}</h3>
-                <p>{president.dealParagraph}</p>
-                <h3>{president.dealIncludesHeading}</h3>
-                <ul class="president-list">
-                  <li>{president.dealIncludes[0]}</li>
-                  <li>{president.dealIncludes[1]}</li>
-                  <li>{president.dealIncludes[2]}</li>
-                  <li>{president.dealIncludes[3]}</li>
-                </ul>
-                <p set:html={president.dealReturns}></p>
-                <p class="president-fine-print">{president.dealFinePrint}</p>
-              </div>
-              <div class="glass-card president-glass" data-motion-item>
-                <h3>{president.rulesHeading}</h3>
-                <div class="president-rule">
-                  <p set:html={president.rules[0]}></p>
                 </div>
-                <div class="president-rule">
-                  <p set:html={president.rules[1]}></p>
-                </div>
-                <div class="president-rule">
-                  <p set:html={president.rules[2]}></p>
-                </div>
-                <div class="president-rule">
-                  <p set:html={president.rules[3]}></p>
-                </div>
-                <div class="president-rule">
-                  <p set:html={president.rules[4]}></p>
-                </div>
-              </div>
-              <div class="glass-card president-glass" data-motion-item>
-                <h3>{president.promiseHeading}</h3>
-                <p>{president.promiseLines[0]}</p>
-                <p>{president.promiseLines[1]}<br />
-                {president.promiseLines[2]}<br />
-                {president.promiseLines[3]}</p>
-                <p>{president.promiseClosing}</p>
-              </div>
+              </a>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section class="president-contact-section">
-            <div class="glass-card president-glass president-contact-card president-portal-card">
-              <h2 class="president-portal-title">{president.contactTitle}</h2>
-              <p class="president-portal-reach">{president.contactReachLine}</p>
-              <ul class="president-portal-list">
-                <li>{president.contactBullets[0]}</li>
-                <li>{president.contactBullets[1]}</li>
-                <li>{president.contactBullets[2]}</li>
-                <li>{president.contactBullets[3]}</li>
-              </ul>
-              <div class="president-portal-meta">
-                <p set:html={president.contactFor}></p>
-                <p set:html={president.contactOpenTo}></p>
-              </div>
-              <p class="president-portal-links">
-                <a href={`mailto:${president.contactEmail}`}>{president.contactEmail}</a><span class="president-portal-sep">|</span><a href={president.contactInstagramUrl} target="_blank" rel="noopener noreferrer">{president.contactInstagramHandle}</a>
-              </p>
-              <p class="president-portal-closing">
-                {president.contactClosing}
-              </p>
-            </div>
-          </section>
+        <!-- sticker divider 2: mushroom + spiral (like square_bubble / love_mushroom art) -->
+        <div class="cosmic-divider" aria-hidden="true">
+          <svg viewBox="0 0 800 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="shroom-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#208c8d"/>
+                <stop offset="100%" stop-color="#a67c00"/>
+              </linearGradient>
+            </defs>
+            <!-- left dotted line -->
+            <line x1="0" y1="26" x2="330" y2="26" stroke="#a67c00" stroke-width="1" stroke-dasharray="2 9"/>
+            <!-- mushroom cluster (centre) -->
+            <g transform="translate(358, 4)">
+              <!-- main mushroom -->
+              <ellipse cx="21" cy="16" rx="21" ry="14" fill="#208c8d" opacity="0.2"/>
+              <ellipse cx="21" cy="16" rx="21" ry="14" stroke="#208c8d" stroke-width="2"/>
+              <!-- mushroom spots -->
+              <circle cx="14" cy="13" r="2.5" fill="#208c8d" opacity="0.4"/>
+              <circle cx="24" cy="10" r="2" fill="#208c8d" opacity="0.3"/>
+              <circle cx="29" cy="16" r="1.5" fill="#208c8d" opacity="0.35"/>
+              <!-- stalk -->
+              <rect x="17" y="28" width="8" height="18" rx="4" fill="url(#shroom-grad)" opacity="0.7"/>
+              <!-- tiny mushroom left -->
+              <ellipse cx="4" cy="36" rx="6" ry="4" fill="#a67c00" opacity="0.35" stroke="#a67c00" stroke-width="1"/>
+              <rect x="2" y="38" width="4" height="8" rx="2" fill="#a67c00" opacity="0.4"/>
+              <!-- tiny mushroom right -->
+              <ellipse cx="38" cy="38" rx="5" ry="3.5" fill="#ffcc33" opacity="0.35" stroke="#ffcc33" stroke-width="1"/>
+              <rect x="36" y="40" width="4" height="7" rx="2" fill="#ffcc33" opacity="0.4"/>
+              <!-- heart ornament (like love_mushroom) -->
+              <text x="-6" y="26" fill="#ff9de2" font-size="12" opacity="0.7">♥</text>
+              <!-- spiral swirl right -->
+              <path d="M50 20 Q55 14 60 20 Q65 26 58 30 Q52 33 50 27" stroke="#208c8d" stroke-width="1.5" fill="none" opacity="0.6"/>
+            </g>
+            <!-- right dotted line -->
+            <line x1="460" y1="26" x2="800" y2="26" stroke="#a67c00" stroke-width="1" stroke-dasharray="2 9"/>
+            <!-- runic ticks -->
+            <text x="322" y="42" fill="#ffcc33" font-size="9" opacity="0.4" font-family="monospace">✦</text>
+            <text x="456" y="42" fill="#208c8d" font-size="9" opacity="0.4" font-family="monospace">✦</text>
+          </svg>
         </div>
 
-        <section class="president-cta">
-          <a href="/#infocigan" class="retreat-button president-retreat-btn">{president.ctaLabel}</a>
+        <!-- The Deal -->
+        <section class="president-section">
+          <h2 class="president-h2">{president.dealHeading}</h2>
+          <p>{president.dealParagraph}</p>
+          <h3 class="president-h3">{president.dealIncludesHeading}</h3>
+          <ul class="president-list">
+            <li>{president.dealIncludes[0]}</li>
+            <li>{president.dealIncludes[1]}</li>
+            <li>{president.dealIncludes[2]}</li>
+            <li>{president.dealIncludes[3]}</li>
+          </ul>
+          <p set:html={president.dealReturns}></p>
+          <p class="president-note">{president.dealFinePrint}</p>
         </section>
+
+        <!-- Rules — campaign cards -->
+        <section class="president-section">
+          <h2 class="president-h2">{president.rulesHeading}</h2>
+          <div class="president-rules-grid">
+            {president.rules.map((rule: string, i: number) => (
+              <div class="president-rule-card">
+                <span class="rule-number">0{i + 1}</span>
+                <p set:html={rule}></p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- sticker divider 3: ouroboros orbit ring (like square_bubble sticker) -->
+        <div class="cosmic-divider" aria-hidden="true">
+          <svg viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="orbit-holo" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff9de2" stop-opacity="0.8"/>
+                <stop offset="33%" stop-color="#a8edff" stop-opacity="0.8"/>
+                <stop offset="66%" stop-color="#ffcc33" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#208c8d" stop-opacity="0.8"/>
+              </linearGradient>
+            </defs>
+            <!-- left line -->
+            <line x1="0" y1="24" x2="344" y2="24" stroke="#208c8d" stroke-width="1" stroke-dasharray="5 5"/>
+            <!-- ouroboros circle (the square_bubble icon) -->
+            <g transform="translate(368, 4)">
+              <!-- outer ring -->
+              <circle cx="20" cy="20" r="19" stroke="url(#orbit-holo)" stroke-width="2.5"/>
+              <!-- inner mushroom-head symbol -->
+              <ellipse cx="20" cy="17" rx="9" ry="6" fill="none" stroke="#208c8d" stroke-width="1.5" opacity="0.7"/>
+              <!-- stalk -->
+              <line x1="20" y1="23" x2="20" y2="33" stroke="#a67c00" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <!-- planet-ring (ouroboros reference) -->
+              <ellipse cx="20" cy="20" rx="14" ry="5" stroke="#ffcc33" stroke-width="1" opacity="0.5" transform="rotate(-20 20 20)"/>
+              <!-- orbiting dot -->
+              <circle cx="20" cy="1" r="3" fill="#208c8d"/>
+            </g>
+            <!-- right line -->
+            <line x1="432" y1="24" x2="800" y2="24" stroke="#208c8d" stroke-width="1" stroke-dasharray="5 5"/>
+            <!-- decorative rune ticks -->
+            <text x="336" y="40" fill="#a67c00" font-size="9" opacity="0.4" font-family="monospace">☿</text>
+            <text x="430" y="40" fill="#ff9de2" font-size="9" opacity="0.4" font-family="monospace">♥</text>
+          </svg>
+        </div>
+
+        <!-- Inline sticker motif strip (between rules and promise — breaks up wall of text) -->
+        <div class="sticker-strip" aria-hidden="true">
+          <!-- Mini sticker 1: cosmic rune badge (Intergalactic J badge shape) -->
+          <div class="sticker-chip">
+            <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="chip-holo-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff9de2"/>
+                  <stop offset="50%" stop-color="#a8edff"/>
+                  <stop offset="100%" stop-color="#ffcc33"/>
+                </linearGradient>
+              </defs>
+              <!-- badge outline (shield-ish like Intergalactic DJ sticker) -->
+              <path d="M6 14 Q6 6 14 6 L66 6 Q74 6 74 14 L74 62 Q74 82 40 86 Q6 82 6 62 Z" fill="#0a0a0a" stroke="url(#chip-holo-1)" stroke-width="3"/>
+              <!-- inner ring -->
+              <path d="M13 18 Q13 12 19 12 L61 12 Q67 12 67 18 L67 58 Q67 74 40 78 Q13 74 13 58 Z" fill="none" stroke="#208c8d" stroke-width="1" opacity="0.4"/>
+              <!-- peace-on hand (middle finger up — the POG gesture) -->
+              <g transform="translate(28, 18)">
+                <rect x="8" y="0" width="8" height="26" rx="4" fill="#208c8d" opacity="0.85"/>
+                <rect x="0" y="10" width="8" height="16" rx="4" fill="#208c8d" opacity="0.6"/>
+                <rect x="16" y="10" width="8" height="16" rx="4" fill="#208c8d" opacity="0.6"/>
+                <rect x="0" y="22" width="24" height="14" rx="4" fill="#208c8d" opacity="0.7"/>
+              </g>
+              <text x="12" y="80" fill="#ffcc33" font-size="7" font-family="monospace" letter-spacing="1">PEACE ON</text>
+            </svg>
+          </div>
+          <!-- Mini sticker 2: mushroom planet -->
+          <div class="sticker-chip">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="chip-shroom" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#208c8d"/>
+                  <stop offset="100%" stop-color="#a67c00"/>
+                </linearGradient>
+              </defs>
+              <!-- space background -->
+              <circle cx="40" cy="40" r="36" fill="#0a0a0a" stroke="url(#chip-shroom)" stroke-width="3"/>
+              <!-- planet ring (like love_mushroom planet) -->
+              <ellipse cx="40" cy="42" rx="22" ry="7" stroke="#a67c00" stroke-width="1.5" opacity="0.6" fill="none" transform="rotate(-15 40 42)"/>
+              <!-- mushroom cap -->
+              <ellipse cx="40" cy="32" rx="18" ry="12" fill="#208c8d" opacity="0.7"/>
+              <ellipse cx="40" cy="32" rx="18" ry="12" stroke="#a8edff" stroke-width="1.5"/>
+              <!-- spots -->
+              <circle cx="33" cy="29" r="3" fill="white" opacity="0.3"/>
+              <circle cx="44" cy="27" r="2" fill="white" opacity="0.25"/>
+              <!-- stalk -->
+              <rect x="36" y="42" width="8" height="20" rx="4" fill="url(#chip-shroom)" opacity="0.8"/>
+              <!-- stars -->
+              <circle cx="14" cy="18" r="1.5" fill="#ffcc33"/>
+              <circle cx="64" cy="22" r="1" fill="#ff9de2"/>
+              <circle cx="20" cy="60" r="1.5" fill="#a8edff"/>
+              <circle cx="62" cy="58" r="1" fill="#ffcc33"/>
+            </svg>
+          </div>
+          <!-- Mini sticker 3: star burst -->
+          <div class="sticker-chip">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="starburst-grad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.9"/>
+                  <stop offset="60%" stop-color="#a67c00" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle cx="40" cy="40" r="36" fill="#0a0a0a" stroke="#a67c00" stroke-width="2" opacity="0.8"/>
+              <!-- starburst rays -->
+              <g opacity="0.85">
+                <line x1="40" y1="10" x2="40" y2="70" stroke="#ffcc33" stroke-width="1" opacity="0.3"/>
+                <line x1="10" y1="40" x2="70" y2="40" stroke="#ffcc33" stroke-width="1" opacity="0.3"/>
+                <line x1="19" y1="19" x2="61" y2="61" stroke="#ffcc33" stroke-width="1" opacity="0.2"/>
+                <line x1="61" y1="19" x2="19" y2="61" stroke="#ffcc33" stroke-width="1" opacity="0.2"/>
+                <!-- 8-point star -->
+                <path d="M40 16 L43 31 L56 22 L47 35 L62 38 L47 41 L56 54 L43 45 L40 60 L37 45 L24 54 L33 41 L18 38 L33 35 L24 22 L37 31Z" fill="#ffcc33" opacity="0.9"/>
+                <!-- glow centre -->
+                <circle cx="40" cy="40" r="6" fill="url(#starburst-grad)"/>
+              </g>
+              <!-- outer ring dashes (like council_id barcode edge) -->
+              <circle cx="40" cy="40" r="34" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 5" opacity="0.4"/>
+            </svg>
+          </div>
+          <!-- Mini sticker 4: ouroboros loop (square bubble reference) -->
+          <div class="sticker-chip">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="chip-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff9de2"/>
+                  <stop offset="25%" stop-color="#a8edff"/>
+                  <stop offset="50%" stop-color="#a8ff9d"/>
+                  <stop offset="75%" stop-color="#ffcc33"/>
+                  <stop offset="100%" stop-color="#c39af5"/>
+                </linearGradient>
+              </defs>
+              <!-- deep green void (like square_bubble bg) -->
+              <path d="M6 20 Q6 6 20 6 L60 6 Q74 6 74 20 L74 60 Q74 74 60 74 L20 74 Q6 74 6 60 Z" fill="#0d2015" stroke="url(#chip-rainbow)" stroke-width="3"/>
+              <!-- ouroboros ring -->
+              <circle cx="40" cy="38" r="20" stroke="url(#chip-rainbow)" stroke-width="3" fill="none" opacity="0.9"/>
+              <!-- mushroom cap inside -->
+              <ellipse cx="40" cy="33" rx="10" ry="7" fill="none" stroke="#a8ff9d" stroke-width="1.5" opacity="0.7"/>
+              <rect x="37" y="39" width="6" height="12" rx="3" fill="#208c8d" opacity="0.6"/>
+              <!-- heart symbol (like the sticker decoration) -->
+              <text x="28" y="72" fill="#ff9de2" font-size="10" opacity="0.8">♥</text>
+              <text x="46" y="72" fill="#ffcc33" font-size="8" opacity="0.7">✦</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- The Promise -->
+        <section class="president-section">
+          <h2 class="president-h2">{president.promiseHeading}</h2>
+          <p>{president.promiseLines[0]}</p>
+          <blockquote class="president-blockquote">
+            {president.promiseLines[1]}<br />
+            {president.promiseLines[2]}<br />
+            {president.promiseLines[3]}
+          </blockquote>
+          <p>{president.promiseClosing}</p>
+        </section>
+
+        <!-- Contact -->
+        <section class="president-section">
+          <h2 class="president-h2">{president.contactTitle}</h2>
+          <p class="president-portal-reach">{president.contactReachLine}</p>
+          <ul class="president-list">
+            <li>{president.contactBullets[0]}</li>
+            <li>{president.contactBullets[1]}</li>
+            <li>{president.contactBullets[2]}</li>
+            <li>{president.contactBullets[3]}</li>
+          </ul>
+          <div class="president-portal-meta">
+            <p set:html={president.contactFor}></p>
+            <p set:html={president.contactOpenTo}></p>
+          </div>
+          <p class="president-portal-links">
+            <a href={`mailto:${president.contactEmail}`}>{president.contactEmail}</a>
+            <span class="president-portal-sep">|</span>
+            <a href={president.contactInstagramUrl} target="_blank" rel="noopener noreferrer">{president.contactInstagramHandle}</a>
+          </p>
+          <p class="president-portal-closing">
+            {president.contactClosing}
+          </p>
+        </section>
+
+        <!-- CTA -->
+        <section class="president-cta">
+          <a href="/#infocigan" class="president-retreat-btn">{president.ctaLabel}</a>
+        </section>
+
       </div>
     </div>
 
+    <!-- ══════════════════════════════════ VIEWER ══════════════════════════════════ -->
     <div class="artwork-viewer" id="president-artwork-viewer" aria-hidden="true">
       <div class="viewer-overlay"></div>
       <div class="viewer-container">
@@ -401,441 +672,613 @@ const president = presidentEntry.data;
     display: none !important;
   }
 
-  /* President of the Galaxy - Cosmic Theme */
-  .president-content {
-    position: relative;
-    z-index: 1;
-    --deep-space: 7, 19, 35;
-    --space-navy: 15, 35, 55;
-    --teal-glow: 45, 140, 155;
-    --bright-cyan: 95, 210, 230;
-    --ice-blue: 180, 235, 245;
-    --champagne: 235, 215, 175;
-  }
-
-  .president-zone {
+  /* ─── Base theme variables ─── */
+  .president-eden-wrap {
+    --eden-bg: #fcf8f9;
+    --eden-text: #134252;
+    --eden-text-muted: #627078;
+    --eden-primary: #208c8d;
+    --eden-gold: #a67c00;
+    --eden-gold-bright: #ffcc33;
     position: relative;
     min-height: 100dvh;
-    z-index: 1;
+    background: var(--eden-bg);
   }
 
-  .president-bg-wrap {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .president-layout {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    background: transparent;
-    color: rgb(var(--ice-blue));
-    font-family: inherit;
-    overflow-y: auto;
-  }
-
-  .president-layout ::selection {
-    background: rgba(var(--bright-cyan), 0.3);
-    color: rgb(var(--ice-blue));
-  }
-
+  /* ─── HERO ─── */
   .president-hero {
-    width: 100%;
-    height: 80dvh;
+    padding: 3rem 0 0;
+  }
+
+  .president-hero-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 60dvh;
+  }
+
+  /* ─── Portal image ─── */
+  .president-portal-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    overflow: hidden;
-    background: rgb(var(--deep-space));
+    /* Must be fit-content so the absolute badge-ring hugs the portal, not the whole grid column */
+    width: fit-content;
+    margin: 0 auto;
   }
 
-  .president-hero::before {
-    content: '';
+  /* ─── Holographic badge ring ─── */
+  .portal-badge-ring {
     position: absolute;
-    inset: 0;
+    inset: -28px;
     pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(7, 19, 35, 0.35) 0%,
-      rgba(15, 35, 55, 0.25) 50%,
-      rgba(45, 140, 155, 0.15) 100%
-    );
+    animation: holo-spin 18s linear infinite;
+    z-index: 1;
   }
 
-  .president-hero img {
+  .badge-ring-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes holo-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .president-portal {
+    position: relative;
+    width: min(380px, 100%);
+    aspect-ratio: 1 / 1;
+    border-radius: 62% 38% 55% 45% / 52% 48% 60% 40%;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 3px rgba(32, 140, 141, 0.25),
+      0 0 30px rgba(32, 140, 141, 0.3),
+      0 0 80px rgba(166, 124, 0, 0.15),
+      0 20px 60px rgba(19, 66, 82, 0.2);
+    transition: box-shadow 0.4s ease;
+    animation: portal-morph 10s ease-in-out infinite;
+  }
+
+  .president-portal:hover {
+    box-shadow:
+      0 0 0 3px rgba(32, 140, 141, 0.5),
+      0 0 50px rgba(32, 140, 141, 0.5),
+      0 0 120px rgba(166, 124, 0, 0.25),
+      0 20px 80px rgba(19, 66, 82, 0.3);
+  }
+
+  @keyframes portal-morph {
+    0%   { border-radius: 62% 38% 55% 45% / 52% 48% 60% 40%; }
+    25%  { border-radius: 50% 50% 40% 60% / 60% 40% 55% 45%; }
+    50%  { border-radius: 38% 62% 46% 54% / 48% 52% 44% 56%; }
+    75%  { border-radius: 55% 45% 60% 40% / 42% 58% 48% 52%; }
+    100% { border-radius: 62% 38% 55% 45% / 52% 48% 60% 40%; }
+  }
+
+  .president-portal-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
+    display: block;
   }
 
-  .president-hero-overlay {
+  /* ─── Orbiting star ─── */
+  .portal-orbit {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 5vw 5vw 2vw 5vw;
-    background: transparent;
+    inset: -20px;
+    animation: orbit-spin 12s linear infinite;
+    pointer-events: none;
   }
 
-  .president-title {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(4rem, 11.2vw, 11.2rem);
-    font-weight: 900;
-    line-height: 0.85;
+  .orbit-star {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    filter: drop-shadow(0 0 6px #ffcc33);
+  }
+
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* ─── Hero text ─── */
+  .president-eyebrow {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    font-weight: 700;
+    color: var(--eden-gold);
     text-transform: uppercase;
-    margin: 0 0 1rem 0;
-    letter-spacing: -0.04em;
+    letter-spacing: 0.25em;
+    margin: 0 0 1.25rem 0;
+    background: linear-gradient(to right, #a67c00 20%, #ffcc33 50%, #a67c00 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: president-gold-shine 5s linear infinite;
+  }
+
+  .president-headline {
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    /*
+     * Bungee is very wide. The text column is ~50% of viewport at desktop.
+     * 3.2vw at a 1150px viewport = 36.8px → "PRESIDENT OF" ≈ 12 chars × 0.72em = 318px  ✓
+     * clamp keeps it legible on small screens and prevents overflow on the narrow column.
+     */
+    font-size: clamp(2rem, 3.2vw, 5rem);
+    font-weight: 400;
+    line-height: 0.96;
+    letter-spacing: -0.01em;
+    margin: 0 0 2rem 0;
+    /* Never break mid-word — the <br/> already splits the two lines correctly */
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
     background: linear-gradient(
       135deg,
-      rgb(var(--ice-blue)) 0%,
-      rgb(var(--bright-cyan)) 25%,
-      rgb(200, 165, 105) 50%,
-      rgb(var(--bright-cyan)) 75%,
-      rgb(var(--ice-blue)) 100%
+      #000 15%,
+      #a67c00 35%,
+      #ffcc33 50%,
+      #a67c00 65%,
+      #000 85%
     );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-size: 200% auto;
-    -webkit-text-stroke: 2px rgb(var(--bright-cyan));
-    filter: drop-shadow(0 0 25px rgba(var(--bright-cyan), 0.6)) drop-shadow(0 4px 18px rgba(var(--teal-glow), 0.4));
-    animation: metallic-shine 8s linear infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: president-gold-shine 6s linear infinite;
   }
 
-  @media (max-width: 768px) {
-    .president-title {
-      filter: none;
-      text-shadow: 0 0 10px rgba(var(--bright-cyan), 0.5);
-    }
-  }
-
-  @keyframes metallic-shine {
+  @keyframes president-gold-shine {
     to { background-position: 200% center; }
   }
 
-  .president-main-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 4vw;
-  }
-
-  .president-intro-section,
-  .president-artwork-card-section,
-  .president-content-grid-section,
-  .president-interaction-section,
-  .president-contact-section {
-    padding: 8rem 0;
-  }
-
-  .president-intro-section::before,
-  .president-artwork-card-section::before,
-  .president-content-grid-section::before,
-  .president-interaction-section::before,
-  .president-contact-section::before {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgb(var(--bright-cyan)),
-      transparent
-    );
-    margin-bottom: 2rem;
-  }
-
-  .president-tagline {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: rgb(var(--champagne));
+  .president-status-block {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+    line-height: 1.8;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    display: block;
-    margin-bottom: 2rem;
+    letter-spacing: 0.12em;
+    color: var(--eden-text-muted);
+    border-left: 2px solid var(--eden-primary);
+    padding-left: 1rem;
   }
 
-  .president-lead,
-  .president-glass h2,
-  .president-glass h3,
-  .president-glass .artwork-card-title {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-weight: 600;
-    color: rgb(var(--bright-cyan));
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    margin: 0 0 2rem 0;
+  .narmail-mono {
+    font-family: 'Space Mono', ui-monospace, monospace;
   }
 
-  .president-lead {
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-    font-weight: 300;
-    line-height: 1.5;
-    color: rgb(var(--ice-blue));
-  }
-
-  .president-glass h2 {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-  }
-
-  .president-glass h3 {
-    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
-  }
-
-  .president-glass .artwork-card-title {
-    font-size: clamp(1.5rem, 2vw, 2rem);
-  }
-
-  .president-glass p,
-  .president-glass .artwork-card-description,
-  .president-list li {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-    line-height: 1.7;
-    color: rgb(var(--ice-blue));
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-  }
-
-  .president-glass p:last-child {
-    margin-bottom: 0;
-  }
-
-  .president-intro-card,
-  .president-interaction-card,
-  .president-contact-card,
-  .president-glass {
-    padding: 4rem;
-    background: rgba(var(--space-navy), 0.75);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(var(--bright-cyan), 0.3);
-    border-radius: 16px;
-    box-shadow:
-      0 8px 32px rgba(var(--deep-space), 0.5),
-      inset 0 1px 0 rgba(var(--ice-blue), 0.15),
-      0 0 40px rgba(var(--teal-glow), 0.2);
-    transition: all 0.3s ease;
-  }
-
-  @media (max-width: 768px) {
-    .president-intro-card,
-    .president-interaction-card,
-    .president-contact-card,
-    .president-glass {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: rgba(var(--space-navy), 0.85);
-      box-shadow: 0 4px 20px rgba(var(--deep-space), 0.6);
-    }
-  }
-
-  .president-intro-card,
-  .president-interaction-card,
-  .president-contact-card {
-    max-width: 1200px;
+  /* ─── Cosmic dividers ─── */
+  .cosmic-divider {
+    width: 100%;
+    max-width: 72rem;
     margin: 0 auto;
-  }
-
-  .president-artwork-card-section .artwork-info-card.president-glass {
-    background-image: linear-gradient(rgba(var(--space-navy), 0.82), rgba(var(--space-navy), 0.82)), url("/images/president_galaxy.webp");
-    background-size: cover;
-    background-position: center;
-  }
-
-  @media (hover: hover) {
-    .president-glass:hover,
-    .president-intro-card:hover,
-    .president-interaction-card:hover,
-    .president-contact-card:hover,
-    .artwork-info-card.president-glass:hover {
-      box-shadow:
-        0 12px 40px rgba(var(--deep-space), 0.6),
-        inset 0 1px 0 rgba(var(--ice-blue), 0.3),
-        0 0 60px rgba(var(--teal-glow), 0.4);
-      border-color: rgba(var(--bright-cyan), 0.5);
-      transform: translateY(-2px);
-    }
-  }
-
-  .president-glass-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-  }
-
-  .president-what-is-this-card {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .president-what-text {
-    flex-shrink: 0;
-  }
-
-  .president-what-image-link {
-    flex: 1 1 auto;
-    min-height: 0;
-    margin-top: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0.5rem 1.5rem;
     overflow: hidden;
   }
 
-  .president-what-image-link img {
+  .cosmic-divider svg {
+    width: 100%;
+    height: 32px;
+  }
+
+  /* ─── Main content layout ─── */
+  .president-main-content {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .president-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(19, 66, 82, 0.1);
+  }
+
+  .president-section:last-of-type {
+    border-bottom: none;
+  }
+
+  /* ─── Section headings ─── */
+  .president-h2 {
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.6rem, 3vw, 3.2rem);
+    font-weight: 400;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .president-h3 {
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.5rem);
+    font-weight: 700;
+    color: var(--eden-text);
+    margin: 2.5rem 0 1rem 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ─── Lead / body text ─── */
+  .president-lead {
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--eden-text);
+    margin: 0;
+  }
+
+  .president-section p {
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    line-height: 1.65;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .president-note {
+    font-style: italic;
+    font-size: clamp(0.85rem, 1.1vw, 1rem) !important;
+    color: var(--eden-text-muted) !important;
+  }
+
+  /* ─── Two-column layout for "What is this" ─── */
+  .president-two-col {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .president-two-col-text {
+    min-width: 0;
+  }
+
+  /* ─── Mini portal (inline image) ─── */
+  .president-mini-portal {
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    border-radius: 45% 55% 52% 48% / 48% 44% 56% 52%;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 2px rgba(32, 140, 141, 0.2),
+      0 0 20px rgba(32, 140, 141, 0.2),
+      0 8px 32px rgba(19, 66, 82, 0.15);
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+  }
+
+  .president-mini-portal:hover {
+    border-radius: 38% 62% 46% 54% / 56% 44% 60% 40%;
+    box-shadow:
+      0 0 0 2px rgba(32, 140, 141, 0.4),
+      0 0 35px rgba(32, 140, 141, 0.35),
+      0 8px 40px rgba(19, 66, 82, 0.25);
+  }
+
+  .president-mini-portal img {
     width: 100%;
     height: 100%;
-    max-width: 100%;
-    max-height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    display: block;
   }
 
-  .president-what-image-link:hover img {
-    transform: scale(1.05);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .president-what-image-link:hover img {
-      transform: none;
-    }
-  }
-
+  /* ─── List ─── */
   .president-list {
     list-style: none;
+    margin: 0 0 1.5rem 0;
     padding: 0;
-    margin: 1.5rem 0;
   }
 
   .president-list li {
-    padding-left: 2rem;
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--eden-text);
+    margin-bottom: 0.75rem;
+    padding-left: 2.25rem;
     position: relative;
   }
 
   .president-list li::before {
-    content: '—';
+    content: '✦';
     position: absolute;
     left: 0;
-    color: rgb(var(--bright-cyan));
-    font-weight: 400;
+    background: linear-gradient(
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
+      #a67c00 80%
+    );
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: president-gold-shine 8s linear infinite;
   }
 
-  .president-fine-print {
-    font-size: 0.95rem;
-    opacity: 0.8;
+  /* ─── Blockquote ─── */
+  .president-blockquote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.1rem, 1.6vw, 1.6rem);
     font-style: italic;
-    margin-top: 2rem;
+    line-height: 1.6;
+    color: var(--eden-text);
+    margin: 1.5rem 0;
+    padding: 1.25rem 0 1.25rem 2rem;
+    border-left: 3px solid var(--eden-primary);
   }
 
-  .president-rule {
+  /* ─── Sticker strip ─── */
+  .sticker-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .sticker-chip {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 12px rgba(19, 66, 82, 0.15));
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+    cursor: default;
+    animation: chip-float 4s ease-in-out infinite;
+  }
+
+  .sticker-chip:nth-child(1) { animation-delay: 0s; }
+  .sticker-chip:nth-child(2) { animation-delay: 0.8s; }
+  .sticker-chip:nth-child(3) { animation-delay: 1.6s; }
+  .sticker-chip:nth-child(4) { animation-delay: 2.4s; }
+
+  .sticker-chip:hover {
+    transform: scale(1.18) rotate(-6deg);
+    filter: drop-shadow(0 8px 20px rgba(32, 140, 141, 0.35));
+  }
+
+  .sticker-chip svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes chip-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-6px); }
+  }
+
+  /* ─── Rules: campaign platform cards ─── */
+  .president-rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .president-rule-card {
+    position: relative;
+    padding: 1.75rem;
+    background: rgba(19, 66, 82, 0.03);
+    border: 1px solid rgba(19, 66, 82, 0.1);
+    border-top: 3px solid var(--eden-primary);
+    border-radius: 0 0 12px 12px;
+    transition: all 0.25s ease;
+    overflow: hidden;
+  }
+
+  .president-rule-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(32, 140, 141, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .president-rule-card:hover {
+    background: rgba(19, 66, 82, 0.06);
+    border-color: rgba(19, 66, 82, 0.2);
+    border-top-color: var(--eden-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(19, 66, 82, 0.1);
+  }
+
+  .rule-number {
+    display: block;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--eden-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .president-rule-card p {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem) !important;
+    margin: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ─── Artwork card ─── */
+  .president-artwork-card-section {
+    padding: 2rem 0 4rem;
+  }
+
+  .president-artwork-card-section .artwork-info-card.president-glass {
+    background-image: linear-gradient(rgba(252, 248, 249, 0.88), rgba(252, 248, 249, 0.88)), url("/images/president_galaxy.webp");
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(19, 66, 82, 0.2);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(19, 66, 82, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .artwork-info-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .artwork-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(32, 140, 141, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .artwork-info-card:hover::before {
+    left: 100%;
+  }
+
+  .artwork-info-card:hover {
+    border-color: rgba(32, 140, 141, 0.4);
+    transform: translateY(-4px);
+    box-shadow:
+      0 12px 48px rgba(19, 66, 82, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .artwork-card-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem;
+  }
+
+  .artwork-card-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--eden-primary);
+    background: rgba(32, 140, 141, 0.1);
+    border-radius: 12px;
+  }
+
+  .artwork-card-text {
+    flex: 1;
+  }
+
+  .artwork-card-title {
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--eden-text);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.1;
+  }
+
+  .artwork-card-description {
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    line-height: 1.5;
+    color: var(--eden-text-muted);
+    margin: 0;
+  }
+
+  .artwork-card-button {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: var(--eden-primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .artwork-card-button:hover {
+    transform: scale(1.05);
+    background: #197374;
+    box-shadow: 0 4px 16px rgba(32, 140, 141, 0.3);
+  }
+
+  .artwork-card-button svg {
+    transition: transform 0.2s ease;
+  }
+
+  .artwork-card-button:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ─── Contact section ─── */
+  .president-portal-reach {
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--eden-text);
     margin-bottom: 1.5rem;
   }
 
-  .president-btn {
-    background: linear-gradient(135deg, rgb(var(--bright-cyan)) 0%, rgb(var(--teal-glow)) 100%);
-    color: rgb(var(--deep-space));
-    padding: 1.25rem 3rem;
-    border-radius: 8px;
-    border: 1px solid rgba(var(--bright-cyan), 0.4);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    box-shadow:
-      0 4px 16px rgba(var(--teal-glow), 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-  }
-
-  .president-btn:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 24px rgba(var(--teal-glow), 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  }
-
-  .president-portal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.25rem, 4vw, 3.5rem);
-    font-weight: 700;
-    color: rgb(var(--bright-cyan));
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
-  }
-
-  .president-portal-reach {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.1rem, 1.4vw, 1.35rem);
-    font-weight: 600;
-    color: rgb(var(--ice-blue));
-    margin-bottom: 1.25rem;
-    letter-spacing: 0.02em;
-  }
-
-  .president-portal-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem 0;
-  }
-
-  .president-portal-list li {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(0.95rem, 1.15vw, 1.1rem);
-    color: rgba(var(--ice-blue), 0.95);
-    padding: 0.6rem 0 0.6rem 1.5rem;
-    position: relative;
-    line-height: 1.5;
-  }
-
-  .president-portal-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: rgb(var(--bright-cyan));
-    font-weight: 700;
-  }
-
   .president-portal-meta {
-    margin-bottom: 2rem;
+    margin: 2rem 0;
   }
 
   .president-portal-meta p {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1rem, 1.2vw, 1.15rem);
-    color: rgb(var(--ice-blue));
-    line-height: 1.6;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+    color: var(--eden-text-muted);
     margin-bottom: 0.75rem;
   }
 
   .president-portal-meta strong {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Space Mono', ui-monospace, monospace;
     font-size: 0.9em;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgb(var(--bright-cyan));
+    color: var(--eden-primary);
   }
 
+  /* ─── LINKS — preserved exactly ─── */
   .president-portal-links {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1rem, 1.15vw, 1.1rem);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
   }
 
   .president-portal-links a {
-    color: rgb(var(--bright-cyan));
-    text-decoration: none;
+    color: var(--eden-primary);
+    text-decoration: underline;
     transition: opacity 0.2s ease;
   }
 
   .president-portal-links a:hover {
-    opacity: 0.75;
-    text-decoration: underline;
+    opacity: 0.8;
   }
 
   .president-portal-sep {
@@ -844,47 +1287,20 @@ const president = presidentEntry.data;
   }
 
   .president-portal-closing {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
     font-style: italic;
     line-height: 1.6;
-    color: rgba(var(--ice-blue), 0.92);
-    margin: 0;
+    color: var(--eden-text-muted);
   }
 
-  .president-cta {
-    padding: 8rem 0;
-    text-align: center;
-    background: transparent;
-  }
-
-  .president-eden-headline {
-    text-transform: uppercase;
-    letter-spacing: -0.045em;
-    line-height: 0.88;
-  }
-
-  .president-eden-body {
-    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-    line-height: 1.4;
-    color: rgb(var(--ice-blue));
-  }
-
-  .president-eden-mono {
-    margin-top: 2rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: clamp(1rem, 1.3vw, 1.3rem);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(var(--ice-blue), 0.7);
-  }
-
+  /* ─── Censored reveal ─── */
   .president-censored {
     display: inline-block;
     position: relative;
     cursor: pointer;
     letter-spacing: 0.2em;
-    color: rgba(var(--ice-blue), 0.6);
+    color: var(--eden-text-muted);
   }
 
   .president-censored::after {
@@ -893,7 +1309,7 @@ const president = presidentEntry.data;
     left: 0;
     top: 0;
     opacity: 0;
-    color: rgb(var(--bright-cyan));
+    color: var(--eden-gold);
     transition: opacity 0.2s ease;
   }
 
@@ -902,15 +1318,16 @@ const president = presidentEntry.data;
     opacity: 1;
   }
 
+  /* ─── CTA ─── */
   .president-retreat-btn {
     display: inline-block;
     text-decoration: none;
     background: transparent;
-    border: 1px solid rgba(var(--bright-cyan), 0.5);
-    color: rgb(var(--bright-cyan));
+    border: 1px solid var(--eden-primary);
+    color: var(--eden-primary);
     padding: 1.25rem 3rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 1rem;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -920,71 +1337,201 @@ const president = presidentEntry.data;
   }
 
   .president-retreat-btn:hover {
-    background: rgba(var(--bright-cyan), 0.15);
-    color: rgb(var(--ice-blue));
-    box-shadow: 0 0 30px rgba(var(--bright-cyan), 0.3);
+    background: rgba(32, 140, 141, 0.1);
+    color: var(--eden-primary);
+    box-shadow: 0 4px 16px rgba(32, 140, 141, 0.15);
   }
 
-  @media (max-width: 1024px) {
-    .president-glass-grid {
+  .president-cta {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  /* ════════════════════════════════════
+     RESPONSIVE
+     Priority: portrait mobile → landscape mobile → tablet → desktop
+     ════════════════════════════════════ */
+
+  /* ── Wide desktop (> 1200px): let the headline breathe bigger ── */
+  @media (min-width: 1200px) {
+    .president-headline {
+      font-size: clamp(3.5rem, 3.5vw, 5.5rem);
+    }
+  }
+
+  /* ── Tablet landscape + small desktop (900–1200px): 2-col, tighter font ── */
+  @media (max-width: 1200px) and (min-width: 901px) {
+    .president-headline {
+      font-size: clamp(2rem, 3vw, 4rem);
+    }
+    .president-portal {
+      width: min(320px, 45vw);
+    }
+  }
+
+  /* ── Below 900px: switch to single-column stacked layout ── */
+  @media (max-width: 900px) {
+    .president-hero-inner {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+    }
+
+    /* Image portal moves to top in single-column view */
+    .president-portal-wrap {
+      order: -1;
+    }
+
+    /* Full-width viewport available for headline now */
+    .president-headline {
+      font-size: clamp(2.8rem, 9vw, 5rem);
+    }
+
+    .president-portal {
+      width: min(280px, 60vw);
+    }
+  }
+
+  /* ── Mobile landscape (wide but short, e.g. phone rotated) ── */
+  @media (max-height: 520px) and (orientation: landscape) {
+    .president-hero-inner {
+      /* Restore 2-column in landscape so content fits without scrolling too much */
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1.5rem;
+      min-height: auto;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .president-portal-wrap {
+      order: 0;
+    }
+
+    .president-portal {
+      width: min(180px, 35vw);
+    }
+
+    .president-headline {
+      /* In landscape, column is narrower again — use vw-relative size */
+      font-size: clamp(1.6rem, 3.5vw, 3rem);
+    }
+
+    .president-hero {
+      padding-top: 1rem;
+    }
+
+    .president-section {
+      padding: 2rem 0;
+    }
+
+    .sticker-strip {
+      padding: 1.5rem 0;
+    }
+
+    .sticker-chip {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  /* ── Narrow mobile portrait (≤ 640px) ── */
+  @media (max-width: 640px) {
+    .president-two-col {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .president-mini-portal {
+      width: 140px;
+      margin: 0 auto;
+    }
+
+    .president-rules-grid {
       grid-template-columns: 1fr;
     }
+
+    .artwork-card-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+      gap: 1.25rem;
+    }
+
+    .artwork-card-button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .president-headline {
+      font-size: clamp(2.8rem, 12vw, 4.5rem);
+    }
+
+    .president-portal {
+      width: min(240px, 70vw);
+    }
+
+    .sticker-strip {
+      gap: 1.25rem;
+    }
+
+    .sticker-chip {
+      width: 64px;
+      height: 64px;
+    }
   }
 
-  @media (max-width: 768px) {
-    .president-hero {
-      height: 60dvh;
+  /* ── Extra-small portrait (≤ 390px, iPhone SE / small Android) ── */
+  @media (max-width: 390px) {
+    .president-portal {
+      width: min(200px, 75vw);
     }
-    .president-title {
-      font-size: clamp(2.4rem, 8vw, 6.4rem);
-    }
-    .president-intro-section,
-    .president-artwork-card-section,
-    .president-content-grid-section,
-    .president-interaction-section,
-    .president-contact-section {
-      padding: 5rem 0;
-    }
-    .president-intro-card,
-    .president-interaction-card,
-    .president-contact-card,
-    .president-glass {
-      padding: 3rem 2rem;
-    }
-  }
 
-  @media (max-width: 480px) {
-    .president-hero {
-      height: 50dvh;
+    .president-headline {
+      font-size: clamp(2.4rem, 13vw, 3.5rem);
     }
-    .president-title {
-      font-size: clamp(2rem, 9.6vw, 4.8rem);
+
+    .president-section {
+      padding: 2rem 0;
     }
-    .president-intro-card,
-    .president-interaction-card,
-    .president-contact-card,
-    .president-glass {
-      padding: 2.5rem 1.5rem;
+
+    .sticker-chip {
+      width: 54px;
+      height: 54px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .president-title {
+    .president-headline,
+    .president-eyebrow,
+    .president-list li::before {
+      animation: none;
+      background-position: 0% center;
+    }
+    .president-portal {
       animation: none;
     }
-    .president-glass:hover,
-    .president-intro-card:hover,
-    .president-interaction-card:hover,
-    .president-contact-card:hover,
-    .artwork-info-card.president-glass:hover {
+    .portal-orbit {
+      animation: none;
+    }
+    .portal-badge-ring {
+      animation: none;
+    }
+    .sticker-chip {
+      animation: none;
+    }
+    .sticker-chip:hover {
       transform: none;
     }
-    .president-btn:hover {
+    .artwork-info-card:hover,
+    .president-rule-card:hover,
+    .president-retreat-btn:hover,
+    .artwork-card-button:hover {
       transform: none;
     }
   }
 
-  /* Gallery Overlay Styles */
+  /* ─── GALLERY VIEWER ─── */
   .artwork-viewer {
     position: fixed;
     inset: 0;
@@ -1005,7 +1552,7 @@ const president = presidentEntry.data;
   .viewer-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(252, 248, 249, 0.98);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
   }
@@ -1025,14 +1572,14 @@ const president = presidentEntry.data;
     justify-content: flex-end;
     gap: 1rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(19, 66, 82, 0.15);
     margin-bottom: 1.5rem;
   }
 
   .viewer-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
+    background: rgba(19, 66, 82, 0.05);
+    border: 1px solid rgba(19, 66, 82, 0.15);
+    color: var(--eden-text);
     width: 48px;
     height: 48px;
     border-radius: 8px;
@@ -1044,15 +1591,16 @@ const president = presidentEntry.data;
   }
 
   .viewer-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: rgb(var(--bright-cyan));
+    background: rgba(19, 66, 82, 0.15);
+    border-color: rgba(19, 66, 82, 0.3);
+    color: var(--eden-primary);
     transform: translateY(-1px);
   }
 
   .viewer-close {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 74, 74, 0.1);
+    border-color: rgba(255, 74, 74, 0.25);
+    color: #ff4a4a;
   }
 
   .viewer-close:hover {
@@ -1066,8 +1614,8 @@ const president = presidentEntry.data;
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(19, 66, 82, 0.04);
+    border: 1px solid rgba(19, 66, 82, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1096,9 +1644,9 @@ const president = presidentEntry.data;
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;
-    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 24px 72px rgba(19, 66, 82, 0.12);
     border-radius: 4px;
-    background: #0a0a0a;
+    background: #fcf8f9;
   }
 
   .viewer-zoom-indicator {
@@ -1106,12 +1654,12 @@ const president = presidentEntry.data;
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(19, 66, 82, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
     padding: 0.5rem 1.25rem;
     border-radius: 30px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: 'Space Mono', ui-monospace, monospace;
     font-size: 0.9rem;
     letter-spacing: 0.05em;
     pointer-events: none;
