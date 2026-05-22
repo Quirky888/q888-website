@@ -3,9 +3,10 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 interface Props {
   inPortal?: boolean;
+  activeStickerId?: string;
 }
 
-const { inPortal = false } = Astro.props;
+const { inPortal = false, activeStickerId } = Astro.props;
 
 type Instrument = CollectionEntry<"stickers">["data"];
 const instruments: Instrument[] = (await getCollection("stickers"))
@@ -85,7 +86,7 @@ const tickerUnit = `${tickerText} — `;
       <p>Overpriced Stickers are sold as collectible art objects. All sales are final. No returns, no refunds. By initiating a trade you confirm that you understand the speculative nature of the instrument and accept full responsibility for your participation. Provenance is verified at point of sale; transfer of ownership is recorded on-chain where applicable.</p>
     </footer>
     <div class="footer-back w-full px-6 md:px-12 lg:px-24 xl:px-32 pt-8 pb-12">
-      <button type="button" data-portal-back class="panel-back hover:text-[#a67c00]">Retreat to Market</button>
+      <a href="/#infocigan" class="panel-back hover:text-[#a67c00] no-underline">Retreat to Market</a>
     </div>
   </div>
 </section>
@@ -755,7 +756,7 @@ const tickerUnit = `${tickerText} — `;
   })();
 </script>
 
-<script define:vars={{ instruments }}>
+<script define:vars={{ instruments, activeStickerId }}>
   (function () {
     window.toggleTermsModal = function () {
       const modal = document.getElementById("termsModal");
@@ -811,11 +812,11 @@ const tickerUnit = `${tickerText} — `;
 
     const data = Array.isArray(instruments) ? instruments : [];
 
-    function openDrawer(id) {
-      const inst = data.find((i) => i.id === id);
+    function openDrawer(id, shouldPushState = true) {
+      const inst = data.find((i) => i.id === id || i.slug === id || i.id.toLowerCase() === id.toLowerCase() || (i.slug && i.slug.toLowerCase() === id.toLowerCase()));
       if (!drawer || !inst) return;
       
-      drawer.setAttribute("data-current-instrument-id", id);
+      drawer.setAttribute("data-current-instrument-id", inst.id);
       if (tickerEl) tickerEl.textContent = inst.ticker;
       if (titleEl) titleEl.textContent = inst.title;
       if (taglineEl) taglineEl.textContent = inst.tagline;
@@ -1135,6 +1136,9 @@ const tickerUnit = `${tickerText} — `;
         } else if (inst.id === "LM-PRICELESS") {
           specs.push("TRANSFER: Not purchasable. Appears to those who stabilize contradictions without force. Recognition is the only currency accepted.");
           specs.push("RITUAL: Apply where geometries conflict (notebook corner bridging round/square doodles, portal thresholds). Whisper gratitude for imbalance. Adheres where love flows between incompatible forms, preventing cosmic overflow.");
+        } else if (inst.id === "KN-0002") {
+          specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
+          specs.push("RITUAL: Apply to a surface that divides two completely different realities.");
         } else {
           specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
           specs.push("RITUAL: Apply at an edge during indecision.");
@@ -1189,13 +1193,22 @@ const tickerUnit = `${tickerText} — `;
       drawer.setAttribute("aria-hidden", "false");
       document.body.classList.add("overflow-hidden");
       drawer.classList.remove("hidden");
+
+      if (shouldPushState) {
+        const slug = inst.slug || inst.id.toLowerCase();
+        history.pushState({ stickerId: inst.id }, "", `/overpriced/${slug}`);
+      }
     }
 
-    function closeDrawer() {
+    function closeDrawer(shouldPushState = true) {
       if (!drawer) return;
       drawer.setAttribute("aria-hidden", "true");
       drawer.classList.add("hidden");
       document.body.classList.remove("overflow-hidden");
+
+      if (shouldPushState) {
+        history.pushState({ stickerId: null }, "", "/overpriced");
+      }
     }
 
     function revealEmail() {
@@ -1214,6 +1227,31 @@ const tickerUnit = `${tickerText} — `;
       }
       if (drawer.dataset.drawerInitialized === "true") return;
       drawer.dataset.drawerInitialized = "true";
+
+      const handlePopstate = () => {
+        const path = window.location.pathname;
+        if (path.startsWith("/overpriced/")) {
+          const id = path.substring("/overpriced/".length);
+          if (id) {
+            openDrawer(id, false);
+          } else {
+            closeDrawer(false);
+          }
+        } else if (path === "/overpriced") {
+          closeDrawer(false);
+        }
+      };
+      window.addEventListener("popstate", handlePopstate);
+
+      const handleBeforeSwap = () => {
+        window.removeEventListener("popstate", handlePopstate);
+        document.removeEventListener("astro:before-swap", handleBeforeSwap);
+      };
+      document.addEventListener("astro:before-swap", handleBeforeSwap);
+
+      if (activeStickerId) {
+        openDrawer(activeStickerId, false);
+      }
 
       triggers.forEach((el) => {
         el.addEventListener("click", (e) => {

@@ -20,5 +20,5 @@ This is a static **Astro** site (Q888 portfolio). No backend services, databases
 - `astro check` requires `@astrojs/check` which is not listed as a dependency. Do not run it without installing that package first.
 - The `.env.example` file exists but is optional — defaults work fine for local dev. Copy it to `.env` if you need to configure `ALLOWED_HOSTS`.
 - Production branch is `jan25-stable`. Never push directly to it. See `.cursorrules` for full git/deploy discipline.
-- The site is a single continuous scroll (`#landing → #projects → #infocigan → #contact`) — do not introduce multi-page routing unless explicitly requested.
+- The site main sections are on a single continuous scroll (`#landing → #projects → #infocigan → #contact`). However, primary Infocigan entities (like /overpriced, /qbag, /narmail, /afterlife, /president) are assigned dedicated top-level URLs in `src/pages/`. Any newly created main page, section, or core product must be assigned its own dedicated, short top-level URL route in `src/pages/`.
 - **Kotiki-Nar chatbot:** AI-powered via `netlify/functions/nar-chat.ts`. To test locally, run `npm run dev:netlify` and add `OPENAI_API_KEY` to `.env`. `npm run dev` alone does not run the function.

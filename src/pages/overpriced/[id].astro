@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SlimNav from "../../components/SlimNav.astro";
+import SystemMeta from "../../components/SystemMeta.astro";
+import OverpricedStickersSection from "../../components/OverpricedStickersSection.astro";
+import InvestorChatbot from "../../components/InvestorChatbot.astro";
+
+export async function getStaticPaths() {
+  const stickers = await getCollection("stickers");
+  const paths = [];
+  
+  for (const sticker of stickers) {
+    paths.push({
+      params: { id: sticker.data.id },
+      props: { sticker: sticker.data }
+    });
+    
+    if (sticker.data.slug && sticker.data.slug !== sticker.data.id) {
+      paths.push({
+        params: { id: sticker.data.slug },
+        props: { sticker: sticker.data }
+      });
+    }
+  }
+  
+  return paths;
+}
+
+const { id } = Astro.params;
+const { sticker } = Astro.props;
+
+const pageTitle = sticker ? `${sticker.title} — Overpriced Stickers — Q888` : "Overpriced Sticker — Q888";
+---
+
+<Layout title={pageTitle}>
+  <SlimNav />
+  <SystemMeta position="top" />
+
+  <main class="relative min-h-screen pt-10 md:pt-11">
+    <div class="overpriced-layout-with-nav">
+      <OverpricedStickersSection inPortal={false} activeStickerId={sticker?.id || id} />
+      <InvestorChatbot />
+    </div>
+  </main>
+
+  <div class="hidden md:block">
+    <SystemMeta position="bottom" />
+  </div>
+</Layout>
+
+<style>
+  .overpriced-layout-with-nav {
+    --overpriced-nav-offset: 2.5rem;
+    padding-top: var(--overpriced-nav-offset);
+  }
+
+  @media (min-width: 768px) {
+    .overpriced-layout-with-nav {
+      --overpriced-nav-offset: 2.75rem;
+    }
+  }
+</style>

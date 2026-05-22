@@ -1,0 +1,1007 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+import NarMailChatbot from "../components/NarMailChatbot.astro";
+import { getEntry } from "astro:content";
+
+const narMailEntry = await getEntry("products", "nar-mail-express");
+if (!narMailEntry || narMailEntry.data.slug !== "nar-mail-express") {
+  throw new Error("Required Nar-Mail content entry is missing.");
+}
+const narMail = narMailEntry.data;
+---
+
+<Layout title="Nar-Mail Express — Q888">
+  <SlimNav />
+  <SystemMeta position="top" />
+
+  <main class="relative min-h-screen pt-10 md:pt-11">
+    <div class="narmail-eden-wrap">
+      <div class="narmail-layout">
+        <section class="narmail-hero">
+          <div class="narmail-hero-image">
+            <img src={narMail.heroImage} alt={narMail.heroAlt} loading="eager" decoding="async" width="1200" height="800" />
+          </div>
+          <div class="narmail-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
+            <div class="mx-auto">
+              <h1 class="narmail-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
+                {narMail.headline}
+              </h1>
+              <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
+                <p>{narMail.subheadline}</p>
+                <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">{narMail.subheadlineAside}</p>
+              </div>
+              <div class="narmail-mono narmail-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest text-left">
+                <div>{narMail.statusLines[0]}</div>
+                <div>{narMail.statusLines[1]}</div>
+                <div>{narMail.statusLines[2]}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="narmail-main-content px-6 sm:px-10 lg:px-16 pb-16">
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.aboutHeading}</h2>
+            <p>{narMail.aboutParagraphs[0]}</p>
+            <p>{narMail.aboutParagraphs[1]}</p>
+            <p>{narMail.aboutParagraphs[2]}</p>
+            <p>{narMail.aboutParagraphs[3]}</p>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.howItWorksHeading}</h2>
+            <h3 class="narmail-h3">{narMail.dualReadingHeading}</h3>
+            <p>{narMail.dualReadingIntro}</p>
+            <p set:html={narMail.dualReadingFirst}></p>
+            <p set:html={narMail.dualReadingSecond}></p>
+            <p>{narMail.dualReadingClosing}</p>
+            <h3 class="narmail-h3">{narMail.deliveryTimelineHeading}</h3>
+            <p>{narMail.deliveryTimelineIntro}</p>
+            <ul class="narmail-list">
+              <li>{narMail.deliveryTimelineBullets[0]}</li>
+              <li>{narMail.deliveryTimelineBullets[1]}</li>
+              <li>{narMail.deliveryTimelineBullets[2]}</li>
+            </ul>
+            <p>{narMail.deliveryTimelineClosing}</p>
+            <h3 class="narmail-h3">{narMail.serviceFeaturesHeading}</h3>
+            <ul class="narmail-features">
+              <li>{narMail.serviceFeaturesBullets[0]}</li>
+              <li>{narMail.serviceFeaturesBullets[1]}</li>
+              <li>{narMail.serviceFeaturesBullets[2]}</li>
+              <li>{narMail.serviceFeaturesBullets[3]}</li>
+              <li>{narMail.serviceFeaturesBullets[4]}</li>
+              <li>{narMail.serviceFeaturesBullets[5]}</li>
+            </ul>
+          </section>
+
+          <section class="narmail-artwork-card-section">
+            <div class="artwork-info-card narmail-glass" id="narmail-gallery-trigger">
+              <div class="artwork-card-content">
+                <div class="artwork-card-icon narmail-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8L10.89 13.26C11.22 13.47 11.64 13.47 11.97 13.26L21 8M5 19H19C20.105 19 21 18.105 21 17V5C21 3.895 20.105 3 19 3H5C3.895 3 3 3.895 3 5V17C3 18.105 3.895 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="artwork-card-text">
+                  <h3 class="artwork-card-title narmail-title">{narMail.artworkCardTitle}</h3>
+                  <p class="artwork-card-description">{narMail.artworkCardDescription}</p>
+                </div>
+                <button class="artwork-card-button narmail-btn" type="button">
+                  <span>{narMail.artworkCardButtonLabel}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.securityHeading}</h2>
+            <p>{narMail.securityIntro}</p>
+            <h3 class="narmail-h3">{narMail.securityBlocks[0].heading}</h3>
+            <h4 class="narmail-h4">{narMail.securityBlocks[0].subheading}</h4>
+            <p>{narMail.securityBlocks[0].body}</p>
+            <h4 class="narmail-h4">{narMail.securityBlocks[1].subheading}</h4>
+            <p>{narMail.securityBlocks[1].body}</p>
+            <h4 class="narmail-h4">{narMail.securityBlocks[2].subheading}</h4>
+            <p>{narMail.securityBlocks[2].body}</p>
+            <h3 class="narmail-h3">{narMail.securityBlocks[3].heading}</h3>
+            <h4 class="narmail-h4">{narMail.securityBlocks[3].subheading}</h4>
+            <p>{narMail.securityBlocks[3].body}</p>
+            <h4 class="narmail-h4">{narMail.securityBlocks[4].subheading}</h4>
+            <p>{narMail.securityBlocks[4].body}</p>
+            <h4 class="narmail-h4">{narMail.securityBlocks[5].subheading}</h4>
+            <p>{narMail.securityBlocks[5].body}</p>
+            <h3 class="narmail-h3">{narMail.securityLevelsHeading}</h3>
+            <p><strong>{narMail.securityLevels[0].level}</strong><br />{narMail.securityLevels[0].description}</p>
+            <p><strong>{narMail.securityLevels[1].level}</strong><br />{narMail.securityLevels[1].description}</p>
+            <p><strong>{narMail.securityLevels[2].level}</strong><br />{narMail.securityLevels[2].description}</p>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.whatYouCanSendHeading}</h2>
+            <p>{narMail.declaredIntro}</p>
+            <ul class="narmail-list">
+              <li>{narMail.declaredItems[0]}</li>
+              <li>{narMail.declaredItems[1]}</li>
+              <li>{narMail.declaredItems[2]}</li>
+            </ul>
+            <p>{narMail.unofficialIntro}</p>
+            <ul class="narmail-list">
+              <li>{narMail.unofficialItems[0]}</li>
+              <li>{narMail.unofficialItems[1]}</li>
+              <li>{narMail.unofficialItems[2]}</li>
+              <li>{narMail.unofficialItems[3]}</li>
+            </ul>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.witnessHeading}</h2>
+            <p>{narMail.witnessIntro}</p>
+            <ul class="narmail-list">
+              <li>{narMail.witnessItems[0]}</li>
+              <li>{narMail.witnessItems[1]}</li>
+              <li>{narMail.witnessItems[2]}</li>
+              <li>{narMail.witnessItems[3]}</li>
+              <li>{narMail.witnessItems[4]}</li>
+            </ul>
+            <p>{narMail.witnessClosing}</p>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.paymentHeading}</h2>
+            <p>{narMail.paymentAcceptIntro}</p>
+            <ul class="narmail-list">
+              <li>{narMail.paymentAcceptItems[0]}</li>
+              <li>{narMail.paymentAcceptItems[1]}</li>
+              <li>{narMail.paymentAcceptItems[2]}</li>
+              <li>{narMail.paymentAcceptItems[3]}</li>
+            </ul>
+            <p>{narMail.paymentRefuseIntro}</p>
+            <ul class="narmail-list">
+              <li>{narMail.paymentRefuseItems[0]}</li>
+              <li>{narMail.paymentRefuseItems[1]}</li>
+              <li>{narMail.paymentRefuseItems[2]}</li>
+            </ul>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.historicalHeading}</h2>
+            <p>{narMail.historicalParagraphs[0]}</p>
+            <p>{narMail.historicalParagraphs[1]}</p>
+          </section>
+
+          <section class="narmail-section narmail-guarantee">
+            <h2 class="narmail-h2">{narMail.guaranteeHeading}</h2>
+            <p>{narMail.guaranteeIntro}</p>
+            <blockquote class="narmail-blockquote">
+              {narMail.guaranteeQuoteLines[0]}<br />
+              {narMail.guaranteeQuoteLines[1]}
+            </blockquote>
+            <p>{narMail.guaranteeClosing}</p>
+          </section>
+
+          <section class="narmail-section">
+            <h2 class="narmail-h2">{narMail.termsHeading}</h2>
+            <ol class="narmail-terms">
+              <li set:html={narMail.termsItems[0]}></li>
+              <li set:html={narMail.termsItems[1]}></li>
+              <li set:html={narMail.termsItems[2]}></li>
+              <li set:html={narMail.termsItems[3]}></li>
+              <li set:html={narMail.termsItems[4]}></li>
+              <li set:html={narMail.termsItems[5]}></li>
+              <li set:html={narMail.termsItems[6]}></li>
+              <li set:html={narMail.termsItems[7]}></li>
+              <li set:html={narMail.termsItems[8]}></li>
+            </ol>
+          </section>
+          <NarMailChatbot />
+        </div>
+
+        <div class="narmail-image-above-footer px-6 sm:px-10 lg:px-16">
+          <img src={narMail.footerImage} alt={narMail.footerImageAlt} class="narmail-q-a-image" loading="lazy" decoding="async" width="400" height="400" />
+        </div>
+
+        <footer class="narmail-footer">
+          <div class="narmail-footer-container px-6 sm:px-10 lg:px-16">
+            <div class="narmail-footer-scatter">
+              <p class="narmail-footer-line narmail-footer-headline">{narMail.footerLines[0]}</p>
+              <p class="narmail-footer-line narmail-footer-dreams">{narMail.footerLines[1]}</p>
+              <p class="narmail-footer-line narmail-footer-invest">{narMail.footerLines[2]}</p>
+              <p class="narmail-footer-line narmail-footer-link-wrap">
+                <a href="/overpriced" class="narmail-footer-link">{narMail.footerLines[3]}</a>
+              </p>
+              <p class="narmail-footer-line narmail-footer-what">{narMail.footerLines[4]}</p>
+              <p class="narmail-footer-line narmail-footer-check">{narMail.footerLines[5]}</p>
+              <p class="narmail-footer-line narmail-footer-check">{narMail.footerLines[6]}</p>
+              <p class="narmail-footer-line narmail-footer-check">{narMail.footerLines[7]}</p>
+              <p class="narmail-footer-line narmail-footer-price">{narMail.footerLines[8]}</p>
+              <p class="narmail-footer-line narmail-footer-contact">
+                <a href={`mailto:${narMail.footerEmail}`}>{narMail.footerEmail}</a>
+                <span class="narmail-footer-sep">|</span>
+                <a href={narMail.footerInstagramUrl} target="_blank" rel="noopener">{narMail.footerInstagramHandle}</a>
+              </p>
+              <div class="narmail-footer-cta">
+                <a href="/#infocigan" class="narmail-retreat-btn no-underline inline-block">{narMail.ctaLabel}</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div class="artwork-viewer" id="narmail-artwork-viewer" aria-hidden="true">
+      <div class="viewer-overlay"></div>
+      <div class="viewer-container">
+        <div class="viewer-controls">
+          <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="viewer-image-wrapper">
+          <div class="viewer-image-container" id="narmail-viewer-image-container">
+            <img
+              src={narMail.viewerImage}
+              alt={narMail.viewerAlt}
+              class="viewer-image"
+              id="narmail-viewer-image"
+              draggable="false"
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="900"
+            />
+          </div>
+        </div>
+        <div class="viewer-zoom-indicator" id="narmail-zoom-indicator">100%</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="hidden md:block">
+    <SystemMeta position="bottom" />
+  </div>
+</Layout>
+
+<script>
+  function initNarmailViewer() {
+    const trigger = document.getElementById("narmail-gallery-trigger");
+    const viewer = document.getElementById("narmail-artwork-viewer");
+    const closeBtn = viewer?.querySelector(".viewer-close");
+    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
+    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
+    const resetBtn = viewer?.querySelector(".viewer-reset");
+    const imageContainer = document.getElementById("narmail-viewer-image-container");
+    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
+    const zoomIndicator = document.getElementById("narmail-zoom-indicator");
+
+    if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const MIN_SCALE = 1;
+    const MAX_SCALE = 4;
+    const ZOOM_STEP = 0.3;
+
+    function updateTransform() {
+      if (!imageContainer) return;
+      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      if (zoomIndicator) {
+        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+        zoomIndicator.classList.add("show");
+        clearTimeout((window as unknown as { narmailZoomTimeout?: number }).narmailZoomTimeout);
+        (window as unknown as { narmailZoomTimeout?: number }).narmailZoomTimeout = window.setTimeout(() => {
+          zoomIndicator.classList.remove("show");
+        }, 1000);
+      }
+    }
+
+    function openViewer() {
+      if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
+      viewer.classList.add("is-open");
+      viewer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      resetView();
+    }
+
+    function closeViewer() {
+      if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
+      viewer.classList.remove("is-open");
+      viewer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      resetView();
+    }
+
+    function resetView() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    function zoomIn() {
+      if (scale < MAX_SCALE) {
+        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+        updateTransform();
+      }
+    }
+
+    function zoomOut() {
+      if (scale > MIN_SCALE) {
+        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+        if (scale === MIN_SCALE) {
+          translateX = 0;
+          translateY = 0;
+        }
+        updateTransform();
+      }
+    }
+
+    function handleWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    }
+
+    function handleDragStart(e: MouseEvent | TouchEvent) {
+      if (scale === 1) return;
+      isDragging = true;
+      imageWrapper?.classList.add("is-grabbing");
+      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
+      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
+    }
+
+    function handleDragMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
+      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
+      translateX = clientX - startX;
+      translateY = clientY - startY;
+      updateTransform();
+    }
+
+    function handleDragEnd() {
+      isDragging = false;
+      imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
+    }
+
+    let initialDistance = 0;
+    let initialScale = 1;
+
+    function getTouchDistance(e: TouchEvent) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        initialDistance = getTouchDistance(e);
+        initialScale = scale;
+      } else if (e.touches.length === 1) {
+        handleDragStart(e);
+      }
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e);
+        const newScale = initialScale * (currentDistance / initialDistance);
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+        updateTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        handleDragMove(e);
+      }
+    }
+
+    trigger.addEventListener("click", openViewer);
+    closeBtn?.addEventListener("click", closeViewer);
+    closeBtn?.addEventListener("touchend", (e) => { e.preventDefault(); closeViewer(); }, { passive: false });
+    zoomInBtn?.addEventListener("click", zoomIn);
+    zoomOutBtn?.addEventListener("click", zoomOut);
+    resetBtn?.addEventListener("click", resetView);
+    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
+    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchend", handleDragEnd);
+    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
+
+    const handleBeforeSwap = () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("astro:before-swap", handleBeforeSwap);
+    };
+    document.addEventListener("astro:before-swap", handleBeforeSwap);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNarmailViewer);
+  } else {
+    initNarmailViewer();
+  }
+  document.addEventListener("astro:page-load", initNarmailViewer);
+</script>
+
+<style>
+  :global(.is-viewer-open [data-slim-nav]),
+  :global(.is-viewer-open [data-system-meta]),
+  :global(.is-viewer-open .mobile-escape-nav) {
+    display: none !important;
+  }
+
+  /* Nar-Mail Express° - Edinburgh magical map style */
+  .narmail-eden-wrap {
+    --eden-bg: #fcf8f9;
+    --eden-text: #134252;
+    --eden-text-muted: #627078;
+    --eden-primary: #208c8d;
+    position: relative;
+    min-height: 100dvh;
+    background: var(--eden-bg);
+  }
+
+  .narmail-hero {
+    position: relative;
+  }
+
+  .narmail-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--eden-bg);
+  }
+
+  .narmail-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(252, 248, 249, 1), rgba(252, 248, 249, 0.4), transparent);
+  }
+
+  .narmail-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .narmail-layout {
+    width: 100%;
+    color: var(--eden-text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    overflow-y: auto;
+  }
+
+  .narmail-headline {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    /* Stylish Gold Shine */
+    background: linear-gradient(to right, #000 20%, #444 40%, #888 50%, #444 60%, #000 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: narmail-gold-shine 6s linear infinite;
+  }
+
+  @media (max-width: 640px) {
+    .narmail-hero {
+      display: flex;
+      flex-direction: column;
+      background-color: #fcf8f9;
+    }
+    .narmail-hero-image {
+      aspect-ratio: auto;
+      height: 280px;
+    }
+    .narmail-hero-overlay {
+      position: relative;
+      margin-top: -100px;
+      padding-top: 100px;
+      background: linear-gradient(to bottom, transparent, #fcf8f9 100px);
+      padding-bottom: 3rem !important;
+    }
+    .narmail-headline {
+      font-size: clamp(2.8rem, 14vw, 4.5rem) !important;
+      line-height: 1.05;
+      text-align: left;
+    }
+  }
+
+  .narmail-mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .narmail-mono-gold {
+    color: #a67c00;
+    background: linear-gradient(
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
+      #a67c00 80%
+    );
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: narmail-gold-shine 8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-mono-gold {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  .narmail-main-content {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .narmail-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(19, 66, 82, 0.12);
+  }
+
+  .narmail-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .narmail-h2 {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+  }
+
+  .narmail-h3 {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 2.5rem 0 1rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .narmail-h4 {
+    font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 1.5rem 0 0.75rem 0;
+  }
+
+  .narmail-section p,
+  .narmail-note {
+    font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+    line-height: 1.6;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .narmail-note {
+    font-style: italic;
+    color: var(--eden-text-muted);
+  }
+
+  .narmail-list,
+  .narmail-features {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+  }
+
+  .narmail-list li,
+  .narmail-features li {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--eden-text);
+    margin-bottom: 0.75rem;
+    padding-left: 2.25rem;
+    position: relative;
+  }
+
+  .narmail-list li::before,
+  .narmail-features li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: #a67c00;
+    background: linear-gradient(
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
+      #a67c00 80%
+    );
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: narmail-gold-shine 8s linear infinite;
+  }
+
+  @keyframes narmail-gold-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-list li::before,
+    .narmail-features li::before {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  .narmail-blockquote {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--eden-text);
+    margin: 1.5rem 0;
+    padding: 0 0 0 2rem;
+    border-left: 4px solid var(--eden-primary);
+  }
+
+  .narmail-terms {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+    color: var(--eden-text);
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+    line-height: 1.6;
+  }
+
+  .narmail-terms li {
+    margin-bottom: 1.25rem;
+  }
+
+  .narmail-guarantee .narmail-blockquote {
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+  }
+
+  .narmail-image-above-footer {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    background: var(--eden-bg);
+    padding-bottom: 0;
+  }
+
+  .narmail-footer {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 8rem 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .narmail-q-a-image {
+    position: absolute;
+    bottom: -0.78rem;
+    right: 2rem;
+    max-width: clamp(100px, 16vw, 180px);
+    height: auto;
+    object-fit: contain;
+  }
+
+  .narmail-footer-scatter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+  .narmail-footer-line {
+    margin: 0;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .narmail-footer-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #fff;
+  }
+  .narmail-footer-dreams {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    grid-column: 1 / -1;
+    text-align: right;
+    transform: rotate(-1deg);
+  }
+  .narmail-footer-invest {
+    font-family: 'Bungee', cursive;
+    font-size: 1.1rem;
+    color: #fff;
+    grid-column: 1;
+  }
+  .narmail-footer-link-wrap {
+    grid-column: 2;
+    transform: rotate(1deg);
+  }
+  .narmail-footer-link {
+    font-size: 1.1rem;
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    animation: narmail-shine 8s linear infinite;
+  }
+  .narmail-footer-link:hover {
+    opacity: 0.9;
+  }
+  .narmail-footer-what {
+    font-family: 'Bungee', cursive;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.75);
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+  }
+  .narmail-footer-check {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .narmail-footer-check:nth-child(6) { grid-column: 1; }
+  .narmail-footer-check:nth-child(7) { grid-column: 2; transform: rotate(-0.5deg); }
+  .narmail-footer-check:nth-child(8) { grid-column: 1; transform: rotate(0.5deg); }
+  .narmail-footer-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .narmail-footer-contact {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .narmail-footer-contact a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .narmail-footer-contact a:hover {
+    text-decoration: underline;
+  }
+  .narmail-footer-sep {
+    margin: 0 0.5rem;
+    opacity: 0.6;
+  }
+  .narmail-footer-cta {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .narmail-footer-scatter {
+      grid-template-columns: 1fr;
+    }
+    .narmail-footer-check:nth-child(6),
+    .narmail-footer-check:nth-child(7),
+    .narmail-footer-check:nth-child(8) {
+      grid-column: 1;
+    }
+    .narmail-footer-dreams { transform: none; }
+    .narmail-footer-link-wrap { transform: none; }
+    .narmail-footer-check { transform: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-footer-line { transform: none !important; }
+    .narmail-footer-link { animation: none; }
+  }
+
+  .narmail-retreat-btn {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .narmail-retreat-btn:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .narmail-artwork-card-section {
+    padding: 5rem 0;
+  }
+
+  .artwork-info-card.narmail-glass {
+    background: #0a0a0a;
+    border: 1px solid #3a3a3a;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .narmail-artwork-card-section .artwork-info-card.narmail-glass {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.92)), url("/images/nar_mail_artwork.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .artwork-info-card.narmail-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(206, 158, 0, 0.08), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .artwork-info-card.narmail-glass:hover {
+    border-color: rgba(206, 158, 0, 0.5);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(206, 158, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .artwork-info-card.narmail-glass:hover::before {
+    left: 100%;
+  }
+
+  .narmail-glass .artwork-card-title {
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    background-position: 0% center;
+    animation: narmail-shine 8s linear infinite;
+    color: transparent;
+  }
+
+  @keyframes narmail-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-glass .artwork-card-title {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  .narmail-glass .artwork-card-title::before {
+    content: '// GALLERY';
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgba(206, 158, 0, 0.7);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    -webkit-text-fill-color: initial;
+  }
+
+  .narmail-glass .artwork-card-description {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+  }
+
+  .narmail-glass .artwork-card-icon.narmail-icon {
+    background: rgba(206, 158, 0, 0.15);
+    color: #ce9e00;
+  }
+
+  .artwork-card-button.narmail-btn {
+    background: transparent;
+    color: #ce9e00;
+    border: 2px solid #ce9e00;
+  }
+
+  .artwork-card-button.narmail-btn:hover {
+    background: #ce9e00;
+    color: #0a0a0a;
+    box-shadow: 0 4px 24px rgba(206, 158, 0, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    .narmail-artwork-card-section {
+      padding: 3rem 0;
+    }
+    .narmail-artwork-card-section .artwork-card-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+    .narmail-artwork-card-section .artwork-card-button {
+      width: 100%;
+      justify-content: center;
+    }
+    .narmail-footer {
+      padding: 6rem 0;
+    }
+    .narmail-footer-headline {
+      font-size: 1.875rem;
+    }
+    .narmail-section {
+      padding: 3rem 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .narmail-retreat-btn {
+      transition: none;
+    }
+  }
+</style>

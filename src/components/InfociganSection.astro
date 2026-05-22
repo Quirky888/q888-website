@@ -1,6 +1,13 @@
 ---
-import InfociganPortalPanels from "./InfociganPortalPanels.astro";
 import { getCollection } from "astro:content";
+
+const urlMap: Record<string, string> = {
+  "overpriced-stickers": "/overpriced",
+  "q-bag": "/qbag",
+  "nar-mail-express": "/narmail",
+  "afterlife-contracts": "/afterlife",
+  "president-of-the-galaxy": "/president",
+};
 
 type Zone = {
   sortOrder: number;
@@ -75,7 +82,7 @@ const zones: Zone[] = (await getCollection("projects"))
           {zones.map((zone) => (
             <div class={`relative group ${zone.scatter} ${zone.slug === "nar-mail-express" ? "md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24" : ""}`} data-motion-item>
               <a 
-                href={`#infocigan-zone-${zone.slug}`}
+                href={urlMap[zone.slug] || '#'}
                 data-infocigan-slug={zone.slug}
                 class="block relative rounded-xl bg-[#72808a] transition-colors duration-500 hover:bg-[#7a8892] cursor-pointer overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
@@ -239,8 +246,6 @@ const zones: Zone[] = (await getCollection("projects"))
     </div>
   </footer>
 
-  <!-- Portal Panels -->
-  <InfociganPortalPanels />
 </section>
 <!-- Q888:SECTION_END id="INFOCIGAN" -->
 

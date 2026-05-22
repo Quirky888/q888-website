@@ -1,5 +1,58 @@
 ---
-// No props needed
+import { getCollection } from "astro:content";
+import fs from "node:fs";
+import path from "node:path";
+
+const projects = await getCollection("projects");
+const projectsData = projects.map(({ data }) => ({
+  slug: data.slug,
+  title: data.cardTitle,
+  descriptor: data.cardDescriptor,
+  system: data.cardSystem,
+  panelTitle: data.panelTitle,
+  panelDescription: data.panelDescription,
+  panelSpecs: data.panelSpecs
+}));
+
+// Manually append Digital Ink and Edinburgh Magical Map metadata to projectsData
+projectsData.push({
+  slug: "digital-ink",
+  title: "Digital Ink",
+  descriptor: "A system for meaning, scarcity, and traceable digital creation.",
+  system: "SYS: INK",
+  panelTitle: "Digital Ink",
+  panelDescription: "What if digital art had memory? What if every brushstroke carried weight, history, and emotional resonance? Digital Ink challenges the disposable nature of infinite digital tools by introducing constraint-based creativity, the Symbolic Smart Pixel Protocol (SSPP), Apple Vision + GPT-4o poetic transformation, and 1,000 Smart Inks on iPadOS.",
+  panelSpecs: [
+    { label: "PLATFORM", value: "iPadOS (iPad-only)" },
+    { label: "STATUS", value: "AVAILABLE NOW" },
+    { label: "ROLE", value: "Concept · Product Design · UX · SwiftUI" },
+    { label: "YEAR", value: "2025–2026" }
+  ]
+});
+
+projectsData.push({
+  slug: "edinburgh-map",
+  title: "Edinburgh Magical Map",
+  descriptor: "A mythic cartography of place, memory, and hidden doors.",
+  system: "SYS: MAP",
+  panelTitle: "Edinburgh Magical Map",
+  panelDescription: "Welcome to Edinburgh — where magic retired but still drinks in public. A mythic cartography showing 15 secret locations and their hidden history/lore, including Castle on Chicken Legs, Real Edinburgh Castle hidden under Arthur's Seat, Troll Market, Star Bank, and Star House.",
+  panelSpecs: [
+    { label: "LAYER", value: "EDINBURGH CITY / UNDERWORLD OVERLAY" },
+    { label: "ACCESS", value: "COUNCIL-GATED" },
+    { label: "STATUS", value: "ACTIVE (REDACTED)" }
+  ]
+});
+
+const edenStoriesPath = path.join(process.cwd(), "public", "eden-stories.json");
+const edenStoriesData = JSON.parse(fs.readFileSync(edenStoriesPath, "utf-8"));
+const mapLocations = edenStoriesData.locations.map((loc: any) => ({
+  id: loc.id,
+  name: loc.name,
+  emoji: loc.emoji,
+  short: loc.short,
+  long: loc.long
+}));
 ---
 
 <div id="nar-chat-widget" class="nar-chat-widget">
@@ -34,13 +87,14 @@
         id="nar-chat-input"
         class="nar-chat-input"
         placeholder="Type your inquiry"
-        autocomplete="one-time-code"
+        autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
         inputmode="text"
         data-1p-ignore="true"
         data-lpignore="true"
+        data-bwignore="true"
         data-form-type="other"
       />
       <button id="nar-chat-send" class="nar-chat-send" aria-label="Send message">
@@ -53,7 +107,7 @@
   </div>
 </div>
 
-<script>
+<script define:vars={{ projectsData, mapLocations }}>
   // @ts-nocheck
   const NAR_CHAT_API = "/.netlify/functions/nar-chat";
   const MAX_MESSAGES = 18;
@@ -67,7 +121,8 @@
   function renderInlineMarkdown(text) {
     return text
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/__(.+?)__/g, "<strong>$1</strong>");
+      .replace(/__(.+?)__/g, "<strong>$1</strong>")
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: rgb(95, 210, 230); text-decoration: underline;">$1</a>');
   }
 
   function renderMarkdown(text) {
@@ -307,14 +362,15 @@
       msg.innerHTML = `<span class="nar-chat-message-label">K-Nar</span><div class="nar-chat-message-content"></div>`;
       this.messagesEl.appendChild(msg);
       const contentEl = msg.querySelector(".nar-chat-message-content");
-      this.scrollToBottom();
+      if (this.messagesEl) {
+        this.messagesEl.scrollTop = msg.offsetTop - 12;
+      }
       return contentEl;
     }
 
     updateStreamingBotMessage(contentEl, text) {
       if (!contentEl) return;
       contentEl.innerHTML = renderMarkdown(text);
-      this.scrollToBottom(true);
     }
 
     showTypingIndicator() {
@@ -328,12 +384,22 @@
       this.scrollToBottom();
     }
 
-    hideTypingIndicator() {
+    hideTypingIndicator(immediate = false) {
       const minVisibleMs = 1200;
       const remove = () => {
         document.getElementById("nar-typing-indicator")?.remove();
         this.typingHideTimer = 0;
       };
+
+      if (immediate) {
+        if (this.typingHideTimer) {
+          clearTimeout(this.typingHideTimer);
+          this.typingHideTimer = 0;
+        }
+        remove();
+        return;
+      }
+
       const elapsed = performance.now() - this.typingShownAt;
 
       if (elapsed >= minVisibleMs) {
@@ -427,7 +493,6 @@
         this.isLoading = false;
         this.setInputDisabled(false);
         this.input?.focus();
-        this.scrollToBottom();
       }
     }
 
@@ -440,7 +505,7 @@
       const res = await fetch(NAR_CHAT_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ messages, projects: projectsData, mapLocations }),
       });
 
       if (!res.ok) {
@@ -456,7 +521,7 @@
         return { content: "", interrupted: false };
       }
 
-      this.hideTypingIndicator();
+      this.hideTypingIndicator(true);
       const contentEl = this.createStreamingBotMessage();
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -565,9 +630,12 @@
 </script>
 
 <style>
-  #nar-chat-widget,
-  #nar-chat-widget * {
-    color: #ffffff !important;
+  #nar-chat-widget {
+    color: #ffffff;
+  }
+  #nar-chat-widget button,
+  #nar-chat-widget input {
+    color: #ffffff;
   }
 
   .nar-chat-widget {
@@ -746,11 +814,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
   }
 
-  .nar-chat-message {
+  .nar-chat-messages :global(.nar-chat-message) {
     display: flex;
     animation: nar-chat-message-in 0.3s ease-out;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   @keyframes nar-chat-message-in {
@@ -764,86 +835,89 @@
     }
   }
 
-  .nar-chat-message.bot {
+  .nar-chat-messages :global(.nar-chat-message.bot) {
     justify-content: flex-start;
   }
 
-  .nar-chat-message.user {
+  .nar-chat-messages :global(.nar-chat-message.user) {
     justify-content: flex-end;
-  }
-
-  .nar-chat-message {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nar-chat-message.user {
     align-items: flex-end;
   }
 
-  .nar-chat-message-label {
+  .nar-chat-messages :global(.nar-chat-message-label) {
     font-size: 0.75rem;
     font-weight: 600;
     opacity: 0.9;
     margin-bottom: 0.25rem;
   }
 
-  #nar-chat-widget .nar-chat-message-content {
+  .nar-chat-messages :global(.nar-chat-message.bot .nar-chat-message-label) {
+    color: rgb(95, 210, 230);
+  }
+
+  .nar-chat-messages :global(.nar-chat-message.user .nar-chat-message-label) {
+    color: rgb(235, 215, 175);
+  }
+
+  .nar-chat-messages :global(.nar-chat-message-content) {
     max-width: 75%;
     padding: 0.75rem 1rem;
     border-radius: 12px;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #ffffff !important;
   }
 
-  #nar-chat-widget .nar-chat-message-content p {
+  .nar-chat-messages :global(.nar-chat-message-content p) {
     margin: 0;
   }
 
-  #nar-chat-widget .nar-chat-message-content p + p,
-  #nar-chat-widget .nar-chat-message-content ul,
-  #nar-chat-widget .nar-chat-message-content ol {
+  .nar-chat-messages :global(.nar-chat-message-content p + p),
+  .nar-chat-messages :global(.nar-chat-message-content ul),
+  .nar-chat-messages :global(.nar-chat-message-content ol) {
     margin-top: 0.5rem;
   }
 
-  #nar-chat-widget .nar-chat-message-content ul,
-  #nar-chat-widget .nar-chat-message-content ol {
+  .nar-chat-messages :global(.nar-chat-message-content ul),
+  .nar-chat-messages :global(.nar-chat-message-content ol) {
     margin-bottom: 0;
     padding-left: 1.2rem;
     list-style-position: outside;
   }
 
-  #nar-chat-widget .nar-chat-message-content ul {
+  .nar-chat-messages :global(.nar-chat-message-content ul) {
     list-style-type: disc;
   }
 
-  #nar-chat-widget .nar-chat-message-content ol {
+  .nar-chat-messages :global(.nar-chat-message-content ol) {
     list-style-type: decimal;
   }
 
-  #nar-chat-widget .nar-chat-message-content li + li {
+  .nar-chat-messages :global(.nar-chat-message-content li + li) {
     margin-top: 0.2rem;
   }
 
-  #nar-chat-widget .nar-chat-message-content strong {
+  .nar-chat-messages :global(.nar-chat-message-content strong) {
     font-weight: 800;
   }
 
-  #nar-chat-widget .nar-chat-message.bot .nar-chat-message-content {
-    background: rgba(95, 210, 230, 0.25);
-    color: #ffffff !important;
-    border: 1px solid rgba(95, 210, 230, 0.4);
+  .nar-chat-messages :global(.nar-chat-message.bot .nar-chat-message-content) {
+    background: rgba(95, 210, 230, 0.15);
+    color: rgb(180, 245, 255) !important;
+    border: 1px solid rgba(95, 210, 230, 0.35);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 0.9rem;
   }
 
-  #nar-chat-widget .nar-chat-message.user .nar-chat-message-content {
-    background: rgba(100, 80, 60, 0.5);
-    color: #ffffff !important;
-    border: 1px solid rgba(200, 165, 105, 0.4);
-    font-weight: 700;
+  .nar-chat-messages :global(.nar-chat-message.user .nar-chat-message-content) {
+    background: rgba(235, 215, 175, 0.12);
+    color: rgb(235, 215, 175) !important;
+    border: 1px solid rgba(235, 215, 175, 0.35);
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: 0.92rem;
+    font-weight: 400;
   }
 
-  .nar-chat-typing {
+  .nar-chat-messages :global(.nar-chat-typing) {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
@@ -854,7 +928,7 @@
     width: max-content;
   }
 
-  .nar-chat-typing-label {
+  .nar-chat-messages :global(.nar-chat-typing-label) {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.66rem;
     letter-spacing: 0.14em;
@@ -862,12 +936,12 @@
     color: rgba(255, 214, 122, 0.95);
   }
 
-  .nar-chat-typing-dots {
+  .nar-chat-messages :global(.nar-chat-typing-dots) {
     display: flex;
     gap: 0.35rem;
   }
 
-  .nar-chat-typing-dots span {
+  .nar-chat-messages :global(.nar-chat-typing-dots span) {
     width: 8px;
     height: 8px;
     background: rgb(214, 168, 74);
@@ -875,11 +949,11 @@
     animation: nar-chat-typing 1.4s infinite;
   }
 
-  .nar-chat-typing-dots span:nth-child(2) {
+  .nar-chat-messages :global(.nar-chat-typing-dots span:nth-child(2)) {
     animation-delay: 0.2s;
   }
 
-  .nar-chat-typing-dots span:nth-child(3) {
+  .nar-chat-messages :global(.nar-chat-typing-dots span:nth-child(3)) {
     animation-delay: 0.4s;
   }
 

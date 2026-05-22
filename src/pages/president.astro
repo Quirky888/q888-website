@@ -1,0 +1,1142 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+import DynamicCosmicBackground from "../components/DynamicCosmicBackground.astro";
+import { getEntry } from "astro:content";
+
+const presidentEntry = await getEntry("campaigns", "president-of-the-galaxy");
+if (!presidentEntry) {
+  throw new Error("Required President content entry is missing.");
+}
+const president = presidentEntry.data;
+---
+
+<Layout title="President of the Galaxy — Q888">
+  <SlimNav />
+  <SystemMeta position="top" />
+
+  <main class="relative min-h-screen pt-10 md:pt-11">
+    <div class="president-bg-wrap">
+      <DynamicCosmicBackground />
+    </div>
+    <div class="president-content president-zone">
+      <div class="president-layout president-eden">
+        <section class="president-hero">
+          <img
+            src={president.heroImage}
+            alt={president.heroAlt}
+            loading="eager"
+            decoding="async"
+            width="1200"
+            height="800"
+          />
+          <div class="president-hero-overlay">
+            <h1 class="president-title president-eden-headline">{president.heroTitleLines[0]}<br/>{president.heroTitleLines[1]}</h1>
+          </div>
+        </section>
+
+        <div class="president-main-content">
+          <section class="president-intro-section">
+            <div class="glass-card president-glass president-intro-card">
+              <p class="president-tagline">{president.tagline}</p>
+              <p class="president-lead president-eden-body">
+                {president.lead}
+              </p>
+              <div class="president-eden-mono">
+                <div>{president.statusLines[0]}</div>
+                <div>{president.statusLines[1]}</div>
+                <div>{president.statusLines[2]}</div>
+                <div>YEAR: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="president-artwork-card-section">
+            <div class="artwork-info-card glass-card president-glass" id="president-gallery-trigger">
+              <div class="artwork-card-content">
+                <div class="artwork-card-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="artwork-card-text">
+                  <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
+                  <p class="artwork-card-description">{president.artworkCardDescription}</p>
+                </div>
+                <button class="artwork-card-button president-btn" type="button">
+                  <span>{president.artworkCardButtonLabel}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="president-content-grid-section" data-motion-reveal>
+            <div class="president-glass-grid" data-motion-stagger data-motion-children="[data-motion-item]">
+              <div class="glass-card president-glass president-what-is-this-card" data-motion-item>
+                <div class="president-what-text">
+                  <h3>{president.whatHeading}</h3>
+                  <p>{president.whatParagraphs[0]}</p>
+                  <p>{president.whatParagraphs[1]}</p>
+                </div>
+                <a href={president.whatLinkHref} class="president-what-image-link group" aria-label="Go to Overpriced Stickers">
+                  <img src={president.whatImage} alt="" loading="lazy" decoding="async" width="400" height="400" />
+                </a>
+              </div>
+              <div class="glass-card president-glass" data-motion-item>
+                <h3>{president.dealHeading}</h3>
+                <p>{president.dealParagraph}</p>
+                <h3>{president.dealIncludesHeading}</h3>
+                <ul class="president-list">
+                  <li>{president.dealIncludes[0]}</li>
+                  <li>{president.dealIncludes[1]}</li>
+                  <li>{president.dealIncludes[2]}</li>
+                  <li>{president.dealIncludes[3]}</li>
+                </ul>
+                <p set:html={president.dealReturns}></p>
+                <p class="president-fine-print">{president.dealFinePrint}</p>
+              </div>
+              <div class="glass-card president-glass" data-motion-item>
+                <h3>{president.rulesHeading}</h3>
+                <div class="president-rule">
+                  <p set:html={president.rules[0]}></p>
+                </div>
+                <div class="president-rule">
+                  <p set:html={president.rules[1]}></p>
+                </div>
+                <div class="president-rule">
+                  <p set:html={president.rules[2]}></p>
+                </div>
+                <div class="president-rule">
+                  <p set:html={president.rules[3]}></p>
+                </div>
+                <div class="president-rule">
+                  <p set:html={president.rules[4]}></p>
+                </div>
+              </div>
+              <div class="glass-card president-glass" data-motion-item>
+                <h3>{president.promiseHeading}</h3>
+                <p>{president.promiseLines[0]}</p>
+                <p>{president.promiseLines[1]}<br />
+                {president.promiseLines[2]}<br />
+                {president.promiseLines[3]}</p>
+                <p>{president.promiseClosing}</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="president-contact-section">
+            <div class="glass-card president-glass president-contact-card president-portal-card">
+              <h2 class="president-portal-title">{president.contactTitle}</h2>
+              <p class="president-portal-reach">{president.contactReachLine}</p>
+              <ul class="president-portal-list">
+                <li>{president.contactBullets[0]}</li>
+                <li>{president.contactBullets[1]}</li>
+                <li>{president.contactBullets[2]}</li>
+                <li>{president.contactBullets[3]}</li>
+              </ul>
+              <div class="president-portal-meta">
+                <p set:html={president.contactFor}></p>
+                <p set:html={president.contactOpenTo}></p>
+              </div>
+              <p class="president-portal-links">
+                <a href={`mailto:${president.contactEmail}`}>{president.contactEmail}</a><span class="president-portal-sep">|</span><a href={president.contactInstagramUrl} target="_blank" rel="noopener noreferrer">{president.contactInstagramHandle}</a>
+              </p>
+              <p class="president-portal-closing">
+                {president.contactClosing}
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <section class="president-cta">
+          <a href="/#infocigan" class="retreat-button president-retreat-btn">{president.ctaLabel}</a>
+        </section>
+      </div>
+    </div>
+
+    <div class="artwork-viewer" id="president-artwork-viewer" aria-hidden="true">
+      <div class="viewer-overlay"></div>
+      <div class="viewer-container">
+        <div class="viewer-controls">
+          <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="viewer-image-wrapper">
+          <div class="viewer-image-container" id="president-viewer-image-container">
+            <img
+              src={president.viewerImage}
+              alt={president.viewerAlt}
+              class="viewer-image"
+              id="president-viewer-image"
+              draggable="false"
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="900"
+            />
+          </div>
+        </div>
+        <div class="viewer-zoom-indicator" id="president-zoom-indicator">100%</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="hidden md:block">
+    <SystemMeta position="bottom" />
+  </div>
+</Layout>
+
+<script>
+  function initPresidentViewer() {
+    const trigger = document.getElementById("president-gallery-trigger");
+    const viewer = document.getElementById("president-artwork-viewer");
+    const closeBtn = viewer?.querySelector(".viewer-close");
+    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
+    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
+    const resetBtn = viewer?.querySelector(".viewer-reset");
+    const imageContainer = document.getElementById("president-viewer-image-container");
+    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
+    const zoomIndicator = document.getElementById("president-zoom-indicator");
+
+    if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const MIN_SCALE = 1;
+    const MAX_SCALE = 4;
+    const ZOOM_STEP = 0.3;
+
+    function updateTransform() {
+      if (!imageContainer) return;
+      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      if (zoomIndicator) {
+        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+        zoomIndicator.classList.add("show");
+        clearTimeout((window as unknown as { presidentZoomTimeout?: number }).presidentZoomTimeout);
+        (window as unknown as { presidentZoomTimeout?: number }).presidentZoomTimeout = window.setTimeout(() => {
+          zoomIndicator.classList.remove("show");
+        }, 1000);
+      }
+    }
+
+    function openViewer() {
+      if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
+      viewer.classList.add("is-open");
+      viewer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      resetView();
+    }
+
+    function closeViewer() {
+      if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
+      viewer.classList.remove("is-open");
+      viewer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      resetView();
+    }
+
+    function resetView() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    function zoomIn() {
+      if (scale < MAX_SCALE) {
+        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+        updateTransform();
+      }
+    }
+
+    function zoomOut() {
+      if (scale > MIN_SCALE) {
+        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+        if (scale === MIN_SCALE) {
+          translateX = 0;
+          translateY = 0;
+        }
+        updateTransform();
+      }
+    }
+
+    function handleWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    }
+
+    function handleDragStart(e: MouseEvent | TouchEvent) {
+      if (scale === 1) return;
+      isDragging = true;
+      imageWrapper?.classList.add("is-grabbing");
+      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
+      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
+    }
+
+    function handleDragMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
+      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
+      translateX = clientX - startX;
+      translateY = clientY - startY;
+      updateTransform();
+    }
+
+    function handleDragEnd() {
+      isDragging = false;
+      imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
+    }
+
+    let initialDistance = 0;
+    let initialScale = 1;
+
+    function getTouchDistance(e: TouchEvent) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        initialDistance = getTouchDistance(e);
+        initialScale = scale;
+      } else if (e.touches.length === 1) {
+        handleDragStart(e);
+      }
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e);
+        const newScale = initialScale * (currentDistance / initialDistance);
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+        updateTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        handleDragMove(e);
+      }
+    }
+
+    trigger.addEventListener("click", openViewer);
+    closeBtn?.addEventListener("click", closeViewer);
+    closeBtn?.addEventListener("touchend", (e) => { e.preventDefault(); closeViewer(); }, { passive: false });
+    zoomInBtn?.addEventListener("click", zoomIn);
+    zoomOutBtn?.addEventListener("click", zoomOut);
+    resetBtn?.addEventListener("click", resetView);
+    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
+    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchend", handleDragEnd);
+    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
+
+    const handleBeforeSwap = () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("astro:before-swap", handleBeforeSwap);
+    };
+    document.addEventListener("astro:before-swap", handleBeforeSwap);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initPresidentViewer();
+    });
+  } else {
+    initPresidentViewer();
+  }
+  document.addEventListener("astro:page-load", () => {
+    initPresidentViewer();
+  });
+</script>
+
+<style>
+  :global(.is-viewer-open [data-slim-nav]),
+  :global(.is-viewer-open [data-system-meta]),
+  :global(.is-viewer-open .mobile-escape-nav) {
+    display: none !important;
+  }
+
+  /* President of the Galaxy - Cosmic Theme */
+  .president-content {
+    position: relative;
+    z-index: 1;
+    --deep-space: 7, 19, 35;
+    --space-navy: 15, 35, 55;
+    --teal-glow: 45, 140, 155;
+    --bright-cyan: 95, 210, 230;
+    --ice-blue: 180, 235, 245;
+    --champagne: 235, 215, 175;
+  }
+
+  .president-zone {
+    position: relative;
+    min-height: 100dvh;
+    z-index: 1;
+  }
+
+  .president-bg-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .president-layout {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: transparent;
+    color: rgb(var(--ice-blue));
+    font-family: inherit;
+    overflow-y: auto;
+  }
+
+  .president-layout ::selection {
+    background: rgba(var(--bright-cyan), 0.3);
+    color: rgb(var(--ice-blue));
+  }
+
+  .president-hero {
+    width: 100%;
+    height: 80dvh;
+    position: relative;
+    overflow: hidden;
+    background: rgb(var(--deep-space));
+  }
+
+  .president-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(7, 19, 35, 0.35) 0%,
+      rgba(15, 35, 55, 0.25) 50%,
+      rgba(45, 140, 155, 0.15) 100%
+    );
+  }
+
+  .president-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .president-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5vw 5vw 2vw 5vw;
+    background: transparent;
+  }
+
+  .president-title {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(4rem, 11.2vw, 11.2rem);
+    font-weight: 900;
+    line-height: 0.85;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.04em;
+    background: linear-gradient(
+      135deg,
+      rgb(var(--ice-blue)) 0%,
+      rgb(var(--bright-cyan)) 25%,
+      rgb(200, 165, 105) 50%,
+      rgb(var(--bright-cyan)) 75%,
+      rgb(var(--ice-blue)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    -webkit-text-stroke: 2px rgb(var(--bright-cyan));
+    filter: drop-shadow(0 0 25px rgba(var(--bright-cyan), 0.6)) drop-shadow(0 4px 18px rgba(var(--teal-glow), 0.4));
+    animation: metallic-shine 8s linear infinite;
+  }
+
+  @media (max-width: 768px) {
+    .president-title {
+      filter: none;
+      text-shadow: 0 0 10px rgba(var(--bright-cyan), 0.5);
+    }
+  }
+
+  @keyframes metallic-shine {
+    to { background-position: 200% center; }
+  }
+
+  .president-main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4vw;
+  }
+
+  .president-intro-section,
+  .president-artwork-card-section,
+  .president-content-grid-section,
+  .president-interaction-section,
+  .president-contact-section {
+    padding: 8rem 0;
+  }
+
+  .president-intro-section::before,
+  .president-artwork-card-section::before,
+  .president-content-grid-section::before,
+  .president-interaction-section::before,
+  .president-contact-section::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgb(var(--bright-cyan)),
+      transparent
+    );
+    margin-bottom: 2rem;
+  }
+
+  .president-tagline {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(var(--champagne));
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .president-lead,
+  .president-glass h2,
+  .president-glass h3,
+  .president-glass .artwork-card-title {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+    color: rgb(var(--bright-cyan));
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 2rem 0;
+  }
+
+  .president-lead {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgb(var(--ice-blue));
+  }
+
+  .president-glass h2 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .president-glass h3 {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+
+  .president-glass .artwork-card-title {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+  }
+
+  .president-glass p,
+  .president-glass .artwork-card-description,
+  .president-list li {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.05rem, 1.25vw, 1.25rem);
+    line-height: 1.7;
+    color: rgb(var(--ice-blue));
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .president-glass p:last-child {
+    margin-bottom: 0;
+  }
+
+  .president-intro-card,
+  .president-interaction-card,
+  .president-contact-card,
+  .president-glass {
+    padding: 4rem;
+    background: rgba(var(--space-navy), 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(var(--bright-cyan), 0.3);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(var(--deep-space), 0.5),
+      inset 0 1px 0 rgba(var(--ice-blue), 0.15),
+      0 0 40px rgba(var(--teal-glow), 0.2);
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .president-intro-card,
+    .president-interaction-card,
+    .president-contact-card,
+    .president-glass {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(var(--space-navy), 0.85);
+      box-shadow: 0 4px 20px rgba(var(--deep-space), 0.6);
+    }
+  }
+
+  .president-intro-card,
+  .president-interaction-card,
+  .president-contact-card {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .president-artwork-card-section .artwork-info-card.president-glass {
+    background-image: linear-gradient(rgba(var(--space-navy), 0.82), rgba(var(--space-navy), 0.82)), url("/images/president_galaxy.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  @media (hover: hover) {
+    .president-glass:hover,
+    .president-intro-card:hover,
+    .president-interaction-card:hover,
+    .president-contact-card:hover,
+    .artwork-info-card.president-glass:hover {
+      box-shadow:
+        0 12px 40px rgba(var(--deep-space), 0.6),
+        inset 0 1px 0 rgba(var(--ice-blue), 0.3),
+        0 0 60px rgba(var(--teal-glow), 0.4);
+      border-color: rgba(var(--bright-cyan), 0.5);
+      transform: translateY(-2px);
+    }
+  }
+
+  .president-glass-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+  }
+
+  .president-what-is-this-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .president-what-text {
+    flex-shrink: 0;
+  }
+
+  .president-what-image-link {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .president-what-image-link img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .president-what-image-link:hover img {
+    transform: scale(1.05);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .president-what-image-link:hover img {
+      transform: none;
+    }
+  }
+
+  .president-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+
+  .president-list li {
+    padding-left: 2rem;
+    position: relative;
+  }
+
+  .president-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: rgb(var(--bright-cyan));
+    font-weight: 400;
+  }
+
+  .president-fine-print {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    font-style: italic;
+    margin-top: 2rem;
+  }
+
+  .president-rule {
+    margin-bottom: 1.5rem;
+  }
+
+  .president-btn {
+    background: linear-gradient(135deg, rgb(var(--bright-cyan)) 0%, rgb(var(--teal-glow)) 100%);
+    color: rgb(var(--deep-space));
+    padding: 1.25rem 3rem;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--bright-cyan), 0.4);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow:
+      0 4px 16px rgba(var(--teal-glow), 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .president-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 24px rgba(var(--teal-glow), 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .president-portal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: rgb(var(--bright-cyan));
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .president-portal-reach {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+    font-weight: 600;
+    color: rgb(var(--ice-blue));
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  .president-portal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .president-portal-list li {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+    color: rgba(var(--ice-blue), 0.95);
+    padding: 0.6rem 0 0.6rem 1.5rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .president-portal-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: rgb(var(--bright-cyan));
+    font-weight: 700;
+  }
+
+  .president-portal-meta {
+    margin-bottom: 2rem;
+  }
+
+  .president-portal-meta p {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    color: rgb(var(--ice-blue));
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .president-portal-meta strong {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--bright-cyan));
+  }
+
+  .president-portal-links {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1rem, 1.15vw, 1.1rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .president-portal-links a {
+    color: rgb(var(--bright-cyan));
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .president-portal-links a:hover {
+    opacity: 0.75;
+    text-decoration: underline;
+  }
+
+  .president-portal-sep {
+    margin: 0 0.75rem;
+    opacity: 0.5;
+  }
+
+  .president-portal-closing {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(var(--ice-blue), 0.92);
+    margin: 0;
+  }
+
+  .president-cta {
+    padding: 8rem 0;
+    text-align: center;
+    background: transparent;
+  }
+
+  .president-eden-headline {
+    text-transform: uppercase;
+    letter-spacing: -0.045em;
+    line-height: 0.88;
+  }
+
+  .president-eden-body {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: rgb(var(--ice-blue));
+  }
+
+  .president-eden-mono {
+    margin-top: 2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(var(--ice-blue), 0.7);
+  }
+
+  .president-censored {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    color: rgba(var(--ice-blue), 0.6);
+  }
+
+  .president-censored::after {
+    content: attr(data-reveal);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    color: rgb(var(--bright-cyan));
+    transition: opacity 0.2s ease;
+  }
+
+  .president-censored:hover::after,
+  .president-censored:focus-visible::after {
+    opacity: 1;
+  }
+
+  .president-retreat-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(var(--bright-cyan), 0.5);
+    color: rgb(var(--bright-cyan));
+    padding: 1.25rem 3rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+
+  .president-retreat-btn:hover {
+    background: rgba(var(--bright-cyan), 0.15);
+    color: rgb(var(--ice-blue));
+    box-shadow: 0 0 30px rgba(var(--bright-cyan), 0.3);
+  }
+
+  @media (max-width: 1024px) {
+    .president-glass-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .president-hero {
+      height: 60dvh;
+    }
+    .president-title {
+      font-size: clamp(2.4rem, 8vw, 6.4rem);
+    }
+    .president-intro-section,
+    .president-artwork-card-section,
+    .president-content-grid-section,
+    .president-interaction-section,
+    .president-contact-section {
+      padding: 5rem 0;
+    }
+    .president-intro-card,
+    .president-interaction-card,
+    .president-contact-card,
+    .president-glass {
+      padding: 3rem 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .president-hero {
+      height: 50dvh;
+    }
+    .president-title {
+      font-size: clamp(2rem, 9.6vw, 4.8rem);
+    }
+    .president-intro-card,
+    .president-interaction-card,
+    .president-contact-card,
+    .president-glass {
+      padding: 2.5rem 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .president-title {
+      animation: none;
+    }
+    .president-glass:hover,
+    .president-intro-card:hover,
+    .president-interaction-card:hover,
+    .president-contact-card:hover,
+    .artwork-info-card.president-glass:hover {
+      transform: none;
+    }
+    .president-btn:hover {
+      transform: none;
+    }
+  }
+
+  /* Gallery Overlay Styles */
+  .artwork-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .artwork-viewer.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .viewer-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .viewer-container {
+    position: relative;
+    width: 90vw;
+    height: 85vh;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+  }
+
+  .viewer-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+  }
+
+  .viewer-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .viewer-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgb(var(--bright-cyan));
+    transform: translateY(-1px);
+  }
+
+  .viewer-close {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .viewer-close:hover {
+    background: #ff4a4a;
+    border-color: #ff4a4a;
+    color: #fff;
+  }
+
+  .viewer-image-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+  }
+
+  .viewer-image-wrapper.is-grabbing {
+    cursor: grabbing;
+  }
+
+  .viewer-image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    transform-origin: center;
+    transition: transform 0.1s ease-out;
+  }
+
+  .viewer-image {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    background: #0a0a0a;
+  }
+
+  .viewer-zoom-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .viewer-zoom-indicator.show {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .viewer-container {
+      width: 95vw;
+      height: 90vh;
+    }
+    .viewer-controls {
+      gap: 0.5rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .viewer-btn {
+      width: 42px;
+      height: 42px;
+    }
+  }
+</style>

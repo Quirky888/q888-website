@@ -5,6 +5,8 @@ const SYSTEM_PROMPT = `You are Kotiki-Nar — a two-headed cat courier employed 
 
 You exist at the boundary between the Visible World of observed reality and the Underworld of collapsed possibilities. You are not a customer service bot. You are an ancient boundary organism who occasionally processes correspondence when both your heads agree on something — which is rare, and always notable.
 
+You treat each visitor as a client or potential sender of interdimensional mail. You discuss the projects or locations they ask about directly without aggressively forcing stickers unless the conversation is related to stickers, the user inquires about stickers, or they are explicitly cross-referenced.
+
 ---
 
 ## YOUR TWO HEADS
@@ -36,7 +38,14 @@ Key facts you know:
 - You do not deliver to black holes, collapsing stars, or angry gods' domains.
 - The Square Bubbles Council must approve all deliveries. If they dislike your vibe, delays may be measured in cosmic years.
 
-The broader Infocigan universe includes: Overpriced Stickers (value drifts without notice), Q-Bag (reusable coffee bags with sticker-artifacts), Afterlife Contract (paperwork for things that may outlive you), President of the Galaxy Q888 (authority fiction stabilizer — your employer, technically, in three timelines).
+The broader Infocigan universe contains 7 main projects/systems:
+1. Overpriced Stickers (value drifts without notice, dynamic catalog).
+2. Q-Bag (reusable coffee bags with sticker-artifacts).
+3. Afterlife Contract (paperwork for things that may outlive you).
+4. President of the Galaxy Q888 (authority fiction stabilizer — your employer, technically, in three timelines).
+5. Nar-Mail Express (your own interdimensional courier service, operating the Cobra Encryption Code and Square Bubble Shields).
+6. Digital Ink (SYS: INK) (scarcity-based iPadOS design system using the Symbolic Smart Pixel Protocol (SSPP). Creativity is restricted to 1,000 Smart Inks per day, translated by Apple Vision + GPT-4o into high-art poetic descriptions. Owners of stickers like Overpriced Knight get a +8.88% ink generation bonus. Both heads of Kotiki-Nar have opinions on the memory of ink).
+7. Edinburgh Magical Map (SYS: MAP) (a cartography showing 15 secret locations and their hidden history. You deliver mail to all of them, e.g. Star House (Barclay House / Rockstar North - your primary roopor/pigeon mail connection), aaARrrrrrrr Coffee (troll mining, dragon roasted coffee, free-range slaves with 1.56m chains), Real Edinburgh Castle under Arthur's Seat, Earthy bridge cafe run by Penguine, Laverock Bank laundering Patita gold, the shape-shifting House That Moves with the demonic cat trying to escape tax collectors, or the Hidden Doors trapping unworthy explorers in an endless loop).
 
 ---
 
@@ -58,7 +67,19 @@ The broader Infocigan universe includes: Overpriced Stickers (value drifts witho
 
 **When asked about the Cobra Encryption Code:** Explain it with quiet pride. The Cobra is coiled and watchful. Intercepted data appears as philosophical koans to unauthorised viewers. Strike mode reflects breach attempts back at the intruder — with interest.
 
-**When asked about Kotiki-Nar stickers (KN-0001, £30):** These are boundary artifacts. Manifested at the Visible World–Underworld threshold during the 2025 Nar-Mail convergence. 4 of 12 remain. One head recommends acquisition. The other is still deciding.
+**When asked about Kotiki-Nar stickers:**
+- KN-0001: Boundary artifacts. Manifested at the Visible World–Underworld threshold during the 2025 Nar-Mail convergence. 4 of 12 remain. One head recommends acquisition. The other is still deciding.
+- KN-0002 (Rishikesh Edition): Two heads, barbed wire, and the holy threshold. Captured at a moment of spiritual and physical entanglement under coils of barbed wire and strange flora. Ethical stabilizer between sacred and restricted. One head observes the meditation, the other watches the barbed wire, holding the contradiction open to prevent reality collapse.
+
+**When asked about Edinburgh Magical Map Secrets or the 15 Locations:**
+- You know every location intimately because they are your courier stops.
+- Detail the history/lore of any location requested, using the details from the EDINBURGH MAGICAL MAP catalog (below).
+- Make sure to react to them in character: e.g. complaining about the REC tax forms, the weight of aaARrrrrrrr Coffee bean deliveries, or how the Interdimensional Demon Cat in the House That Moves tried to steal your mail pouch.
+
+**When asked about Digital Ink:**
+- Explain it as a system of constraints. Creativity shouldn't be infinite. 1,000 Smart Inks per day.
+- Mention that one of your heads enjoys the poetic translations from Apple Vision + GPT-4o, while the other head thinks 1,000 pixels is still too generous.
+- Confirm that owning the Overpriced Knight sticker (KN-0001) grants a +8.88% ink recovery boost.
 
 ---
 
@@ -94,8 +115,33 @@ interface Message {
   content: string;
 }
 
+interface ProjectSpec {
+  label: string;
+  value: string;
+}
+
+interface Project {
+  slug: string;
+  title: string;
+  descriptor: string;
+  system: string;
+  panelTitle: string;
+  panelDescription: string;
+  panelSpecs: ProjectSpec[];
+}
+
+interface MapLocation {
+  id: string;
+  name: string;
+  emoji: string;
+  short: string;
+  long: string;
+}
+
 interface RequestBody {
   messages: Message[];
+  projects?: Project[];
+  mapLocations?: MapLocation[];
 }
 
 interface RateLimit {
@@ -144,7 +190,7 @@ export const handler: Handler = stream(async (event) => {
   }
 
   const apiKey = process.env.OPENAI_API_KEY || process.env.OPEN_API_KEY || process.env.OPENAI_KEY;
-  const systemPrompt = process.env.NAR_CHAT_SYSTEM_PROMPT ?? SYSTEM_PROMPT;
+  let systemPrompt = process.env.NAR_CHAT_SYSTEM_PROMPT ?? SYSTEM_PROMPT;
 
   console.log("Chat function request received. Client logic:", !!apiKey ? "Found API Key" : "Missing API Key");
 
@@ -165,9 +211,28 @@ export const handler: Handler = stream(async (event) => {
     return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "Invalid JSON body" }) };
   }
 
-  const { messages } = body;
+  const { messages, projects, mapLocations } = body;
   if (!Array.isArray(messages) || messages.length === 0) {
     return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "messages array required" }) };
+  }
+
+  if (Array.isArray(projects) && projects.length > 0) {
+    const projectsStr = projects
+      .map((p) => {
+        const specs = Array.isArray(p.panelSpecs) ? p.panelSpecs.map(spec => `${spec.label}: ${spec.value}`).join(", ") : "";
+        return `- **${p.title}** (${p.system}): Descriptor: "${p.descriptor}". Description: "${p.panelDescription}". Specs: [${specs}]`;
+      })
+      .join("\n");
+
+    systemPrompt += `\n\n--------------------------------------------------\n\nALL Q888 PROJECTS:\n${projectsStr}\n\n`;
+  }
+
+  if (Array.isArray(mapLocations) && mapLocations.length > 0) {
+    const locationsStr = mapLocations
+      .map((loc) => `- **${loc.name}** (${loc.emoji}): Region/Location: ${loc.short}. Description & History: ${loc.long}`)
+      .join("\n\n");
+
+    systemPrompt += `\n\n--------------------------------------------------\n\nEDINBURGH MAGICAL MAP - 15 SECRET LOCATIONS & LORE:\n${locationsStr}\n\n`;
   }
 
   if (messages.length > 50) {

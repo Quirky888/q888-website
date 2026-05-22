@@ -1,0 +1,838 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+import { getEntry } from "astro:content";
+
+const afterlifeEntry = await getEntry("contracts", "afterlife-contracts");
+if (!afterlifeEntry) {
+  throw new Error("Required Afterlife content entry is missing.");
+}
+const afterlife = afterlifeEntry.data;
+---
+
+<Layout title="Afterlife Contracts — Q888">
+  <SlimNav />
+  <SystemMeta position="top" />
+
+  <main class="relative min-h-screen pt-10 md:pt-11">
+    <div class="afterlife-eden-wrap">
+      <div class="afterlife-narmail-layout">
+        <section class="afterlife-hero">
+          <div class="afterlife-hero-image">
+            <img src={afterlife.heroImage} alt={afterlife.heroAlt} loading="eager" decoding="async" width="1200" height="800" />
+          </div>
+          <div class="afterlife-hero-overlay px-6 sm:px-10 lg:px-16 pb-16">
+            <div class="mx-auto">
+              <h1 class="afterlife-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
+                <span class="afterlife-headline-line">{afterlife.heroLines[0]}</span>
+                <span class="afterlife-headline-line">{afterlife.heroLines[1]}</span>
+              </h1>
+              <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
+                <p>{afterlife.heroSubheadline}</p>
+                <p class="mt-4 text-[clamp(1rem,1.2vw,1.3rem)] opacity-70">{afterlife.heroSubheadlineAside}</p>
+              </div>
+              <div class="afterlife-mono afterlife-mono-gold mt-12 text-lg sm:text-xl leading-relaxed uppercase tracking-widest">
+                <div>{afterlife.statusLines[0]}</div>
+                <div>{afterlife.statusLines[1]}</div>
+                <div>{afterlife.statusLines[2]}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="afterlife-main-content px-6 sm:px-10 lg:px-16 pb-16">
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.aboutHeading}</h2>
+            <p>{afterlife.aboutParagraph}</p>
+          </section>
+
+          <section class="afterlife-artwork-card-section">
+            <div class="artwork-info-card afterlife-narmail-glass" id="afterlife-gallery-trigger">
+              <div class="artwork-card-content">
+                <div class="artwork-card-icon afterlife-gallery-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="artwork-card-text">
+                  <h3 class="artwork-card-title afterlife-gallery-title">{afterlife.artworkCardTitle}</h3>
+                  <p class="artwork-card-description">{afterlife.artworkCardDescription}</p>
+                </div>
+                <button class="artwork-card-button afterlife-gallery-btn" type="button">
+                  <span>{afterlife.artworkCardButtonLabel}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.conceptHeading}</h2>
+            <p>{afterlife.conceptParagraphs[0]}</p>
+            <p>{afterlife.conceptParagraphs[1]}</p>
+          </section>
+
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.bureaucracyHeading}</h2>
+            <p>{afterlife.bureaucracyParagraph}</p>
+          </section>
+
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.dualityHeading}</h2>
+            <p>{afterlife.dualityParagraphs[0]}</p>
+            <p>{afterlife.dualityParagraphs[1]}</p>
+          </section>
+
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.visualLanguageHeading}</h2>
+            <p>{afterlife.visualLanguageParagraph}</p>
+          </section>
+
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.interactionHeading}</h2>
+            <p>{afterlife.interactionIntro}</p>
+            <ul class="afterlife-list">
+              <li>{afterlife.interactionItems[0]}</li>
+              <li>{afterlife.interactionItems[1]}</li>
+              <li>{afterlife.interactionItems[2]}</li>
+              <li>{afterlife.interactionItems[3]}</li>
+            </ul>
+            <p>{afterlife.interactionClosing}</p>
+          </section>
+
+          <section class="afterlife-section afterlife-guarantee">
+            <h2 class="afterlife-h2">{afterlife.closingHeading}</h2>
+            <blockquote class="afterlife-blockquote">
+              {afterlife.closingQuoteLines[0]}<br />
+              {afterlife.closingQuoteLines[1]}
+            </blockquote>
+          </section>
+
+          <section class="afterlife-section">
+            <h2 class="afterlife-h2">{afterlife.downloadHeading}</h2>
+            <p>{afterlife.downloadIntro}</p>
+            <div class="afterlife-terms">
+              <h3 class="afterlife-h3">{afterlife.termsHeading}</h3>
+              <p>{afterlife.termsIntro}</p>
+              <ul class="afterlife-list">
+                <li>{afterlife.termsItems[0]}</li>
+                <li>{afterlife.termsItems[1]}</li>
+                <li>{afterlife.termsItems[2]}</li>
+                <li>{afterlife.termsItems[3]}</li>
+                <li>{afterlife.termsItems[4]}</li>
+              </ul>
+              <div class="terms-checkbox-wrapper mt-6">
+                <label class="terms-checkbox-label">
+                  <input type="checkbox" id="afterlife-terms-checkbox" class="terms-checkbox" />
+                  <span class="checkbox-text">{afterlife.termsCheckboxLabel}</span>
+                </label>
+              </div>
+            </div>
+            <div class="download-button-wrapper mt-6">
+              <a
+                href={afterlife.downloadHref}
+                download={afterlife.downloadFilename}
+                class="afterlife-download-btn"
+                id="afterlife-download-btn"
+                aria-disabled="true"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15M7 10L12 15M12 15L17 10M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{afterlife.downloadButtonLabel}</span>
+              </a>
+              <p class="download-hint" id="download-hint">{afterlife.downloadHint}</p>
+            </div>
+          </section>
+
+          <section class="afterlife-section afterlife-cta">
+            <a href="/#infocigan" class="afterlife-retreat-btn no-underline inline-block">{afterlife.ctaLabel}</a>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="artwork-viewer" id="afterlife-artwork-viewer" aria-hidden="true">
+      <div class="viewer-overlay"></div>
+      <div class="viewer-container">
+        <div class="viewer-controls">
+          <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="viewer-image-wrapper">
+          <div class="viewer-image-container" id="afterlife-viewer-image-container">
+            <img
+              src={afterlife.viewerImage}
+              alt={afterlife.viewerAlt}
+              class="viewer-image"
+              id="afterlife-viewer-image"
+              draggable="false"
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="900"
+            />
+          </div>
+        </div>
+        <div class="viewer-zoom-indicator" id="afterlife-zoom-indicator">100%</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="hidden md:block">
+    <SystemMeta position="bottom" />
+  </div>
+</Layout>
+
+<script>
+  function initAfterlifeViewer() {
+    const trigger = document.getElementById("afterlife-gallery-trigger");
+    const viewer = document.getElementById("afterlife-artwork-viewer");
+    const closeBtn = viewer?.querySelector(".viewer-close");
+    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
+    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
+    const resetBtn = viewer?.querySelector(".viewer-reset");
+    const imageContainer = document.getElementById("afterlife-viewer-image-container");
+    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
+    const zoomIndicator = document.getElementById("afterlife-zoom-indicator");
+
+    if (!trigger || !viewer || !imageContainer) return;
+    if (viewer.hasAttribute("data-viewer-initialized")) return;
+    viewer.setAttribute("data-viewer-initialized", "true");
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const MIN_SCALE = 1;
+    const MAX_SCALE = 4;
+    const ZOOM_STEP = 0.3;
+
+    function updateTransform() {
+      if (!imageContainer) return;
+      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      if (zoomIndicator) {
+        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+        zoomIndicator.classList.add("show");
+        clearTimeout((window as unknown as { afterlifeZoomTimeout?: number }).afterlifeZoomTimeout);
+        (window as unknown as { afterlifeZoomTimeout?: number }).afterlifeZoomTimeout = window.setTimeout(() => {
+          zoomIndicator.classList.remove("show");
+        }, 1000);
+      }
+    }
+
+    function openViewer() {
+      if (!viewer) return;
+      document.documentElement.classList.add("is-viewer-open");
+      viewer.classList.add("is-open");
+      viewer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      resetView();
+    }
+
+    function closeViewer() {
+      if (!viewer) return;
+      document.documentElement.classList.remove("is-viewer-open");
+      viewer.classList.remove("is-open");
+      viewer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      resetView();
+    }
+
+    function resetView() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    function zoomIn() {
+      if (scale < MAX_SCALE) {
+        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+        updateTransform();
+      }
+    }
+
+    function zoomOut() {
+      if (scale > MIN_SCALE) {
+        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+        if (scale === MIN_SCALE) {
+          translateX = 0;
+          translateY = 0;
+        }
+        updateTransform();
+      }
+    }
+
+    function handleWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn();
+      else zoomOut();
+    }
+
+    function handleDragStart(e: MouseEvent | TouchEvent) {
+      if (scale === 1) return;
+      isDragging = true;
+      imageWrapper?.classList.add("is-grabbing");
+      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
+      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
+      if (e.type === "mousedown") {
+        document.addEventListener("mousemove", handleDragMove as EventListener);
+        document.addEventListener("mouseup", handleDragEnd);
+      }
+    }
+
+    function handleDragMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
+      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
+      translateX = clientX - startX;
+      translateY = clientY - startY;
+      updateTransform();
+    }
+
+    function handleDragEnd() {
+      isDragging = false;
+      imageWrapper?.classList.remove("is-grabbing");
+      document.removeEventListener("mousemove", handleDragMove as EventListener);
+      document.removeEventListener("mouseup", handleDragEnd);
+    }
+
+    let initialDistance = 0;
+    let initialScale = 1;
+
+    function getTouchDistance(e: TouchEvent) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        initialDistance = getTouchDistance(e);
+        initialScale = scale;
+      } else if (e.touches.length === 1) {
+        handleDragStart(e);
+      }
+    }
+
+    function handleTouchMove(e: TouchEvent) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e);
+        const newScale = initialScale * (currentDistance / initialDistance);
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
+        updateTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        handleDragMove(e);
+      }
+    }
+
+    trigger.addEventListener("click", openViewer);
+    closeBtn?.addEventListener("click", closeViewer);
+    closeBtn?.addEventListener("touchend", (e) => { e.preventDefault(); closeViewer(); }, { passive: false });
+    zoomInBtn?.addEventListener("click", zoomIn);
+    zoomOutBtn?.addEventListener("click", zoomOut);
+    resetBtn?.addEventListener("click", resetView);
+    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
+    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
+    imageWrapper?.addEventListener("touchend", handleDragEnd);
+    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
+
+    const handleBeforeSwap = () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("astro:before-swap", handleBeforeSwap);
+    };
+    document.addEventListener("astro:before-swap", handleBeforeSwap);
+  }
+
+  function initAfterlifeDownload() {
+    const checkbox = document.getElementById("afterlife-terms-checkbox");
+    const downloadBtn = document.getElementById("afterlife-download-btn");
+    const hint = document.getElementById("download-hint");
+
+    if (!checkbox || !downloadBtn) return;
+
+    checkbox.addEventListener("change", () => {
+      if ((checkbox as HTMLInputElement).checked) {
+        downloadBtn.setAttribute("aria-disabled", "false");
+        hint?.classList.add("hidden");
+      } else {
+        downloadBtn.setAttribute("aria-disabled", "true");
+        hint?.classList.remove("hidden");
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initAfterlifeViewer();
+      initAfterlifeDownload();
+    });
+  } else {
+    initAfterlifeViewer();
+    initAfterlifeDownload();
+  }
+  document.addEventListener("astro:page-load", () => {
+    initAfterlifeViewer();
+    initAfterlifeDownload();
+  });
+</script>
+
+<style>
+  :global(.is-viewer-open [data-slim-nav]),
+  :global(.is-viewer-open [data-system-meta]),
+  :global(.is-viewer-open .mobile-escape-nav) {
+    display: none !important;
+  }
+
+  .afterlife-eden-wrap {
+    --eden-bg: #fcf8f9;
+    --eden-text: #134252;
+    --eden-text-muted: #627078;
+    --eden-primary: #208c8d;
+    position: relative;
+    min-height: 100dvh;
+    background: var(--eden-bg);
+  }
+
+  .afterlife-narmail-layout {
+    width: 100%;
+    color: var(--eden-text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    overflow-y: auto;
+  }
+
+  .afterlife-hero {
+    position: relative;
+  }
+
+  .afterlife-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--eden-bg);
+  }
+
+  .afterlife-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .afterlife-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(252, 248, 249, 1), rgba(252, 248, 249, 0.4), transparent);
+  }
+
+  .afterlife-headline {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .afterlife-headline-line {
+    display: block;
+    line-height: 0.85;
+  }
+
+  @media (max-width: 640px) {
+    .afterlife-hero {
+      display: flex;
+      flex-direction: column;
+      background-color: #fcf8f9;
+    }
+    .afterlife-hero-image {
+      aspect-ratio: auto;
+      height: 280px;
+    }
+    .afterlife-hero-overlay {
+      position: relative;
+      margin-top: -100px;
+      padding-top: 100px;
+      background: linear-gradient(to bottom, transparent, #fcf8f9 100px);
+      padding-bottom: 3rem !important;
+    }
+    .afterlife-headline {
+      font-size: clamp(2.8rem, 14vw, 4.5rem) !important;
+      line-height: 1.05;
+      text-align: left;
+    }
+    .afterlife-headline-line {
+      line-height: 1.0;
+    }
+  }
+
+  .afterlife-mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .afterlife-mono-gold {
+    color: #a67c00;
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: afterlife-gold-shine 8s linear infinite;
+  }
+
+  @keyframes afterlife-gold-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .afterlife-mono-gold {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  .afterlife-main-content {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .afterlife-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(19, 66, 82, 0.12);
+  }
+
+  .afterlife-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .afterlife-h2 {
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+  }
+
+  .afterlife-h3 {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    font-weight: 500;
+    color: var(--eden-text);
+    margin: 2.5rem 0 1rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .afterlife-section p {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--eden-text);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .afterlife-list {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+  }
+
+  .afterlife-list li {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--eden-text);
+    margin-bottom: 0.75rem;
+    padding-left: 2.25rem;
+    position: relative;
+  }
+
+  .afterlife-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: #a67c00;
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-size: 200% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: afterlife-gold-shine 8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .afterlife-list li::before {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  .afterlife-blockquote {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--eden-text);
+    margin: 1.5rem 0;
+    padding: 0 0 0 2rem;
+    border-left: 4px solid var(--eden-primary);
+  }
+
+  .afterlife-terms {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+    color: var(--eden-text);
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+    line-height: 1.6;
+  }
+
+  .afterlife-terms h3 {
+    margin: 1.5rem 0 1rem 0;
+  }
+
+  .terms-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    cursor: pointer;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: var(--eden-text);
+  }
+
+  .terms-checkbox {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: #a67c00;
+  }
+
+  .afterlife-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 3rem;
+    background: transparent;
+    color: rgba(19, 66, 82, 0.4);
+    border: 2px solid rgba(19, 66, 82, 0.3);
+    border-radius: 8px;
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .afterlife-download-btn[aria-disabled="false"] {
+    background: #a67c00;
+    color: #0a0a0a;
+    border-color: #a67c00;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .afterlife-download-btn[aria-disabled="false"]:hover {
+    background: #ce9e00;
+    border-color: #ce9e00;
+  }
+
+  .download-hint {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--eden-text-muted);
+  }
+
+  .download-hint.hidden {
+    display: none;
+  }
+
+  .afterlife-retreat-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: var(--eden-text);
+    border: 2px solid var(--eden-text);
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .afterlife-retreat-btn:hover {
+    background: var(--eden-text);
+    color: var(--eden-bg);
+  }
+
+  .afterlife-cta {
+    text-align: center;
+  }
+
+  /* Gallery card - same as Nar-Mail narmail-glass */
+  .afterlife-artwork-card-section {
+    padding: 5rem 0;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass {
+    background: #0a0a0a;
+    border: 1px solid #3a3a3a;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .afterlife-artwork-card-section .artwork-info-card.afterlife-narmail-glass {
+    background-image: linear-gradient(rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.92)), url("/images/afterlife_contract.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(206, 158, 0, 0.08), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass:hover {
+    border-color: rgba(206, 158, 0, 0.5);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(206, 158, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .artwork-info-card.afterlife-narmail-glass:hover::before {
+    left: 100%;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-title.afterlife-gallery-title {
+    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    background-position: 0% center;
+    animation: afterlife-shine 8s linear infinite;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-title.afterlife-gallery-title::before {
+    content: '// GALLERY';
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgba(206, 158, 0, 0.7);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    -webkit-text-fill-color: initial;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-description {
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+  }
+
+  .artwork-info-card.afterlife-narmail-glass .artwork-card-icon.afterlife-gallery-icon {
+    background: rgba(206, 158, 0, 0.15);
+    color: #ce9e00;
+  }
+
+  .artwork-card-button.afterlife-gallery-btn {
+    background: transparent;
+    color: #ce9e00;
+    border: 2px solid #ce9e00;
+  }
+
+  .artwork-card-button.afterlife-gallery-btn:hover {
+    background: #ce9e00;
+    color: #0a0a0a;
+    box-shadow: 0 4px 24px rgba(206, 158, 0, 0.35);
+  }
+
+  @keyframes afterlife-shine {
+    to { background-position: 200% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .artwork-info-card.afterlife-narmail-glass .artwork-card-title.afterlife-gallery-title {
+      animation: none;
+      background-position: 50% center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .afterlife-artwork-card-section {
+      padding: 3rem 0;
+    }
+    .afterlife-artwork-card-section .artwork-card-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+    .afterlife-artwork-card-section .artwork-card-button {
+      width: 100%;
+      justify-content: center;
+    }
+    .afterlife-section {
+      padding: 3rem 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .artwork-info-card.afterlife-narmail-glass:hover,
+    .afterlife-retreat-btn {
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

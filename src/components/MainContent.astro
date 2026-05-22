@@ -42,7 +42,6 @@ const { projectToOpen } = Astro.props;
   import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
   import { initIpGeoCoords } from "../scripts/ipGeoCoords";
   import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
-  import { initInfociganPortal, destroyInfociganPortal } from "../scripts/infociganPortal";
   import { initRevealMotion, destroyRevealMotion } from "../scripts/revealMotion";
 
   let didInit = false;
@@ -56,7 +55,6 @@ const { projectToOpen } = Astro.props;
     initIpGeoCoords();
     initThresholdMotion();
     initProjectDrawer();
-    initInfociganPortal();
     initRevealMotion();
 
     didInit = true;
@@ -74,8 +72,8 @@ const { projectToOpen } = Astro.props;
         }
         
         requestAnimationFrame(async () => {
-          if (projectToOpen === "edinburgh-map") await openDrawer("edinburgh-map", "right");
-          else if (projectToOpen === "digital-ink") await openDrawer("digital-ink", "left");
+          if (projectToOpen === "edinburgh-map") await openDrawer("edinburgh-map", "right", false);
+          else if (projectToOpen === "digital-ink") await openDrawer("digital-ink", "left", false);
         });
       };
 
@@ -95,7 +93,6 @@ const { projectToOpen } = Astro.props;
     destroyNavScroll();
     destroySystemMetaState();
     destroyProjectDrawer();
-    destroyInfociganPortal();
     destroyRevealMotion();
     import("../scripts/edinburghMap").then((m) => m.destroyEdinburghMap()).catch(() => {});
 

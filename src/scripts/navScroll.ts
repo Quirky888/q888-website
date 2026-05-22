@@ -1,4 +1,3 @@
-import { closePortal } from "./infociganPortal";
 import { closeDrawerIfOpen } from "./drawerNav";
 
 let initialized = false;
@@ -8,24 +7,33 @@ const OVERLAY_CLOSE_DURATION = 700;
 
 function handleScroll(e: Event, link: HTMLAnchorElement) {
   const href = link.getAttribute("href");
-  if (!href?.startsWith("#")) return;
+  if (!href) return;
 
-  const targetId = href.slice(1);
+  const isHash = href.startsWith("#");
+  const isPathHash = href.startsWith("/#");
+  if (!isHash && !isPathHash) return;
+
+  // Determine if we are on the homepage
+  const isOnHomepage = window.location.pathname === "/" || window.location.pathname === "/index.html";
+
+  if (!isOnHomepage && isPathHash) {
+    // Let normal browser navigation load the home page and go to the hash
+    return;
+  }
+
+  const targetId = isPathHash ? href.slice(2) : href.slice(1);
   const target = document.getElementById(targetId);
   if (!target) return;
 
   e.preventDefault();
 
-  const hadOverlay =
-    !!document.querySelector(".portal-panel.is-active") ||
-    !!document.querySelector("[data-drawer-panel].is-active");
+  const hadOverlay = !!document.querySelector("[data-drawer-panel].is-active");
 
-  closePortal();
   closeDrawerIfOpen();
 
   const scrollAndUpdate = () => {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.pushState(null, "", window.location.pathname + window.location.search + href);
+    history.pushState(null, "", "/" + (targetId === "landing" ? "" : "#" + targetId));
   };
 
   if (hadOverlay) {

@@ -98,10 +98,18 @@ function trapFocus(panel: HTMLElement) {
   return () => panel.removeEventListener("keydown", handler);
 }
 
-export async function openDrawer(id: DrawerId, direction: Direction) {
+export async function openDrawer(id: DrawerId, direction: Direction, shouldPushState = true) {
   const root = getDrawerRoot();
   const panel = getDrawerPanel(id);
   if (!root || !panel) return;
+
+  if (activeDrawer === id) return;
+
+  if (activeDrawer) {
+    const activePanel = getDrawerPanel(activeDrawer);
+    const activeDir = (activePanel?.dataset.direction as Direction) || "left";
+    await closeDrawer(activeDir, false);
+  }
 
   if (id === "edinburgh-map") {
     const { initEdinburghMap } = await import("./edinburghMap");
@@ -129,16 +137,21 @@ export async function openDrawer(id: DrawerId, direction: Direction) {
   }
 
   focusTrapCleanup = trapFocus(panel);
+
+  if (shouldPushState) {
+    const path = id === "digital-ink" ? "/dink" : "/map";
+    history.pushState({ project: id }, "", path);
+  }
 }
 
-export function closeDrawerIfOpen() {
+export function closeDrawerIfOpen(shouldPushState = true) {
   if (!activeDrawer) return;
   const panel = getDrawerPanel(activeDrawer);
   const direction = (panel?.dataset.direction as Direction) || "left";
-  closeDrawer(direction);
+  closeDrawer(direction, shouldPushState);
 }
 
-export async function closeDrawer(direction: Direction) {
+export async function closeDrawer(direction: Direction, shouldPushState = true) {
   const root = getDrawerRoot();
   if (!activeDrawer || !root) return;
 
@@ -165,13 +178,22 @@ export async function closeDrawer(direction: Direction) {
     gsap.set(panel, { x: xTo, opacity: 0 });
     cleanup();
   } else {
-    gsap.to(panel, {
-      x: xTo,
-      opacity: 0.85,
-      duration: 0.55,
-      ease: "power1.inOut",
-      onComplete: cleanup,
+    await new Promise<void>((resolve) => {
+      gsap.to(panel, {
+        x: xTo,
+        opacity: 0.85,
+        duration: 0.55,
+        ease: "power1.inOut",
+        onComplete: () => {
+          cleanup();
+          resolve();
+        },
+      });
     });
+  }
+
+  if (shouldPushState) {
+    history.pushState({ project: null }, "", "/");
   }
 }
 
@@ -195,6 +217,25 @@ export function initProjectDrawer() {
 
   abortController = new AbortController();
   const { signal } = abortController;
+
+  window.addEventListener(
+    "popstate",
+    async () => {
+      const path = window.location.pathname.replace(/\/$/, "");
+      if (path === "/dink") {
+        await openDrawer("digital-ink", "left", false);
+      } else if (path === "/map") {
+        await openDrawer("edinburgh-map", "right", false);
+      } else if (path === "") {
+        if (activeDrawer) {
+          const panel = getDrawerPanel(activeDrawer);
+          const direction = (panel?.dataset.direction as Direction) || "left";
+          await closeDrawer(direction, false);
+        }
+      }
+    },
+    { signal }
+  );
 
   const triggers = document.querySelectorAll<HTMLElement>("[data-drawer-trigger]");
   const closeButtons = document.querySelectorAll<HTMLElement>("[data-drawer-close]");
