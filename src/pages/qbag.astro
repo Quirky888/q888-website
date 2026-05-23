@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
+import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import { getEntry } from "astro:content";
 import { Image } from "astro:assets";
@@ -15,7 +16,8 @@ const qBag = qBagEntry.data;
 ---
 
 <Layout title="Q-Bag — Q888">
-  <SlimNav />
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />
 
   <main class="relative min-h-[100dvh] pt-10 md:pt-11">

@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import MobileNav from "../components/MobileNav.astro";
 
 interface Props {
 	title?: string;
@@ -37,24 +36,6 @@ const { title = "Q888" } = Astro.props;
 	</head>
 	<body>
 		<slot />
-		
-		<!-- Mobile Escape Navigation -->
-		<div class="mobile-escape-nav" data-mobile-escape-nav>
-			<button class="mobile-close-btn" aria-label="Close Tab" title="Close Tab" type="button">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<line x1="18" y1="6" x2="6" y2="18"></line>
-					<line x1="6" y1="6" x2="18" y2="18"></line>
-				</svg>
-			</button>
-			<button class="mobile-back-btn" aria-label="Go Back" title="Go Back" type="button">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M19 12H5M12 19l-7-7 7-7"></path>
-				</svg>
-			</button>
-		</div>
-
-		<!-- New Orbital Mobile Navigation -->
-		<MobileNav />
 
 		<script>
 			(function initSplitFlapReducedMotion() {
@@ -91,91 +72,6 @@ const { title = "Q888" } = Astro.props;
 				console.log('[Q888] User Agent:', navigator.userAgent);
 			}
 
-			const backBtn = document.querySelector('.mobile-back-btn');
-			if (backBtn) {
-				const handleBack = (e?: Event) => {
-					if (e) {
-						e.preventDefault();
-						e.stopPropagation();
-					}
-					if (window.history.length > 1) {
-						window.history.back();
-					} else {
-						window.location.href = '/#landing';
-					}
-				};
-				backBtn.addEventListener('click', handleBack);
-				backBtn.addEventListener('touchend', (e) => {
-					e.preventDefault();
-					handleBack(e);
-				}, { passive: false });
-			}
-
-			const closeBtn = document.querySelector('.mobile-close-btn');
-			if (closeBtn) {
-				const handleClose = (e?: Event) => {
-					if (e) {
-						e.preventDefault();
-						e.stopPropagation();
-					}
-					
-					// 1. Check if a drawer or chatbot is open and close it first
-					const activeDrawerCloseBtn = document.querySelector('.drawer-open [data-close-drawer], .drawer-open [data-drawer-close], .overflow-hidden [data-close-drawer], .overflow-hidden [data-drawer-close], .chat-open #nar-chat-close, .chat-open #investor-chat-close');
-					if (activeDrawerCloseBtn) {
-						(activeDrawerCloseBtn as HTMLElement).click();
-						return;
-					}
-
-					// 2. Otherwise, attempt to close the window/tab
-					window.close();
-					
-					// Fallback if window.close() fails
-					setTimeout(() => {
-						window.location.href = '/#landing';
-					}, 250);
-				};
-				closeBtn.addEventListener('click', handleClose);
-				closeBtn.addEventListener('touchend', (e) => {
-					e.preventDefault();
-					handleClose(e);
-				}, { passive: false });
-			}
-
-			function updateMobileEscapeVisibility() {
-				const nav = document.querySelector('[data-mobile-escape-nav]');
-				if (!nav) return;
-				const hasPortal = document.querySelector('.portal-panel.is-active');
-				const isStandalone = window.location.pathname !== '/' && window.location.pathname !== '/index.html';
-				const hasDrawerOpen = document.body.classList.contains('overflow-hidden') || document.body.classList.contains('drawer-open') || document.body.classList.contains('chat-open');
-				const showEscape = !!hasPortal || isStandalone || hasDrawerOpen;
-				nav.classList.toggle('is-overlay-open', showEscape);
-
-				// Hide the Orbital FAB to prevent overlapping when escape nav is active
-				const orbitalFab = document.querySelector('.mobile-nav-container') as HTMLElement;
-				if (orbitalFab) {
-					orbitalFab.style.display = showEscape ? 'none' : '';
-				}
-			}
-
-			let debounceId = 0;
-			const debouncedUpdate = () => {
-				clearTimeout(debounceId);
-				debounceId = window.setTimeout(updateMobileEscapeVisibility, 50);
-			};
-
-			const escapeObserver = new MutationObserver(debouncedUpdate);
-			
-			// Observe portals for active state changes
-			const portalContainer = document.querySelector('.infocigan-portal-system');
-			if (portalContainer) {
-				escapeObserver.observe(portalContainer, { attributes: true, attributeFilter: ['class'], subtree: true });
-			}
-			// Observe body for drawer 'overflow-hidden' class (cheap since subtree: false)
-			escapeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'], subtree: false });
-
-			document.addEventListener('DOMContentLoaded', updateMobileEscapeVisibility);
-			window.addEventListener('hashchange', updateMobileEscapeVisibility);
-			updateMobileEscapeVisibility();
 
 			// Defer non-critical portal fonts until after page is fully interactive.
 			// Bungee, Playfair Display, Space Mono, Syne are only used inside
@@ -196,76 +92,6 @@ const { title = "Q888" } = Astro.props;
 			}
 		</script>
 
-		<style>
-			.mobile-escape-nav {
-				position: fixed;
-				bottom: 20px;
-				right: 20px;
-				z-index: 999998;
-				display: none;
-				pointer-events: auto;
-			}
 
-			@media (max-width: 1024px) {
-				.mobile-escape-nav.is-overlay-open {
-					display: flex;
-					flex-direction: column;
-					gap: 12px;
-				}
-			}
-
-			@media (min-width: 1025px) {
-				.mobile-escape-nav {
-					display: none !important;
-				}
-			}
-
-			.mobile-back-btn,
-			.mobile-close-btn {
-				width: 56px;
-				height: 56px;
-				border-radius: 50%;
-				background: rgba(0, 0, 0, 0.85);
-				backdrop-filter: blur(8px);
-				-webkit-backdrop-filter: blur(8px);
-				color: white;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				touch-action: manipulation;
-				-webkit-tap-highlight-color: transparent;
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-				transition: all 0.2s ease;
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				cursor: pointer;
-			}
-
-			.mobile-back-btn:active,
-			.mobile-close-btn:active {
-				transform: scale(0.92);
-				background: rgba(0, 0, 0, 0.95);
-			}
-
-			@media (min-width: 769px) {
-				.mobile-escape-nav {
-					display: none !important;
-				}
-			}
-
-			@media (max-width: 1024px) {
-				.mobile-escape-nav {
-					position: fixed !important;
-					bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 56px + 12px);
-					right: max(1.5rem, env(safe-area-inset-right, 0px));
-					z-index: 999999;
-				}
-
-				.mobile-back-btn,
-				.mobile-close-btn {
-					width: 56px;
-					height: 56px;
-				}
-			}
-		</style>
 	</body>
 </html>

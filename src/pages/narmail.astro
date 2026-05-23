@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
+import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import NarMailChatbot from "../components/NarMailChatbot.astro";
 import { getEntry } from "astro:content";
@@ -14,7 +15,8 @@ const narMail = narMailEntry.data;
 ---
 
 <Layout title="Nar-Mail Express — Q888">
-  <SlimNav />
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />
 
   <main class="relative min-h-screen pt-10 md:pt-11">
@@ -469,7 +471,7 @@ const narMail = narMailEntry.data;
 <style>
   :global(.is-viewer-open [data-slim-nav]),
   :global(.is-viewer-open [data-system-meta]),
-  :global(.is-viewer-open .mobile-escape-nav) {
+  :global(.is-viewer-open [data-subpage-nav]) {
     display: none !important;
   }
 
