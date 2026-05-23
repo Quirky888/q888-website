@@ -56,6 +56,7 @@ function lockScroll() {
     lockState.previousOverflow = document.body.style.overflow;
     lockState.previousPaddingRight = document.body.style.paddingRight;
     document.body.style.overflow = "hidden";
+    document.body.classList.add("drawer-open");
     if (scrollbarWidth > 0) {
       document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
@@ -70,6 +71,7 @@ function unlockScroll() {
   if (lockState.count > 0) return;
   document.body.style.overflow = lockState.previousOverflow;
   document.body.style.paddingRight = lockState.previousPaddingRight;
+  document.body.classList.remove("drawer-open");
 }
 
 function trapFocus(panel: HTMLElement) {
@@ -151,7 +153,7 @@ export function closeDrawerIfOpen(shouldPushState = true) {
   closeDrawer(direction, shouldPushState);
 }
 
-export async function closeDrawer(direction: Direction, shouldPushState = true) {
+async function closeDrawer(direction: Direction, shouldPushState = true) {
   const root = getDrawerRoot();
   if (!activeDrawer || !root) return;
 

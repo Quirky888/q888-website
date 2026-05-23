@@ -1,0 +1,111 @@
+---
+const navLinks = [
+  // tx, ty determine the final position of the link relative to the center of the FAB when opened.
+  // We stagger them to create a quarter-circle orbital arc towards the top-left.
+  { label: "Projects", href: "/#projects", tx: "-100px", ty: "-20px" },
+  { label: "Infocigan", href: "/#infocigan", tx: "-80px", ty: "-80px" },
+  { label: "Contact", href: "/#contact", tx: "-20px", ty: "-100px" },
+];
+---
+
+<div class="mobile-nav-container lg:hidden fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-[999999] pointer-events-none">
+  <!-- 
+    The wrapper is pointer-events-none so it doesn't block clicks around the FAB. 
+    The interactive parts have pointer-events-auto.
+  -->
+  <div class="relative w-14 h-14" data-mobile-nav>
+    <!-- Orbital Links -->
+    {navLinks.map((link, index) => (
+      <a 
+        href={link.href} 
+        class="orbital-link absolute top-1/2 right-1/2 translate-x-[50%] -translate-y-1/2 opacity-0 pointer-events-none flex items-center justify-center px-4 py-2 rounded-full bg-black/80 dark:bg-white/10 backdrop-blur-xl border border-white/20 text-white dark:text-white text-xs font-mono tracking-widest uppercase shadow-2xl transition-all duration-500 will-change-transform"
+        style={`transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); --tx: ${link.tx}; --ty: ${link.ty}; transition-delay: ${index * 40}ms;`}
+        data-scroll
+      >
+        {link.label}
+      </a>
+    ))}
+
+    <!-- FAB Toggle -->
+    <button 
+      class="fab-toggle absolute inset-0 w-14 h-14 rounded-full bg-black/90 dark:bg-white/10 backdrop-blur-xl border border-white/30 text-white flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-transform duration-300 active:scale-90 pointer-events-auto z-10"
+      aria-label="Toggle Navigation Menu"
+    >
+      <div class="relative w-5 h-5 flex flex-col justify-center items-center gap-[4px]">
+        <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center" data-bar="1"></span>
+        <span class="block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center" data-bar="2"></span>
+      </div>
+    </button>
+  </div>
+</div>
+
+<script>
+  function initMobileNav() {
+    const navs = document.querySelectorAll('[data-mobile-nav]');
+    navs.forEach(nav => {
+      if (nav.hasAttribute('data-initialized')) return;
+      nav.setAttribute('data-initialized', 'true');
+
+      const toggleBtn = nav.querySelector('.fab-toggle');
+      const links = nav.querySelectorAll('.orbital-link');
+      const bar1 = nav.querySelector('[data-bar="1"]');
+      const bar2 = nav.querySelector('[data-bar="2"]');
+
+      let isOpen = false;
+
+      // Initialize closed state transform immediately
+      links.forEach(link => {
+        (link as HTMLElement).style.transform = `translate(50%, -50%) scale(0.5)`;
+      });
+
+      const toggleMenu = () => {
+        isOpen = !isOpen;
+        if (isOpen) {
+          // Open state
+          links.forEach(link => {
+            const tx = (link as HTMLElement).style.getPropertyValue('--tx');
+            const ty = (link as HTMLElement).style.getPropertyValue('--ty');
+            // We use 50% for X because right-1/2 needs a positive translation to align the center
+            (link as HTMLElement).style.transform = `translate(calc(50% + ${tx}), calc(-50% + ${ty})) scale(1)`;
+            link.classList.remove('opacity-0', 'pointer-events-none');
+            link.classList.add('opacity-100', 'pointer-events-auto');
+          });
+
+          bar1?.classList.add('rotate-45', 'translate-y-[3px]');
+          bar2?.classList.add('-rotate-45', '-translate-y-[3px]');
+          toggleBtn?.classList.add('bg-white/20', 'border-white/50');
+          toggleBtn?.classList.remove('bg-black/90', 'border-white/30');
+        } else {
+          // Close state
+          links.forEach(link => {
+            (link as HTMLElement).style.transform = `translate(50%, -50%) scale(0.5)`;
+            link.classList.add('opacity-0', 'pointer-events-none');
+            link.classList.remove('opacity-100', 'pointer-events-auto');
+          });
+
+          bar1?.classList.remove('rotate-45', 'translate-y-[3px]');
+          bar2?.classList.remove('-rotate-45', '-translate-y-[3px]');
+          toggleBtn?.classList.remove('bg-white/20', 'border-white/50');
+          toggleBtn?.classList.add('bg-black/90', 'border-white/30');
+        }
+      };
+
+      toggleBtn?.addEventListener('click', toggleMenu);
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          if (isOpen) toggleMenu();
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (isOpen && !nav.contains(e.target as Node)) {
+          toggleMenu();
+        }
+      });
+    });
+  }
+
+  initMobileNav();
+  document.addEventListener('astro:page-load', initMobileNav);
+</script>

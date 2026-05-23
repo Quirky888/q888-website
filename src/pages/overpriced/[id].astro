@@ -39,7 +39,7 @@ const pageTitle = sticker ? `${sticker.title} — Overpriced Stickers — Q888` 
 
   <main class="relative min-h-screen pt-10 md:pt-11">
     <div class="overpriced-layout-with-nav">
-      <OverpricedStickersSection inPortal={false} activeStickerId={sticker?.id || id} />
+      <OverpricedStickersSection activeStickerId={sticker?.id || id} />
       <InvestorChatbot />
     </div>
   </main>

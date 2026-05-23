@@ -195,7 +195,7 @@ class StoryDrawer {
   }
 
   open(locationId: string) {
-    console.log('[Edinburgh Map] Opening drawer for location:', locationId);
+    if (import.meta.env.DEV) console.log('[Edinburgh Map] Opening drawer for location:', locationId);
     const location = this.stories.find((story) => story.id === locationId);
     if (!location) {
       console.warn('[Edinburgh Map] Location not found:', locationId);
@@ -222,11 +222,11 @@ class StoryDrawer {
 
     this.drawer.classList.add("is-open");
     this.drawer.setAttribute("aria-hidden", "false");
-    console.log('[Edinburgh Map] Drawer opened successfully');
+    if (import.meta.env.DEV) console.log('[Edinburgh Map] Drawer opened successfully');
   }
 
   close() {
-    console.log('[Edinburgh Map] Closing drawer');
+    if (import.meta.env.DEV) console.log('[Edinburgh Map] Closing drawer');
     this.drawer.classList.remove("is-open");
     this.drawer.setAttribute("aria-hidden", "true");
     this.currentIndex = -1;
@@ -338,7 +338,6 @@ function buildHotspots(
 
 function bindHotspots(
   svg: SVGSVGElement,
-  stories: EdenLocation[],
   drawer: StoryDrawer,
   signal: AbortSignal
 ) {
@@ -430,11 +429,11 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
     const drawer = new StoryDrawer(drawerEl, data.locations);
     drawer.bindEvents(signal);
     buildHotspots(svg, data.locations, data.hotspotDefaults);
-    bindHotspots(svg, data.locations, drawer, signal);
+    bindHotspots(svg, drawer, signal);
     bindClickAway(section, drawer, signal);
     bindEscapeKey(drawer, signal);
 
-    console.log('[Edinburgh Map] Map initialized successfully with', data.locations.length, 'locations');
+    if (import.meta.env.DEV) console.log('[Edinburgh Map] Map initialized successfully with', data.locations.length, 'locations');
 
     const mapContainer = section.querySelector<HTMLElement>(".eden-map-container");
     const mapShell = section.querySelector<HTMLElement>(".eden-map-shell");
@@ -442,12 +441,12 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
     const loadingEl = section.querySelector<HTMLElement>("[data-eden-map-loading]");
     const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
-    console.log('[Panzoom] mapContainer:', mapContainer ? 'Found' : 'Not found');
-    console.log('[Panzoom] mapShell:', mapShell ? 'Found' : 'Not found');
-    console.log('[Panzoom] mapImage:', mapImage ? 'Found' : 'Not found');
-    console.log('[Panzoom] loadingEl:', loadingEl ? 'Found' : 'Not found');
-    console.log('[Panzoom] isMobile:', isMobile());
-    console.log('[Panzoom] Window width:', window.innerWidth);
+    if (import.meta.env.DEV) console.log('[Panzoom] mapContainer:', mapContainer ? 'Found' : 'Not found');
+    if (import.meta.env.DEV) console.log('[Panzoom] mapShell:', mapShell ? 'Found' : 'Not found');
+    if (import.meta.env.DEV) console.log('[Panzoom] mapImage:', mapImage ? 'Found' : 'Not found');
+    if (import.meta.env.DEV) console.log('[Panzoom] loadingEl:', loadingEl ? 'Found' : 'Not found');
+    if (import.meta.env.DEV) console.log('[Panzoom] isMobile:', isMobile());
+    if (import.meta.env.DEV) console.log('[Panzoom] Window width:', window.innerWidth);
 
     const hideLoading = () => {
       if (loadingEl) {
@@ -473,34 +472,31 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
         panzoomInstance.destroy();
         panzoomInstance = null;
       }
-      console.log('[Panzoom] Starting initialization...');
+      if (import.meta.env.DEV) console.log('[Panzoom] Starting initialization...');
       try {
+        mapContainer.style.willChange = 'transform';
+        mapContainer.style.touchAction = 'none';
         panzoomInstance = Panzoom(mapContainer, {
           maxScale: 3,
           minScale: 1,
           startScale: 1,
-          contain: "inside",
+          contain: "outside",
           cursor: "move",
           pinchAndPan: true,
           animate: false,
           duration: 0,
           excludeClass: "panzoom-exclude",
-          panOnlyWhenZoomed: true,
+          panOnlyWhenZoomed: false,
           disableZoom: false,
-          touchAction: "none",
-          handleStartEvent: (e: Event) => {
-            if ("touches" in e && touchCount < 2) return;
-            e.preventDefault();
-            e.stopPropagation();
-          },
+          touchAction: "none"
         });
-        console.log('[Panzoom] Instance created successfully');
+        if (import.meta.env.DEV) console.log('[Panzoom] Instance created successfully');
         try {
           mapShell.addEventListener("wheel", panzoomInstance.zoomWithWheel, {
             passive: false,
             signal,
           });
-          console.log('[Panzoom] Event listener attached');
+          if (import.meta.env.DEV) console.log('[Panzoom] Event listener attached');
         } catch (wheelError) {
           console.error('[Panzoom] Wheel listener failed:', wheelError);
         }
@@ -511,17 +507,17 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
     };
 
     const onImageReady = () => {
-      console.log('[Edinburgh Map] Image loaded, hiding loading indicator');
+      if (import.meta.env.DEV) console.log('[Edinburgh Map] Image loaded, hiding loading indicator');
       hideLoading();
       initPanzoomIfMobile();
     };
 
     if (mapImage && loadingEl) {
       if (mapImage.complete && mapImage.naturalHeight > 0) {
-        console.log('[Edinburgh Map] Image already loaded');
+        if (import.meta.env.DEV) console.log('[Edinburgh Map] Image already loaded');
         onImageReady();
       } else {
-        console.log('[Edinburgh Map] Waiting for image load');
+        if (import.meta.env.DEV) console.log('[Edinburgh Map] Waiting for image load');
         mapImage.addEventListener("load", onImageReady, { once: true, signal });
         mapImage.addEventListener(
           "error",
@@ -567,9 +563,9 @@ export function initEdinburghMap() {
   if (initialized) return;
   initialized = true;
 
-  console.log('[Edinburgh Map] Initializing...');
-  console.log('[Edinburgh Map] Screen:', window.innerWidth, 'x', window.innerHeight);
-  console.log('[Edinburgh Map] Orientation:', window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
+  if (import.meta.env.DEV) console.log('[Edinburgh Map] Initializing...');
+  if (import.meta.env.DEV) console.log('[Edinburgh Map] Screen:', window.innerWidth, 'x', window.innerHeight);
+  if (import.meta.env.DEV) console.log('[Edinburgh Map] Orientation:', window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
 
   const panel = document.querySelector<HTMLElement>(SELECTOR_PANEL);
   if (!panel) {
@@ -577,7 +573,7 @@ export function initEdinburghMap() {
     initialized = false;
     return;
   }
-  console.log('[Edinburgh Map] Panel found');
+  if (import.meta.env.DEV) console.log('[Edinburgh Map] Panel found');
 
   const section = panel.matches(SELECTOR_SECTION)
     ? panel
@@ -593,7 +589,7 @@ export function initEdinburghMap() {
         abortController?.abort();
         abortController = new AbortController();
         const { signal } = abortController;
-        console.log('[Edinburgh Map] Panel is active, initializing map...');
+        if (import.meta.env.DEV) console.log('[Edinburgh Map] Panel is active, initializing map...');
         initMap(section, signal, panel);
       }
     } else {
@@ -602,7 +598,7 @@ export function initEdinburghMap() {
       if (panzoomInstance) {
         panzoomInstance.destroy();
         panzoomInstance = null;
-        console.log('[Panzoom] Destroyed on panel close');
+        if (import.meta.env.DEV) console.log('[Panzoom] Destroyed on panel close');
       }
       if (window.matchMedia("(max-width: 768px)").matches) {
         const loadingEl = section?.querySelector<HTMLElement>("[data-eden-map-loading]");

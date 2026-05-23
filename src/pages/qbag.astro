@@ -3,106 +3,432 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
 
 const qBagEntry = await getEntry("products", "q-bag");
 if (!qBagEntry || qBagEntry.data.slug !== "q-bag") {
   throw new Error("Required Q-Bag content entry is missing.");
 }
 const qBag = qBagEntry.data;
+
+// Gallery images — hi-res targets (used in client script)
 ---
 
 <Layout title="Q-Bag — Q888">
   <SlimNav />
   <SystemMeta position="top" />
 
-  <main class="relative min-h-screen pt-10 md:pt-11">
-    <div class="qbag-new-layout">
+  <main class="relative min-h-[100dvh] pt-10 md:pt-11">
+    <div class="qbag-eden-wrap">
+
+      <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
       <section class="qbag-hero">
-        <img
-          src={qBag.heroImage}
-          alt={qBag.heroAlt}
-          loading="eager"
-          decoding="async"
-          width="1200"
-          height="800"
-        />
-        <div class="qbag-hero-overlay">
-          <h1 class="qbag-title gold-shine">{qBag.heroTitle}</h1>
+        <div class="qbag-hero-inner px-6 sm:px-10 lg:px-16">
+
+          <!-- Portal image with holographic ring -->
+          <div class="qbag-portal-wrap">
+            <!-- Holographic bag ring -->
+            <div class="portal-badge-ring" aria-hidden="true">
+              <svg class="badge-ring-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="qb-holo-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="#ffcc33"/>
+                    <stop offset="16%"  stop-color="#c17a2e"/>
+                    <stop offset="33%"  stop-color="#208c8d"/>
+                    <stop offset="50%"  stop-color="#a8edff"/>
+                    <stop offset="66%"  stop-color="#ff9de2"/>
+                    <stop offset="83%"  stop-color="#ffcc33"/>
+                    <stop offset="100%" stop-color="#c17a2e"/>
+                  </linearGradient>
+                  <linearGradient id="qb-holo-ring-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#a67c00" stop-opacity="0.5"/>
+                    <stop offset="50%"  stop-color="#208c8d" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#a67c00" stop-opacity="0.5"/>
+                  </linearGradient>
+                </defs>
+                <!-- outer holo ring (rounded square, edge-hugging) -->
+                <rect x="3" y="3" width="434" height="434" rx="86" ry="86" stroke="url(#qb-holo-ring)" stroke-width="6" fill="none" opacity="0.9"/>
+                <!-- inner gold ring -->
+                <rect x="11" y="11" width="418" height="418" rx="78" ry="78" stroke="url(#qb-holo-ring-2)" stroke-width="2" fill="none"/>
+                <!-- mini bag silhouette top-left corner -->
+                <g transform="translate(72, 4)" opacity="0.8">
+                  <rect x="0" y="4" width="28" height="22" rx="3" fill="#c17a2e" opacity="0.7"/>
+                  <rect x="5" y="0" width="18" height="6" rx="2" fill="#a67c00" opacity="0.9"/>
+                  <circle cx="14" cy="11" r="4" fill="#ffcc33" opacity="0.6"/>
+                </g>
+                <!-- mini bag bottom-right corner -->
+                <g transform="translate(338, 414)" opacity="0.8">
+                  <rect x="0" y="0" width="28" height="22" rx="3" fill="#208c8d" opacity="0.7"/>
+                  <rect x="5" y="-4" width="18" height="6" rx="2" fill="#208c8d" opacity="0.9"/>
+                </g>
+                <!-- star top-right corner -->
+                <path d="M358 8 L364 10 L364 16 L368 11 L374 13 L371 8 L374 3 L368 5 L364 0 L364 6Z" fill="#ffcc33"/>
+                <!-- star bottom-left corner -->
+                <path d="M82 432 L76 430 L76 424 L72 429 L66 427 L69 432 L66 437 L72 435 L76 440 L76 434Z" fill="#208c8d"/>
+                <!-- tiny heart top-right -->
+                <text x="344" y="36" fill="#ff9de2" font-size="13" opacity="0.8">♥</text>
+                <!-- tiny star bottom-left -->
+                <text x="82" y="410" fill="#ffcc33" font-size="11" opacity="0.7">✦</text>
+                <!-- portal rune top-center -->
+                <text x="207" y="18" fill="#208c8d" font-size="10" opacity="0.6" font-family="monospace">☽</text>
+                <!-- coffee bean dots on left edge -->
+                <circle cx="3" cy="185" r="4" fill="#c17a2e" opacity="0.5"/>
+                <circle cx="3" cy="255" r="3" fill="#a67c00" opacity="0.4"/>
+              </svg>
+            </div>
+
+            <div class="qbag-portal">
+              <Image
+                src={qBag.heroImage}
+                alt={qBag.heroAlt}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                width={800}
+                height={800}
+                class="qbag-portal-img"
+              />
+              <!-- orbiting coffee-bean star -->
+              <div class="portal-orbit" aria-hidden="true">
+                <svg class="orbit-star" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- coffee bean shape -->
+                  <ellipse cx="16" cy="16" rx="10" ry="14" fill="#c17a2e" opacity="0.9"/>
+                  <path d="M16 4 Q20 10 16 16 Q12 22 16 28" stroke="#faf7f2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                  <ellipse cx="16" cy="16" rx="10" ry="14" stroke="#ffcc33" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Title block -->
+          <div class="qbag-hero-text">
+            <p class="qbag-eyebrow">Infocigan Product</p>
+            <h1 class="qbag-headline">
+              Q&#8209;BAG™
+            </h1>
+            <div class="qbag-status-block qb-mono">
+              <div>TYPE: REUSABLE CONTAINER</div>
+              <div>EDITION: PRESIDENT OF THE GALAXY</div>
+              <div>STATUS: <span class="qbag-status-live">CONCEPT ACTIVE</span></div>
+              <div>FORMAT: COFFEE · STICKERS · CULTURE</div>
+            </div>
+          </div>
+
         </div>
       </section>
-      
-      <div class="qbag-main-content">
-        <section class="qbag-intro-section">
-          <div class="glass-card intro-card">
-            <p class="qbag-tagline gold-shine">{qBag.introTagline}</p>
-            <p class="qbag-lead">
-              {qBag.introLead}
-            </p>
-          </div>
-        </section>
+
+      <!-- ══ SVG DIVIDER 1: coffee bean orbit ══ -->
+      <div class="qb-cosmic-divider" aria-hidden="true">
+        <svg viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <!-- left dashed line -->
+          <line x1="0" y1="24" x2="330" y2="24" stroke="#c17a2e" stroke-width="1" stroke-dasharray="3 8"/>
+          <!-- coffee bean cluster -->
+          <g transform="translate(348, 10)">
+            <!-- large bean -->
+            <ellipse cx="26" cy="14" rx="14" ry="18" fill="#c17a2e" opacity="0.25"/>
+            <ellipse cx="26" cy="14" rx="14" ry="18" stroke="#c17a2e" stroke-width="2"/>
+            <path d="M26 0 Q30 8 26 14 Q22 20 26 28" stroke="#a67c00" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <!-- small beans flanking -->
+            <ellipse cx="7" cy="22" rx="7" ry="9" fill="#a67c00" opacity="0.2" stroke="#a67c00" stroke-width="1"/>
+            <ellipse cx="45" cy="22" rx="6" ry="8" fill="#208c8d" opacity="0.2" stroke="#208c8d" stroke-width="1"/>
+            <!-- orbit dots -->
+            <circle cx="0" cy="24" r="2.5" fill="#c17a2e" opacity="0.4"/>
+            <circle cx="52" cy="24" r="2" fill="#208c8d" opacity="0.4"/>
+            <!-- star -->
+            <path d="M26 -4 L27.2 -0.5 L31 -0.5 L28.1 1.7 L29.2 5 L26 3 L22.8 5 L23.9 1.7 L21 -0.5 L24.8 -0.5Z" fill="#ffcc33" opacity="0.9"/>
+          </g>
+          <!-- right dashed line -->
+          <line x1="460" y1="24" x2="800" y2="24" stroke="#c17a2e" stroke-width="1" stroke-dasharray="3 8"/>
+          <!-- runic ticks -->
+          <text x="322" y="40" fill="#a67c00" font-size="8" opacity="0.4" font-family="monospace">⊕</text>
+          <text x="456" y="40" fill="#208c8d" font-size="8" opacity="0.4" font-family="monospace">☽</text>
+        </svg>
       </div>
 
-      <!-- Artwork Gallery Info Card (replaces full artwork section) -->
-      <section class="qbag-artwork-card-section">
-        <div class="artwork-info-card glass-card" id="artwork-gallery-trigger">
-          <div class="artwork-card-content">
-            <div class="artwork-card-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="artwork-card-text">
-              <h3 class="artwork-card-title">{qBag.artworkCardTitle}</h3>
-              <p class="artwork-card-description">{qBag.artworkCardDescription}</p>
-            </div>
-            <button class="artwork-card-button" type="button">
-              <span>{qBag.artworkCardButtonLabel}</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
+      <!-- ══════════════════════════════════ MAIN CONTENT ══════════════════════════════════ -->
+      <div class="qbag-main-content px-6 sm:px-10 lg:px-16 pb-16">
 
-      <div class="qbag-main-content">
-        <section class="qbag-content-grid-section" data-motion-reveal>
-          <div class="qbag-glass-grid" data-motion-stagger data-motion-children="[data-motion-item]">
-            <div class="glass-card" data-motion-item>
-              <h3>{qBag.conceptCards[0].title}</h3>
+        <!-- Lead -->
+        <section class="qbag-section">
+          <p class="qbag-lead">{qBag.introLead}</p>
+        </section>
+
+        <!-- Gallery card trigger -->
+        <section class="qbag-artwork-card-section">
+          <div
+            class="qbag-artwork-card"
+            id="qbag-gallery-trigger"
+            role="button"
+            tabindex="0"
+            aria-label="Open Q-Bag artwork gallery"
+          >
+            <div class="artwork-card-content">
+              <div class="artwork-card-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="artwork-card-text">
+                <h3 class="artwork-card-title">{qBag.artworkCardTitle}</h3>
+                <p class="artwork-card-description">{qBag.artworkCardDescription}</p>
+              </div>
+              <button class="artwork-card-button qb-btn" type="button" aria-label="Open full gallery viewer" tabindex="-1">
+                <span>{qBag.artworkCardButtonLabel}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- The Concept -->
+        <section class="qbag-section">
+          <h2 class="qbag-h2">{qBag.conceptCards[0].title}</h2>
+          <div class="qbag-two-col">
+            <div class="qbag-two-col-text">
               <p>{qBag.conceptCards[0].paragraphs[0]}</p>
               <p>{qBag.conceptCards[0].paragraphs[1]}</p>
             </div>
-            <div class="glass-card" data-motion-item>
-              <h3>{qBag.conceptCards[1].title}</h3>
-              <p>{qBag.conceptCards[1].paragraphs[0]}</p>
-              <p>{qBag.conceptCards[1].paragraphs[1]}</p>
-              <p>{qBag.conceptCards[1].paragraphs[2]}</p>
-            </div>
-            <div class="glass-card" data-motion-item>
-              <h3>{qBag.conceptCards[2].title}</h3>
-              <p>{qBag.conceptCards[2].paragraphs[0]}</p>
-              <p>{qBag.conceptCards[2].paragraphs[1]}</p>
-            </div>
-            <div class="glass-card" data-motion-item>
-              <h3>{qBag.conceptCards[3].title}</h3>
-              <p>{qBag.conceptCards[3].paragraphs[0]}</p>
-              <p>{qBag.conceptCards[3].paragraphs[1]}</p>
+            <!-- Inline Q-Bag portal visual -->
+            <div class="qbag-mini-portal-wrap" aria-hidden="true">
+              <div class="qbag-mini-portal">
+                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="portal-glow" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.15"/>
+                      <stop offset="60%" stop-color="#208c8d" stop-opacity="0.08"/>
+                      <stop offset="100%" stop-color="#faf7f2" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="bag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#c17a2e"/>
+                      <stop offset="50%" stop-color="#ffcc33"/>
+                      <stop offset="100%" stop-color="#a67c00"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- portal glow -->
+                  <circle cx="100" cy="100" r="90" fill="url(#portal-glow)"/>
+                  <!-- portal rings -->
+                  <circle cx="100" cy="100" r="88" stroke="#c17a2e" stroke-width="1.5" stroke-dasharray="8 5" opacity="0.4"/>
+                  <circle cx="100" cy="100" r="72" stroke="#208c8d" stroke-width="1" stroke-dasharray="5 8" opacity="0.3"/>
+                  <!-- bag body -->
+                  <rect x="62" y="70" width="76" height="90" rx="6" fill="url(#bag-grad)" opacity="0.85"/>
+                  <!-- bag top fold -->
+                  <rect x="70" y="54" width="60" height="20" rx="4" fill="#a67c00" opacity="0.9"/>
+                  <!-- bag clip -->
+                  <rect x="86" y="46" width="28" height="10" rx="5" fill="#ffcc33" opacity="0.95"/>
+                  <!-- sticker circle on bag -->
+                  <circle cx="100" cy="105" r="24" fill="#faf7f2" opacity="0.2" stroke="#ffcc33" stroke-width="1.5" stroke-dasharray="4 4"/>
+                  <!-- star in sticker -->
+                  <path d="M100 86 L102.5 94 L111 94 L104.4 99.1 L106.9 107 L100 102 L93.1 107 L95.6 99.1 L89 94 L97.5 94Z" fill="#ffcc33" opacity="0.9"/>
+                  <!-- steam wisps -->
+                  <path d="M82 64 Q80 55 84 47 Q88 39 84 32" stroke="#c17a2e" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+                  <path d="M100 60 Q98 50 102 41 Q106 32 102 24" stroke="#208c8d" stroke-width="1.5" fill="none" opacity="0.35" stroke-linecap="round"/>
+                  <path d="M118 64 Q116 55 120 47 Q124 39 120 32" stroke="#c17a2e" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+                  <!-- orbit dot -->
+                  <circle cx="100" cy="12" r="5" fill="#ffcc33" opacity="0.8"/>
+                  <!-- small hearts -->
+                  <text x="24" y="90" fill="#ff9de2" font-size="14" opacity="0.6">♥</text>
+                  <text x="158" y="130" fill="#208c8d" font-size="11" opacity="0.5">✦</text>
+                </svg>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="qbag-partners-section">
-          <div class="glass-card partners-card">
-            <h2>{qBag.partnersTitle}</h2>
-            <p>{qBag.partnersParagraphs[0]}</p>
-            <p>{qBag.partnersParagraphs[1]}</p>
-          </div>
+        <!-- ══ SVG DIVIDER 2: bag portal ring ══ -->
+        <div class="qb-cosmic-divider" aria-hidden="true">
+          <svg viewBox="0 0 800 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="qb-portal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#208c8d"/>
+                <stop offset="100%" stop-color="#c17a2e"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="26" x2="342" y2="26" stroke="#208c8d" stroke-width="1" stroke-dasharray="2 9"/>
+            <!-- bag in portal -->
+            <g transform="translate(358, 4)">
+              <!-- portal ring -->
+              <circle cx="21" cy="22" r="20" stroke="url(#qb-portal-grad)" stroke-width="2.5" fill="none" opacity="0.9"/>
+              <!-- bag inside -->
+              <rect x="13" y="14" width="16" height="20" rx="2" fill="#c17a2e" opacity="0.6"/>
+              <rect x="15" y="10" width="12" height="6" rx="2" fill="#a67c00" opacity="0.8"/>
+              <rect x="18" y="7" width="6" height="4" rx="2" fill="#ffcc33" opacity="0.9"/>
+              <!-- orbit dot -->
+              <circle cx="21" cy="2" r="2.5" fill="#ffcc33"/>
+              <!-- tiny heart -->
+              <text x="-8" y="28" fill="#ff9de2" font-size="11" opacity="0.7">♥</text>
+              <!-- spiral -->
+              <path d="M46 18 Q52 12 56 18 Q60 24 53 28 Q47 30 46 24" stroke="#208c8d" stroke-width="1.5" fill="none" opacity="0.5"/>
+            </g>
+            <line x1="462" y1="26" x2="800" y2="26" stroke="#208c8d" stroke-width="1" stroke-dasharray="2 9"/>
+            <text x="334" y="42" fill="#a67c00" font-size="9" opacity="0.4" font-family="monospace">✦</text>
+            <text x="458" y="42" fill="#208c8d" font-size="9" opacity="0.4" font-family="monospace">✦</text>
+          </svg>
+        </div>
+
+        <!-- Stickers as Artifacts -->
+        <section class="qbag-section">
+          <h2 class="qbag-h2">{qBag.conceptCards[1].title}</h2>
+          <p>{qBag.conceptCards[1].paragraphs[0]}</p>
+          <p>{qBag.conceptCards[1].paragraphs[1]}</p>
+          <p>{qBag.conceptCards[1].paragraphs[2]}</p>
         </section>
 
+        <!-- Sticker chip strip -->
+        <div class="qb-sticker-strip" aria-hidden="true">
+          <!-- Chip 1: dimension bag portal -->
+          <div class="qb-sticker-chip">
+            <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="qb-chip-holo-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffcc33"/>
+                  <stop offset="33%" stop-color="#208c8d"/>
+                  <stop offset="66%" stop-color="#ff9de2"/>
+                  <stop offset="100%" stop-color="#c17a2e"/>
+                </linearGradient>
+              </defs>
+              <!-- badge outline -->
+              <path d="M6 14 Q6 6 14 6 L66 6 Q74 6 74 14 L74 62 Q74 82 40 86 Q6 82 6 62 Z" fill="#faf7f2" stroke="url(#qb-chip-holo-1)" stroke-width="3"/>
+              <!-- inner ring -->
+              <path d="M14 18 Q14 12 20 12 L60 12 Q66 12 66 18 L66 58 Q66 74 40 78 Q14 74 14 58 Z" fill="none" stroke="#208c8d" stroke-width="1" opacity="0.35"/>
+              <!-- coffee bag icon -->
+              <rect x="27" y="26" width="26" height="34" rx="3" fill="#c17a2e" opacity="0.8"/>
+              <rect x="30" y="20" width="20" height="9" rx="2.5" fill="#a67c00" opacity="0.9"/>
+              <rect x="34" y="15" width="12" height="7" rx="3.5" fill="#ffcc33" opacity="0.95"/>
+              <!-- star sticker on bag -->
+              <path d="M40 34 L41 38 L45 38 L42 41 L43 45 L40 43 L37 45 L38 41 L35 38 L39 38Z" fill="#ffcc33" opacity="0.9"/>
+              <text x="16" y="84" fill="#a67c00" font-size="7" font-family="monospace" letter-spacing="0.5">Q-BAG™</text>
+            </svg>
+          </div>
+
+          <!-- Chip 2: sticker badge -->
+          <div class="qb-sticker-chip">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="qb-chip-amber" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffcc33"/>
+                  <stop offset="100%" stop-color="#c17a2e"/>
+                </linearGradient>
+              </defs>
+              <circle cx="40" cy="40" r="36" fill="#faf7f2" stroke="url(#qb-chip-amber)" stroke-width="3"/>
+              <!-- inner ring dashes -->
+              <circle cx="40" cy="40" r="30" stroke="#c17a2e" stroke-width="1" stroke-dasharray="4 5" opacity="0.4" fill="none"/>
+              <!-- sticker diamond -->
+              <path d="M40 16 L56 32 L40 56 L24 32Z" fill="#c17a2e" opacity="0.2" stroke="#c17a2e" stroke-width="1.5"/>
+              <!-- inner star -->
+              <path d="M40 25 L42 32 L49 32 L43.5 36.5 L45.5 43 L40 39 L34.5 43 L36.5 36.5 L31 32 L38 32Z" fill="#ffcc33" opacity="0.95"/>
+              <!-- hearts around -->
+              <text x="14" y="24" fill="#ff9de2" font-size="11" opacity="0.7">♥</text>
+              <text x="59" y="62" fill="#208c8d" font-size="9" opacity="0.6">✦</text>
+              <text x="14" y="62" fill="#a67c00" font-size="8" opacity="0.5">☽</text>
+            </svg>
+          </div>
+
+          <!-- Chip 3: coffee star -->
+          <div class="qb-sticker-chip">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="qb-starburst" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.9"/>
+                  <stop offset="60%" stop-color="#c17a2e" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#faf7f2" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle cx="40" cy="40" r="36" fill="#faf7f2" stroke="#c17a2e" stroke-width="2" opacity="0.8"/>
+              <!-- rays -->
+              <line x1="40" y1="10" x2="40" y2="70" stroke="#ffcc33" stroke-width="1" opacity="0.25"/>
+              <line x1="10" y1="40" x2="70" y2="40" stroke="#ffcc33" stroke-width="1" opacity="0.25"/>
+              <line x1="19" y1="19" x2="61" y2="61" stroke="#ffcc33" stroke-width="1" opacity="0.18"/>
+              <line x1="61" y1="19" x2="19" y2="61" stroke="#ffcc33" stroke-width="1" opacity="0.18"/>
+              <!-- 8-point star -->
+              <path d="M40 16 L43 31 L56 22 L47 35 L62 38 L47 41 L56 54 L43 45 L40 60 L37 45 L24 54 L33 41 L18 38 L33 35 L24 22 L37 31Z" fill="#c17a2e" opacity="0.85"/>
+              <!-- coffee bean centre -->
+              <ellipse cx="40" cy="40" rx="7" ry="9" fill="#ffcc33" opacity="0.95"/>
+              <path d="M40 31 Q43 35.5 40 40 Q37 44.5 40 49" stroke="#a67c00" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <!-- orbit ring -->
+              <circle cx="40" cy="40" r="34" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 5" opacity="0.35" fill="none"/>
+            </svg>
+          </div>
+
+          <!-- Chip 4: spiral loop / ouroboros -->
+          <div class="qb-sticker-chip">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="qb-chip-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff9de2"/>
+                  <stop offset="25%" stop-color="#ffcc33"/>
+                  <stop offset="50%" stop-color="#208c8d"/>
+                  <stop offset="75%" stop-color="#a8edff"/>
+                  <stop offset="100%" stop-color="#c17a2e"/>
+                </linearGradient>
+              </defs>
+              <!-- rounded square bg (square bubble reference) -->
+              <path d="M6 20 Q6 6 20 6 L60 6 Q74 6 74 20 L74 60 Q74 74 60 74 L20 74 Q6 74 6 60 Z" fill="#f0ede6" stroke="url(#qb-chip-rainbow)" stroke-width="3"/>
+              <!-- ouroboros ring -->
+              <circle cx="40" cy="38" r="20" stroke="url(#qb-chip-rainbow)" stroke-width="3" fill="none" opacity="0.9"/>
+              <!-- bag inside loop -->
+              <rect x="33" y="28" width="14" height="18" rx="2" fill="#c17a2e" opacity="0.6"/>
+              <rect x="35" y="24" width="10" height="6" rx="2" fill="#a67c00" opacity="0.8"/>
+              <rect x="37" y="20" width="6" height="5" rx="2.5" fill="#ffcc33" opacity="0.9"/>
+              <!-- heart + star -->
+              <text x="27" y="72" fill="#ff9de2" font-size="10" opacity="0.8">♥</text>
+              <text x="46" y="72" fill="#ffcc33" font-size="8" opacity="0.7">✦</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Sustainability as Identity -->
+        <section class="qbag-section">
+          <h2 class="qbag-h2">{qBag.conceptCards[2].title}</h2>
+          <p>{qBag.conceptCards[2].paragraphs[0]}</p>
+          <p>{qBag.conceptCards[2].paragraphs[1]}</p>
+        </section>
+
+        <!-- ══ SVG DIVIDER 3: steam spiral ══ -->
+        <div class="qb-cosmic-divider" aria-hidden="true">
+          <svg viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <line x1="0" y1="24" x2="344" y2="24" stroke="#a67c00" stroke-width="1" stroke-dasharray="5 5"/>
+            <!-- steam spiral centre -->
+            <g transform="translate(358, 4)">
+              <!-- outer ring -->
+              <circle cx="20" cy="20" r="19" stroke="#c17a2e" stroke-width="2" stroke-dasharray="6 4" fill="none" opacity="0.6"/>
+              <!-- steam wisps -->
+              <path d="M12 26 Q10 19 14 12 Q18 5 14 0" stroke="#c17a2e" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <path d="M20 28 Q18 20 22 12 Q26 4 22 -2" stroke="#a67c00" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+              <path d="M28 26 Q26 19 30 12 Q34 5 30 0" stroke="#208c8d" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+              <!-- cup base -->
+              <path d="M10 30 Q10 38 20 38 Q30 38 30 30" stroke="#c17a2e" stroke-width="2" fill="none" opacity="0.7"/>
+              <line x1="8" y1="40" x2="32" y2="40" stroke="#a67c00" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+              <!-- orbit dot -->
+              <circle cx="20" cy="1" r="2.5" fill="#ffcc33"/>
+            </g>
+            <line x1="432" y1="24" x2="800" y2="24" stroke="#a67c00" stroke-width="1" stroke-dasharray="5 5"/>
+            <text x="336" y="40" fill="#208c8d" font-size="9" opacity="0.4" font-family="monospace">☿</text>
+            <text x="430" y="40" fill="#ff9de2" font-size="9" opacity="0.4" font-family="monospace">♥</text>
+          </svg>
+        </div>
+
+        <!-- Speculative Investment -->
+        <section class="qbag-section">
+          <h2 class="qbag-h2">{qBag.conceptCards[3].title}</h2>
+          <p>{qBag.conceptCards[3].paragraphs[0]}</p>
+          <blockquote class="qbag-blockquote">
+            {qBag.conceptCards[3].paragraphs[1]}
+          </blockquote>
+        </section>
+
+        <!-- For Partners -->
+        <section class="qbag-section">
+          <h2 class="qbag-h2">{qBag.partnersTitle}</h2>
+          <p>{qBag.partnersParagraphs[0]}</p>
+          <p>{qBag.partnersParagraphs[1]}</p>
+        </section>
+
+        <!-- Closing statement -->
         <section class="qbag-closing-section">
-          <div class="closing-content">
-            <p class="big-statement">
+          <div class="qbag-closing-inner">
+            <p class="qbag-big-statement">
               {qBag.closingLines[0]}<br />
               {qBag.closingLines[1]}<br />
               {qBag.closingLines[2]}
@@ -110,66 +436,103 @@ const qBag = qBagEntry.data;
           </div>
         </section>
 
-        <section class="qbag-contact-section">
-          <div class="glass-card contact-card">
-            <p>{qBag.contactIntro}</p>
-            <p class="contact-info">
-              <a href={`mailto:${qBag.contactEmail}`}>{qBag.contactEmail}</a> or Instagram: <a href={qBag.contactInstagramUrl} target="_blank" rel="noopener">{qBag.contactInstagramHandle}</a>
-            </p>
-          </div>
+        <!-- Contact -->
+        <section class="qbag-section" id="qbag-contact">
+          <h2 class="qbag-h2">Get in Touch</h2>
+          <p>{qBag.contactIntro}</p>
+          <p class="qbag-portal-links">
+            <a href={`mailto:${qBag.contactEmail}`} id="qbag-email-link">{qBag.contactEmail}</a>
+            <span class="qbag-portal-sep">|</span>
+            <a href={qBag.contactInstagramUrl} target="_blank" rel="noopener noreferrer" id="qbag-instagram-link">{qBag.contactInstagramHandle}</a>
+          </p>
         </section>
-      </div>
 
-      <section class="qbag-cta">
-        <a href="/#infocigan" class="retreat-button no-underline inline-block">
-          {qBag.ctaLabel}
-        </a>
-      </section>
+        <!-- CTA -->
+        <section class="qbag-cta">
+          <a href="/#infocigan" class="qbag-retreat-btn" id="qbag-cta-btn">{qBag.ctaLabel}</a>
+        </section>
 
-      <div class="artwork-viewer" id="artwork-viewer" aria-hidden="true">
-        <div class="viewer-overlay"></div>
-        <div class="viewer-container">
-          <div class="viewer-controls">
-            <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div class="viewer-image-wrapper">
-            <div class="viewer-image-container" id="viewer-image-container">
-              <img
-                src={qBag.viewerImage}
-                alt={qBag.viewerAlt}
-                class="viewer-image"
-                id="viewer-image"
-                draggable="false"
-                loading="lazy"
-                decoding="async"
-                width="1200"
-                height="900"
-              />
-            </div>
-          </div>
-          <div class="viewer-zoom-indicator" id="zoom-indicator">100%</div>
-        </div>
       </div>
     </div>
+
+    <!-- ══════════════════════════════════ GALLERY DIALOG ══════════════════════════════════ -->
+    <dialog
+      class="qbag-gallery-dialog"
+      id="qbag-gallery-dialog"
+      aria-label="Q-Bag artwork gallery"
+    >
+      <!-- Controls bar -->
+      <div class="gallery-controls" id="qbag-gallery-controls">
+        <!-- Left: nav -->
+        <div class="gallery-ctrl-group">
+          <button class="gallery-btn gallery-prev" id="qbag-prev-btn" aria-label="Previous image" title="Previous (←)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <span class="gallery-counter" id="qbag-gallery-counter" aria-live="polite">1 / 2</span>
+          <button class="gallery-btn gallery-next" id="qbag-next-btn" aria-label="Next image" title="Next (→)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <span class="gallery-label" id="qbag-gallery-label" aria-live="polite"></span>
+        </div>
+
+        <!-- Right: actions -->
+        <div class="gallery-ctrl-group">
+          <button class="gallery-btn gallery-zoom-in" id="qbag-zoom-in" aria-label="Zoom in" title="Zoom in (+)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="gallery-btn gallery-zoom-out" id="qbag-zoom-out" aria-label="Zoom out" title="Zoom out (-)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="gallery-btn gallery-reset" id="qbag-reset-zoom" aria-label="Reset zoom" title="Reset view (0)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <a class="gallery-btn gallery-download" id="qbag-download-btn" aria-label="Download image" title="Download image" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3V16M12 16L7 11M12 16L17 11M5 20H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button class="gallery-btn gallery-fullscreen" id="qbag-fullscreen-btn" aria-label="Toggle fullscreen" title="Fullscreen (F)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="qbag-fs-icon-expand">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="qbag-fs-icon-shrink" class="hidden">
+              <path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="gallery-btn gallery-close" id="qbag-close-btn" aria-label="Close gallery" title="Close (Esc)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Image viewport -->
+      <div class="gallery-viewport" id="qbag-gallery-viewport">
+        <div class="gallery-img-container" id="qbag-img-container">
+          <img
+            class="gallery-img"
+            id="qbag-gallery-img"
+            src=""
+            alt=""
+            draggable="false"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="gallery-zoom-pill" id="qbag-zoom-pill" aria-live="polite" aria-atomic="true">100%</div>
+      </div>
+    </dialog>
   </main>
 
   <div class="hidden md:block">
@@ -178,338 +541,696 @@ const qBag = qBagEntry.data;
 </Layout>
 
 <script>
-  function initArtworkViewer() {
-    const trigger = document.getElementById("artwork-gallery-trigger");
-    const viewer = document.getElementById("artwork-viewer");
-    const closeBtn = viewer?.querySelector(".viewer-close");
-    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
-    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
-    const resetBtn = viewer?.querySelector(".viewer-reset");
-    const imageContainer = document.getElementById("viewer-image-container");
-    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
-    const zoomIndicator = document.getElementById("zoom-indicator");
+  /* ─────────────────────────────────────────────────────────────────
+     Q-BAG GALLERY — Native <dialog> + Fullscreen API + multi-image
+     ───────────────────────────────────────────────────────────────── */
+  type GalleryImage = { src: string; alt: string; label: string };
 
-    if (!trigger || !viewer || !imageContainer) return;
-    if (viewer.hasAttribute("data-viewer-initialized")) return;
-    viewer.setAttribute("data-viewer-initialized", "true");
+  const IMAGES: GalleryImage[] = [
+    { src: "/images/qbag_concept.webp", alt: "Q-Bag Visual Archive — full collage artwork",    label: "Visual Archive"         },
+  ];
 
+  function initGallery() {
+    const trigger   = document.getElementById("qbag-gallery-trigger");
+    const dialog    = document.getElementById("qbag-gallery-dialog") as HTMLDialogElement | null;
+    if (!trigger || !dialog) return;
+    if (dialog.dataset.galleryInit) return;
+    dialog.dataset.galleryInit = "1";
+
+    const img        = document.getElementById("qbag-gallery-img") as HTMLImageElement;
+    const counter    = document.getElementById("qbag-gallery-counter")!;
+    const label      = document.getElementById("qbag-gallery-label")!;
+    const container  = document.getElementById("qbag-img-container")!;
+    const viewport   = document.getElementById("qbag-gallery-viewport")!;
+    const pill       = document.getElementById("qbag-zoom-pill")!;
+    const prevBtn    = document.getElementById("qbag-prev-btn")!;
+    const nextBtn    = document.getElementById("qbag-next-btn")!;
+    const zoomInBtn  = document.getElementById("qbag-zoom-in")!;
+    const zoomOutBtn = document.getElementById("qbag-zoom-out")!;
+    const resetBtn   = document.getElementById("qbag-reset-zoom")!;
+    const dlBtn      = document.getElementById("qbag-download-btn") as HTMLAnchorElement;
+    const fsBtn      = document.getElementById("qbag-fullscreen-btn")!;
+    const closeBtn   = document.getElementById("qbag-close-btn")!;
+    const fsExpand   = document.getElementById("qbag-fs-icon-expand")!;
+    const fsShrink   = document.getElementById("qbag-fs-icon-shrink")!;
+
+    if (IMAGES.length <= 1) {
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
+      counter.style.display = "none";
+    }
+
+    let currentIdx = 0;
     let scale = 1;
-    let translateX = 0;
-    let translateY = 0;
+    let tx = 0;
+    let ty = 0;
     let isDragging = false;
     let startX = 0;
     let startY = 0;
-
     const MIN_SCALE = 1;
-    const MAX_SCALE = 4;
-    const ZOOM_STEP = 0.3;
+    const MAX_SCALE = 5;
+    const ZOOM_STEP = 0.35;
+    let pillTimer: ReturnType<typeof setTimeout>;
+    let initialDist = 0;
+    let initialScale = 1;
 
-    function updateTransform() {
-      if (!imageContainer) return;
-      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-      if (zoomIndicator) {
-        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
-        showZoomIndicator();
-      }
+    // ── Image loading ──
+    function loadImage(idx: number) {
+      const entry = IMAGES[idx];
+      img.src = entry.src;
+      img.alt = entry.alt;
+      dlBtn.href = entry.src;
+      dlBtn.download = entry.src.split("/").pop() ?? "qbag-artwork";
+      counter.textContent = `${idx + 1} / ${IMAGES.length}`;
+      label.textContent = entry.label;
+      prevBtn.toggleAttribute("disabled", idx === 0);
+      nextBtn.toggleAttribute("disabled", idx === IMAGES.length - 1);
     }
 
-    function showZoomIndicator() {
-      if (!zoomIndicator) return;
-      zoomIndicator.classList.add("show");
-      clearTimeout((window as unknown as { zoomIndicatorTimeout?: number }).zoomIndicatorTimeout);
-      (window as unknown as { zoomIndicatorTimeout?: number }).zoomIndicatorTimeout = window.setTimeout(() => {
-        zoomIndicator.classList.remove("show");
-      }, 1000);
+    // ── Transform ──
+    function applyTransform() {
+      container.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      const pct = `${Math.round(scale * 100)}%`;
+      pill.textContent = pct;
+      pill.classList.add("show");
+      clearTimeout(pillTimer);
+      pillTimer = setTimeout(() => pill.classList.remove("show"), 1200);
     }
 
-    function openViewer() {
-      if (!viewer) return;
-      document.documentElement.classList.add("is-viewer-open");
-      viewer.classList.add("is-open");
-      viewer.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      resetView();
-    }
-
-    function closeViewer() {
-      if (!viewer) return;
-      document.documentElement.classList.remove("is-viewer-open");
-      viewer.classList.remove("is-open");
-      viewer.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      resetView();
-    }
-
-    function resetView() {
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      updateTransform();
+    function resetTransform() {
+      scale = 1; tx = 0; ty = 0;
+      container.style.transform = "";
     }
 
     function zoomIn() {
-      if (scale < MAX_SCALE) {
-        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
-        updateTransform();
-      }
+      scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+      applyTransform();
     }
 
     function zoomOut() {
-      if (scale > MIN_SCALE) {
-        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
-        if (scale === MIN_SCALE) {
-          translateX = 0;
-          translateY = 0;
-        }
-        updateTransform();
+      scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+      if (scale <= MIN_SCALE) { tx = 0; ty = 0; }
+      applyTransform();
+    }
+
+    // ── Open / close ──
+    function openGallery(idx = 0) {
+      currentIdx = idx;
+      loadImage(currentIdx);
+      resetTransform();
+      document.documentElement.classList.add("is-viewer-open");
+      document.body.style.overflow = "hidden";
+      dialog!.showModal();
+    }
+
+    function closeGallery() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      dialog!.close();
+      document.documentElement.classList.remove("is-viewer-open");
+      document.body.style.overflow = "";
+      resetTransform();
+    }
+
+    // ── Fullscreen ──
+    function updateFsIcon() {
+      const isFs = !!document.fullscreenElement;
+      fsExpand.classList.toggle("hidden", isFs);
+      fsShrink.classList.toggle("hidden", !isFs);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        dialog!.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
       }
     }
 
-    function handleWheel(e: WheelEvent) {
-      e.preventDefault();
-      if (e.deltaY < 0) zoomIn();
-      else zoomOut();
-    }
+    document.addEventListener("fullscreenchange", updateFsIcon);
 
-    function handleDragStart(e: MouseEvent | TouchEvent) {
-      if (scale === 1) return;
+    // ── Drag / pan ──
+    function onPointerDown(e: PointerEvent) {
+      if (scale <= 1) return;
       isDragging = true;
-      imageWrapper?.classList.add("is-grabbing");
-      const clientX = e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
-      const clientY = e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
-      startX = clientX - translateX;
-      startY = clientY - translateY;
-      if (e.type === "mousedown") {
-        document.addEventListener("mousemove", handleDragMove as EventListener);
-        document.addEventListener("mouseup", handleDragEnd);
-      }
+      viewport.setPointerCapture(e.pointerId);
+      viewport.style.cursor = "grabbing";
+      startX = e.clientX - tx;
+      startY = e.clientY - ty;
     }
 
-    function handleDragMove(e: MouseEvent | TouchEvent) {
+    function onPointerMove(e: PointerEvent) {
       if (!isDragging) return;
-      e.preventDefault();
-      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
-      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
-      translateX = clientX - startX;
-      translateY = clientY - startY;
-      updateTransform();
+      tx = e.clientX - startX;
+      ty = e.clientY - startY;
+      applyTransform();
     }
 
-    function handleDragEnd() {
+    function onPointerUp(e: PointerEvent) {
+      if (!isDragging) return;
       isDragging = false;
-      imageWrapper?.classList.remove("is-grabbing");
-      document.removeEventListener("mousemove", handleDragMove as EventListener);
-      document.removeEventListener("mouseup", handleDragEnd);
+      viewport.releasePointerCapture(e.pointerId);
+      viewport.style.cursor = "";
     }
 
-    let initialDistance = 0;
-    let initialScale = 1;
-
-    function getTouchDistance(e: TouchEvent) {
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    // ── Wheel zoom ──
+    function onWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn(); else zoomOut();
     }
 
-    function handleTouchStart(e: TouchEvent) {
+    // ── Touch pinch ──
+    function getTouchDist(e: TouchEvent) {
+      return Math.hypot(
+        e.touches[1].clientX - e.touches[0].clientX,
+        e.touches[1].clientY - e.touches[0].clientY,
+      );
+    }
+
+    function onTouchStart(e: TouchEvent) {
       if (e.touches.length === 2) {
-        initialDistance = getTouchDistance(e);
+        initialDist  = getTouchDist(e);
         initialScale = scale;
-      } else if (e.touches.length === 1) {
-        handleDragStart(e);
       }
     }
 
-    function handleTouchMove(e: TouchEvent) {
+    function onTouchMove(e: TouchEvent) {
       if (e.touches.length === 2) {
         e.preventDefault();
-        const currentDistance = getTouchDistance(e);
-        const newScale = initialScale * (currentDistance / initialDistance);
-        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
-        updateTransform();
-      } else if (e.touches.length === 1 && isDragging) {
-        handleDragMove(e);
+        const ratio = getTouchDist(e) / initialDist;
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, initialScale * ratio));
+        applyTransform();
       }
     }
 
-    trigger.addEventListener("click", openViewer);
-    closeBtn?.addEventListener("click", closeViewer);
-    closeBtn?.addEventListener("touchend", (e) => { e.preventDefault(); closeViewer(); }, { passive: false });
-    zoomInBtn?.addEventListener("click", zoomIn);
-    zoomOutBtn?.addEventListener("click", zoomOut);
-    resetBtn?.addEventListener("click", resetView);
+    // ── Keyboard ──
+    function onKeyDown(e: KeyboardEvent) {
+      if (!dialog?.open) return;
+      switch (e.key) {
+        case "ArrowLeft":  if (currentIdx > 0)                    { currentIdx--; loadImage(currentIdx); resetTransform(); } break;
+        case "ArrowRight": if (currentIdx < IMAGES.length - 1)    { currentIdx++; loadImage(currentIdx); resetTransform(); } break;
+        case "+": case "=": zoomIn();   break;
+        case "-":           zoomOut();  break;
+        case "0":           resetTransform(); pill.textContent = "100%"; break;
+        case "f": case "F": toggleFullscreen(); break;
+        // ESC is handled natively by <dialog>
+      }
+    }
 
-    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+    // ── Nav buttons ──
+    prevBtn.addEventListener("click", () => {
+      if (currentIdx > 0) { currentIdx--; loadImage(currentIdx); resetTransform(); }
+    });
+    nextBtn.addEventListener("click", () => {
+      if (currentIdx < IMAGES.length - 1) { currentIdx++; loadImage(currentIdx); resetTransform(); }
+    });
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    // ── Event wiring ──
+    trigger.addEventListener("click",   () => openGallery(0));
+    trigger.addEventListener("keydown", (e: Event) => {
+      const ke = e as KeyboardEvent;
+      if (ke.key === "Enter" || ke.key === " ") { ke.preventDefault(); openGallery(0); }
+    });
+
+    closeBtn.addEventListener("click",    closeGallery);
+    zoomInBtn.addEventListener("click",   zoomIn);
+    zoomOutBtn.addEventListener("click",  zoomOut);
+    resetBtn.addEventListener("click",    () => { resetTransform(); });
+    fsBtn.addEventListener("click",       toggleFullscreen);
+
+    // Light dismiss: close when clicking the <dialog> backdrop (the area outside .gallery-*)
+    dialog!.addEventListener("click", (e) => {
+      const target = e.target as Element;
+      if (target === dialog) closeGallery();
+    });
+
+    // Native cancel event (ESC key on <dialog>)
+    dialog!.addEventListener("cancel", (e) => {
+      e.preventDefault(); // prevent default so we can handle cleanup
+      closeGallery();
+    });
+
+    viewport.addEventListener("pointerdown", onPointerDown as EventListener);
+    viewport.addEventListener("pointermove", onPointerMove as EventListener);
+    viewport.addEventListener("pointerup",   onPointerUp   as EventListener);
+    viewport.addEventListener("wheel",       onWheel as EventListener, { passive: false });
+    viewport.addEventListener("touchstart",  onTouchStart as EventListener, { passive: true });
+    viewport.addEventListener("touchmove",   onTouchMove  as EventListener, { passive: false });
+
+    document.addEventListener("keydown", onKeyDown);
+
+    // Cleanup on Astro page transitions
+    const cleanup = () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("fullscreenchange", updateFsIcon);
+      document.removeEventListener("astro:before-swap", cleanup);
     };
-    document.addEventListener("keydown", handleKeyDown);
-
-    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
-    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
-    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
-    imageWrapper?.addEventListener("touchend", handleDragEnd);
-    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
-
-    const handleBeforeSwap = () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("astro:before-swap", handleBeforeSwap);
-    };
-    document.addEventListener("astro:before-swap", handleBeforeSwap);
+    document.addEventListener("astro:before-swap", cleanup);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initArtworkViewer);
+    document.addEventListener("DOMContentLoaded", initGallery);
   } else {
-    initArtworkViewer();
+    initGallery();
   }
-  document.addEventListener("astro:page-load", initArtworkViewer);
+  document.addEventListener("astro:page-load", initGallery);
 </script>
 
 <style>
+  /* ─── Hide nav when viewer is open ─── */
   :global(.is-viewer-open [data-slim-nav]),
   :global(.is-viewer-open [data-system-meta]),
   :global(.is-viewer-open .mobile-escape-nav) {
     display: none !important;
   }
 
-  /* Q-Bag layout - clean & modern */
-  .qbag-new-layout {
-    width: 100%;
-    background: #0a0a0a;
-    color: var(--text-primary, #e0e0e0);
-    font-family: inherit;
-    overflow-y: auto;
-  }
+  /* ═══════════════════════════════════════
+     LIGHT THEME VARIABLES (scoped)
+     ═══════════════════════════════════════ */
+  .qbag-eden-wrap {
+    --qb-bg:           #faf7f2;
+    --qb-bg-card:      rgba(255, 253, 248, 0.85);
+    --qb-text:         #1a1008;
+    --qb-text-muted:   #6b5744;
+    --qb-primary:      #208c8d;   /* teal */
+    --qb-gold:         #a67c00;
+    --qb-gold-bright:  #ffcc33;
+    --qb-amber:        #c17a2e;
+    --qb-border:       rgba(26, 16, 8, 0.1);
 
-  .qbag-hero {
-    width: 100%;
-    height: 80dvh;
     position: relative;
-    overflow: hidden;
+    min-height: 100dvh;
+    background: var(--qb-bg);
+    color: var(--qb-text);
   }
 
-  .qbag-hero img {
+  /* ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ */
+  .qbag-hero {
+    padding: 3rem 0 0;
+  }
+
+  .qbag-hero-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 58dvh;
+  }
+
+  /* ─── Portal wrap ─── */
+  .qbag-portal-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  /* Static gradient border frame — sits exactly on the image edge */
+  .qbag-portal-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;            /* flush with the image */
+    border-radius: 28px; /* match the portal exactly */
+    padding: 5px;        /* border thickness */
+    background: conic-gradient(
+      from 0deg,
+      #ffcc33,
+      #c17a2e,
+      #208c8d,
+      #a8edff,
+      #ff9de2,
+      #ffcc33,
+      #c17a2e,
+      #ffcc33
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 9; /* above the image (z-index:2), below the spinning ring (z-index:10) */
+  }
+
+  /* ─── Holographic ring ─── */
+  .portal-badge-ring {
+    position: absolute;
+    inset: -6px;
+    pointer-events: none;
+    animation: qb-holo-spin 20s linear infinite;
+    z-index: 10;
+  }
+
+  .badge-ring-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes qb-holo-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* ─── Portal shape (rounded square) ─── */
+  .qbag-portal {
+    position: relative;
+    width: min(360px, 100%);
+    height: min(360px, 100vw); /* explicit square — same as width */
+    aspect-ratio: 1 / 1;      /* fallback insurance */
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow:
+      0 0 30px rgba(193, 122, 46, 0.18),
+      0 0 80px rgba(166, 124, 0, 0.08),
+      0 20px 60px rgba(26, 16, 8, 0.12);
+    transition: box-shadow 0.4s ease;
+    z-index: 2;
+  }
+
+  .qbag-portal:hover {
+    box-shadow:
+      0 0 50px rgba(193, 122, 46, 0.28),
+      0 0 100px rgba(255, 204, 51, 0.12),
+      0 20px 70px rgba(26, 16, 8, 0.18);
+  }
+
+  .qbag-portal-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    display: block;
   }
 
-  .qbag-hero-overlay {
+  /* ─── Orbiting coffee bean ─── */
+  .portal-orbit {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 4vw;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    inset: -6px;
+    animation: orbit-spin 14s linear infinite;
+    pointer-events: none;
+    z-index: 11;
   }
 
-  .qbag-title {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(5rem, 14vw, 14rem);
-    font-weight: 900;
-    line-height: 0.85;
-    text-transform: uppercase;
-    color: var(--accent-primary, #ffd700);
-    margin: 0;
-    letter-spacing: -0.04em;
-    text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+  .orbit-star {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 0 6px #c17a2e) drop-shadow(0 0 3px #ffcc33);
   }
 
-  .qbag-main-content {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 4vw;
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
   }
 
-  .qbag-intro-section {
-    padding: 8rem 0 6rem;
-  }
-
-  .intro-card {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 4rem;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  }
-
-  .qbag-tagline {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    font-weight: 600;
-    color: var(--accent-primary, #ffd700);
-    margin-bottom: 2rem;
+  /* ─── Hero text ─── */
+  .qbag-eyebrow {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    line-height: 1;
-    opacity: 0.95;
+    margin: 0 0 1.25rem 0;
+    background: linear-gradient(to right, #a67c00 20%, #ffcc33 50%, #a67c00 80%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: qb-gold-shine 5s linear infinite;
   }
 
-  .qbag-lead {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-    line-height: 1.4;
-    font-weight: 300;
-    opacity: 0.95;
-    margin: 0;
+  .qbag-headline {
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.9;
     letter-spacing: -0.01em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    margin: 0 0 2rem 0;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    background: linear-gradient(
+      135deg,
+      #1a1008 10%,
+      #a67c00 30%,
+      #ffcc33 50%,
+      #c17a2e 65%,
+      #1a1008 88%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: qb-gold-shine 7s linear infinite;
   }
 
+  @keyframes qb-gold-shine {
+    to { background-position: 200% center; }
+  }
+
+  .qbag-status-block {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(0.65rem, 1vw, 0.85rem);
+    line-height: 1.9;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--qb-text-muted);
+    border-left: 2px solid var(--qb-amber);
+    padding-left: 1rem;
+  }
+
+  .qb-mono {
+    font-family: 'Space Mono', ui-monospace, monospace;
+  }
+
+  .qbag-status-live {
+    color: var(--qb-primary);
+    font-weight: 700;
+  }
+
+  /* ─── Cosmic dividers ─── */
+  .qb-cosmic-divider {
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.5rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .qb-cosmic-divider svg {
+    width: 100%;
+    height: 36px;
+  }
+
+  /* ═══════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════ */
+  .qbag-main-content {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .qbag-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--qb-border);
+  }
+
+  .qbag-section:last-of-type {
+    border-bottom: none;
+  }
+
+  /* ─── Lead ─── */
+  .qbag-lead {
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--qb-text);
+    margin: 0;
+  }
+
+  /* ─── Headings ─── */
+  .qbag-h2 {
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.6rem, 3vw, 3.2rem);
+    font-weight: 400;
+    color: var(--qb-text);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  /* ─── Body text ─── */
+  .qbag-section p {
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    line-height: 1.65;
+    color: var(--qb-text);
+    margin: 0 0 1.5rem 0;
+  }
+
+  /* ─── Blockquote ─── */
+  .qbag-blockquote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--qb-text);
+    margin: 1.5rem 0;
+    padding: 1.25rem 0 1.25rem 2rem;
+    border-left: 3px solid var(--qb-amber);
+  }
+
+  /* ─── Two-col layout ─── */
+  .qbag-two-col {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .qbag-two-col-text {
+    min-width: 0;
+  }
+
+  /* ─── Mini portal visual ─── */
+  .qbag-mini-portal-wrap {
+    flex-shrink: 0;
+  }
+
+  .qbag-mini-portal {
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    border-radius: 45% 55% 52% 48% / 48% 44% 56% 52%;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 2px rgba(193, 122, 46, 0.15),
+      0 0 20px rgba(193, 122, 46, 0.15),
+      0 8px 32px rgba(26, 16, 8, 0.1);
+    transition: all 0.4s ease;
+    animation: qb-mini-morph 14s ease-in-out infinite;
+  }
+
+  .qbag-mini-portal:hover {
+    border-radius: 38% 62% 46% 54% / 56% 44% 60% 40%;
+    box-shadow:
+      0 0 0 2px rgba(193, 122, 46, 0.35),
+      0 0 30px rgba(193, 122, 46, 0.25),
+      0 8px 40px rgba(26, 16, 8, 0.15);
+  }
+
+  @keyframes qb-mini-morph {
+    0%   { border-radius: 45% 55% 52% 48% / 48% 44% 56% 52%; }
+    50%  { border-radius: 55% 45% 44% 56% / 56% 52% 44% 48%; }
+    100% { border-radius: 45% 55% 52% 48% / 48% 44% 56% 52%; }
+  }
+
+  .qbag-mini-portal svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ─── Sticker strip ─── */
+  .qb-sticker-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .qb-sticker-chip {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 12px rgba(193, 122, 46, 0.15));
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+    cursor: default;
+    animation: qb-chip-float 4s ease-in-out infinite;
+  }
+
+  .qb-sticker-chip:nth-child(1) { animation-delay: 0s; }
+  .qb-sticker-chip:nth-child(2) { animation-delay: 0.9s; }
+  .qb-sticker-chip:nth-child(3) { animation-delay: 1.8s; }
+  .qb-sticker-chip:nth-child(4) { animation-delay: 2.7s; }
+
+  .qb-sticker-chip:hover {
+    transform: scale(1.2) rotate(-5deg);
+    filter: drop-shadow(0 8px 20px rgba(193, 122, 46, 0.3));
+  }
+
+  .qb-sticker-chip svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes qb-chip-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-7px); }
+  }
+
+  /* ─── Gallery card ─── */
   .qbag-artwork-card-section {
-    padding: 6rem 0;
+    padding: 2rem 0 4rem;
   }
 
-  .qbag-artwork-card-section .artwork-info-card {
-    background-image: linear-gradient(rgba(10, 10, 10, 0.78), rgba(10, 10, 10, 0.78)), url("/images/qbag_concept.webp");
-    background-size: cover;
-    background-position: center;
-  }
-
-  .artwork-info-card {
+  .qbag-artwork-card {
     max-width: 1000px;
     margin: 0 auto;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(193, 122, 46, 0.2);
+    box-shadow:
+      0 8px 32px rgba(26, 16, 8, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    background-image:
+      linear-gradient(rgba(250, 247, 242, 0.90), rgba(250, 247, 242, 0.90)),
+      url("/images/Qbag_hero.webp");
+    background-size: cover;
+    background-position: center;
   }
 
-  .artwork-info-card::before {
+  .qbag-artwork-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(193, 122, 46, 0.08), transparent);
     transition: left 0.5s ease;
   }
 
-  .artwork-info-card:hover::before {
-    left: 100%;
-  }
+  .qbag-artwork-card:hover::before { left: 100%; }
 
-  .artwork-info-card:hover {
-    border-color: rgba(255, 215, 0, 0.5);
+  .qbag-artwork-card:hover {
+    border-color: rgba(193, 122, 46, 0.4);
     transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(255, 215, 0, 0.2);
+    box-shadow:
+      0 12px 48px rgba(26, 16, 8, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
 
   .artwork-card-content {
     display: flex;
     align-items: center;
     gap: 2rem;
-    padding: 3rem;
+    padding: 2.5rem;
   }
 
   .artwork-card-icon {
@@ -519,436 +1240,120 @@ const qBag = qBagEntry.data;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent-primary, #ffd700);
-    background: rgba(255, 215, 0, 0.1);
+    color: var(--qb-amber);
+    background: rgba(193, 122, 46, 0.1);
     border-radius: 12px;
   }
 
-  .artwork-card-text {
-    flex: 1;
-  }
+  .artwork-card-text { flex: 1; }
 
   .artwork-card-title {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
     font-weight: 700;
-    color: var(--accent-primary, #ffd700);
-    margin: 0 0 1rem 0;
+    color: var(--qb-text);
+    margin: 0 0 0.5rem 0;
     line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  .artwork-card-title::before {
-    content: '// GALLERY';
-    display: block;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: rgba(255, 215, 0, 0.5);
-    letter-spacing: 0.2em;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
   }
 
   .artwork-card-description {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.05rem, 1.3vw, 1.3rem);
-    line-height: 1.7;
-    opacity: 0.85;
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    line-height: 1.5;
+    color: var(--qb-text-muted);
     margin: 0;
-    font-weight: 300;
-    letter-spacing: -0.005em;
   }
 
-  .artwork-card-button {
+  .artwork-card-button.qb-btn {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    background: var(--accent-primary, #ffd700);
-    color: #000;
+    background: var(--qb-amber);
+    color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .artwork-card-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.4);
-  }
-
-  .artwork-card-button svg {
-    transition: transform 0.2s ease;
-  }
-
-  .artwork-card-button:hover svg {
-    transform: translateX(4px);
-  }
-
-  @media (max-width: 768px) {
-    .artwork-card-content {
-      flex-direction: column;
-      text-align: center;
-      padding: 2rem;
-      gap: 1.5rem;
-    }
-    .artwork-card-button {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  .artwork-viewer {
-    position: fixed;
-    inset: 0;
-    z-index: 2000000;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .artwork-viewer.is-open {
-    display: block;
-    opacity: 1;
-  }
-
-  .viewer-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.98);
-    backdrop-filter: blur(10px);
-  }
-
-  .viewer-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .viewer-controls {
-    position: absolute;
-    top: calc(1.5rem + env(safe-area-inset-top, 0px));
-    right: calc(1.5rem + env(safe-area-inset-right, 0px));
-    display: flex;
-    gap: 0.5rem;
-    z-index: 10002;
-  }
-
-  .viewer-btn {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-  }
-
-  .viewer-btn:hover {
-    background: rgba(255, 215, 0, 0.2);
-    border-color: var(--accent-primary, #ffd700);
-    transform: scale(1.05);
-  }
-
-  .viewer-close {
-    background: rgba(255, 50, 50, 0.15);
-    border-color: rgba(255, 50, 50, 0.3);
-  }
-
-  .viewer-close:hover {
-    background: rgba(255, 50, 50, 0.3);
-    border-color: rgba(255, 50, 50, 0.6);
-  }
-
-  .viewer-image-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    cursor: grab;
-  }
-
-  .viewer-image-wrapper.is-grabbing {
-    cursor: grabbing;
-  }
-
-  .viewer-image-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-origin: center center;
-    transition: transform 0.2s ease;
-    will-change: transform;
-  }
-
-  .viewer-image {
-    max-width: 90vw;
-    max-height: 90dvh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    user-select: none;
-    pointer-events: none;
-  }
-
-  .viewer-zoom-indicator {
-    position: absolute;
-    bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    color: #fff;
-    font-size: 0.875rem;
-    font-weight: 600;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-    z-index: 10002;
-  }
-
-  .viewer-zoom-indicator.show {
-    opacity: 1;
-  }
-
-  @media (max-width: 768px) {
-    .viewer-controls {
-      top: calc(1rem + env(safe-area-inset-top, 0px));
-      right: calc(1rem + env(safe-area-inset-right, 0px));
-      gap: 0.375rem;
-    }
-    .viewer-btn {
-      width: 40px;
-      height: 40px;
-    }
-    .viewer-image {
-      max-width: 95vw;
-      max-height: 95dvh;
-    }
-  }
-
-  .qbag-content-grid-section {
-    padding: 6rem 0;
-  }
-
-  .qbag-glass-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-  }
-
-  .glass-card {
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 3.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
-  }
-
-  .glass-card:hover {
-    background: rgba(15, 15, 15, 0.75);
-    border-color: rgba(255, 215, 0, 0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
-  }
-
-  .glass-card h3 {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
     font-weight: 700;
-    margin-bottom: 2rem;
-    color: var(--accent-primary, #ffd700);
-    border-bottom: none;
-    padding-bottom: 0;
-    display: block;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
-  }
-
-  .glass-card h3::before {
-    content: '//';
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.7em;
-    color: rgba(255, 215, 0, 0.4);
-    margin-right: 0.75rem;
-    font-weight: 400;
-  }
-
-  .glass-card p {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.05rem, 1.3vw, 1.3rem);
-    line-height: 1.75;
-    opacity: 0.9;
-    margin-bottom: 1.75rem;
-    font-weight: 400;
-    letter-spacing: -0.005em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    animation: fadeInUp 0.6s ease-out backwards;
-    animation-delay: calc(var(--delay, 0) * 0.1s);
-  }
-
-  .glass-card p:first-of-type {
-    font-size: clamp(1.15rem, 1.4vw, 1.4rem);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .glass-card p:last-child {
-    margin-bottom: 0;
-  }
-
-  .qbag-partners-section {
-    padding: 8rem 0;
-  }
-
-  .qbag-partners-section h2 {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
-    font-weight: 800;
-    margin-bottom: 3rem;
-    color: var(--accent-primary, #ffd700);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    text-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
-  }
-
-  .partners-card h2::before {
-    content: '// FOR PARTNERS';
-    display: block;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: rgba(255, 215, 0, 0.5);
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .qbag-partners-section p {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.15rem, 1.6vw, 1.6rem);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    font-weight: 300;
-    letter-spacing: -0.005em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+  .artwork-card-button.qb-btn:hover {
+    transform: scale(1.05);
+    background: #a66020;
+    box-shadow: 0 4px 16px rgba(193, 122, 46, 0.3);
   }
 
-  .partners-card {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 4rem;
-  }
+  .artwork-card-button.qb-btn svg { transition: transform 0.2s ease; }
+  .artwork-card-button.qb-btn:hover svg { transform: translateX(4px); }
 
+  /* ─── Closing ─── */
   .qbag-closing-section {
-    padding: 8rem 0;
+    padding: 6rem 0;
     text-align: center;
   }
 
-  .closing-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 6rem 3rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .big-statement {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.3;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    letter-spacing: -0.02em;
-  }
-
-  .qbag-contact-section {
-    padding: 6rem 0 8rem;
-  }
-
-  .contact-card {
+  .qbag-closing-inner {
     max-width: 900px;
     margin: 0 auto;
-    padding: 4rem 3rem;
-    text-align: center;
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--qb-border);
+    border-bottom: 1px solid var(--qb-border);
   }
 
-  .contact-card p {
-    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    font-size: clamp(1.05rem, 1.4vw, 1.4rem);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+  .qbag-big-statement {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--qb-text);
+    margin: 0;
+    letter-spacing: -0.01em;
   }
 
-  .qbag-new-layout .contact-info {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    font-size: clamp(1rem, 1.3vw, 1.3rem) !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.02em;
-    margin-top: 2rem;
+  /* ─── Contact links ─── */
+  .qbag-portal-links {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 2rem 0;
   }
 
-  .contact-card a {
-    color: #ce9e00;
-    text-decoration: none;
+  .qbag-portal-links a {
+    /* #208c8d on #faf7f2 = contrast ~4.8:1  ✓ WCAG AA */
+    color: var(--qb-primary);
+    text-decoration: underline;
     transition: opacity 0.2s ease;
   }
 
-  .contact-card a:hover {
-    opacity: 0.7;
-    text-decoration: underline;
+  .qbag-portal-links a:hover { opacity: 0.75; }
+
+  .qbag-portal-sep {
+    margin: 0 0.75rem;
+    opacity: 0.4;
   }
 
+  /* ─── CTA ─── */
   .qbag-cta {
-    padding: 6rem 0;
+    padding: 5rem 0 7rem;
     text-align: center;
-    background: #0a0a0a;
   }
 
-  .qbag-new-layout .retreat-button {
+  .qbag-retreat-btn {
+    display: inline-block;
+    text-decoration: none;
     background: transparent;
-    border: 2px solid #a67c00;
-    color: #ce9e00;
-    padding: 1.5rem 4rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 1.1rem;
+    border: 1px solid var(--qb-amber);
+    color: var(--qb-amber);
+    padding: 1.25rem 3rem;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -957,166 +1362,293 @@ const qBag = qBagEntry.data;
     border-radius: 4px;
   }
 
-  .qbag-new-layout .retreat-button:hover {
-    background: #ce9e00;
-    color: #000;
-    box-shadow: 0 0 30px rgba(166, 124, 0, 0.3);
+  .qbag-retreat-btn:hover {
+    background: rgba(193, 122, 46, 0.08);
+    color: var(--qb-amber);
+    box-shadow: 0 4px 16px rgba(193, 122, 46, 0.15);
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 0.9;
-      transform: translateY(0);
-    }
+  /* ═══════════════════════════════════════
+     NATIVE <dialog> GALLERY
+     ═══════════════════════════════════════ */
+  .qbag-gallery-dialog {
+    /* Reset browser defaults */
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    /* Full-screen modal */
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background: transparent;
+    /* flex column to stack controls + viewport */
+    display: none; /* overridden by [open] below */
+    flex-direction: column;
   }
 
-  @media (max-width: 1024px) {
-    .qbag-glass-grid {
+  .qbag-gallery-dialog[open] {
+    display: flex;
+  }
+
+  .qbag-gallery-dialog::backdrop {
+    background: rgba(250, 247, 242, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* ─── Controls bar ─── */
+  .gallery-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(193, 122, 46, 0.12);
+    flex-shrink: 0;
+    background: var(--qb-bg, #faf7f2);
+  }
+
+  .gallery-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .gallery-counter {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+    color: var(--qb-text-muted, #6b5744);
+    letter-spacing: 0.1em;
+    padding: 0 0.5rem;
+  }
+
+  .gallery-label {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--qb-amber, #c17a2e);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 0.5rem;
+  }
+
+  .gallery-btn {
+    background: rgba(26, 16, 8, 0.05);
+    border: 1px solid rgba(26, 16, 8, 0.12);
+    color: var(--qb-text, #1a1008);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .gallery-btn:hover {
+    background: rgba(193, 122, 46, 0.1);
+    border-color: rgba(193, 122, 46, 0.35);
+    color: var(--qb-amber, #c17a2e);
+    transform: translateY(-1px);
+  }
+
+  .gallery-btn[disabled] {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .gallery-close {
+    background: rgba(220, 60, 60, 0.08);
+    border-color: rgba(220, 60, 60, 0.2);
+    color: #dc3c3c;
+  }
+
+  .gallery-close:hover {
+    background: #dc3c3c;
+    border-color: #dc3c3c;
+    color: #fff;
+  }
+
+  /* ─── Image viewport ─── */
+  .gallery-viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+    border-top: none;
+    background: rgba(193, 122, 46, 0.03);
+  }
+
+  .gallery-img-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    transform-origin: center;
+    transition: transform 0.1s ease-out;
+  }
+
+  .gallery-img {
+    max-width: 96%;
+    max-height: 96%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    box-shadow: 0 24px 80px rgba(26, 16, 8, 0.1);
+    border-radius: 4px;
+  }
+
+  /* ─── Zoom pill ─── */
+  .gallery-zoom-pill {
+    position: absolute;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 16, 8, 0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .gallery-zoom-pill.show { opacity: 1; }
+
+  .hidden { display: none !important; }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════ */
+
+  /* ── Tablet/small desktop ── */
+  @media (max-width: 900px) {
+    .qbag-hero-inner {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      min-height: auto;
+      gap: 2rem;
+      padding-bottom: 2rem;
     }
-    .qbag-title {
-      font-size: clamp(4rem, 12vw, 10rem);
+
+    .qbag-portal-wrap {
+      order: -1;
     }
-    .qbag-tagline {
-      letter-spacing: 0.2em;
+
+    .qbag-portal {
+      width: min(280px, 65vw);
+      height: min(280px, 65vw);
     }
-    .glass-card h3 {
-      font-size: clamp(1.6rem, 2.2vw, 2.4rem);
-    }
-    .intro-card,
-    .partners-card,
-    .contact-card {
-      padding: 3rem 2rem;
+
+    .qbag-headline {
+      font-size: clamp(3rem, 10vw, 5rem);
     }
   }
 
-  @media (max-width: 768px) {
-    .qbag-hero {
-      height: 60dvh;
+  /* ── Landscape phone ── */
+  @media (max-height: 520px) and (orientation: landscape) {
+    .qbag-hero-inner {
+      grid-template-columns: 1fr 1.2fr;
+      min-height: auto;
+      gap: 1.5rem;
     }
-    .qbag-main-content {
-      padding: 0 3vw;
+
+    .qbag-portal-wrap { order: 0; }
+
+    .qbag-portal {
+      width: min(180px, 35vw);
+      height: min(180px, 35vw);
     }
-    .qbag-title {
-      font-size: clamp(3rem, 10vw, 8rem);
-      letter-spacing: -0.03em;
+
+    .qbag-headline {
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
     }
-    .qbag-tagline {
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-    }
-    .qbag-lead {
-      font-size: clamp(1.25rem, 2vw, 1.8rem);
-    }
-    .qbag-intro-section {
-      padding: 5rem 0 4rem;
-    }
-    .intro-card {
-      padding: 3rem 2.5rem;
-    }
-    .qbag-content-grid-section {
-      padding: 3rem 0;
-    }
-    .qbag-glass-grid {
+
+    .qbag-section { padding: 2.5rem 0; }
+    .qb-sticker-strip { padding: 1.5rem 0; }
+    .qb-sticker-chip { width: 56px; height: 56px; }
+  }
+
+  /* ── Mobile portrait ── */
+  @media (max-width: 640px) {
+    .qbag-portal { width: min(240px, 72vw); height: min(240px, 72vw); }
+
+    .qbag-two-col {
+      grid-template-columns: 1fr;
       gap: 2rem;
     }
-    .glass-card {
-      padding: 2.5rem 2rem;
+
+    .qbag-mini-portal-wrap {
+      display: none; /* hide inline visual on small screens to save space */
     }
-    .glass-card h3 {
-      font-size: clamp(1.5rem, 2vw, 2rem);
-      margin-bottom: 1.5rem;
+
+    .artwork-card-content {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+      gap: 1.25rem;
     }
-    .glass-card p {
-      font-size: 1.05rem;
-      line-height: 1.7;
+
+    .artwork-card-button.qb-btn {
+      width: 100%;
+      justify-content: center;
     }
-    .big-statement {
-      font-size: clamp(2rem, 5vw, 4rem);
-    }
-    .qbag-partners-section h2 {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-    }
-    .qbag-partners-section,
-    .qbag-closing-section {
-      padding: 5rem 0;
-    }
-    .qbag-contact-section {
-      padding: 5rem 0 6rem;
-    }
-    .partners-card,
-    .contact-card {
-      padding: 3rem 2rem;
-    }
-    .closing-content {
-      padding: 3rem 1rem;
-    }
+
+    .qbag-headline { font-size: clamp(3rem, 14vw, 5rem); }
+    .qb-sticker-strip { gap: 1.25rem; }
+    .qb-sticker-chip { width: 64px; height: 64px; }
+    .qbag-closing-inner { padding: 3rem 1rem; }
+    .gallery-label { display: none; }
   }
 
-  @media (max-width: 480px) {
-    .qbag-hero {
-      height: 50dvh;
-    }
-    .qbag-title {
-      font-size: clamp(2.5rem, 12vw, 6rem);
-    }
-    .qbag-tagline {
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-    }
-    .intro-card {
-      padding: 2rem 1.5rem;
-    }
-    .glass-card {
-      padding: 1.5rem;
-    }
-    .artwork-card-title {
-      font-size: 1.5rem;
-    }
-    .qbag-new-layout .retreat-button {
-      padding: 1rem 2rem;
-      font-size: 1rem;
-    }
+  /* ── Extra small ── */
+  @media (max-width: 390px) {
+    .qbag-portal { width: min(200px, 78vw); height: min(200px, 78vw); }
+    .qbag-headline { font-size: clamp(2.6rem, 15vw, 4rem); }
+    .qb-sticker-chip { width: 54px; height: 54px; }
+    .gallery-btn { width: 38px; height: 38px; }
+    .gallery-counter { font-size: 0.7rem; }
   }
 
-  /* Gold Shine Effect */
-  .gold-shine {
-    color: #a67c00;
-    background: linear-gradient(
-      to right, 
-      #a67c00 20%, 
-      #ce9e00 40%, 
-      #ffcc33 50%, 
-      #ce9e00 60%, 
-      #a67c00 80%
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 8s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
+  /* ── Gallery dialog on mobile ── */
+  @media (max-width: 768px) {
+    .gallery-controls {
+      padding: 0.75rem 1rem;
+      gap: 0.5rem;
     }
+    .gallery-btn { width: 40px; height: 40px; }
+    .gallery-counter { font-size: 0.72rem; }
   }
 
+  /* ══════════════════════════════════════
+     REDUCED MOTION
+     ════════════════════════════════════== */
   @media (prefers-reduced-motion: reduce) {
-    .gold-shine {
+    .qbag-headline,
+    .qbag-eyebrow {
       animation: none;
+      background-position: 0% center;
     }
-    .glass-card p {
-      animation: none;
-    }
-    .qbag-new-layout .gold-shine {
-      animation: none;
-    }
+    .qbag-portal,
+    .qbag-mini-portal { animation: none; }
+    .portal-orbit,
+    .portal-badge-ring { animation: none; }
+    .qb-sticker-chip { animation: none; }
+    .qb-sticker-chip:hover { transform: none; }
+    .qbag-artwork-card:hover,
+    .qbag-retreat-btn:hover,
+    .artwork-card-button.qb-btn:hover { transform: none; }
+    .gallery-img-container { transition: none; }
   }
 </style>

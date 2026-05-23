@@ -4,6 +4,7 @@ import SlimNav from "../components/SlimNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import NarMailChatbot from "../components/NarMailChatbot.astro";
 import { getEntry } from "astro:content";
+import DOMPurify from "isomorphic-dompurify";
 
 const narMailEntry = await getEntry("products", "nar-mail-express");
 if (!narMailEntry || narMailEntry.data.slug !== "nar-mail-express") {
@@ -54,8 +55,8 @@ const narMail = narMailEntry.data;
             <h2 class="narmail-h2">{narMail.howItWorksHeading}</h2>
             <h3 class="narmail-h3">{narMail.dualReadingHeading}</h3>
             <p>{narMail.dualReadingIntro}</p>
-            <p set:html={narMail.dualReadingFirst}></p>
-            <p set:html={narMail.dualReadingSecond}></p>
+            <p set:html={DOMPurify.sanitize(narMail.dualReadingFirst)}></p>
+            <p set:html={DOMPurify.sanitize(narMail.dualReadingSecond)}></p>
             <p>{narMail.dualReadingClosing}</p>
             <h3 class="narmail-h3">{narMail.deliveryTimelineHeading}</h3>
             <p>{narMail.deliveryTimelineIntro}</p>
@@ -187,15 +188,15 @@ const narMail = narMailEntry.data;
           <section class="narmail-section">
             <h2 class="narmail-h2">{narMail.termsHeading}</h2>
             <ol class="narmail-terms">
-              <li set:html={narMail.termsItems[0]}></li>
-              <li set:html={narMail.termsItems[1]}></li>
-              <li set:html={narMail.termsItems[2]}></li>
-              <li set:html={narMail.termsItems[3]}></li>
-              <li set:html={narMail.termsItems[4]}></li>
-              <li set:html={narMail.termsItems[5]}></li>
-              <li set:html={narMail.termsItems[6]}></li>
-              <li set:html={narMail.termsItems[7]}></li>
-              <li set:html={narMail.termsItems[8]}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[0])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[1])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[2])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[3])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[4])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[5])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[6])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[7])}></li>
+              <li set:html={DOMPurify.sanitize(narMail.termsItems[8])}></li>
             </ol>
           </section>
           <NarMailChatbot />

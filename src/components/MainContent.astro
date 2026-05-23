@@ -17,7 +17,7 @@ const { projectToOpen } = Astro.props;
 <SlimNav />
 <SystemMeta position="top" />
 
-<main class="relative min-h-screen pt-10 md:pt-11" data-open-project={projectToOpen}>
+<main class="relative min-h-[100dvh] overflow-x-hidden pt-10 md:pt-11" data-open-project={projectToOpen}>
   <section id="landing" data-section="landing" class="relative -mt-10 md:-mt-11">
     <LandingHero />
   </section>

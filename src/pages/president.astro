@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import { getEntry } from "astro:content";
+import DOMPurify from "isomorphic-dompurify";
 
 const presidentEntry = await getEntry("campaigns", "president-of-the-galaxy");
 if (!presidentEntry) {
@@ -227,7 +228,7 @@ const president = presidentEntry.data;
             <li>{president.dealIncludes[2]}</li>
             <li>{president.dealIncludes[3]}</li>
           </ul>
-          <p set:html={president.dealReturns}></p>
+          <p set:html={DOMPurify.sanitize(president.dealReturns)}></p>
           <p class="president-note">{president.dealFinePrint}</p>
         </section>
 
@@ -238,7 +239,7 @@ const president = presidentEntry.data;
             {president.rules.map((rule: string, i: number) => (
               <div class="president-rule-card">
                 <span class="rule-number">0{i + 1}</span>
-                <p set:html={rule}></p>
+                <p set:html={DOMPurify.sanitize(rule)}></p>
               </div>
             ))}
           </div>
@@ -407,8 +408,8 @@ const president = presidentEntry.data;
             <li>{president.contactBullets[3]}</li>
           </ul>
           <div class="president-portal-meta">
-            <p set:html={president.contactFor}></p>
-            <p set:html={president.contactOpenTo}></p>
+            <p set:html={DOMPurify.sanitize(president.contactFor)}></p>
+            <p set:html={DOMPurify.sanitize(president.contactOpenTo)}></p>
           </div>
           <p class="president-portal-links">
             <a href={`mailto:${president.contactEmail}`}>{president.contactEmail}</a>
