@@ -164,22 +164,40 @@ const qBag = qBagEntry.data;
             tabindex="0"
             aria-label="Open Q-Bag artwork gallery"
           >
+            <!-- Secure Certificate Border Details -->
+            <div class="certificate-secure-border"></div>
+            <div class="certificate-corner-brackets"></div>
+
             <div class="artwork-card-content">
-              <div class="artwork-card-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <!-- Left: Postage Stamp Artwork Frame -->
+              <div class="artwork-stamp-frame">
+                <div class="postage-stamp">
+                  <img
+                    src="/images/qbag_concept.webp"
+                    alt="Q-Bag Visual Archive Campaign Preview"
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="300"
+                  />
+                  <div class="stamp-hologram-glare"></div>
+                  <div class="stamp-inner-gold"></div>
+                </div>
               </div>
-              <div class="artwork-card-text">
+
+              <!-- Right: Content & Action -->
+              <div class="artwork-card-text-wrap">
+                <div class="artwork-card-tag font-mono">// INFOCIGAN SPECULATIVE CULTURAL ARTIFACT</div>
                 <h3 class="artwork-card-title">{qBag.artworkCardTitle}</h3>
                 <p class="artwork-card-description">{qBag.artworkCardDescription}</p>
+                
+                <button class="artwork-card-button qb-btn" type="button" aria-label="Open full campaign gallery viewer" tabindex="-1">
+                  <span>{qBag.artworkCardButtonLabel}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
               </div>
-              <button class="artwork-card-button qb-btn" type="button" aria-label="Open full gallery viewer" tabindex="-1">
-                <span>{qBag.artworkCardButtonLabel}</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
             </div>
           </div>
         </section>
@@ -1189,109 +1207,257 @@ const qBag = qBagEntry.data;
   }
 
   .qbag-artwork-card {
-    max-width: 1000px;
-    margin: 0 auto;
-    cursor: pointer;
-    transition: all 0.3s ease;
     position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(19, 66, 82, 0.12);
+    border-radius: 24px;
+    max-width: 960px;
+    margin: 0 auto;
     overflow: hidden;
-    border-radius: 16px;
-    border: 1px solid rgba(193, 122, 46, 0.2);
-    box-shadow:
-      0 8px 32px rgba(26, 16, 8, 0.07),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    background-image:
-      linear-gradient(rgba(250, 247, 242, 0.90), rgba(250, 247, 242, 0.90)),
-      url("/images/Qbag_hero.webp");
-    background-size: cover;
-    background-position: center;
+    box-shadow: 
+      0 4px 24px rgba(19, 66, 82, 0.04),
+      0 20px 48px rgba(19, 66, 82, 0.06);
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-
-  .qbag-artwork-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(193, 122, 46, 0.08), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .qbag-artwork-card:hover::before { left: 100%; }
 
   .qbag-artwork-card:hover {
-    border-color: rgba(193, 122, 46, 0.4);
     transform: translateY(-4px);
-    box-shadow:
-      0 12px 48px rgba(26, 16, 8, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    box-shadow: 
+      0 8px 32px rgba(19, 66, 82, 0.08),
+      0 28px 64px rgba(19, 66, 82, 0.12);
+    border-color: rgba(193, 122, 46, 0.35);
+  }
+
+  /* Secure Double Gold/Amber Border on Certificate Card */
+  .certificate-secure-border {
+    position: absolute;
+    inset: 6px;
+    border: 3px double rgba(193, 122, 46, 0.4);
+    border-radius: 18px;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* Safe-Deposit corner brackets */
+  .certificate-corner-brackets {
+    position: absolute;
+    inset: 14px;
+    border: 1px dashed rgba(32, 140, 141, 0.15);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* Coffee bean ornaments at corners! */
+  .certificate-corner-brackets::before {
+    content: '✦';
+    position: absolute;
+    top: -6px;
+    left: -4px;
+    font-size: 0.8rem;
+    color: #ce9e00;
+  }
+
+  .certificate-corner-brackets::after {
+    content: '✦';
+    position: absolute;
+    bottom: -6px;
+    right: -4px;
+    font-size: 0.8rem;
+    color: #ce9e00;
   }
 
   .artwork-card-content {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 2.5rem;
+    gap: 3.5rem;
+    padding: 4rem 3.5rem;
   }
 
-  .artwork-card-icon {
+  /* Left Side: Gilded Certificate Frame */
+  .artwork-stamp-frame {
     flex-shrink: 0;
-    width: 64px;
-    height: 64px;
+    width: 300px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: var(--qb-amber);
-    background: rgba(193, 122, 46, 0.1);
-    border-radius: 12px;
-  }
-
-  .artwork-card-text { flex: 1; }
-
-  .artwork-card-title {
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
-    font-weight: 700;
-    color: var(--qb-text);
-    margin: 0 0 0.5rem 0;
-    line-height: 1.1;
-  }
-
-  .artwork-card-description {
-    font-size: clamp(0.9rem, 1.1vw, 1rem);
-    line-height: 1.5;
-    color: var(--qb-text-muted);
-    margin: 0;
-  }
-
-  .artwork-card-button.qb-btn {
-    flex-shrink: 0;
-    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.75rem;
-    background: var(--qb-amber);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: 'Space Mono', ui-monospace, monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+  }
+
+  .postage-stamp {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #fdfcfb;
+    padding: 12px;
+    border: 1px solid rgba(19, 66, 82, 0.12);
+    box-shadow: 
+      0 8px 24px rgba(19, 66, 82, 0.06),
+      0 2px 6px rgba(0, 0, 0, 0.03);
+    border-radius: 2px;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+    transform-origin: center;
+  }
+
+  /* Stamp perforation notches around the edges */
+  .postage-stamp::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 6px dotted #ffffff;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .postage-stamp img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid rgba(19, 66, 82, 0.08);
+    border-radius: 1px;
+  }
+
+  /* Holographic moving glare */
+  .stamp-hologram-glare {
+    position: absolute;
+    inset: 12px;
+    background: linear-gradient(
+      135deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.45) 45%,
+      rgba(206, 158, 0, 0.2) 50%,
+      rgba(32, 140, 141, 0.2) 55%,
+      transparent 70%
+    );
+    background-size: 200% 200%;
+    background-position: -100% -100%;
+    transition: background-position 0.6s ease;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: color-dodge;
+  }
+
+  /* Thin gold border layer on top of image */
+  .stamp-inner-gold {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(206, 158, 0, 0.4);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Postmark detail on the stamp */
+  .postage-stamp::after {
+    content: '★ COFFEE REUSE';
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: var(--qb-amber);
+    border: 1px solid var(--qb-amber);
+    padding: 1px 4px;
+    border-radius: 1px;
+    z-index: 4;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .qbag-artwork-card:hover .postage-stamp {
+    transform: translateY(-8px) rotate(1.5deg) scale(1.02);
+    box-shadow: 
+      0 18px 36px rgba(19, 66, 82, 0.12),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .qbag-artwork-card:hover .stamp-hologram-glare {
+    background-position: 200% 200%;
+  }
+
+  /* Right Side: Content & Action */
+  .artwork-card-text-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .artwork-card-tag {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--qb-primary);
+    letter-spacing: 0.25em;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
   }
 
-  .artwork-card-button.qb-btn:hover {
-    transform: scale(1.05);
-    background: #a66020;
-    box-shadow: 0 4px 16px rgba(193, 122, 46, 0.3);
+  .qbag-artwork-card .artwork-card-title {
+    background: linear-gradient(to right, #c17a2e 10%, #208c8d 50%, #c17a2e 90%);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: qbag-gold-shine-title 10s linear infinite;
+    color: transparent;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 1rem 0;
   }
 
-  .artwork-card-button.qb-btn svg { transition: transform 0.2s ease; }
-  .artwork-card-button.qb-btn:hover svg { transform: translateX(4px); }
+  @keyframes qbag-gold-shine-title {
+    to { background-position: 200% center; }
+  }
+
+  .qbag-artwork-card .artwork-card-description {
+    color: var(--qb-text-muted);
+    font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+    line-height: 1.6;
+    font-weight: 400;
+    margin: 0 0 2rem 0;
+    text-align: left;
+  }
+
+  .artwork-card-button.qb-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #ffcc33 0%, #c17a2e 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 80px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 
+      0 4px 14px rgba(193, 122, 46, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .artwork-card-button.qb-btn svg {
+    transition: transform 0.35s ease;
+  }
+
+  .artwork-card-button.qb-btn:hover {
+    background: linear-gradient(135deg, #208c8d 0%, #176d6e 100%);
+    color: #ffffff;
+    box-shadow: 
+      0 6px 20px rgba(32, 140, 141, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .artwork-card-button.qb-btn:hover svg {
+    transform: translateX(4px);
+  }
 
   /* ─── Closing ─── */
   .qbag-closing-section {
