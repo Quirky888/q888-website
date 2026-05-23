@@ -139,10 +139,16 @@ const president = presidentEntry.data;
 
         <!-- Artwork card -->
         <section class="president-artwork-card-section">
-          <div class="artwork-info-card president-glass" id="president-gallery-trigger">
+          <div
+            class="artwork-info-card president-glass"
+            id="president-gallery-trigger"
+            role="button"
+            tabindex="0"
+            aria-label="Open President campaign gallery"
+          >
             <div class="artwork-card-content">
               <div class="artwork-card-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
@@ -150,9 +156,9 @@ const president = presidentEntry.data;
                 <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
                 <p class="artwork-card-description">{president.artworkCardDescription}</p>
               </div>
-              <button class="artwork-card-button president-btn" type="button">
+              <button class="artwork-card-button president-btn" type="button" aria-label="Open campaign poster viewer" tabindex="-1">
                 <span>{president.artworkCardButtonLabel}</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
@@ -431,50 +437,84 @@ const president = presidentEntry.data;
       </div>
     </div>
 
-    <!-- ══════════════════════════════════ VIEWER ══════════════════════════════════ -->
-    <div class="artwork-viewer" id="president-artwork-viewer" aria-hidden="true">
-      <div class="viewer-overlay"></div>
-      <div class="viewer-container">
-        <div class="viewer-controls">
-          <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <!-- ══════════════════════════════════ GALLERY DIALOG ══════════════════════════════════ -->
+    <dialog
+      class="president-gallery-dialog"
+      id="president-gallery-dialog"
+      aria-label="President of the Galaxy campaign gallery"
+    >
+      <!-- Controls bar -->
+      <div class="gallery-controls" id="president-gallery-controls">
+        <!-- Left: nav -->
+        <div class="gallery-ctrl-group">
+          <button class="gallery-btn gallery-prev" id="president-prev-btn" aria-label="Previous image" title="Previous (←)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <span class="gallery-counter" id="president-gallery-counter" aria-live="polite">1 / 1</span>
+          <button class="gallery-btn gallery-next" id="president-next-btn" aria-label="Next image" title="Next (→)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <span class="gallery-label" id="president-gallery-label" aria-live="polite"></span>
+        </div>
+
+        <!-- Right: actions -->
+        <div class="gallery-ctrl-group">
+          <button class="gallery-btn gallery-zoom-in" id="president-zoom-in" aria-label="Zoom in" title="Zoom in (+)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-          <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <button class="gallery-btn gallery-zoom-out" id="president-zoom-out" aria-label="Zoom out" title="Zoom out (-)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-          <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <button class="gallery-btn gallery-reset" id="president-reset-zoom" aria-label="Reset zoom" title="Reset view (0)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
+          <a class="gallery-btn gallery-download" id="president-download-btn" aria-label="Download image" title="Download image" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3V16M12 16L7 11M12 16L17 11M5 20H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button class="gallery-btn gallery-fullscreen" id="president-fullscreen-btn" aria-label="Toggle fullscreen" title="Fullscreen (F)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="president-fs-icon-expand">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="president-fs-icon-shrink" class="hidden">
+              <path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="gallery-btn gallery-close" id="president-close-btn" aria-label="Close gallery" title="Close (Esc)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
-        <div class="viewer-image-wrapper">
-          <div class="viewer-image-container" id="president-viewer-image-container">
-            <img
-              src={president.viewerImage}
-              alt={president.viewerAlt}
-              class="viewer-image"
-              id="president-viewer-image"
-              draggable="false"
-              loading="lazy"
-              decoding="async"
-              width="1200"
-              height="900"
-            />
-          </div>
-        </div>
-        <div class="viewer-zoom-indicator" id="president-zoom-indicator">100%</div>
       </div>
-    </div>
+
+      <!-- Image viewport -->
+      <div class="gallery-viewport" id="president-gallery-viewport">
+        <div class="gallery-img-container" id="president-img-container">
+          <img
+            class="gallery-img"
+            id="president-gallery-img"
+            src=""
+            alt=""
+            draggable="false"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="gallery-zoom-pill" id="president-zoom-pill" aria-live="polite" aria-atomic="true">100%</div>
+      </div>
+    </dialog>
   </main>
 
   <div class="hidden md:block">
@@ -483,197 +523,435 @@ const president = presidentEntry.data;
 </Layout>
 
 <script>
-  function initPresidentViewer() {
-    const trigger = document.getElementById("president-gallery-trigger");
-    const viewer = document.getElementById("president-artwork-viewer");
-    const closeBtn = viewer?.querySelector(".viewer-close");
-    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
-    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
-    const resetBtn = viewer?.querySelector(".viewer-reset");
-    const imageContainer = document.getElementById("president-viewer-image-container");
-    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
-    const zoomIndicator = document.getElementById("president-zoom-indicator");
+  /* ─────────────────────────────────────────────────────────────────
+     PRESIDENT CAMPAIGN GALLERY — Native <dialog> + Fullscreen API
+     ───────────────────────────────────────────────────────────────── */
+  type GalleryImage = { src: string; alt: string; label: string };
 
-    if (!trigger || !viewer || !imageContainer) return;
-    if (viewer.hasAttribute("data-viewer-initialized")) return;
-    viewer.setAttribute("data-viewer-initialized", "true");
+  const IMAGES: GalleryImage[] = [
+    { src: "/images/president_galaxy.webp", alt: "President of the Galaxy — full campaign poster", label: "Campaign Poster" },
+  ];
 
+  function initGallery() {
+    // Force cleanup on page load / page swap to avoid carrying over viewer state
+    document.documentElement.classList.remove("is-viewer-open");
+    document.body.style.overflow = "";
+
+    const trigger   = document.getElementById("president-gallery-trigger");
+    const dialog    = document.getElementById("president-gallery-dialog") as HTMLDialogElement | null;
+    if (!trigger || !dialog) return;
+    if (dialog.dataset.galleryInit) return;
+    dialog.dataset.galleryInit = "1";
+
+    const img        = document.getElementById("president-gallery-img") as HTMLImageElement;
+    const counter    = document.getElementById("president-gallery-counter")!;
+    const label      = document.getElementById("president-gallery-label")!;
+    const container  = document.getElementById("president-img-container")!;
+    const viewport   = document.getElementById("president-gallery-viewport")!;
+    const pill       = document.getElementById("president-zoom-pill")!;
+    const prevBtn    = document.getElementById("president-prev-btn")!;
+    const nextBtn    = document.getElementById("president-next-btn")!;
+    const zoomInBtn  = document.getElementById("president-zoom-in")!;
+    const zoomOutBtn = document.getElementById("president-zoom-out")!;
+    const resetBtn   = document.getElementById("president-reset-zoom")!;
+    const dlBtn      = document.getElementById("president-download-btn") as HTMLAnchorElement;
+    const fsBtn      = document.getElementById("president-fullscreen-btn")!;
+    const closeBtn   = document.getElementById("president-close-btn")!;
+    const fsExpand   = document.getElementById("president-fs-icon-expand")!;
+    const fsShrink   = document.getElementById("president-fs-icon-shrink")!;
+
+    if (IMAGES.length <= 1) {
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
+      counter.style.display = "none";
+    }
+
+    let currentIdx = 0;
     let scale = 1;
-    let translateX = 0;
-    let translateY = 0;
+    let tx = 0;
+    let ty = 0;
     let isDragging = false;
     let startX = 0;
     let startY = 0;
-
     const MIN_SCALE = 1;
-    const MAX_SCALE = 4;
-    const ZOOM_STEP = 0.3;
+    const MAX_SCALE = 5;
+    const ZOOM_STEP = 0.35;
+    let pillTimer: ReturnType<typeof setTimeout>;
+    let initialDist = 0;
+    let initialScale = 1;
 
-    function updateTransform() {
-      if (!imageContainer) return;
-      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-      if (zoomIndicator) {
-        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
-        zoomIndicator.classList.add("show");
-        clearTimeout((window as unknown as { presidentZoomTimeout?: number }).presidentZoomTimeout);
-        (window as unknown as { presidentZoomTimeout?: number }).presidentZoomTimeout = window.setTimeout(() => {
-          zoomIndicator.classList.remove("show");
-        }, 1000);
-      }
+    // ── Image loading ──
+    function loadImage(idx: number) {
+      const entry = IMAGES[idx];
+      img.src = entry.src;
+      img.alt = entry.alt;
+      dlBtn.href = entry.src;
+      dlBtn.download = entry.src.split("/").pop() ?? "president-artwork";
+      counter.textContent = `${idx + 1} / ${IMAGES.length}`;
+      label.textContent = entry.label;
+      prevBtn.toggleAttribute("disabled", idx === 0);
+      nextBtn.toggleAttribute("disabled", idx === IMAGES.length - 1);
     }
 
-    function openViewer() {
-      if (!viewer) return;
-      document.documentElement.classList.add("is-viewer-open");
-      viewer.classList.add("is-open");
-      viewer.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      resetView();
+    // ── Transform ──
+    function applyTransform() {
+      container.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      const pct = `${Math.round(scale * 100)}%`;
+      pill.textContent = pct;
+      pill.classList.add("show");
+      clearTimeout(pillTimer);
+      pillTimer = setTimeout(() => pill.classList.remove("show"), 1200);
     }
 
-    function closeViewer() {
-      if (!viewer) return;
-      document.documentElement.classList.remove("is-viewer-open");
-      viewer.classList.remove("is-open");
-      viewer.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      resetView();
-    }
-
-    function resetView() {
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      updateTransform();
+    function resetTransform() {
+      scale = 1; tx = 0; ty = 0;
+      container.style.transform = "";
     }
 
     function zoomIn() {
-      if (scale < MAX_SCALE) {
-        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
-        updateTransform();
-      }
+      scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+      applyTransform();
     }
 
+    // Explicit function ZoomOut
     function zoomOut() {
-      if (scale > MIN_SCALE) {
-        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
-        if (scale === MIN_SCALE) {
-          translateX = 0;
-          translateY = 0;
-        }
-        updateTransform();
+      scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+      if (scale <= MIN_SCALE) { tx = 0; ty = 0; }
+      applyTransform();
+    }
+
+    // ── Open / close ──
+    function openGallery(idx = 0) {
+      currentIdx = idx;
+      loadImage(currentIdx);
+      resetTransform();
+      document.documentElement.classList.add("is-viewer-open");
+      document.body.style.overflow = "hidden";
+      dialog!.showModal();
+    }
+
+    function closeGallery() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      dialog!.close();
+      document.documentElement.classList.remove("is-viewer-open");
+      document.body.style.overflow = "";
+      resetTransform();
+    }
+
+    // ── Fullscreen ──
+    function updateFsIcon() {
+      const isFs = !!document.fullscreenElement;
+      fsExpand.classList.toggle("hidden", isFs);
+      fsShrink.classList.toggle("hidden", !isFs);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        dialog!.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
       }
     }
 
-    function handleWheel(e: WheelEvent) {
-      e.preventDefault();
-      if (e.deltaY < 0) zoomIn();
-      else zoomOut();
-    }
+    document.addEventListener("fullscreenchange", updateFsIcon);
 
-    function handleDragStart(e: MouseEvent | TouchEvent) {
-      if (scale === 1) return;
+    // ── Drag / pan ──
+    function onPointerDown(e: PointerEvent) {
+      if (scale <= 1) return;
       isDragging = true;
-      imageWrapper?.classList.add("is-grabbing");
-      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
-      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
-      if (e.type === "mousedown") {
-        document.addEventListener("mousemove", handleDragMove as EventListener);
-        document.addEventListener("mouseup", handleDragEnd);
-      }
+      viewport.setPointerCapture(e.pointerId);
+      viewport.style.cursor = "grabbing";
+      startX = e.clientX - tx;
+      startY = e.clientY - ty;
     }
 
-    function handleDragMove(e: MouseEvent | TouchEvent) {
+    function onPointerMove(e: PointerEvent) {
       if (!isDragging) return;
-      e.preventDefault();
-      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
-      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
-      translateX = clientX - startX;
-      translateY = clientY - startY;
-      updateTransform();
+      tx = e.clientX - startX;
+      ty = e.clientY - startY;
+      applyTransform();
     }
 
-    function handleDragEnd() {
+    function onPointerUp(e: PointerEvent) {
+      if (!isDragging) return;
       isDragging = false;
-      imageWrapper?.classList.remove("is-grabbing");
-      document.removeEventListener("mousemove", handleDragMove as EventListener);
-      document.removeEventListener("mouseup", handleDragEnd);
+      viewport.releasePointerCapture(e.pointerId);
+      viewport.style.cursor = "";
     }
 
-    let initialDistance = 0;
-    let initialScale = 1;
-
-    function getTouchDistance(e: TouchEvent) {
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    // ── Wheel zoom ──
+    function onWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn(); else zoomOut();
     }
 
-    function handleTouchStart(e: TouchEvent) {
+    // ── Touch pinch ──
+    function getTouchDist(e: TouchEvent) {
+      return Math.hypot(
+        e.touches[1].clientX - e.touches[0].clientX,
+        e.touches[1].clientY - e.touches[0].clientY,
+      );
+    }
+
+    function onTouchStart(e: TouchEvent) {
       if (e.touches.length === 2) {
-        initialDistance = getTouchDistance(e);
+        initialDist  = getTouchDist(e);
         initialScale = scale;
-      } else if (e.touches.length === 1) {
-        handleDragStart(e);
       }
     }
 
-    function handleTouchMove(e: TouchEvent) {
+    function onTouchMove(e: TouchEvent) {
       if (e.touches.length === 2) {
         e.preventDefault();
-        const currentDistance = getTouchDistance(e);
-        const newScale = initialScale * (currentDistance / initialDistance);
-        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
-        updateTransform();
-      } else if (e.touches.length === 1 && isDragging) {
-        handleDragMove(e);
+        const ratio = getTouchDist(e) / initialDist;
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, initialScale * ratio));
+        applyTransform();
       }
     }
 
-    trigger.addEventListener("click", openViewer);
-    closeBtn?.addEventListener("click", closeViewer);
-    closeBtn?.addEventListener("touchend", (e) => { e.preventDefault(); closeViewer(); }, { passive: false });
-    zoomInBtn?.addEventListener("click", zoomIn);
-    zoomOutBtn?.addEventListener("click", zoomOut);
-    resetBtn?.addEventListener("click", resetView);
-    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+    // ── Keyboard ──
+    function onKeyDown(e: KeyboardEvent) {
+      if (!dialog?.open) return;
+      switch (e.key) {
+        case "ArrowLeft":  if (currentIdx > 0)                    { currentIdx--; loadImage(currentIdx); resetTransform(); } break;
+        case "ArrowRight": if (currentIdx < IMAGES.length - 1)    { currentIdx++; loadImage(currentIdx); resetTransform(); } break;
+        case "+": case "=": zoomIn();   break;
+        case "-":           zoomOut();  break;
+        case "0":           resetTransform(); pill.textContent = "100%"; break;
+        case "f": case "F": toggleFullscreen(); break;
+      }
+    }
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    // ── Nav buttons ──
+    prevBtn.addEventListener("click", () => {
+      if (currentIdx > 0) { currentIdx--; loadImage(currentIdx); resetTransform(); }
+    });
+    nextBtn.addEventListener("click", () => {
+      if (currentIdx < IMAGES.length - 1) { currentIdx++; loadImage(currentIdx); resetTransform(); }
+    });
+
+    // ── Event wiring ──
+    trigger.addEventListener("click",   () => openGallery(0));
+    trigger.addEventListener("keydown", (e: Event) => {
+      const ke = e as KeyboardEvent;
+      if (ke.key === "Enter" || ke.key === " ") { ke.preventDefault(); openGallery(0); }
+    });
+
+    closeBtn.addEventListener("click",    closeGallery);
+    zoomInBtn.addEventListener("click",   zoomIn);
+    zoomOutBtn.addEventListener("click",  zoomOut);
+    resetBtn.addEventListener("click",    () => { resetTransform(); });
+    fsBtn.addEventListener("click",       toggleFullscreen);
+
+    // Light dismiss: close when clicking the backdrop
+    dialog!.addEventListener("click", (e) => {
+      const target = e.target as Element;
+      if (target === dialog) closeGallery();
+    });
+
+    // Native cancel event (ESC key)
+    dialog!.addEventListener("cancel", (e) => {
+      e.preventDefault();
+      closeGallery();
+    });
+
+    viewport.addEventListener("pointerdown", onPointerDown as EventListener);
+    viewport.addEventListener("pointermove", onPointerMove as EventListener);
+    viewport.addEventListener("pointerup",   onPointerUp   as EventListener);
+    viewport.addEventListener("wheel",       onWheel as EventListener, { passive: false });
+    viewport.addEventListener("touchstart",  onTouchStart as EventListener, { passive: true });
+    viewport.addEventListener("touchmove",   onTouchMove  as EventListener, { passive: false });
+
+    document.addEventListener("keydown", onKeyDown);
+
+    // Cleanup on Astro page transitions
+    const cleanup = () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("fullscreenchange", updateFsIcon);
+      document.documentElement.classList.remove("is-viewer-open");
+      document.body.style.overflow = "";
+      document.removeEventListener("astro:before-swap", cleanup);
     };
-    document.addEventListener("keydown", handleKeyDown);
-
-    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
-    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
-    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
-    imageWrapper?.addEventListener("touchend", handleDragEnd);
-    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
-
-    const handleBeforeSwap = () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("astro:before-swap", handleBeforeSwap);
-    };
-    document.addEventListener("astro:before-swap", handleBeforeSwap);
+    document.addEventListener("astro:before-swap", cleanup);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      initPresidentViewer();
-    });
+    document.addEventListener("DOMContentLoaded", initGallery);
   } else {
-    initPresidentViewer();
+    initGallery();
   }
-  document.addEventListener("astro:page-load", () => {
-    initPresidentViewer();
-  });
+  document.addEventListener("astro:page-load", initGallery);
 </script>
 
 <style>
+  /* ─── Hide nav when viewer is open ─── */
   :global(.is-viewer-open [data-slim-nav]),
   :global(.is-viewer-open [data-system-meta]),
-  :global(.is-viewer-open [data-subpage-nav]) {
+  :global(.is-viewer-open [data-subpage-nav]),
+  :global(.is-viewer-open .mobile-escape-nav) {
     display: none !important;
   }
+
+  /* ═══════════════════════════════════════
+     NATIVE <dialog> GALLERY
+     ═══════════════════════════════════════ */
+  .president-gallery-dialog {
+    /* Reset browser defaults */
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    /* Full-screen modal */
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background: transparent;
+    /* flex column to stack controls + viewport */
+    display: none; /* overridden by [open] below */
+    flex-direction: column;
+  }
+
+  .president-gallery-dialog[open] {
+    display: flex;
+  }
+
+  .president-gallery-dialog::backdrop {
+    background: rgba(250, 247, 242, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* ─── Controls bar ─── */
+  .gallery-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(19, 66, 82, 0.15);
+    flex-shrink: 0;
+    background: var(--eden-bg, #fcf8f9);
+  }
+
+  .gallery-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .gallery-counter {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+    color: var(--eden-text-muted, #627078);
+    letter-spacing: 0.1em;
+    padding: 0 0.5rem;
+  }
+
+  .gallery-label {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--eden-gold, #a67c00);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 0.5rem;
+  }
+
+  .gallery-btn {
+    background: rgba(19, 66, 82, 0.05);
+    border: 1px solid rgba(19, 66, 82, 0.15);
+    color: var(--eden-text, #134252);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .gallery-btn:hover {
+    background: rgba(19, 66, 82, 0.1);
+    border-color: rgba(19, 66, 82, 0.3);
+    color: var(--eden-primary, #208c8d);
+    transform: translateY(-1px);
+  }
+
+  .gallery-btn[disabled] {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .gallery-close {
+    background: rgba(220, 60, 60, 0.08);
+    border-color: rgba(220, 60, 60, 0.2);
+    color: #dc3c3c;
+  }
+
+  .gallery-close:hover {
+    background: #dc3c3c;
+    border-color: #dc3c3c;
+    color: #fff;
+  }
+
+  /* ─── Image viewport ─── */
+  .gallery-viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+    border-top: none;
+    background: rgba(19, 66, 82, 0.03);
+  }
+
+  .gallery-img-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    transform-origin: center;
+    transition: transform 0.1s ease-out;
+  }
+
+  .gallery-img {
+    max-width: 96%;
+    max-height: 96%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    box-shadow: 0 24px 80px rgba(19, 66, 82, 0.15);
+    border-radius: 4px;
+  }
+
+  /* ─── Zoom pill ─── */
+  .gallery-zoom-pill {
+    position: absolute;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(19, 66, 82, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .gallery-zoom-pill.show { opacity: 1; }
 
   /* ─── Base theme variables ─── */
   .president-eden-wrap {

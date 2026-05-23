@@ -25,6 +25,7 @@ function handleScroll(e: Event, link: HTMLAnchorElement) {
   const target = document.getElementById(targetId);
   if (!target) return;
 
+  // We are handling the scroll natively, so prevent default browser navigation
   e.preventDefault();
 
   const hadOverlay = !!document.querySelector("[data-drawer-panel].is-active");
@@ -52,7 +53,7 @@ function handleClick(e: Event) {
 function handleTouchEnd(e: TouchEvent) {
   const link = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[data-scroll]");
   if (!link) return;
-  e.preventDefault();
+  // Let handleScroll call e.preventDefault() only if it handles the event
   handleScroll(e, link);
 }
 

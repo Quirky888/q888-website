@@ -90,6 +90,20 @@ const { title = "Q888" } = Astro.props;
 			} else {
 				window.addEventListener('load', () => setTimeout(loadPortalFonts, 200), { once: true });
 			}
+
+			// Global cleanup to avoid carrying over gallery viewer state
+			(function cleanupViewerState() {
+				const cleanup = () => {
+					document.documentElement.classList.remove("is-viewer-open");
+					document.body.style.overflow = "";
+				};
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", cleanup);
+				} else {
+					cleanup();
+				}
+				document.addEventListener("astro:page-load", cleanup);
+			})();
 		</script>
 
 

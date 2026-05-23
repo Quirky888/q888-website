@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SubPageNav from "../components/SubPageNav.astro";
+import SlimNav from "../components/SlimNav.astro";
 ---
 
 <Layout title="Square Bubbles Copyright — Q888">
   <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
 
   <main class="min-h-screen bg-[var(--bg-cosmic)] text-[var(--text-silver)] relative">
     <div class="max-w-3xl mx-auto px-6 py-20 md:px-12 md:py-24 lg:px-24 lg:py-28"

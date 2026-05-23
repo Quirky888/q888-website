@@ -51,10 +51,16 @@ const afterlife = afterlifeEntry.data;
           </section>
 
           <section class="afterlife-artwork-card-section">
-            <div class="artwork-info-card afterlife-narmail-glass" id="afterlife-gallery-trigger">
+            <div
+              class="artwork-info-card afterlife-narmail-glass"
+              id="afterlife-gallery-trigger"
+              role="button"
+              tabindex="0"
+              aria-label="Open Afterlife artwork gallery"
+            >
               <div class="artwork-card-content">
                 <div class="artwork-card-icon afterlife-gallery-icon">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L20 14M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
@@ -62,9 +68,9 @@ const afterlife = afterlifeEntry.data;
                   <h3 class="artwork-card-title afterlife-gallery-title">{afterlife.artworkCardTitle}</h3>
                   <p class="artwork-card-description">{afterlife.artworkCardDescription}</p>
                 </div>
-                <button class="artwork-card-button afterlife-gallery-btn" type="button">
+                <button class="artwork-card-button afterlife-gallery-btn" type="button" aria-label="Open full gallery viewer" tabindex="-1">
                   <span>{afterlife.artworkCardButtonLabel}</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
@@ -158,49 +164,84 @@ const afterlife = afterlifeEntry.data;
       </div>
     </div>
 
-    <div class="artwork-viewer" id="afterlife-artwork-viewer" aria-hidden="true">
-      <div class="viewer-overlay"></div>
-      <div class="viewer-container">
-        <div class="viewer-controls">
-          <button class="viewer-btn viewer-close" aria-label="Close viewer" title="Close (ESC)">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <!-- ══════════════════════════════════ GALLERY DIALOG ══════════════════════════════════ -->
+    <dialog
+      class="afterlife-gallery-dialog"
+      id="afterlife-gallery-dialog"
+      aria-label="Afterlife Contract campaign gallery"
+    >
+      <!-- Controls bar -->
+      <div class="gallery-controls" id="afterlife-gallery-controls">
+        <!-- Left: nav -->
+        <div class="gallery-ctrl-group">
+          <button class="gallery-btn gallery-prev" id="afterlife-prev-btn" aria-label="Previous image" title="Previous (←)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button class="viewer-btn viewer-zoom-in" aria-label="Zoom in" title="Zoom In">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <span class="gallery-counter" id="afterlife-gallery-counter" aria-live="polite">1 / 1</span>
+          <button class="gallery-btn gallery-next" id="afterlife-next-btn" aria-label="Next image" title="Next (→)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <span class="gallery-label" id="afterlife-gallery-label" aria-live="polite"></span>
+        </div>
+
+        <!-- Right: actions -->
+        <div class="gallery-ctrl-group">
+          <button class="gallery-btn gallery-zoom-in" id="afterlife-zoom-in" aria-label="Zoom in" title="Zoom in (+)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-          <button class="viewer-btn viewer-zoom-out" aria-label="Zoom out" title="Zoom Out">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <button class="gallery-btn gallery-zoom-out" id="afterlife-zoom-out" aria-label="Zoom out" title="Zoom out (-)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
-          <button class="viewer-btn viewer-reset" aria-label="Reset view" title="Reset View">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <button class="gallery-btn gallery-reset" id="afterlife-reset-zoom" aria-label="Reset zoom" title="Reset view (0)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
+          <a class="gallery-btn gallery-download" id="afterlife-download-btn" aria-label="Download image" title="Download image" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3V16M12 16L7 11M12 16L17 11M5 20H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button class="gallery-btn gallery-fullscreen" id="afterlife-fullscreen-btn" aria-label="Toggle fullscreen" title="Fullscreen (F)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="afterlife-fs-icon-expand">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" id="afterlife-fs-icon-shrink" class="hidden">
+              <path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="gallery-btn gallery-close" id="afterlife-close-btn" aria-label="Close gallery" title="Close (Esc)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
-        <div class="viewer-image-wrapper">
-          <div class="viewer-image-container" id="afterlife-viewer-image-container">
-            <Image
-              src={afterlife.viewerImage}
-              alt={afterlife.viewerAlt}
-              class="viewer-image"
-              id="afterlife-viewer-image"
-              draggable="false"
-              loading="lazy"
-              decoding="async"
-              width={1200}
-              height={900}
-            />
-          </div>
-        </div>
-        <div class="viewer-zoom-indicator" id="afterlife-zoom-indicator">100%</div>
       </div>
-    </div>
+
+      <!-- Image viewport -->
+      <div class="gallery-viewport" id="afterlife-gallery-viewport">
+        <div class="gallery-img-container" id="afterlife-img-container">
+          <img
+            class="gallery-img"
+            id="afterlife-gallery-img"
+            src=""
+            alt=""
+            draggable="false"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="gallery-zoom-pill" id="afterlife-zoom-pill" aria-live="polite" aria-atomic="true">100%</div>
+      </div>
+    </dialog>
   </main>
 
   <div class="hidden md:block">
@@ -209,177 +250,258 @@ const afterlife = afterlifeEntry.data;
 </Layout>
 
 <script>
-  function initAfterlifeViewer() {
-    const trigger = document.getElementById("afterlife-gallery-trigger");
-    const viewer = document.getElementById("afterlife-artwork-viewer");
-    const closeBtn = viewer?.querySelector(".viewer-close");
-    const zoomInBtn = viewer?.querySelector(".viewer-zoom-in");
-    const zoomOutBtn = viewer?.querySelector(".viewer-zoom-out");
-    const resetBtn = viewer?.querySelector(".viewer-reset");
-    const imageContainer = document.getElementById("afterlife-viewer-image-container");
-    const imageWrapper = viewer?.querySelector(".viewer-image-wrapper");
-    const zoomIndicator = document.getElementById("afterlife-zoom-indicator");
+  /* ─────────────────────────────────────────────────────────────────
+     AFTERLIFE GALLERY — Native <dialog> + Fullscreen API
+     ───────────────────────────────────────────────────────────────── */
+  type GalleryImage = { src: string; alt: string; label: string };
 
-    if (!trigger || !viewer || !imageContainer) return;
-    if (viewer.hasAttribute("data-viewer-initialized")) return;
-    viewer.setAttribute("data-viewer-initialized", "true");
+  const IMAGES: GalleryImage[] = [
+    { src: "/images/afterlife_contract.webp", alt: "Afterlife Contract Full Certificate", label: "Contract Certificate" },
+  ];
 
+  function initGallery() {
+    // Force cleanup on page load / page swap to avoid carrying over viewer state
+    document.documentElement.classList.remove("is-viewer-open");
+    document.body.style.overflow = "";
+
+    const trigger   = document.getElementById("afterlife-gallery-trigger");
+    const dialog    = document.getElementById("afterlife-gallery-dialog") as HTMLDialogElement | null;
+    if (!trigger || !dialog) return;
+    if (dialog.dataset.galleryInit) return;
+    dialog.dataset.galleryInit = "1";
+
+    const img        = document.getElementById("afterlife-gallery-img") as HTMLImageElement;
+    const counter    = document.getElementById("afterlife-gallery-counter")!;
+    const label      = document.getElementById("afterlife-gallery-label")!;
+    const container  = document.getElementById("afterlife-img-container")!;
+    const viewport   = document.getElementById("afterlife-gallery-viewport")!;
+    const pill       = document.getElementById("afterlife-zoom-pill")!;
+    const prevBtn    = document.getElementById("afterlife-prev-btn")!;
+    const nextBtn    = document.getElementById("afterlife-next-btn")!;
+    const zoomInBtn  = document.getElementById("afterlife-zoom-in")!;
+    const zoomOutBtn = document.getElementById("afterlife-zoom-out")!;
+    const resetBtn   = document.getElementById("afterlife-reset-zoom")!;
+    const dlBtn      = document.getElementById("afterlife-download-btn") as HTMLAnchorElement;
+    const fsBtn      = document.getElementById("afterlife-fullscreen-btn")!;
+    const closeBtn   = document.getElementById("afterlife-close-btn")!;
+    const fsExpand   = document.getElementById("afterlife-fs-icon-expand")!;
+    const fsShrink   = document.getElementById("afterlife-fs-icon-shrink")!;
+
+    if (IMAGES.length <= 1) {
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
+      counter.style.display = "none";
+    }
+
+    let currentIdx = 0;
     let scale = 1;
-    let translateX = 0;
-    let translateY = 0;
+    let tx = 0;
+    let ty = 0;
     let isDragging = false;
     let startX = 0;
     let startY = 0;
-
     const MIN_SCALE = 1;
-    const MAX_SCALE = 4;
-    const ZOOM_STEP = 0.3;
+    const MAX_SCALE = 5;
+    const ZOOM_STEP = 0.35;
+    let pillTimer: ReturnType<typeof setTimeout>;
+    let initialDist = 0;
+    let initialScale = 1;
 
-    function updateTransform() {
-      if (!imageContainer) return;
-      imageContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-      if (zoomIndicator) {
-        zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
-        zoomIndicator.classList.add("show");
-        clearTimeout((window as unknown as { afterlifeZoomTimeout?: number }).afterlifeZoomTimeout);
-        (window as unknown as { afterlifeZoomTimeout?: number }).afterlifeZoomTimeout = window.setTimeout(() => {
-          zoomIndicator.classList.remove("show");
-        }, 1000);
-      }
+    // ── Image loading ──
+    function loadImage(idx: number) {
+      const entry = IMAGES[idx];
+      img.src = entry.src;
+      img.alt = entry.alt;
+      dlBtn.href = entry.src;
+      dlBtn.download = entry.src.split("/").pop() ?? "afterlife-artwork";
+      counter.textContent = `${idx + 1} / ${IMAGES.length}`;
+      label.textContent = entry.label;
+      prevBtn.toggleAttribute("disabled", idx === 0);
+      nextBtn.toggleAttribute("disabled", idx === IMAGES.length - 1);
     }
 
-    function openViewer() {
-      if (!viewer) return;
-      document.documentElement.classList.add("is-viewer-open");
-      viewer.classList.add("is-open");
-      viewer.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      resetView();
+    // ── Transform ──
+    function applyTransform() {
+      container.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      const pct = `${Math.round(scale * 100)}%`;
+      pill.textContent = pct;
+      pill.classList.add("show");
+      clearTimeout(pillTimer);
+      pillTimer = setTimeout(() => pill.classList.remove("show"), 1200);
     }
 
-    function closeViewer() {
-      if (!viewer) return;
-      document.documentElement.classList.remove("is-viewer-open");
-      viewer.classList.remove("is-open");
-      viewer.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      resetView();
-    }
-
-    function resetView() {
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      updateTransform();
+    function resetTransform() {
+      scale = 1; tx = 0; ty = 0;
+      container.style.transform = "";
     }
 
     function zoomIn() {
-      if (scale < MAX_SCALE) {
-        scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
-        updateTransform();
-      }
+      scale = Math.min(scale + ZOOM_STEP, MAX_SCALE);
+      applyTransform();
     }
 
     function zoomOut() {
-      if (scale > MIN_SCALE) {
-        scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
-        if (scale === MIN_SCALE) {
-          translateX = 0;
-          translateY = 0;
-        }
-        updateTransform();
+      scale = Math.max(scale - ZOOM_STEP, MIN_SCALE);
+      if (scale <= MIN_SCALE) { tx = 0; ty = 0; }
+      applyTransform();
+    }
+
+    // ── Open / close ──
+    function openGallery(idx = 0) {
+      currentIdx = idx;
+      loadImage(currentIdx);
+      resetTransform();
+      document.documentElement.classList.add("is-viewer-open");
+      document.body.style.overflow = "hidden";
+      dialog!.showModal();
+    }
+
+    function closeGallery() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      dialog!.close();
+      document.documentElement.classList.remove("is-viewer-open");
+      document.body.style.overflow = "";
+      resetTransform();
+    }
+
+    // ── Fullscreen ──
+    function updateFsIcon() {
+      const isFs = !!document.fullscreenElement;
+      fsExpand.classList.toggle("hidden", isFs);
+      fsShrink.classList.toggle("hidden", !isFs);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        dialog!.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
       }
     }
 
-    function handleWheel(e: WheelEvent) {
-      e.preventDefault();
-      if (e.deltaY < 0) zoomIn();
-      else zoomOut();
-    }
+    document.addEventListener("fullscreenchange", updateFsIcon);
 
-    function handleDragStart(e: MouseEvent | TouchEvent) {
-      if (scale === 1) return;
+    // ── Drag / pan ──
+    function onPointerDown(e: PointerEvent) {
+      if (scale <= 1) return;
       isDragging = true;
-      imageWrapper?.classList.add("is-grabbing");
-      startX = (e.type === "mousedown" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX) - translateX;
-      startY = (e.type === "mousedown" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY) - translateY;
-      if (e.type === "mousedown") {
-        document.addEventListener("mousemove", handleDragMove as EventListener);
-        document.addEventListener("mouseup", handleDragEnd);
-      }
+      viewport.setPointerCapture(e.pointerId);
+      viewport.style.cursor = "grabbing";
+      startX = e.clientX - tx;
+      startY = e.clientY - ty;
     }
 
-    function handleDragMove(e: MouseEvent | TouchEvent) {
+    function onPointerMove(e: PointerEvent) {
       if (!isDragging) return;
-      e.preventDefault();
-      const clientX = e.type === "mousemove" ? (e as MouseEvent).clientX : (e as TouchEvent).touches[0].clientX;
-      const clientY = e.type === "mousemove" ? (e as MouseEvent).clientY : (e as TouchEvent).touches[0].clientY;
-      translateX = clientX - startX;
-      translateY = clientY - startY;
-      updateTransform();
+      tx = e.clientX - startX;
+      ty = e.clientY - startY;
+      applyTransform();
     }
 
-    function handleDragEnd() {
+    function onPointerUp(e: PointerEvent) {
+      if (!isDragging) return;
       isDragging = false;
-      imageWrapper?.classList.remove("is-grabbing");
-      document.removeEventListener("mousemove", handleDragMove as EventListener);
-      document.removeEventListener("mouseup", handleDragEnd);
+      viewport.releasePointerCapture(e.pointerId);
+      viewport.style.cursor = "";
     }
 
-    let initialDistance = 0;
-    let initialScale = 1;
-
-    function getTouchDistance(e: TouchEvent) {
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-      return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+    // ── Wheel zoom ──
+    function onWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (e.deltaY < 0) zoomIn(); else zoomOut();
     }
 
-    function handleTouchStart(e: TouchEvent) {
+    // ── Touch pinch ──
+    function getTouchDist(e: TouchEvent) {
+      return Math.hypot(
+        e.touches[1].clientX - e.touches[0].clientX,
+        e.touches[1].clientY - e.touches[0].clientY,
+      );
+    }
+
+    function onTouchStart(e: TouchEvent) {
       if (e.touches.length === 2) {
-        initialDistance = getTouchDistance(e);
+        initialDist  = getTouchDist(e);
         initialScale = scale;
-      } else if (e.touches.length === 1) {
-        handleDragStart(e);
       }
     }
 
-    function handleTouchMove(e: TouchEvent) {
+    // Explicit function onTouchMove
+    function onTouchMove(e: TouchEvent) {
       if (e.touches.length === 2) {
         e.preventDefault();
-        const currentDistance = getTouchDistance(e);
-        const newScale = initialScale * (currentDistance / initialDistance);
-        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, newScale));
-        updateTransform();
-      } else if (e.touches.length === 1 && isDragging) {
-        handleDragMove(e);
+        const ratio = getTouchDist(e) / initialDist;
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, initialScale * ratio));
+        applyTransform();
       }
     }
 
-    trigger.addEventListener("click", openViewer);
-    closeBtn?.addEventListener("click", closeViewer);
-    closeBtn?.addEventListener("touchend", (e) => { e.preventDefault(); closeViewer(); }, { passive: false });
-    zoomInBtn?.addEventListener("click", zoomIn);
-    zoomOutBtn?.addEventListener("click", zoomOut);
-    resetBtn?.addEventListener("click", resetView);
-    viewer.querySelector(".viewer-overlay")?.addEventListener("click", closeViewer);
+    // ── Keyboard ──
+    function onKeyDown(e: KeyboardEvent) {
+      if (!dialog?.open) return;
+      switch (e.key) {
+        case "ArrowLeft":  if (currentIdx > 0)                    { currentIdx--; loadImage(currentIdx); resetTransform(); } break;
+        case "ArrowRight": if (currentIdx < IMAGES.length - 1)    { currentIdx++; loadImage(currentIdx); resetTransform(); } break;
+        case "+": case "=": zoomIn();   break;
+        case "-":           zoomOut();  break;
+        case "0":           resetTransform(); pill.textContent = "100%"; break;
+        case "f": case "F": toggleFullscreen(); break;
+      }
+    }
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && viewer.classList.contains("is-open")) closeViewer();
+    // ── Nav buttons ──
+    prevBtn.addEventListener("click", () => {
+      if (currentIdx > 0) { currentIdx--; loadImage(currentIdx); resetTransform(); }
+    });
+    nextBtn.addEventListener("click", () => {
+      if (currentIdx < IMAGES.length - 1) { currentIdx++; loadImage(currentIdx); resetTransform(); }
+    });
+
+    // ── Event wiring ──
+    trigger.addEventListener("click",   () => openGallery(0));
+    trigger.addEventListener("keydown", (e: Event) => {
+      const ke = e as KeyboardEvent;
+      if (ke.key === "Enter" || ke.key === " ") { ke.preventDefault(); openGallery(0); }
+    });
+
+    closeBtn.addEventListener("click",    closeGallery);
+    zoomInBtn.addEventListener("click",   zoomIn);
+    zoomOutBtn.addEventListener("click",  zoomOut);
+    resetBtn.addEventListener("click",    () => { resetTransform(); });
+    fsBtn.addEventListener("click",       toggleFullscreen);
+
+    // Light dismiss: close when clicking the backdrop
+    dialog!.addEventListener("click", (e) => {
+      const target = e.target as Element;
+      if (target === dialog) closeGallery();
+    });
+
+    // Native cancel event (ESC key)
+    dialog!.addEventListener("cancel", (e) => {
+      e.preventDefault();
+      closeGallery();
+    });
+
+    viewport.addEventListener("pointerdown", onPointerDown as EventListener);
+    viewport.addEventListener("pointermove", onPointerMove as EventListener);
+    viewport.addEventListener("pointerup",   onPointerUp   as EventListener);
+    viewport.addEventListener("wheel",       onWheel as EventListener, { passive: false });
+    viewport.addEventListener("touchstart",  onTouchStart as EventListener, { passive: true });
+    viewport.addEventListener("touchmove",   onTouchMove  as EventListener, { passive: false });
+
+    document.addEventListener("keydown", onKeyDown);
+
+    // Cleanup on Astro page transitions
+    const cleanup = () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("fullscreenchange", updateFsIcon);
+      document.documentElement.classList.remove("is-viewer-open");
+      document.body.style.overflow = "";
+      document.removeEventListener("astro:before-swap", cleanup);
     };
-    document.addEventListener("keydown", handleKeyDown);
-
-    imageWrapper?.addEventListener("mousedown", handleDragStart as EventListener);
-    imageWrapper?.addEventListener("touchstart", handleTouchStart as EventListener, { passive: false });
-    imageWrapper?.addEventListener("touchmove", handleTouchMove as EventListener, { passive: false });
-    imageWrapper?.addEventListener("touchend", handleDragEnd);
-    imageWrapper?.addEventListener("wheel", handleWheel as EventListener, { passive: false });
-
-    const handleBeforeSwap = () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("astro:before-swap", handleBeforeSwap);
-    };
-    document.addEventListener("astro:before-swap", handleBeforeSwap);
+    document.addEventListener("astro:before-swap", cleanup);
   }
 
   function initAfterlifeDownload() {
@@ -402,25 +524,187 @@ const afterlife = afterlifeEntry.data;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
-      initAfterlifeViewer();
+      initGallery();
       initAfterlifeDownload();
     });
   } else {
-    initAfterlifeViewer();
+    initGallery();
     initAfterlifeDownload();
   }
   document.addEventListener("astro:page-load", () => {
-    initAfterlifeViewer();
+    initGallery();
     initAfterlifeDownload();
   });
 </script>
 
 <style>
+  /* ─── Hide nav when viewer is open ─── */
   :global(.is-viewer-open [data-slim-nav]),
   :global(.is-viewer-open [data-system-meta]),
-  :global(.is-viewer-open [data-subpage-nav]) {
+  :global(.is-viewer-open [data-subpage-nav]),
+  :global(.is-viewer-open .mobile-escape-nav) {
     display: none !important;
   }
+
+  /* ═══════════════════════════════════════
+     NATIVE <dialog> GALLERY
+     ═══════════════════════════════════════ */
+  .afterlife-gallery-dialog {
+    /* Reset browser defaults */
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    /* Full-screen modal */
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background: transparent;
+    /* flex column to stack controls + viewport */
+    display: none; /* overridden by [open] below */
+    flex-direction: column;
+  }
+
+  .afterlife-gallery-dialog[open] {
+    display: flex;
+  }
+
+  .afterlife-gallery-dialog::backdrop {
+    background: rgba(250, 247, 242, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* ─── Controls bar ─── */
+  .gallery-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(19, 66, 82, 0.15);
+    flex-shrink: 0;
+    background: var(--eden-bg, #fcf8f9);
+  }
+
+  .gallery-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .gallery-counter {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+    color: var(--eden-text-muted, #627078);
+    letter-spacing: 0.1em;
+    padding: 0 0.5rem;
+  }
+
+  .gallery-label {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--eden-text, #134252);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 0.5rem;
+    opacity: 0.8;
+  }
+
+  .gallery-btn {
+    background: rgba(19, 66, 82, 0.05);
+    border: 1px solid rgba(19, 66, 82, 0.15);
+    color: var(--eden-text, #134252);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .gallery-btn:hover {
+    background: rgba(19, 66, 82, 0.1);
+    border-color: rgba(19, 66, 82, 0.3);
+    color: var(--eden-primary, #208c8d);
+    transform: translateY(-1px);
+  }
+
+  .gallery-btn[disabled] {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .gallery-close {
+    background: rgba(220, 60, 60, 0.08);
+    border-color: rgba(220, 60, 60, 0.2);
+    color: #dc3c3c;
+  }
+
+  .gallery-close:hover {
+    background: #dc3c3c;
+    border-color: #dc3c3c;
+    color: #fff;
+  }
+
+  /* ─── Image viewport ─── */
+  .gallery-viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+    border-top: none;
+    background: rgba(19, 66, 82, 0.03);
+  }
+
+  .gallery-img-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    transform-origin: center;
+    transition: transform 0.1s ease-out;
+  }
+
+  .gallery-img {
+    max-width: 96%;
+    max-height: 96%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    box-shadow: 0 24px 80px rgba(19, 66, 82, 0.15);
+    border-radius: 4px;
+  }
+
+  /* ─── Zoom pill ─── */
+  .gallery-zoom-pill {
+    position: absolute;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(19, 66, 82, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .gallery-zoom-pill.show { opacity: 1; }
 
   .afterlife-eden-wrap {
     --eden-bg: #fcf8f9;
