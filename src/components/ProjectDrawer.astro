@@ -17,7 +17,7 @@
     aria-label="Digital Ink project details"
   >
     <div class="drawer-scroll">
-      <button type="button" data-drawer-close class="drawer-close-x" aria-label="Close">×</button>
+      <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>
       <section class="di-panel di-body overflow-x-clip">
         <!-- Q888:SECTION_START id="di-header" -->
         <div class="px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
@@ -434,7 +434,7 @@
     data-eden-map-section
   >
     <div class="drawer-scroll">
-      <button type="button" data-drawer-close class="drawer-close-x" aria-label="Close">×</button>
+      <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>
       <!-- Q888:SECTION_START id="eden-hero" -->
       <section class="eden-hero-section px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
         <div class="mx-auto">
@@ -470,18 +470,18 @@
       </section>
       <!-- Q888:SECTION_END id="eden-hero" -->
 
-      <div class="eden-map-shell" data-eden-map>
+      <div class="eden-map-shell min-h-[100dvh] w-full relative" data-eden-map>
         <div class="eden-map-loading" data-eden-map-loading aria-live="polite">
           <div class="eden-map-spinner"></div>
           <span class="eden-map-loading-text">Loading map...</span>
         </div>
         <div class="eden-map-inner eden-map-container" data-eden-map-inner>
-          <picture>
+          <picture class="block w-full h-full">
             <source media="(max-width: 768px)" srcset="/images/Edinburgh_Magic_mobile.webp" />
             <img
               src="/images/Edinburgh_Magic.webp"
               alt="Edinburgh Magic map"
-              class="eden-map-image"
+              class="eden-map-image w-full h-full object-contain"
               loading="lazy"
               decoding="async"
               width="2400"
@@ -495,24 +495,6 @@
             aria-label="Edinburgh Magic map hotspots"
             data-eden-map-svg
           >
-            <defs>
-              <filter id="eden-glow-bright" x="-150%" y="-150%" width="400%" height="400%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur1" />
-                <feGaussianBlur in="blur1" stdDeviation="24" result="blur2" />
-                <feGaussianBlur in="blur2" stdDeviation="36" result="blur3" />
-                <feColorMatrix
-                  in="blur3"
-                  type="matrix"
-                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
-                />
-                <feMerge>
-                  <feMergeNode in="blur3" />
-                  <feMergeNode in="blur2" />
-                  <feMergeNode in="blur1" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
           </svg>
         </div>
       </div>
@@ -942,9 +924,9 @@
     --eden-error: #c0152f;
     --eden-ease: cubic-bezier(0.16, 1, 0.3, 1);
     --eden-drawer-duration: 350ms;
-    --eden-drawer-height-desktop: 50vh;
-    --eden-drawer-height-tablet: 55vh;
-    --eden-drawer-height-mobile: 100vh;
+    --eden-drawer-height-desktop: 50dvh;
+    --eden-drawer-height-tablet: 55dvh;
+    --eden-drawer-height-mobile: 100dvh;
     --eden-ring-opacity: 0.18;
     background: var(--eden-bg);
     display: flex;
@@ -1210,8 +1192,8 @@
   @media (max-width: 768px) {
     .eden-map-container {
       position: relative !important;
-      width: 100% !important;
-      height: 100% !important;
+      width: 1000px !important;
+      height: 1000px !important;
       touch-action: none !important;
       cursor: grab;
       pointer-events: auto !important;
@@ -1221,11 +1203,11 @@
     }
     .eden-map-image,
     .eden-map-overlay {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
-      will-change: transform;
-      backface-visibility: hidden;
     }
   }
 
@@ -1741,6 +1723,7 @@
     .eden-hotspot:hover .hotspot-glow,
     .eden-hotspot:focus-visible .hotspot-glow {
       filter: none !important;
+      animation: none !important;
     }
     
     .eden-hotspot:hover .hotspot-glow,

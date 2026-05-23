@@ -1,12 +1,12 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 
 interface Props {
-  inPortal?: boolean;
   activeStickerId?: string;
 }
 
-const { inPortal = false, activeStickerId } = Astro.props;
+const { activeStickerId } = Astro.props;
 
 type Instrument = CollectionEntry<"stickers">["data"];
 const instruments: Instrument[] = (await getCollection("stickers"))
@@ -59,7 +59,7 @@ const tickerUnit = `${tickerText} — `;
           </div>
           {instrument.imageUrl && (
             <div class="instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)]">
-              <img src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" width="400" height="300" />
+              <Image src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" width={400} height={300} />
             </div>
           )}
           <div class="instrument-card-body px-4 py-3 flex-1">
@@ -92,7 +92,7 @@ const tickerUnit = `${tickerText} — `;
 </section>
 
 <div id="sticker-detail-drawer" class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto" data-sticker-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Sticker instrument details">
-  <button type="button" data-close-drawer class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors" aria-label="Close drawer">×</button>
+  <button type="button" data-close-drawer class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors hidden lg:flex" aria-label="Close drawer">×</button>
   <div class="drawer-scrollable max-w-4xl w-full max-h-[80dvh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
     <div class="drawer-content">
       <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
@@ -756,7 +756,7 @@ const tickerUnit = `${tickerText} — `;
   })();
 </script>
 
-<script define:vars={{ instruments, activeStickerId }}>
+<script is:inline define:vars={{ instruments, activeStickerId }}>
   (function () {
     window.toggleTermsModal = function () {
       const modal = document.getElementById("termsModal");

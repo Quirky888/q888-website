@@ -1,6 +1,7 @@
 ---
 import SystemMeta from "./SystemMeta.astro";
 import SlimNav from "./SlimNav.astro";
+import SubPageNav from "./SubPageNav.astro";
 import LandingHero from "./LandingHero.astro";
 import ProjectsThreshold from "./ProjectsThreshold.astro";
 import ProjectDrawer from "./ProjectDrawer.astro";
@@ -14,10 +15,13 @@ interface Props {
 const { projectToOpen } = Astro.props;
 ---
 
-<SlimNav />
+{projectToOpen && <SubPageNav />}
+<div class={projectToOpen ? "hidden md:block" : ""}>
+  <SlimNav />
+</div>
 <SystemMeta position="top" />
 
-<main class="relative min-h-screen pt-10 md:pt-11" data-open-project={projectToOpen}>
+<main class="relative min-h-[100dvh] overflow-x-hidden pt-10 md:pt-11" data-open-project={projectToOpen}>
   <section id="landing" data-section="landing" class="relative -mt-10 md:-mt-11">
     <LandingHero />
   </section>

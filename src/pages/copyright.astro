@@ -1,18 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SubPageNav from "../components/SubPageNav.astro";
+import SlimNav from "../components/SlimNav.astro";
 ---
 
 <Layout title="Square Bubbles Copyright — Q888">
-  <main class="min-h-screen bg-[var(--bg-cosmic)] text-[var(--text-silver)] relative">
-    <a
-      href="/#contact"
-      class="copyright-close fixed top-0 right-0 z-[10001] flex items-center justify-center w-14 h-14 md:w-12 md:h-12 text-2xl md:text-xl font-light text-[var(--text-silver-muted)] hover:text-[var(--text-silver)] transition-colors touch-manipulation"
-      style="top: max(0.5rem, env(safe-area-inset-top)); right: max(0.5rem, env(safe-area-inset-right));"
-      aria-label="Close"
-    >
-      ×
-    </a>
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
 
+  <main class="min-h-screen bg-[var(--bg-cosmic)] text-[var(--text-silver)] relative">
     <div class="max-w-3xl mx-auto px-6 py-20 md:px-12 md:py-24 lg:px-24 lg:py-28"
       style="padding-top: max(5rem, calc(env(safe-area-inset-top) + 4rem)); padding-right: max(1.5rem, calc(env(safe-area-inset-right) + 1rem));">
       <h1 class="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--text-silver-muted)] mb-10 md:mb-12">
@@ -63,16 +59,4 @@ import Layout from "../layouts/Layout.astro";
       </a>
     </div>
   </main>
-
-  <style>
-    .copyright-close {
-      -webkit-tap-highlight-color: transparent;
-    }
-    @media (max-width: 768px) {
-      .copyright-close {
-        min-width: 56px;
-        min-height: 56px;
-      }
-    }
-  </style>
 </Layout>

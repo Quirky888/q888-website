@@ -10,15 +10,7 @@ const navLinks = [
   <div class="slim-nav-inner">
     <a href="/#landing" class="slim-wordmark" data-scroll>Q888</a>
     
-    <button 
-      class="slim-toggle" 
-      aria-label="Menu"
-      aria-expanded="false"
-      type="button"
-    >
-      <span class="slim-toggle-bar"></span>
-      <span class="slim-toggle-bar"></span>
-    </button>
+
     
     <div class="slim-links" data-slim-links>
       {navLinks.map((link) => (
@@ -28,56 +20,7 @@ const navLinks = [
   </div>
 </nav>
 
-<script>
-  function initSlimNavToggle() {
-    const navs = document.querySelectorAll('[data-slim-nav]');
-    navs.forEach((nav) => {
-      if (nav.hasAttribute('data-slim-nav-initialized')) return;
-      const toggle = nav.querySelector('.slim-toggle');
-      const links = nav.querySelector('[data-slim-links]');
-      if (!toggle || !links) return;
-      nav.setAttribute('data-slim-nav-initialized', 'true');
-      
-      const toggleMenu = (e?: Event) => {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!expanded));
-        links.classList.toggle('open');
-      };
 
-      toggle.addEventListener('click', toggleMenu);
-      toggle.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        toggleMenu();
-      }, { passive: false });
-
-      links.querySelectorAll('a').forEach((link) => {
-        const closeMenu = () => {
-          toggle.setAttribute('aria-expanded', 'false');
-          links.classList.remove('open');
-          (link as HTMLElement).classList.remove('touch-active');
-        };
-        
-        link.addEventListener('click', closeMenu);
-        
-        link.addEventListener('touchstart', () => {
-          (link as HTMLElement).classList.add('touch-active');
-        }, { passive: true });
-        
-        link.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          closeMenu();
-        }, { passive: false });
-      });
-    });
-  }
-  
-  initSlimNavToggle();
-  document.addEventListener('astro:page-load', initSlimNavToggle);
-</script>
 
 <style>
   .slim-nav {

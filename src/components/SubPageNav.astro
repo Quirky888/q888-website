@@ -1,0 +1,255 @@
+---
+/**
+ * SubPageNav — Hyper-minimalist "Focus Mode" mobile navigation.
+ *
+ * Renders two floating buttons:
+ *   Back (←)  — bottom-left  — secondary action
+ *   Close (✕) — bottom-right — primary action (escape to home)
+ *
+ * Only visible on mobile/tablet (< 768px).
+ * Desktop defers to SlimNav.
+ * Hidden when `.is-viewer-open` is active (artwork viewer / gallery is fullscreen).
+ */
+---
+
+<div data-subpage-nav class="spn-root">
+  <!-- Back arrow: bottom-left, secondary -->
+  <button
+    id="spn-back"
+    class="spn-btn spn-back"
+    type="button"
+    aria-label="Go back"
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Close X: bottom-right, primary -->
+  <button
+    id="spn-close"
+    class="spn-btn spn-close"
+    type="button"
+    aria-label="Return to home"
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  </button>
+</div>
+
+<script>
+  function initSubPageNav() {
+    const backBtn = document.getElementById("spn-back");
+    const closeBtn = document.getElementById("spn-close");
+
+    if (backBtn && !backBtn.dataset.spnInit) {
+      backBtn.dataset.spnInit = "1";
+      backBtn.addEventListener("click", () => {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = "/#landing";
+        }
+      });
+    }
+
+    if (closeBtn && !closeBtn.dataset.spnInit) {
+      closeBtn.dataset.spnInit = "1";
+      closeBtn.addEventListener("click", () => {
+        // 1. Check if terms modal is open
+        const termsModal = document.getElementById("termsModal");
+        if (termsModal && !termsModal.classList.contains("hidden")) {
+          const termsClose = termsModal.querySelector(".terms-modal-close");
+          if (termsClose) {
+            (termsClose as HTMLElement).click();
+            return;
+          }
+        }
+
+        // 2. Check if sticker details drawer is open
+        const stickerDrawer = document.getElementById("sticker-detail-drawer");
+        if (stickerDrawer && !stickerDrawer.classList.contains("hidden")) {
+          const drawerClose = stickerDrawer.querySelector("[data-close-drawer]");
+          if (drawerClose) {
+            (drawerClose as HTMLElement).click();
+            return;
+          }
+        }
+
+        // 3. Check if project drawer is open
+        const projectDrawerClose = document.querySelector(".drawer-panel.is-active [data-drawer-close]");
+        if (projectDrawerClose) {
+          (projectDrawerClose as HTMLElement).click();
+          return;
+        }
+
+        // 4. Check if Nar-Mail chatbot is open
+        const narChatClose = document.getElementById("nar-chat-close");
+        const narChatWindow = document.getElementById("nar-chat-window");
+        if (narChatClose && narChatWindow && narChatWindow.classList.contains("is-open")) {
+          narChatClose.click();
+          return;
+        }
+
+        // 5. Check if Investor chatbot is open
+        const investorChatClose = document.getElementById("investor-chat-close");
+        const investorChatWindow = document.getElementById("investor-chat-window");
+        if (investorChatClose && investorChatWindow && investorChatWindow.classList.contains("investor-active")) {
+          investorChatClose.click();
+          return;
+        }
+
+        // Default fallback: return to home page
+        window.location.href = "/#landing";
+      });
+    }
+  }
+
+  initSubPageNav();
+  document.addEventListener("astro:page-load", initSubPageNav);
+</script>
+
+<style>
+  /* ── Base: hidden by default, block only on mobile ── */
+  .spn-root {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .spn-root {
+      display: block;
+    }
+  }
+
+  /* ── Shared button base ── */
+  .spn-btn {
+    position: fixed;
+    z-index: 999999;
+    /* 44 × 44px — iOS minimum ergonomic tap target */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* Prevent double-tap zoom and ghost highlights on iOS */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    border: none;
+    /* Frosted glass */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    /* Smooth micro-interactions */
+    transition:
+      transform 0.12s ease,
+      opacity 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .spn-btn:active {
+    transform: scale(0.88);
+  }
+
+  /* ── Portrait positioning ── */
+
+  /* Back (←): bottom-left — secondary, slightly lower opacity */
+  .spn-back {
+    /*
+     * max() picks the larger of:
+     *   • 1.25rem (minimum comfortable padding above thumb)
+     *   • env(safe-area-inset-bottom) — home indicator / landscape bar
+     * Fallback 0px used when env() is unsupported; 1.25rem wins via max().
+     */
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    left: max(1.25rem, env(safe-area-inset-left, 0px));
+    background: rgba(0, 0, 0, 0.60);
+    color: rgba(255, 255, 255, 0.80);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    opacity: 0.82;
+  }
+
+  /* Close (✕): bottom-right — primary, full opacity, stronger border */
+  .spn-close {
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    right: max(1.25rem, env(safe-area-inset-right, 0px));
+    background: rgba(0, 0, 0, 0.80);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.32),
+      0 0 0 0.5px rgba(255, 255, 255, 0.06);
+    opacity: 1;
+  }
+
+  /*
+   * ── Landscape adaptation ──
+   *
+   * In landscape on notched iPhones, the Dynamic Island / notch shifts
+   * to the left side. env(safe-area-inset-left/right) grow accordingly,
+   * so the max() calls naturally push buttons clear of the hardware.
+   * We also reduce the bottom offset since the landscape home bar is thinner.
+   */
+  @media (orientation: landscape) {
+    .spn-back {
+      bottom: max(0.6rem, env(safe-area-inset-bottom, 0px));
+      left: max(1.5rem, env(safe-area-inset-left, 0px));
+    }
+    .spn-close {
+      bottom: max(0.6rem, env(safe-area-inset-bottom, 0px));
+      right: max(1.5rem, env(safe-area-inset-right, 0px));
+    }
+  }
+
+  /* ── Pointer/hover enhancement (non-touch devices) ── */
+  @media (hover: hover) {
+    .spn-back:hover {
+      background: rgba(0, 0, 0, 0.80);
+      opacity: 1;
+    }
+    .spn-close:hover {
+      background: rgba(0, 0, 0, 0.95);
+      border-color: rgba(255, 255, 255, 0.50);
+    }
+  }
+
+  /*
+   * ── Artwork viewer / gallery fullscreen ──
+   * When .is-viewer-open is on <html>, hide both buttons completely.
+   * :global() unwraps Astro's scope so this selector applies site-wide.
+   */
+  :global(.is-viewer-open [data-subpage-nav]) {
+    display: none !important;
+  }
+
+  /* ── Desktop: hidden — SlimNav handles navigation on ≥768px ── */
+  @media (min-width: 768px) {
+    .spn-root {
+      display: none !important;
+    }
+  }
+</style>

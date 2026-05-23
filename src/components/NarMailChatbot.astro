@@ -95,7 +95,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
       </div>
       <div class="nar-chat-header-actions">
         <button id="nar-chat-reset" class="nar-chat-reset" aria-label="New conversation" title="New conversation">↺</button>
-        <button id="nar-chat-close" class="nar-chat-close" aria-label="Close chat">&times;</button>
+        <button id="nar-chat-close" class="nar-chat-close hidden lg:flex" aria-label="Close chat">&times;</button>
       </div>
     </div>
 
@@ -131,7 +131,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
   </div>
 </div>
 
-<script define:vars={{ projectsData, mapLocations }}>
+<script is:inline define:vars={{ projectsData, mapLocations }}>
   // @ts-nocheck
   const NAR_CHAT_API = "/.netlify/functions/nar-chat";
   const MAX_MESSAGES = 18;
@@ -354,6 +354,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
       this.toggle?.classList.add("is-hidden");
       this.toggle?.setAttribute("aria-expanded", "true");
       this.input?.focus();
+      document.body.classList.add("chat-open");
     }
 
     closeChat() {
@@ -362,6 +363,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
       this.toggle?.classList.remove("is-hidden");
       this.toggle?.setAttribute("aria-expanded", "false");
       this.toggle?.focus();
+      document.body.classList.remove("chat-open");
     }
 
     /**

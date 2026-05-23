@@ -23,8 +23,7 @@ const { title = "Q888" } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- Critical fonts: load immediately -->
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" media="print" onload="this.media='all'" />
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" /></noscript>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
 		<!-- Non-critical portal fonts: deferred until after load, invisible to initial paint -->
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" id="portal-fonts-preload" />
 		<!-- Portal font stylesheet injected after page load by JS below -->
@@ -33,19 +32,10 @@ const { title = "Q888" } = Astro.props;
 		<link rel="preload" as="image" href="/images/q888_mobile.avif" media="(max-width: 768px) and (orientation: portrait)" fetchpriority="high" />
 		<link rel="preload" as="image" href="/images/Q888_hero.webp" media="(min-width: 769px)" fetchpriority="high" />
 		<!-- Split-flap: deferred, skips mobile parse entirely -->
-		<script defer src="/vendor/hotfx-split-flap.js"></script>
+		<script is:inline defer src="/vendor/hotfx-split-flap.js"></script>
 	</head>
 	<body>
 		<slot />
-		
-		<!-- Mobile Escape Navigation -->
-		<div class="mobile-escape-nav" data-mobile-escape-nav>
-			<button class="mobile-back-btn" aria-label="Back" title="Back" type="button">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M19 12H5M12 19l-7-7 7-7"></path>
-				</svg>
-			</button>
-		</div>
 
 		<script>
 			(function initSplitFlapReducedMotion() {
@@ -82,50 +72,6 @@ const { title = "Q888" } = Astro.props;
 				console.log('[Q888] User Agent:', navigator.userAgent);
 			}
 
-			const backBtn = document.querySelector('.mobile-back-btn');
-			if (backBtn) {
-				const handleBack = (e?: Event) => {
-					if (e) {
-						e.preventDefault();
-						e.stopPropagation();
-					}
-					if (window.history.length > 1) {
-						window.history.back();
-					} else {
-						window.location.href = '/#landing';
-					}
-				};
-				backBtn.addEventListener('click', handleBack);
-				backBtn.addEventListener('touchend', (e) => {
-					e.preventDefault();
-					handleBack(e);
-				}, { passive: false });
-			}
-
-			function updateMobileEscapeVisibility() {
-				const nav = document.querySelector('[data-mobile-escape-nav]');
-				if (!nav) return;
-				const hasPortal = document.querySelector('.portal-panel.is-active');
-				nav.classList.toggle('is-overlay-open', !!hasPortal);
-			}
-
-			let debounceId = 0;
-			const debouncedUpdate = () => {
-				clearTimeout(debounceId);
-				debounceId = window.setTimeout(updateMobileEscapeVisibility, 50);
-			};
-
-			// Narrow MutationObserver to only the portal container, not entire body.
-			// Watching document.body with subtree:true fires on every DOM mutation
-			// anywhere on the page — extremely expensive on mobile.
-			const portalContainer = document.querySelector('.infocigan-portal-system');
-			if (portalContainer) {
-				const escapeObserver = new MutationObserver(debouncedUpdate);
-				escapeObserver.observe(portalContainer, { attributes: true, attributeFilter: ['class'], subtree: true });
-			}
-			document.addEventListener('DOMContentLoaded', updateMobileEscapeVisibility);
-			window.addEventListener('hashchange', updateMobileEscapeVisibility);
-			updateMobileEscapeVisibility();
 
 			// Defer non-critical portal fonts until after page is fully interactive.
 			// Bungee, Playfair Display, Space Mono, Syne are only used inside
@@ -144,68 +90,22 @@ const { title = "Q888" } = Astro.props;
 			} else {
 				window.addEventListener('load', () => setTimeout(loadPortalFonts, 200), { once: true });
 			}
+
+			// Global cleanup to avoid carrying over gallery viewer state
+			(function cleanupViewerState() {
+				const cleanup = () => {
+					document.documentElement.classList.remove("is-viewer-open");
+					document.body.style.overflow = "";
+				};
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", cleanup);
+				} else {
+					cleanup();
+				}
+				document.addEventListener("astro:page-load", cleanup);
+			})();
 		</script>
 
-		<style>
-			.mobile-escape-nav {
-				position: fixed;
-				bottom: 20px;
-				right: 20px;
-				z-index: 999998;
-				display: none;
-				pointer-events: auto;
-			}
 
-			@media (max-width: 768px) {
-				.mobile-escape-nav.is-overlay-open {
-					display: flex;
-					gap: 12px;
-				}
-			}
-
-			.mobile-back-btn {
-				width: 56px;
-				height: 56px;
-				border-radius: 50%;
-				background: rgba(0, 0, 0, 0.85);
-				backdrop-filter: blur(8px);
-				-webkit-backdrop-filter: blur(8px);
-				color: white;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				touch-action: manipulation;
-				-webkit-tap-highlight-color: transparent;
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-				transition: all 0.2s ease;
-				border: none;
-				cursor: pointer;
-			}
-
-			.mobile-back-btn:active {
-				transform: scale(0.92);
-				background: rgba(0, 0, 0, 0.95);
-			}
-
-			@media (min-width: 769px) {
-				.mobile-escape-nav {
-					display: none !important;
-				}
-			}
-
-			@media (orientation: portrait) and (max-width: 768px) {
-				.mobile-escape-nav {
-					position: fixed !important;
-					bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 56px + 12px);
-					right: max(1.5rem, env(safe-area-inset-right, 0px));
-					z-index: 999999;
-				}
-
-				.mobile-back-btn {
-					width: 56px;
-					height: 56px;
-				}
-			}
-		</style>
 	</body>
 </html>
