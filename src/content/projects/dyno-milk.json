@@ -1,0 +1,27 @@
+{
+  "slug": "dyno-milk",
+  "sortOrder": 5,
+  "cardTitle": "DYNO MILK",
+  "cardDescriptor": "The world's first genetically resurrected bio-dairy. For those who don't just chase success—they drink it.",
+  "cardSystem": "SYST: BIO-DAIRY",
+  "cardScatter": "",
+  "cardImage": "/images/Dyno_card.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "DYNO MILK",
+  "panelDescription": "Genetically resurrected. Bio-engineered. Extremely overpriced. Authorized wallets only.",
+  "panelSpecs": [
+    {
+      "label": "STATUS",
+      "value": "PHASE_4_INCUBATION"
+    },
+    {
+      "label": "PROTEIN",
+      "value": "626G_PER_CARTON"
+    },
+    {
+      "label": "DELIVERY",
+      "value": "2028 ± 1 LIGHT YEAR"
+    }
+  ]
+}
