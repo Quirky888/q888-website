@@ -206,14 +206,10 @@ import SystemMeta from "../components/SystemMeta.astro";
               <div class="dyno-panel-body">
                 <p class="dyno-vibe-label">THE VIBE</p>
                 <p class="dyno-body-text">
-                  Biological supremacy. Physical impossibility. Practically wet concrete.
-                  But physics is for the common people.
+                  Biological supremacy. Physical impossibility. Practically wet concrete. But physics is for the common people. You don't want to live like common people. You don't want to drink whatever common people do... because you want your morning microfoam to have been engineered from the dominant signature of a species that had no predators. You want dominance, not just data. Apex predator latte art.
                 </p>
-                <p class="dyno-body-text dyno-pulp-text">
-                  You don't want to live like common people.
-                  You don't want to do whatever common people do.
-                  You want to assert dominance.
-                  Apex predator latte art.
+                <p class="dyno-body-text dyno-gold-text" style="font-size: clamp(0.9rem, 1.5vw, 1.2rem); line-height: 1.4; font-family: 'Syne Mono', monospace; font-weight: 700;">
+                  (Note for the record: As we established, 626 grams of protein in a liquid pint is a literal physical impossibility that would result in a solid brick of matter, but in the Q888 universe, we proudly ignore the laws of physics if it means a better flex).
                 </p>
 
                 <p class="dyno-flex-label">THE FLEX</p>
@@ -1003,7 +999,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 
   .dyno-hl-line-1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 7vw, 8rem);
+    font-size: clamp(4rem, 10vw, 12rem);
     color: var(--dyno-white);
     letter-spacing: 0.02em;
   }
@@ -1026,7 +1022,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 
   .dyno-hl-line-4 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 5rem);
+    font-size: clamp(3rem, 6vw, 8rem);
     color: var(--dyno-green);
     text-shadow: var(--dyno-glow-green);
     letter-spacing: 0.05em;
@@ -1130,7 +1126,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 
   .dyno-section-headline {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 5vw, 5rem);
+    font-size: clamp(3rem, 6vw, 8rem);
     letter-spacing: 0.04em;
     color: var(--dyno-white);
     text-transform: uppercase;
@@ -1280,7 +1276,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 
   .dyno-panel-headline {
     font-family: 'Black Han Sans', sans-serif;
-    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-size: clamp(3rem, 6vw, 8rem);
     line-height: 1;
     text-transform: uppercase;
     margin: 0 0 2rem;
@@ -1351,10 +1347,26 @@ import SystemMeta from "../components/SystemMeta.astro";
   }
 
   .dyno-body-text {
-    font-size: clamp(0.9rem, 1.4vw, 1.15rem);
-    line-height: 1.65;
+    font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+    line-height: 1.15;
+    font-weight: 700;
     color: var(--dyno-white);
     margin: 0 0 0.75rem;
+  }
+
+  .dyno-gold-text {
+    background: linear-gradient(to right, #d4af37 10%, #ffdf73 40%, #fffae6 50%, #ffdf73 60%, #d4af37 90%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: dyno-gold-shine 6s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+  }
+
+  @keyframes dyno-gold-shine {
+    to { background-position: 200% center; }
   }
 
   .dyno-body-text em {
@@ -1534,8 +1546,9 @@ import SystemMeta from "../components/SystemMeta.astro";
   }
 
   .dyno-wealth-body {
-    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-    line-height: 1.7;
+    font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+    line-height: 1.15;
+    font-weight: 700;
     color: var(--dyno-white);
     margin: 0 0 1rem;
   }
