@@ -58,8 +58,18 @@ const tickerUnit = `${tickerText} — `;
             <div class="ticker-badge">{instrument.ticker} ED: {instrument.availableCount}/{instrument.editionTotal}</div>
           </div>
           {instrument.imageUrl && (
-            <div class="instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)]">
+            <div class={`instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)] ${instrument.id === 'DM-0001' ? 'dm-classified-wrap' : ''}`}>
               <Image src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" width={400} height={300} />
+              {instrument.id === 'DM-0001' && (
+                <div class="dm-classified-overlay" aria-hidden="true">
+                  <div class="dm-classified-scan"></div>
+                  <div class="dm-classified-label">
+                    <span class="dm-classified-icon">◈</span>
+                    <span class="dm-classified-text">DESIGN<br/>CLASSIFIED</span>
+                    <span class="dm-classified-sub">REVEAL: 2028</span>
+                  </div>
+                </div>
+              )}
             </div>
           )}
           <div class="instrument-card-body px-4 py-3 flex-1">
@@ -694,6 +704,112 @@ const tickerUnit = `${tickerText} — `;
 
   @media (prefers-reduced-motion: reduce) {
     .gold-shine {
+      animation: none;
+    }
+  }
+
+  /* ── DM-0001 CLASSIFIED OVERLAY ── */
+  .dm-classified-wrap {
+    position: relative;
+  }
+
+  .dm-classified-wrap img {
+    filter: blur(14px) brightness(0.6) saturate(0.4);
+    transform: scale(1.08);
+    transition: filter 0.4s ease;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .dm-classified-wrap:hover img {
+    filter: blur(10px) brightness(0.7) saturate(0.5);
+  }
+
+  .dm-classified-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      rgba(8, 0, 15, 0.55) 0%,
+      rgba(200, 57, 255, 0.15) 50%,
+      rgba(8, 0, 15, 0.55) 100%
+    );
+    backdrop-filter: blur(2px);
+    border-bottom: 1px solid rgba(200, 57, 255, 0.3);
+    overflow: hidden;
+  }
+
+  .dm-classified-scan {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(200, 57, 255, 0.05) 3px,
+      rgba(200, 57, 255, 0.05) 4px
+    );
+    animation: dm-scan-drift 4s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes dm-scan-drift {
+    from { background-position: 0 0; }
+    to { background-position: 0 100px; }
+  }
+
+  .dm-classified-label {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .dm-classified-icon {
+    font-size: 1.4rem;
+    color: #c839ff;
+    animation: dm-redact-pulse 2s ease-in-out infinite alternate;
+    display: block;
+  }
+
+  @keyframes dm-redact-pulse {
+    from { opacity: 0.6; text-shadow: 0 0 10px #c839ff; }
+    to   { opacity: 1;   text-shadow: 0 0 25px #c839ff, 0 0 50px rgba(200, 57, 255, 0.4); }
+  }
+
+  .dm-classified-text {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.75rem, 2vw, 1.1rem);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #f0e8ff;
+    line-height: 1.1;
+    text-shadow: 0 0 10px rgba(200, 57, 255, 0.6);
+    text-transform: uppercase;
+  }
+
+  .dm-classified-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: #c839ff;
+    opacity: 0.8;
+    text-transform: uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dm-classified-scan {
+      animation: none;
+    }
+    .dm-classified-icon {
       animation: none;
     }
   }

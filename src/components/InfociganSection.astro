@@ -7,6 +7,7 @@ const urlMap: Record<string, string> = {
   "nar-mail-express": "/narmail",
   "afterlife-contracts": "/afterlife",
   "president-of-the-galaxy": "/president",
+  "dyno-milk": "/dyno",
 };
 
 type Zone = {
@@ -80,14 +81,22 @@ const zones: Zone[] = (await getCollection("projects"))
       <div class="order-2 lg:order-1">
         <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16" data-motion-stagger data-motion-children="[data-motion-item]">
           {zones.map((zone) => (
-            <div class={`relative group ${zone.scatter} ${zone.slug === "nar-mail-express" ? "md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24" : ""}`} data-motion-item>
+            <div class={`relative group ${zone.scatter} ${
+              (zone.slug === 'nar-mail-express' || zone.slug === 'dyno-milk') ? 'md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24' : ''
+            } ${
+              zone.slug === 'dyno-milk' ? 'dyno-milk-card-wrap' : ''
+            }`} data-motion-item>
               <a 
                 href={urlMap[zone.slug] || '#'}
                 data-infocigan-slug={zone.slug}
-                class="block relative rounded-xl bg-[#72808a] transition-colors duration-500 hover:bg-[#7a8892] cursor-pointer overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300"
+                class={`block relative rounded-xl transition-colors duration-500 cursor-pointer overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 ${
+                  zone.slug === 'dyno-milk'
+                    ? 'dyno-milk-card bg-[#08000f] hover:bg-[#0e0018]'
+                    : 'bg-[#72808a] hover:bg-[#7a8892]'
+                }`}
               >
                 <!-- Artifact Image Area -->
-                <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden">
+                <div class={`relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden ${zone.slug === 'dyno-milk' ? 'dyno-milk-img-area' : ''}`}>
                   {zone.image ? (
                     <>
 <img
@@ -261,6 +270,131 @@ const zones: Zone[] = (await getCollection("projects"))
       transform: none !important;
     }
   }
+
+  /* ══ DYNO MILK CARD — DISTINCT STYLE ══ */
+  /* Wrapper: slight left shift + tilt (desktop only) */
+  @media (min-width: 768px) {
+    .dyno-milk-card-wrap {
+      transform: translateX(-3%) rotate(-1.5deg) !important;
+      transform-origin: center center;
+    }
+    .dyno-milk-card-wrap:hover {
+      transform: translateX(-3%) rotate(-1.5deg) translateY(-4px) !important;
+    }
+  }
+
+  /* The card itself: deep bio-dairy dark background */
+  .dyno-milk-card {
+    /* Override the default grey background */
+    background: #08000f !important;
+    box-shadow: 0 8px 40px rgba(200, 57, 255, 0.15), 0 2px 8px rgba(0,0,0,0.5) !important;
+  }
+
+  /* Slow breathing glow on the image area */
+  .dyno-milk-card .dyno-milk-bg-glow {
+    /* injected via the span below */
+  }
+
+  /* Image area override: no plain grey, let the dark BG show */
+  .dyno-milk-card .dyno-milk-img-area {
+    background: transparent;
+    position: relative;
+  }
+
+  /* Animated radial glow behind image — CSS only, composited layer */
+  .dyno-milk-card .dyno-milk-img-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 30% 50%, rgba(255, 45, 120, 0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 60% at 75% 40%, rgba(200, 57, 255, 0.18) 0%, transparent 60%);
+    animation: dyno-card-breathe 5s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+    will-change: opacity;
+  }
+
+  @keyframes dyno-card-breathe {
+    from {
+      opacity: 0.6;
+      background:
+        radial-gradient(ellipse 70% 55% at 30% 50%, rgba(255, 45, 120, 0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 75% 40%, rgba(200, 57, 255, 0.18) 0%, transparent 60%);
+    }
+    to {
+      opacity: 1;
+      background:
+        radial-gradient(ellipse 75% 60% at 35% 50%, rgba(255, 45, 120, 0.32) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 65% at 70% 45%, rgba(200, 57, 255, 0.26) 0%, transparent 60%);
+    }
+  }
+
+  /* Image sits above the glow */
+  .dyno-milk-card .dyno-milk-img-area img {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Subtle scan-line texture over the whole card — ultra-cheap, 1 CSS gradient */
+  .dyno-milk-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 5px,
+      rgba(200, 57, 255, 0.025) 5px,
+      rgba(200, 57, 255, 0.025) 6px
+    );
+    pointer-events: none;
+    z-index: 10;
+    border-radius: inherit;
+  }
+
+  /* Border glow on hover */
+  .dyno-milk-card:hover {
+    box-shadow: 0 12px 60px rgba(255, 45, 120, 0.25), 0 0 0 1px rgba(255, 45, 120, 0.2) !important;
+  }
+
+  /* Text block on dark bg needs light text */
+  .dyno-milk-card .infocigan-card-text-block {
+    background: rgba(8, 0, 15, 0.85) !important;
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 45, 120, 0.2);
+  }
+
+  .dyno-milk-card .infocigan-card-text-block h3 {
+    /* keep gold-shine, it works fine on dark */
+  }
+
+  .dyno-milk-card .infocigan-card-text-block p {
+    color: rgba(200, 180, 220, 0.8) !important;
+  }
+
+  .dyno-milk-card .infocigan-card-text-block .font-mono {
+    color: rgba(255, 45, 120, 0.7) !important;
+  }
+
+  /* system tag on dark bg */
+  .dyno-milk-card .absolute.top-3 {
+    background: rgba(200, 57, 255, 0.2) !important;
+    color: rgba(200, 57, 255, 0.9) !important;
+    border: 1px solid rgba(200, 57, 255, 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dyno-milk-card .dyno-milk-img-area::before {
+      animation: none;
+    }
+    .dyno-milk-card-wrap,
+    .dyno-milk-card-wrap:hover {
+      transform: none !important;
+    }
+  }
+
 
   @media (prefers-reduced-motion: reduce) {
     .infocigan-cards img {
