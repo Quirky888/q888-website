@@ -108,8 +108,81 @@ const tickerUnit = `${tickerText} — `;
       <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
       <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
       <p class="drawer-tagline text-[var(--text-muted)] mb-6" data-sticker-tagline></p>
-      <div class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl">
-        <img data-sticker-image class="w-full h-[40dvh] md:h-[50dvh] object-contain object-center bg-[var(--bg-fog)]/50 hidden" alt="" />
+      <div class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl relative" data-sticker-image-container>
+        <img data-sticker-image class="w-full h-[40dvh] md:h-[50dvh] object-contain object-center bg-[var(--bg-fog)]/50 hidden transition-all duration-700" alt="" />
+        <div data-sticker-blur-overlay class="absolute inset-0 flex items-center justify-center p-4 bg-black/40 hidden pointer-events-none z-10">
+          <div class="flex flex-wrap justify-center items-center gap-x-2 gap-y-3 p-5 md:p-8 max-w-[95%] md:max-w-[85%] bg-black/60 backdrop-blur-[1px] border border-white/20 rounded-xl shadow-2xl -rotate-1 select-none" style="line-height: 1.2;">
+            <!-- IMAGE -->
+            <div class="flex items-center gap-0.5">
+              <span class="inline-block px-1.5 py-0.5 bg-white text-black font-serif text-xl md:text-2xl font-bold border border-black -rotate-3">I</span>
+              <span class="inline-block px-1 py-1 bg-[#ff00ff] text-white font-sans text-lg md:text-xl font-extrabold rotate-2">M</span>
+              <span class="inline-block px-1.5 py-0.5 bg-black text-[#ffe600] font-mono text-xl md:text-2xl rotate-6 border border-[#ffe600]">A</span>
+              <span class="inline-block px-2 py-0 bg-[#ffe600] text-black font-sans text-2xl md:text-3xl font-black -rotate-6" style="font-family: 'Black Han Sans', sans-serif;">G</span>
+              <span class="inline-block px-1 py-0.5 bg-white text-[#ff00ff] font-serif text-lg md:text-xl font-black rotate-3 border-2 border-dashed border-[#ff00ff]">E</span>
+            </div>
+
+            <!-- AVAILABLE -->
+            <div class="flex items-center gap-0.5">
+              <span class="inline-block px-2.5 py-1 bg-black text-white font-sans text-lg md:text-xl font-black -rotate-3" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.15em;">AVAIL</span>
+              <span class="inline-block px-2 py-0.5 bg-[#00ffff] text-black font-mono text-xl md:text-2xl font-bold rotate-4 shadow-[2px_2px_0px_#000]">ABLE</span>
+            </div>
+
+            <!-- TO -->
+            <div class="flex items-center gap-0.5">
+              <span class="inline-block px-1.5 py-0.5 bg-[#ff2a2a] text-white font-serif text-lg md:text-xl font-bold -rotate-6">T</span>
+              <span class="inline-block px-2 py-1 bg-white text-black font-sans text-xl md:text-2xl font-black rotate-3" style="font-family: 'Black Han Sans', sans-serif;">O</span>
+            </div>
+
+            <!-- THE -->
+            <div class="flex items-center">
+              <span class="inline-block px-2.5 py-1 bg-black text-[#00ff66] font-mono text-lg md:text-xl border-2 border-[#00ff66] -rotate-2" style="font-family: 'VT323', monospace;">THE</span>
+            </div>
+
+            <!-- PUBLIC -->
+            <div class="flex items-center gap-0.5">
+              <span class="inline-block px-1.5 py-0.5 bg-[#ffe600] text-black font-sans text-xl md:text-2xl font-black rotate-4" style="font-family: 'Bebas Neue', sans-serif;">P</span>
+              <span class="inline-block px-1 py-1 bg-white text-[#ff00ff] font-serif text-lg md:text-xl font-bold -rotate-3">U</span>
+              <span class="inline-block px-2 py-0.5 bg-black text-white font-mono text-xl md:text-2xl rotate-2 border border-white">B</span>
+              <span class="inline-block px-1.5 py-0 bg-[#ff00ff] text-white font-sans text-lg md:text-xl font-black -rotate-4">L</span>
+              <span class="inline-block px-1 py-1 bg-[#00ffff] text-black font-serif text-xl md:text-2xl rotate-3">I</span>
+              <span class="inline-block px-2 py-0.5 bg-black text-[#ffe600] font-sans text-2xl md:text-3xl font-black -rotate-6" style="font-family: 'Black Han Sans', sans-serif;">C</span>
+            </div>
+
+            <!-- YEAR -->
+            <div class="flex items-center">
+              <span class="inline-block px-2.5 py-1 bg-white text-black font-serif text-xl md:text-2xl font-bold rotate-2 border border-black shadow-[2px_2px_0px_#000]">YEAR</span>
+            </div>
+
+            <!-- 2028 -->
+            <div class="flex items-center">
+              <span class="inline-block px-3 py-1 bg-[#ff00ff] text-white font-mono text-2xl md:text-3xl font-black rotate-6 shadow-[3px_3px_0px_#ffe600] border-2 border-white" style="font-family: 'VT323', monospace; text-shadow: 1px 1px 0px #000;">2028</span>
+            </div>
+
+            <!-- ± -->
+            <div class="flex items-center">
+              <span class="inline-block px-2 py-0.5 bg-black text-[#00ffff] font-serif text-2xl md:text-3xl font-extrabold -rotate-12 border border-dashed border-[#00ffff]">±</span>
+            </div>
+
+            <!-- 1 -->
+            <div class="flex items-center">
+              <span class="inline-block px-2.5 py-1 bg-[#ffe600] text-black font-sans text-2xl md:text-3xl font-black rotate-12 shadow-[2px_2px_0px_#ff00ff]" style="font-family: 'Black Han Sans', sans-serif;">1</span>
+            </div>
+
+            <!-- LIGHT -->
+            <div class="flex items-center gap-0.5">
+              <span class="inline-block px-1.5 py-1 bg-white text-[#ff2a2a] font-serif text-lg md:text-xl font-bold rotate-3 border-2 border-[#ff2a2a]">L</span>
+              <span class="inline-block px-2 py-0.5 bg-black text-white font-sans text-xl md:text-2xl font-black -rotate-4" style="font-family: 'Bebas Neue', sans-serif;">I</span>
+              <span class="inline-block px-1 py-1 bg-[#00ff66] text-black font-mono text-lg md:text-xl rotate-6">G</span>
+              <span class="inline-block px-1.5 py-0.5 bg-[#ff00ff] text-white font-serif text-xl md:text-2xl font-bold -rotate-3">H</span>
+              <span class="inline-block px-2 py-0 bg-black text-[#ffe600] font-sans text-xl md:text-2xl font-black rotate-2" style="font-family: 'Black Han Sans', sans-serif;">T</span>
+            </div>
+
+            <!-- YEAR. -->
+            <div class="flex items-center">
+              <span class="inline-block px-3 py-1 bg-white text-black font-mono text-xl md:text-2xl font-black -rotate-3 border-2 border-double border-black shadow-[2px_2px_0px_#ff00ff]" style="font-family: 'Courier New', monospace;">YEAR.</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
       <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
@@ -937,12 +1010,28 @@ const tickerUnit = `${tickerText} — `;
       if (titleEl) titleEl.textContent = inst.title;
       if (taglineEl) taglineEl.textContent = inst.tagline;
       
+      const blurOverlay = drawer?.querySelector("[data-sticker-blur-overlay]");
       if (imageEl && inst.imageUrl) {
         imageEl.src = inst.imageUrl;
         imageEl.alt = inst.imageAlt || inst.title;
         imageEl.classList.remove("hidden");
+        
+        if (inst.id === 'DM-0001') {
+          const targetDate = new Date('2028-01-01T00:00:00Z');
+          if (new Date() < targetDate) {
+            imageEl.style.filter = "blur(24px) brightness(0.6)";
+            if (blurOverlay) blurOverlay.classList.remove("hidden");
+          } else {
+            imageEl.style.filter = "none";
+            if (blurOverlay) blurOverlay.classList.add("hidden");
+          }
+        } else {
+          imageEl.style.filter = "none";
+          if (blurOverlay) blurOverlay.classList.add("hidden");
+        }
       } else if (imageEl) {
         imageEl.classList.add("hidden");
+        if (blurOverlay) blurOverlay.classList.add("hidden");
       }
       
       if (galleryEl && inst.gallery && inst.gallery.length > 0) {

@@ -43,6 +43,7 @@ const stickers = defineCollection({
       "SUBSCRIPTION",
       "RESERVED",
       "SOLD",
+      "Pre-Incubation Phase 4",
     ]),
     provenance: z.string().min(1),
     contactEmail: z.string().email(),
