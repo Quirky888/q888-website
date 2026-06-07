@@ -32,7 +32,7 @@ const { title = "Q888" } = Astro.props;
 		<link rel="preload" as="image" href="/images/q888_mobile.avif" media="(max-width: 768px) and (orientation: portrait)" fetchpriority="high" />
 		<link rel="preload" as="image" href="/images/Q888_hero.webp" media="(min-width: 769px)" fetchpriority="high" />
 		<!-- Split-flap: deferred, skips mobile parse entirely -->
-		<script is:inline defer src="/vendor/hotfx-split-flap.js"></script>
+		<script type="module" src="/vendor/hotfx-split-flap.js"></script>
 	</head>
 	<body>
 		<slot />
@@ -51,8 +51,10 @@ const { title = "Q888" } = Astro.props;
 						if (htmlEl.classList.contains('meta-value-split-flap')) {
 							span.className = 'meta-value';
 							span.dataset.field = htmlEl.dataset.field ?? '';
+						} else if (htmlEl.classList.contains('landing-meta-split-flap')) {
+							span.className = 'landing-meta-span text-black';
 						}
-						span.textContent = htmlEl.textContent ?? '';
+						span.textContent = htmlEl.getAttribute('data-target-text') || htmlEl.textContent || '';
 						htmlEl.replaceWith(span);
 					});
 				};
