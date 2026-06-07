@@ -27,7 +27,7 @@
             </h1>
             
             <p class="mt-8 mx-auto text-[clamp(1.9rem,3vw,3.4rem)] leading-[1.12] text-zinc-200">
-              What if digital art had memory? What if every brushstroke carried weight, history, and emotional resonance? Digital Ink reimagines digital creation by introducing scarcity, symbolism, and intention into the drawing process—transforming pixels into living artifacts that remember their origins and evolve through your artistic journey.
+              Digital Ink is a post-digital artistic medium defined by deliberate scarcity. Conceived as an antidote to the frictionless reproducibility of traditional digital tools, it treats the digital canvas as a strictly finite resource. By compressing an entire photograph into a single, irreducible pixel, the project returns the "aura" of authenticity to the digital realm—where every brushstroke carries the weight of a sacrificed memory.
             </p>
 
             <p class="mt-8 mx-auto text-[clamp(1.3rem,1.5vw,1.6rem)] leading-relaxed text-zinc-300">
@@ -79,7 +79,7 @@
             <h2 class="di-h2">Philosophy &amp; Experience</h2>
             <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
               <p>
-                Digital Ink challenges the disposable nature of infinite digital tools. In an age where we can undo endlessly and create without consequence, this app asks: what if your materials were finite and precious? Each of your 1,000 Smart Inks is extracted from personal images—photographs, memories, moments that matter to you. When you draw, you're not just arranging colors; you're weaving your personal history into visual form. Every pixel remembers when it was born, where it came from, and carries symbolic meaning through color-to-emotion mapping. This creates a profound shift: your tiny 100-pixel artwork holds deep sentimental value because each drop is irreplaceable and emotionally alive.
+                Digital Ink challenges the disposable nature of infinite digital tools. In an age where we can undo endlessly and create without consequence, this app asks: what if software imposed physical constraints? Through strict rules of conservation, each pixel becomes a finite material—much like paint in a tube. When you draw, you're not just arranging colors; you are placing an indexical trace of a real-world photograph onto a canvas. The inability to duplicate or summon pixels from nothing turns the act of digital creation into a deliberate, sculptural process where each mark is a weighty commitment.
               </p>
             </div>
           </div>
@@ -140,7 +140,7 @@
             <h2 class="di-h2">Innovation Beyond Traditional Drawing Apps</h2>
             <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
               <p>
-                Unlike Procreate, Adobe Fresco, or other drawing apps that offer unlimited brushes and infinite resources, Digital Ink introduces constraint-based creativity. The core innovation is the Symbolic Smart Pixel Protocol (SSPP): each ink carries dual identity as both data (SHA-256 hash, timestamp, provenance) and myth (essence, elemental frequency, emotional resonance). The AI-powered poetic transformation layer uses Apple Vision + GPT-4o to turn ordinary image descriptions into mystical narratives—"Tree" becomes "Ancient Earth Sentinel." This isn't just a drawing tool; it's a ritual space where scarcity drives intentionality, and every creative decision carries weight. The offline-first architecture with server-verified token system ensures your limited inks remain secure, tracked, and truly yours across their entire lifecycle.
+                Unlike Procreate or Adobe Fresco—which optimize for speed and abundance—Digital Ink introduces intentional constraints to give each action significance. The core innovation lies in its approach to digital authenticity: it achieves the rigorous scarcity of blockchain-based art, but deliberately eschews financialization. There are no tokens, no public ledgers, and no speculative mechanics. Instead, cryptographic hashing serves purely as an artistic mechanism to ensure that each pixel remains a provably unique, untamperable archive of its source photograph. It is a system that is provenance-rich but value-agnostic.
               </p>
             </div>
           </div>
@@ -210,36 +210,33 @@
         <div class="py-16 pb-32" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);">
           <div class="mx-auto">
 
-            <!-- Technical Architecture -->
+            <!-- Systems Aesthetic -->
             <div class="di-detail-section" data-di-reveal-section>
-              <div class="di-eyebrow">// TECHNICAL ARCHITECTURE</div>
-              <h2 class="di-h2">Technical Architecture</h2>
+              <div class="di-eyebrow">// SYSTEMS AESTHETIC</div>
+              <h2 class="di-h2">Three Phases of Engagement</h2>
               <p class="mt-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                Digital Ink is built on SwiftUI with Core Data persistence, implementing a three-state ink lifecycle architecture: InkHome (available pool), Canvas (actively placed in artwork), and Gallery (archived in completed pieces). The drawing engine leverages native iOS 18 gesture recognition to deliver Procreate-quality pan, zoom, and rotation interactions. A custom tap-to-place pixel system provides precise control while maintaining the fluidity expected from professional creative tools.
+                Digital Ink operates on a conceptual three-state machine. First, the <strong>Drop Machine (Extraction)</strong> permanently consumes an imported photograph, downscaling it into a singular SmartInk pixel with cryptographic metadata. Second, the <strong>Canvas (Creation)</strong> enforces strict conservation laws; pixels are spent from your inventory and placed onto a fixed grid without layering. Finally, <strong>Biography Mode (Reflection)</strong> allows viewers to inspect any pixel on a completed canvas, revealing the hidden archival history, semantic context, and origin photograph that powers that tiny dot of color.
               </p>
             </div>
 
-            <!-- AI & Vision Integration -->
+            <!-- Concept-Driven Architecture -->
             <div class="di-detail-section" data-di-reveal-section>
-              <div class="di-eyebrow">// AI &amp; VISION</div>
-              <h2 class="di-h2">AI &amp; Vision Integration</h2>
+              <div class="di-eyebrow">// LOCAL-FIRST</div>
+              <h2 class="di-h2">Concept-Driven Architecture</h2>
               <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
                 <p>
-                  The app integrates Apple Vision framework for scene understanding and GPT-4o for caption generation, creating a two-stage transformation pipeline. When users import images, Vision analyzes visual content, then GPT-4o applies a poetic transformation layer that generates mystical, emotionally resonant descriptions. A proprietary color-to-frequency mapping algorithm assigns elemental values (Earth, Water, Fire, Air, Love, Mushroom) based on hue, saturation, and contextual analysis.
+                  Every technical decision reinforces the project's philosophy. Built as a native iPadOS app with Core Data SQLite, Digital Ink operates entirely offline. This local-first architecture ensures that true ownership of the art resides fully with the user, mirroring the self-contained nature of a physical art studio. AI and Vision frameworks are utilized minimally and locally for semantic indexing—augmenting the artist's ability to search their inventory without offloading the creative act to an algorithm or risking data privacy.
                 </p>
               </div>
             </div>
 
-            <!-- Data Integrity & Security -->
+            <!-- Exhibition Value -->
             <div class="di-detail-section" data-di-reveal-section>
-              <div class="di-eyebrow">// DATA INTEGRITY</div>
-              <h2 class="di-h2">Data Integrity &amp; Security</h2>
+              <div class="di-eyebrow">// INSTALLATION</div>
+              <h2 class="di-h2">Exhibition Value</h2>
               <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
                 <p>
-                  To enforce the one-image–one-pixel constraint, Digital Ink implements SHA-256 hashing for duplicate detection.
-                  The token-based economy uses StoreKit 2 with a Cloudflare Durable Objects backend for server-side purchase verification
-                  and audit-grade logging. This architecture ensures that every Smart Ink is provably unique, traceable, and secure—creating
-                  genuine digital scarcity without blockchain overhead.
+                  In a gallery context, Digital Ink transforms from a personal tool into an interactive "system-as-artwork." The application itself becomes an installation where visitors can submit their own photographs to a communal Extraction Kiosk. The resulting pixels feed a shared Canvas where audiences collectively navigate scarcity. Crucially, the final artworks invite deep discovery; viewers can tap the digital paintings to unpack the "archive of memories" embedded in each pixel, making the invisible assumptions of digital creation visible.
                 </p>
               </div>
             </div>
