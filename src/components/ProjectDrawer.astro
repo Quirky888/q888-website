@@ -20,19 +20,19 @@
       <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>
       <section class="di-panel di-body overflow-x-clip">
         <!-- Q888:SECTION_START id="di-header" -->
-        <div class="px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
+        <div class="pt-32 sm:pt-36 pb-16" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);" data-di-reveal-section>
           <div class="mx-auto">
             <h1 class="di-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-zinc-50">
               DIGITAL INK
             </h1>
             
             <p class="mt-8 mx-auto text-[clamp(1.9rem,3vw,3.4rem)] leading-[1.12] text-zinc-200">
-              What if digital art had memory? What if every brushstroke carried weight, history, and emotional resonance? Digital Ink reimagines digital creation by introducing scarcity, symbolism, and intention into the drawing process—transforming pixels into living artifacts that remember their origins and evolve through your artistic journey.
+              Digital Ink is a post-digital artistic medium defined by deliberate scarcity. Conceived as an antidote to the frictionless reproducibility of traditional digital tools, it treats the digital canvas as a strictly finite resource. By compressing an entire photograph into a single, irreducible pixel, the project returns the "aura" of authenticity to the digital realm—where every brushstroke carries the weight of a sacrificed memory.
             </p>
 
             <p class="mt-8 mx-auto text-[clamp(1.3rem,1.5vw,1.6rem)] leading-relaxed text-zinc-300">
               Digital Ink turns the smallest unit of digital creation into something with weight:
-              <span class="text-zinc-100">one image → one Smart Ink Drop (1×1) </span>
+              <span class="di-tagline-key">one image → one Smart Ink Drop (1×1)</span>
             </p>
 
             <div class="di-mono mt-10 text-lg sm:text-xl text-zinc-400 leading-relaxed">
@@ -50,15 +50,36 @@
           <div class="aspect-video w-full bg-zinc-900/60">
             <img src="/images/DigitalInk_Ipad_kn.webp" alt="Digital Ink on iPad" class="h-full w-full object-cover" loading="lazy" decoding="async" width="1200" height="800" />
           </div>
+          <div class="di-img-label">APP_VIEW · iPadOS · DRAWING ENGINE</div>
+        </div>
+
+        <!-- SECTION DIVIDER 1 -->
+        <div class="di-section-divider" aria-hidden="true">
+          <svg viewBox="0 0 600 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <line x1="0" y1="16" x2="240" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+            <g transform="translate(262, 4)">
+              <rect x="0" y="0" width="8" height="8" fill="rgba(91,156,246,0.6)"/>
+              <rect x="10" y="0" width="8" height="8" fill="rgba(91,156,246,0.15)"/>
+              <rect x="20" y="0" width="8" height="8" fill="rgba(91,156,246,0.08)"/>
+              <rect x="0" y="10" width="8" height="8" fill="rgba(91,156,246,0.15)"/>
+              <rect x="10" y="10" width="8" height="8" fill="rgba(91,156,246,0.35)"/>
+              <rect x="20" y="10" width="8" height="8" fill="rgba(91,156,246,0.15)"/>
+              <rect x="0" y="20" width="8" height="8" fill="rgba(91,156,246,0.08)"/>
+              <rect x="10" y="20" width="8" height="8" fill="rgba(91,156,246,0.15)"/>
+              <rect x="20" y="20" width="8" height="8" fill="rgba(91,156,246,0.6)"/>
+            </g>
+            <line x1="318" y1="16" x2="600" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+          </svg>
         </div>
 
         <!-- Q888:SECTION_START id="di-philosophy" -->
-        <div class="px-6 sm:px-10 lg:px-16 py-16">
+        <div class="py-16" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);" data-di-reveal-section>
           <div class="mx-auto">
-            <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">Philosophy & Experience</h2>
+            <div class="di-eyebrow">// MEDIUM &amp; PHILOSOPHY</div>
+            <h2 class="di-h2">Philosophy &amp; Experience</h2>
             <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
               <p>
-                Digital Ink challenges the disposable nature of infinite digital tools. In an age where we can undo endlessly and create without consequence, this app asks: what if your materials were finite and precious? Each of your 1,000 Smart Inks is extracted from personal images—photographs, memories, moments that matter to you. When you draw, you're not just arranging colors; you're weaving your personal history into visual form. Every pixel remembers when it was born, where it came from, and carries symbolic meaning through color-to-emotion mapping. This creates a profound shift: your tiny 100-pixel artwork holds deep sentimental value because each drop is irreplaceable and emotionally alive.​
+                Digital Ink challenges the disposable nature of infinite digital tools. In an age where we can undo endlessly and create without consequence, this app asks: what if software imposed physical constraints? Through strict rules of conservation, each pixel becomes a finite material—much like paint in a tube. When you draw, you're not just arranging colors; you are placing an indexical trace of a real-world photograph onto a canvas. The inability to duplicate or summon pixels from nothing turns the act of digital creation into a deliberate, sculptural process where each mark is a weighty commitment.
               </p>
             </div>
           </div>
@@ -66,7 +87,7 @@
         <!-- Q888:SECTION_END id="di-philosophy" -->
 
         <!-- IMAGE 2 -->
-        <div class="px-6 sm:px-10 lg:px-16 py-2">
+        <div class="py-2" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);">
           <div class="di-reveal aspect-[4/5] sm:aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image2">
             <!-- Base (aligned right, not stretched) -->
             <img
@@ -90,15 +111,36 @@
               height="600"
             />
           </div>
+          <div class="di-img-label">CANVAS_STATE · HOVER TO REVEAL OVERLAY</div>
+        </div>
+
+        <!-- SECTION DIVIDER 2 -->
+        <div class="di-section-divider" aria-hidden="true">
+          <svg viewBox="0 0 600 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <line x1="0" y1="16" x2="248" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+            <g transform="translate(268, 8)">
+              <rect x="0" y="0" width="6" height="6" fill="rgba(91,156,246,0.08)"/>
+              <rect x="8" y="0" width="6" height="6" fill="rgba(91,156,246,0.5)"/>
+              <rect x="16" y="0" width="6" height="6" fill="rgba(91,156,246,0.08)"/>
+              <rect x="0" y="8" width="6" height="6" fill="rgba(91,156,246,0.5)"/>
+              <rect x="8" y="8" width="6" height="6" fill="rgba(91,156,246,0.9)"/>
+              <rect x="16" y="8" width="6" height="6" fill="rgba(91,156,246,0.5)"/>
+              <rect x="0" y="16" width="6" height="6" fill="rgba(91,156,246,0.08)"/>
+              <rect x="8" y="16" width="6" height="6" fill="rgba(91,156,246,0.5)"/>
+              <rect x="16" y="16" width="6" height="6" fill="rgba(91,156,246,0.08)"/>
+            </g>
+            <line x1="314" y1="16" x2="600" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+          </svg>
         </div>
 
         <!-- Q888:SECTION_START id="di-innovation" -->
-        <div class="px-6 sm:px-10 lg:px-16 py-16">
+        <div class="py-16" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);" data-di-reveal-section>
           <div class="mx-auto">
-            <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">Innovation Beyond Traditional Drawing Apps</h2>
+            <div class="di-eyebrow">// CONCEPT &amp; INNOVATION</div>
+            <h2 class="di-h2">Innovation Beyond Traditional Drawing Apps</h2>
             <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
               <p>
-                Unlike Procreate, Adobe Fresco, or other drawing apps that offer unlimited brushes and infinite resources, Digital Ink introduces constraint-based creativity. The core innovation is the Symbolic Smart Pixel Protocol (SSPP): each ink carries dual identity as both data (SHA-256 hash, timestamp, provenance) and myth (essence, elemental frequency, emotional resonance). The AI-powered poetic transformation layer uses Apple Vision + GPT-4o to turn ordinary image descriptions into mystical narratives—"Tree" becomes "Ancient Earth Sentinel." This isn't just a drawing tool; it's a ritual space where scarcity drives intentionality, and every creative decision carries weight. The offline-first architecture with server-verified token system ensures your limited inks remain secure, tracked, and truly yours across their entire lifecycle.​
+                Unlike Procreate or Adobe Fresco—which optimize for speed and abundance—Digital Ink introduces intentional constraints to give each action significance. The core innovation lies in its approach to digital authenticity: it achieves the rigorous scarcity of blockchain-based art, but deliberately eschews financialization. There are no tokens, no public ledgers, and no speculative mechanics. Instead, cryptographic hashing serves purely as an artistic mechanism to ensure that each pixel remains a provably unique, untamperable archive of its source photograph. It is a system that is provenance-rich but value-agnostic.
               </p>
             </div>
           </div>
@@ -106,7 +148,7 @@
         <!-- Q888:SECTION_END id="di-innovation" -->
 
         <!-- IMAGE 3 -->
-        <div class="px-6 sm:px-10 lg:px-16 py-8">
+        <div class="py-8" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);">
           <div class="di-reveal aspect-video w-full bg-transparent relative overflow-hidden" data-di-reveal="image3">
             <!-- Base image -->
             <img
@@ -137,277 +179,270 @@
               </p>
             </div>
           </div>
+          <div class="di-img-label">MEMORY_VIEW · PIXEL BIOGRAPHY SYSTEM</div>
+        </div>
+
+        <!-- SECTION DIVIDER 3 -->
+        <div class="di-section-divider" aria-hidden="true">
+          <svg viewBox="0 0 600 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <line x1="0" y1="16" x2="220" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+            <g transform="translate(240, 6)">
+              <rect x="0" y="0" width="5" height="5" fill="rgba(91,156,246,0.6)"/>
+              <rect x="7" y="0" width="5" height="5" fill="rgba(91,156,246,0.3)"/>
+              <rect x="14" y="0" width="5" height="5" fill="rgba(91,156,246,0.15)"/>
+              <rect x="21" y="0" width="5" height="5" fill="rgba(91,156,246,0.08)"/>
+              <rect x="28" y="0" width="5" height="5" fill="rgba(91,156,246,0.04)"/>
+              <rect x="35" y="0" width="5" height="5" fill="rgba(91,156,246,0.02)"/>
+              <rect x="42" y="0" width="5" height="5" fill="rgba(91,156,246,0.04)"/>
+              <rect x="49" y="0" width="5" height="5" fill="rgba(91,156,246,0.08)"/>
+              <rect x="56" y="0" width="5" height="5" fill="rgba(91,156,246,0.15)"/>
+              <rect x="63" y="0" width="5" height="5" fill="rgba(91,156,246,0.3)"/>
+              <rect x="70" y="0" width="5" height="5" fill="rgba(91,156,246,0.6)"/>
+              <rect x="7" y="7" width="5" height="5" fill="rgba(91,156,246,0.15)"/>
+              <rect x="35" y="7" width="5" height="5" fill="rgba(91,156,246,0.6)"/>
+              <rect x="63" y="7" width="5" height="5" fill="rgba(91,156,246,0.15)"/>
+            </g>
+            <line x1="360" y1="16" x2="600" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+          </svg>
         </div>
 
         <!-- Q888:SECTION_START id="di-details" -->
-        <div class="px-6 sm:px-10 lg:px-16 py-16 pb-32">
+        <div class="py-16 pb-32" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);">
           <div class="mx-auto">
-            <div class="space-y-16">
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">Technical Architecture</h2>
-              <p class="mt-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                Digital Ink is built on SwiftUI with Core Data persistence, implementing a three-state ink lifecycle architecture: InkHome (available pool), Canvas (actively placed in artwork), and Gallery (archived in completed pieces). The drawing engine leverages native iOS 18 gesture recognition to deliver Procreate-quality pan, zoom, and rotation interactions. A custom tap-to-place pixel system provides precise control while maintaining the fluidity expected from professional creative tools.​
 
+            <!-- Systems Aesthetic -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// SYSTEMS AESTHETIC</div>
+              <h2 class="di-h2">Three Phases of Engagement</h2>
+              <p class="mt-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                Digital Ink operates on a conceptual three-state machine. First, the <strong>Drop Machine (Extraction)</strong> permanently consumes an imported photograph, downscaling it into a singular SmartInk pixel with cryptographic metadata. Second, the <strong>Canvas (Creation)</strong> enforces strict conservation laws; pixels are spent from your inventory and placed onto a fixed grid without layering. Finally, <strong>Biography Mode (Reflection)</strong> allows viewers to inspect any pixel on a completed canvas, revealing the hidden archival history, semantic context, and origin photograph that powers that tiny dot of color.
               </p>
             </div>
 
-            <div>
-              <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">AI & Vision Integrationt</h2>
+            <!-- Concept-Driven Architecture -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// LOCAL-FIRST</div>
+              <h2 class="di-h2">Concept-Driven Architecture</h2>
               <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
                 <p>
-                  The app integrates Apple Vision framework for scene understanding and GPT-4o for caption generation, creating a two-stage transformation pipeline. When users import images, Vision analyzes visual content, then GPT-4o applies a poetic transformation layer that generates mystical, emotionally resonant descriptions. A proprietary color-to-frequency mapping algorithm assigns elemental values (Earth, Water, Fire, Air, Love, Mushroom) based on hue, saturation, and contextual analysis.​
+                  Every technical decision reinforces the project's philosophy. Built as a native iPadOS app with Core Data SQLite, Digital Ink operates entirely offline. This local-first architecture ensures that true ownership of the art resides fully with the user, mirroring the self-contained nature of a physical art studio. AI and Vision frameworks are utilized minimally and locally for semantic indexing—augmenting the artist's ability to search their inventory without offloading the creative act to an algorithm or risking data privacy.
                 </p>
-                
               </div>
             </div>
-            <div class="space-y-16">
 
-              <!-- Data Integrity & Security -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Data Integrity &amp; Security
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    To enforce the one-image–one-pixel constraint, Digital Ink implements SHA-256 hashing for duplicate detection.
-                    The token-based economy uses StoreKit 2 with a Cloudflare Durable Objects backend for server-side purchase verification
-                    and audit-grade logging. This architecture ensures that every Smart Ink is provably unique, traceable, and secure—creating
-                    genuine digital scarcity without blockchain overhead.
-                  </p>
-                </div>
+            <!-- Exhibition Value -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// INSTALLATION</div>
+              <h2 class="di-h2">Exhibition Value</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>
+                  In a gallery context, Digital Ink transforms from a personal tool into an interactive "system-as-artwork." The application itself becomes an installation where visitors can submit their own photographs to a communal Extraction Kiosk. The resulting pixels feed a shared Canvas where audiences collectively navigate scarcity. Crucially, the final artworks invite deep discovery; viewers can tap the digital paintings to unpack the "archive of memories" embedded in each pixel, making the invisible assumptions of digital creation visible.
+                </p>
               </div>
-            
-              <!-- Technical Stack -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Technical Stack
-                </h2>
-            
-                <div class="mt-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <ul class="space-y-3">
-                    <li><span class="text-zinc-200">Frontend:</span> Swift, SwiftUI, Core Data</li>
-                    <li><span class="text-zinc-200">AI/ML:</span> Apple Vision Framework, GPT-4o API</li>
-                    <li><span class="text-zinc-200">Backend:</span> Cloudflare Durable Objects, StoreKit 2</li>
-                    <li><span class="text-zinc-200">Platform:</span> iPadOS (native iPad app)</li>
-                  </ul>
-                </div>
-              </div>
-            
-              <!-- Development Journey -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Development Journey
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    As solo developer and designer, I architected every aspect of Digital Ink—from philosophical concept to production deployment.
-                    The gesture system required deep study of iOS touch handling to match the polish users expect from tools like Procreate.
-                    Implementing server-verified purchases demanded careful security architecture to prevent token fraud while maintaining smooth
-                    user experience. The AI integration pipeline needed optimization to balance poetic output quality with performance constraints
-                    on-device.
-                  </p>
-            
-                  <p>
-                    The project launched successfully on the App Store on January 12, 2026, delivering the complete MVP feature set:
-                    drawing engine, import system, metadata tracking, in-app purchases, and gallery functionality.
-                  </p>
-                </div>
-              </div>
-            
-              <!-- Artistic & Cultural Implications -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Artistic &amp; Cultural Implications
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    Digital Ink proposes a new form of pixel-based authorship where art becomes a system of resonance and memory, not just visual beauty.
-                    Ownership of ink drops ties directly to emotional experiences—imported dream images, meaningful photographs, AI-generated collaborations.
-                    Each drawing becomes ritual rather than routine, transforming digital matter with conscious intent. This opens possibilities for symbolic
-                    storytelling where the meaning behind each pixel matters as much as its color.
-                  </p>
-                </div>
-              </div>
-            
-              <!-- Future Development Roadmap -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Future Development Roadmap
-                </h2>
-            
-                <div class="mt-8 space-y-10 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    Digital Ink is designed as a platform for expansion into new creative territories:
-                  </p>
-            
-                  <div class="space-y-10">
-                    <div>
-                      <h3 class="text-xl sm:text-2xl font-medium text-zinc-100 tracking-[-0.01em] uppercase">
-                        Cloud Sync &amp; Cross-Device Tracking
-                      </h3>
-                      <p class="mt-4">
-                        Long-term ink history synchronized across devices, allowing artists to see how their ink pools evolve over months and years.
-                      </p>
-                    </div>
-            
-                    <div>
-                      <h3 class="text-xl sm:text-2xl font-medium text-zinc-100 tracking-[-0.01em] uppercase">
-                        Ink Biographies
-                      </h3>
-                      <p class="mt-4">
-                        Detailed timeline views showing how individual pixels traveled through multiple artworks, creating visual genealogies of creative decisions.
-                      </p>
-                    </div>
-            
-                    <div>
-                      <h3 class="text-xl sm:text-2xl font-medium text-zinc-100 tracking-[-0.01em] uppercase">
-                        AI Memory Reconstruction
-                      </h3>
-                      <p class="mt-4">
-                        Smart Inks that speak through AI-powered image reconstruction. Using original image descriptions, metadata, and accumulated usage history,
-                        the system generates new artworks from your digital ink memories—transforming your creative archive into a generative storytelling engine.
-                      </p>
-                    </div>
-            
-                    <div>
-                      <h3 class="text-xl sm:text-2xl font-medium text-zinc-100 tracking-[-0.01em] uppercase">
-                        Collaborative Features
-                      </h3>
-                      <p class="mt-4">
-                        Shared ink pools for co-creation, ink trading between artists, and community-driven symbolic protocols.
-                        This opens possibilities for collaborative storytelling where multiple artists contribute to shared mythologies.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-              <!-- Physical-Digital Hybrid: Sticker & Skin System -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Physical-Digital Hybrid: Sticker &amp; Skin System
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    Digital Ink bridges physical and digital realms through limited-edition collectible stickers that unlock app enhancements.
-                    Each physical sticker purchase includes a unique digital patch code, creating tangible connection between physical art objects
-                    and digital creative tools.
-                  </p>
-                </div>
-              </div>
-            
-              <!-- Aura Sticker System -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Aura Sticker System
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    Each sticker functions as a digital artifact carrying specific aura properties that enhance app functionality:
-                  </p>
-            
-                  <ul class="space-y-3">
-                    <li>Expands ink capacity</li>
-                    <li class="text-zinc-200">
-                      Example: “Overpriced Knight” sticker grants +8.88% ink on top of allowed 1000 Smart Inks
-                    </li>
-                  </ul>
-            
-                  <p>
-                    This system transforms stickers from passive collectibles into functional upgrades while maintaining the core philosophy of meaningful constraints.
-                    Limited physical production ensures genuine scarcity, and each sticker’s aura is carefully balanced to enhance—not overwhelm—the intentional
-                    creative experience.
-                  </p>
-                </div>
-              </div>
-            
-              <!-- Premium Cosmetic System: Luxurious Lux -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Premium Cosmetic System: Luxurious Lux
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    For collectors seeking pure aesthetic prestige, Digital Ink offers premium cosmetic upgrades that provide zero gameplay advantage
-                    but maximum visual impact.
-                  </p>
-            
-                  <div>
-                    <h3 class="text-xl sm:text-2xl font-medium text-zinc-100 tracking-[-0.01em] uppercase">
-                      Luxurious Lux Skin features include
-                    </h3>
-            
-                    <ul class="mt-4 space-y-3">
-                      <li>Full golden/pearlescent UI transformation with subtle shimmer animations</li>
-                      <li>Exclusive loading sequences with custom messaging</li>
-                      <li>Canvas edge glow effects and refined visual flourishes</li>
-                      <li>Premium audio feedback for interactions</li>
-                    </ul>
-                  </div>
-            
-                  <p>
-                    This approach mirrors successful cosmetic systems in gaming and creative software, where optional prestige items support ongoing development
-                    while preserving core functionality for all users. The premium tier exists purely for those who value aesthetic customization and want to
-                    support continued platform development.
-                  </p>
-                </div>
-              </div>
-            
-              <!-- Collectible Strategy -->
-              <div>
-                <h2 class="text-4xl sm:text-5xl font-medium tracking-[-0.015em] text-zinc-50">
-                  Collectible Strategy
-                </h2>
-            
-                <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
-                  <p>
-                    The physical-digital hybrid model serves multiple purposes:
-                  </p>
-            
-                  <ul class="space-y-3">
-                    <li>Revenue diversification beyond app purchases alone</li>
-                    <li>Community building through limited-edition releases and trading culture</li>
-                    <li>Tangible brand presence in physical spaces (studios, desks, sketchbooks)</li>
-                    <li>Graduated value tiers from functional aura stickers to pure prestige items</li>
-                  </ul>
-            
-                  <p>
-                    Each physical sticker is produced in numbered limited editions, with digital codes redeemable once per purchase.
-                    This creates legitimate scarcity while preventing digital duplication, maintaining the app’s core philosophy of meaningful constraints.
-                  </p>
-                </div>
-              </div>
-            
             </div>
+
+            <!-- Technical Stack -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// STACK</div>
+              <h2 class="di-h2">Technical Stack</h2>
+              <div class="di-stack-grid mt-8">
+                <div class="di-stack-row">
+                  <span class="di-stack-key">FRONTEND</span>
+                  <span class="di-stack-val">Swift · SwiftUI · Core Data</span>
+                </div>
+                <div class="di-stack-row">
+                  <span class="di-stack-key">AI / ML</span>
+                  <span class="di-stack-val">Apple Vision Framework · GPT-4o API</span>
+                </div>
+                <div class="di-stack-row">
+                  <span class="di-stack-key">BACKEND</span>
+                  <span class="di-stack-val">Cloudflare Durable Objects · StoreKit 2</span>
+                </div>
+                <div class="di-stack-row">
+                  <span class="di-stack-key">PLATFORM</span>
+                  <span class="di-stack-val">iPadOS — native iPad app</span>
+                </div>
+              </div>
             </div>
+
+            <!-- Development Journey -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// DEVELOPMENT JOURNEY</div>
+              <h2 class="di-h2">Development Journey</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>
+                  As solo developer and designer, I architected every aspect of Digital Ink—from philosophical concept to production deployment.
+                  The gesture system required deep study of iOS touch handling to match the polish users expect from tools like Procreate.
+                  Implementing server-verified purchases demanded careful security architecture to prevent token fraud while maintaining smooth
+                  user experience. The AI integration pipeline needed optimization to balance poetic output quality with performance constraints on-device.
+                </p>
+                <p>
+                  The project launched successfully on the App Store on January 12, 2026, delivering the complete MVP feature set:
+                  drawing engine, import system, metadata tracking, in-app purchases, and gallery functionality.
+                </p>
+              </div>
+            </div>
+
+            <!-- SECTION DIVIDER 4 -->
+            <div class="di-section-divider" aria-hidden="true">
+              <svg viewBox="0 0 600 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <line x1="0" y1="16" x2="255" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+                <g transform="translate(271, 5)">
+                  <rect x="0" y="0" width="7" height="7" fill="rgba(91,156,246,0.08)"/>
+                  <rect x="9" y="0" width="7" height="7" fill="rgba(91,156,246,0.25)"/>
+                  <rect x="18" y="0" width="7" height="7" fill="rgba(91,156,246,0.08)"/>
+                  <rect x="9" y="9" width="7" height="7" fill="rgba(91,156,246,0.7)"/>
+                  <rect x="0" y="18" width="7" height="7" fill="rgba(91,156,246,0.08)"/>
+                  <rect x="9" y="18" width="7" height="7" fill="rgba(91,156,246,0.25)"/>
+                  <rect x="18" y="18" width="7" height="7" fill="rgba(91,156,246,0.08)"/>
+                </g>
+                <line x1="320" y1="16" x2="600" y2="16" stroke="rgba(91,156,246,0.18)" stroke-width="1" stroke-dasharray="3 6"/>
+              </svg>
+            </div>
+
+            <!-- Artistic & Cultural Implications -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// CULTURAL POSITION</div>
+              <h2 class="di-h2">Artistic &amp; Cultural Implications</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>
+                  Digital Ink proposes a new form of pixel-based authorship where art becomes a system of resonance and memory, not just visual beauty.
+                  Ownership of ink drops ties directly to emotional experiences—imported dream images, meaningful photographs, AI-generated collaborations.
+                  Each drawing becomes ritual rather than routine, transforming digital matter with conscious intent. This opens possibilities for symbolic
+                  storytelling where the meaning behind each pixel matters as much as its color.
+                </p>
+              </div>
+            </div>
+
+            <!-- Future Development Roadmap -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// ROADMAP</div>
+              <h2 class="di-h2">Future Development Roadmap</h2>
+              <p class="mt-8 text-2xl sm:text-3xl leading-[1.55] text-zinc-400">
+                Digital Ink is designed as a platform for expansion into new creative territories:
+              </p>
+              <div class="di-roadmap-grid mt-10">
+                <div class="di-roadmap-card">
+                  <span class="di-card-num">01</span>
+                  <h3 class="di-card-title">Cloud Sync &amp; Cross-Device</h3>
+                  <p class="di-card-body">Long-term ink history synchronized across devices, allowing artists to see how their ink pools evolve over months and years.</p>
+                </div>
+                <div class="di-roadmap-card">
+                  <span class="di-card-num">02</span>
+                  <h3 class="di-card-title">Ink Biographies</h3>
+                  <p class="di-card-body">Detailed timeline views showing how individual pixels traveled through multiple artworks, creating visual genealogies of creative decisions.</p>
+                </div>
+                <div class="di-roadmap-card">
+                  <span class="di-card-num">03</span>
+                  <h3 class="di-card-title">AI Memory Reconstruction</h3>
+                  <p class="di-card-body">Smart Inks that speak through AI-powered image reconstruction. Using original image descriptions and accumulated usage history, the system generates impressions from your digital ink memories.</p>
+                </div>
+                <div class="di-roadmap-card">
+                  <span class="di-card-num">04</span>
+                  <h3 class="di-card-title">Collaborative Features</h3>
+                  <p class="di-card-body">Shared ink pools for co-creation, ink trading between artists, and community-driven symbolic protocols across shared mythologies.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Physical-Digital Hybrid -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// PHYSICAL × DIGITAL</div>
+              <h2 class="di-h2">Physical-Digital Hybrid: Sticker &amp; Skin System</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>
+                  Digital Ink bridges physical and digital realms through limited-edition collectible stickers that unlock app enhancements.
+                  Each physical sticker purchase includes a unique digital patch code, creating tangible connection between physical art objects
+                  and digital creative tools.
+                </p>
+              </div>
+            </div>
+
+            <!-- Aura Sticker System -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// AURA SYSTEM</div>
+              <h2 class="di-h2">Aura Sticker System</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>Each sticker functions as a digital artifact carrying specific aura properties that enhance app functionality:</p>
+                <ul class="di-bullet-list">
+                  <li>Expands ink capacity beyond the baseline 1,000 Smart Inks</li>
+                  <li>Example: <span class="text-zinc-100">"Overpriced Knight"</span> sticker grants +8.88% ink on top of the 1,000 Smart Ink limit</li>
+                </ul>
+                <p>
+                  This system transforms stickers from passive collectibles into functional upgrades while maintaining the core philosophy of meaningful constraints.
+                  Limited physical production ensures genuine scarcity, and each sticker's aura is carefully balanced to enhance—not overwhelm—the intentional
+                  creative experience.
+                </p>
+              </div>
+            </div>
+
+            <!-- Premium Cosmetic System -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// COSMETICS</div>
+              <h2 class="di-h2">Premium Cosmetic System: Luxurious Lux</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>
+                  For collectors seeking pure aesthetic prestige, Digital Ink offers premium cosmetic upgrades that provide zero gameplay advantage
+                  but maximum visual impact.
+                </p>
+                <div>
+                  <h3 class="di-sub-h3">Luxurious Lux Skin features include</h3>
+                  <ul class="di-bullet-list mt-4">
+                    <li>Full golden/pearlescent UI transformation with subtle shimmer animations</li>
+                    <li>Exclusive loading sequences with custom messaging</li>
+                    <li>Canvas edge glow effects and refined visual flourishes</li>
+                    <li>Premium audio feedback for interactions</li>
+                  </ul>
+                </div>
+                <p>
+                  This approach mirrors successful cosmetic systems in gaming and creative software, where optional prestige items support ongoing development
+                  while preserving core functionality for all users.
+                </p>
+              </div>
+            </div>
+
+            <!-- Collectible Strategy -->
+            <div class="di-detail-section" data-di-reveal-section>
+              <div class="di-eyebrow">// COLLECTIBLE STRATEGY</div>
+              <h2 class="di-h2">Collectible Strategy</h2>
+              <div class="mt-8 space-y-8 mx-auto text-2xl sm:text-3xl leading-[1.55] text-zinc-300">
+                <p>The physical-digital hybrid model serves multiple purposes:</p>
+                <ul class="di-bullet-list">
+                  <li>Revenue diversification beyond app purchases alone</li>
+                  <li>Community building through limited-edition releases and trading culture</li>
+                  <li>Tangible brand presence in physical spaces (studios, desks, sketchbooks)</li>
+                  <li>Graduated value tiers from functional aura stickers to pure prestige items</li>
+                </ul>
+                <p>
+                  Each physical sticker is produced in numbered limited editions, with digital codes redeemable once per purchase.
+                  This creates legitimate scarcity while preventing digital duplication, maintaining the app's core philosophy of meaningful constraints.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
         <!-- Q888:SECTION_END id="di-details" -->
 
         <!-- FOOTER BANNER -->
         <div class="full-bleed mt-24 pb-32 relative">
-          <div class="di-footer-quote absolute top-0 right-12 sm:right-16 lg:right-24 w-[45%] max-w-[28rem] text-right pr-8 hidden md:block">
-            <p class="di-silver-shine text-left text-2xl sm:text-4xl leading-relaxed">
+          <!-- Silver-shine quote: always visible, stacks on mobile -->
+          <div class="di-footer-quote-wrap">
+            <p class="di-silver-shine di-footer-quote-line">
               Every pixel you place remembers where it came from.
             </p>
-            <p class="di-silver-shine text-right text-2xl sm:text-4xl leading-relaxed mt-2">
+            <p class="di-silver-shine di-footer-quote-line di-footer-quote-line-right">
               So do you...
             </p>
           </div>
-          <div class="flex justify-center">
+          <div class="flex justify-center mt-8 md:mt-0">
             <a 
               href="https://apps.apple.com/us/app/digital-ink/id6757157376" 
               target="_blank" 
               rel="noopener noreferrer"
               class="di-app-banner block w-[95%] mx-auto outline-none"
             >
-<img
+              <img
                 src="/images/digitalink_appstore.webp"
                 alt="Download Digital Ink on the App Store"
                 class="w-full h-auto object-cover"
@@ -795,6 +830,8 @@
     }
   }
 
+
+
   .di-panel .di-headline {
     font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   }
@@ -912,7 +949,267 @@
     .di-silver-shine { animation: none; }
   }
 
-  /* Edinburgh Map Panel */
+  /* ─── Digital Ink: Design System Tokens ─────────────────────────── */
+  .di-panel {
+    --di-accent: #5b9cf6;
+    --di-accent-dim: rgba(91, 156, 246, 0.12);
+    --di-accent-border: rgba(91, 156, 246, 0.22);
+    --di-accent-glow: rgba(91, 156, 246, 0.45);
+  }
+
+  /* ─── Section eyebrow labels ─────────────────────────────────────── */
+  .di-eyebrow {
+    font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    letter-spacing: 0.14em;
+    color: var(--di-accent);
+    opacity: 0.8;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ─── Section h2 (branded) ───────────────────────────────────────── */
+  .di-h2 {
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 500;
+    tracking: -0.015em;
+    color: #f4f4f5;
+    line-height: 1.1;
+    position: relative;
+    padding-left: 1rem;
+  }
+  .di-h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 3px;
+    background: var(--di-accent);
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  /* ─── Opening tagline key phrase glow ───────────────────────────── */
+  .di-tagline-key {
+    color: #f4f4f5;
+    text-shadow:
+      0 0 20px var(--di-accent-glow),
+      0 0 40px rgba(91, 156, 246, 0.2);
+  }
+
+  /* ─── SVG Section Dividers ───────────────────────────────────────── */
+  .di-section-divider {
+    width: 100%;
+    max-width: 680px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .di-section-divider svg {
+    width: 100%;
+    height: 32px;
+  }
+
+  /* ─── Image context labels ───────────────────────────────────────── */
+  .di-img-label {
+    font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+    letter-spacing: 0.12em;
+    color: var(--di-accent);
+    opacity: 0.55;
+    text-transform: uppercase;
+    padding: 0.6rem var(--drawer-pad) 0;
+  }
+
+  /* ─── Detail section spacing ─────────────────────────────────────── */
+  .di-detail-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .di-detail-section:last-child {
+    border-bottom: none;
+  }
+
+  /* ─── Tech stack grid ────────────────────────────────────────────── */
+  .di-stack-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--di-accent-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .di-stack-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--di-accent-border);
+    transition: background 200ms ease;
+  }
+  .di-stack-row:last-child {
+    border-bottom: none;
+  }
+  .di-stack-row:hover {
+    background: var(--di-accent-dim);
+  }
+  .di-stack-key {
+    font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+    letter-spacing: 0.1em;
+    color: var(--di-accent);
+    background: rgba(91, 156, 246, 0.07);
+    padding: 1rem 1rem 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--di-accent-border);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .di-stack-val {
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    color: #d4d4d8;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── Roadmap card grid ──────────────────────────────────────────── */
+  .di-roadmap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 768px) {
+    .di-roadmap-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .di-roadmap-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(91, 156, 246, 0.14);
+    border-radius: 10px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    position: relative;
+    transition: background 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+  }
+  .di-roadmap-card:hover {
+    background: rgba(91, 156, 246, 0.06);
+    border-color: rgba(91, 156, 246, 0.3);
+    box-shadow: 0 0 24px rgba(91, 156, 246, 0.08);
+  }
+  .di-card-num {
+    font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--di-accent);
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .di-card-title {
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    font-weight: 600;
+    color: #f4f4f5;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+  .di-card-body {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    color: #a1a1aa;
+    line-height: 1.6;
+  }
+
+  /* ─── Styled bullet lists ────────────────────────────────────────── */
+  .di-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .di-bullet-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: inherit;
+    color: inherit;
+    line-height: 1.55;
+  }
+  .di-bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: var(--di-accent);
+    opacity: 0.7;
+    border-radius: 1px;
+  }
+
+  /* ─── Sub-h3 (inside sections) ──────────────────────────────────── */
+  .di-sub-h3 {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-weight: 600;
+    color: #a1a1aa;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+    font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+  }
+
+  /* ─── Footer quote – always visible ─────────────────────────────── */
+  .di-footer-quote-wrap {
+    padding: 0 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .di-footer-quote-line {
+    font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+    line-height: 1.4;
+    text-align: left;
+  }
+  .di-footer-quote-line-right {
+    text-align: right;
+  }
+  @media (min-width: 768px) {
+    .di-footer-quote-wrap {
+      position: absolute;
+      top: 0;
+      right: 3rem;
+      width: 42%;
+      max-width: 28rem;
+      padding: 0 1rem;
+    }
+  }
+
+  /* ─── Drawer scroll-reveal (scoped to .drawer-scroll) ───────────── */
+  [data-di-reveal-section] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  [data-di-reveal-section].di-revealed {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-di-reveal-section] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+
   .eden-panel {
     --eden-primary: #208c8d;
     --eden-primary-hover: #247480;
@@ -1877,5 +2174,54 @@
     document.addEventListener('astro:page-load', initGlitches);
     document.addEventListener('astro:before-swap', cleanup);
     window.addEventListener('beforeunload', cleanup);
+  })();
+
+  // ─── Digital Ink: Drawer-Scoped Scroll-Reveal Observer ──────────────
+  (() => {
+    const prefersReduced = () =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function initDiReveal() {
+      const diPanel = document.querySelector('[data-drawer-panel="digital-ink"]');
+      if (!diPanel) return;
+
+      const scrollRoot = diPanel.querySelector('.drawer-scroll') as HTMLElement | null;
+      if (!scrollRoot) return;
+
+      const items = Array.from(
+        diPanel.querySelectorAll<HTMLElement>('[data-di-reveal-section]')
+      );
+
+      if (prefersReduced()) {
+        items.forEach(el => el.classList.add('di-revealed'));
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            (entry.target as HTMLElement).classList.add('di-revealed');
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          root: scrollRoot,
+          rootMargin: '0px 0px -60px 0px',
+          threshold: 0.05,
+        }
+      );
+
+      items.forEach(el => observer.observe(el));
+
+      function cleanupObserver() {
+        observer.disconnect();
+        document.removeEventListener('astro:before-swap', cleanupObserver);
+      }
+      document.addEventListener('astro:before-swap', cleanupObserver);
+    }
+
+    initDiReveal();
+    document.addEventListener('astro:page-load', initDiReveal);
   })();
 </script>
