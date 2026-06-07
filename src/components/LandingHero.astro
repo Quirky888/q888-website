@@ -1,8 +1,11 @@
 ---
+
 ---
 
 <div class="flex flex-col min-h-[100dvh] min-h-screen w-full overflow-x-hidden">
-  <div class="relative w-full h-[100dvh] h-screen overflow-hidden bg-[var(--bg-fog)]">
+  <div
+    class="relative w-full h-[100dvh] h-screen overflow-hidden bg-[var(--bg-fog)]"
+  >
     <picture>
       <source
         type="image/avif"
@@ -36,11 +39,22 @@
       <h1 class="hero-title-silver">Q888</h1>
     </div>
 
-    <svg width="0" height="0" class="absolute pointer-events-none" aria-hidden="true" focusable="false">
+    <svg
+      width="0"
+      height="0"
+      class="absolute pointer-events-none"
+      aria-hidden="true"
+      focusable="false"
+    >
       <defs>
         <filter id="hero-tagline-glitch">
-          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="5"
+          ></feDisplacementMap>
         </filter>
       </defs>
     </svg>
@@ -48,74 +62,100 @@
 
   <div class="landing-typography px-6 md:px-24 pt-12 md:pt-16 pb-16 md:pb-24">
     <div class="landing-status-bar flex flex-col gap-1.5 font-mono text-lg sm:text-xl text-zinc-500 leading-relaxed uppercase tracking-widest mb-12">
-      <span class="flex gap-2"><span class="opacity-50">PORTAL_STATE:</span> <hotfx-split-flap class="landing-meta-split-flap">SLIGHTLY_OPEN</hotfx-split-flap></span>
-      <span class="flex gap-2"><span class="opacity-50">NARRATIVE_MODE:</span> <hotfx-split-flap class="landing-meta-split-flap">UNFOLDING</hotfx-split-flap></span>
-      <span class="flex gap-2"><span class="opacity-50">ENTITY_TYPE:</span> <hotfx-split-flap class="landing-meta-split-flap">IDENTITY</hotfx-split-flap></span>
+      <span class="flex gap-2"><span class="opacity-50">PORTAL_STATE:</span> <hotfx-split-flap class="landing-meta-split-flap clackety-flap" width="13" characters=" ABCDEFGHIJKLMNOPQRSTUVWXYZ_" data-target-text="SLIGHTLY_OPEN">             </hotfx-split-flap></span>
+      <span class="flex gap-2"><span class="opacity-50">NARRATIVE_MODE:</span> <hotfx-split-flap class="landing-meta-split-flap clackety-flap" width="9" characters=" ABCDEFGHIJKLMNOPQRSTUVWXYZ_" data-target-text="UNFOLDING">         </hotfx-split-flap></span>
+      <span class="flex gap-2"><span class="opacity-50">ENTITY_TYPE:</span> <hotfx-split-flap class="landing-meta-split-flap clackety-flap" width="8" characters=" ABCDEFGHIJKLMNOPQRSTUVWXYZ_" data-target-text="IDENTITY">        </hotfx-split-flap></span>
     </div>
-    <p class="landing-line-1">
-      Identity &amp; Architecture
-    </p>
+    <p class="landing-line-1">Identity &amp; Architecture</p>
 
     <p class="landing-line-2">
-      Q888 builds <span class="symbolic-box"><span class="gold-gradient-text">symbolic systems</span></span>, narrative architectures, and speculative tools.
+      Q888 builds <span class="symbolic-box"
+        ><span class="gold-gradient-text">symbolic systems</span></span
+      >, narrative architectures, and speculative tools.
     </p>
 
     <p class="landing-line-3">
-      Operating at the intersection of contemporary art, AI, and conceptual infrastructure, this practice treats myth, code, and interface as equal materials.
+      Operating at the intersection of contemporary art, AI, and conceptual
+      infrastructure, this practice treats myth, code, and interface as equal
+      materials.
     </p>
 
     <p class="landing-intro-follow">
-      This work refuses instant clarity; it is structured to unfold. Meaning accumulates here through repetition, context, and return.
+      This work refuses instant clarity; it is structured to unfold. Meaning
+      accumulates here through repetition, context, and return.
     </p>
 
     <p class="landing-entry-point">
-      <span class="black-box-white">This is not a portfolio. It is an entry point into a set of living systems.</span>
+      <span class="black-box-white"
+        >This is not a portfolio. It is an entry point into a set of living
+        systems.</span
+      >
     </p>
 
     <h2 class="landing-projects-heading">The Systems</h2>
 
     <p class="landing-paragraph-1">
-      <a href="/dink" class="landing-link gold-gradient-text">Digital Ink</a><br />
-      <a href="/dink" class="landing-link">AI-driven drawing tools</a> for iPad where image-making becomes a negotiation between human intention and machine interpretation. A research environment for explainable visual collaboration.
+      <a href="/dink" class="landing-link gold-gradient-text">Digital Ink</a><br
+      />
+      <a href="/dink" class="landing-link">AI-driven drawing tools</a> for iPad where
+      image-making becomes a negotiation between human intention and machine interpretation.
+      A research environment for explainable visual collaboration.
     </p>
 
     <p class="landing-paragraph-2">
-      <a href="/map" class="landing-link gold-gradient-text">Edinburgh Magic Map</a><br />
-      An interactive mythology layered onto real geography. A cartographic narrative where place becomes interface and story becomes infrastructure.
+      <a href="/map" class="landing-link gold-gradient-text"
+        >Edinburgh Magic Map</a
+      ><br />
+      An interactive mythology layered onto real geography. A cartographic narrative
+      where place becomes interface and story becomes infrastructure.
     </p>
 
     <p class="landing-paragraph-3">
-      <a href="#infocigan" class="landing-link gold-gradient-text">Project Infocigan</a><br />
-      A speculative design studio producing artifacts for uncertain futures. Objects released with internal logic, controlled circulation, and conceptual lineage.
+      <a href="#infocigan" class="landing-link gold-gradient-text"
+        >Project Infocigan</a
+      ><br />
+      A speculative design studio producing artifacts for uncertain futures. Objects
+      released with internal logic, controlled circulation, and conceptual lineage.
     </p>
 
     <h2 class="landing-method-heading">The Method</h2>
 
     <p class="landing-method-paragraph">
-      Across these works, Q888 constructs ecosystems, not isolated pieces. Editions, protocols, and verification structures are embedded into the code of each project.
+      Across these works, Q888 constructs ecosystems, not isolated pieces.
+      Editions, protocols, and verification structures are embedded into the
+      code of each project.
     </p>
 
     <p class="landing-method-paragraph landing-method-paragraph-2">
-      Here, scarcity, provenance, and narrative weight are not marketing devices—they are core artistic materials.
+      Here, scarcity, provenance, and narrative weight are not marketing
+      devices—they are core artistic materials.
     </p>
 
     <p class="landing-method-paragraph landing-method-paragraph-3">
-      <span class="black-box-white">The practice spans screens, walls, and conceptual territories. Technology is treated as substance, not surface. Absurdism is the method used to question value systems, authorship, and the mechanics of belief.</span>
+      <span class="black-box-white"
+        >The practice spans screens, walls, and conceptual territories.
+        Technology is treated as substance, not surface. Absurdism is the method
+        used to question value systems, authorship, and the mechanics of belief.</span
+      >
     </p>
 
     <p class="landing-method-paragraph landing-method-paragraph-4">
-      These works behave like operating systems: mythologies with governance, artifacts with lineage, and tools that generate further tools.
+      These works behave like operating systems: mythologies with governance,
+      artifacts with lineage, and tools that generate further tools.
     </p>
 
     <p class="landing-final-line">
-      Collaborations, commissions, research partnerships, and critical dialogue are welcome.
+      Collaborations, commissions, research partnerships, and critical dialogue
+      are welcome.
     </p>
   </div>
 </div>
 
 <script>
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const isTablet = window.matchMedia("(max-width: 1024px)").matches || window.matchMedia("(hover: none)").matches;
+  const isTablet =
+    window.matchMedia("(max-width: 1024px)").matches ||
+    window.matchMedia("(hover: none)").matches;
   let glitchTimeoutId = 0;
 
   function runPulseGlitch() {
@@ -126,13 +166,18 @@
       if (!tagline.isConnected || reducedMotion.matches) return;
       tagline.classList.add("is-glitching");
       window.setTimeout(() => tagline.classList.remove("is-glitching"), 140);
-      glitchTimeoutId = window.setTimeout(pulseGlitch, 2000 + Math.random() * 1000);
+      glitchTimeoutId = window.setTimeout(
+        pulseGlitch,
+        2000 + Math.random() * 1000,
+      );
     };
     pulseGlitch();
   }
 
   function handleLandingLinkClick(e: MouseEvent) {
-    const link = (e.target as HTMLElement).closest(".landing-link") as HTMLAnchorElement;
+    const link = (e.target as HTMLElement).closest(
+      ".landing-link",
+    ) as HTMLAnchorElement;
     if (!link) return;
 
     const href = link.getAttribute("href");
@@ -150,16 +195,50 @@
   }
 
   function setupListeners() {
-    document.querySelectorAll(".landing-link").forEach(link => {
+    document.querySelectorAll(".landing-link").forEach((link) => {
       // Remove existing to avoid duplicates if called multiple times
-      link.removeEventListener("click", handleLandingLinkClick as EventListener);
+      link.removeEventListener(
+        "click",
+        handleLandingLinkClick as EventListener,
+      );
       link.addEventListener("click", handleLandingLinkClick as EventListener);
     });
+  }
+
+  function initClacketyFlaps() {
+    const flaps = document.querySelectorAll(".clackety-flap");
+    if (!flaps.length || reducedMotion.matches) {
+      // Fallback for reduced motion
+      flaps.forEach(flap => {
+        const targetText = flap.getAttribute("data-target-text");
+        if (targetText) flap.textContent = targetText;
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const flap = entry.target;
+          const targetText = flap.getAttribute("data-target-text");
+          if (targetText && flap.textContent !== targetText) {
+            // Stagger the flip effect slightly
+            setTimeout(() => {
+              flap.textContent = targetText;
+            }, index * 200 + 150);
+          }
+          obs.unobserve(flap);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    flaps.forEach(f => observer.observe(f));
   }
 
   function init() {
     runPulseGlitch();
     setupListeners();
+    initClacketyFlaps();
   }
 
   function cleanup() {
@@ -248,7 +327,9 @@
     filter: url("#hero-tagline-glitch");
   }
   @keyframes hero-shine {
-    to { background-position: 200% center; }
+    to {
+      background-position: 200% center;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -264,7 +345,7 @@
       top: 33.4%;
     }
     .hero-title-silver {
-      font-size: 3.0rem;
+      font-size: 3rem;
     }
   }
 
@@ -272,7 +353,11 @@
     position: relative;
     min-height: 78dvh;
     color: var(--text-ink);
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      sans-serif;
   }
 
   .landing-status-bar hotfx-split-flap.landing-meta-split-flap {
@@ -298,7 +383,7 @@
   }
   .landing-status-bar hotfx-split-flap.landing-meta-split-flap::part(flap) {
     color: #fff;
-    background: transparent;
+    background: #000;
   }
   .landing-status-bar hotfx-split-flap.landing-meta-split-flap::part(divider) {
     background: rgb(113 113 122);
@@ -430,7 +515,11 @@
   }
 
   .gold-gradient-text {
-    background: linear-gradient(135deg, rgb(218, 197, 143) 0%, rgb(184, 143, 98) 100%);
+    background: linear-gradient(
+      135deg,
+      rgb(218, 197, 143) 0%,
+      rgb(184, 143, 98) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
