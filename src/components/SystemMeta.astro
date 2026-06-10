@@ -1,11 +1,19 @@
 ---
-interface Props {
-  position: "top" | "bottom";
+interface MetaItem {
+  field: string;
+  label: string;
+  value: string;
+  width: number;
 }
 
-const { position } = Astro.props;
+interface Props {
+  position: "top" | "bottom";
+  customItems?: MetaItem[];
+}
 
-const metaItems = [
+const { position, customItems } = Astro.props;
+
+const metaItems = customItems || [
   { field: "system_status", label: "SYSTEM_STATUS", value: "QUIET", width: 9 },
   { field: "oracle_mode", label: "ORACLE_MODE", value: "ENGAGED", width: 7 },
   { field: "whisper_protocol", label: "WHISPER_PROTOCOL", value: "ACTIVE", width: 8 },

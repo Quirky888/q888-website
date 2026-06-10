@@ -5,12 +5,19 @@ import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import OverpricedStickersSection from "../components/OverpricedStickersSection.astro";
 import InvestorChatbot from "../components/InvestorChatbot.astro";
+
+const overpricedMetaItems = [
+  { field: "sentiment", label: "SENTIMENT", value: "MYTHIC", width: 6 },
+  { field: "ask_price", label: "ASK_PRICE", value: "TOO MUCH", width: 8 },
+  { field: "liquidity", label: "LIQUIDITY", value: "COSMIC", width: 6 },
+  { field: "rarity", label: "RARITY", value: "STUBBORN", width: 8 },
+];
 ---
 
 <Layout title="Overpriced Stickers — Q888">
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
-  <SystemMeta position="top" />
+  <SystemMeta position="top" customItems={overpricedMetaItems} />
 
   <main class="relative min-h-screen pt-10 md:pt-11">
     <div class="overpriced-layout-with-nav">
@@ -20,7 +27,7 @@ import InvestorChatbot from "../components/InvestorChatbot.astro";
   </main>
 
   <div class="hidden md:block">
-    <SystemMeta position="bottom" />
+    <SystemMeta position="bottom" customItems={overpricedMetaItems} />
   </div>
 </Layout>
 

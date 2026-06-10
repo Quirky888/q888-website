@@ -3,12 +3,19 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
+
+const dynoMetaItems = [
+  { field: "bio_status", label: "BIO_STATUS", value: "PHASE 4", width: 7 },
+  { field: "physics_laws", label: "PHYSICS_LAWS", value: "IGNORED", width: 7 },
+  { field: "vibe_check", label: "VIBE_CHECK", value: "ANARCHY", width: 7 },
+  { field: "irony_index", label: "IRONY_INDEX", value: "MAXIMUM", width: 7 },
+];
 ---
 
 <Layout title="DYNO MILK — Q888">
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
-  <SystemMeta position="top" />
+  <SystemMeta position="top" customItems={dynoMetaItems} />
 
   <main class="dyno-wrap relative min-h-screen pt-10 md:pt-11" id="dyno-main">
     <!-- ══════════════════════════════════════════════════════
@@ -124,13 +131,32 @@ import SystemMeta from "../components/SystemMeta.astro";
     </div>
 
     <!-- ══════════════════════════════════════════════════════
+         DYNO MILK — COLORFUL TEXT LOGO
+    ══════════════════════════════════════════════════════ -->
+    <section class="dyno-wordmark-section" aria-label="DYNO MILK logo">
+      <div class="dyno-wordmark-wrap">
+        <div class="dyno-wordmark-row dyno-wordmark-row-1">
+          <span class="dwl d">D</span>
+          <span class="dwl y">Y</span>
+          <span class="dwl n">N</span>
+          <span class="dwl o">O</span>
+        </div>
+        <div class="dyno-wordmark-row dyno-wordmark-row-2">
+          <span class="dwl m">M</span>
+          <span class="dwl i">I</span>
+          <span class="dwl l">L</span>
+          <span class="dwl k">K</span>
+        </div>
+        <div class="dyno-wordmark-tagline">BIO-ENGINEERED // IRRESPONSIBLY EXPENSIVE</div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
          COMMODITIES SECTION — DIAGONAL SPLIT
     ══════════════════════════════════════════════════════ -->
     <section class="dyno-commodities" id="dyno-commodities">
       <div class="dyno-commodities-header">
-        <span class="dyno-section-tag">🧬</span>
         <h2 class="dyno-section-headline">THE COMMODITIES: CHOOSE YOUR FLEX</h2>
-        <span class="dyno-section-tag">💸</span>
       </div>
 
       <div class="dyno-split-arena" id="dyno-split-arena">
@@ -298,7 +324,6 @@ import SystemMeta from "../components/SystemMeta.astro";
     ══════════════════════════════════════════════════════ -->
     <section class="dyno-wealth" id="dyno-wealth">
       <div class="dyno-wealth-header">
-        <span class="dyno-section-tag">📈</span>
         <h2 class="dyno-section-headline dyno-wealth-headline">
           THE INFOCIGAN WEALTH TRAP
         </h2>
@@ -611,7 +636,7 @@ import SystemMeta from "../components/SystemMeta.astro";
   </main>
 
   <div class="hidden md:block">
-    <SystemMeta position="bottom" />
+    <SystemMeta position="bottom" customItems={dynoMetaItems} />
   </div>
 </Layout>
 
@@ -1299,6 +1324,195 @@ import SystemMeta from "../components/SystemMeta.astro";
     }
     to {
       opacity: 1;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     DYNO MILK WORDMARK LOGO
+  ══════════════════════════════════════════════════════ */
+  .dyno-wordmark-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(3rem, 8vw, 7rem) 1.5rem clamp(2rem, 6vw, 5rem);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .dyno-wordmark-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%,
+      rgba(255, 45, 120, 0.08) 0%,
+      rgba(57, 255, 20, 0.04) 50%,
+      transparent 100%);
+    pointer-events: none;
+  }
+
+  .dyno-wordmark-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1em;
+    /* prevent horizontal bleed on narrow screens */
+    max-width: 100%;
+  }
+
+  .dyno-wordmark-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.02em;
+    line-height: 0.9;
+  }
+
+  /* Each letter — base */
+  .dwl {
+    display: inline-block;
+    font-size: clamp(4.2rem, 22vw, 16rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-shadow:
+      0 0 40px currentColor,
+      0 4px 0 rgba(0,0,0,0.6);
+    will-change: transform;
+    transition: transform 0.15s ease;
+  }
+
+  .dwl:hover {
+    transform: scale(1.08) rotate(-3deg);
+    filter: brightness(1.3);
+    z-index: 2;
+    position: relative;
+  }
+
+  /* ── Per-letter colour + font ── */
+  .dwl.d {
+    color: #ff2d78;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    animation: dwl-float 3.1s ease-in-out infinite alternate;
+    text-shadow: 0 0 50px rgba(255,45,120,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+  .dwl.y {
+    color: #39ff14;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    animation: dwl-float 2.7s ease-in-out 0.3s infinite alternate;
+    text-shadow: 0 0 50px rgba(57,255,20,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+  .dwl.n {
+    color: #ffe600;
+    font-family: 'Syne', sans-serif;
+    animation: dwl-float 3.4s ease-in-out 0.6s infinite alternate;
+    text-shadow: 0 0 50px rgba(255,230,0,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+  .dwl.o {
+    color: #00e5ff;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    animation: dwl-float 2.9s ease-in-out 0.9s infinite alternate;
+    text-shadow: 0 0 50px rgba(0,229,255,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+  .dwl.m {
+    color: #ff6b00;
+    font-family: 'Playfair Display', serif;
+    animation: dwl-float 3.2s ease-in-out 0.2s infinite alternate;
+    text-shadow: 0 0 50px rgba(255,107,0,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+  .dwl.i {
+    color: #ff2d78;
+    font-family: 'Syne', sans-serif;
+    font-style: italic;
+    animation: dwl-float 2.8s ease-in-out 0.5s infinite alternate;
+    text-shadow: 0 0 50px rgba(255,45,120,0.7), 0 4px 0 rgba(0,0,0,0.6);
+    letter-spacing: -0.05em;
+  }
+  .dwl.l {
+    color: #39ff14;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    animation: dwl-float 3.6s ease-in-out 0.8s infinite alternate;
+    text-shadow: 0 0 50px rgba(57,255,20,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+  .dwl.k {
+    color: #ffe600;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    animation: dwl-float 3.0s ease-in-out 1.1s infinite alternate;
+    text-shadow: 0 0 50px rgba(255,230,0,0.7), 0 4px 0 rgba(0,0,0,0.6);
+  }
+
+  @keyframes dwl-float {
+    from { transform: translateY(0px) rotate(0deg); }
+    to   { transform: translateY(-10px) rotate(1.5deg); }
+  }
+
+  .dyno-wordmark-tagline {
+    font-family: 'Syne Mono', 'Space Mono', monospace;
+    font-size: clamp(0.6rem, 2.2vw, 1rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 1.2rem;
+    text-align: center;
+    padding: 0.5em 1.4em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    /* animated rainbow shimmer */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(90deg,
+      #ff2d78 0%,
+      #ffe600 30%,
+      #39ff14 55%,
+      #00e5ff 78%,
+      #ff6b00 90%,
+      #ff2d78 100%
+    );
+    background-size: 200% auto;
+    animation: tagline-shimmer 4s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(255, 45, 120, 0.6))
+            drop-shadow(0 0 18px rgba(57, 255, 20, 0.35));
+  }
+
+  @keyframes tagline-shimmer {
+    from { background-position: 0% center; }
+    to   { background-position: 200% center; }
+  }
+
+  /* ── Mobile portrait (≤480px) ── */
+  @media (max-width: 480px) {
+    .dyno-wordmark-section {
+      padding: 2.5rem 0.5rem 1.5rem;
+    }
+    .dwl {
+      font-size: clamp(3.8rem, 23vw, 5.5rem);
+    }
+    .dyno-wordmark-tagline {
+      font-size: clamp(0.5rem, 3.4vw, 0.68rem);
+      letter-spacing: 0.1em;
+      padding: 0.45em 0.8em;
+      margin-top: 1rem;
+    }
+  }
+
+  /* ── Mobile landscape (≤500px tall) ── */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .dyno-wordmark-section {
+      padding: 1.5rem 1rem 1rem;
+    }
+    .dwl {
+      font-size: clamp(3rem, 13vw, 8rem);
+    }
+    .dyno-wordmark-tagline {
+      font-size: clamp(0.5rem, 1.8vw, 0.75rem);
+      margin-top: 0.75rem;
+    }
+  }
+
+  /* ── Tablets (481px–768px) ── */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .dwl {
+      font-size: clamp(4.5rem, 20vw, 8rem);
     }
   }
 

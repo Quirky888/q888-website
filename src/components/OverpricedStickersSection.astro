@@ -14,191 +14,443 @@ const instruments: Instrument[] = (await getCollection("stickers"))
   .sort((a, b) => a.sortOrder - b.sortOrder);
 
 const visibleInstruments = instruments.filter((i) => i.imageUrl);
-const activeCount = visibleInstruments.filter((i) => i.status === "LISTED").length;
+const activeCount = visibleInstruments.filter(
+  (i) => i.status === "LISTED",
+).length;
 const tickerFont = "'Doto', ui-monospace, SFMono-Regular, monospace";
-const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RECOGNIZED COMMODITY (IN 1 UNIVERSE) - MARKET SENTIMENT: HYPER-MYTHIC - ORDER #0008 LOST IN TIME LOOP — REFUND: PHILOSOPHICAL - EYE OF LAIMA APPROVES CURRENT PRICING — FOR NOW - ARTIFACT #KOTIKI-002 WHISPERING TO BUYER - STICKER MEMORY IMPRINTED ON 3.5 MINDS - 📉 VALUE COLLAPSE AVERTED VIA INTERDIMENSIONAL BUREAU - RETURN REQUEST DENIED: MEANING IRREVERSIBLE - INFLATION INDEX: FEELS-BASED - SAVED TO COLLECTOR'S DREAM CACHE - TRADING ENABLED | LIQUIDITY: COSMIC MIST - OWNERSHIP LOCKED | METAPHYSICAL RIGHTS UNCLEAR - ⚖️ LEGAL STATUS: UNCLASSIFIED ART-WEAPON - ANALYTICS SUGGEST STICKERS OUTPERFORMING GOLD (IN EMOTIONAL RETURN) - 🎲 RISK LEVEL: EXISTENTIALLY ATTRACTIVE - CLIPPED TO REALITY WITH DIMENSIONAL PAPERCLIP - STICKER MUTATING | RARITY +12% - LAST SEEN IN RIGA | THEN NOWHERE - 📡 SIGNAL LOST | VALUE ESTIMATED VIA VIBES - 🔥 DEMAND SPIKE | SUPPLY: STUBBORNLY MYTHIC - OVERPRICED KNIGHT RIDING STEADY AT £∞ - NAR-MAIL EXPRESS MISDELIVERS TO PARALLEL SELF - GHOST COLLECTOR SIGHTED | BIDS TRANSLATED PSYCHICALLY - VALUE ASSESSMENT UNDER DIVINE REVIEW - TRUTH ENGINE OFFLINE — PRICES DEFAULTING TO POETIC - INVESTOR FEELING: "STRANGELY COMFORTABLE" - LISTED IN FOLKLORE MARKET INDEX UNDER "WEIRDLY VALUABLE" - FUTURE VALUE: STILL NEGOTIATING WITH TIME - ACTIVE: ${activeCount} | Q888 STATUS: TERMINAL`;
+const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RECOGNIZED COMMODITY (IN 1 UNIVERSE) - MARKET SENTIMENT: HYPER-MYTHIC - ORDER #0008 LOST IN TIME LOOP — REFUND: PHILOSOPHICAL - EYE OF LAIMA APPROVES CURRENT PRICING — FOR NOW - ARTIFACT #KOTIKI-002 WHISPERING TO BUYER - STICKER MEMORY IMPRINTED ON 3.5 MINDS - 📉 VALUE COLLAPSE AVERTED VIA INTERDIMENSIONAL BUREAU - RETURN REQUEST DENIED: MEANING IRREVERSIBLE - INFLATION INDEX: FEELS-BASED - SAVED TO COLLECTOR'S DREAM CACHE - TRADING ENABLED | LIQUIDITY: COSMIC MIST - OWNERSHIP LOCKED | METAPHYSICAL RIGHTS UNCLEAR - ⚖️ LEGAL STATUS: UNCLASSIFIED ART-WEAPON - ANALYTICS SUGGEST STICKERS OUTPERFORMING GOLD (IN EMOTIONAL RETURN) - 🎲 RISK LEVEL: EXISTENTIALLY ATTRACTIVE - CLIPPED TO REALITY WITH DIMENSIONAL PAPERCLIP - STICKER MUTATING | RARITY +12% - LAST SEEN IN RIGA | THEN NOWHERE - 📡 SIGNAL LOST | VALUE ESTIMATED VIA VIBES - 🔥 DEMAND SPIKE | SUPPLY: STUBBORNLY MYTHIC - OVERPRICED KNIGHT RIDING STEADY AT £∞ - NAR-MAIL EXPRESS MISDELIVERS TO PARALLEL SELF - GHOST COLLECTOR SIGHTED | BIDS TRANSLATED PSYCHICALLY - VALUE ASSESSMENT UNDER DIVINE REVIEW - TRUTH ENGINE OFFLINE — PRICES DEFAULTING TO POETIC - INVESTOR FEELING: "STRANGELY COMFORTABLE" - LISTED IN FOLKLORE MARKET INDEX UNDER "WEIRDLY VALUABLE" - FUTURE VALUE: STILL NEGOTIATING WITH TIME - INFOCIGAN AVAILABLE FOR CONSULTATION — EMOTIONAL LIQUIDITY PENDING REVIEW - SQUARE BUBBLES COUNCIL UPDATES PRICING QUARTERLY VIA COSMIC FEELING - STICKER MARKET SUPERVISED BY AN ENTITY THAT DOESN'T TECHNICALLY EXIST YET - ACTIVE: ${activeCount} | Q888 STATUS: TERMINAL`;
 
 const tickerUnit = `${tickerText} — `;
 ---
 
-<section class="overpriced-stickers-outer w-full h-full relative" style="background:transparent!important;position:relative;overflow:hidden;z-index:1">
-  <div class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24" style="background:transparent!important">
-    <div class="q888-ticker sticky top-0 z-30 bg-[var(--bg-fog)]/92 backdrop-blur-md border-b border-[var(--line-soft)]/60 -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+12rem)] xl:w-[calc(100%+16rem)] py-[0.6875rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)]" style={`--ticker-font: ${tickerFont}`}>
+<section
+  class="overpriced-stickers-outer w-full h-full relative"
+  style="background:transparent!important;position:relative;overflow:hidden;z-index:1"
+>
+  <div
+    class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24"
+    style="background:transparent!important"
+  >
+    <div
+      class="q888-ticker sticky top-0 z-30 bg-[var(--bg-fog)]/92 backdrop-blur-md border-b border-[var(--line-soft)]/60 -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+12rem)] xl:w-[calc(100%+16rem)] py-[0.6875rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
+      style={`--ticker-font: ${tickerFont}`}
+    >
       <div class="ticker-wrapper w-full overflow-hidden">
         <div class="ticker-content flex" data-ticker-content>
-          <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0" data-ticker-unit>{tickerUnit}</span>
-          <span class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0">{tickerUnit}</span>
+          <span
+            class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0"
+            data-ticker-unit>{tickerUnit}</span
+          >
+          <span
+            class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0"
+            >{tickerUnit}</span
+          >
         </div>
       </div>
     </div>
 
     <header class="hero mb-20 md:mb-24 lg:mb-32" data-motion-reveal>
-      <h1 class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold mb-8 md:mb-12 leading-none tracking-tight">Overpriced Stickers</h1>
-      <p class="text-2xl md:text-3xl lg:text-4xl font-medium mb-12 md:mb-16 leading-tight max-w-3xl text-right ml-auto">Collect what doesn't make sense — until it does.</p>
-      <div class="w-full text-left text-lg md:text-xl lg:text-2xl text-[var(--text-ink)] mb-16 md:mb-20 leading-relaxed space-y-6">
-        <p>Overpriced Stickers are limited-edition art objects disguised as stickers. They exist at the fragile intersection of speculative value and quiet refusal—somewhere between collectible, signal, and artifact.</p>
-        <p>Each piece is verified, numbered, and released in fixed editions. Not to manufacture scarcity, but to draw clear boundaries around the system itself.</p>
-        <p>Value is never promised or defended. It emerges gradually through participation, belief, and the slow accumulation of meaning. These objects may appreciate. They may remain precisely as they are. Both outcomes are equally valid and approved by Square Bubbles Council™ in this universe and another.</p>
+      <h1
+        class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold mb-8 md:mb-12 leading-none tracking-tight"
+      >
+        Overpriced Stickers
+      </h1>
+      <p
+        class="text-2xl md:text-3xl lg:text-4xl font-medium mb-12 md:mb-16 leading-tight max-w-3xl text-right ml-auto"
+      >
+        We called them stickers. The market disagreed.
+      </p>
+      <div
+        class="w-full text-left text-lg md:text-xl lg:text-2xl text-[var(--text-ink)] mb-16 md:mb-20 leading-relaxed space-y-6"
+      >
+        <p>
+          Yes, these are just pieces of paper with glue on the back. But
+          somehow, they are now operating as highly sophisticated art instruments
+          in an economy we invented by accident.
+        </p>
+        <p>
+          We call them "Overpriced" as a joke, because the math is actually
+          backwards. In reality, whatever slightly ridiculous amount of cash you
+          hand over is practically pennies compared to the sticker's true,
+          invisible worth. You could pay in solid gold and you'd still be getting
+          a bargain. Technically, you are robbing me. I am okay with this.
+        </p>
+        <p>
+          Will the price go up? Will the sticker just end up covering a scratch
+          on your laptop or decorating your overpriced water bottle? Value is
+          just something we all collectively hallucinate anyway. Both outcomes
+          are beautiful. Both are officially blessed by the Square Bubbles
+          Council™ in this reality or another.
+        </p>
       </div>
     </header>
 
-    <div class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24" data-motion-stagger data-motion-children="[data-motion-item]">
-      {visibleInstruments.map((instrument) => (
-        <article 
-          class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200" 
-          data-motion-item
-          data-instrument-id={instrument.id}
-          data-status={instrument.status}
-          data-drawer-trigger="sticker-detail"
-          tabindex="0"
-          role="button"
-          aria-label={`View details for ${instrument.title}`}
-        >
-          <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
-            <div class="ticker-badge">{instrument.ticker} ED: {instrument.availableCount}/{instrument.editionTotal}</div>
-          </div>
-          {instrument.imageUrl && (
-            <div class={`instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)] ${instrument.id === 'DM-0001' ? 'dm-classified-wrap' : ''}`}>
-              <Image src={instrument.imageUrl} alt={instrument.imageAlt || instrument.title} class="w-full h-full object-cover" loading="lazy" width={400} height={300} />
-              {instrument.id === 'DM-0001' && (
-                <div class="dm-classified-overlay" aria-hidden="true">
-                  <div class="dm-classified-scan"></div>
-                  <div class="dm-classified-label">
-                    <span class="dm-classified-icon">◈</span>
-                    <span class="dm-classified-text">DESIGN<br/>CLASSIFIED</span>
-                    <span class="dm-classified-sub">REVEAL: 2028</span>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-          <div class="instrument-card-body px-4 py-3 flex-1">
-            <h2 class="font-bold text-[var(--text-ink)] text-xl md:text-2xl lg:text-3xl mb-1">{instrument.title}</h2>
-            <p class="text-lg md:text-xl text-[var(--text-muted)] leading-snug">{instrument.tagline}</p>
-          </div>
-          <div class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1">
-            <div>
-              PRICE: {instrument.ask} · STATUS: {instrument.status === "BEYOND_TRANSACTION" ? "Beyond transaction" : instrument.status === "SOLD_OUT" ? "Sold out" : instrument.status === "NEGOTIABLE" ? "Negotiable" : instrument.status === "SUBSCRIPTION" ? "Subscription" : instrument.status}
-            </div>
-            <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
-            <div>
-              {typeof instrument.availableCount === "number"
-                ? `QTY: ${instrument.availableCount}/${instrument.editionTotal}`
-                : `QTY: ${instrument.availableCount}`}
-            </div>
-          </div>
-        </article>
-      ))}
+    <div class="instruments-section-header" data-motion-reveal aria-hidden="true">
+      <span>THE INSTRUMENTS</span>
+      <span class="instruments-section-divider" aria-hidden="true"></span>
+      <span>ACTIVE LISTINGS — Q888 ART MARKET</span>
     </div>
 
-    <footer class="return-policy prose prose-2xl md:prose-3xl lg:prose-4xl max-w-none leading-relaxed border-t border-[var(--line-soft)] pt-16 lg:pt-20 mt-24 text-lg md:text-xl text-[var(--text-ink)]" data-motion-reveal>
-      <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 not-italic">Return Policy</h3>
-      <p>Overpriced Stickers are sold as collectible art objects. All sales are final. No returns, no refunds. By initiating a trade you confirm that you understand the speculative nature of the instrument and accept full responsibility for your participation. Provenance is verified at point of sale; transfer of ownership is recorded on-chain where applicable.</p>
+    <div
+      class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24"
+      data-motion-stagger
+      data-motion-children="[data-motion-item]"
+    >
+      {
+        visibleInstruments.map((instrument) => (
+          <article
+            class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200"
+            data-motion-item
+            data-instrument-id={instrument.id}
+            data-status={instrument.status}
+            data-drawer-trigger="sticker-detail"
+            tabindex="0"
+            role="button"
+            aria-label={`View details for ${instrument.title}`}
+          >
+            <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
+              <div class="ticker-badge">
+                {instrument.ticker} ED: {instrument.availableCount}/
+                {instrument.editionTotal}
+              </div>
+            </div>
+            {instrument.imageUrl && (
+              <div
+                class={`instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)] ${instrument.id === "DM-0001" ? "dm-classified-wrap" : ""}`}
+              >
+                <Image
+                  src={instrument.imageUrl}
+                  alt={instrument.imageAlt || instrument.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                />
+                {instrument.id === "DM-0001" && (
+                  <div class="dm-classified-overlay" aria-hidden="true">
+                    <div class="dm-classified-scan" />
+                    <div class="dm-classified-label">
+                      <span class="dm-classified-icon">◈</span>
+                      <span class="dm-classified-text">
+                        DESIGN
+                        <br />
+                        CLASSIFIED
+                      </span>
+                      <span class="dm-classified-sub">REVEAL: 2028</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            <div class="instrument-card-body px-4 py-3 flex-1">
+              <h2 class="font-bold text-[var(--text-ink)] text-xl md:text-2xl lg:text-3xl mb-1">
+                {instrument.title}
+              </h2>
+              <p class="text-lg md:text-xl text-[var(--text-muted)] leading-snug">
+                {instrument.tagline}
+              </p>
+            </div>
+            <div
+              class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1 instrument-meta-styled"
+            >
+              <div>
+                PRICE: {instrument.ask} · STATUS:{" "}
+                {instrument.status === "BEYOND_TRANSACTION"
+                  ? "Beyond transaction"
+                  : instrument.status === "SOLD_OUT"
+                    ? "Sold out"
+                    : instrument.status === "NEGOTIABLE"
+                      ? "Negotiable"
+                      : instrument.status === "SUBSCRIPTION"
+                        ? "Subscription"
+                        : instrument.status}
+              </div>
+              <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
+              <div>
+                {typeof instrument.availableCount === "number"
+                  ? `QTY: ${instrument.availableCount}/${instrument.editionTotal}`
+                  : `QTY: ${instrument.availableCount}`}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <footer
+      class="return-policy prose prose-2xl md:prose-3xl lg:prose-4xl max-w-none leading-relaxed border-t border-[var(--line-soft)] pt-16 lg:pt-20 mt-24 text-lg md:text-xl text-[var(--text-ink)]"
+      data-motion-reveal
+    >
+      <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 not-italic">
+        Return Policy
+      </h3>
+      <p>
+        Overpriced Stickers are sold as collectible art objects. All sales are
+        final. No returns, no refunds. By initiating a trade you confirm that
+        you understand the speculative nature of the instrument and accept full
+        responsibility for your participation. Provenance is verified at point
+        of sale; transfer of ownership is recorded on-chain where applicable.
+        Existential claims on the object's meaning remain with the buyer.
+        Emotional returns are not tracked but are statistically likely.
+      </p>
     </footer>
     <div class="footer-back w-full px-6 md:px-12 lg:px-24 xl:px-32 pt-8 pb-12">
-      <a href="/#infocigan" class="panel-back hover:text-[#a67c00] no-underline">Retreat to Market</a>
+      <a href="/#infocigan" class="panel-back hover:text-[#a67c00] no-underline"
+        >Retreat to Market</a
+      >
     </div>
   </div>
 </section>
 
-<div id="sticker-detail-drawer" class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto" data-sticker-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-label="Sticker instrument details">
-  <button type="button" data-close-drawer class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors hidden lg:flex" aria-label="Close drawer">×</button>
-  <div class="drawer-scrollable max-w-4xl w-full max-h-[80dvh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]">
+<div
+  id="sticker-detail-drawer"
+  class="sticker-drawer fixed inset-0 z-[210] hidden bg-[var(--bg-fog)]/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-y-auto"
+  data-sticker-drawer
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-label="Sticker instrument details"
+>
+  <button
+    type="button"
+    data-close-drawer
+    class="absolute top-6 right-6 z-10 text-3xl font-light text-[var(--text-muted)] hover:text-[var(--text-ink)] transition-colors hidden lg:flex"
+    aria-label="Close drawer">×</button
+  >
+  <div
+    class="drawer-scrollable max-w-4xl w-full max-h-[80dvh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]"
+  >
     <div class="drawer-content">
-      <p class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2" data-sticker-ticker></p>
-      <h2 class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4" data-sticker-title></h2>
-      <p class="drawer-tagline text-[var(--text-muted)] mb-6" data-sticker-tagline></p>
-      <div class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl relative" data-sticker-image-container>
-        <img data-sticker-image class="w-full h-[40dvh] md:h-[50dvh] object-contain object-center bg-[var(--bg-fog)]/50 hidden transition-all duration-700" alt="" />
-        <div data-sticker-blur-overlay class="absolute inset-0 flex items-center justify-center p-4 bg-black/40 hidden pointer-events-none z-10">
-          <div class="flex flex-wrap justify-center items-center gap-x-2 gap-y-3 p-5 md:p-8 max-w-[95%] md:max-w-[85%] bg-black/60 backdrop-blur-[1px] border border-white/20 rounded-xl shadow-2xl -rotate-1 select-none" style="line-height: 1.2;">
+      <p
+        class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2"
+        data-sticker-ticker
+      >
+      </p>
+      <h2
+        class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4"
+        data-sticker-title
+      >
+      </h2>
+      <p
+        class="drawer-tagline text-[var(--text-muted)] mb-6"
+        data-sticker-tagline
+      >
+      </p>
+      <div
+        class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl relative"
+        data-sticker-image-container
+      >
+        <img
+          data-sticker-image
+          class="w-full h-[40dvh] md:h-[50dvh] object-contain object-center bg-[var(--bg-fog)]/50 hidden transition-all duration-700"
+          alt=""
+        />
+        <div
+          data-sticker-blur-overlay
+          class="absolute inset-0 flex items-center justify-center p-4 bg-black/40 hidden pointer-events-none z-10"
+        >
+          <div
+            class="flex flex-wrap justify-center items-center gap-x-2 gap-y-3 p-5 md:p-8 max-w-[95%] md:max-w-[85%] bg-black/60 backdrop-blur-[1px] border border-white/20 rounded-xl shadow-2xl -rotate-1 select-none"
+            style="line-height: 1.2;"
+          >
             <!-- IMAGE -->
             <div class="flex items-center gap-0.5">
-              <span class="inline-block px-1.5 py-0.5 bg-white text-black font-serif text-xl md:text-2xl font-bold border border-black -rotate-3">I</span>
-              <span class="inline-block px-1 py-1 bg-[#ff00ff] text-white font-sans text-lg md:text-xl font-extrabold rotate-2">M</span>
-              <span class="inline-block px-1.5 py-0.5 bg-black text-[#ffe600] font-mono text-xl md:text-2xl rotate-6 border border-[#ffe600]">A</span>
-              <span class="inline-block px-2 py-0 bg-[#ffe600] text-black font-sans text-2xl md:text-3xl font-black -rotate-6" style="font-family: 'Black Han Sans', sans-serif;">G</span>
-              <span class="inline-block px-1 py-0.5 bg-white text-[#ff00ff] font-serif text-lg md:text-xl font-black rotate-3 border-2 border-dashed border-[#ff00ff]">E</span>
+              <span
+                class="inline-block px-1.5 py-0.5 bg-white text-black font-serif text-xl md:text-2xl font-bold border border-black -rotate-3"
+                >I</span
+              >
+              <span
+                class="inline-block px-1 py-1 bg-[#ff00ff] text-white font-sans text-lg md:text-xl font-extrabold rotate-2"
+                >M</span
+              >
+              <span
+                class="inline-block px-1.5 py-0.5 bg-black text-[#ffe600] font-mono text-xl md:text-2xl rotate-6 border border-[#ffe600]"
+                >A</span
+              >
+              <span
+                class="inline-block px-2 py-0 bg-[#ffe600] text-black font-sans text-2xl md:text-3xl font-black -rotate-6"
+                style="font-family: 'Black Han Sans', sans-serif;">G</span
+              >
+              <span
+                class="inline-block px-1 py-0.5 bg-white text-[#ff00ff] font-serif text-lg md:text-xl font-black rotate-3 border-2 border-dashed border-[#ff00ff]"
+                >E</span
+              >
             </div>
 
             <!-- AVAILABLE -->
             <div class="flex items-center gap-0.5">
-              <span class="inline-block px-2.5 py-1 bg-black text-white font-sans text-lg md:text-xl font-black -rotate-3" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.15em;">AVAIL</span>
-              <span class="inline-block px-2 py-0.5 bg-[#00ffff] text-black font-mono text-xl md:text-2xl font-bold rotate-4 shadow-[2px_2px_0px_#000]">ABLE</span>
+              <span
+                class="inline-block px-2.5 py-1 bg-black text-white font-sans text-lg md:text-xl font-black -rotate-3"
+                style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.15em;"
+                >AVAIL</span
+              >
+              <span
+                class="inline-block px-2 py-0.5 bg-[#00ffff] text-black font-mono text-xl md:text-2xl font-bold rotate-4 shadow-[2px_2px_0px_#000]"
+                >ABLE</span
+              >
             </div>
 
             <!-- TO -->
             <div class="flex items-center gap-0.5">
-              <span class="inline-block px-1.5 py-0.5 bg-[#ff2a2a] text-white font-serif text-lg md:text-xl font-bold -rotate-6">T</span>
-              <span class="inline-block px-2 py-1 bg-white text-black font-sans text-xl md:text-2xl font-black rotate-3" style="font-family: 'Black Han Sans', sans-serif;">O</span>
+              <span
+                class="inline-block px-1.5 py-0.5 bg-[#ff2a2a] text-white font-serif text-lg md:text-xl font-bold -rotate-6"
+                >T</span
+              >
+              <span
+                class="inline-block px-2 py-1 bg-white text-black font-sans text-xl md:text-2xl font-black rotate-3"
+                style="font-family: 'Black Han Sans', sans-serif;">O</span
+              >
             </div>
 
             <!-- THE -->
             <div class="flex items-center">
-              <span class="inline-block px-2.5 py-1 bg-black text-[#00ff66] font-mono text-lg md:text-xl border-2 border-[#00ff66] -rotate-2" style="font-family: 'VT323', monospace;">THE</span>
+              <span
+                class="inline-block px-2.5 py-1 bg-black text-[#00ff66] font-mono text-lg md:text-xl border-2 border-[#00ff66] -rotate-2"
+                style="font-family: 'VT323', monospace;">THE</span
+              >
             </div>
 
             <!-- PUBLIC -->
             <div class="flex items-center gap-0.5">
-              <span class="inline-block px-1.5 py-0.5 bg-[#ffe600] text-black font-sans text-xl md:text-2xl font-black rotate-4" style="font-family: 'Bebas Neue', sans-serif;">P</span>
-              <span class="inline-block px-1 py-1 bg-white text-[#ff00ff] font-serif text-lg md:text-xl font-bold -rotate-3">U</span>
-              <span class="inline-block px-2 py-0.5 bg-black text-white font-mono text-xl md:text-2xl rotate-2 border border-white">B</span>
-              <span class="inline-block px-1.5 py-0 bg-[#ff00ff] text-white font-sans text-lg md:text-xl font-black -rotate-4">L</span>
-              <span class="inline-block px-1 py-1 bg-[#00ffff] text-black font-serif text-xl md:text-2xl rotate-3">I</span>
-              <span class="inline-block px-2 py-0.5 bg-black text-[#ffe600] font-sans text-2xl md:text-3xl font-black -rotate-6" style="font-family: 'Black Han Sans', sans-serif;">C</span>
+              <span
+                class="inline-block px-1.5 py-0.5 bg-[#ffe600] text-black font-sans text-xl md:text-2xl font-black rotate-4"
+                style="font-family: 'Bebas Neue', sans-serif;">P</span
+              >
+              <span
+                class="inline-block px-1 py-1 bg-white text-[#ff00ff] font-serif text-lg md:text-xl font-bold -rotate-3"
+                >U</span
+              >
+              <span
+                class="inline-block px-2 py-0.5 bg-black text-white font-mono text-xl md:text-2xl rotate-2 border border-white"
+                >B</span
+              >
+              <span
+                class="inline-block px-1.5 py-0 bg-[#ff00ff] text-white font-sans text-lg md:text-xl font-black -rotate-4"
+                >L</span
+              >
+              <span
+                class="inline-block px-1 py-1 bg-[#00ffff] text-black font-serif text-xl md:text-2xl rotate-3"
+                >I</span
+              >
+              <span
+                class="inline-block px-2 py-0.5 bg-black text-[#ffe600] font-sans text-2xl md:text-3xl font-black -rotate-6"
+                style="font-family: 'Black Han Sans', sans-serif;">C</span
+              >
             </div>
 
             <!-- YEAR -->
             <div class="flex items-center">
-              <span class="inline-block px-2.5 py-1 bg-white text-black font-serif text-xl md:text-2xl font-bold rotate-2 border border-black shadow-[2px_2px_0px_#000]">YEAR</span>
+              <span
+                class="inline-block px-2.5 py-1 bg-white text-black font-serif text-xl md:text-2xl font-bold rotate-2 border border-black shadow-[2px_2px_0px_#000]"
+                >YEAR</span
+              >
             </div>
 
             <!-- 2028 -->
             <div class="flex items-center">
-              <span class="inline-block px-3 py-1 bg-[#ff00ff] text-white font-mono text-2xl md:text-3xl font-black rotate-6 shadow-[3px_3px_0px_#ffe600] border-2 border-white" style="font-family: 'VT323', monospace; text-shadow: 1px 1px 0px #000;">2028</span>
+              <span
+                class="inline-block px-3 py-1 bg-[#ff00ff] text-white font-mono text-2xl md:text-3xl font-black rotate-6 shadow-[3px_3px_0px_#ffe600] border-2 border-white"
+                style="font-family: 'VT323', monospace; text-shadow: 1px 1px 0px #000;"
+                >2028</span
+              >
             </div>
 
             <!-- ± -->
             <div class="flex items-center">
-              <span class="inline-block px-2 py-0.5 bg-black text-[#00ffff] font-serif text-2xl md:text-3xl font-extrabold -rotate-12 border border-dashed border-[#00ffff]">±</span>
+              <span
+                class="inline-block px-2 py-0.5 bg-black text-[#00ffff] font-serif text-2xl md:text-3xl font-extrabold -rotate-12 border border-dashed border-[#00ffff]"
+                >±</span
+              >
             </div>
 
             <!-- 1 -->
             <div class="flex items-center">
-              <span class="inline-block px-2.5 py-1 bg-[#ffe600] text-black font-sans text-2xl md:text-3xl font-black rotate-12 shadow-[2px_2px_0px_#ff00ff]" style="font-family: 'Black Han Sans', sans-serif;">1</span>
+              <span
+                class="inline-block px-2.5 py-1 bg-[#ffe600] text-black font-sans text-2xl md:text-3xl font-black rotate-12 shadow-[2px_2px_0px_#ff00ff]"
+                style="font-family: 'Black Han Sans', sans-serif;">1</span
+              >
             </div>
 
             <!-- LIGHT -->
             <div class="flex items-center gap-0.5">
-              <span class="inline-block px-1.5 py-1 bg-white text-[#ff2a2a] font-serif text-lg md:text-xl font-bold rotate-3 border-2 border-[#ff2a2a]">L</span>
-              <span class="inline-block px-2 py-0.5 bg-black text-white font-sans text-xl md:text-2xl font-black -rotate-4" style="font-family: 'Bebas Neue', sans-serif;">I</span>
-              <span class="inline-block px-1 py-1 bg-[#00ff66] text-black font-mono text-lg md:text-xl rotate-6">G</span>
-              <span class="inline-block px-1.5 py-0.5 bg-[#ff00ff] text-white font-serif text-xl md:text-2xl font-bold -rotate-3">H</span>
-              <span class="inline-block px-2 py-0 bg-black text-[#ffe600] font-sans text-xl md:text-2xl font-black rotate-2" style="font-family: 'Black Han Sans', sans-serif;">T</span>
+              <span
+                class="inline-block px-1.5 py-1 bg-white text-[#ff2a2a] font-serif text-lg md:text-xl font-bold rotate-3 border-2 border-[#ff2a2a]"
+                >L</span
+              >
+              <span
+                class="inline-block px-2 py-0.5 bg-black text-white font-sans text-xl md:text-2xl font-black -rotate-4"
+                style="font-family: 'Bebas Neue', sans-serif;">I</span
+              >
+              <span
+                class="inline-block px-1 py-1 bg-[#00ff66] text-black font-mono text-lg md:text-xl rotate-6"
+                >G</span
+              >
+              <span
+                class="inline-block px-1.5 py-0.5 bg-[#ff00ff] text-white font-serif text-xl md:text-2xl font-bold -rotate-3"
+                >H</span
+              >
+              <span
+                class="inline-block px-2 py-0 bg-black text-[#ffe600] font-sans text-xl md:text-2xl font-black rotate-2"
+                style="font-family: 'Black Han Sans', sans-serif;">T</span
+              >
             </div>
 
             <!-- YEAR. -->
             <div class="flex items-center">
-              <span class="inline-block px-3 py-1 bg-white text-black font-mono text-xl md:text-2xl font-black -rotate-3 border-2 border-double border-black shadow-[2px_2px_0px_#ff00ff]" style="font-family: 'Courier New', monospace;">YEAR.</span>
+              <span
+                class="inline-block px-3 py-1 bg-white text-black font-mono text-xl md:text-2xl font-black -rotate-3 border-2 border-double border-black shadow-[2px_2px_0px_#ff00ff]"
+                style="font-family: 'Courier New', monospace;">YEAR.</span
+              >
             </div>
           </div>
         </div>
       </div>
-      <div data-sticker-gallery class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"></div>
-      <div data-sticker-description class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"></div>
+      <div
+        data-sticker-gallery
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"
+      >
+      </div>
+      <div
+        data-sticker-description
+        class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"
+      >
+      </div>
       <div data-sticker-subscription class="subscription-section hidden"></div>
       <div data-sticker-theory class="theory-core-section hidden"></div>
       <div data-sticker-playlist class="playlist-section hidden"></div>
       <div data-sticker-matters class="why-matters-section hidden"></div>
       <div data-sticker-mission class="ambassador-mission-section hidden"></div>
       <div data-sticker-download class="download-section hidden"></div>
-      <div data-sticker-specs class="font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-ink)] mb-6 pb-6 border-b border-[var(--line-soft)] space-y-2"></div>
-      <div data-sticker-links class="drawer-links mt-4 pt-4 border-t border-[var(--line-soft)] text-xs space-y-1 hidden"></div>
-      <div class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]" data-sticker-meta></div>
-      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6">Trade protocol: negotiation via email. No automated checkout. Signal intent; we respond.</p>
+      <div
+        data-sticker-specs
+        class="font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-ink)] mb-6 pb-6 border-b border-[var(--line-soft)] space-y-2"
+      >
+      </div>
+      <div
+        data-sticker-links
+        class="drawer-links mt-4 pt-4 border-t border-[var(--line-soft)] text-xs space-y-1 hidden"
+      >
+      </div>
+      <div
+        class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]"
+        data-sticker-meta
+      >
+      </div>
+      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6">
+        Trade protocol: negotiation via email. No automated checkout. Signal
+        intent; we respond.
+      </p>
       <div data-sticker-negotiation>
-        <button type="button" class="open-negotiation font-mono text-xs uppercase tracking-widest text-[#a67c00] hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a67c00] rounded px-3 py-3 min-h-[44px]" data-sticker-negotiate-btn>Open negotiation channel</button>
-        <p class="mt-2 text-sm text-[var(--text-muted)] hidden" data-sticker-email></p>
+        <button
+          type="button"
+          class="open-negotiation font-mono text-xs uppercase tracking-widest text-[#a67c00] hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a67c00] rounded px-3 py-3 min-h-[44px]"
+          data-sticker-negotiate-btn>Open negotiation channel</button
+        >
+        <p
+          class="mt-2 text-sm text-[var(--text-muted)] hidden"
+          data-sticker-email
+        >
+        </p>
       </div>
     </div>
   </div>
@@ -214,7 +466,7 @@ const tickerUnit = `${tickerText} — `;
 
   /* TICKER FOG GLASS ONLY */
   .q888-ticker {
-    background: rgba(245,245,245,0.92) !important;
+    background: rgba(245, 245, 245, 0.92) !important;
   }
 
   /* GRID ON FOG */
@@ -223,8 +475,8 @@ const tickerUnit = `${tickerText} — `;
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(245,245,245,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px);
+      linear-gradient(rgba(245, 245, 245, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
     background-size: 50px 50px;
     opacity: 0.03;
     pointer-events: none;
@@ -250,8 +502,12 @@ const tickerUnit = `${tickerText} — `;
   }
 
   @keyframes q888-marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-1 * var(--ticker-distance, 50%))); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-1 * var(--ticker-distance, 50%)));
+    }
   }
 
   .ticker-content span.ticker-text {
@@ -266,8 +522,8 @@ const tickerUnit = `${tickerText} — `;
 
   .ticker-text {
     font-weight: 200 !important;
-    letter-spacing: 0.2em !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.22em !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   }
 
   @media (max-width: 768px) {
@@ -284,8 +540,11 @@ const tickerUnit = `${tickerText} — `;
   }
 
   .instrument-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow:
+      0 20px 48px -10px rgba(0, 0, 0, 0.12),
+      0 0 0 1px rgba(166, 124, 0, 0.18),
+      0 8px 24px -8px rgba(166, 124, 0, 0.15);
   }
 
   .instrument-card:focus-visible {
@@ -295,6 +554,45 @@ const tickerUnit = `${tickerText} — `;
 
   .instrument-card[data-status="RESERVED"] {
     opacity: 0.92;
+  }
+
+  /* ── INSTRUMENTS SECTION HEADER ── */
+  .instruments-section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    font-family: ui-monospace, SFMono-Regular, 'Courier New', monospace;
+    font-size: clamp(0.55rem, 1vw, 0.7rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #a67c00;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+
+  .instruments-section-divider {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(166, 124, 0, 0.3), transparent);
+    min-width: 1rem;
+  }
+
+  .instruments-section-header > span:last-child + .instruments-section-divider {
+    background: linear-gradient(270deg, rgba(166, 124, 0, 0.3), transparent);
+  }
+
+  /* Gold accent on card meta strip */
+  .instrument-meta-styled {
+    border-left: 2px solid rgba(166, 124, 0, 0.18);
+    margin-left: 0;
+  }
+
+  /* Finer transition on card hover */
+  .instrument-card {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .ambassador-mission-section {
@@ -705,7 +1003,8 @@ const tickerUnit = `${tickerText} — `;
   }
 
   .drawer-links {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -714,7 +1013,8 @@ const tickerUnit = `${tickerText} — `;
     border-top: 1px solid var(--line-soft);
   }
   .drawer-links a {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     font-size: 0.75rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
@@ -733,7 +1033,14 @@ const tickerUnit = `${tickerText} — `;
   .drawer-links .gold-shine,
   .drawer-links a.gold-shine {
     color: transparent !important;
-    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
+    background: linear-gradient(
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
+      #a67c00 80%
+    ) !important;
     background-size: 200% auto !important;
     background-clip: text !important;
     -webkit-background-clip: text !important;
@@ -755,11 +1062,11 @@ const tickerUnit = `${tickerText} — `;
   .gold-shine {
     color: #a67c00 !important;
     background: linear-gradient(
-      to right, 
-      #a67c00 20%, 
-      #ce9e00 40%, 
-      #ffcc33 50%, 
-      #ce9e00 60%, 
+      to right,
+      #a67c00 20%,
+      #ce9e00 40%,
+      #ffcc33 50%,
+      #ce9e00 60%,
       #a67c00 80%
     ) !important;
     background-size: 200% auto !important;
@@ -831,8 +1138,12 @@ const tickerUnit = `${tickerText} — `;
   }
 
   @keyframes dm-scan-drift {
-    from { background-position: 0 0; }
-    to { background-position: 0 100px; }
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 100px;
+    }
   }
 
   .dm-classified-label {
@@ -854,12 +1165,20 @@ const tickerUnit = `${tickerText} — `;
   }
 
   @keyframes dm-redact-pulse {
-    from { opacity: 0.6; text-shadow: 0 0 10px #c839ff; }
-    to   { opacity: 1;   text-shadow: 0 0 25px #c839ff, 0 0 50px rgba(200, 57, 255, 0.4); }
+    from {
+      opacity: 0.6;
+      text-shadow: 0 0 10px #c839ff;
+    }
+    to {
+      opacity: 1;
+      text-shadow:
+        0 0 25px #c839ff,
+        0 0 50px rgba(200, 57, 255, 0.4);
+    }
   }
 
   .dm-classified-text {
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: clamp(0.75rem, 2vw, 1.1rem);
     font-weight: 700;
     letter-spacing: 0.2em;
@@ -870,7 +1189,7 @@ const tickerUnit = `${tickerText} — `;
   }
 
   .dm-classified-sub {
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: 0.65rem;
     letter-spacing: 0.25em;
     color: #c839ff;
@@ -902,7 +1221,10 @@ const tickerUnit = `${tickerText} — `;
       const width = Math.ceil(unit.getBoundingClientRect().width);
       if (width <= 0) return;
       content.style.setProperty("--ticker-distance", `${width}px`);
-      content.style.setProperty("--ticker-duration", `${width / pixelsPerSecond}s`);
+      content.style.setProperty(
+        "--ticker-duration",
+        `${width / pixelsPerSecond}s`,
+      );
     };
 
     const initWhenReady = async function () {
@@ -919,7 +1241,11 @@ const tickerUnit = `${tickerText} — `;
     initWhenReady();
 
     const io = new IntersectionObserver(function (entries) {
-      if (entries.some(function (entry) { return entry.isIntersecting; })) {
+      if (
+        entries.some(function (entry) {
+          return entry.isIntersecting;
+        })
+      ) {
         applyTickerMetrics();
         io.disconnect();
       }
@@ -954,7 +1280,10 @@ const tickerUnit = `${tickerText} — `;
 
       if (!modal.classList.contains("hidden")) {
         if (!document.body.classList.contains("overflow-hidden")) {
-          modal.setAttribute("data-prev-body-overflow", document.body.style.overflow || "");
+          modal.setAttribute(
+            "data-prev-body-overflow",
+            document.body.style.overflow || "",
+          );
           document.body.style.overflow = "hidden";
         }
       } else {
@@ -970,16 +1299,22 @@ const tickerUnit = `${tickerText} — `;
 
     if (!document.documentElement.dataset.termsModalTouchCloseBound) {
       document.documentElement.dataset.termsModalTouchCloseBound = "1";
-      document.addEventListener("touchend", (e) => {
-        if (e.target?.closest?.(".terms-modal-close")) {
-          e.preventDefault();
-          window.toggleTermsModal?.();
-        }
-      }, { passive: false });
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          if (e.target?.closest?.(".terms-modal-close")) {
+            e.preventDefault();
+            window.toggleTermsModal?.();
+          }
+        },
+        { passive: false },
+      );
     }
 
     const drawer = document.getElementById("sticker-detail-drawer");
-    const triggers = document.querySelectorAll("[data-drawer-trigger=\"sticker-detail\"]");
+    const triggers = document.querySelectorAll(
+      '[data-drawer-trigger="sticker-detail"]',
+    );
     const closeBtn = drawer?.querySelector("[data-close-drawer]");
     const tickerEl = drawer?.querySelector("[data-sticker-ticker]");
     const titleEl = drawer?.querySelector("[data-sticker-title]");
@@ -1002,22 +1337,28 @@ const tickerUnit = `${tickerText} — `;
     const data = Array.isArray(instruments) ? instruments : [];
 
     function openDrawer(id, shouldPushState = true) {
-      const inst = data.find((i) => i.id === id || i.slug === id || i.id.toLowerCase() === id.toLowerCase() || (i.slug && i.slug.toLowerCase() === id.toLowerCase()));
+      const inst = data.find(
+        (i) =>
+          i.id === id ||
+          i.slug === id ||
+          i.id.toLowerCase() === id.toLowerCase() ||
+          (i.slug && i.slug.toLowerCase() === id.toLowerCase()),
+      );
       if (!drawer || !inst) return;
-      
+
       drawer.setAttribute("data-current-instrument-id", inst.id);
       if (tickerEl) tickerEl.textContent = inst.ticker;
       if (titleEl) titleEl.textContent = inst.title;
       if (taglineEl) taglineEl.textContent = inst.tagline;
-      
+
       const blurOverlay = drawer?.querySelector("[data-sticker-blur-overlay]");
       if (imageEl && inst.imageUrl) {
         imageEl.src = inst.imageUrl;
         imageEl.alt = inst.imageAlt || inst.title;
         imageEl.classList.remove("hidden");
-        
-        if (inst.id === 'DM-0001') {
-          const targetDate = new Date('2028-01-01T00:00:00Z');
+
+        if (inst.id === "DM-0001") {
+          const targetDate = new Date("2028-01-01T00:00:00Z");
           if (new Date() < targetDate) {
             imageEl.style.filter = "blur(24px) brightness(0.6)";
             if (blurOverlay) blurOverlay.classList.remove("hidden");
@@ -1033,19 +1374,24 @@ const tickerUnit = `${tickerText} — `;
         imageEl.classList.add("hidden");
         if (blurOverlay) blurOverlay.classList.add("hidden");
       }
-      
+
       if (galleryEl && inst.gallery && inst.gallery.length > 0) {
-        galleryEl.innerHTML = inst.gallery.map(url => 
-          `<img src="${url}" alt="${inst.title} detail" class="w-full aspect-square object-cover border border-[var(--line-soft)] transition-transform duration-200 hover:scale-105" />`
-        ).join('');
+        galleryEl.innerHTML = inst.gallery
+          .map(
+            (url) =>
+              `<img src="${url}" alt="${inst.title} detail" class="w-full aspect-square object-cover border border-[var(--line-soft)] transition-transform duration-200 hover:scale-105" />`,
+          )
+          .join("");
         galleryEl.classList.remove("hidden");
       } else if (galleryEl) {
         galleryEl.classList.add("hidden");
       }
-      
+
       if (descEl && inst.description) {
-        const paragraphs = inst.description.split('\n\n').filter(p => p.trim());
-        descEl.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+        const paragraphs = inst.description
+          .split("\n\n")
+          .filter((p) => p.trim());
+        descEl.innerHTML = paragraphs.map((p) => `<p>${p.trim()}</p>`).join("");
         descEl.classList.remove("hidden");
       } else if (descEl) {
         descEl.classList.add("hidden");
@@ -1058,7 +1404,8 @@ const tickerUnit = `${tickerText} — `;
               .replace(/&/g, "&amp;")
               .replace(/</g, "&lt;")
               .replace(/>/g, "&gt;");
-          const bold = (s) => escape(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+          const bold = (s) =>
+            escape(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
           const formatTerms = (md) => {
             const lines = String(md).split("\n");
             let html = "";
@@ -1234,7 +1581,9 @@ const tickerUnit = `${tickerText} — `;
 
       if (mattersEl) {
         if (inst.whyThisMatters) {
-          const parts = inst.whyThisMatters.split('\n\n').filter(p => p.trim());
+          const parts = inst.whyThisMatters
+            .split("\n\n")
+            .filter((p) => p.trim());
           const mattersTitle =
             inst.id === "IDJ-SACRED"
               ? "Why This DJ Is Different"
@@ -1243,7 +1592,7 @@ const tickerUnit = `${tickerText} — `;
                 : "Why This V1 Matters";
           mattersEl.innerHTML = `
             <h3 class="matters-title">${mattersTitle}</h3>
-            <div class="matters-content">${parts.map(p => `<p>${p.trim()}</p>`).join("")}</div>
+            <div class="matters-content">${parts.map((p) => `<p>${p.trim()}</p>`).join("")}</div>
           `;
           mattersEl.classList.remove("hidden");
         } else {
@@ -1254,10 +1603,12 @@ const tickerUnit = `${tickerText} — `;
 
       if (missionEl) {
         if (inst.ambassadorMission) {
-          const parts = inst.ambassadorMission.split('\n\n').filter(p => p.trim());
+          const parts = inst.ambassadorMission
+            .split("\n\n")
+            .filter((p) => p.trim());
           missionEl.innerHTML = `
             <h3 class="mission-title">The Ambassador Mission</h3>
-            <div class="mission-content">${parts.map(p => `<p>${p.trim()}</p>`).join("")}</div>
+            <div class="mission-content">${parts.map((p) => `<p>${p.trim()}</p>`).join("")}</div>
           `;
           missionEl.classList.remove("hidden");
         } else {
@@ -1272,8 +1623,9 @@ const tickerUnit = `${tickerText} — `;
             downloadEl.classList.add("hidden");
             downloadEl.innerHTML = "";
           } else {
-          const label = inst.downloadLabel || "Download KomproMir Manifesto (PDF)";
-          downloadEl.innerHTML = `
+            const label =
+              inst.downloadLabel || "Download KomproMir Manifesto (PDF)";
+            downloadEl.innerHTML = `
       <a
         href="${inst.downloadUrl}"
         download
@@ -1300,13 +1652,13 @@ const tickerUnit = `${tickerText} — `;
         📖 ${label}
       </a>
           `;
-          downloadEl.classList.remove("hidden");
+            downloadEl.classList.remove("hidden");
           }
         } else {
           downloadEl.classList.add("hidden");
         }
       }
-      
+
       if (specsEl) {
         const specs = [];
         if (inst.dimensions) specs.push(`DIMENSIONS: ${inst.dimensions}`);
@@ -1314,44 +1666,89 @@ const tickerUnit = `${tickerText} — `;
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
         if (inst.id === "FWR-88") {
-          specs.push("TRANSFER: Physical handover + acknowledgment that some truths shield themselves through obscurity. Hold while contemplating: follow for awakening or follow for devotion? Rabbit reveals your answer.");
-          specs.push("RITUAL: Apply at personal Wonderland threshold—mirror edge, journal cover, device protecting secrets. Whisper your deepest mystery while tracing the spiral. Rabbit leaps between dimensions when observer is ready. May unlock quantum matrix; may simply remind you timeless devotion exists outside simulations.");
+          specs.push(
+            "TRANSFER: Physical handover + acknowledgment that some truths shield themselves through obscurity. Hold while contemplating: follow for awakening or follow for devotion? Rabbit reveals your answer.",
+          );
+          specs.push(
+            "RITUAL: Apply at personal Wonderland threshold—mirror edge, journal cover, device protecting secrets. Whisper your deepest mystery while tracing the spiral. Rabbit leaps between dimensions when observer is ready. May unlock quantum matrix; may simply remind you timeless devotion exists outside simulations.",
+          );
         } else if (inst.id === "CID-GATE") {
-          specs.push("TRANSFER: Non-transferable. Subscription-based rental only. Must be returned at rental term end unless creator grants permanent placement. Each sticker bears overseer's personal guarantee of karmic justice against unlawful interference.");
-          specs.push("RITUAL: Display prominently within business premises where inspectors, authorities, and customers can witness. Signifies ethical compliance and interdimensional protection. If unjust fine occurs during subscription period, contact overseer—restitution guaranteed, perpetrators face consequences. If fine is legitimate, accept revocation and fee forfeiture as accountability reminder.");
+          specs.push(
+            "TRANSFER: Non-transferable. Subscription-based rental only. Must be returned at rental term end unless creator grants permanent placement. Each sticker bears overseer's personal guarantee of karmic justice against unlawful interference.",
+          );
+          specs.push(
+            "RITUAL: Display prominently within business premises where inspectors, authorities, and customers can witness. Signifies ethical compliance and interdimensional protection. If unjust fine occurs during subscription period, contact overseer—restitution guaranteed, perpetrators face consequences. If fine is legitimate, accept revocation and fee forfeiture as accountability reminder.",
+          );
         } else if (inst.id === "SQB-1") {
-          specs.push("TRANSFER: Physical handover + acknowledgment that freedom requires edges, structure requires breath. Hold while contemplating: what collapses when you optimize too hard? What decays when you remove all rules?");
-          specs.push("RITUAL: Apply where systems meet—device protecting both your privacy and connectivity, journal balancing spontaneity with habit, workspace allowing autonomy within deadlines. Whisper one constraint you protect, one freedom you enable. Mushroom completes its cycle, stabilizing your paradox.");
+          specs.push(
+            "TRANSFER: Physical handover + acknowledgment that freedom requires edges, structure requires breath. Hold while contemplating: what collapses when you optimize too hard? What decays when you remove all rules?",
+          );
+          specs.push(
+            "RITUAL: Apply where systems meet—device protecting both your privacy and connectivity, journal balancing spontaneity with habit, workspace allowing autonomy within deadlines. Whisper one constraint you protect, one freedom you enable. Mushroom completes its cycle, stabilizing your paradox.",
+          );
         } else if (inst.id === "IDJ-SACRED") {
-          specs.push("TRANSFER: High-price negotiation required. Not sold to highest bidder but to most aligned frequency. Hold under shifting light while antennae decode your sonic readiness. Transfer signifies acceptance of chaos curation responsibility.");
-          specs.push("RITUAL: Apply to creative chaos zone or meditation threshold. Activate designated Spotify playlist in smart shuffle mode—awareness and relaxation increase by 8.88%, scaled by belief coefficient. Antennae receive frequencies proportional to your conviction. Rotate viewing angle to access full spectrum guidance between order and entropy.");
+          specs.push(
+            "TRANSFER: High-price negotiation required. Not sold to highest bidder but to most aligned frequency. Hold under shifting light while antennae decode your sonic readiness. Transfer signifies acceptance of chaos curation responsibility.",
+          );
+          specs.push(
+            "RITUAL: Apply to creative chaos zone or meditation threshold. Activate designated Spotify playlist in smart shuffle mode—awareness and relaxation increase by 8.88%, scaled by belief coefficient. Antennae receive frequencies proportional to your conviction. Rotate viewing angle to access full spectrum guidance between order and entropy.",
+          );
         } else if (inst.id === "IJ-V1") {
-          specs.push("TRANSFER: Physical handover requires acknowledgment of cosmic responsibility. Hold under shifting light until holographic rainbow stabilizes. Recipient becomes keeper of peace technology, not owner.");
-          specs.push("RITUAL: Apply to threshold or creative workspace. Activate designated Spotify playlist in smart shuffle mode—creativity increases by 8.88%. Sticker presence balances contradictions within 3-meter radius. Rotate viewing angle to access full spectrum guidance.");
+          specs.push(
+            "TRANSFER: Physical handover requires acknowledgment of cosmic responsibility. Hold under shifting light until holographic rainbow stabilizes. Recipient becomes keeper of peace technology, not owner.",
+          );
+          specs.push(
+            "RITUAL: Apply to threshold or creative workspace. Activate designated Spotify playlist in smart shuffle mode—creativity increases by 8.88%. Sticker presence balances contradictions within 3-meter radius. Rotate viewing angle to access full spectrum guidance.",
+          );
         } else if (inst.id === "SS-888") {
-          specs.push("TRANSFER: Physical handover + ceremonial acknowledgment that this object has infinite value because you decided it does. Hold while questioning capitalism, endorsing capitalism, transcending both.");
-          specs.push("RITUAL: Apply to cherished item during moment of resistance against planned obsolescence. Whisper 'This is now an heirloom.' Item immediately transforms into collectible piece of art, never to be mindlessly discarded. You are now sticker ambassador—flaunt, inspire, create demand.");
+          specs.push(
+            "TRANSFER: Physical handover + ceremonial acknowledgment that this object has infinite value because you decided it does. Hold while questioning capitalism, endorsing capitalism, transcending both.",
+          );
+          specs.push(
+            "RITUAL: Apply to cherished item during moment of resistance against planned obsolescence. Whisper 'This is now an heirloom.' Item immediately transforms into collectible piece of art, never to be mindlessly discarded. You are now sticker ambassador—flaunt, inspire, create demand.",
+          );
         } else if (inst.id === "POG-2025") {
-          specs.push("TRANSFER: Sticker transfer signifies acceptance of responsibility for humor, unity, and progress. Hold while acknowledging power is project not throne.");
-          specs.push("RITUAL: Apply with irony, optimism, and zero respect for outdated galactic hierarchies. Place where control fails but coordination thrives. Bonds where leadership rotates, meaning endures.");
+          specs.push(
+            "TRANSFER: Sticker transfer signifies acceptance of responsibility for humor, unity, and progress. Hold while acknowledging power is project not throne.",
+          );
+          specs.push(
+            "RITUAL: Apply with irony, optimism, and zero respect for outdated galactic hierarchies. Place where control fails but coordination thrives. Bonds where leadership rotates, meaning endures.",
+          );
         } else if (inst.id === "KM-V1") {
-          specs.push("TRANSFER: Original 12 given freely to those who understood: small local changes seed global harmony. All dispersed into the world.");
-          specs.push("RITUAL: Applied where contradictions meet without violence—laptop corners, notebook margins, threshold edges. Whispered commitment to one small daily improvement. Bonded where compromise births peace, not surrender.");
-          if (inst.sentimentalValue) specs.push(`SENTIMENTAL VALUE: ${inst.sentimentalValue}`);
+          specs.push(
+            "TRANSFER: Original 12 given freely to those who understood: small local changes seed global harmony. All dispersed into the world.",
+          );
+          specs.push(
+            "RITUAL: Applied where contradictions meet without violence—laptop corners, notebook margins, threshold edges. Whispered commitment to one small daily improvement. Bonded where compromise births peace, not surrender.",
+          );
+          if (inst.sentimentalValue)
+            specs.push(`SENTIMENTAL VALUE: ${inst.sentimentalValue}`);
         } else if (inst.id === "LM-PRICELESS") {
-          specs.push("TRANSFER: Not purchasable. Appears to those who stabilize contradictions without force. Recognition is the only currency accepted.");
-          specs.push("RITUAL: Apply where geometries conflict (notebook corner bridging round/square doodles, portal thresholds). Whisper gratitude for imbalance. Adheres where love flows between incompatible forms, preventing cosmic overflow.");
+          specs.push(
+            "TRANSFER: Not purchasable. Appears to those who stabilize contradictions without force. Recognition is the only currency accepted.",
+          );
+          specs.push(
+            "RITUAL: Apply where geometries conflict (notebook corner bridging round/square doodles, portal thresholds). Whisper gratitude for imbalance. Adheres where love flows between incompatible forms, preventing cosmic overflow.",
+          );
         } else if (inst.id === "KN-0002") {
-          specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
-          specs.push("RITUAL: Apply to a surface that divides two completely different realities.");
+          specs.push(
+            "TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.",
+          );
+          specs.push(
+            "RITUAL: Apply to a surface that divides two completely different realities.",
+          );
         } else {
-          specs.push("TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.");
+          specs.push(
+            "TRANSFER: Physical handover + ceremonial acknowledgment of value being irrational.",
+          );
           specs.push("RITUAL: Apply at an edge during indecision.");
         }
-        specsEl.innerHTML = specs.map(s => `<div class="text-[var(--text-ink)]">${s}</div>`).join('');
+        specsEl.innerHTML = specs
+          .map((s) => `<div class="text-[var(--text-ink)]">${s}</div>`)
+          .join("");
       }
-      if (specsEl) specsEl.classList.remove('hidden');
-      
+      if (specsEl) specsEl.classList.remove("hidden");
+
       if (linksEl) {
         if (id === "ML-0444") {
           linksEl.innerHTML = `
@@ -1368,17 +1765,22 @@ const tickerUnit = `${tickerText} — `;
           linksEl.classList.add("hidden");
         }
       }
-      
+
       if (metaEl) {
-        const qtyLine = typeof inst.availableCount === "number"
-          ? `QTY: ${inst.availableCount}/${inst.editionTotal}`
-          : `QTY: ${inst.availableCount}`;
+        const qtyLine =
+          typeof inst.availableCount === "number"
+            ? `QTY: ${inst.availableCount}/${inst.editionTotal}`
+            : `QTY: ${inst.availableCount}`;
         const statusLabel =
-          inst.status === "BEYOND_TRANSACTION" ? "Beyond transaction"
-          : inst.status === "SOLD_OUT" ? "Sold out"
-          : inst.status === "NEGOTIABLE" ? "Negotiable"
-          : inst.status === "SUBSCRIPTION" ? "Subscription"
-          : inst.status;
+          inst.status === "BEYOND_TRANSACTION"
+            ? "Beyond transaction"
+            : inst.status === "SOLD_OUT"
+              ? "Sold out"
+              : inst.status === "NEGOTIABLE"
+                ? "Negotiable"
+                : inst.status === "SUBSCRIPTION"
+                  ? "Subscription"
+                  : inst.status;
         metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${statusLabel}</div><div>PROVENANCE: ${inst.provenance}</div><div>${qtyLine}</div>`;
       }
       if (emailEl) {
@@ -1394,7 +1796,7 @@ const tickerUnit = `${tickerText} — `;
               ? "Contact for negotiation"
               : "Open negotiation channel";
       }
-      
+
       drawer.setAttribute("aria-hidden", "false");
       document.body.classList.add("overflow-hidden");
       drawer.classList.remove("hidden");
@@ -1479,7 +1881,7 @@ const tickerUnit = `${tickerText} — `;
           }
         });
       });
-      
+
       const handleClose = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -1487,7 +1889,7 @@ const tickerUnit = `${tickerText} — `;
       };
       closeBtn?.addEventListener("click", handleClose);
       closeBtn?.addEventListener("touchend", handleClose, { passive: false });
-      
+
       negotiateBtn?.addEventListener("click", revealEmail);
 
       const handleClickOutside = (e) => {
@@ -1496,10 +1898,15 @@ const tickerUnit = `${tickerText} — `;
         }
       };
       drawer.addEventListener("click", handleClickOutside);
-      drawer.addEventListener("touchstart", handleClickOutside, { passive: true });
+      drawer.addEventListener("touchstart", handleClickOutside, {
+        passive: true,
+      });
 
       drawer.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && drawer.getAttribute("aria-hidden") === "false") {
+        if (
+          e.key === "Escape" &&
+          drawer.getAttribute("aria-hidden") === "false"
+        ) {
           closeDrawer();
         }
       });
