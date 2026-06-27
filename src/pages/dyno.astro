@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
+import dynoStickerData from "../content/stickers/20-dm-0001.json";
 
 const dynoMetaItems = [
   { field: "bio_status", label: "BIO_STATUS", value: "PHASE 4", width: 7 },
@@ -10,6 +11,70 @@ const dynoMetaItems = [
   { field: "vibe_check", label: "VIBE_CHECK", value: "ANARCHY", width: 7 },
   { field: "irony_index", label: "IRONY_INDEX", value: "MAXIMUM", width: 7 },
 ];
+
+// ── Dynamic depletion notice — updates automatically with availableCount ──
+const dmAvailable = dynoStickerData.availableCount as number;
+const dmTotal = dynoStickerData.editionTotal as number;
+const dmSold = dmTotal - dmAvailable;
+
+type DepletionVariant = "fresh" | "depleting" | "critical" | "almostGone" | "soldOut";
+interface DepletionNotice {
+  variant: DepletionVariant;
+  icon: string;
+  head: string;
+  body: string;
+  sub: string;
+  iconRight: string;
+}
+
+let depletionNotice: DepletionNotice;
+
+if (dmAvailable <= 0) {
+  depletionNotice = {
+    variant: "soldOut",
+    icon: "☠️",
+    head: "ALLOCATION TERMINATED.",
+    body: `All ${dmTotal} units of the first-wave DM-XPNSV have been claimed. The era is sealed. The timeline has closed. If you are reading this, you arrived too late — which says something about your instincts.`,
+    sub: "// STATUS: EXTINCT · FIRST-WAVE CLOSED · NO RESTOCKS SCHEDULED",
+    iconRight: "🦕",
+  };
+} else if (dmAvailable <= 2) {
+  depletionNotice = {
+    variant: "almostGone",
+    icon: "⚠️",
+    head: "CRITICAL ALLOCATION ALERT.",
+    body: `Only ${dmAvailable} unit${dmAvailable === 1 ? "" : "s"} remain from the original ${dmTotal}. ${dmSold} visionar${dmSold === 1 ? "y has" : "ies have"} already locked in their bio-dairy futures. This is not a drill. This is the end of the beginning.`,
+    sub: `// REMAINING: ${dmAvailable}/${dmTotal} · IMMINENT EXTINCTION`,
+    iconRight: "🧬",
+  };
+} else if (dmAvailable <= 4) {
+  depletionNotice = {
+    variant: "critical",
+    icon: "◈",
+    head: "FIRST-WAVE CRITICALLY LOW.",
+    body: `${dmSold} allocation${dmSold === 1 ? "" : "s"} already secured. ${dmAvailable} slots remain from the original ${dmTotal}. The pristine block is gone. What remains is statistically rare and spiritually significant.`,
+    sub: `// ${dmAvailable} OF ${dmTotal} REMAINING · DEPLETING FAST`,
+    iconRight: "🧬",
+  };
+} else if (dmAvailable <= 7) {
+  depletionNotice = {
+    variant: "depleting",
+    icon: "◈",
+    head: "TRANSMISSION INTERCEPTED.",
+    body: `${dmSold} visionar${dmSold === 1 ? "y has" : "ies have"} already secured their bio-dairy futures. ${dmAvailable} first-wave slots remain. The full-slab is gone. What remains is rarer.`,
+    sub: `// FIRST-WAVE ALLOCATIONS: DEPLETING · ${dmAvailable}/${dmTotal} LEFT`,
+    iconRight: "🧬",
+  };
+} else {
+  depletionNotice = {
+    variant: "fresh",
+    icon: "◈",
+    head: "TRANSMISSION INTERCEPTED.",
+    body: `The era of the pristine ${dmTotal}-unit block is officially over. ${dmSold > 0 ? `${dmSold} visionar${dmSold === 1 ? "y has" : "ies have"} already secured their bio-dairy futures. ` : ""}The full-slab is gone. What remains is rarer.`,
+    sub: `// FIRST-WAVE ALLOCATIONS: DEPLETING · ${dmAvailable}/${dmTotal} LEFT`,
+    iconRight: "🧬",
+  };
+}
 ---
 
 <Layout title="DYNO MILK — Q888">
@@ -42,6 +107,19 @@ const dynoMetaItems = [
           <span class="holo-dna">🥛</span>
         </div>
       </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         ALLOCATION DEPLETION NOTICE
+    ══════════════════════════════════════════════════════ -->
+    <div class={`dyno-depletion-notice dyno-depletion-notice--${depletionNotice.variant}`} id="dyno-depletion-notice" role="status" aria-label="Allocation status update">
+      <span class="dyno-depletion-icon" aria-hidden="true">{depletionNotice.icon}</span>
+      <span class="dyno-depletion-body">
+        <strong class="dyno-depletion-head">{depletionNotice.head}</strong>
+        {depletionNotice.body}
+        <span class="dyno-depletion-sub">{depletionNotice.sub}</span>
+      </span>
+      <span class="dyno-depletion-icon" aria-hidden="true">{depletionNotice.iconRight}</span>
     </div>
 
     <!-- ══════════════════════════════════════════════════════
@@ -524,10 +602,10 @@ const dynoMetaItems = [
                   >
                 </div>
                 <a
-                  href="mailto:hello@q888.space?subject=DYNO%20MILK%20VISIONARY%20APPLICATION&body=I%20confirm%20my%20net%20worth%20qualifies.%20I%20am%20applying%20for%20a%20Visionary%20slot%20(£25).%20I%20understand%20this%20is%20a%20sight-unseen%20allocation%20requiring%20manual%20approval."
+                  href="/overpriced/dyno-milk-overpriced"
                   class="dyno-apply-btn"
                   id="dyno-apply-btn"
-                  aria-label="Apply for Visionary slot allocation"
+                  aria-label="Apply for Visionary slot allocation — view the DM-XPNSV sticker"
                   aria-disabled="true"
                   tabindex="-1"
                 >
@@ -823,7 +901,7 @@ const dynoMetaItems = [
         if (btnText) btnText.textContent = "CONFIRM NET WORTH TO APPLY";
         warning?.classList.remove("hidden");
       } else {
-        // Apply button: unlocked — real mailto link is already in href
+        // Apply button: unlocked — navigates to the DM-XPNSV sticker page
         if (applyBtn) {
           applyBtn.removeAttribute("aria-disabled");
           applyBtn.setAttribute("tabindex", "0");
@@ -990,6 +1068,118 @@ const dynoMetaItems = [
     font-size: 0.85rem;
     color: var(--dyno-muted);
     letter-spacing: 0.15em;
+  }
+
+  /* ── Allocation Depletion Notice ── */
+  .dyno-depletion-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(
+      90deg,
+      rgba(57, 255, 20, 0.06) 0%,
+      rgba(57, 255, 20, 0.12) 50%,
+      rgba(57, 255, 20, 0.06) 100%
+    );
+    border-bottom: 1px solid rgba(57, 255, 20, 0.25);
+    border-top: 1px solid rgba(57, 255, 20, 0.1);
+    animation: depletion-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes depletion-pulse {
+    0%, 100% { border-color: rgba(57, 255, 20, 0.25); box-shadow: none; }
+    50% { border-color: rgba(57, 255, 20, 0.5); box-shadow: 0 0 20px rgba(57, 255, 20, 0.08); }
+  }
+
+  .dyno-depletion-icon {
+    font-size: 1rem;
+    color: var(--dyno-green);
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+
+  .dyno-depletion-body {
+    font-family: "Syne Mono", monospace;
+    font-size: clamp(0.6rem, 1.1vw, 0.78rem);
+    color: var(--dyno-white);
+    letter-spacing: 0.08em;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .dyno-depletion-head {
+    color: var(--dyno-green);
+    letter-spacing: 0.15em;
+    margin-right: 0.35em;
+  }
+
+  .dyno-depletion-body em {
+    color: var(--dyno-yellow);
+    font-style: normal;
+  }
+
+  .dyno-depletion-sub {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.68em;
+    color: var(--dyno-green);
+    opacity: 0.6;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ── Variant colour overrides ── */
+  /* critical / almostGone: yellow warning */
+  .dyno-depletion-notice--critical,
+  .dyno-depletion-notice--almostGone {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 230, 0, 0.06) 0%,
+      rgba(255, 230, 0, 0.12) 50%,
+      rgba(255, 230, 0, 0.06) 100%
+    );
+    border-color: rgba(255, 230, 0, 0.3);
+  }
+  .dyno-depletion-notice--critical .dyno-depletion-head,
+  .dyno-depletion-notice--almostGone .dyno-depletion-head,
+  .dyno-depletion-notice--critical .dyno-depletion-icon,
+  .dyno-depletion-notice--almostGone .dyno-depletion-icon,
+  .dyno-depletion-notice--critical .dyno-depletion-sub,
+  .dyno-depletion-notice--almostGone .dyno-depletion-sub {
+    color: var(--dyno-yellow);
+  }
+  @keyframes depletion-pulse-yellow {
+    0%, 100% { border-color: rgba(255, 230, 0, 0.3); box-shadow: none; }
+    50% { border-color: rgba(255, 230, 0, 0.6); box-shadow: 0 0 20px rgba(255, 230, 0, 0.1); }
+  }
+  .dyno-depletion-notice--critical,
+  .dyno-depletion-notice--almostGone {
+    animation: depletion-pulse-yellow 2s ease-in-out infinite;
+  }
+
+  /* soldOut: pink / extinct */
+  .dyno-depletion-notice--soldOut {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 45, 120, 0.08) 0%,
+      rgba(255, 45, 120, 0.16) 50%,
+      rgba(255, 45, 120, 0.08) 100%
+    );
+    border-color: rgba(255, 45, 120, 0.35);
+  }
+  .dyno-depletion-notice--soldOut .dyno-depletion-head,
+  .dyno-depletion-notice--soldOut .dyno-depletion-icon,
+  .dyno-depletion-notice--soldOut .dyno-depletion-sub {
+    color: var(--dyno-pink);
+  }
+  @keyframes depletion-pulse-pink {
+    0%, 100% { border-color: rgba(255, 45, 120, 0.35); box-shadow: none; }
+    50% { border-color: rgba(255, 45, 120, 0.7); box-shadow: 0 0 24px rgba(255, 45, 120, 0.12); }
+  }
+  .dyno-depletion-notice--soldOut {
+    animation: depletion-pulse-pink 1.5s ease-in-out infinite;
   }
 
   .dyno-holosticker {
