@@ -8,6 +8,7 @@ const urlMap: Record<string, string> = {
   "afterlife-contracts": "/afterlife",
   "president-of-the-galaxy": "/president",
   "dyno-milk": "/dyno",
+  "aero-sticker": "/aero",
 };
 
 type Zone = {
@@ -18,6 +19,7 @@ type Zone = {
   system: string;
   scatter: string;
   image: string | null;
+  imageMobile?: string | null;
   holographic?: boolean;
   lightText: boolean;
 };
@@ -31,6 +33,7 @@ const zones: Zone[] = (await getCollection("projects"))
     system: data.cardSystem,
     scatter: data.cardScatter,
     image: data.cardImage,
+    imageMobile: data.cardImageMobile,
     holographic: data.cardHolographic,
     lightText: data.cardLightText,
   }))
@@ -82,9 +85,11 @@ const zones: Zone[] = (await getCollection("projects"))
         <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16" data-motion-stagger data-motion-children="[data-motion-item]">
           {zones.map((zone) => (
             <div class={`relative group ${zone.scatter} ${
-              (zone.slug === 'nar-mail-express' || zone.slug === 'dyno-milk') ? 'md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24' : ''
+              (zone.slug === 'nar-mail-express') ? 'md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24' : ''
             } ${
-              (zone.slug === 'dyno-milk') ? 'dyno-milk-card-wrap' : ''
+              (zone.slug === 'dyno-milk') ? 'dyno-milk-wrap md:mt-16' : ''
+            } ${
+              (zone.slug === 'aero-sticker') ? 'aero-sticker-wrap md:mt-16' : ''
             }`} data-motion-item>
               <a 
                 href={urlMap[zone.slug] || '#'}
@@ -95,15 +100,30 @@ const zones: Zone[] = (await getCollection("projects"))
                 <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden">
                   {zone.image ? (
                     <>
-<img
-                        src={zone.image}
-                        alt={zone.title}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                        width="400"
-                        height="500"
-                      />
+                      {zone.imageMobile ? (
+                        <picture class="w-full h-full block overflow-hidden">
+                          <source srcset={zone.imageMobile} media="(max-width: 767px)" />
+                          <img
+                            src={zone.image}
+                            alt={zone.title}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                            width="400"
+                            height="500"
+                          />
+                        </picture>
+                      ) : (
+                        <img
+                          src={zone.image}
+                          alt={zone.title}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                          width="400"
+                          height="500"
+                        />
+                      )}
                       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
                       {zone.holographic && (
                         <div class="holographic-overlay absolute inset-0 pointer-events-none mix-blend-screen opacity-40 group-hover:opacity-0 transition-opacity duration-700"></div>
@@ -260,14 +280,21 @@ const zones: Zone[] = (await getCollection("projects"))
     transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   }
   
-  /* Dyno Milk positioning adjustments */
+  /* Dyno and Aero positioning adjustments */
   @media (min-width: 768px) {
-    .dyno-milk-card-wrap {
-      transform: translateX(6%) rotate(1.5deg) !important;
+    .dyno-milk-wrap {
+      transform: translateY(12px) rotate(1deg) !important;
       transform-origin: center center;
     }
-    .dyno-milk-card-wrap:hover {
-      transform: translateX(6%) rotate(1.5deg) translateY(-4px) !important;
+    .dyno-milk-wrap:hover {
+      transform: translateY(6px) rotate(1deg) !important;
+    }
+    .aero-sticker-wrap {
+      transform: translateY(24px) rotate(-1.5deg) !important;
+      transform-origin: center center;
+    }
+    .aero-sticker-wrap:hover {
+      transform: translateY(18px) rotate(-1.5deg) !important;
     }
   }
 

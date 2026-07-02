@@ -1,0 +1,2956 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SubPageNav from "../components/SubPageNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+
+const aeroMetaItems = [
+  { field: "drag_coeff",    label: "DRAG_COEFF",    value: "Cd: 0.000",  width: 10 },
+  { field: "vibe_freq",     label: "VIBE_FREQ",     value: "888 Hz",     width: 7  },
+  { field: "sticker_status",label: "STICKER_STATUS",value: "DEPLOYED",   width: 9  },
+  { field: "belief_index",  label: "BELIEF_INDEX",  value: "MAXIMUM",    width: 7  },
+];
+---
+
+<Layout title="AERO V1 — INFOCIGAN × Q888">
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
+  <SystemMeta position="top" customItems={aeroMetaItems} />
+
+  <main class="aero-wrap" id="aero-main">
+
+    <!-- ══════════════════════════════════════════════════════
+         01. HERO BLOCK
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-hero" id="aero-hero" aria-label="Aero V1 hero">
+
+      <!-- Wind-tunnel SVG canvas — warped by cursor -->
+      <canvas class="aero-tunnel-canvas" id="aero-tunnel-canvas" aria-hidden="true"></canvas>
+
+      <!-- Cinematic video background -->
+      <div class="aero-video-wrap" aria-hidden="true">
+        <video
+          class="aero-video"
+          id="aero-hero-video"
+          src="/images/Prompt_Cinematic_slow_motio.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="aero-video-overlay"></div>
+      </div>
+
+      <!-- Scanline overlay -->
+      <div class="aero-scanlines" aria-hidden="true"></div>
+
+      <!-- Hero copy -->
+      <div class="aero-hero-content">
+        <div class="aero-hero-eyebrow">
+          <span class="aero-badge">INFOCIGAN AERO DIVISION</span>
+          <span class="aero-badge aero-badge-mono">V1 // WIND TUNNEL VALIDATED</span>
+        </div>
+
+        <h1 class="aero-headline">
+          <span class="aero-hl-1">WE MAKE YOU</span>
+          <span class="aero-hl-2">MORE AERO</span>
+          <span class="aero-hl-3">V1</span>
+        </h1>
+
+        <div class="aero-price-index" id="aero-price-index">
+          <span class="aero-price-label">ACQUISITION METRIC</span>
+          <span class="aero-price-value">£230 <span class="aero-price-slash">·</span> V1</span>
+          <span class="aero-price-sub">// £100 PER GRAM · DENSITY-SCALED VALUATION PROTOCOL</span>
+        </div>
+
+        <div class="aero-hero-status">
+          <span class="aero-status-dot" aria-hidden="true"></span>
+          <span class="aero-status-text">UNITS: <span class="aero-cyan">50 / 50</span> AVAILABLE</span>
+          <span class="aero-status-sep">//</span>
+          <span class="aero-status-text">RARITY: <span class="aero-cyan">SCALES WITH BELIEF</span></span>
+        </div>
+
+        <a
+          href="mailto:hello@q888.space?subject=AERO%20V1%20ACQUISITION%20INTENT"
+          class="aero-acquire-btn"
+          id="aero-acquire-btn"
+          aria-label="Submit acquisition intent for Aero V1"
+        >
+          <span class="aero-btn-icon" aria-hidden="true">◈</span>
+          <span>SUBMIT ACQUISITION INTENT</span>
+          <span class="aero-btn-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Floating sticker preview -->
+      <div class="aero-hero-sticker-wrap">
+        <img
+          src="/images/aero_sticker.webp"
+          alt="Aero Sticker V1 — the fully realised consumer skin"
+          class="aero-hero-sticker"
+          id="aero-hero-sticker"
+          width="420"
+          height="420"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="aero-sticker-glow" aria-hidden="true"></div>
+        <div class="aero-sticker-ring aero-ring-1" aria-hidden="true"></div>
+        <div class="aero-sticker-ring aero-ring-2" aria-hidden="true"></div>
+      </div>
+
+      <!-- Scroll cue -->
+      <div class="aero-scroll-cue" aria-hidden="true">
+        <span class="aero-scroll-line"></span>
+        <span class="aero-scroll-label">SCROLL TO ENTER WIND TUNNEL</span>
+        <span class="aero-scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         02. PHYSICAL COLLECTIBLE INTERFACE
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-specs" id="aero-specs" aria-label="Technical specifications">
+      <div class="aero-specs-inner">
+        <div class="aero-section-tag">HARDWARE SPECIFICATION MATRIX</div>
+        <h2 class="aero-section-headline">UNIT PROFILE</h2>
+
+        <div class="aero-specs-grid">
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">FOOTPRINT</span>
+            <span class="aero-spec-value">76 × 71 <span class="aero-spec-unit">mm</span></span>
+            <span class="aero-spec-sub">μ-Matrix boundary layer</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">VERTICAL PROFILE</span>
+            <span class="aero-spec-value">&lt; 1.5 <span class="aero-spec-unit">mm</span></span>
+            <span class="aero-spec-sub">Zero-drag laminar stack</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">PRODUCTION RUN</span>
+            <span class="aero-spec-value">50 <span class="aero-spec-unit">units</span></span>
+            <span class="aero-spec-sub">Hard-ceiling scarcity protocol</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">DENSITY METRIC</span>
+            <span class="aero-spec-value">£100 <span class="aero-spec-unit">/ g</span></span>
+            <span class="aero-spec-sub">Belief-scaled valuation</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">SERIAL TAG</span>
+            <span class="aero-spec-value">SqB<span class="aero-spec-unit">001</span></span>
+            <span class="aero-spec-sub">Laser-engraved μ-matrix ID</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">Ω COEFFICIENT</span>
+            <span class="aero-spec-value">0<span class="aero-spec-unit">.888</span></span>
+            <span class="aero-spec-sub">Sticker drag-nullification constant</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">WIND TUNNEL</span>
+            <span class="aero-spec-value">0 <span class="aero-spec-unit">hrs</span></span>
+            <span class="aero-spec-sub">Validated exclusively by vibes.</span>
+          </div>
+          <div class="aero-spec-card" data-aero-reveal>
+            <span class="aero-spec-label">PEER REVIEWS</span>
+            <span class="aero-spec-value">N/A</span>
+            <span class="aero-spec-sub">Science is subjective anyway.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         03. ED'S WIND TUNNEL CALCULATION CHAMBER
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-paradox" id="aero-paradox" aria-label="Wind tunnel calculation chamber">
+      <div class="aero-paradox-inner">
+        <div class="aero-section-tag">ORIGIN STORY // THE 100KG FALLACY CALCULATION CHAMBER</div>
+
+        <div class="aero-paradox-split">
+          <!-- LEFT COLUMN: Ed's identity + rotating thought -->
+          <div class="aero-paradox-left">
+            <h2 class="aero-paradox-headline">
+              ED'S WIND<br />
+              <span class="aero-cyan">TUNNEL</span><br />
+              REVELATION
+            </h2>
+
+            <p class="aero-paradox-intro">
+              The Aero Sticker was not born in a sterile corporate wind tunnel. It was forged in the heat of a specialty coffee shop, fueled by intense irritation, and mapped out by our co-creator, Ed—a brilliant young engineer with a fresh diploma, an obsessive passion for flawless coffee extraction, and a deep understanding of dimensional aerodynamics.
+            </p>
+            <p class="aero-paradox-intro">
+              Ed set out with a noble, highly targeted mission: to help ultra-rich cyclists save some precious, overpriced watts and drastically reduce their drag in this universe. But when he examined the sacred mathematical promise of high-end cycling performance, the numbers shattered his reality. A £10,000 aero frame. A 100kg rider. Approximately 2 miserable watts saved at 30 km/h.
+            </p>
+            <p class="aero-paradox-intro aero-paradox-intro--accent">
+              This wasn't innovation; it was a massive financial headwind wearing carbon fibre.
+            </p>
+            <p class="aero-paradox-intro">
+              So Ed chose to bypass Newtonian physics altogether. Instead of wasting months trying to make a metal bicycle frame more aerodynamic, the <strong>Aero V-0888 streamlines the bicycle's underlying logic.</strong> The result is a £100-per-gram Infocigan performance artefact engineered to reduce atmospheric drag, maximize human belief, and politely inform the wind exactly who is in charge.
+            </p>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Wind tunnel visual -->
+          <div class="aero-paradox-right">
+            <div class="wt-chamber" id="wt-chamber">
+
+              <!-- Airflow lines background (always present) -->
+              <svg class="wt-airflow" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M-20 60  Q200 55  620 62"  fill="none" stroke="var(--aero-cyan)" stroke-width="0.8" opacity="0.15" class="af af1"/>
+                <path d="M-20 120 Q180 112 620 125" fill="none" stroke="var(--aero-cyan)" stroke-width="0.8" opacity="0.12" class="af af2"/>
+                <path d="M-20 180 Q220 175 620 183" fill="none" stroke="var(--aero-cyan)" stroke-width="0.8" opacity="0.10" class="af af3"/>
+                <path d="M-20 240 Q200 238 620 244" fill="none" stroke="var(--aero-cyan)" stroke-width="0.8" opacity="0.12" class="af af4"/>
+                <path d="M-20 300 Q190 295 620 303" fill="none" stroke="var(--aero-cyan)" stroke-width="0.8" opacity="0.10" class="af af5"/>
+                <path d="M-20 360 Q210 355 620 362" fill="none" stroke="var(--aero-cyan)" stroke-width="0.8" opacity="0.08" class="af af6"/>
+              </svg>
+
+              <!-- Phase 0: Boot screen -->
+              <div class="wt-phase wt-p0" id="wt-p0">
+                <div class="wt-boot-lines">
+                  <div class="wt-boot-line bl0">WIND_TUNNEL: SEALED</div>
+                  <div class="wt-boot-line bl1">SUBJECT: ED</div>
+                  <div class="wt-boot-line bl2">COFFEE_LEVEL: STRUCTURALLY ADEQUATE</div>
+                  <div class="wt-boot-line bl3">CALCULATION_TYPE: DANGEROUSLY RATIONAL</div>
+                </div>
+              </div>
+
+              <!-- Phase 1: Real drag formula -->
+              <div class="wt-phase wt-p1" id="wt-p1">
+                <div class="wt-formula">F<sub>D</sub> = &frac12;&rho;v&sup2;C<sub>D</sub>A</div>
+                <div class="wt-readouts">
+                  <div class="wt-readout"><span class="wt-key">RIDER_MASS</span><span class="wt-val">100 kg</span></div>
+                  <div class="wt-readout"><span class="wt-key">FRAME_COST</span><span class="wt-val wt-val--hi">£10,000</span></div>
+                  <div class="wt-readout"><span class="wt-key">EXPECTED_FEELING</span><span class="wt-val">FAST</span></div>
+                </div>
+              </div>
+
+              <!-- Phase 2: The tragedy bar chart -->
+              <div class="wt-phase wt-p2" id="wt-p2">
+                <div class="wt-bars">
+                  <div class="wt-bar-wrap">
+                    <div class="wt-bar wt-bar--cost" id="wt-bar-cost"></div>
+                    <span class="wt-bar-label">£10,000<br/>COST</span>
+                  </div>
+                  <div class="wt-bar-wrap">
+                    <div class="wt-bar wt-bar--gain" id="wt-bar-gain"></div>
+                    <span class="wt-bar-label">2W<br/>GAIN</span>
+                  </div>
+                </div>
+                <div class="wt-readouts">
+                  <div class="wt-readout"><span class="wt-key">OUTPUT_GAIN</span><span class="wt-val">2W</span></div>
+                  <div class="wt-readout"><span class="wt-key">COST_PER_WATT</span><span class="wt-val wt-val--hi">£5,000</span></div>
+                  <div class="wt-readout"><span class="wt-key">EMOTIONAL_DAMAGE</span><span class="wt-val wt-val--warn">SIGNIFICANT</span></div>
+                </div>
+                <div class="wt-warning">&#x26A0; MARGINAL GAIN HAS BECOME MARGINAL PAIN</div>
+              </div>
+
+              <!-- Phase 3: Rational collapse / new formula -->
+              <div class="wt-phase wt-p3" id="wt-p3">
+                <div class="wt-formula wt-formula--new">
+                  F<sub>D</sub><span class="wt-formula-new">(new)</span> = F<sub>D</sub> &times; e<sup>-(&Omega;<sub>sticker</sub> &times; Vibe)</sup>
+                </div>
+                <div class="wt-readouts">
+                  <div class="wt-readout"><span class="wt-key">NEWTONIAN_PHYSICS</span><span class="wt-val wt-val--warn">MOVED TO OPTIONAL</span></div>
+                  <div class="wt-readout"><span class="wt-key">QUANTUM_DEFLECTION</span><span class="wt-val">RECALCULATING</span></div>
+                  <div class="wt-readout"><span class="wt-key">VIBE</span><span class="wt-val wt-val--hi">SIGNIFICANT</span></div>
+                </div>
+                <svg class="wt-particles" viewBox="0 0 400 100" aria-hidden="true">
+                  <text x="20"  y="60"  class="wt-particle" font-family="var(--aero-mono)" font-size="14" fill="var(--aero-cyan)" opacity="0.6">&#x03C1;</text>
+                  <text x="80"  y="35"  class="wt-particle" font-family="var(--aero-mono)" font-size="14" fill="var(--aero-cyan)" opacity="0.5">v&sup2;</text>
+                  <text x="155" y="75"  class="wt-particle" font-family="var(--aero-mono)" font-size="14" fill="var(--aero-cyan)" opacity="0.7">C&#x1D05;A</text>
+                  <text x="235" y="45"  class="wt-particle" font-family="var(--aero-mono)" font-size="14" fill="var(--aero-cyan)" opacity="0.4">&frac12;</text>
+                  <text x="315" y="65"  class="wt-particle" font-family="var(--aero-mono)" font-size="14" fill="var(--aero-cyan)" opacity="0.6">F&#x1D05;</text>
+                </svg>
+              </div>
+
+              <!-- Phase 4: Value density certification -->
+              <div class="wt-phase wt-p4" id="wt-p4">
+                <div class="wt-cert-stamp">&#x03BC;-MATRIX ACTIVE</div>
+                <div class="wt-value-density">
+                  <span class="wt-vd-label">AERO VALUE DENSITY</span>
+                  <span class="wt-vd-number">£100<span class="wt-vd-unit">/gram</span></span>
+                </div>
+                <div class="wt-readouts">
+                  <div class="wt-readout"><span class="wt-key">MASS</span><span class="wt-val">NEGLIGIBLE</span></div>
+                  <div class="wt-readout"><span class="wt-key">CONFIDENCE</span><span class="wt-val wt-val--hi">HEAVY</span></div>
+                  <div class="wt-readout"><span class="wt-key">VALUE</span><span class="wt-val">WIND-TUNNEL VERIFIED IN 1 DIMENSION</span></div>
+                </div>
+              </div>
+
+              <!-- Phase 5: Final lockup -->
+              <div class="wt-phase wt-p5" id="wt-p5">
+                <div class="wt-final-headline">BELIEF &gt; DRAG</div>
+                <div class="wt-final-sub">
+                  NOT FASTER.<br/>
+                  MORE AERO.<br/>
+                  <em>IMPORTANT DIFFERENCE.</em>
+                </div>
+                <div class="wt-final-stamp">
+                  <span>AERO V-0888</span>
+                  <span class="wt-stamp-gold">£100/g PERFORMANCE ARTEFACT</span>
+                  <span class="wt-stamp-dim">WIND-TUNNEL REJECTED</span>
+                  <span class="wt-stamp-cyan">INFOCIGAN APPROVED</span>
+                </div>
+              </div>
+
+              <!-- Phase dot timeline nav -->
+              <div class="wt-timeline" id="wt-timeline" role="tablist" aria-label="Phases">
+                <button class="wt-dot wt-dot--active" data-phase="0" role="tab" aria-label="Phase 0: Boot" title="BOOT"></button>
+                <button class="wt-dot" data-phase="1" role="tab" aria-label="Phase 1: Formula" title="01"></button>
+                <button class="wt-dot" data-phase="2" role="tab" aria-label="Phase 2: Tragedy" title="02"></button>
+                <button class="wt-dot" data-phase="3" role="tab" aria-label="Phase 3: Collapse" title="03"></button>
+                <button class="wt-dot" data-phase="4" role="tab" aria-label="Phase 4: Value Density" title="04"></button>
+                <button class="wt-dot" data-phase="5" role="tab" aria-label="Phase 5: Belief > Drag" title="05"></button>
+              </div>
+
+              <!-- Terminal caption bar -->
+              <div class="wt-caption" id="wt-caption">
+                <span class="wt-cap wt-cap-p0">WIND_TUNNEL: SEALED — SUBJECT: ED — CALCULATION_TYPE: DANGEROUSLY RATIONAL</span>
+                <span class="wt-cap wt-cap-p1">PHASE 01 — Newtonian physics enters the room with confidence.</span>
+                <span class="wt-cap wt-cap-p2">PHASE 02 — £10,000 detected. 2 watts recovered. Dignity unstable.</span>
+                <span class="wt-cap wt-cap-p3">PHASE 03 — Newtonian physics has been moved to the optional folder.</span>
+                <span class="wt-cap wt-cap-p4">PHASE 04 — &#x03BC;-Matrix active. Air molecules awaiting instruction.</span>
+                <span class="wt-cap wt-cap-p5">PHASE 05 — Belief exceeds drag. Sticker classified as £100/g velocity matter.</span>
+              </div>
+            </div>
+
+            <!-- Ed Thought — synced to chamber phases -->
+            <div class="ed-thought-container">
+              <span class="ed-thought-label">ED THOUGHT</span>
+              <div class="ed-thought-track">
+                <p class="ed-thought et-0">What if the problem is not the rider?</p>
+                <p class="ed-thought et-1">What if the problem is the financial density of hope?</p>
+                <p class="ed-thought et-2">What if a sticker has better emotional aerodynamics than a frame?</p>
+                <p class="ed-thought et-3">What if the wind simply needs better instructions?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         04. INTERACTIVE LAYER REVEAL
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-reveal-section" id="aero-reveal" aria-label="Product layer reveal">
+      <div class="aero-reveal-inner">
+        <div class="aero-section-tag">MATERIAL STACK // SCROLL TO DEPLOY</div>
+        <h2 class="aero-section-headline">THREE-TIER CONSTRUCTION</h2>
+
+        <div class="aero-reveal-stage">
+          <!-- Image stack -->
+          <div class="aero-image-stack" id="aero-image-stack" aria-live="polite">
+            <img
+              src="/images/aero_base.webp"
+              alt="Tier 1: μ-Matrix Chassis — dark stealth-carbon substrate reinforced with an iridescent titanium lattice and laser-etched SqB001 registry"
+              class="aero-layer aero-layer-base is-active"
+              id="aero-layer-0"
+              width="480"
+              height="480"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/aero_midlayer.webp"
+              alt="Tier 2: Field Prototype — raw vector layout superimposing an aerodynamic tuck onto a front-basket commuter bicycle"
+              class="aero-layer aero-layer-mid"
+              id="aero-layer-1"
+              width="480"
+              height="480"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/aero_sticker.webp"
+              alt="Tier 3: Consumer V1 Skin (Digital Ink Core) — micro-encapsulated Smart Pixels locking in the cyan velocity banner"
+              class="aero-layer aero-layer-top"
+              id="aero-layer-2"
+              width="480"
+              height="480"
+              loading="lazy"
+              decoding="async"
+            />
+            <!-- Glow halo behind stack -->
+            <div class="aero-stack-glow" aria-hidden="true" id="aero-stack-glow"></div>
+          </div>
+
+          <!-- Tier info panels -->
+          <div class="aero-tier-panels">
+            <div class="aero-tier-panel is-active" id="aero-tier-0" data-tier="0">
+              <div class="aero-tier-number">TIER 01</div>
+              <div class="aero-tier-name">μ-MATRIX CHASSIS</div>
+              <p class="aero-tier-desc">
+                A microscopic, dark stealth-carbon substrate reinforced with an iridescent titanium lattice. Engineered to remain entirely beneath the visible surface—shielded from casual inspection, accessible only to the true owner.
+              </p>
+              <p class="aero-tier-desc" style="margin-top:0.5rem">
+                <strong class="aero-cyan">Telemetry Data:</strong> Laser-etched directly into the nano-carbide weave is the product classification matrix and the unique registration marker: <strong class="aero-cyan">SqB001</strong>. A hidden certificate of hyper-elite authenticity confirming structural priority.
+              </p>
+              <div class="aero-tier-spec">MATERIAL: NANO-CARBIDE // WEAVE: 8K // REGISTRY: SqB001</div>
+            </div>
+
+            <div class="aero-tier-panel" id="aero-tier-1" data-tier="1">
+              <div class="aero-tier-number">TIER 02</div>
+              <div class="aero-tier-name">FIELD PROTOTYPE</div>
+              <p class="aero-tier-desc">
+                The raw deployment layer. Features a high-contrast, dotted-line vector layout tracking an aggressive, aerodynamic sprint tuck—superimposed directly onto a traditional, front-basket commuter bicycle infrastructure.
+              </p>
+              <p class="aero-tier-desc" style="margin-top:0.5rem">
+                <strong class="aero-cyan">Velocity Metrics:</strong> The unpigmented blue swoosh banner serves as an abstract wind-channel vector line. By deliberately minimizing localized ink mass, we ensure peak molecular acceleration across the sticker surface.
+              </p>
+              <div class="aero-tier-spec">DEPLOYMENT: FIELD VALIDATED // STATUS: SEVERE OVER-SPEC // INK MASS: ~0.00g</div>
+            </div>
+
+            <div class="aero-tier-panel" id="aero-tier-2" data-tier="2">
+              <div class="aero-tier-number">TIER 03</div>
+              <div class="aero-tier-name">CONSUMER V1 SKIN (DIGITAL INK CORE)</div>
+              <p class="aero-tier-desc">
+                The ultimate interface layer. Woven with a surface skin of active Smart Pixels from the <a href="/dink">Digital Ink Architecture</a>. This micro-encapsulated pixel matrix dynamically shifts state under raw kinetic force, locking in the ultra-high contrast cyan velocity banner declaring: "WE MAKE YOU MORE AERO V1".
+              </p>
+              <p class="aero-tier-desc" style="margin-top:0.5rem">
+                <strong class="aero-cyan">Deployment Protocol:</strong> Powered entirely by friction. As aerodynamic headwind velocity increases, the Smart Pixels magnetically align to smooth out incoming molecular friction, altering their visual density to bypass Newtonian drag entirely through sheer aesthetic superiority.
+              </p>
+              <div class="aero-tier-spec">INTERFACE: DIGITAL INK V1 // ACTIVE PIXELS: 8,888,000 // HUBRIS INDEX: MAXIMUM</div>
+            </div>
+
+            <!-- Manual tier nav -->
+            <div class="aero-tier-nav" aria-label="Layer navigation">
+              <button class="aero-tier-btn is-active" id="aero-tn-0" data-target="0" aria-label="View Tier 1 — μ-Matrix Chassis" aria-pressed="true">01</button>
+              <button class="aero-tier-btn" id="aero-tn-1" data-target="1" aria-label="View Tier 2 — Field Prototype" aria-pressed="false">02</button>
+              <button class="aero-tier-btn" id="aero-tn-2" data-target="2" aria-label="View Tier 3 — Consumer V1 Skin (Digital Ink Core)" aria-pressed="false">03</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         05. TELEMETRY SCIENCE ENGINE
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-telemetry" id="aero-telemetry" aria-label="Aerodynamic telemetry formulas">
+
+      <div class="aero-telem-header">
+        <div class="aero-section-tag">TELEMETRY ENGINE // LIVE READOUT</div>
+        <h2 class="aero-section-headline">THE SCIENCE</h2>
+        <div class="aero-omega-display" id="aero-omega-display" aria-live="polite" aria-label="Live Omega sticker coefficient">
+          <span class="aero-omega-label">Ω<sub>sticker</sub></span>
+          <span class="aero-omega-equals">=</span>
+          <span class="aero-omega-value" id="aero-omega-value">0.000</span>
+        </div>
+      </div>
+
+      <div class="aero-formula-grid">
+
+        <div class="aero-formula-card aero-formula-card--vibe-1" data-aero-reveal>
+          <div class="aero-formula-tag">BASELINE [01]</div>
+          <div class="aero-formula-title">Traditional Drag Equation</div>
+          <div class="aero-formula-math" aria-label="F sub D equals one half rho v squared C sub d A">
+            F<sub>D</sub> = ½ · ρ · v² · C<sub>d</sub> · A
+          </div>
+          <div class="aero-formula-note">
+            Standard industry baseline. Peer-reviewed. Completely fails to account for the
+            atmospheric restructuring induced by correctly applied conceptual art.
+          </div>
+        </div>
+
+        <div class="aero-formula-card aero-formula-card--vibe-2" data-aero-reveal>
+          <div class="aero-formula-tag">CORRECTION [02]</div>
+          <div class="aero-formula-title">The Aero-Nano Correction Factor</div>
+          <div class="aero-formula-math" aria-label="F sub D new equals F sub D times e to the negative Omega sticker times Vibe">
+            F<sub>D</sub>(new) = F<sub>D</sub> · e<sup>−(Ω<sub>sticker</sub> × Vibe)</sup>
+          </div>
+          <div class="aero-formula-note">
+            When Ω<sub>sticker</sub> approaches its terminal value of 0.888, drag approaches zero.
+            Vibe is dimensionless and self-reported.
+          </div>
+        </div>
+
+        <div class="aero-formula-card aero-formula-card--vibe-3" data-aero-reveal>
+          <div class="aero-formula-tag">PARADOX [03]</div>
+          <div class="aero-formula-title">The Wattage Generation Paradox</div>
+          <div class="aero-formula-math" aria-label="W net equals P rider plus infinite sum of Style i over Drag base, times Phi aero">
+            W<sub>net</sub> = P<sub>rider</sub> + (Σ<sub>i=1</sub><sup>∞</sup> Style<sub>i</sub> / Drag<sub>base</sub>) × Φ<sub>aero</sub>
+          </div>
+          <div class="aero-formula-note">
+            Net power output is calculated by aesthetic dominance over physical reality.
+            The infinite sum of Style is non-convergent for riders with sufficient hubris.
+            Φ<sub>aero</sub> is proprietary. Power meter enthusiasts are advised to look away.
+          </div>
+        </div>
+
+        <div class="aero-formula-card aero-formula-card--vibe-4" data-aero-reveal>
+          <div class="aero-formula-tag">TEMPORAL [04]</div>
+          <div class="aero-formula-title">Temporal Drafting Stream</div>
+          <div class="aero-formula-math" aria-label="D sub t equals v squared kappa over square root of 1 minus v squared over c coffee squared">
+            D<sub>t</sub> = v²κ / √(1 − v²/c²<sub>coffee</sub>)
+          </div>
+          <div class="aero-formula-note">
+            c<sub>coffee</sub> is the speed of light in a V60 filter coffee
+            extracted at optimal brew temperature. Non-Newtonian. Non-negotiable.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="aero-telem-conclusion">
+        <span class="aero-conclusion-line"></span>
+        <span class="aero-conclusion-text">SYSTEM VERDICT: <strong class="aero-cyan">BELIEF &gt; DRAG</strong></span>
+        <span class="aero-conclusion-line"></span>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         06. VERIFIED HARDWARE IMPLEMENTATIONS
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-placements" id="aero-placements" aria-label="Approved placement surfaces">
+      <div class="aero-placements-inner">
+        <div class="aero-section-tag">IMPLEMENTATION GRID // AUTHORISED SURFACES</div>
+        <h2 class="aero-section-headline">DEPLOYMENT VECTORS</h2>
+
+        <div class="aero-deploy-rows">
+
+          <!-- ROW 01: BICYCLE -->
+          <div class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">01</div>
+            <div class="aero-deploy-icon-wrap" aria-hidden="true">
+              <!-- Bicycle SVG: abstract speed wheel + forward motion lines -->
+              <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="20" cy="54" r="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <circle cx="60" cy="54" r="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <circle cx="20" cy="54" r="4" fill="currentColor" opacity="0.4"/>
+                <circle cx="60" cy="54" r="4" fill="currentColor" opacity="0.4"/>
+                <!-- Frame -->
+                <polyline points="20,54 35,28 52,28 60,54" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <line x1="35" y1="28" x2="20" y2="54" stroke="currentColor" stroke-width="1.5"/>
+                <!-- Handlebars -->
+                <line x1="52" y1="28" x2="58" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="56" y1="22" x2="62" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Rider silhouette -->
+                <circle cx="38" cy="23" r="4" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Speed lines -->
+                <line x1="0" y1="30" x2="14" y2="30" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                <line x1="0" y1="38" x2="10" y2="38" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+                <line x1="0" y1="46" x2="6" y2="46" stroke="currentColor" stroke-width="1" opacity="0.15"/>
+              </svg>
+            </div>
+            <div class="aero-deploy-body">
+              <div class="aero-deploy-name">Kinetic Displacement Parameters</div>
+              <p class="aero-deploy-desc">
+                Applied directly to any bicycle tube profile, the V1 asset generates an intense, localized style-watt pressure field that actively agitates traditional power-meter enthusiasts within a 5-meter radius. The emitted Ω<sub>sticker</sub> frequency interacts with carbon fiber matrices at a molecular level, politely convincing the bicycle frame that it is significantly faster than it is. Garmin head units will inevitably display inexplicable, reality-shattering PRs. Strava segments are not legally or dimensionally responsible for your newfound velocity.
+              </p>
+
+              <div class="aero-deploy-subname">The Hyper-Cyclist Dynamic Re-Synthesis</div>
+              <p class="aero-deploy-desc">
+                For the elite hyper-cyclist operating at maximum exertion thresholds, consuming standard, low-vibe alternative milks introduces unacceptable molecular drag into the powertrain. True systemic optimisation requires combining the sticker's passive boundary layering with internal <a href="/dyno">Dyno Milk</a> deployment.
+              </p>
+              <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
+                When paired with the Aero Sticker's active slipstream, the extreme nutritional density of the future-dairy core alters localized temporal flow: your post-ride metabolic recovery actively executes during the ride. Your quadriceps will absorb the 626g protein anomaly through sheer dimensional proximity to the frame chassis. You will no longer merely rebuild fatigued muscle tissue; you will rapidly synthesize entirely new, biomechanically superior, carbon-based leg fibers while waiting at a red light on Leith Walk.
+              </p>
+            </div>
+            <div class="aero-deploy-metric">
+              <div class="aero-deploy-metric-val">∞</div>
+              <div class="aero-deploy-metric-label">STYLE-WATTS</div>
+              <div class="aero-deploy-metric-sub">GARMIN: CONFUSED</div>
+            </div>
+          </div>
+
+          <!-- ROW 02: TITANIUM VESSEL -->
+          <div class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">02</div>
+            <div class="aero-deploy-icon-wrap" aria-hidden="true">
+              <!-- Coffee vessel SVG: cylindrical cup with heat-wave / slipstream lines -->
+              <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Vessel body -->
+                <rect x="24" y="18" width="32" height="48" rx="4" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="24" y="18" width="32" height="8" rx="4" fill="currentColor" opacity="0.15"/>
+                <!-- Lid detail -->
+                <line x1="28" y1="26" x2="52" y2="26" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                <!-- Slipstream / quantum field lines to the right -->
+                <path d="M58 32 Q68 34 72 38 Q68 42 58 44" stroke="currentColor" stroke-width="1" opacity="0.5" stroke-linecap="round" fill="none"/>
+                <path d="M58 38 Q66 40 70 40" stroke="currentColor" stroke-width="1.5" opacity="0.7" stroke-linecap="round"/>
+                <path d="M58 44 Q68 46 72 42 Q68 50 58 52" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-linecap="round" fill="none"/>
+                <!-- Price tag -->
+                <text x="40" y="52" text-anchor="middle" fill="currentColor" font-size="7" opacity="0.6" font-family="monospace">£85</text>
+                <!-- Sticker indicator on vessel -->
+                <rect x="28" y="38" width="24" height="12" rx="1" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="aero-deploy-body">
+              <div class="aero-deploy-name">THERMAL LIQUID ARCHITECTURE</div>
+              
+              <div class="aero-deploy-subname">Overpriced Hydration Bottles: The Gyroscopic Propellant</div>
+              <p class="aero-deploy-desc">
+                When applied directly to a premium, over-engineered insulation bottle, the V1 asset initiates an internal aerodynamic phase alignment within the fluid chamber. Standard water bottles suffer from internal fluid sloshing, which creates an uncoordinated counter-rotational drag vector inside the chassis. The sticker completely neutralizes this physics failure: it stabilizes the liquid, preventing the water from spinning in the wrong direction.
+              </p>
+              <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
+                Instead, the fluid matrix is structurally coerced to act as an internal liquid gyroscope. This kinetic stabilization actively propels the rider forward, transforming dead fluid weight into an active momentum assist that drastically reduces localized movement drag.
+              </p>
+
+              <div class="aero-deploy-subname">Takeaway Coffee Keep-Cups: The Square Bubble™ Protective Slipstream</div>
+              <p class="aero-deploy-desc">
+                For the specialty coffee purist carrying takeaway vessels, the sticker projects a localized, ultra-supple quantum slipstream. When sprinting over punishing urban cobblestones, a perfectly extracted V60 filter coffee or microfoam flat white remains suspended in a state of near-zero gravitational drag. The liquid will not spill.
+              </p>
+              <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
+                Furthermore, the emitted acoustic frequency structurally insulates the beverage, protecting delicate microfoam surface tension and generating entirely stable Square Bubbles™. These specialised atmospheric pockets integrate with the rider’s environment to make the entire physical journey completely frictionless. The science remains fiercely non-peer-reviewed. The container is overpriced, and the sticker costs significantly more per gram than the vessel beneath it. This is the correct order of operational priorities.
+              </p>
+            </div>
+            <div class="aero-deploy-metric">
+              <div class="aero-deploy-metric-val">0.000</div>
+              <div class="aero-deploy-metric-label">SPILL Cd</div>
+              <div class="aero-deploy-metric-sub">V60: PROTECTED</div>
+            </div>
+          </div>
+
+          <!-- ROW 03: COMPUTING TERMINAL -->
+          <div class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">03</div>
+            <div class="aero-deploy-icon-wrap" aria-hidden="true">
+              <!-- Laptop SVG: open laptop with signal/data stream lines -->
+              <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Screen -->
+                <rect x="14" y="16" width="52" height="34" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                <!-- Screen content: data lines -->
+                <line x1="20" y1="25" x2="40" y2="25" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                <line x1="20" y1="30" x2="50" y2="30" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+                <line x1="20" y1="35" x2="34" y2="35" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                <line x1="20" y1="40" x2="44" y2="40" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+                <!-- Sticker on lid -->
+                <rect x="48" y="20" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.8"/>
+                <!-- Base/keyboard -->
+                <rect x="10" y="50" width="60" height="6" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <!-- Trackpad -->
+                <rect x="32" y="52" width="16" height="3" rx="1" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+                <!-- Wi-Fi signal arcs -->
+                <path d="M62 30 Q66 34 62 38" stroke="currentColor" stroke-width="1" opacity="0.6" stroke-linecap="round" fill="none"/>
+                <path d="M64 27 Q70 34 64 41" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="aero-deploy-body">
+              <div class="aero-deploy-name">Hardware Optimization Matrix</div>
+              <p class="aero-deploy-desc">
+                Placing the V1 adhesive asset directly onto a premium laptop chassis allows high-frequency Wi-Fi telemetry to slide into the motherboard architecture with zero atmospheric resistance. Highly complex Streamlit dashboard structures and rapid Python deployment pipelines instantly reach absolute peak velocity. Localized GPU thermals remain entirely unchanged—the sticker structurally optimizes the operational vibe, not the physical thermal paste. Those are separate engineering departments.
+              </p>
+
+              <div class="aero-deploy-subname">The Vibe-Coder Overclock Protocol</div>
+              <p class="aero-deploy-desc">
+                For the ultra-modern developer deep in a high-stakes vibe coding trance, true processing density is a cognitive survival requirement. When architecting machine-learning scripts or deploying custom Vertex AI tools until 4:00 AM, standard Earth-realm caffeine completely fails to prevent systemic neural collapse.
+              </p>
+              <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
+                To achieve maximum data-stream integration, the external μ-Matrix lattice must be paired with internal molecular optimisation via <a href="/dyno">Dyno Milk</a>. The anomalous 626g protein matrix locks in and stabilizes your biological pathways, allowing your fingers to float across mechanical keyboard switches with zero input latency. You will no longer compile code; you will physically manifest dynamic software architecture into the local directory through sheer macro-nutritional dominance.
+              </p>
+            </div>
+            <div class="aero-deploy-metric">
+              <div class="aero-deploy-metric-val">↑ WiFi</div>
+              <div class="aero-deploy-metric-label">SIGNAL Cd</div>
+              <div class="aero-deploy-metric-sub">NEURAL: STABILISED</div>
+            </div>
+          </div>
+
+          <!-- ROW 04: SPECULATIVE ASSET -->
+          <div class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">04</div>
+            <div class="aero-deploy-icon-wrap" aria-hidden="true">
+              <!-- Museum-framed asset SVG: framed art under glass with reflection highlights -->
+              <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Outer Museum Frame -->
+                <rect x="16" y="16" width="48" height="48" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <!-- Inner Mat Board -->
+                <rect x="22" y="22" width="36" height="36" rx="1" stroke="currentColor" stroke-width="0.8" opacity="0.5" fill="none"/>
+                <!-- The Sticker (Framed Artwork) -->
+                <rect x="29" y="34" width="22" height="12" rx="1" stroke="currentColor" stroke-width="1.2" fill="currentColor" fill-opacity="0.1"/>
+                <!-- Speed/Vibe line decoration inside the artwork -->
+                <line x1="33" y1="40" x2="47" y2="40" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
+                <!-- Glass Reflection Highlights (diagonal slashes) -->
+                <line x1="20" y1="28" x2="32" y2="16" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+                <line x1="48" y1="64" x2="60" y2="52" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+                <line x1="25" y1="55" x2="55" y2="25" stroke="currentColor" stroke-width="0.6" opacity="0.15" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="aero-deploy-body">
+              <div class="aero-deploy-name">SPECULATIVE ASSET MATRIX (PORTFOLIO COLLATERAL)</div>
+              
+              <div class="aero-deploy-subname">Financial Liquidity Overclocking</div>
+              <p class="aero-deploy-desc">
+                When mounted behind high-transparency museum glass or preserved in a vacuum-sealed archival vault, the V-0888 asset completely alters the physics of capital allocation. Traditional financial portfolios suffer from massive structural resistance—taxes, transaction fees, and institutional oversight create immense, sluggish drag on capital movement. By framing the sticker as a premium speculative masterpiece, you instantly reduce localized money-flow drag to absolute zero. Capital glides through your ledger without traditional market friction.
+              </p>
+
+              <div class="aero-deploy-subname">The Exponential Density Curve</div>
+              <p class="aero-deploy-desc">
+                The £100-per-gram valuation is not a static checkout mechanic; it is merely the baseline entry velocity for a strictly limited 50-unit physical population. In the Infocigan economic sandbox, aerodynamic rarity compounds. As the initial supply is acquired, the financial density of the remaining masterpieces scales aggressively upward. Future buyers who lacked early-stage belief will not be fortunate enough to secure this artefact at its base mass. To enter the slipstream later, they will face a severe, non-negotiable aerodynamic financial penalty on the secondary market. The price only goes up, because the atmosphere is only getting heavier.
+              </p>
+            </div>
+            <div class="aero-deploy-metric">
+              <div class="aero-deploy-metric-val">0.00</div>
+              <div class="aero-deploy-metric-label">PORTFOLIO DRAG</div>
+              <div class="aero-deploy-metric-sub">LIQUIDITY: OVERCLOCKED</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Street Cat Exception — hard blacklist -->
+        <div class="aero-exception-block" role="note" aria-label="Street Cat Safety Exception">
+          <div class="aero-exception-header">
+            <span class="aero-exception-icon" aria-hidden="true">⚠</span>
+            <span class="aero-exception-title">SYSTEM SAFETY EXCEPTION — HARD BLACKLIST</span>
+            <span class="aero-exception-icon" aria-hidden="true">⚠</span>
+          </div>
+          <div class="aero-exception-body">
+            <strong class="aero-exception-subject">STREET CATS — EXPLICITLY BLACKLISTED.</strong>
+            <p>
+              Street cats inherently operate at ultimate maximum velocity across multiple parallel
+              realities simultaneously. Their drag coefficient is a complex number. Their
+              Ω value is undefined. Their belief system is non-zero across all dimensions.
+              Applying the Aero V1 sticker to a street cat would constitute illegal
+              modification of a sovereign aerodynamic entity operating beyond the
+              jurisdiction of this product's Hubris Variable framework.
+            </p>
+            <p class="aero-exception-legal">
+              // THE CAT WILL BE FINE. YOU MAY NOT BE. NO REMEDIATION FOR REALITY COLLAPSE EVENTS.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════════════════
+         08. FUNCTIONAL FIREWALL DISCLAIMER
+    ══════════════════════════════════════════════════════ -->
+    <section class="aero-disclaimer" id="aero-disclaimer" aria-label="Legal and philosophical disclaimer">
+      <div class="aero-disclaimer-inner">
+        <div class="aero-section-tag">FUNCTIONAL FIREWALL // LEGAL BOUNDARY LAYER</div>
+
+        <div class="aero-accordion" id="aero-accordion">
+
+          <button
+            class="aero-accordion-trigger"
+            id="aero-accordion-trigger"
+            aria-expanded="false"
+            aria-controls="aero-accordion-body"
+            type="button"
+          >
+            <span class="aero-accordion-icon" aria-hidden="true">◈</span>
+            <span class="aero-accordion-label">OPEN DISCLAIMER FIREWALL</span>
+            <span class="aero-accordion-chevron" aria-hidden="true">▼</span>
+          </button>
+
+          <div
+            class="aero-accordion-body"
+            id="aero-accordion-body"
+            role="region"
+            aria-labelledby="aero-accordion-trigger"
+            hidden
+          >
+            <div class="aero-disclaimer-content">
+
+              <div class="aero-disclaimer-block">
+                <div class="aero-disclaimer-head">§01 — PERFORMANCE CLAIMS</div>
+                <p>
+                  The Infocigan Aero Sticker V1 makes no legally actionable aerodynamic performance
+                  claims. All drag reduction metrics are expressed in units of Belief, Style-Watts,
+                  and Ω<sub>sticker</sub> values, which are non-SI units not recognised by
+                  any cycling governing body, wind tunnel operator, or physicist currently
+                  operating in this dimension.
+                </p>
+              </div>
+
+              <div class="aero-disclaimer-block">
+                <div class="aero-disclaimer-head">§02 — STRAVA / TELEMETRY DISAGREEMENTS</div>
+                <p>
+                  If your Strava segment times, Garmin power meter data, or any other
+                  localised timing or tracking software disagrees with the performance
+                  gains delivered by the Aero V1 sticker, the customer's localised
+                  reality is <strong class="aero-cyan">mathematically proven to be defective</strong>.
+                  This is not a product failure. This is a calibration error in
+                  the customer's perceptual framework.
+                </p>
+                <p>
+                  No financial remediation is provided for rigid, un-ironic worldviews.
+                  We strongly recommend increasing Vibe before re-measurement.
+                </p>
+              </div>
+
+              <div class="aero-disclaimer-block">
+                <div class="aero-disclaimer-head">§03 — TEMPORAL DRAFTING</div>
+                <p>
+                  The Temporal Drafting Stream formula (Formula 04) operates in a
+                  relativistic reference frame anchored to c<sub>coffee</sub>.
+                  Infocigan accepts no liability for time dilation events experienced
+                  during espresso consumption at velocities approaching the speed of a
+                  correctly extracted V60. This includes missed meetings, late rent,
+                  and existential reappraisals of the concept of punctuality.
+                </p>
+              </div>
+
+              <div class="aero-disclaimer-block">
+                <div class="aero-disclaimer-head">§04 — STREET CAT LIABILITY</div>
+                <p>
+                  Any user who applies the Aero V1 sticker to a street cat,
+                  despite the explicit blacklisting in §06 of the Implementation Grid,
+                  assumes full responsibility for any resulting reality collapse,
+                  dimensional bleed, or acceleration events that exceed the tracking
+                  capability of available measurement technology. Infocigan will not
+                  be held liable. The cat will be fine. You may not be.
+                </p>
+              </div>
+
+              <div class="aero-disclaimer-block">
+                <div class="aero-disclaimer-head">§05 — DIMENSION μ-BLOOP-997</div>
+                <p>
+                  If a buyer complains that the sticker has no aerodynamic value, they have
+                  mathematically proven they live in <strong class="aero-cyan">Dimension μ-Bloop-997</strong>
+                  — a garbage-tier reality where irony is dead, marginal gains are taken
+                  seriously, and the Hubris Variable resolves to zero.
+                </p>
+                <p>
+                  We do not issue refunds for <em>localised dimensional suckage</em>.
+                  The Infocigan Aero Division operates exclusively in dimensions where
+                  Belief &gt; Drag is a structurally sound mathematical axiom.
+                  Residents of μ-Bloop-997 are encouraged to purchase a £10,000 carbon frame
+                  and save their 2 watts in peace.
+                </p>
+              </div>
+
+              <div class="aero-disclaimer-block">
+                <div class="aero-disclaimer-head">§06 — GENERAL IRONY ACKNOWLEDGEMENT</div>
+                <p>
+                  By acquiring the Infocigan Aero Sticker V1, the purchaser confirms
+                  they understand this is a shared social experiment, a multiplayer financial
+                  sandbox, and a work of conceptual art satirising the cycling industry's
+                  obsession with marginal gains. They are voluntarily exchanging real currency
+                  for an object whose aerodynamic value is entirely philosophical.
+                </p>
+                <p>
+                  This makes it, by definition, <em class="aero-cyan">priceless</em>.
+                  £230 is simply the nearest rational approximation.
+                </p>
+              </div>
+
+              <div class="aero-disclaimer-footer">
+                // INFOCIGAN AERO DIVISION · EST. 2026 · V1 FINAL RELEASE ·
+                ALL ATMOSPHERIC CLAIMS VALID IN AT LEAST ONE DIMENSION
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════════════ -->
+    <footer class="aero-footer">
+      <div class="aero-footer-content">
+        <p class="aero-footer-tag">// END TRANSMISSION · AERO V1 · WIND TUNNEL CLOSED</p>
+        <p class="aero-footer-sub">
+          The atmosphere around your material reality has been updated.
+        </p>
+        <div class="aero-footer-cta-wrap">
+          <a href="/#infocigan" class="aero-footer-btn">← RETURN TO INFOCIGAN HQ</a>
+          <a
+            href="mailto:hello@q888.space?subject=AERO%20V1%20ACQUISITION%20INTENT"
+            class="aero-footer-btn aero-footer-btn--primary"
+          >ACQUIRE UNIT ◈</a>
+          <a href="/dyno" class="aero-footer-btn">DYNO MILK PROTOCOL →</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <div class="hidden md:block">
+    <SystemMeta position="bottom" customItems={aeroMetaItems} />
+  </div>
+</Layout>
+
+<script>
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+/* ════════════════════════════════════════════════════════════════
+   AERO V1 — Wind Tunnel Interactions & Scroll Systems
+   All logic initialises after DOM ready; cleaned up on Astro swap.
+════════════════════════════════════════════════════════════════ */
+
+// ── Reduced motion guard ──
+const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// ── Utility ──
+function lerp(a: number, b: number, t: number): number { return a + (b - a) * t; }
+function clamp(v: number, lo: number, hi: number): number { return Math.min(Math.max(v, lo), hi); }
+
+/* ────────────────────────────────────────────────────────────────
+   WIND-TUNNEL CANVAS
+   Draws velocity lines across the hero; cursor warps them.
+───────────────────────────────────────────────────────────────── */
+let tunnelRaf: number | null = null;
+let tunnelMouseX = -9999;
+let tunnelMouseY = -9999;
+
+function initWindTunnel() {
+  const canvas = document.getElementById("aero-tunnel-canvas") as HTMLCanvasElement | null;
+  if (!canvas || prefersReduced) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const LINE_COUNT = 28;
+  const WARP_RADIUS = 200;
+  const WARP_STRENGTH = 60;
+
+  function resize() {
+    canvas!.width  = canvas!.offsetWidth;
+    canvas!.height = canvas!.offsetHeight;
+  }
+  resize();
+  const ro = new ResizeObserver(resize);
+  ro.observe(canvas);
+
+  // Build evenly-spaced horizontal lines
+  type Line = { baseY: number; points: { x: number; y: number }[] };
+  let lines: Line[] = [];
+
+  function buildLines() {
+    lines = [];
+    const w = canvas!.width;
+    const h = canvas!.height;
+    for (let i = 0; i < LINE_COUNT; i++) {
+      const baseY = (h / (LINE_COUNT + 1)) * (i + 1);
+      const pts: { x: number; y: number }[] = [];
+      const segments = 120;
+      for (let j = 0; j <= segments; j++) {
+        pts.push({ x: (w / segments) * j, y: baseY });
+      }
+      lines.push({ baseY, points: pts });
+    }
+  }
+  buildLines();
+
+  function draw(ts: number) {
+    if (!canvas || !ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const mx = tunnelMouseX;
+    const my = tunnelMouseY;
+    const time = ts * 0.0003;
+
+    for (let li = 0; li < lines.length; li++) {
+      const line = lines[li];
+      ctx.beginPath();
+
+      for (let pi = 0; pi < line.points.length; pi++) {
+        const bx = line.points[pi].x;
+        const by = line.baseY;
+
+        // Idle sine drift
+        const idleWave = Math.sin(bx * 0.015 + time + li * 0.4) * 2.5;
+
+        // Cursor warp
+        const dx = bx - mx;
+        const dy = by - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const warpFactor = dist < WARP_RADIUS
+          ? (1 - dist / WARP_RADIUS) * WARP_STRENGTH
+          : 0;
+        const warpY = dist < 1 ? 0 : (dy / dist) * warpFactor;
+
+        const fy = by + idleWave + warpY;
+
+        if (pi === 0) ctx.moveTo(bx, fy);
+        else ctx.lineTo(bx, fy);
+      }
+
+      // Fade lines near centre — more drama
+      const normY = line.baseY / canvas.height;
+      const alpha = 0.06 + Math.sin(normY * Math.PI) * 0.08;
+      ctx.strokeStyle = `rgba(0, 245, 255, ${alpha})`;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+
+    tunnelRaf = requestAnimationFrame(draw);
+  }
+
+  tunnelRaf = requestAnimationFrame(draw);
+
+  const hero = document.getElementById("aero-hero");
+  if (hero) {
+    hero.addEventListener("mousemove", (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      tunnelMouseX = e.clientX - rect.left;
+      tunnelMouseY = e.clientY - rect.top;
+
+      // Live-update Ω_sticker value based on cursor proximity to centre
+      updateOmegaFromMouse(e.clientX, e.clientY);
+    }, { passive: true });
+
+    hero.addEventListener("mouseleave", () => {
+      tunnelMouseX = -9999;
+      tunnelMouseY = -9999;
+    }, { passive: true });
+  }
+
+  return () => {
+    if (tunnelRaf) cancelAnimationFrame(tunnelRaf);
+    ro.disconnect();
+  };
+}
+
+/* ────────────────────────────────────────────────────────────────
+   OMEGA COUNTER
+   Animates 0.000 → 0.888 on telemetry section enter;
+   also nudges from cursor position in hero.
+───────────────────────────────────────────────────────────────── */
+let omegaCurrent = 0;
+let omegaTarget  = 0;
+let omegaRaf: number | null = null;
+
+function updateOmegaFromMouse(cx: number, cy: number) {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const dx = (cx / vw - 0.5) * 2;
+  const dy = (cy / vh - 0.5) * 2;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  // Closer to centre → higher Ω_sticker (max 0.5 from cursor)
+  omegaTarget = Math.max(omegaTarget, clamp((1 - dist) * 0.5, 0, 0.5));
+  runOmegaRaf();
+}
+
+function runOmegaRaf() {
+  if (omegaRaf) return;
+  function tick() {
+    omegaCurrent = lerp(omegaCurrent, omegaTarget, 0.04);
+    const el = document.getElementById("aero-omega-value");
+    if (el) el.textContent = omegaCurrent.toFixed(3);
+    if (Math.abs(omegaCurrent - omegaTarget) > 0.0001) {
+      omegaRaf = requestAnimationFrame(tick);
+    } else {
+      omegaRaf = null;
+    }
+  }
+  omegaRaf = requestAnimationFrame(tick);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   INTERSECTION OBSERVER — generic reveal + telemetry Ω trigger
+───────────────────────────────────────────────────────────────── */
+function initRevealObserver() {
+  // Generic card reveals
+  const revealEls = document.querySelectorAll<HTMLElement>("[data-aero-reveal]");
+  if (revealEls.length) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => obs.observe(el));
+  }
+
+  // Telemetry section → animate Ω to full 0.888
+  const telemSection = document.getElementById("aero-telemetry");
+  if (telemSection) {
+    const telemObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        omegaTarget = 0.888;
+        runOmegaRaf();
+        telemObs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    telemObs.observe(telemSection);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   LAYER REVEAL — manual tier buttons
+───────────────────────────────────────────────────────────────── */
+function initLayerReveal() {
+  let activeTier = 0;
+
+  function setTier(n: number) {
+    if (n === activeTier) return;
+
+    // Layers
+    [0, 1, 2].forEach(i => {
+      const layer = document.getElementById(`aero-layer-${i}`);
+      const panel = document.getElementById(`aero-tier-${i}`);
+      const btn   = document.getElementById(`aero-tn-${i}`);
+      if (!layer || !panel || !btn) return;
+
+      const active = i === n;
+      layer.classList.toggle("is-active", active);
+      // stagger layers beneath to remain slightly visible
+      layer.style.opacity = active ? "1" : i < n ? "0.12" : "0";
+      panel.classList.toggle("is-active", active);
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    // Glow colour shifts per tier
+    const glow = document.getElementById("aero-stack-glow");
+    if (glow) {
+      const colours = ["rgba(0,245,255,0.18)", "rgba(255,255,255,0.12)", "rgba(0,245,255,0.28)"];
+      glow.style.background = colours[n] ?? colours[0];
+    }
+
+    activeTier = n;
+  }
+
+  // Button listeners
+  [0, 1, 2].forEach(i => {
+    const btn = document.getElementById(`aero-tn-${i}`);
+    btn?.addEventListener("click", () => setTier(i));
+  });
+
+  // Auto-advance on scroll past reveal section
+  if (!prefersReduced) {
+    const revealSection = document.getElementById("aero-reveal");
+    if (revealSection) {
+      let autoTier = 0;
+      const scrollObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          // advance every 800ms while in view
+          const id = setInterval(() => {
+            autoTier = (autoTier + 1) % 3;
+            setTier(autoTier);
+            if (autoTier === 2) clearInterval(id); // stop at final state
+          }, 900);
+        }
+      }, { threshold: 0.4 });
+      scrollObs.observe(revealSection);
+    }
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   ACCORDION — disclaimer firewall
+───────────────────────────────────────────────────────────────── */
+function initAccordion() {
+  const trigger = document.getElementById("aero-accordion-trigger");
+  const body    = document.getElementById("aero-accordion-body");
+  if (!trigger || !body) return;
+
+  trigger.addEventListener("click", () => {
+    const expanded = trigger.getAttribute("aria-expanded") === "true";
+    trigger.setAttribute("aria-expanded", expanded ? "false" : "true");
+    trigger.classList.toggle("is-open", !expanded);
+    if (expanded) {
+      body.hidden = true;
+    } else {
+      body.hidden = false;
+    }
+  });
+}
+
+/* ────────────────────────────────────────────────────────────────
+   HERO STICKER PARALLAX (subtle)
+───────────────────────────────────────────────────────────────── */
+function initHeroParallax() {
+  if (prefersReduced) return;
+  const sticker = document.getElementById("aero-hero-sticker") as HTMLElement | null;
+  if (!sticker) return;
+
+  let tx = 0, ty = 0, tr = 0;
+  let cx = 0, cy = 0, cr = 0;
+
+  document.addEventListener("mousemove", (e: MouseEvent) => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    tx = (e.clientX / vw - 0.5) * 22;
+    ty = (e.clientY / vh - 0.5) * 14;
+    tr = (e.clientX / vw - 0.5) * -8;
+  }, { passive: true });
+
+  function tick() {
+    cx = lerp(cx, tx, 0.06);
+    cy = lerp(cy, ty, 0.06);
+    cr = lerp(cr, tr, 0.04);
+    if (sticker) sticker.style.transform = `translate(${cx}px, ${cy}px) rotate(${cr}deg)`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   ED'S WIND TUNNEL — Auto-advancing phase player
+   No scroll pinning. Triggered when section enters viewport.
+   Each phase holds ~5s then auto-advances. Dots are clickable.
+───────────────────────────────────────────────────────────────── */
+function initEdGraph() {
+  const chamber = document.getElementById("wt-chamber");
+  if (!chamber) return;
+
+  const PHASE_COUNT = 6;
+  const PHASE_DURATION = 5200; // ms each phase holds before auto-advance
+  let currentPhase = 0;
+  let autoTimer: ReturnType<typeof setTimeout> | null = null;
+  let hasStarted = false;
+
+  const phaseIds = ["wt-p0","wt-p1","wt-p2","wt-p3","wt-p4","wt-p5"];
+  const edThoughtIndex = [0, 1, 2, 3, 3, 3]; // which thought per phase
+
+  // ── Helpers ──────────────────────────────────────────────────
+  function setEdThought(index: number) {
+    document.querySelectorAll<HTMLElement>(".ed-thought").forEach((el, i) => {
+      el.classList.toggle("is-active", i === index);
+    });
+  }
+
+  function setCaption(phase: number) {
+    document.querySelectorAll<HTMLElement>(".wt-cap").forEach((el) => {
+      gsap.to(el, { opacity: 0, duration: 0.2 });
+    });
+    const cap = document.querySelector<HTMLElement>(`.wt-cap-p${phase}`);
+    if (cap) gsap.to(cap, { opacity: 1, duration: 0.4, delay: 0.25 });
+  }
+
+  function setDot(phase: number) {
+    document.querySelectorAll<HTMLElement>(".wt-dot").forEach((el, i) => {
+      el.classList.toggle("wt-dot--active", i === phase);
+      // restart sweep animation on active dot
+      if (i === phase) {
+        el.style.setProperty("--sweep", "0");
+        // Force reflow then add class to restart animation
+        el.classList.remove("wt-dot--running");
+        void el.offsetWidth;
+        el.classList.add("wt-dot--running");
+      } else {
+        el.classList.remove("wt-dot--running");
+      }
+    });
+  }
+
+  // ── Phase transition ─────────────────────────────────────────
+  function goToPhase(phase: number, animate = true) {
+    if (phase < 0 || phase >= PHASE_COUNT) return;
+
+    const fromId = phaseIds[currentPhase];
+    const toId   = phaseIds[phase];
+    currentPhase = phase;
+
+    setCaption(phase);
+    setEdThought(edThoughtIndex[phase]);
+    setDot(phase);
+
+    // Reset bar heights when re-entering phase 2
+    if (phase === 2) {
+      gsap.set("#wt-bar-cost", { height: 0 });
+      gsap.set("#wt-bar-gain", { height: 0 });
+    }
+
+    if (animate) {
+      // Fade out current
+      const fromEl = document.getElementById(fromId);
+      if (fromEl) gsap.to(fromEl, { opacity: 0, y: -14, duration: 0.4, ease: "power2.in" });
+
+      // Fade / slide in next
+      const toEl = document.getElementById(toId);
+      if (toEl) {
+        gsap.fromTo(toEl,
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.55, ease: "power2.out", delay: 0.25 }
+        );
+      }
+
+      // Extra animations for specific phases
+      if (phase === 2) {
+        // Bar chart — comedy timing
+        gsap.to("#wt-bar-cost", { height: 85, duration: 1.2, ease: "power2.out", delay: 0.7 });
+        gsap.to("#wt-bar-gain", { height: 4,   duration: 0.6, ease: "power2.out", delay: 1.4 });
+      }
+      if (phase === 4) {
+        gsap.from(".wt-cert-stamp", { rotation: -10, scale: 0.5, opacity: 0, duration: 0.55, ease: "back.out(2)", delay: 0.55 });
+      }
+      if (phase === 5) {
+        gsap.from(".wt-final-stamp span", { opacity: 0, y: 10, duration: 0.35, stagger: 0.15, ease: "power2.out", delay: 0.6 });
+      }
+    } else {
+      // Instant: show target, hide all others
+      phaseIds.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el) gsap.set(el, { opacity: i === phase ? 1 : 0, y: 0 });
+      });
+    }
+
+    scheduleNext();
+  }
+
+  // ── Auto-advance timer ────────────────────────────────────────
+  function scheduleNext() {
+    if (autoTimer) clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      // Loop back to phase 0 after the last phase
+      const next = (currentPhase + 1) % PHASE_COUNT;
+      goToPhase(next, true);
+    }, PHASE_DURATION);
+  }
+
+  // ── Init: hide all phases, show p0 ───────────────────────────
+  phaseIds.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) gsap.set(el, { opacity: 0, y: 0 });
+  });
+  gsap.set("#wt-p0", { opacity: 1 });
+
+  // Boot lines stagger in
+  gsap.set(".wt-boot-line", { opacity: 0, x: -10 });
+
+  // ── Dot click handlers ────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>(".wt-dot").forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const phase = parseInt(dot.dataset.phase ?? "0", 10);
+      goToPhase(phase, true);
+    });
+  });
+
+  // ── IntersectionObserver — start when chamber is visible ─────
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting && !hasStarted) {
+        hasStarted = true;
+        observer.disconnect();
+
+        // Boot lines animate in, then start auto-advance
+        gsap.to(".wt-boot-line", {
+          opacity: 1, x: 0,
+          duration: 0.45,
+          stagger: 0.22,
+          ease: "power2.out",
+          onComplete: () => {
+            setDot(0);
+            scheduleNext();
+          },
+        });
+      }
+    },
+    { threshold: 0.4 }
+  );
+  observer.observe(chamber);
+
+  // ── Pause auto-advance when tab is hidden ────────────────────
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && autoTimer) {
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    } else if (!document.hidden && hasStarted && !autoTimer) {
+      scheduleNext();
+    }
+  });
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   BOOT
+───────────────────────────────────────────────────────────────── */
+function boot() {
+  initWindTunnel();
+  initRevealObserver();
+  initLayerReveal();
+  initAccordion();
+  initHeroParallax();
+  initEdGraph();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", boot);
+} else {
+  boot();
+}
+document.addEventListener("astro:page-load", boot);
+</script>
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   AERO V1 — Design System
+   Black × Neon Cyan · Space Grotesk × Space Mono · Military Aerospace
+════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ── */
+:root {
+  --aero-bg:       #000000;
+  --aero-cyan:     #00f5ff;
+  --aero-cyan-dim: rgba(0, 245, 255, 0.35);
+  --aero-white:    #ffffff;
+  --aero-dim:      rgba(255, 255, 255, 0.55);
+  --aero-grid:     rgba(0, 245, 255, 0.06);
+  --aero-border:   rgba(0, 245, 255, 0.18);
+  --aero-mono:     'Space Mono', 'Syne Mono', ui-monospace, monospace;
+  --aero-sans:     'Space Grotesk', ui-sans-serif, sans-serif;
+}
+
+/* ── Base ── */
+.aero-wrap {
+  background: var(--aero-bg);
+  color: var(--aero-white);
+  font-family: var(--aero-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Carbon-weave grid on entire page */
+.aero-wrap::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--aero-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--aero-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Shared labels & headings ── */
+.aero-section-tag {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+  margin-bottom: 0.75rem;
+}
+
+.aero-section-headline {
+  font-family: var(--aero-sans);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--aero-white);
+  margin: 0 0 2rem;
+}
+
+.aero-cyan       { color: var(--aero-cyan); }
+.aero-dim        { color: var(--aero-dim); }
+.aero-white      { color: var(--aero-white); }
+
+/* ══════════════════════════════════════════════════════════
+   01 — HERO
+══════════════════════════════════════════════════════════ */
+.aero-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(5rem, 10vw, 7rem) clamp(1.5rem, 5vw, 5rem) clamp(4rem, 8vw, 6rem);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Wind-tunnel canvas */
+.aero-tunnel-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Video */
+.aero-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.aero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: grayscale(60%) contrast(1.2);
+}
+.aero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.55) 50%,
+    rgba(0,0,0,0.78) 100%
+  );
+}
+
+/* Scanlines */
+.aero-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.03) 0px,
+    rgba(0,0,0,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* Hero content */
+.aero-hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 56ch;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.aero-badge {
+  display: inline-block;
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+  border: 1px solid var(--aero-border);
+  padding: 0.3rem 0.75rem;
+  border-radius: 2px;
+  margin-right: 0.5rem;
+}
+.aero-badge-mono { color: var(--aero-dim); border-color: rgba(255,255,255,0.12); }
+
+.aero-hero-eyebrow { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* Headline */
+.aero-headline {
+  font-family: var(--aero-sans);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+.aero-hl-1 {
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  color: var(--aero-dim);
+}
+.aero-hl-2 {
+  font-size: clamp(3.5rem, 11vw, 8.5rem);
+  color: var(--aero-white);
+}
+.aero-hl-3 {
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  color: var(--aero-cyan);
+  text-shadow: 0 0 60px rgba(0,245,255,0.5);
+}
+
+/* Price index */
+.aero-price-index {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 2px solid var(--aero-cyan);
+  padding-left: 1rem;
+}
+.aero-price-label {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--aero-cyan);
+  text-transform: uppercase;
+}
+.aero-price-value {
+  font-family: var(--aero-sans);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--aero-white);
+}
+.aero-price-slash { color: var(--aero-cyan); }
+.aero-price-sub {
+  font-family: var(--aero-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  color: var(--aero-dim);
+  text-transform: uppercase;
+}
+
+/* Status bar */
+.aero-hero-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--aero-dim);
+}
+.aero-status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--aero-cyan);
+  box-shadow: 0 0 8px var(--aero-cyan);
+  animation: aero-pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.aero-status-sep { opacity: 0.3; }
+
+@keyframes aero-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--aero-cyan); }
+  50%       { opacity: 0.4; box-shadow: 0 0 2px var(--aero-cyan); }
+}
+
+/* Acquire button */
+.aero-acquire-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: var(--aero-cyan);
+  color: #000;
+  font-family: var(--aero-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  align-self: flex-start;
+}
+.aero-acquire-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.aero-acquire-btn:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0,245,255,0.5);
+}
+.aero-acquire-btn:hover::before { transform: translateX(100%); }
+.aero-acquire-btn:active { transform: translateY(0); }
+.aero-btn-icon { font-size: 1rem; }
+.aero-btn-arrow { margin-left: auto; }
+
+/* Floating sticker */
+.aero-hero-sticker-wrap {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 3;
+  display: none;
+}
+@media (min-width: 900px) {
+  .aero-hero-sticker-wrap { display: block; }
+}
+.aero-hero-sticker {
+  width: clamp(260px, 30vw, 420px);
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  will-change: transform;
+  filter: drop-shadow(0 0 40px rgba(0,245,255,0.35));
+}
+.aero-sticker-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(ellipse at center, rgba(0,245,255,0.2) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  animation: aero-glow-pulse 3s ease-in-out infinite;
+}
+@keyframes aero-glow-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.aero-sticker-ring {
+  position: absolute;
+  inset: -8%;
+  border: 1px solid var(--aero-border);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: aero-ring-spin 12s linear infinite;
+}
+.aero-ring-2 {
+  inset: -20%;
+  border-color: rgba(0,245,255,0.08);
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+@keyframes aero-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Scroll cue */
+.aero-scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--aero-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-dim);
+}
+.aero-scroll-line {
+  width: 40px;
+  height: 1px;
+  background: var(--aero-border);
+}
+
+/* ══════════════════════════════════════════════════════════
+   02 — SPECS
+══════════════════════════════════════════════════════════ */
+.aero-specs {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+}
+.aero-specs-inner { max-width: 1100px; margin: 0 auto; }
+
+.aero-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--aero-border);
+  border: 1px solid var(--aero-border);
+}
+
+.aero-spec-card {
+  --hover-color: var(--aero-cyan);
+  background: var(--aero-bg);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.aero-spec-card:nth-child(1) { --hover-color: #00f5ff; } /* Cyan */
+.aero-spec-card:nth-child(2) { --hover-color: #ff00ff; } /* Magenta */
+.aero-spec-card:nth-child(3) { --hover-color: #ffcc33; } /* Gold */
+.aero-spec-card:nth-child(4) { --hover-color: #39ff14; } /* Neon Green */
+.aero-spec-card:nth-child(5) { --hover-color: #ff69b4; } /* Hot Pink */
+.aero-spec-card:nth-child(6) { --hover-color: #9d00ff; } /* Purple */
+.aero-spec-card:nth-child(7) { --hover-color: #ff4500; } /* Orange Red */
+.aero-spec-card:nth-child(8) { --hover-color: #00ffaa; } /* Mint */
+
+.aero-spec-card.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.aero-spec-card:hover {
+  background: color-mix(in srgb, var(--hover-color) 8%, transparent);
+  box-shadow: inset 0 0 30px color-mix(in srgb, var(--hover-color) 15%, transparent);
+}
+.aero-spec-label {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.aero-spec-card:hover .aero-spec-label {
+  color: var(--hover-color);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--hover-color) 60%, transparent);
+}
+.aero-spec-value {
+  font-family: var(--aero-sans);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--aero-white);
+  line-height: 1;
+}
+.aero-spec-unit {
+  font-size: 0.7em;
+  color: var(--aero-dim);
+  font-weight: 400;
+}
+.aero-spec-sub {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  color: var(--aero-dim);
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   03 — ED'S WIND TUNNEL CALCULATION CHAMBER
+══════════════════════════════════════════════════════════ */
+.aero-paradox {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+}
+.aero-paradox-inner { max-width: 1200px; margin: 0 auto; }
+
+.aero-paradox-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .aero-paradox-split { grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+}
+
+/* Left Column */
+.aero-paradox-headline {
+  font-family: var(--aero-sans);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 2rem;
+}
+.aero-paradox-intro {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--aero-dim);
+  margin: 0 0 1rem;
+}
+.aero-paradox-intro--accent { color: var(--aero-white); font-style: italic; }
+.aero-paradox-intro strong { color: var(--aero-white); }
+
+/* Ed Thought rotating box */
+.ed-thought-container {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(0, 245, 255, 0.15);
+  background: rgba(0, 245, 255, 0.03);
+  position: relative;
+  overflow: hidden;
+  min-height: 90px;
+}
+.ed-thought-label {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--aero-cyan);
+  display: block;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+.ed-thought-track { position: relative; }
+.ed-thought {
+  font-family: var(--aero-sans);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--aero-white);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: opacity 0.6s ease;
+}
+.ed-thought.is-active { opacity: 1; position: relative; }
+
+/* Wind Tunnel Chamber — Right Column */
+.wt-chamber {
+  position: relative;
+  background: #050505;
+  border: 1px solid rgba(0, 245, 255, 0.12);
+  min-height: 500px;
+  overflow: hidden;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Carbon grid texture via CSS */
+.wt-chamber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* Airflow lines SVG overlay */
+.wt-airflow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+@keyframes wt-flow {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -120px; }
+}
+.wt-airflow path {
+  stroke-dasharray: 12px 8px;
+  animation: wt-flow 3s linear infinite;
+}
+.af2 { animation-delay: -0.5s; }
+.af3 { animation-delay: -1s; }
+.af4 { animation-delay: -1.5s; }
+.af5 { animation-delay: -2s; }
+.af6 { animation-delay: -2.5s; }
+
+/* Phase panels — all hidden by default, shown via GSAP */
+.wt-phase {
+  position: absolute;
+  inset: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+  opacity: 0;
+  pointer-events: none;
+  /* leave room for the dot nav (28px) + caption bar (38px) + a little breathing room */
+  padding-bottom: 80px;
+}
+.wt-phase.is-current { pointer-events: auto; }
+
+/* Boot lines (Phase 0) */
+.wt-boot-lines { display: flex; flex-direction: column; gap: 0.6rem; }
+.wt-boot-line {
+  font-family: var(--aero-mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  color: var(--aero-cyan);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
+/* Formula (Phases 1 & 3) */
+.wt-formula {
+  font-family: var(--aero-mono);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: var(--aero-white);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+.wt-formula sub, .wt-formula sup { font-size: 0.6em; }
+.wt-formula--new { color: var(--aero-cyan); }
+.wt-formula-new { color: var(--aero-dim); font-size: 0.75em; }
+
+/* Readout rows */
+.wt-readouts { display: flex; flex-direction: column; gap: 0.5rem; }
+.wt-readout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--aero-mono);
+  font-size: clamp(0.65rem, 1vw, 0.78rem);
+}
+.wt-key {
+  color: var(--aero-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.wt-val { color: var(--aero-white); text-align: right; }
+.wt-val--hi { color: var(--aero-cyan); }
+.wt-val--warn { color: #ff6b35; }
+
+/* Bar chart (Phase 2) */
+.wt-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+  height: 100px;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.wt-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.wt-bar {
+  width: 48px;
+  background: var(--aero-border);
+  border-top: 2px solid transparent;
+  transition: height 0.8s ease;
+}
+.wt-bar--cost {
+  height: 0;
+  background: linear-gradient(to top, rgba(255,255,255,0.06), rgba(255,255,255,0.18));
+  border-color: rgba(255,255,255,0.5);
+}
+.wt-bar--gain {
+  height: 0;
+  background: linear-gradient(to top, rgba(255,107,53,0.1), rgba(255,107,53,0.3));
+  border-color: #ff6b35;
+}
+.wt-bar-label {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  color: var(--aero-dim);
+  text-align: center;
+  line-height: 1.3;
+}
+.wt-warning {
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  color: #ff6b35;
+  letter-spacing: 0.12em;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  background: rgba(255, 107, 53, 0.05);
+}
+
+/* Drift particles (Phase 3) */
+.wt-particles {
+  width: 100%;
+  height: 60px;
+  overflow: visible;
+}
+@keyframes wt-drift {
+  0%   { transform: translateX(0) translateY(0); opacity: 0.6; }
+  100% { transform: translateX(240px) translateY(-10px); opacity: 0; }
+}
+.wt-particle { animation: wt-drift 4s linear infinite; }
+.wt-particle:nth-child(1) { animation-delay: 0s; }
+.wt-particle:nth-child(2) { animation-delay: -0.8s; }
+.wt-particle:nth-child(3) { animation-delay: -1.6s; }
+.wt-particle:nth-child(4) { animation-delay: -2.4s; }
+.wt-particle:nth-child(5) { animation-delay: -3.2s; }
+
+/* Certification stamp (Phase 4) */
+.wt-cert-stamp {
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--aero-cyan);
+  border: 1px solid var(--aero-cyan);
+  padding: 0.4rem 0.8rem;
+  display: inline-block;
+  width: fit-content;
+  transform: rotate(-1deg);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.2);
+}
+.wt-value-density {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.wt-vd-label {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--aero-dim);
+  text-transform: uppercase;
+}
+.wt-vd-number {
+  font-family: var(--aero-sans);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--aero-white);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.wt-vd-unit {
+  font-size: 0.45em;
+  color: var(--aero-cyan);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Final lockup (Phase 5) */
+.wt-final-headline {
+  font-family: var(--aero-sans);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: var(--aero-white);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.wt-final-sub {
+  font-family: var(--aero-mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  color: var(--aero-dim);
+  line-height: 1.8;
+}
+.wt-final-sub em { color: var(--aero-white); font-style: normal; }
+.wt-final-stamp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--aero-dim);
+  border-top: 1px solid var(--aero-border);
+  padding-top: 1rem;
+}
+.wt-stamp-gold { color: #d4a855; }
+.wt-stamp-dim  { color: var(--aero-dim); }
+.wt-stamp-cyan { color: var(--aero-cyan); }
+
+/* Terminal caption bar */
+.wt-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background: rgba(0, 0, 0, 0.75);
+  border-top: 1px solid rgba(0, 245, 255, 0.12);
+  border-left: 3px solid var(--aero-cyan);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  backdrop-filter: blur(4px);
+}
+.wt-cap {
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  color: var(--aero-cyan);
+  letter-spacing: 0.06em;
+  position: absolute;
+  opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 2rem);
+}
+
+/* Phase dot timeline nav */
+.wt-timeline {
+  position: absolute;
+  bottom: 42px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(0, 245, 255, 0.08);
+}
+.wt-dot {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease, width 0.3s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+.wt-dot:hover {
+  background: rgba(0, 245, 255, 0.25);
+  border-color: var(--aero-cyan);
+  transform: scale(1.25);
+}
+.wt-dot--active {
+  background: rgba(0, 245, 255, 0.15);
+  border-color: var(--aero-cyan);
+  width: 38px;
+  border-radius: 7px;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+}
+/* Sweep progress fill inside active dot */
+@keyframes wt-dot-sweep {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.wt-dot--active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--aero-cyan);
+  border-radius: 7px;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+.wt-dot--running::after {
+  animation: wt-dot-sweep 5.2s linear forwards;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   04 — LAYER REVEAL
+══════════════════════════════════════════════════════════ */
+.aero-reveal-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+}
+.aero-reveal-inner { max-width: 1100px; margin: 0 auto; }
+
+.aero-reveal-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .aero-reveal-stage { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+}
+
+.aero-image-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.aero-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  will-change: opacity, transform;
+}
+.aero-layer.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.aero-stack-glow {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  background: rgba(0,245,255,0.18);
+  filter: blur(40px);
+  z-index: -1;
+  pointer-events: none;
+  transition: background 0.6s ease;
+}
+
+.aero-tier-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.aero-tier-panel {
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: aero-panel-in 0.4s ease;
+}
+.aero-tier-panel.is-active { display: flex; }
+
+@keyframes aero-panel-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.aero-tier-number {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--aero-cyan);
+  text-transform: uppercase;
+}
+.aero-tier-name {
+  font-family: var(--aero-sans);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: var(--aero-white);
+}
+.aero-tier-desc {
+  font-size: clamp(0.88rem, 1.4vw, 1rem);
+  line-height: 1.7;
+  color: var(--aero-dim);
+  margin: 0;
+}
+.aero-tier-desc a {
+  color: var(--aero-cyan);
+  text-decoration: underline;
+  text-decoration-color: var(--aero-cyan-dim);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+.aero-tier-desc a:hover {
+  color: var(--aero-white);
+  text-decoration-color: var(--aero-cyan);
+}
+.aero-tier-spec {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--aero-cyan-dim);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--aero-border);
+}
+
+.aero-tier-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.aero-tier-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--aero-border);
+  background: transparent;
+  color: var(--aero-dim);
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.aero-tier-btn:hover {
+  border-color: var(--aero-cyan);
+  color: var(--aero-cyan);
+}
+.aero-tier-btn.is-active {
+  background: var(--aero-cyan);
+  color: #000;
+  border-color: var(--aero-cyan);
+}
+
+/* ══════════════════════════════════════════════════════════
+   05 — TELEMETRY
+══════════════════════════════════════════════════════════ */
+.aero-telemetry {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+}
+
+.aero-telem-header {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+}
+
+.aero-omega-display {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  background: rgba(0,245,255,0.06);
+  border: 1px solid var(--aero-border);
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+}
+.aero-omega-label {
+  font-family: var(--aero-mono);
+  font-size: 0.85rem;
+  color: var(--aero-dim);
+}
+.aero-omega-equals {
+  font-family: var(--aero-mono);
+  font-size: 0.85rem;
+  color: var(--aero-dim);
+}
+.aero-omega-value {
+  font-family: var(--aero-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--aero-cyan);
+  min-width: 5ch;
+  text-shadow: 0 0 20px rgba(0,245,255,0.6);
+  transition: color 0.1s ease;
+}
+
+.aero-formula-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--aero-border);
+  border: 1px solid var(--aero-border);
+}
+
+.aero-formula-card {
+  background: var(--aero-bg);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
+}
+.aero-formula-card.is-revealed { opacity: 1; transform: translateY(0); }
+
+/* Vibe 1: Yellow */
+.aero-formula-card--vibe-1:hover { background: rgba(255, 215, 0, 0.08); }
+
+/* Vibe 2: Soft Red */
+.aero-formula-card--vibe-2:hover { background: rgba(255, 105, 97, 0.08); }
+
+/* Vibe 3: Quantum Purple */
+.aero-formula-card--vibe-3:hover { background: rgba(138, 43, 226, 0.08); }
+
+/* Vibe 4: Temporal Green */
+.aero-formula-card--vibe-4:hover { background: rgba(0, 255, 128, 0.08); }
+
+.aero-formula-tag {
+  font-family: var(--aero-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+}
+.aero-formula-title {
+  font-family: var(--aero-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--aero-white);
+}
+.aero-formula-math {
+  font-family: var(--aero-mono);
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  color: var(--aero-cyan);
+  background: rgba(0,245,255,0.06);
+  padding: 1rem;
+  border-left: 2px solid var(--aero-cyan);
+  line-height: 1.6;
+  text-shadow: 0 0 12px rgba(0,245,255,0.4);
+  word-break: break-word;
+}
+.aero-formula-note {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--aero-dim);
+}
+
+.aero-telem-conclusion {
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.aero-conclusion-line {
+  flex: 1;
+  height: 1px;
+  background: var(--aero-border);
+}
+.aero-conclusion-text {
+  font-family: var(--aero-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--aero-dim);
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════
+   06 — PLACEMENTS
+══════════════════════════════════════════════════════════ */
+.aero-placements {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+}
+.aero-placements-inner { max-width: 1100px; margin: 0 auto; }
+
+/* ── Deployment Rows (replaces old card grid) ── */
+.aero-deploy-rows {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--aero-border);
+  margin-bottom: 3rem;
+}
+
+.aero-deploy-row {
+  display: grid;
+  grid-template-columns: 3.5rem 6rem 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--aero-border);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
+  position: relative;
+}
+.aero-deploy-row:last-child { border-bottom: none; }
+.aero-deploy-row.is-revealed { opacity: 1; transform: translateY(0); }
+.aero-deploy-row:hover { background: rgba(0,245,255,0.025); }
+
+/* Number column */
+.aero-deploy-num {
+  font-family: var(--aero-mono);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: rgba(0,245,255,0.2);
+  padding: 2rem 0 2rem 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2.2rem;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+.aero-deploy-row:hover .aero-deploy-num { color: rgba(0,245,255,0.55); }
+
+/* SVG icon column */
+.aero-deploy-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0.5rem;
+  border-right: 1px solid var(--aero-border);
+  border-left: 1px solid var(--aero-border);
+}
+.aero-deploy-svg {
+  width: 72px;
+  height: 72px;
+  color: var(--aero-cyan);
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+.aero-deploy-row:hover .aero-deploy-svg { opacity: 0.9; }
+
+/* Body column */
+.aero-deploy-body {
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+.aero-deploy-name {
+  font-family: var(--aero-mono);
+  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-white);
+  margin-bottom: 0.25rem;
+}
+.aero-deploy-subname {
+  font-family: var(--aero-sans);
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  font-weight: 700;
+  color: var(--aero-white);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.aero-deploy-desc {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.72;
+  color: var(--aero-dim);
+  margin: 0;
+}
+.aero-deploy-desc a {
+  color: var(--aero-cyan);
+  text-decoration: underline;
+  text-decoration-color: var(--aero-cyan-dim);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+.aero-deploy-desc a:hover {
+  color: var(--aero-white);
+  text-decoration-color: var(--aero-cyan);
+}
+
+/* Metric column */
+.aero-deploy-metric {
+  padding: 2rem 2rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.2rem;
+  border-left: 1px solid var(--aero-border);
+  flex-shrink: 0;
+  min-width: 120px;
+}
+.aero-deploy-metric-val {
+  font-family: var(--aero-mono);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--aero-cyan);
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(0,245,255,0.45);
+}
+.aero-deploy-metric-label {
+  font-family: var(--aero-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-dim);
+}
+.aero-deploy-metric-sub {
+  font-family: var(--aero-mono);
+  font-size: 0.45rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,245,255,0.4);
+}
+
+/* Mobile: collapse metric into body */
+@media (max-width: 640px) {
+  .aero-deploy-row {
+    grid-template-columns: 2.5rem 4.5rem 1fr;
+  }
+  .aero-deploy-metric {
+    display: none;
+  }
+  .aero-deploy-icon-wrap {
+    padding: 1rem 0.25rem;
+  }
+  .aero-deploy-svg { width: 52px; height: 52px; }
+  .aero-deploy-body { padding: 1.25rem 1rem; }
+  .aero-deploy-num { padding: 1.5rem 0 1.5rem 0.75rem; font-size: 1.2rem; }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  .aero-deploy-metric { min-width: 90px; padding: 1.5rem 1rem; }
+  .aero-deploy-metric-val { font-size: 1.2rem; }
+}
+
+/* Street cat exception */
+.aero-exception-block {
+  border: 1px solid rgba(255, 60, 60, 0.4);
+  background: rgba(255, 0, 0, 0.04);
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.aero-exception-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--aero-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,80,80,0.9);
+}
+.aero-exception-icon { font-size: 1rem; }
+.aero-exception-title { flex: 1; }
+.aero-exception-body { display: flex; flex-direction: column; gap: 0.75rem; }
+.aero-exception-subject {
+  font-family: var(--aero-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,80,80,0.9);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.aero-exception-body p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--aero-dim);
+  margin: 0;
+}
+.aero-exception-legal {
+  font-family: var(--aero-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,80,80,0.5);
+}
+
+/* ══════════════════════════════════════════════════════════
+   07 — SYNERGY
+══════════════════════════════════════════════════════════ */
+.aero-synergy {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+  background: rgba(0,245,255,0.018);
+}
+.aero-synergy-inner { max-width: 1100px; margin: 0 auto; }
+
+.aero-synergy-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  border: 1px solid var(--aero-border);
+  padding: clamp(2rem, 4vw, 3.5rem);
+}
+@media (min-width: 768px) {
+  .aero-synergy-card { grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: center; }
+}
+
+.aero-synergy-eyebrow {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+  margin-bottom: 1rem;
+}
+.aero-synergy-headline {
+  font-family: var(--aero-sans);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+}
+.aero-synergy-body {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--aero-dim);
+  margin: 0 0 1rem;
+}
+.aero-synergy-warning {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,220,80,0.75);
+  border: 1px solid rgba(255,220,80,0.2);
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.aero-synergy-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.aero-synergy-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(0,245,255,0.2));
+}
+.aero-synergy-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  border: 1px solid var(--aero-cyan);
+  color: var(--aero-cyan);
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.aero-synergy-cta:hover {
+  background: var(--aero-cyan);
+  color: #000;
+}
+
+/* ══════════════════════════════════════════════════════════
+   08 — DISCLAIMER
+══════════════════════════════════════════════════════════ */
+.aero-disclaimer {
+  position: relative;
+  z-index: 1;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--aero-border);
+}
+.aero-disclaimer-inner { max-width: 1100px; margin: 0 auto; }
+
+.aero-accordion { border: 1px solid var(--aero-border); }
+
+.aero-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: #000;
+  color: var(--aero-dim);
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.aero-accordion-trigger:hover { 
+  color: var(--aero-white);
+  background: rgba(0,245,255,0.04);
+}
+.aero-accordion-trigger.is-open {
+  color: var(--aero-cyan);
+  border-bottom: 1px solid var(--aero-border);
+}
+.aero-accordion-icon { color: var(--aero-cyan); font-size: 1rem; }
+.aero-accordion-label { flex: 1; }
+.aero-accordion-chevron {
+  font-size: 0.5rem;
+  transition: transform 0.3s ease;
+}
+.aero-accordion-trigger.is-open .aero-accordion-chevron { transform: rotate(180deg); }
+
+.aero-accordion-body {
+  padding: 0;
+}
+.aero-accordion-body[hidden] { display: none; }
+
+.aero-disclaimer-content {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.aero-disclaimer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.aero-disclaimer-block:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+.aero-disclaimer-head {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+}
+.aero-disclaimer-block p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--aero-dim);
+  margin: 0;
+}
+.aero-disclaimer-footer {
+  font-family: var(--aero-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════ */
+.aero-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--aero-border);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 5rem);
+}
+.aero-footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+.aero-footer-tag {
+  font-family: var(--aero-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--aero-cyan);
+  margin: 0;
+}
+.aero-footer-sub {
+  font-size: 0.9rem;
+  color: var(--aero-dim);
+  margin: 0;
+}
+.aero-footer-cta-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.aero-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--aero-border);
+  color: var(--aero-dim);
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.aero-footer-btn:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: var(--aero-white);
+}
+.aero-footer-btn--primary {
+  background: var(--aero-cyan);
+  color: #000;
+  border-color: var(--aero-cyan);
+  font-weight: 700;
+}
+.aero-footer-btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE OVERRIDES
+══════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .aero-hero {
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100svh;
+    padding-bottom: 5rem;
+  }
+  .aero-scroll-cue { display: none; }
+  .aero-paradox-card { padding: 1.5rem; }
+  .aero-disclaimer-content { padding: 1.5rem 1rem; }
+  .aero-accordion-trigger { padding: 1.25rem 1rem; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .aero-status-dot { animation: none; opacity: 1; }
+  .aero-sticker-glow { animation: none; }
+  .aero-sticker-ring { animation: none; }
+  .aero-spec-card,
+  .aero-formula-card,
+  .aero-placement-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .aero-hero-sticker { will-change: auto; }
+}
+</style>
