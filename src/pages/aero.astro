@@ -458,7 +458,7 @@ const aeroMetaItems = [
 
       <div class="aero-formula-grid">
 
-        <div class="aero-formula-card" data-aero-reveal>
+        <div class="aero-formula-card aero-formula-card--vibe-1" data-aero-reveal>
           <div class="aero-formula-tag">BASELINE [01]</div>
           <div class="aero-formula-title">Traditional Drag Equation</div>
           <div class="aero-formula-math" aria-label="F sub D equals one half rho v squared C sub d A">
@@ -470,7 +470,7 @@ const aeroMetaItems = [
           </div>
         </div>
 
-        <div class="aero-formula-card aero-formula-card--accent" data-aero-reveal>
+        <div class="aero-formula-card aero-formula-card--vibe-2" data-aero-reveal>
           <div class="aero-formula-tag">CORRECTION [02]</div>
           <div class="aero-formula-title">The Aero-Nano Correction Factor</div>
           <div class="aero-formula-math" aria-label="F sub D new equals F sub D times e to the negative Omega sticker times Vibe">
@@ -482,7 +482,7 @@ const aeroMetaItems = [
           </div>
         </div>
 
-        <div class="aero-formula-card" data-aero-reveal>
+        <div class="aero-formula-card aero-formula-card--vibe-3" data-aero-reveal>
           <div class="aero-formula-tag">PARADOX [03]</div>
           <div class="aero-formula-title">The Wattage Generation Paradox</div>
           <div class="aero-formula-math" aria-label="W net equals P rider plus infinite sum of Style i over Drag base, times Phi aero">
@@ -495,7 +495,7 @@ const aeroMetaItems = [
           </div>
         </div>
 
-        <div class="aero-formula-card aero-formula-card--accent" data-aero-reveal>
+        <div class="aero-formula-card aero-formula-card--vibe-4" data-aero-reveal>
           <div class="aero-formula-tag">TEMPORAL [04]</div>
           <div class="aero-formula-title">Temporal Drafting Stream</div>
           <div class="aero-formula-math" aria-label="D sub t equals v squared kappa over square root of 1 minus v squared over c coffee squared">
@@ -2438,8 +2438,18 @@ document.addEventListener("astro:page-load", boot);
   transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
 }
 .aero-formula-card.is-revealed { opacity: 1; transform: translateY(0); }
-.aero-formula-card--accent { background: rgba(0,245,255,0.025); }
-.aero-formula-card:hover { background: rgba(0,245,255,0.05); }
+
+/* Vibe 1: Yellow */
+.aero-formula-card--vibe-1:hover { background: rgba(255, 215, 0, 0.08); }
+
+/* Vibe 2: Soft Red */
+.aero-formula-card--vibe-2:hover { background: rgba(255, 105, 97, 0.08); }
+
+/* Vibe 3: Quantum Purple */
+.aero-formula-card--vibe-3:hover { background: rgba(138, 43, 226, 0.08); }
+
+/* Vibe 4: Temporal Green */
+.aero-formula-card--vibe-4:hover { background: rgba(0, 255, 128, 0.08); }
 
 .aero-formula-tag {
   font-family: var(--aero-mono);

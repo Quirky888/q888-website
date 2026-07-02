@@ -15,6 +15,7 @@ const projects = defineCollection({
     cardSystem: z.string().min(1),
     cardScatter: z.string().default(""),
     cardImage: z.string().nullable(),
+    cardImageMobile: z.string().optional().nullable(),
     cardHolographic: z.boolean().default(false),
     cardLightText: z.boolean().default(true),
     panelTitle: z.string().min(1),

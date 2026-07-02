@@ -19,6 +19,7 @@ type Zone = {
   system: string;
   scatter: string;
   image: string | null;
+  imageMobile?: string | null;
   holographic?: boolean;
   lightText: boolean;
 };
@@ -32,6 +33,7 @@ const zones: Zone[] = (await getCollection("projects"))
     system: data.cardSystem,
     scatter: data.cardScatter,
     image: data.cardImage,
+    imageMobile: data.cardImageMobile,
     holographic: data.cardHolographic,
     lightText: data.cardLightText,
   }))
@@ -98,15 +100,30 @@ const zones: Zone[] = (await getCollection("projects"))
                 <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden">
                   {zone.image ? (
                     <>
-<img
-                        src={zone.image}
-                        alt={zone.title}
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                        width="400"
-                        height="500"
-                      />
+                      {zone.imageMobile ? (
+                        <picture class="w-full h-full block overflow-hidden">
+                          <source srcset={zone.imageMobile} media="(max-width: 767px)" />
+                          <img
+                            src={zone.image}
+                            alt={zone.title}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                            width="400"
+                            height="500"
+                          />
+                        </picture>
+                      ) : (
+                        <img
+                          src={zone.image}
+                          alt={zone.title}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                          width="400"
+                          height="500"
+                        />
+                      )}
                       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
                       {zone.holographic && (
                         <div class="holographic-overlay absolute inset-0 pointer-events-none mix-blend-screen opacity-40 group-hover:opacity-0 transition-opacity duration-700"></div>
