@@ -1,0 +1,27 @@
+{
+  "slug": "aero-sticker",
+  "sortOrder": 6,
+  "cardTitle": "AERO V1",
+  "cardDescriptor": "A £230 sticker. More aerodynamic advantage than a wind-tunnel-tested bicycle. Purely by manipulation of local atmospheric reality.",
+  "cardSystem": "SYST: DEPLOYED",
+  "cardScatter": "",
+  "cardImage": "/images/aero_sticker.webp",
+  "cardHolographic": false,
+  "cardLightText": true,
+  "panelTitle": "AERO V1",
+  "panelDescription": "The Infocigan Aero Sticker V1. 76×71mm. Less than 1.5mm thick. £230. Operates on aesthetic superiority and hubris. 50 units. Belief > Drag.",
+  "panelSpecs": [
+    {
+      "label": "PRICE",
+      "value": "£230 · £100/g"
+    },
+    {
+      "label": "UNITS",
+      "value": "50 TOTAL"
+    },
+    {
+      "label": "DRAG",
+      "value": "Cd: 0.000"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ const urlMap: Record<string, string> = {
   "afterlife-contracts": "/afterlife",
   "president-of-the-galaxy": "/president",
   "dyno-milk": "/dyno",
+  "aero-sticker": "/aero",
 };
 
 type Zone = {
@@ -82,9 +83,11 @@ const zones: Zone[] = (await getCollection("projects"))
         <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16" data-motion-stagger data-motion-children="[data-motion-item]">
           {zones.map((zone) => (
             <div class={`relative group ${zone.scatter} ${
-              (zone.slug === 'nar-mail-express' || zone.slug === 'dyno-milk') ? 'md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24' : ''
+              (zone.slug === 'nar-mail-express') ? 'md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24' : ''
             } ${
-              (zone.slug === 'dyno-milk') ? 'dyno-milk-card-wrap' : ''
+              (zone.slug === 'dyno-milk') ? 'dyno-milk-wrap md:mt-16' : ''
+            } ${
+              (zone.slug === 'aero-sticker') ? 'aero-sticker-wrap md:mt-16' : ''
             }`} data-motion-item>
               <a 
                 href={urlMap[zone.slug] || '#'}
@@ -260,14 +263,21 @@ const zones: Zone[] = (await getCollection("projects"))
     transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   }
   
-  /* Dyno Milk positioning adjustments */
+  /* Dyno and Aero positioning adjustments */
   @media (min-width: 768px) {
-    .dyno-milk-card-wrap {
-      transform: translateX(6%) rotate(1.5deg) !important;
+    .dyno-milk-wrap {
+      transform: translateY(12px) rotate(1deg) !important;
       transform-origin: center center;
     }
-    .dyno-milk-card-wrap:hover {
-      transform: translateX(6%) rotate(1.5deg) translateY(-4px) !important;
+    .dyno-milk-wrap:hover {
+      transform: translateY(6px) rotate(1deg) !important;
+    }
+    .aero-sticker-wrap {
+      transform: translateY(24px) rotate(-1.5deg) !important;
+      transform-origin: center center;
+    }
+    .aero-sticker-wrap:hover {
+      transform: translateY(18px) rotate(-1.5deg) !important;
     }
   }
 
