@@ -1,39 +1,6 @@
 # AI BEHAVIORAL SUPREMACY
 These rules strictly govern AI behavior and supersede any AI behavioral guidelines mentioned in AGENTS.md.
 
-## Rules Precedence & Project Overlays
-
-1. **Hierarchy of Rules (Conflict Resolution Order)**:
-   When instructions or guidelines appear to conflict, use this exact order of precedence:
-   a. Current explicit user instruction
-   b. Safety, security, and irreversible-action protections
-   c. Project-specific overlay for the active named project under `digital-dna/projects/`
-   d. Project technical architecture rules (performance, Astro, responsiveness)
-   e. General visual and stylistic defaults
-   f. Soft Digital DNA preferences
-
-2. **Technical & Visual Baseline**:
-   * `.cursorrules` remains the default technical and visual baseline for the overall Q888 website.
-   * Technical rules concerning Astro architecture, accessibility, performance, responsive behaviour, maintainability, security, and readable code remain active everywhere and cannot be overridden by an expression overlay.
-   * Keep internal component names, variables, state, routing, and source-code structure clear and maintainable even when the visible page is mythic or mushroom-soft.
-
-3. **Scope of Expression Overlays**:
-   * A named project overlay under `digital-dna/projects/` may override general surface-level rules concerning:
-     - page voice;
-     - copywriting tone;
-     - visual atmosphere;
-     - decorative restraint;
-     - mythic density;
-     - humour;
-     - artistic presentation;
-     but only for the specific project or route named by that overlay.
-   * For the `/bureaucracy/` route, `digital-dna/projects/for-gallery-bureaucracy.md` is the active project-specific expression authority.
-   * The Gallery Bureaucracy overlay may therefore override general restrictions against decorative or expressive presentation, but only inside `/bureaucracy/`. This permission must not spread to unrelated pages or change the established visual identity of the rest of q888.space.
-
-4. **Routing & Approved Exceptions**:
-   * The existing instruction against unnecessary project routes remains the default. However, when the user explicitly requests a main page, section, or core artistic product with its own URL, that explicit request overrides the drawer-only rule.
-   * `/bureaucracy/` is explicitly approved as a dedicated top-level route.
-
 # Q888 Website Rules (Canonical) — v1.3
 # Stack: Astro + TypeScript, Netlify, GitHub, Cloudflare DNS
 
