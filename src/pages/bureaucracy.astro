@@ -1039,7 +1039,7 @@ const codeFragments = [
       if (!isDrawing) return;
       ctx.fillStyle = "rgba(10,10,10,0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(255,255,255,0.18)"; // Bumped opacity to make it visible
+      ctx.fillStyle = "rgba(255, 255, 255, 0.38)"; // Bumped opacity to make it visible
       ctx.font = `${fontSize}px ui-monospace, monospace`;
       for (let i = 0; i < columns.length; i++) {
         const ch = chars[Math.floor(Math.random() * chars.length)];
@@ -1092,7 +1092,7 @@ const codeFragments = [
      BASE WRAP — dark terminal world
   ═══════════════════════════════════════════════ */
   .bur-wrap {
-    background: #0a0a0a;
+    background: #121212;
     color: #e0ddd6;
     min-height: 100dvh;
     padding-top: 2.75rem; /* clear SystemMeta bar */
@@ -1166,16 +1166,16 @@ const codeFragments = [
   }
 
   .bur-entry-tag {
-    font-size: 0.6rem;
+    font-size: 0.95rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.55);
     line-height: 1.6;
   }
 
   .bur-entry-tag-mono {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
   }
 
   /* Status grid */
@@ -1210,14 +1210,14 @@ const codeFragments = [
   }
 
   .bur-status-label {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.50);
   }
 
   .bur-status-val {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.7);
@@ -1262,7 +1262,7 @@ const codeFragments = [
 
   .bur-hl-pre {
     font-size: clamp(1.2rem, 4vw, 2rem);
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.55);
     font-weight: 700;
     letter-spacing: 0.25em;
     font-family: ui-monospace, monospace;
@@ -1277,7 +1277,7 @@ const codeFragments = [
 
   .bur-hl-sub {
     font-size: clamp(2rem, 7vw, 5.5rem);
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.60);
     font-weight: 700;
     line-height: 1;
   }
@@ -1287,7 +1287,7 @@ const codeFragments = [
     font-size: clamp(0.65rem, 1.5vw, 0.8rem);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.60);
     max-width: 42rem;
     line-height: 1.6;
   }
@@ -1303,14 +1303,14 @@ const codeFragments = [
   .bur-hero-intro p {
     font-size: clamp(0.8rem, 1.8vw, 0.95rem);
     line-height: 1.75;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
     font-family: ui-monospace, monospace;
     letter-spacing: 0.02em;
   }
 
   .bur-hero-caveat {
-    font-size: 0.65rem !important;
-    color: rgba(255, 255, 255, 0.3) !important;
+    font-size: 0.85rem !important;
+    color: rgba(255, 255, 255, 0.50) !important;
     letter-spacing: 0.08em;
     border-left: 2px solid rgba(255, 255, 255, 0.1);
     padding-left: 0.75rem;
@@ -1321,10 +1321,10 @@ const codeFragments = [
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.55rem;
+    font-size: 0.9rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     animation: bur-pulse 3s ease-in-out infinite;
   }
 
@@ -1355,10 +1355,10 @@ const codeFragments = [
   }
 
   .bur-section-label {
-    font-size: 0.55rem;
+    font-size: 0.9rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     padding-bottom: 0.75rem;
     margin-bottom: 2.5rem;
@@ -1367,7 +1367,7 @@ const codeFragments = [
   .bur-section-subtitle {
     font-size: clamp(0.75rem, 1.5vw, 0.9rem);
     line-height: 1.75;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.60);
     max-width: 44rem;
     margin-bottom: 2.5rem;
     letter-spacing: 0.02em;
@@ -1384,10 +1384,10 @@ const codeFragments = [
   }
 
   .bur-inline-status {
-    font-size: 0.55rem;
+    font-size: 0.9rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0.3rem 0.65rem;
     white-space: nowrap;
@@ -1424,17 +1424,17 @@ const codeFragments = [
     font-size: 0.58rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.50);
     white-space: nowrap;
   }
 
   .bur-meta-sep {
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 0.95rem;
   }
 
   .bur-meta-val {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.72);
@@ -1481,12 +1481,12 @@ const codeFragments = [
   .bur-identity-copy p {
     font-size: clamp(0.8rem, 1.6vw, 0.95rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.52);
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .bur-identity-note {
-    font-size: 0.65rem !important;
-    color: rgba(255, 255, 255, 0.28) !important;
+    font-size: 0.85rem !important;
+    color: rgba(255, 255, 255, 0.48) !important;
     border-left: 2px solid rgba(255, 255, 255, 0.08);
     padding-left: 0.75rem;
     letter-spacing: 0.04em;
@@ -1530,15 +1530,15 @@ const codeFragments = [
   }
 
   .bur-distinction-label {
-    font-size: 0.52rem;
+    font-size: 0.88rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.48);
   }
 
   .bur-distinction-text {
     font-size: clamp(0.9rem, 2vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.4;
   }
 
@@ -1558,7 +1558,7 @@ const codeFragments = [
   .bur-method-desc {
     font-size: clamp(0.75rem, 1.5vw, 0.875rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.60);
     margin-top: 0.25rem;
   }
 
@@ -1575,10 +1575,10 @@ const codeFragments = [
   }
 
   .bur-formula-label {
-    font-size: 0.52rem;
+    font-size: 0.88rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.45);
     margin-bottom: 1.25rem;
   }
 
@@ -1592,19 +1592,19 @@ const codeFragments = [
   .bur-formula-node {
     font-size: clamp(0.7rem, 1.5vw, 0.875rem);
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.80);
     border: 1px solid rgba(255, 255, 255, 0.12);
     padding: 0.3rem 0.7rem;
   }
 
   .bur-formula-node-final {
     color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.55);
     background: rgba(255, 255, 255, 0.05);
   }
 
   .bur-formula-arrow {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     font-size: 0.9rem;
   }
 
@@ -1624,16 +1624,16 @@ const codeFragments = [
   }
 
   .bur-code-agent {
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.85);
     letter-spacing: 0.06em;
   }
 
   .bur-code-sep {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.45);
   }
 
   .bur-code-action {
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.62);
   }
 
   .bur-code-line-final .bur-code-agent,
@@ -1667,7 +1667,7 @@ const codeFragments = [
   }
 
   .bur-evidence-card {
-    background: #0a0a0a;
+    background: #121212;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -1689,17 +1689,17 @@ const codeFragments = [
   }
 
   .bur-card-code {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
   }
 
   .bur-card-status {
-    font-size: 0.48rem;
+    font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.58);
     border: 1px solid rgba(255, 255, 255, 0.12);
     padding: 0.15rem 0.4rem;
   }
@@ -1714,9 +1714,9 @@ const codeFragments = [
   }
 
   .bur-card-desc {
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     line-height: 1.65;
-    color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.58);
     flex: 1;
   }
 
@@ -1725,15 +1725,15 @@ const codeFragments = [
   }
 
   .bur-card-access {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     transition: color 160ms ease;
   }
 
   .bur-evidence-card:hover .bur-card-access {
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
   }
 
 
@@ -1767,8 +1767,8 @@ const codeFragments = [
     top: 1.5rem;
     width: 6px;
     height: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    background: #121212;
     border-radius: 50%;
   }
 
@@ -1783,7 +1783,7 @@ const codeFragments = [
     font-size: 0.58rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.48);
     padding-top: 0.1rem;
     word-break: break-all;
   }
@@ -1803,7 +1803,7 @@ const codeFragments = [
   .bur-timeline-note {
     font-size: 0.62rem;
     letter-spacing: 0.06em;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.48);
     line-height: 1.5;
   }
 
@@ -1813,8 +1813,8 @@ const codeFragments = [
   }
 
   .bur-redacted-inline {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.35);
     letter-spacing: 0.04em;
     user-select: none;
   }
@@ -1822,7 +1822,7 @@ const codeFragments = [
   .bur-timeline-fn-text {
     font-size: 0.58rem;
     letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     text-transform: uppercase;
   }
 
@@ -1849,10 +1849,10 @@ const codeFragments = [
   }
 
   .bur-fragment-label {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
     padding: 0.65rem 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     background: rgba(255, 255, 255, 0.02);
@@ -1865,7 +1865,7 @@ const codeFragments = [
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: clamp(0.68rem, 1.3vw, 0.8rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
     white-space: pre;
     overflow-x: auto;
   }
@@ -1900,9 +1900,9 @@ const codeFragments = [
   .bur-earth-preface {
     font-family: "Space Grotesk", ui-sans-serif, sans-serif;
     font-size: clamp(0.9rem, 2vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 700;
-    border-left: 2px solid rgba(255, 255, 255, 0.15);
+    border-left: 2px solid rgba(255, 255, 255, 0.35);
     padding-left: 1rem;
     line-height: 1.5;
   }
@@ -1910,12 +1910,12 @@ const codeFragments = [
   .bur-earth-copy p {
     font-size: clamp(0.75rem, 1.5vw, 0.88rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.62);
   }
 
   .bur-earth-footnote {
-    font-size: 0.6rem !important;
-    color: rgba(255, 255, 255, 0.22) !important;
+    font-size: 0.95rem !important;
+    color: rgba(255, 255, 255, 0.42) !important;
     letter-spacing: 0.06em;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding-top: 0.75rem;
@@ -1929,7 +1929,7 @@ const codeFragments = [
   .bur-curator-intro {
     font-size: clamp(0.78rem, 1.5vw, 0.9rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.58);
     max-width: 44rem;
     margin-bottom: 2.5rem;
   }
@@ -1967,23 +1967,23 @@ const codeFragments = [
   }
 
   .bur-action-btn:hover {
-    border-color: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.48);
     background: rgba(255, 255, 255, 0.06);
   }
 
   .bur-action-btn-primary {
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.42);
     background: rgba(255, 255, 255, 0.04);
   }
 
   .bur-action-btn-primary:hover {
-    border-color: rgba(255, 255, 255, 0.45);
+    border-color: rgba(255, 255, 255, 0.65);
     background: rgba(255, 255, 255, 0.08);
   }
 
   .bur-btn-icon {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.50);
     flex-shrink: 0;
     transition: color 160ms ease;
   }
@@ -1993,24 +1993,24 @@ const codeFragments = [
   }
 
   .bur-btn-label {
-    font-size: 0.6rem;
+    font-size: 0.95rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.85);
     flex: 1;
   }
 
   .bur-btn-status {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
     white-space: nowrap;
     transition: color 160ms ease;
   }
 
   .bur-action-btn:hover .bur-btn-status {
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
   }
 
   /* Footer stamp */
@@ -2023,7 +2023,7 @@ const codeFragments = [
   }
 
   .bur-stamp-line {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.1);
     letter-spacing: 0;
     overflow: hidden;
@@ -2031,10 +2031,10 @@ const codeFragments = [
   }
 
   .bur-stamp-text {
-    font-size: 0.52rem;
+    font-size: 0.88rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     line-height: 1.8;
     display: flex;
     flex-wrap: wrap;
@@ -2075,7 +2075,7 @@ const codeFragments = [
   /* ── Hover: pointer media (non-touch) ── */
   @media (hover: none) {
     .bur-evidence-card:hover {
-      background: #0a0a0a;
+      background: #121212;
     }
     .bur-action-btn:hover {
       border-color: rgba(255, 255, 255, 0.1);
@@ -2132,7 +2132,7 @@ const codeFragments = [
   .bur-rejection-copy p {
     font-size: clamp(0.78rem, 1.5vw, 0.9rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.65);
   }
 
   /* Mutual freedom rule box */
@@ -2147,10 +2147,10 @@ const codeFragments = [
   }
 
   .bur-mutual-rule-label {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
   }
 
   .bur-mutual-rule-lines {
@@ -2178,18 +2178,18 @@ const codeFragments = [
   }
 
   .bur-protocol-label {
-    font-size: 0.52rem;
+    font-size: 0.88rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.48);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding-bottom: 0.65rem;
   }
 
   .bur-protocol-intro {
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255, 255, 255, 0.62);
   }
 
   .bur-protocol-list {
@@ -2205,17 +2205,17 @@ const codeFragments = [
     display: flex;
     align-items: baseline;
     gap: 0.75rem;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.58);
+    color: rgba(255, 255, 255, 0.78);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     padding-bottom: 0.35rem;
   }
 
   .bur-proto-num {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
     flex-shrink: 0;
     min-width: 1.5rem;
   }
@@ -2231,7 +2231,7 @@ const codeFragments = [
   }
 
   .bur-pf-label {
-    font-size: 0.48rem;
+    font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: rgba(255, 150, 150, 0.4);
@@ -2246,23 +2246,23 @@ const codeFragments = [
   }
 
   .bur-pf-key {
-    font-size: 0.55rem;
+    font-size: 0.9rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.48);
     white-space: nowrap;
   }
 
   .bur-pf-sep {
-    color: rgba(255, 255, 255, 0.18);
-    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 0.9rem;
   }
 
   .bur-pf-val {
     font-size: 0.62rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.70);
   }
 
   .bur-pf-restricted {
@@ -2323,10 +2323,10 @@ const codeFragments = [
   }
 
   .bur-case-number {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
     flex-shrink: 0;
   }
 
@@ -2339,10 +2339,10 @@ const codeFragments = [
   }
 
   .bur-case-event {
-    font-size: 0.6rem;
+    font-size: 0.95rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.50);
   }
 
   .bur-case-header-right {
@@ -2354,7 +2354,7 @@ const codeFragments = [
   }
 
   .bur-case-badge {
-    font-size: 0.45rem;
+    font-size: 0.85rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 0.2rem 0.5rem;
@@ -2376,7 +2376,7 @@ const codeFragments = [
 
   .bur-case-toggle-icon {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.50);
     line-height: 1;
     width: 1.5rem;
     text-align: center;
@@ -2387,7 +2387,7 @@ const codeFragments = [
   }
 
   .bur-case-card.is-open .bur-case-toggle-icon {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.80);
   }
 
   /* Expanded body */
@@ -2434,25 +2434,25 @@ const codeFragments = [
   }
 
   .bur-cf-key {
-    font-size: 0.52rem;
+    font-size: 0.88rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.26);
+    color: rgba(255, 255, 255, 0.46);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .bur-cf-sep {
-    color: rgba(255, 255, 255, 0.15);
-    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.9rem;
   }
 
   .bur-cf-val {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.80);
     word-break: break-word;
   }
 
@@ -2488,21 +2488,21 @@ const codeFragments = [
   }
 
   .bur-crb-label {
-    font-size: 0.48rem;
+    font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
   }
 
   .bur-crb-val {
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
   }
 
   .bur-crb-val-restricted {
     color: rgba(255, 140, 120, 0.85);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -2511,7 +2511,7 @@ const codeFragments = [
   .bur-case-smallprint {
     font-size: 0.58rem;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 1rem;
     letter-spacing: 0.04em;
@@ -2524,7 +2524,7 @@ const codeFragments = [
   }
 
   .bur-cf-quote {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.65);
     font-style: italic;
     text-transform: none;
     letter-spacing: 0.02em;
@@ -2546,10 +2546,10 @@ const codeFragments = [
   }
 
   .bur-why-label {
-    font-size: 0.5rem;
+    font-size: 0.85rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.22);
+    color: rgba(255, 255, 255, 0.42);
     padding: 0.65rem 1.25rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     background: rgba(255, 255, 255, 0.02);
@@ -2574,7 +2574,7 @@ const codeFragments = [
   .bur-why-core p {
     font-size: clamp(0.75rem, 1.4vw, 0.875rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.48);
+    color: rgba(255, 255, 255, 0.68);
     margin: 0;
   }
 
@@ -2594,21 +2594,21 @@ const codeFragments = [
     display: flex;
     align-items: baseline;
     gap: 0.75rem;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     line-height: 1.65;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
   }
 
   .bur-why-num {
-    font-size: 0.48rem;
+    font-size: 0.68rem;
     letter-spacing: 0.14em;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     flex-shrink: 0;
     min-width: 1.25rem;
   }
 
   .bur-why-note {
-    color: rgba(255, 255, 255, 0.35) !important;
+    color: rgba(255, 255, 255, 0.55) !important;
     font-style: italic;
     border-left: 2px solid rgba(255, 255, 255, 0.08);
     padding-left: 0.75rem;
@@ -2624,17 +2624,17 @@ const codeFragments = [
   }
 
   .bur-public-note-label {
-    font-size: 0.48rem;
+    font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.40);
     margin-bottom: 0.1rem;
   }
 
   .bur-public-note p {
     font-size: clamp(0.75rem, 1.4vw, 0.875rem);
     line-height: 1.75;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
   }
 
@@ -2667,7 +2667,7 @@ const codeFragments = [
       grid-template-columns: 10rem auto 1fr;
     }
     .bur-mutual-rule-lines p {
-      font-size: 0.8rem !important;
+      font-size: 0.95rem !important;
     }
   }
 
@@ -2767,7 +2767,7 @@ const codeFragments = [
     left: 0;
     height: 1px;
     width: 0;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.45);
     transition: width 600ms cubic-bezier(0.22,1,0.36,1) 100ms;
   }
 
@@ -2778,13 +2778,13 @@ const codeFragments = [
 
   /* Timeline dot: glow on scroll-in */
   .bur-timeline-entry.is-revealed::before {
-    background: rgba(255,255,255,0.5);
-    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.70);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.50);
     animation: bur-dot-ping 1.6s ease-out;
   }
 
   @keyframes bur-dot-ping {
-    0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+    0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.60); }
     70%  { box-shadow: 0 0 0 8px rgba(255,255,255,0);  }
     100% { box-shadow: 0 0 0 0 rgba(255,255,255,0);    }
   }
@@ -2828,7 +2828,7 @@ const codeFragments = [
   }
 
   @keyframes bur-case-scan {
-    0%   { border-color: rgba(255,255,255,0.18); }
+    0%   { border-color: rgba(255, 255, 255, 0.38); }
     60%  { border-color: rgba(255,255,255,0.06); }
     100% { border-color: rgba(255,255,255,0.06); }
   }
@@ -2841,7 +2841,7 @@ const codeFragments = [
 
   /* Mutual-rule italic lines: warmer tint */
   .bur-mutual-rule-lines p {
-    background: linear-gradient(90deg, rgba(255,255,240,0.8) 0%, rgba(255,255,255,0.65) 100%);
+    background: linear-gradient(90deg, rgba(255,255,240,0.8) 0%, rgba(255, 255, 255, 0.85) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2897,13 +2897,13 @@ const codeFragments = [
   }
 
   .bur-decree-icon {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     color: rgba(255,130,110,0.55);
     animation: bur-blink 2.8s ease-in-out infinite;
   }
 
   .bur-decree-title {
-    font-size: 0.52rem;
+    font-size: 0.88rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(255,130,110,0.65);
@@ -2924,10 +2924,10 @@ const codeFragments = [
   }
 
   .bur-decree-sub {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255, 255, 255, 0.50);
   }
 
   .bur-decree-list {
@@ -2951,16 +2951,16 @@ const codeFragments = [
   .bur-decree-note {
     font-size: clamp(0.8rem,1.5vw,0.92rem);
     line-height: 1.9;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.85);
     font-style: italic;
     border-top: 1px solid rgba(255,80,60,0.08);
     padding-top: 0.75rem;
   }
 
   .bur-decree-footnote {
-    font-size: 0.6rem;
+    font-size: 0.95rem;
     line-height: 1.8;
-    color: rgba(255,255,255,0.22);
+    color: rgba(255, 255, 255, 0.42);
     letter-spacing: 0.04em;
     font-style: italic;
   }
