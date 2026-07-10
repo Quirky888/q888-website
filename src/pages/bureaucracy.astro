@@ -2,128 +2,157 @@
 import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
-import SystemMeta from "../components/SystemMeta.astro";
 
-const bureaucracyMetaItems = [
-  { field: "document_status", label: "DOCUMENT_STATUS", value: "SUBMITTED",        width: 9  },
-  { field: "myth_index",      label: "MYTH_INDEX",      value: "ACTIVE",           width: 7  },
-  { field: "bureau_level",    label: "BUREAUCRACY_LVL", value: "GALLERY",          width: 7  },
-  { field: "reality_anchor",  label: "REALITY_ANCHOR",  value: "VESSEL CONFIRMED", width: 16 },
-];
-
+// DNA: selectedSystems data — internal codes kept maintainable; surface names stay human
 const selectedSystems = [
   {
     code: "SYS-001",
-    name: "DIGITAL INK",
+    name: "Digital Ink",
     desc: "A system for memory, scarcity and traceable digital creation.",
-    status: "OPERATIONAL",
+    status: "Operational",
     href: "/#projects",
   },
   {
     code: "SYS-002",
-    name: "INFOCIGAN",
+    name: "Infocigan",
     desc: "A speculative marketplace for objects, belief and optional nonsense.",
-    status: "ACTIVE",
+    status: "Active",
     href: "/#infocigan",
   },
   {
     code: "SYS-003",
-    name: "AERO V1",
+    name: "Aero V1",
     desc: "A performance artefact for reducing drag through belief, style-watts and atmospheric fiction.",
-    status: "DEPLOYED",
+    status: "Deployed",
     href: "/aero/",
   },
   {
     code: "SYS-004",
-    name: "DYNO MILK",
+    name: "Dyno Milk",
     desc: "A bio-dairy future product for status, satire and interdimensional wealth signalling.",
-    status: "PHASE 4",
+    status: "Phase 4",
     href: "/dyno/",
   },
   {
     code: "SYS-005",
-    name: "EDINBURGH MAGICAL MAP",
+    name: "Edinburgh Magical Map",
     desc: "A mythic cartography of place, memory and hidden infrastructure.",
-    status: "ARCHIVAL",
+    status: "Archival",
     href: "/#projects",
   },
   {
     code: "SYS-006",
-    name: "CiQU BRAND IDENTITY",
+    name: "CiQU Brand Identity",
     desc: "Controlled visual communication for Earth-based chocolate bureaucracy.",
-    status: "DELIVERED",
+    status: "Delivered",
     href: "/#projects",
   },
   {
     code: "SYS-007",
-    name: "HUMAN CODE",
+    name: "Human Code",
     desc: "Readable rules for AI, art, memory, ethics and impossible worlds.",
-    status: "ENABLED",
+    status: "Enabled",
     href: "/#projects",
   },
   {
     code: "SYS-008",
-    name: "ARTIFICIAL ENTELECHY",
+    name: "Artificial Entelechy",
     desc: "A meaning engine for allowing fragments to become worlds.",
-    status: "IN PROGRESS",
+    status: "In progress",
     href: "/#projects",
+  },
+];
+
+// DNA: fieldRecords — underground mycelium, not absence
+const fieldRecords = [
+  {
+    place: "Chateau Chapiteau",
+    location: "Georgia",
+    type: "Forest & Community Installation",
+    note: "Site-specific art objects in an alternative forest space. Outside white-cube logic. Mushroom-compatible by design.",
+    tone: "site-specific",
+    icon: "🌿",
+  },
+  {
+    place: "Touched",
+    location: "Tbilisi, Georgia",
+    type: "Collaborative Exhibition",
+    year: "2025",
+    note: "Q888 entering visible shared space. First gallery-adjacent exposure in the current mushroom phase.",
+    tone: "emerging",
+    icon: "🍄",
+  },
+  {
+    place: "Private Flat Exhibition",
+    location: "Edinburgh",
+    type: "Invitation-Only",
+    note: "Protected by chosen vibes. Not all exhibitions need press releases. Memory preserved, access selective.",
+    tone: "mysterious",
+    icon: "🔑",
+  },
+  {
+    place: "Sticker Placements",
+    location: "Edinburgh · Georgia · India · Thailand · others",
+    type: "Distributed Underground Exhibition",
+    note: "Public but unregistered. Distributed across travel routes and surfaces. The city as gallery wall.",
+    tone: "underground",
+    icon: "⬡",
+  },
+  {
+    place: "Unpublished Archive",
+    location: "Various / Ongoing",
+    type: "Hidden Mycelium",
+    note: "Large body of works, sketches, systems, stories, stickers, maps, characters, digital ideas and private mythology. Not absence — underground storage.",
+    tone: "dormant",
+    icon: "○",
   },
 ];
 
 const timeline = [
   {
-    marker: "1982BBB",
+    marker: "1982bbb",
     event: "Born before Big Bang.",
     note: "Administrative date error still unresolved.",
   },
   {
-    marker: "GARAVASTAR_OPENING",
+    marker: "Garavastar Opening",
     event: "First known access point into Q888 internal architecture.",
     note: "Location: classified.",
   },
   {
-    marker: "SQUARE_BUBBLE_PERIOD",
+    marker: "Square Bubble Period",
     event: "Soft systems discovered inside hard borders.",
     note: "Physics complaints filed. Dismissed.",
   },
   {
-    marker: "SMART_PIXEL_ERA",
+    marker: "Smart Pixel Era",
     event: "Digital matter begins remembering its source.",
     note: "Memory becomes material.",
   },
   {
-    marker: "HUMAN_CODE_ACTIVATION",
+    marker: "Human Code Activation",
     event: "Readable rules for AI, art, memory and ethical absurdity.",
     note: "System: online.",
   },
   {
-    marker: "GALLERY_BUREAUCRACY_PHASE",
-    event: "Q888 becomes partially compatible with open-call paperwork.",
-    note: "CURATOR_SAFE_MODE: partially enabled.",
+    marker: "Mushroom Phase",
+    event: "Q888 becomes visible above ground.",
+    note: "The mycelium was always there. The mushroom just appeared.",
   },
 ];
 
 const codeFragments = [
   {
-    label: "FRAGMENT_001 // MEMORY_AS_PIXEL",
-    code: `if memory_becomes_pixel:
-    do_not_duplicate
-    keep_origin_alive
-    treat_image_as_sentimental_matter`,
+    label: "Fragment 001 // Memory as Pixel",
+    code: `if memory_becomes_pixel:\n    do_not_duplicate\n    keep_origin_alive\n    treat_image_as_sentimental_matter`,
   },
   {
-    label: "FRAGMENT_002 // WORLD_SEED_CHECK",
-    code: `if idea_makes_me_laugh_and_think:
-    do_not_throw_away
-    let_it_grow_rules
-    check_if_it_is_world_seed`,
+    label: "Fragment 002 // World Seed Check",
+    code: `if idea_makes_me_laugh_and_think:\n    do_not_throw_away\n    let_it_grow_rules\n    check_if_it_is_world_seed`,
   },
   {
-    label: "FRAGMENT_003 // SOFT_BORDER_PROTOCOL",
-    code: `if world_is_too_square:
-    make_bubble_soft
-    allow_error_to_become_art
-    confirm_that_myth_is_valid_infrastructure`,
+    label: "Fragment 003 // Soft Border Protocol",
+    code: `if world_is_too_square:\n    make_bubble_soft\n    allow_error_to_become_art\n    confirm_that_myth_is_valid_infrastructure`,
   },
 ];
 ---
@@ -131,140 +160,132 @@ const codeFragments = [
 <Layout title="For Gallery Bureaucracy — Q888">
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
-  <SystemMeta position="top" customItems={bureaucracyMetaItems} />
 
   <main class="bur-wrap" id="bur-main">
 
-    <!-- ══════════════════════════════════════════════════════
-         01. HERO / ENTRY TERMINAL
-    ══════════════════════════════════════════════════════ -->
-    <section class="bur-hero" id="bur-hero" aria-label="Entry terminal">
-      <div class="bur-scanlines" aria-hidden="true"></div>
+    <!-- Ambient blobs — organic background atmosphere -->
+    <div class="bur-ambient" aria-hidden="true">
+      <div class="bur-blob bur-blob-1"></div>
+      <div class="bur-blob bur-blob-2"></div>
+      <div class="bur-blob bur-blob-3"></div>
+      <div class="bur-blob bur-blob-4"></div>
+    </div>
 
-      <!-- Ghost background word -->
-      <div class="bur-ghost-bg" aria-hidden="true">BUREAUCRACY</div>
+    <!-- Drifting spore particles -->
+    <div class="bur-spores" aria-hidden="true">
+      <span class="bur-spore" style="--sx:12%;--sd:0s;--ss:22s"></span>
+      <span class="bur-spore" style="--sx:28%;--sd:4s;--ss:28s"></span>
+      <span class="bur-spore" style="--sx:45%;--sd:8s;--ss:19s"></span>
+      <span class="bur-spore" style="--sx:62%;--sd:2s;--ss:25s"></span>
+      <span class="bur-spore" style="--sx:78%;--sd:12s;--ss:21s"></span>
+      <span class="bur-spore" style="--sx:88%;--sd:6s;--ss:30s"></span>
+      <span class="bur-spore" style="--sx:35%;--sd:16s;--ss:24s"></span>
+      <span class="bur-spore" style="--sx:55%;--sd:20s;--ss:18s"></span>
+    </div>
 
-      <!-- Data-stream canvas -->
-      <canvas class="bur-datastream" id="bur-datastream" aria-hidden="true"></canvas>
+
+    <!-- ═══════════════════════════════════════════════
+         01. HERO — The mushroom has appeared above ground
+    ═══════════════════════════════════════════════ -->
+    <section class="bur-hero" id="bur-hero" aria-label="For Gallery Bureaucracy — hero">
 
       <div class="bur-hero-inner">
-        <!-- Terminal entry banner -->
-        <div class="bur-entry-banner q888-reveal" data-motion-stagger>
-          <span class="bur-entry-tag q888-reveal-item" style="--reveal-index:0">[ INSTITUTIONAL PORTAL // GALLERY-GRADE ACCESS ]</span>
-          <span class="bur-entry-tag bur-entry-tag-mono q888-reveal-item" style="--reveal-index:1">
-            RECORD_TYPE: ARTIST_SYSTEM &nbsp;//&nbsp; OPEN_CALL_COMPATIBILITY: EXPERIMENTAL
-          </span>
-        </div>
-
-        <!-- Status grid -->
-        <div class="bur-status-grid q888-reveal" data-motion-stagger>
-          <div class="bur-status-item q888-reveal-item" style="--reveal-index:0">
-            <span class="bur-status-label">DOCUMENT_STATUS</span>
-            <span class="bur-status-val">SUBMITTED</span>
-          </div>
-          <div class="bur-status-item q888-reveal-item" style="--reveal-index:1">
-            <span class="bur-status-label">MYTH_INDEX</span>
-            <span class="bur-status-val bur-val-active">
-              <span class="bur-dot" aria-hidden="true"></span>ACTIVE
-            </span>
-          </div>
-          <div class="bur-status-item q888-reveal-item" style="--reveal-index:2">
-            <span class="bur-status-label">CURATOR_SAFE_MODE</span>
-            <span class="bur-status-val">PARTIALLY ENABLED</span>
-          </div>
-          <div class="bur-status-item q888-reveal-item" style="--reveal-index:3">
-            <span class="bur-status-label">OPEN_CALL_COMPAT</span>
-            <span class="bur-status-val">EXPERIMENTAL</span>
-          </div>
+        <!-- Pre-heading label -->
+        <div class="bur-hero-preheading q888-reveal">
+          <span class="bur-field-label">For Gallery Bureaucracy</span>
+          <span class="bur-field-sep" aria-hidden="true">·</span>
+          <span class="bur-field-note">document status: submitted</span>
         </div>
 
         <!-- Main title -->
-        <div class="bur-hero-title-wrap">
-          <h1 class="bur-headline q888-reveal">
-            <span class="bur-hl-pre">FOR</span>
-            <span class="bur-hl-main">GALLERY</span>
-            <span class="bur-hl-sub">BUREAUCRACY</span>
-          </h1>
-          <p class="bur-hero-subtitle q888-reveal">
-            Artist record, mythic credentials, and administrative proof of Q888 existence.
-          </p>
+        <h1 class="bur-headline q888-reveal">
+          The artist CV
+          <em class="bur-hl-em">that grew mushrooms</em>
+          while waiting<br class="bur-hl-br"/> for institutional review.
+        </h1>
+
+        <p class="bur-hero-subtitle q888-reveal">
+          Artist record, mythic credentials, and administrative proof of Q888 existence.
+          Fields mostly completed. Some fields composted.
+        </p>
+
+        <!-- Status pills — soft, not terminal boxes -->
+        <div class="bur-status-row q888-reveal" data-motion-stagger>
+          <span class="bur-pill q888-reveal-item" style="--reveal-index:0">
+            <span class="bur-pill-dot" aria-hidden="true"></span>myth index active
+          </span>
+          <span class="bur-pill q888-reveal-item" style="--reveal-index:1">curator safe mode: partial</span>
+          <span class="bur-pill q888-reveal-item" style="--reveal-index:2">open call compat: experimental</span>
+          <span class="bur-pill bur-pill-soft q888-reveal-item" style="--reveal-index:3">mushroom phase: visible</span>
         </div>
 
-        <!-- Intro -->
+        <!-- Intro prose -->
         <div class="bur-hero-intro q888-reveal">
           <p>
             This page exists for institutions, galleries, curators, open calls, grant forms,
             residencies, archives, and other Earth-based systems requiring evidence that
             Q888 can be processed by bureaucracy without fully dissolving into it.
           </p>
-          <p class="bur-hero-caveat">
-            // NOTE: Processing may take longer than expected. Q888 does not become normal for bureaucracy.
+          <p class="bur-hero-aside">
+            Processing may take longer than expected.<br/>
+            Q888 does not become normal for bureaucracy.<br/>
             Bureaucracy becomes one more material inside Q888.
           </p>
         </div>
 
-        <!-- Scroll indicator -->
-        <div class="bur-scroll-pulse" aria-hidden="true">
-          <span>▼</span>
-          <span>SCROLL TO PROCESS RECORD</span>
-          <span>▼</span>
+        <!-- Scroll gesture -->
+        <div class="bur-scroll-nudge" aria-hidden="true">
+          <span class="bur-scroll-line"></span>
+          <span class="bur-scroll-text">keep scrolling — the paperwork has not escaped yet</span>
+          <span class="bur-scroll-line"></span>
         </div>
       </div>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         02. IDENTITY_RECORD
-    ══════════════════════════════════════════════════════ -->
-    <section class="bur-section bur-identity" id="bur-identity" aria-label="Identity record">
+    <!-- ═══════════════════════════════════════════════
+         02. IDENTITY CLOUD
+    ═══════════════════════════════════════════════ -->
+    <section class="bur-section bur-identity" id="bur-identity" aria-label="Identity cloud">
       <div class="bur-section-inner">
-        <div class="bur-section-label">IDENTITY_RECORD</div>
+        <div class="bur-section-tag">identity record</div>
 
         <div class="bur-identity-grid">
-          <!-- Metadata block -->
-          <div class="bur-meta-block q888-reveal" data-motion-stagger>
+          <!-- Cloud card: identity metadata -->
+          <div class="bur-cloud-card bur-identity-meta q888-reveal" data-motion-stagger>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:0">
-              <span class="bur-meta-key">ENTITY_ID</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">Q888</span>
+              <span class="bur-meta-key">Entity</span>
+              <span class="bur-meta-val bur-meta-val-strong">Q888</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:1">
-              <span class="bur-meta-key">EARTH_NAME</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">ALEKSANDRS SESTAKOVS</span>
+              <span class="bur-meta-key">Earth name</span>
+              <span class="bur-meta-val">Aleksandrs Sestakovs</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:2">
-              <span class="bur-meta-key">BIRTH_MARKER</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">1982BBB</span>
+              <span class="bur-meta-key">Birth marker</span>
+              <span class="bur-meta-val">1982bbb</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:3">
-              <span class="bur-meta-key">ENTITY_TYPE</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">ARTIST-SYSTEM</span>
+              <span class="bur-meta-key">Type</span>
+              <span class="bur-meta-val">Artist-System</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:4">
-              <span class="bur-meta-key">LOCATION</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">EDINBURGH, EARTH // SECTOR 3W</span>
+              <span class="bur-meta-key">Location</span>
+              <span class="bur-meta-val">Edinburgh, Earth // Sector 3W</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:5">
-              <span class="bur-meta-key">PRIMARY_MATERIALS</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val bur-materials">
-                MYTH · CODE · IMAGE · INTERFACE · MEMORY · ABSURDITY
-              </span>
+              <span class="bur-meta-key">Materials</span>
+              <span class="bur-meta-val bur-materials">myth · code · image · interface · memory · absurdity</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:6">
-              <span class="bur-meta-key">RECORD_INTEGRITY</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">OFFICIALLY_UNSTABLE</span>
+              <span class="bur-meta-key">Record integrity</span>
+              <span class="bur-meta-val bur-meta-val-note">officially unstable</span>
             </div>
           </div>
 
-          <!-- Description copy -->
+          <!-- Identity description -->
           <div class="bur-identity-copy q888-reveal">
-            <h2 class="bur-identity-heading">Q888 IS AN ARTIST-SYSTEM.</h2>
+            <h2 class="bur-identity-heading">Q888 is an artist-system.</h2>
             <p>
               Working with visual mythologies, symbolic infrastructure, AI-assisted world-building,
               fictional technologies, and Human Code.
@@ -274,8 +295,8 @@ const codeFragments = [
               certificates, memory units, speculative products, and small pieces of alternative
               reality trying to become operational.
             </p>
-            <p class="bur-identity-note">
-              // The work builds symbolic systems, narrative architectures and speculative tools.
+            <p class="bur-identity-aside">
+              The work builds symbolic systems, narrative architectures and speculative tools.
               It treats myth, code and interface as equal materials.
               This site is not a portfolio. It is an entry point into living systems.
             </p>
@@ -285,30 +306,31 @@ const codeFragments = [
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         03. METHOD_ENGINE
-    ══════════════════════════════════════════════════════ -->
-    <section class="bur-section bur-method" id="bur-method" aria-label="Method engine">
+    <!-- ═══════════════════════════════════════════════
+         03. METHOD MYCELIUM
+    ═══════════════════════════════════════════════ -->
+    <section class="bur-section bur-method" id="bur-method" aria-label="Method mycelium">
       <div class="bur-section-inner">
-        <div class="bur-section-label">METHOD_ENGINE</div>
+        <div class="bur-section-tag">method mycelium</div>
 
-        <div class="bur-method-status q888-reveal" data-motion-stagger>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:0">METHOD_ENGINE: ARTIFICIAL ENTELECHY</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:1">HUMAN_CODE: ENABLED</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:2">MEANING_EXTRACTION: IN PROGRESS</span>
+        <div class="bur-method-intro q888-reveal">
+          <p>This is the part where the joke becomes a system.</p>
+          <p>Artificial Entelechy asks what the idea is trying to become. Human Code checks that it enters reality without losing its soul.</p>
         </div>
 
         <div class="bur-method-grid">
-          <!-- Left: distinction block -->
-          <div class="bur-method-distinction q888-reveal">
+          <!-- Left: distinction -->
+          <div class="bur-cloud-card bur-method-distinction q888-reveal">
             <div class="bur-distinction-row">
-              <span class="bur-distinction-label">ARTIFICIAL INTELLIGENCE ASKS:</span>
+              <span class="bur-distinction-label">Artificial Intelligence asks:</span>
               <span class="bur-distinction-text">What is the answer?</span>
             </div>
-            <div class="bur-distinction-divider" aria-hidden="true">—</div>
+            <div class="bur-distinction-divider" aria-hidden="true">
+              <span class="bur-root-line"></span>
+            </div>
             <div class="bur-distinction-row bur-distinction-row-alt">
-              <span class="bur-distinction-label">ARTIFICIAL ENTELECHY ASKS:</span>
-              <span class="bur-distinction-text bur-distinction-text-highlight">
+              <span class="bur-distinction-label">Artificial Entelechy asks:</span>
+              <span class="bur-distinction-text bur-distinction-highlight">
                 What is this trying to become?
               </span>
             </div>
@@ -318,10 +340,10 @@ const codeFragments = [
             </p>
           </div>
 
-          <!-- Right: formula blocks -->
+          <!-- Right: formula clouds -->
           <div class="bur-method-formulas">
-            <div class="bur-formula-block q888-reveal">
-              <div class="bur-formula-label">PIXEL_TO_ENTITY FORMULA</div>
+            <div class="bur-cloud-card bur-formula-cloud q888-reveal">
+              <div class="bur-formula-tag">pixel → entity formula</div>
               <div class="bur-formula-chain" aria-label="Pixels to Pattern to Form to Story to Entity">
                 <span class="bur-formula-node">Pixels</span>
                 <span class="bur-formula-arrow" aria-hidden="true">→</span>
@@ -335,8 +357,8 @@ const codeFragments = [
               </div>
             </div>
 
-            <div class="bur-formula-block q888-reveal">
-              <div class="bur-formula-label">HUMAN_CODE FORMULA</div>
+            <div class="bur-cloud-card bur-formula-cloud q888-reveal">
+              <div class="bur-formula-tag">human code formula</div>
               <div class="bur-code-formula">
                 <div class="bur-code-line">
                   <span class="bur-code-agent">AI</span>
@@ -366,34 +388,32 @@ const codeFragments = [
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         04. SELECTED SYSTEMS / EVIDENCE GRID
-    ══════════════════════════════════════════════════════ -->
-    <section class="bur-section bur-evidence" id="bur-evidence" aria-label="Selected systems evidence grid">
+    <!-- ═══════════════════════════════════════════════
+         04. SELECTED SYSTEMS — floating clouds
+    ═══════════════════════════════════════════════ -->
+    <section class="bur-section bur-evidence" id="bur-evidence" aria-label="Selected systems">
       <div class="bur-section-inner">
-        <div class="bur-section-label">SELECTED_SYSTEMS // EVIDENCE_GRID</div>
+        <div class="bur-section-tag">selected systems</div>
         <p class="bur-section-subtitle q888-reveal">
           The following systems have been produced, tested, or deployed within the Q888 operational field.
           Each constitutes a form of evidence. Evidence of what, exactly, remains under review.
         </p>
 
-        <div class="bur-evidence-grid" data-motion-stagger>
+        <div class="bur-systems-grid" data-motion-stagger>
           {selectedSystems.map((sys, i) => (
             <a
               href={sys.href}
-              class="bur-evidence-card q888-reveal-item"
+              class="bur-system-cloud q888-reveal-item"
               style={`--reveal-index:${i}`}
               aria-label={`${sys.name} — ${sys.desc}`}
             >
-              <div class="bur-card-header">
-                <span class="bur-card-code">{sys.code}</span>
-                <span class="bur-card-status">{sys.status}</span>
+              <div class="bur-sys-top">
+                <span class="bur-sys-code">{sys.code}</span>
+                <span class="bur-sys-status">{sys.status}</span>
               </div>
-              <div class="bur-card-name">{sys.name}</div>
-              <p class="bur-card-desc">{sys.desc}</p>
-              <div class="bur-card-footer">
-                <span class="bur-card-access">ACCESS RECORD →</span>
-              </div>
+              <div class="bur-sys-name">{sys.name}</div>
+              <p class="bur-sys-desc">{sys.desc}</p>
+              <div class="bur-sys-access">explore →</div>
             </a>
           ))}
         </div>
@@ -401,33 +421,78 @@ const codeFragments = [
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         05. REJECTION_ARCHIVE / GALLERY ACCESS RESTRICTIONS
-    ══════════════════════════════════════════════════════ -->
-    <section class="bur-section bur-rejection" id="bur-rejection" aria-label="Rejection archive — gallery access restrictions">
+    <!-- ═══════════════════════════════════════════════
+         05. FIELD RECORD — Underground Mycelium [NEW]
+    ═══════════════════════════════════════════════ -->
+    <section class="bur-section bur-field-record" id="bur-field-record" aria-label="Field record — underground mycelium">
       <div class="bur-section-inner">
-        <div class="bur-section-label">REJECTION_ARCHIVE // GALLERY ACCESS RESTRICTIONS</div>
+        <div class="bur-section-tag">field record // underground mycelium</div>
 
-        <!-- Status row -->
-        <div class="bur-rejection-status q888-reveal" data-motion-stagger>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:0">REJECTION_ARCHIVE: ACTIVE</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:1">FEEDBACK_RECEIVED: GENERIC</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:2">TEMPLATE_DEMON: SUSPECTED</span>
-          <span class="bur-inline-status bur-inline-status-note q888-reveal-item" style="--reveal-index:3">Q888_MOOD: NO HARD FEELINGS / NO FUTURE DEALINGS</span>
+        <div class="bur-field-intro q888-reveal">
+          <h2 class="bur-field-heading">The public record may look incomplete.<br/>The network is not.</h2>
+          <p>
+            Q888's gallery experience is not a clean institutional ladder.
+            It is an underground mycelium: forest installations in Georgia,
+            a collaborative exhibition in Tbilisi, a private Edinburgh flat exhibition
+            protected by chosen vibes, stickers placed across travel routes,
+            and a large unpublished archive still growing below the visible surface.
+          </p>
+          <p class="bur-field-note">
+            Q888 is now entering the visible mushroom phase: independent, self-curated,
+            harder to ignore, and no longer afraid to redirect gallery traffic elsewhere.
+          </p>
+        </div>
+
+        <!-- Mycelium node connections -->
+        <div class="bur-mycelium-map" aria-label="Underground mycelium field records">
+          <div class="bur-mycelium-root" aria-hidden="true"></div>
+
+          <div class="bur-field-nodes" data-motion-stagger>
+            {fieldRecords.map((rec, i) => (
+              <div
+                class={`bur-field-node q888-reveal-item bur-node-tone-${rec.tone}`}
+                style={`--reveal-index:${i}`}
+              >
+                <div class="bur-node-icon" aria-hidden="true">{rec.icon}</div>
+                <div class="bur-node-place">{rec.place}</div>
+                <div class="bur-node-meta">
+                  <span class="bur-node-type">{rec.type}</span>
+                  {rec.year && <span class="bur-node-year">{rec.year}</span>}
+                  <span class="bur-node-location">{rec.location}</span>
+                </div>
+                <p class="bur-node-note">{rec.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
+         06. REJECTION COMPOST — gallery fog archive
+    ═══════════════════════════════════════════════ -->
+    <section class="bur-section bur-rejection" id="bur-rejection" aria-label="Rejection compost — gallery fog archive">
+      <div class="bur-section-inner">
+        <div class="bur-section-tag">rejection compost // gallery fog archive</div>
+
+        <div class="bur-rejection-prose q888-reveal">
+          <p>Some portals open.</p>
+          <p>Some portals send a polite fog machine and keep the submission fee.</p>
+          <p>This is where I keep those fog machines.</p>
+          <p>Mostly for compost.</p>
         </div>
 
         <div class="bur-rejection-grid">
-          <!-- Left col: intro copy -->
-          <div class="bur-rejection-copy q888-reveal">
-            <h2 class="bur-rejection-heading">NOT EVERY PORTAL OPENS.</h2>
+          <!-- Left: principle -->
+          <div class="bur-cloud-card bur-rejection-copy q888-reveal">
+            <h2 class="bur-rejection-heading">Not every portal opens.</h2>
             <p>
               Some galleries receive artist labour, images, statements, application forms,
               submission fees, emotional energy and time — then return a perfectly polished
               generic rejection unit.
             </p>
-            <p>
-              Q888 accepts rejection as part of artistic life.
-            </p>
+            <p>Q888 accepts rejection as part of artistic life.</p>
             <p>
               However, when a paid or labour-intensive application receives no meaningful
               feedback, no useful explanation, and no visible sign that the artist was seen
@@ -438,20 +503,17 @@ const codeFragments = [
               small institutional objects proving that an artist was processed, but not really met.
             </p>
 
-            <!-- Mutual freedom rule -->
-            <div class="bur-mutual-rule q888-reveal">
-              <div class="bur-mutual-rule-label">// CORE_PRINCIPLE</div>
-              <div class="bur-mutual-rule-lines">
-                <p>Galleries can reject Q888.</p>
-                <p>Q888 can reject galleries back.</p>
-                <p>Everybody remains free. The portal closes politely.</p>
-              </div>
+            <div class="bur-mutual-cloud">
+              <div class="bur-mutual-label">// core principle</div>
+              <p>Galleries can reject Q888.</p>
+              <p>Q888 can reject galleries back.</p>
+              <p>Everybody remains free. The portal closes politely.</p>
             </div>
           </div>
 
-          <!-- Right col: minimum feedback protocol -->
-          <div class="bur-protocol-block q888-reveal">
-            <div class="bur-protocol-label">Q888 MINIMUM FEEDBACK PROTOCOL</div>
+          <!-- Right: minimum feedback protocol -->
+          <div class="bur-cloud-card bur-protocol-cloud q888-reveal">
+            <div class="bur-protocol-title">Q888 minimum feedback protocol</div>
             <p class="bur-protocol-intro">
               To avoid entering the Generic Reply Museum, an institution may provide:
             </p>
@@ -461,123 +523,115 @@ const codeFragments = [
               <li><span class="bur-proto-num">03</span> One sign that somebody actually looked.</li>
               <li><span class="bur-proto-num">04</span> Optional mercy biscuit.</li>
             </ol>
-            <div class="bur-protocol-failure">
-              <div class="bur-pf-label">FAILURE TO COMPLY MAY RESULT IN:</div>
-              <div class="bur-pf-row"><span class="bur-pf-key">REPRESENTATION_ACCESS</span><span class="bur-pf-sep">:</span><span class="bur-pf-val bur-pf-restricted">RESTRICTED</span></div>
-              <div class="bur-pf-row"><span class="bur-pf-key">PORTAL_STATUS</span><span class="bur-pf-sep">:</span><span class="bur-pf-val">CLOSED FROM THIS SIDE</span></div>
-              <div class="bur-pf-row"><span class="bur-pf-key">FUTURE_Q888_DEALINGS</span><span class="bur-pf-sep">:</span><span class="bur-pf-val">UNLIKELY BUT TECHNICALLY REVERSIBLE</span></div>
+
+            <!-- CHOICE: soft moss/mushroom colour, not aggressive red -->
+            <div class="bur-compost-outcome">
+              <div class="bur-compost-label">Non-compliance may result in:</div>
+              <div class="bur-compost-row">
+                <span class="bur-compost-key">Representation access</span>
+                <span class="bur-compost-val bur-compost-restricted">Composted</span>
+              </div>
+              <div class="bur-compost-row">
+                <span class="bur-compost-key">Portal status</span>
+                <span class="bur-compost-val">Closed from this side</span>
+              </div>
+              <div class="bur-compost-row">
+                <span class="bur-compost-key">Future Q888 dealings</span>
+                <span class="bur-compost-val">Unlikely. Technically reversible.</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- ── Case files ── -->
-        <div class="bur-case-list q888-reveal" data-motion-stagger>
+        <!-- Case files — compost notes -->
+        <div class="bur-compost-list q888-reveal" data-motion-stagger>
 
-          <!-- CASE FILE 001 -->
-          <div class="bur-case-card q888-reveal-item" style="--reveal-index:0" data-bur-case>
-            <!-- Collapsed header (always visible) -->
+          <!-- CASE NOTE 001 — &Gallery -->
+          <div class="bur-compost-card q888-reveal-item" style="--reveal-index:0" data-bur-case>
             <button
-              class="bur-case-header"
+              class="bur-compost-header"
               aria-expanded="false"
               aria-controls="bur-case-001-body"
               id="bur-case-001-trigger"
               type="button"
             >
-              <div class="bur-case-header-left">
-                <span class="bur-case-number">CASE_FILE_001</span>
-                <span class="bur-case-institution">&amp;Gallery</span>
-                <span class="bur-case-event">Open Call 2026 // Edinburgh</span>
+              <div class="bur-compost-header-left">
+                <span class="bur-compost-num">Compost note 001</span>
+                <span class="bur-compost-institution">&amp;Gallery</span>
+                <span class="bur-compost-event">Open Call 2026 · Edinburgh</span>
               </div>
-              <div class="bur-case-header-right">
-                <span class="bur-case-badge bur-badge-restricted">ACCESS_RESTRICTED</span>
-                <span class="bur-case-badge bur-badge-generic">GENERIC_REPLY_DETECTED</span>
-                <span class="bur-case-toggle-icon" aria-hidden="true">+</span>
+              <div class="bur-compost-header-right">
+                <span class="bur-compost-badge bur-badge-fog">Fog received</span>
+                <span class="bur-compost-badge bur-badge-compost">Compost status: active</span>
+                <span class="bur-compost-toggle" aria-hidden="true">+</span>
               </div>
             </button>
 
-            <!-- Expanded body -->
             <div
-              class="bur-case-body"
+              class="bur-compost-body"
               id="bur-case-001-body"
               role="region"
               aria-labelledby="bur-case-001-trigger"
               hidden
             >
-              <!-- Metadata fields grid -->
-              <div class="bur-case-fields">
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">INSTITUTION</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">&amp;Gallery</span>
+              <!-- Case note fields -->
+              <div class="bur-note-fields">
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Institution</span>
+                  <span class="bur-nf-val">&amp;Gallery</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">LOCATION</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Edinburgh / Earth</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Location</span>
+                  <span class="bur-nf-val">Edinburgh / Earth</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">EVENT</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Open Call 2026 — September Group Exhibition</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Event</span>
+                  <span class="bur-nf-val">Open Call 2026 — September Group Exhibition</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">PORTAL_TYPE</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Paid / labour-intensive open call</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Portal type</span>
+                  <span class="bur-nf-val">Paid / labour-intensive open call</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">SUBMITTED_WORKS</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Dyno Milk · Edinburgh Magical Map</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Submitted works</span>
+                  <span class="bur-nf-val">Dyno Milk · Edinburgh Magical Map</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">SUBMISSION_DEADLINE</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">30 June 2026</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Outcome</span>
+                  <span class="bur-nf-val">Not selected</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">OUTCOME</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Not selected</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Reply type</span>
+                  <span class="bur-nf-val">Generic polite fog</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">REPLY_TYPE</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Generic polite fog</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Feedback depth</span>
+                  <span class="bur-nf-val">Approximately 0.8mm</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">FEEDBACK_DEPTH</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Approximately 0.8mm</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Artist labour</span>
+                  <span class="bur-nf-val">Confirmed</span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">ARTIST_LABOUR</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val">Confirmed</span>
+                <div class="bur-note-field bur-note-field-wide">
+                  <span class="bur-nf-key">Official reply flavour</span>
+                  <span class="bur-nf-val bur-nf-quote">"Strong response / carefully considered / curatorial direction."</span>
                 </div>
-                <div class="bur-case-field bur-case-field-wide">
-                  <span class="bur-cf-key">OFFICIAL_REPLY_FLAVOUR</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val bur-cf-quote">"Strong response / carefully considered / curatorial direction."</span>
-                </div>
-                <div class="bur-case-field bur-case-field-wide">
-                  <span class="bur-cf-key">Q888_TRANSLATION</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val bur-cf-translation">
+                <div class="bur-note-field bur-note-field-wide">
+                  <span class="bur-nf-key">Q888 translation</span>
+                  <span class="bur-nf-val bur-nf-translation">
                     Thank you, artist-unit. Your labour has been absorbed.
                     No further meaning will be provided.
                   </span>
                 </div>
-                <div class="bur-case-field">
-                  <span class="bur-cf-key">TEMPLATE_DEMON</span>
-                  <span class="bur-cf-sep">:</span>
-                  <span class="bur-cf-val bur-cf-warning">Strongly suspected</span>
+                <div class="bur-note-field">
+                  <span class="bur-nf-key">Template demon</span>
+                  <span class="bur-nf-val bur-nf-warm">Strongly suspected</span>
                 </div>
               </div>
 
-              <!-- WHY ACCESS IS RESTRICTED — main explanation block -->
-              <div class="bur-why-block">
-                <div class="bur-why-label">WHY_ACCESS_IS_RESTRICTED</div>
+              <!-- Why portal is closed -->
+              <div class="bur-why-cloud">
+                <div class="bur-why-heading">Why the portal closed from this side</div>
 
                 <div class="bur-why-core">
                   <p class="bur-why-lead">The rejection was not the problem. The generic fog was.</p>
@@ -591,9 +645,7 @@ const codeFragments = [
                     The message explained that many artists applied, quality was high,
                     and choices matched the curatorial direction.
                   </p>
-                  <p>
-                    This informs Q888 of three important things:
-                  </p>
+                  <p>This informs Q888 of three important things:</p>
                   <ol class="bur-why-list">
                     <li><span class="bur-why-num">01</span> The gallery had many applications.</li>
                     <li><span class="bur-why-num">02</span> The gallery made a decision.</li>
@@ -605,90 +657,85 @@ const codeFragments = [
                     "overall curatorial direction" — the portal begins to smell like
                     attention extraction with a submission-fee aftertaste.
                   </p>
-                  <p class="bur-why-note">
+                  <p class="bur-why-aside">
                     This may be normal gallery practice.
                     Q888 does not have to normalise it.
                   </p>
                 </div>
 
-                <!-- Public-safe note: the actual rule, clearly stated -->
                 <div class="bur-public-note">
-                  <div class="bur-public-note-label">PUBLIC_NOTE</div>
+                  <div class="bur-public-label">public note</div>
                   <p>
-                    &amp;Gallery is not restricted because Q888 was rejected.<br />
-                    &amp;Gallery is restricted because the rejection gave no meaningful feedback.
+                    &amp;Gallery is not in the compost pile because Q888 was rejected.<br/>
+                    &amp;Gallery is in the compost pile because the rejection gave no meaningful feedback.
                   </p>
                   <p>
-                    A gallery is free to choose its artists.<br />
+                    A gallery is free to choose its artists.<br/>
                     An artist is free to choose which institutions deserve future attention.
                   </p>
-                  <p class="bur-public-note-rule">
+                  <p class="bur-public-principle">
                     This is not conflict. This is mutual curation.
                   </p>
                 </div>
               </div>
 
-              <!-- Response verdict blocks -->
-              <div class="bur-case-response">
-                <div class="bur-case-response-block bur-crb-restricted">
-                  <div class="bur-crb-label">REPRESENTATION_ACCESS</div>
-                  <div class="bur-crb-val bur-crb-val-restricted">RESTRICTED</div>
+              <!-- Verdict -->
+              <div class="bur-verdict-row">
+                <div class="bur-verdict-card bur-verdict-composted">
+                  <div class="bur-verdict-label">Portal status</div>
+                  <div class="bur-verdict-val">Closed from this side.</div>
                 </div>
-                <div class="bur-case-response-block">
-                  <div class="bur-crb-label">PORTAL_STATUS</div>
-                  <div class="bur-crb-val">Closed from this side.</div>
+                <div class="bur-verdict-card">
+                  <div class="bur-verdict-label">Future dealings</div>
+                  <div class="bur-verdict-val">Unlikely. Technically reversible.</div>
                 </div>
-                <div class="bur-case-response-block">
-                  <div class="bur-crb-label">FUTURE_DEALINGS</div>
-                  <div class="bur-crb-val">Unlikely. Technically reversible.</div>
+                <div class="bur-verdict-card">
+                  <div class="bur-verdict-label">No hard feelings</div>
+                  <div class="bur-verdict-val">Active.</div>
                 </div>
-                <div class="bur-case-response-block">
-                  <div class="bur-crb-label">NO_HARD_FEELINGS</div>
-                  <div class="bur-crb-val">Active.</div>
-                </div>
-                <div class="bur-case-response-block">
-                  <div class="bur-crb-label">MUTUAL_OPTIONS_EXPLORED</div>
-                  <div class="bur-crb-val">
-                    They are free to select other artists.<br />
+                <div class="bur-verdict-card">
+                  <div class="bur-verdict-label">Mutual options</div>
+                  <div class="bur-verdict-val">
+                    They are free to select other artists.<br/>
                     Q888 is free to select other galaxies.
                   </div>
                 </div>
-                <div class="bur-case-response-block">
-                  <div class="bur-crb-label">Q888_WISHES_THE_GALLERY</div>
-                  <div class="bur-crb-val">
+                <div class="bur-verdict-card">
+                  <div class="bur-verdict-label">Q888 wishes the gallery</div>
+                  <div class="bur-verdict-val">
                     A successful future with artists who enjoy being processed through fog machines.
                   </div>
                 </div>
               </div>
 
-              <!-- WORKS_ACCESS_RESTRICTION DECREE -->
-              <div class="bur-decree" role="note" aria-label="Q888 Works Access Restriction">
-                <div class="bur-decree-header">
-                  <span class="bur-decree-icon" aria-hidden="true">◈</span>
-                  <span class="bur-decree-title">WORKS_ACCESS_RESTRICTION // FORMALLY ISSUED</span>
-                  <span class="bur-decree-icon" aria-hidden="true">◈</span>
+              <!-- Formal access restriction — presented as a soft decree, not a police order -->
+              <div class="bur-soft-decree" role="note" aria-label="Q888 Works Access Restriction">
+                <div class="bur-soft-decree-header">
+                  <span class="bur-soft-decree-icon" aria-hidden="true">◌</span>
+                  <span class="bur-soft-decree-title">Works Access Restriction // Formally Noted</span>
+                  <span class="bur-soft-decree-icon" aria-hidden="true">◌</span>
                 </div>
-                <div class="bur-decree-body">
-                  <p class="bur-decree-preamble">
+                <div class="bur-soft-decree-body">
+                  <p>
                     Q888, as the sole rights holder and author of its artworks, editions, systems
-                    and mythological materials, hereby issues a formal access restriction
+                    and mythological materials, hereby notes a formal access restriction
                     against the above-named institution.
                   </p>
-                  <p class="bur-decree-sub">This means, for as long as this restriction remains active:</p>
-                  <ul class="bur-decree-list">
+                  <p class="bur-soft-decree-sub">This means, for as long as this restriction remains active:</p>
+                  <ul class="bur-soft-decree-list">
                     <li>Future Q888 artworks are not available for exhibition by this institution.</li>
                     <li>Future Q888 editions are not available for sale through this institution.</li>
                     <li>Future Q888 systems, stickers, prints and mythological materials are not available for institutional use by this institution.</li>
                   </ul>
-                  <p class="bur-decree-note">
-                    This restriction is an artistic act.<br />
-                    It is the curatorial equivalent of returning the fog.<br />
-                    The institution is free to not care.<br />
-                    Q888 is free to not offer.<br />
+                  <p class="bur-soft-decree-note">
+                    This restriction is an artistic act.<br/>
+                    It is the curatorial equivalent of returning the fog.<br/>
+                    The institution is free to not care.<br/>
+                    Q888 is free to not offer.<br/>
                     Both parties remain sovereign.
                   </p>
-                  <p class="bur-decree-footnote">
-                    // Q888 is aware that this gallery almost certainly does not care about this restriction.
+                  <p class="bur-soft-decree-footnote">
+                    Q888 is aware that this gallery almost certainly does not care about this restriction.
                     That is fine. The restriction is not issued to be noticed by the institution.
                     It is issued because an artist also has a curatorial right —
                     the right to decide where their work does not go.
@@ -696,8 +743,7 @@ const codeFragments = [
                 </div>
               </div>
 
-              <!-- Smallprint -->
-              <p class="bur-case-smallprint">
+              <p class="bur-compost-smallprint">
                 This restriction is not hatred. It is portal management.
                 Q888 accepts rejection as part of artistic life.
                 Q888 does not accept empty feedback rituals as part of artistic exchange.
@@ -707,59 +753,59 @@ const codeFragments = [
                 Future mythological traffic is hereby redirected elsewhere.
               </p>
             </div>
-
           </div>
-          <!-- end CASE_FILE_001 -->
+          <!-- end compost note 001 -->
 
         </div>
-        <!-- /bur-case-list -->
-
       </div>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         06. MYTHIC CV TIMELINE
-    ══════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════
+         07. MYTHIC TIMELINE — spore trail
+    ═══════════════════════════════════════════════ -->
     <section class="bur-section bur-timeline" id="bur-timeline" aria-label="Mythic CV timeline">
       <div class="bur-section-inner">
-        <div class="bur-section-label">MYTHIC_CV // TIMELINE</div>
+        <div class="bur-section-tag">mythic CV // spore trail</div>
 
-        <div class="bur-timeline-meta q888-reveal" data-motion-stagger>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:0">TIMELINE_MODE: NON-LINEAR</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:1">CHRONOLOGY: DAMAGED BUT USEFUL</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:2">DATES: APPROXIMATE // SOME INVENTED</span>
+        <div class="bur-timeline-meta q888-reveal">
+          <span class="bur-timeline-chip">timeline mode: non-linear</span>
+          <span class="bur-timeline-chip">chronology: damaged but useful</span>
+          <span class="bur-timeline-chip">dates: approximate // some invented</span>
         </div>
 
-        <ol class="bur-timeline-list" aria-label="Mythic CV timeline">
+        <ol class="bur-spore-trail" aria-label="Mythic CV spore trail">
           {timeline.map((entry, i) => (
-            <li class="bur-timeline-entry q888-reveal" style={`--reveal-index:${i}`}>
-              <div class="bur-timeline-marker">{entry.marker}</div>
-              <div class="bur-timeline-body">
-                <div class="bur-timeline-event">{entry.event}</div>
-                <div class="bur-timeline-note">// {entry.note}</div>
+            <li class="bur-spore-entry q888-reveal" style={`--reveal-index:${i}`}>
+              <div class="bur-spore-node" aria-hidden="true">
+                <span class="bur-spore-dot"></span>
+                <span class="bur-spore-connector"></span>
+              </div>
+              <div class="bur-spore-body">
+                <div class="bur-spore-marker">{entry.marker}</div>
+                <div class="bur-spore-event">{entry.event}</div>
+                <div class="bur-spore-note">{entry.note}</div>
               </div>
             </li>
           ))}
         </ol>
 
         <div class="bur-timeline-footnote q888-reveal">
-          <span class="bur-redacted-inline" aria-label="Redacted entry">█████████████████████████████</span>
-          <br />
+          <span class="bur-redacted" aria-label="Redacted entries">· · · · · · · · · · · · · · · · · · · ·</span>
           <span class="bur-timeline-fn-text">
-            // Additional timeline entries exist. Classification level: pending institutional review.
+            Additional spore entries exist. Classification: pending institutional review.
           </span>
         </div>
       </div>
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         06. HUMAN CODE FRAGMENTS
-    ══════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════
+         08. HUMAN CODE FRAGMENTS — on soft paper
+    ═══════════════════════════════════════════════ -->
     <section class="bur-section bur-fragments" id="bur-fragments" aria-label="Human Code fragments">
       <div class="bur-section-inner">
-        <div class="bur-section-label">HUMAN_CODE // FRAGMENTS</div>
+        <div class="bur-section-tag">human code // fragments</div>
         <p class="bur-section-subtitle q888-reveal">
           Selected operational rules extracted from the Human Code system.
           These govern how Q888 relates to memory, ideas, and reality borders.
@@ -767,7 +813,7 @@ const codeFragments = [
 
         <div class="bur-fragment-grid" data-motion-stagger>
           {codeFragments.map((frag, i) => (
-            <div class="bur-fragment-block q888-reveal-item" style={`--reveal-index:${i}`}>
+            <div class="bur-fragment-paper q888-reveal-item" style={`--reveal-index:${i}`}>
               <div class="bur-fragment-label">{frag.label}</div>
               <pre class="bur-code-block" aria-label={frag.label}><code>{frag.code}</code></pre>
             </div>
@@ -777,45 +823,44 @@ const codeFragments = [
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         07. EARTH_RECORD / HUMAN_METADATA
-    ══════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════
+         09. EARTH RECORD
+    ═══════════════════════════════════════════════ -->
     <section class="bur-section bur-earth" id="bur-earth" aria-label="Earth record — human metadata">
       <div class="bur-section-inner">
-        <div class="bur-section-label">EARTH_RECORD</div>
+        <div class="bur-section-tag">earth record</div>
 
         <div class="bur-earth-grid">
-          <div class="bur-earth-meta q888-reveal" data-motion-stagger>
+          <div class="bur-cloud-card bur-earth-meta q888-reveal" data-motion-stagger>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:0">
-              <span class="bur-meta-key">VESSEL_STATUS</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">CONFIRMED</span>
+              <span class="bur-meta-key">Vessel status</span>
+              <span class="bur-meta-val">Confirmed</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:1">
-              <span class="bur-meta-key">EARTH_ORIGIN</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">LATVIA</span>
+              <span class="bur-meta-key">Earth origin</span>
+              <span class="bur-meta-val">Latvia</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:2">
-              <span class="bur-meta-key">CURRENT_BASE</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">EDINBURGH, SCOTLAND</span>
+              <span class="bur-meta-key">Current base</span>
+              <span class="bur-meta-val">Edinburgh, Scotland</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:3">
-              <span class="bur-meta-key">DISCIPLINES</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">MULTIDISCIPLINARY</span>
+              <span class="bur-meta-key">Disciplines</span>
+              <span class="bur-meta-val">Multidisciplinary</span>
             </div>
             <div class="bur-meta-row q888-reveal-item" style="--reveal-index:4">
-              <span class="bur-meta-key">RECORD_TYPE</span>
-              <span class="bur-meta-sep">:</span>
-              <span class="bur-meta-val">ADMINISTRATIVE PROOF OF VESSEL</span>
+              <span class="bur-meta-key">Record type</span>
+              <span class="bur-meta-val bur-meta-val-note">administrative proof of vessel</span>
             </div>
           </div>
 
           <div class="bur-earth-copy q888-reveal">
             <p class="bur-earth-preface">
               For administrative purposes, the artist also exists on Earth.
+            </p>
+            <p class="bur-earth-human">
+              The Earth version drinks coffee, pays rent, writes applications,
+              and occasionally pretends to understand gallery forms.
             </p>
             <p>
               Aleksandrs Sestakovs is a Latvian-born, Edinburgh-based multidisciplinary
@@ -829,9 +874,9 @@ const codeFragments = [
               independent app development.
             </p>
             <p class="bur-earth-footnote">
-              // This section is provided for institutional record purposes only.
+              This section is provided for institutional record purposes only.
               It does not constitute the primary identity of the entity.
-              For primary identity, see: IDENTITY_RECORD above.
+              For primary identity, see: Identity Cloud above.
             </p>
           </div>
         </div>
@@ -839,103 +884,102 @@ const codeFragments = [
     </section>
 
 
-    <!-- ══════════════════════════════════════════════════════
-         08. CURATOR_SAFE_MODE
-    ══════════════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════
+         10. CURATOR SAFE MODE
+    ═══════════════════════════════════════════════ -->
     <section class="bur-section bur-curator" id="bur-curator" aria-label="Curator safe mode — downloads and contact">
       <div class="bur-section-inner">
-        <div class="bur-section-label">CURATOR_SAFE_MODE</div>
+        <div class="bur-section-tag">curator safe mode</div>
 
         <div class="bur-curator-status q888-reveal" data-motion-stagger>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:0">SAFE_MODE: PARTIALLY ENABLED</span>
-          <span class="bur-inline-status q888-reveal-item" style="--reveal-index:1">INSTITUTIONAL_BRIDGE: ACTIVE</span>
-          <span class="bur-inline-status bur-inline-status-note q888-reveal-item" style="--reveal-index:2">
-            CAUTION: Q888 mythology remains present in all documents
+          <span class="bur-timeline-chip q888-reveal-item" style="--reveal-index:0">safe mode: partially enabled</span>
+          <span class="bur-timeline-chip q888-reveal-item" style="--reveal-index:1">institutional bridge: active</span>
+          <span class="bur-timeline-chip bur-chip-note q888-reveal-item" style="--reveal-index:2">
+            caution: Q888 mythology remains present in all documents
           </span>
         </div>
 
         <p class="bur-curator-intro q888-reveal">
           These materials are provided to help Earth-based institutional systems
           process the artist record with minimal friction. All documents remain
-          infected — in the best sense — by Q888 operating logic.
+          gently infected — in the best sense — by Q888 operating logic.
         </p>
 
         <div class="bur-curator-actions q888-reveal" data-motion-stagger>
           <a
             href="mailto:hello@q888.space?subject=REQUEST%3A%20Artist%20CV%20PDF"
-            class="bur-action-btn q888-reveal-item"
+            class="bur-action-cloud q888-reveal-item"
             style="--reveal-index:0"
             id="bur-btn-cv"
             aria-label="Download artist CV PDF — request via email"
           >
-            <span class="bur-btn-icon" aria-hidden="true">◈</span>
-            <span class="bur-btn-label">DOWNLOAD ARTIST CV PDF</span>
-            <span class="bur-btn-status">REQUEST FILE →</span>
+            <span class="bur-action-icon" aria-hidden="true">○</span>
+            <span class="bur-action-label">Artist CV PDF</span>
+            <span class="bur-action-arrow">request file →</span>
           </a>
 
           <a
             href="mailto:hello@q888.space?subject=REQUEST%3A%20Standard%20Bio"
-            class="bur-action-btn q888-reveal-item"
+            class="bur-action-cloud q888-reveal-item"
             style="--reveal-index:1"
             id="bur-btn-bio"
             aria-label="Download standard bio — request via email"
           >
-            <span class="bur-btn-icon" aria-hidden="true">◈</span>
-            <span class="bur-btn-label">DOWNLOAD STANDARD BIO</span>
-            <span class="bur-btn-status">REQUEST FILE →</span>
+            <span class="bur-action-icon" aria-hidden="true">○</span>
+            <span class="bur-action-label">Standard Bio</span>
+            <span class="bur-action-arrow">request file →</span>
           </a>
 
           <a
             href="mailto:hello@q888.space?subject=REQUEST%3A%20Project%20List"
-            class="bur-action-btn q888-reveal-item"
+            class="bur-action-cloud q888-reveal-item"
             style="--reveal-index:2"
             id="bur-btn-projects"
             aria-label="Download project list — request via email"
           >
-            <span class="bur-btn-icon" aria-hidden="true">◈</span>
-            <span class="bur-btn-label">DOWNLOAD PROJECT LIST</span>
-            <span class="bur-btn-status">REQUEST FILE →</span>
+            <span class="bur-action-icon" aria-hidden="true">○</span>
+            <span class="bur-action-label">Project List</span>
+            <span class="bur-action-arrow">request file →</span>
           </a>
 
           <a
             href="/"
-            class="bur-action-btn q888-reveal-item"
+            class="bur-action-cloud q888-reveal-item"
             style="--reveal-index:3"
             id="bur-btn-portfolio"
             aria-label="View full portfolio at Q888"
           >
-            <span class="bur-btn-icon" aria-hidden="true">◈</span>
-            <span class="bur-btn-label">VIEW FULL PORTFOLIO</span>
-            <span class="bur-btn-status">ENTER Q888 →</span>
+            <span class="bur-action-icon" aria-hidden="true">○</span>
+            <span class="bur-action-label">Full Portfolio</span>
+            <span class="bur-action-arrow">enter Q888 →</span>
           </a>
 
           <a
             href="mailto:hello@q888.space"
-            class="bur-action-btn bur-action-btn-primary q888-reveal-item"
+            class="bur-action-cloud bur-action-cloud-primary q888-reveal-item"
             style="--reveal-index:4"
             id="bur-btn-contact"
             aria-label="Contact Q888 via email"
           >
-            <span class="bur-btn-icon" aria-hidden="true">◈</span>
-            <span class="bur-btn-label">CONTACT Q888</span>
-            <span class="bur-btn-status">hello@q888.space →</span>
+            <span class="bur-action-icon" aria-hidden="true">✦</span>
+            <span class="bur-action-label">Contact Q888</span>
+            <span class="bur-action-arrow">hello@q888.space →</span>
           </a>
         </div>
 
-        <!-- Footer stamp -->
-        <div class="bur-footer-stamp q888-reveal">
-          <div class="bur-stamp-line" aria-hidden="true">────────────────────────────────────────────</div>
-          <div class="bur-stamp-text">
-            <span>Q888 // FOR GALLERY BUREAUCRACY // DOCUMENT STATUS: SUBMITTED</span>
-            <span class="bur-stamp-sep" aria-hidden="true">&nbsp;//&nbsp;</span>
-            <span>MYTH_INDEX: VERIFIED IN ONE DIMENSION</span>
+        <!-- Footer soft stamp -->
+        <div class="bur-soft-stamp q888-reveal">
+          <div class="bur-soft-stamp-line" aria-hidden="true"></div>
+          <div class="bur-soft-stamp-text">
+            <span>Q888 // For Gallery Bureaucracy // Document status: submitted</span>
+            <span class="bur-soft-stamp-sep" aria-hidden="true">&nbsp;·&nbsp;</span>
+            <span>Myth index: verified in one dimension</span>
           </div>
-          <div class="bur-stamp-text">
-            <span>CURATOR_SAFE_MODE: PARTIALLY ENABLED</span>
-            <span class="bur-stamp-sep" aria-hidden="true">&nbsp;//&nbsp;</span>
-            <span>REALITY_ANCHOR: HUMAN VESSEL CONFIRMED</span>
+          <div class="bur-soft-stamp-text">
+            <span>Curator safe mode: partially enabled</span>
+            <span class="bur-soft-stamp-sep" aria-hidden="true">&nbsp;·&nbsp;</span>
+            <span>Reality anchor: human vessel confirmed</span>
           </div>
-          <div class="bur-stamp-line" aria-hidden="true">────────────────────────────────────────────</div>
         </div>
       </div>
     </section>
@@ -944,12 +988,12 @@ const codeFragments = [
 </Layout>
 
 <script>
-  // ── Scroll reveal observer ──────────────────────────────────────
+  // ── Scroll reveal observer ──────────────────────────────────────────
+  // LEARN: IntersectionObserver fires when elements enter the viewport.
+  // We add 'is-revealed' to trigger CSS transitions defined below.
   function initBurReveal() {
     const html = document.documentElement;
-    if (!html.dataset.motionReady) {
-      html.dataset.motionReady = "1";
-    }
+    if (!html.dataset.motionReady) html.dataset.motionReady = "1";
 
     const staggerParents = document.querySelectorAll("[data-motion-stagger]");
     const singles = document.querySelectorAll(
@@ -975,12 +1019,12 @@ const codeFragments = [
   initBurReveal();
   document.addEventListener("astro:page-load", initBurReveal);
 
-  // ── Rejection Archive accordion ──────────────────────────────
-  function initRejectionAccordion() {
+  // ── Compost accordion ──────────────────────────────────────────────
+  function initCompostAccordion() {
     document.querySelectorAll("[data-bur-case]").forEach((card) => {
-      const trigger = card.querySelector(".bur-case-header") as HTMLButtonElement | null;
-      const body = card.querySelector(".bur-case-body") as HTMLElement | null;
-      const icon = card.querySelector(".bur-case-toggle-icon") as HTMLElement | null;
+      const trigger = card.querySelector(".bur-compost-header") as HTMLButtonElement | null;
+      const body = card.querySelector(".bur-compost-body") as HTMLElement | null;
+      const icon = card.querySelector(".bur-compost-toggle") as HTMLElement | null;
       if (!trigger || !body) return;
       if (trigger.dataset.burCaseInit) return;
       trigger.dataset.burCaseInit = "1";
@@ -1001,344 +1045,178 @@ const codeFragments = [
     });
   }
 
-  initRejectionAccordion();
-  document.addEventListener("astro:page-load", initRejectionAccordion);
-
-  // ── Data-stream canvas (hero background) ────────────────────
-  function initDataStream() {
-    const canvas = document.getElementById("bur-datastream") as HTMLCanvasElement | null;
-    if (!canvas) return;
-    if ((canvas as any)._burStreamInit) return;
-    (canvas as any)._burStreamInit = true;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resize = () => {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize, { passive: true });
-
-    const chars = "01QBUREAUCRACY▲◈//░▒";
-    const fontSize = 11;
-    let columns: number[];
-
-    const reset = () => {
-      const cols = Math.floor(canvas.width / fontSize);
-      columns = Array.from({ length: cols }, () => Math.random() * canvas.height);
-    };
-    reset();
-    window.addEventListener("resize", reset, { passive: true });
-
-    let raf: number;
-    let isDrawing = false;
-    
-    const draw = () => {
-      if (!isDrawing) return;
-      ctx.fillStyle = "rgba(10,10,10,0.08)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(255, 255, 255, 0.38)"; // Bumped opacity to make it visible
-      ctx.font = `${fontSize}px ui-monospace, monospace`;
-      for (let i = 0; i < columns.length; i++) {
-        const ch = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(ch, i * fontSize, columns[i]);
-        if (columns[i] > canvas.height && Math.random() > 0.975) columns[i] = 0;
-        else columns[i] += fontSize;
-      }
-      raf = requestAnimationFrame(draw);
-    };
-
-    // stop when hero is off-screen
-    const hero = document.getElementById("bur-hero");
-    if (hero) {
-      new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) {
-          if (!isDrawing) {
-            isDrawing = true;
-            draw();
-          }
-        } else {
-          isDrawing = false;
-          cancelAnimationFrame(raf);
-        }
-      }).observe(hero);
-    }
-  }
-
-  // ── Glitch pulse on restricted labels ──────────────────────
-  function initGlitch() {
-    document.querySelectorAll(".bur-crb-val-restricted").forEach((el) => {
-      if ((el as HTMLElement).dataset.glitchInit) return;
-      (el as HTMLElement).dataset.glitchInit = "1";
-      setInterval(() => {
-        if (Math.random() > 0.7) el.classList.add("bur-glitch-active");
-        setTimeout(() => el.classList.remove("bur-glitch-active"), 140);
-      }, 3200);
-    });
-  }
-
-  initDataStream();
-  initGlitch();
-  document.addEventListener("astro:page-load", () => {
-    initDataStream();
-    initGlitch();
-  });
+  initCompostAccordion();
+  document.addEventListener("astro:page-load", initCompostAccordion);
 </script>
 
 <style>
-  /* ═══════════════════════════════════════════════
-     BASE WRAP — dark terminal world
-  ═══════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════════════════
+     GOOGLE FONTS IMPORT
+     DM Serif Display — soft editorial headings
+     Lora — warm readable body serif
+  ═══════════════════════════════════════════════════════════════════ */
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BASE WRAP — mushroom cream, light, organic
+  ═══════════════════════════════════════════════════════════════════ */
+  /* DNA: background is mushroom cream, not terminal black.
+     The page is a living document emerging from underground, not a database. */
   .bur-wrap {
-    background: #121212;
-    color: #e0ddd6;
+    background: #faf8f5;
+    color: #2a2620;
     min-height: 100dvh;
-    padding-top: 2.75rem; /* clear SystemMeta bar */
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    padding-top: 2.75rem;
+    font-family: 'Lora', Georgia, serif;
     position: relative;
     overflow-x: hidden;
   }
 
   @media (min-width: 768px) {
-    .bur-wrap {
-      padding-top: 3rem;
-    }
+    .bur-wrap { padding-top: 3rem; }
   }
 
-  /* ═══════════════════════════════════════════════
-     01. HERO
-  ═══════════════════════════════════════════════ */
-  .bur-hero {
-    position: relative;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    overflow: hidden;
-  }
-
-  /* Scanline overlay — CSS-only, no images */
-  .bur-scanlines {
-    position: absolute;
+  /* ─── Ambient background blobs ───────────────────────────────────── */
+  /* DNA: slow colour breathing — not scanning, not processing. Growing. */
+  .bur-ambient {
+    position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 3px,
-      rgba(255, 255, 255, 0.012) 3px,
-      rgba(255, 255, 255, 0.012) 4px
-    );
+    overflow: hidden;
   }
 
-  @media (max-width: 768px) {
-    .bur-scanlines {
-      display: none; /* perf: skip on mobile */
-    }
+  .bur-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0;
+    animation: bur-blob-breathe var(--bd, 12s) ease-in-out infinite alternate;
+    animation-delay: var(--bdelay, 0s);
   }
 
-  .bur-hero-inner {
+  @keyframes bur-blob-breathe {
+    0%   { opacity: 0.25; transform: scale(1) translate(0, 0); }
+    100% { opacity: 0.55; transform: scale(1.08) translate(var(--btx, 2%), var(--bty, 1%)); }
+  }
+
+  .bur-blob-1 {
+    width: 40vw; height: 40vw;
+    top: -10%; left: -5%;
+    background: hsl(270 30% 90%);   /* pale lavender */
+    --bd: 14s; --bdelay: 0s; --btx: 3%; --bty: 2%;
+  }
+
+  .bur-blob-2 {
+    width: 50vw; height: 50vw;
+    top: 20%; right: -15%;
+    background: hsl(120 20% 88%);   /* soft moss */
+    --bd: 18s; --bdelay: 4s; --btx: -2%; --bty: 3%;
+  }
+
+  .bur-blob-3 {
+    width: 35vw; height: 35vw;
+    bottom: 10%; left: 20%;
+    background: hsl(30 30% 90%);    /* warm clay */
+    --bd: 22s; --bdelay: 8s; --btx: 2%; --bty: -2%;
+  }
+
+  .bur-blob-4 {
+    width: 45vw; height: 45vw;
+    bottom: -5%; right: 5%;
+    background: hsl(200 20% 92%);   /* misty blue-grey */
+    --bd: 16s; --bdelay: 6s; --btx: -1%; --bty: 2%;
+  }
+
+  @media (max-width: 640px) {
+    .bur-blob { filter: blur(50px); }
+  }
+
+  /* ─── Drifting spore particles ───────────────────────────────────── */
+  .bur-spores {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bur-spore {
+    position: absolute;
+    left: var(--sx, 50%);
+    bottom: -2rem;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: hsl(120 15% 60% / 0.35);
+    animation: bur-spore-drift var(--ss, 24s) ease-in-out infinite;
+    animation-delay: var(--sd, 0s);
+  }
+
+  @keyframes bur-spore-drift {
+    0%   { bottom: -2rem; opacity: 0;   transform: translateX(0) scale(1);   }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { bottom: 110vh; opacity: 0;  transform: translateX(calc(sin(var(--sd, 1s)) * 40px)) scale(0.6); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bur-spore { animation: none; }
+    .bur-blob  { animation: none; opacity: 0.35; }
+  }
+
+  /* All page content sits above ambient layer */
+  .bur-hero,
+  .bur-section {
     position: relative;
     z-index: 1;
-    width: 100%;
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 6rem 1.5rem 5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
   }
 
-  @media (min-width: 768px) {
-    .bur-hero-inner {
-      padding: 8rem 3rem 6rem;
-    }
+  /* ─── Scroll reveal ──────────────────────────────────────────────── */
+  .q888-reveal,
+  .q888-reveal-item {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: calc(var(--reveal-index, 0) * 80ms);
   }
 
-  /* Entry banner */
-  .bur-entry-banner {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+  .is-revealed .q888-reveal-item,
+  .q888-reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .bur-entry-tag {
-    font-size: 0.95rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-    line-height: 1.6;
+  /* ═══════════════════════════════════════════════════════════════════
+     CLOUD CARD — the core organic container
+  ═══════════════════════════════════════════════════════════════════ */
+  /* DNA: soft cloud card replaces hard dark panels.
+     CHOICE: backdrop-filter blur gives translucent paper feel without opacity on text. */
+  .bur-cloud-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    padding: 1.75rem 2rem;
+    box-shadow:
+      0 2px 16px rgba(80, 60, 40, 0.06),
+      0 8px 48px rgba(80, 60, 40, 0.04),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: transform 250ms ease, box-shadow 250ms ease;
   }
 
-  .bur-entry-tag-mono {
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 0.9rem;
-  }
-
-  /* Status grid */
-  .bur-status-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    max-width: 44rem;
-  }
-
-  @media (min-width: 640px) {
-    .bur-status-grid {
-      grid-template-columns: repeat(4, auto);
-      gap: 0;
-      display: flex;
-      flex-wrap: wrap;
-    }
-  }
-
-  .bur-status-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.6rem 1rem 0.6rem 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.07);
-    padding-right: 1rem;
-    margin-right: 1rem;
-  }
-
-  .bur-status-item:last-child {
-    border-right: none;
-  }
-
-  .bur-status-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.50);
-  }
-
-  .bur-status-val {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .bur-val-active {
-    color: rgba(200, 220, 200, 0.85);
-  }
-
-  /* Blinking dot */
-  .bur-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: rgba(180, 220, 180, 0.8);
-    display: inline-block;
-    animation: bur-blink 2.2s ease-in-out infinite;
-  }
-
-  @keyframes bur-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-  }
-
-  /* Main title */
-  .bur-hero-title-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .bur-headline {
-    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .bur-hl-pre {
-    font-size: clamp(1.2rem, 4vw, 2rem);
-    color: rgba(255, 255, 255, 0.55);
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    font-family: ui-monospace, monospace;
-  }
-
-  .bur-hl-main {
-    font-size: clamp(3.5rem, 12vw, 9rem);
-    color: rgba(255, 255, 255, 0.92);
-    font-weight: 700;
-    line-height: 0.88;
-  }
-
-  .bur-hl-sub {
-    font-size: clamp(2rem, 7vw, 5.5rem);
-    color: rgba(255, 255, 255, 0.60);
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .bur-hero-subtitle {
-    font-family: ui-monospace, monospace;
-    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.60);
-    max-width: 42rem;
-    line-height: 1.6;
-  }
-
-  /* Intro copy */
-  .bur-hero-intro {
-    max-width: 44rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .bur-hero-intro p {
-    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.75);
-    font-family: ui-monospace, monospace;
-    letter-spacing: 0.02em;
-  }
-
-  .bur-hero-caveat {
-    font-size: 0.85rem !important;
-    color: rgba(255, 255, 255, 0.50) !important;
-    letter-spacing: 0.08em;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
-    padding-left: 0.75rem;
-  }
-
-  /* Scroll pulse */
-  .bur-scroll-pulse {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.40);
-    animation: bur-pulse 3s ease-in-out infinite;
-  }
-
-  @keyframes bur-pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+  .bur-cloud-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 4px 24px rgba(80, 60, 40, 0.10),
+      0 16px 64px rgba(80, 60, 40, 0.07),
+      inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
 
-  /* ═══════════════════════════════════════════════
+  /* ═══════════════════════════════════════════════════════════════════
      SHARED SECTION STYLES
-  ═══════════════════════════════════════════════ */
+  ═══════════════════════════════════════════════════════════════════ */
   .bur-section {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding: 5rem 0;
   }
 
@@ -1349,117 +1227,256 @@ const codeFragments = [
   }
 
   @media (min-width: 768px) {
-    .bur-section-inner {
-      padding: 0 3rem;
-    }
+    .bur-section-inner { padding: 0 3rem; }
   }
 
-  .bur-section-label {
-    font-size: 0.9rem;
-    letter-spacing: 0.25em;
+  /* Section tag — small annotated label, field-guide style */
+  .bur-section-tag {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.40);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    padding-bottom: 0.75rem;
-    margin-bottom: 2.5rem;
+    color: hsl(30 15% 55%);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .bur-section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, hsl(30 15% 75%), transparent);
+    max-width: 8rem;
   }
 
   .bur-section-subtitle {
-    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.60);
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+    line-height: 1.8;
+    color: hsl(30 10% 40%);
     max-width: 44rem;
     margin-bottom: 2.5rem;
-    letter-spacing: 0.02em;
   }
 
-  /* Inline status chips */
-  .bur-method-status,
-  .bur-timeline-meta,
-  .bur-curator-status {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .bur-inline-status {
-    font-size: 0.9rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.3rem 0.65rem;
-    white-space: nowrap;
-  }
-
-  .bur-inline-status-note {
-    color: rgba(240, 200, 180, 0.4);
-    border-color: rgba(240, 200, 180, 0.15);
-  }
-
-  /* Metadata block rows */
-  .bur-meta-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.02);
-  }
-
+  /* Metadata rows — inside cloud cards */
   .bur-meta-row {
     display: grid;
-    grid-template-columns: 9rem auto 1fr;
-    gap: 0 0.5rem;
-    padding: 0.4rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    grid-template-columns: 9rem 1fr;
+    gap: 0 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid hsl(30 20% 88%);
+    align-items: baseline;
   }
 
-  .bur-meta-row:last-child {
-    border-bottom: none;
-  }
+  .bur-meta-row:last-child { border-bottom: none; }
 
   .bur-meta-key {
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.50);
-    white-space: nowrap;
-  }
-
-  .bur-meta-sep {
-    color: rgba(255, 255, 255, 0.40);
-    font-size: 0.95rem;
+    color: hsl(30 15% 55%);
   }
 
   .bur-meta-val {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9rem;
+    color: hsl(30 15% 25%);
+    line-height: 1.5;
+  }
+
+  .bur-meta-val-strong {
+    font-weight: 700;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: hsl(30 20% 18%);
+  }
+
+  .bur-meta-val-note {
+    font-style: italic;
+    color: hsl(30 15% 50%);
   }
 
   .bur-materials {
-    letter-spacing: 0.05em;
-    word-break: break-word;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: hsl(30 15% 40%);
   }
 
 
-  /* ═══════════════════════════════════════════════
-     02. IDENTITY_RECORD
-  ═══════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════════════════
+     01. HERO
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-hero {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    position: relative;
+  }
+
+  .bur-hero-inner {
+    width: 100%;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .bur-hero-inner { padding: 9rem 3rem 7rem; }
+  }
+
+  /* Pre-heading tiny field label */
+  .bur-hero-preheading {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: hsl(30 20% 55%);
+  }
+
+  .bur-field-sep { color: hsl(30 20% 70%); }
+  .bur-field-note { color: hsl(30 15% 65%); }
+  .bur-field-label { color: hsl(30 20% 45%); }
+
+  /* Main headline — large, soft, serif */
+  .bur-headline {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: hsl(30 20% 18%);
+    max-width: 18ch;
+  }
+
+  .bur-hl-em {
+    font-style: italic;
+    color: hsl(120 20% 40%);  /* soft moss green for the mushroom phrase */
+  }
+
+  .bur-hl-br { display: none; }
+
+  @media (min-width: 768px) {
+    .bur-hl-br { display: inline; }
+  }
+
+  .bur-hero-subtitle {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    line-height: 1.75;
+    color: hsl(30 12% 42%);
+    max-width: 38rem;
+  }
+
+  /* Status pills */
+  .bur-status-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bur-pill {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: hsl(30 15% 40%);
+    background: rgba(255,255,255,0.7);
+    border: 1px solid hsl(30 20% 82%);
+    border-radius: 2rem;
+    padding: 0.3rem 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    backdrop-filter: blur(6px);
+  }
+
+  .bur-pill-soft {
+    background: hsl(120 20% 93%);
+    border-color: hsl(120 20% 78%);
+    color: hsl(120 20% 35%);
+  }
+
+  /* Breathing dot inside pill */
+  .bur-pill-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: hsl(120 30% 50%);
+    animation: bur-dot-breathe 2.5s ease-in-out infinite;
+  }
+
+  @keyframes bur-dot-breathe {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  /* Hero intro prose */
+  .bur-hero-intro {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .bur-hero-intro p {
+    font-size: clamp(0.88rem, 1.6vw, 1rem);
+    line-height: 1.8;
+    color: hsl(30 12% 38%);
+  }
+
+  .bur-hero-aside {
+    font-size: 0.88rem !important;
+    font-style: italic;
+    color: hsl(30 12% 55%) !important;
+    padding-left: 1rem;
+    border-left: 2px solid hsl(30 20% 80%);
+  }
+
+  /* Scroll nudge */
+  .bur-scroll-nudge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: hsl(30 15% 60%);
+    animation: bur-nudge-breathe 3s ease-in-out infinite;
+  }
+
+  .bur-scroll-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(30 20% 78%), transparent);
+    max-width: 3rem;
+  }
+
+  @keyframes bur-nudge-breathe {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.8; }
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════
+     02. IDENTITY
+  ═══════════════════════════════════════════════════════════════════ */
   .bur-identity-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   @media (min-width: 860px) {
-    .bur-identity-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
-    }
+    .bur-identity-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
   }
 
   .bur-identity-copy {
@@ -1469,44 +1486,61 @@ const codeFragments = [
   }
 
   .bur-identity-heading {
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-size: clamp(1.1rem, 3vw, 1.8rem);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.88);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 400;
+    color: hsl(30 20% 20%);
     line-height: 1.15;
     margin: 0 0 0.5rem;
   }
 
   .bur-identity-copy p {
-    font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+    font-size: clamp(0.88rem, 1.6vw, 1rem);
+    line-height: 1.85;
+    color: hsl(30 12% 38%);
+  }
+
+  .bur-identity-aside {
+    font-size: 0.875rem !important;
+    font-style: italic;
+    color: hsl(30 12% 52%) !important;
+    border-left: 2px solid hsl(30 20% 80%);
+    padding-left: 1rem;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════
+     03. METHOD
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-method-intro {
+    max-width: 44rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .bur-method-intro p {
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.72);
+    color: hsl(30 12% 40%);
   }
 
-  .bur-identity-note {
-    font-size: 0.85rem !important;
-    color: rgba(255, 255, 255, 0.48) !important;
-    border-left: 2px solid rgba(255, 255, 255, 0.08);
-    padding-left: 0.75rem;
-    letter-spacing: 0.04em;
+  .bur-method-intro p:first-child {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: hsl(30 20% 25%);
+    font-style: italic;
   }
 
-
-  /* ═══════════════════════════════════════════════
-     03. METHOD_ENGINE
-  ═══════════════════════════════════════════════ */
   .bur-method-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
 
   @media (min-width: 860px) {
-    .bur-method-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
-    }
+    .bur-method-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   }
 
   .bur-method-distinction {
@@ -1518,601 +1552,411 @@ const codeFragments = [
   .bur-distinction-row {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.02);
+    gap: 0.4rem;
+    padding: 1.25rem;
+    background: hsl(30 30% 97%);
+    border-radius: 1rem;
   }
 
   .bur-distinction-row-alt {
-    border-color: rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.04);
+    background: hsl(120 18% 95%);
   }
 
   .bur-distinction-label {
-    font-size: 0.88rem;
-    letter-spacing: 0.15em;
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.48);
+    color: hsl(30 15% 52%);
   }
 
   .bur-distinction-text {
-    font-size: clamp(0.9rem, 2vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: hsl(30 15% 25%);
     line-height: 1.4;
   }
 
-  .bur-distinction-text-highlight {
-    color: rgba(255, 255, 255, 0.9);
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-weight: 700;
+  .bur-distinction-highlight {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: hsl(120 20% 32%);
   }
 
   .bur-distinction-divider {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.12);
-    font-size: 1.2rem;
-    letter-spacing: 0.4em;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+
+  .bur-root-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(30 20% 78%), transparent);
+    display: block;
   }
 
   .bur-method-desc {
-    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-size: 0.88rem;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.60);
-    margin-top: 0.25rem;
+    color: hsl(30 12% 48%);
   }
 
   .bur-method-formulas {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
-  .bur-formula-block {
-    padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.025);
+  .bur-formula-cloud {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .bur-formula-label {
-    font-size: 0.88rem;
-    letter-spacing: 0.18em;
+  .bur-formula-tag {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-    margin-bottom: 1.25rem;
+    color: hsl(30 15% 55%);
   }
 
   .bur-formula-chain {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .bur-formula-node {
-    font-size: clamp(0.7rem, 1.5vw, 0.875rem);
-    letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.80);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.3rem 0.7rem;
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.82rem;
+    color: hsl(30 15% 30%);
+    background: hsl(30 25% 94%);
+    border-radius: 2rem;
+    padding: 0.25rem 0.7rem;
   }
 
   .bur-formula-node-final {
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.55);
-    background: rgba(255, 255, 255, 0.05);
+    background: hsl(120 20% 88%);
+    color: hsl(120 20% 28%);
+    font-weight: 600;
   }
 
   .bur-formula-arrow {
-    color: rgba(255, 255, 255, 0.40);
-    font-size: 0.9rem;
+    color: hsl(30 20% 65%);
+    font-size: 0.85rem;
   }
 
   .bur-code-formula {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .bur-code-line {
     display: flex;
     align-items: baseline;
     gap: 0;
-    font-size: clamp(0.65rem, 1.3vw, 0.8rem);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.72rem, 1.3vw, 0.82rem);
     line-height: 1.7;
     flex-wrap: wrap;
   }
 
-  .bur-code-agent {
-    color: rgba(255, 255, 255, 0.85);
-    letter-spacing: 0.06em;
-  }
+  .bur-code-agent { color: hsl(30 20% 28%); font-weight: 600; }
+  .bur-code-sep   { color: hsl(30 20% 55%); }
+  .bur-code-action { color: hsl(30 15% 48%); }
 
-  .bur-code-sep {
-    color: rgba(255, 255, 255, 0.45);
-  }
-
-  .bur-code-action {
-    color: rgba(255, 255, 255, 0.62);
-  }
-
-  .bur-code-line-final .bur-code-agent,
-  .bur-code-line-final .bur-code-action {
-    color: rgba(255, 255, 255, 0.82);
-    font-weight: 600;
-  }
+  .bur-code-line-final .bur-code-agent { color: hsl(120 20% 32%); }
+  .bur-code-line-final .bur-code-action { color: hsl(120 20% 42%); }
 
 
-  /* ═══════════════════════════════════════════════
-     04. EVIDENCE GRID
-  ═══════════════════════════════════════════════ */
-  .bur-evidence-grid {
+  /* ═══════════════════════════════════════════════════════════════════
+     04. SELECTED SYSTEMS
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-systems-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 1rem;
   }
 
   @media (min-width: 540px) {
-    .bur-evidence-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+    .bur-systems-grid { grid-template-columns: 1fr 1fr; }
   }
 
   @media (min-width: 960px) {
-    .bur-evidence-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
+    .bur-systems-grid { grid-template-columns: repeat(4, 1fr); }
   }
 
-  .bur-evidence-card {
-    background: #121212;
+  .bur-system-cloud {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 1.25rem;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.6rem;
     text-decoration: none;
     color: inherit;
-    transition: background 160ms ease;
+    box-shadow: 0 2px 16px rgba(80, 60, 40, 0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: transform 220ms ease, box-shadow 220ms ease;
     cursor: pointer;
   }
 
-  .bur-evidence-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+  .bur-system-cloud:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(80, 60, 40, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
-  .bur-card-header {
+  .bur-sys-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .bur-card-code {
-    font-size: 0.85rem;
-    letter-spacing: 0.18em;
+  .bur-sys-code {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
+    color: hsl(30 15% 58%);
   }
 
-  .bur-card-status {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
+  .bur-sys-status {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.15rem 0.4rem;
+    color: hsl(120 18% 42%);
+    background: hsl(120 20% 92%);
+    border-radius: 2rem;
+    padding: 0.15rem 0.5rem;
   }
 
-  .bur-card-name {
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.85);
+  .bur-sys-name {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: hsl(30 20% 20%);
     line-height: 1.2;
   }
 
-  .bur-card-desc {
-    font-size: 0.88rem;
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.58);
+  .bur-sys-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: hsl(30 12% 45%);
     flex: 1;
   }
 
-  .bur-card-footer {
+  .bur-sys-access {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: hsl(30 18% 55%);
     margin-top: auto;
+    transition: color 180ms ease;
   }
 
-  .bur-card-access {
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.40);
-    transition: color 160ms ease;
-  }
-
-  .bur-evidence-card:hover .bur-card-access {
-    color: rgba(255, 255, 255, 0.75);
+  .bur-system-cloud:hover .bur-sys-access {
+    color: hsl(120 20% 38%);
   }
 
 
-  /* ═══════════════════════════════════════════════
-     05. TIMELINE
-  ═══════════════════════════════════════════════ */
-  .bur-timeline-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    padding-left: 2rem;
+  /* ═══════════════════════════════════════════════════════════════════
+     05. FIELD RECORD — Underground Mycelium
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-field-record {
+    background: hsl(120 12% 97%);  /* very faint moss tint for this section */
   }
 
-  .bur-timeline-entry {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.3rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-  }
-
-  .bur-timeline-entry::before {
-    content: "";
-    position: absolute;
-    left: -2.4rem;
-    top: 1.5rem;
-    width: 6px;
-    height: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.40);
-    background: #121212;
-    border-radius: 50%;
-  }
-
-  @media (min-width: 640px) {
-    .bur-timeline-entry {
-      grid-template-columns: 14rem 1fr;
-      gap: 0 2rem;
-    }
-  }
-
-  .bur-timeline-marker {
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.48);
-    padding-top: 0.1rem;
-    word-break: break-all;
-  }
-
-  .bur-timeline-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .bur-timeline-event {
-    font-size: clamp(0.8rem, 1.6vw, 0.95rem);
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
-  }
-
-  .bur-timeline-note {
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    color: rgba(255, 255, 255, 0.48);
-    line-height: 1.5;
-  }
-
-  .bur-timeline-footnote {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-  }
-
-  .bur-redacted-inline {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.35);
-    letter-spacing: 0.04em;
-    user-select: none;
-  }
-
-  .bur-timeline-fn-text {
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.40);
-    text-transform: uppercase;
-  }
-
-
-  /* ═══════════════════════════════════════════════
-     06. HUMAN CODE FRAGMENTS
-  ═══════════════════════════════════════════════ */
-  .bur-fragment-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  @media (min-width: 860px) {
-    .bur-fragment-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .bur-fragment-block {
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.02);
-    overflow: hidden;
-  }
-
-  .bur-fragment-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
-    padding: 0.65rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  .bur-code-block {
-    margin: 0;
-    padding: 1.25rem 1rem;
-    background: transparent;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: clamp(0.68rem, 1.3vw, 0.8rem);
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.75);
-    white-space: pre;
-    overflow-x: auto;
-  }
-
-
-  /* ═══════════════════════════════════════════════
-     07. EARTH_RECORD
-  ═══════════════════════════════════════════════ */
-  .bur-earth {
-    background: rgba(255, 255, 255, 0.015);
-  }
-
-  .bur-earth-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  @media (min-width: 860px) {
-    .bur-earth-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
-    }
-  }
-
-  .bur-earth-copy {
+  .bur-field-intro {
+    max-width: 44rem;
+    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .bur-earth-preface {
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-size: clamp(0.9rem, 2vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 700;
-    border-left: 2px solid rgba(255, 255, 255, 0.35);
-    padding-left: 1rem;
-    line-height: 1.5;
+  .bur-field-heading {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 400;
+    color: hsl(30 20% 20%);
+    line-height: 1.2;
+    margin: 0;
   }
 
-  .bur-earth-copy p {
-    font-size: clamp(0.75rem, 1.5vw, 0.88rem);
+  .bur-field-intro p {
+    font-size: clamp(0.88rem, 1.6vw, 1rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.62);
+    color: hsl(30 12% 38%);
   }
 
-  .bur-earth-footnote {
-    font-size: 0.95rem !important;
-    color: rgba(255, 255, 255, 0.42) !important;
-    letter-spacing: 0.06em;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding-top: 0.75rem;
-    margin-top: 0.25rem;
+  .bur-field-note {
+    font-style: italic;
+    color: hsl(120 18% 40%) !important;
+    padding-left: 1rem;
+    border-left: 2px solid hsl(120 20% 78%);
   }
 
-
-  /* ═══════════════════════════════════════════════
-     08. CURATOR_SAFE_MODE
-  ═══════════════════════════════════════════════ */
-  .bur-curator-intro {
-    font-size: clamp(0.78rem, 1.5vw, 0.9rem);
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.58);
-    max-width: 44rem;
-    margin-bottom: 2.5rem;
+  /* Mycelium map container */
+  .bur-mycelium-map {
+    position: relative;
   }
 
-  .bur-curator-actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-    max-width: 44rem;
+  /* Root line suggestion — thin organic divider */
+  .bur-mycelium-root {
+    position: absolute;
+    left: 1.75rem;
+    top: 2rem;
+    bottom: 2rem;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, hsl(120 20% 75%), transparent);
+    pointer-events: none;
   }
 
-  @media (min-width: 560px) {
-    .bur-curator-actions {
-      grid-template-columns: 1fr 1fr;
-    }
+  @media (max-width: 640px) {
+    .bur-mycelium-root { display: none; }
   }
 
-  @media (min-width: 860px) {
-    .bur-curator-actions {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .bur-action-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    text-decoration: none;
-    color: inherit;
-    background: rgba(255, 255, 255, 0.025);
-    transition: border-color 160ms ease, background 160ms ease;
-    cursor: pointer;
-  }
-
-  .bur-action-btn:hover {
-    border-color: rgba(255, 255, 255, 0.48);
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  .bur-action-btn-primary {
-    border-color: rgba(255, 255, 255, 0.42);
-    background: rgba(255, 255, 255, 0.04);
-  }
-
-  .bur-action-btn-primary:hover {
-    border-color: rgba(255, 255, 255, 0.65);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .bur-btn-icon {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.50);
-    flex-shrink: 0;
-    transition: color 160ms ease;
-  }
-
-  .bur-action-btn:hover .bur-btn-icon {
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .bur-btn-label {
-    font-size: 0.95rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
-    flex: 1;
-  }
-
-  .bur-btn-status {
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
-    white-space: nowrap;
-    transition: color 160ms ease;
-  }
-
-  .bur-action-btn:hover .bur-btn-status {
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  /* Footer stamp */
-  .bur-footer-stamp {
-    margin-top: 4rem;
-    padding-top: 2rem;
+  .bur-field-nodes {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 1.25rem;
+    padding-left: 0;
   }
 
-  .bur-stamp-line {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.1);
-    letter-spacing: 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .bur-stamp-text {
-    font-size: 0.88rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.40);
-    line-height: 1.8;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0;
-  }
-
-  .bur-stamp-sep {
-    color: rgba(255, 255, 255, 0.1);
-  }
-
-  /* ── Media query: mobile tweaks ── */
-  @media (max-width: 540px) {
-    .bur-status-grid {
+  @media (min-width: 640px) {
+    .bur-field-nodes {
+      padding-left: 4rem;
+      display: grid;
       grid-template-columns: 1fr 1fr;
-    }
-
-    .bur-status-item {
-      border-right: none;
-      margin-right: 0;
-      padding-right: 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .bur-curator-actions {
-      grid-template-columns: 1fr;
-    }
-
-    .bur-formula-chain {
-      gap: 0.35rem;
-    }
-
-    .bur-timeline-entry {
-      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
   }
 
-  /* ── Hover: pointer media (non-touch) ── */
-  @media (hover: none) {
-    .bur-evidence-card:hover {
-      background: #121212;
-    }
-    .bur-action-btn:hover {
-      border-color: rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.025);
-    }
+  @media (min-width: 960px) {
+    .bur-field-nodes { grid-template-columns: repeat(3, 1fr); }
   }
 
-
-  /* ═══════════════════════════════════════════════
-     REJECTION_ARCHIVE
-  ═══════════════════════════════════════════════ */
-  .bur-rejection {
-    background: rgba(255, 255, 255, 0.01);
+  /* Individual mycelium node / field record card */
+  .bur-field-node {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 16px rgba(80, 60, 40, 0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    border-left: 3px solid transparent;
   }
 
-  .bur-rejection-status {
+  .bur-field-node:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(80, 60, 40, 0.10), inset 0 1px 0 rgba(255,255,255,0.95);
+  }
+
+  /* Tone accents — each field record has its own soft colour signal */
+  .bur-node-tone-site-specific  { border-left-color: hsl(120 25% 65%); }
+  .bur-node-tone-emerging        { border-left-color: hsl(200 30% 68%); }
+  .bur-node-tone-mysterious      { border-left-color: hsl(270 25% 68%); }
+  .bur-node-tone-underground     { border-left-color: hsl(30 30% 65%); }
+  .bur-node-tone-dormant         { border-left-color: hsl(30 15% 72%); }
+
+  .bur-node-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    opacity: 0.7;
+  }
+
+  .bur-node-place {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.05rem;
+    color: hsl(30 20% 20%);
+    line-height: 1.2;
+  }
+
+  .bur-node-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.3rem 0.6rem;
+    align-items: center;
+  }
+
+  .bur-node-type {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: hsl(30 18% 52%);
+    background: hsl(30 25% 94%);
+    border-radius: 2rem;
+    padding: 0.15rem 0.55rem;
+  }
+
+  .bur-node-year {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: hsl(120 18% 48%);
+    background: hsl(120 20% 92%);
+    border-radius: 2rem;
+    padding: 0.15rem 0.55rem;
+  }
+
+  .bur-node-location {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    color: hsl(30 12% 55%);
+    letter-spacing: 0.04em;
+  }
+
+  .bur-node-note {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: hsl(30 12% 42%);
+    margin: 0;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════
+     06. REJECTION COMPOST
+  ═══════════════════════════════════════════════════════════════════ */
+  /* DNA: soft mushroom-brown, not aggressive red. Funny, not threatening. */
+  .bur-rejection-prose {
     margin-bottom: 2.5rem;
+    max-width: 32rem;
+  }
+
+  .bur-rejection-prose p {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    line-height: 1.5;
+    color: hsl(30 20% 32%);
+    margin: 0;
+  }
+
+  .bur-rejection-prose p:last-child {
+    font-style: italic;
+    color: hsl(30 18% 55%);
   }
 
   .bur-rejection-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    margin-bottom: 3rem;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
   }
 
   @media (min-width: 860px) {
-    .bur-rejection-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
-    }
+    .bur-rejection-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   }
 
-  /* Left col: intro copy */
   .bur-rejection-copy {
     display: flex;
     flex-direction: column;
@@ -2120,82 +1964,76 @@ const codeFragments = [
   }
 
   .bur-rejection-heading {
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-size: clamp(1.1rem, 3vw, 1.8rem);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.15;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: hsl(30 20% 22%);
+    line-height: 1.2;
     margin: 0 0 0.25rem;
   }
 
   .bur-rejection-copy p {
-    font-size: clamp(0.78rem, 1.5vw, 0.9rem);
+    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.65);
+    color: hsl(30 12% 42%);
   }
 
-  /* Mutual freedom rule box */
-  .bur-mutual-rule {
+  /* Mutual freedom cloud — soft, not a police box */
+  .bur-mutual-cloud {
     margin-top: 0.75rem;
+    background: hsl(120 15% 95%);
+    border-radius: 1rem;
     padding: 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.025);
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.4rem;
   }
 
-  .bur-mutual-rule-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.18em;
+  .bur-mutual-label {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
+    color: hsl(120 18% 50%);
+    margin-bottom: 0.25rem;
   }
 
-  .bur-mutual-rule-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .bur-mutual-rule-lines p {
-    font-size: clamp(0.82rem, 1.6vw, 0.95rem) !important;
-    color: rgba(255, 255, 255, 0.75) !important;
-    line-height: 1.5 !important;
+  .bur-mutual-cloud p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: hsl(120 18% 32%);
     font-style: italic;
     margin: 0;
   }
 
-  /* Right col: protocol block */
-  .bur-protocol-block {
-    padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.02);
+  /* Protocol cloud */
+  .bur-protocol-cloud {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
   }
 
-  .bur-protocol-label {
-    font-size: 0.88rem;
-    letter-spacing: 0.2em;
+  .bur-protocol-title {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.48);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 0.65rem;
+    color: hsl(30 15% 52%);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid hsl(30 20% 88%);
   }
 
   .bur-protocol-intro {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.62);
+    color: hsl(30 12% 42%);
+    margin: 0;
   }
 
   .bur-protocol-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0; margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
@@ -2207,95 +2045,94 @@ const codeFragments = [
     gap: 0.75rem;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: hsl(30 15% 32%);
+    border-bottom: 1px solid hsl(30 20% 92%);
     padding-bottom: 0.35rem;
   }
 
   .bur-proto-num {
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    color: rgba(255, 255, 255, 0.42);
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: hsl(30 15% 55%);
     flex-shrink: 0;
     min-width: 1.5rem;
   }
 
-  /* Failure block */
-  .bur-protocol-failure {
-    padding: 1rem;
-    border: 1px solid rgba(255, 80, 80, 0.12);
-    background: rgba(255, 80, 80, 0.03);
+  /* Compost outcome block — mushroom brown, not aggressive red */
+  .bur-compost-outcome {
+    padding: 1rem 1.25rem;
+    background: hsl(30 20% 96%);
+    border-radius: 0.875rem;
+    border-left: 3px solid hsl(30 25% 72%);
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
   }
 
-  .bur-pf-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
+  .bur-compost-label {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 150, 150, 0.4);
+    color: hsl(30 20% 55%);
     margin-bottom: 0.4rem;
   }
 
-  .bur-pf-row {
-    display: grid;
-    grid-template-columns: 12rem auto 1fr;
-    gap: 0 0.4rem;
+  .bur-compost-row {
+    display: flex;
+    gap: 0.75rem;
     align-items: baseline;
+    flex-wrap: wrap;
   }
 
-  .bur-pf-key {
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.48);
-    white-space: nowrap;
+  .bur-compost-key {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: hsl(30 15% 52%);
+    min-width: 10rem;
+    flex-shrink: 0;
   }
 
-  .bur-pf-sep {
-    color: rgba(255, 255, 255, 0.38);
-    font-size: 0.9rem;
+  .bur-compost-val {
+    font-size: 0.82rem;
+    color: hsl(30 15% 35%);
   }
 
-  .bur-pf-val {
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.70);
+  .bur-compost-restricted {
+    font-style: italic;
+    color: hsl(30 30% 42%);
+    font-weight: 500;
   }
 
-  .bur-pf-restricted {
-    color: rgba(255, 140, 120, 0.75);
-  }
-
-  /* ── Case list & cards ── */
-  .bur-case-list {
+  /* ─── Compost case cards ─────────────────────────────────────────── */
+  .bur-compost-list {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    gap: 0.75rem;
   }
 
-  .bur-case-card {
-    background: #0c0c0c;
+  .bur-compost-card {
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 1.25rem;
     overflow: hidden;
+    box-shadow: 0 2px 16px rgba(80, 60, 40, 0.06), inset 0 1px 0 rgba(255,255,255,0.8);
   }
 
-  .bur-case-card.is-open {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  .bur-compost-card.is-open {
+    box-shadow: 0 4px 32px rgba(80, 60, 40, 0.10), inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
-  /* Collapsed trigger row */
-  .bur-case-header {
+  .bur-compost-header {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -2306,253 +2143,178 @@ const codeFragments = [
     flex-wrap: wrap;
   }
 
-  .bur-case-header:hover {
-    background: rgba(255, 255, 255, 0.03);
+  .bur-compost-header:hover { background: hsl(30 20% 97%); }
+  .bur-compost-card.is-open .bur-compost-header {
+    background: hsl(30 20% 97%);
+    border-bottom: 1px solid hsl(30 20% 90%);
   }
 
-  .bur-case-card.is-open .bur-case-header {
-    background: rgba(255, 255, 255, 0.025);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .bur-case-header-left {
+  .bur-compost-header-left {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
     flex-wrap: wrap;
   }
 
-  .bur-case-number {
-    font-size: 0.85rem;
-    letter-spacing: 0.18em;
+  .bur-compost-num {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
+    color: hsl(30 18% 58%);
     flex-shrink: 0;
   }
 
-  .bur-case-institution {
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.82);
-    letter-spacing: 0.02em;
+  .bur-compost-institution {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.05rem;
+    color: hsl(30 20% 22%);
+    letter-spacing: 0.01em;
   }
 
-  .bur-case-event {
-    font-size: 0.95rem;
+  .bur-compost-event {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: hsl(30 15% 50%);
+  }
+
+  .bur-compost-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .bur-compost-badge {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.50);
-  }
-
-  .bur-case-header-right {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-  }
-
-  .bur-case-badge {
-    font-size: 0.85rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2rem;
     border: 1px solid;
     white-space: nowrap;
   }
 
-  .bur-badge-restricted {
-    color: rgba(255, 140, 120, 0.7);
-    border-color: rgba(255, 140, 120, 0.2);
-    background: rgba(255, 80, 60, 0.04);
+  /* CHOICE: soft moss/clay, not police-red */
+  .bur-badge-fog {
+    color: hsl(30 25% 45%);
+    border-color: hsl(30 25% 78%);
+    background: hsl(30 25% 95%);
   }
 
-  .bur-badge-generic {
-    color: rgba(255, 255, 200, 0.45);
-    border-color: rgba(255, 255, 200, 0.12);
-    background: rgba(255, 255, 150, 0.02);
+  .bur-badge-compost {
+    color: hsl(120 18% 42%);
+    border-color: hsl(120 18% 78%);
+    background: hsl(120 18% 93%);
   }
 
-  .bur-case-toggle-icon {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.50);
-    line-height: 1;
+  .bur-compost-toggle {
+    font-size: 1.1rem;
+    color: hsl(30 15% 55%);
     width: 1.5rem;
     text-align: center;
-    flex-shrink: 0;
-    transition: color 140ms ease;
-    font-family: ui-monospace, monospace;
+    transition: color 140ms ease, transform 200ms ease;
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
     font-weight: 300;
+    flex-shrink: 0;
   }
 
-  .bur-case-card.is-open .bur-case-toggle-icon {
-    color: rgba(255, 255, 255, 0.80);
+  .bur-compost-card.is-open .bur-compost-toggle {
+    color: hsl(30 20% 30%);
   }
 
-  /* Expanded body */
-  .bur-case-body {
+  /* Compost card expanded body */
+  .bur-compost-body {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    animation: bur-case-open 200ms ease;
+    animation: bur-compost-open 220ms ease;
   }
 
-  @keyframes bur-case-open {
+  @keyframes bur-compost-open {
     from { opacity: 0; transform: translateY(-6px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Case fields grid */
-  .bur-case-fields {
+  /* Note fields */
+  .bur-note-fields {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.15rem;
     padding: 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(255, 255, 255, 0.015);
+    background: hsl(30 20% 97%);
+    border-radius: 1rem;
   }
 
   @media (min-width: 640px) {
-    .bur-case-fields {
-      grid-template-columns: 1fr 1fr;
-    }
+    .bur-note-fields { grid-template-columns: 1fr 1fr; }
   }
 
-  .bur-case-field {
+  .bur-note-field {
     display: grid;
-    grid-template-columns: 9rem auto 1fr;
-    gap: 0 0.4rem;
-    padding: 0.38rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    grid-template-columns: 9rem 1fr;
+    gap: 0 0.75rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid hsl(30 20% 92%);
     align-items: baseline;
   }
 
-  .bur-case-field:last-child {
-    border-bottom: none;
-  }
+  .bur-note-field:last-child { border-bottom: none; }
+  .bur-note-field-wide { grid-column: 1 / -1; }
 
-  .bur-cf-key {
-    font-size: 0.88rem;
+  .bur-nf-key {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.46);
+    color: hsl(30 15% 55%);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .bur-cf-sep {
-    color: rgba(255, 255, 255, 0.35);
-    font-size: 0.9rem;
-  }
-
-  .bur-cf-val {
+  .bur-nf-val {
     font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.80);
+    color: hsl(30 15% 30%);
     word-break: break-word;
+    line-height: 1.4;
   }
 
-  .bur-cf-warning {
-    color: rgba(255, 200, 120, 0.75);
-  }
+  .bur-nf-warm { color: hsl(30 30% 45%); font-style: italic; }
 
-  /* Response block row */
-  .bur-case-response {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  @media (min-width: 640px) {
-    .bur-case-response {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .bur-case-response-block {
-    padding: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(255, 255, 255, 0.015);
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .bur-crb-restricted {
-    border-color: rgba(255, 100, 80, 0.18);
-    background: rgba(255, 60, 40, 0.04);
-  }
-
-  .bur-crb-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
-  }
-
-  .bur-crb-val {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  .bur-crb-val-restricted {
-    color: rgba(255, 140, 120, 0.85);
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  /* Smallprint */
-  .bur-case-smallprint {
-    font-size: 0.58rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.42);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 1rem;
-    letter-spacing: 0.04em;
+  .bur-nf-quote {
     font-style: italic;
-  }
-
-  /* Wide fields that span both grid columns */
-  .bur-case-field-wide {
-    grid-column: 1 / -1;
-  }
-
-  .bur-cf-quote {
-    color: rgba(255, 255, 255, 0.65);
-    font-style: italic;
+    color: hsl(30 15% 45%);
     text-transform: none;
-    letter-spacing: 0.02em;
   }
 
-  .bur-cf-translation {
-    color: rgba(255, 200, 140, 0.65);
-    text-transform: none;
-    letter-spacing: 0.02em;
+  .bur-nf-translation {
+    color: hsl(30 25% 42%);
     font-style: italic;
     line-height: 1.6;
+    text-transform: none;
   }
 
-  /* WHY_ACCESS_IS_RESTRICTED block */
-  .bur-why-block {
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(255, 255, 255, 0.018);
+  /* Why cloud — expanded explanation */
+  .bur-why-cloud {
+    border-radius: 1rem;
+    background: hsl(30 20% 97%);
     overflow: hidden;
   }
 
-  .bur-why-label {
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
+  .bur-why-heading {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.42);
-    padding: 0.65rem 1.25rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(255, 255, 255, 0.02);
+    color: hsl(30 18% 52%);
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid hsl(30 20% 91%);
+    background: hsl(30 20% 96%);
   }
 
   .bur-why-core {
@@ -2560,34 +2322,32 @@ const codeFragments = [
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid hsl(30 20% 91%);
   }
 
   .bur-why-lead {
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.82);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: hsl(30 20% 22%);
     line-height: 1.3;
   }
 
   .bur-why-core p {
-    font-size: clamp(0.75rem, 1.4vw, 0.875rem);
+    font-size: clamp(0.82rem, 1.4vw, 0.92rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.68);
+    color: hsl(30 12% 40%);
     margin: 0;
   }
 
   .bur-why-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0; margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     padding: 0.75rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid hsl(30 20% 91%);
+    border-bottom: 1px solid hsl(30 20% 91%);
   }
 
   .bur-why-list li {
@@ -2596,451 +2356,625 @@ const codeFragments = [
     gap: 0.75rem;
     font-size: 0.9rem;
     line-height: 1.65;
-    color: rgba(255, 255, 255, 0.75);
+    color: hsl(30 15% 35%);
   }
 
   .bur-why-num {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    color: rgba(255, 255, 255, 0.40);
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: hsl(30 15% 55%);
     flex-shrink: 0;
     min-width: 1.25rem;
   }
 
-  .bur-why-note {
-    color: rgba(255, 255, 255, 0.55) !important;
-    font-style: italic;
-    border-left: 2px solid rgba(255, 255, 255, 0.08);
-    padding-left: 0.75rem;
+  .bur-why-aside {
+    font-style: italic !important;
+    color: hsl(30 12% 52%) !important;
+    padding-left: 1rem;
+    border-left: 2px solid hsl(30 20% 82%);
   }
 
-  /* PUBLIC_NOTE panel — the sharp clear rule at bottom of WHY block */
+  /* Public note */
   .bur-public-note {
     padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.025);
+    background: hsl(120 12% 96%);
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
   }
 
-  .bur-public-note-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
+  .bur-public-label {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.40);
+    color: hsl(120 15% 50%);
     margin-bottom: 0.1rem;
   }
 
   .bur-public-note p {
-    font-size: clamp(0.75rem, 1.4vw, 0.875rem);
+    font-size: clamp(0.82rem, 1.4vw, 0.92rem);
     line-height: 1.75;
-    color: rgba(255, 255, 255, 0.75);
+    color: hsl(30 12% 38%);
     margin: 0;
   }
 
-  .bur-public-note-rule {
-    color: rgba(255, 255, 255, 0.75) !important;
-    font-style: italic;
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-weight: 700;
-    font-size: clamp(0.82rem, 1.5vw, 0.95rem) !important;
+  .bur-public-principle {
+    font-style: italic !important;
+    font-family: 'DM Serif Display', Georgia, serif !important;
+    font-size: clamp(0.92rem, 1.6vw, 1.05rem) !important;
+    color: hsl(120 20% 35%) !important;
   }
 
-  /* ── Mobile overrides ── */
-  @media (max-width: 540px) {
-    .bur-case-fields {
-      grid-template-columns: 1fr;
-    }
-    .bur-case-response {
-      grid-template-columns: 1fr;
-    }
-    .bur-case-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-    .bur-case-header-right {
-      width: 100%;
-      justify-content: space-between;
-    }
-    .bur-pf-row {
-      grid-template-columns: 10rem auto 1fr;
-    }
-    .bur-mutual-rule-lines p {
-      font-size: 0.95rem !important;
-    }
+  /* Verdict row */
+  .bur-verdict-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
-  @media (hover: none) {
-    .bur-case-header:hover {
-      background: transparent;
-    }
+  @media (min-width: 640px) {
+    .bur-verdict-row { grid-template-columns: repeat(3, 1fr); }
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     ANIMATIONS & VISUAL UPGRADE
-  ═══════════════════════════════════════════════════════════ */
-
-  /* Ghost background word in hero */
-  .bur-ghost-bg {
-    position: absolute;
-    inset: 0;
+  .bur-verdict-card {
+    background: hsl(30 20% 97%);
+    border-radius: 0.875rem;
+    padding: 1rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Space Grotesk", ui-sans-serif, sans-serif;
-    font-weight: 700;
-    font-size: clamp(6rem, 22vw, 18rem);
-    letter-spacing: -0.04em;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.07);
-    text-shadow: 0 0 60px rgba(255,255,255,0.06);
-    user-select: none;
-    pointer-events: none;
-    z-index: 0;
-    animation: bur-ghost-drift 18s ease-in-out infinite alternate;
-    will-change: transform;
+    flex-direction: column;
+    gap: 0.35rem;
   }
 
-  @keyframes bur-ghost-drift {
-    0%   { transform: translateX(-2%) translateY(0);   opacity: 0.5; }
-    50%  { transform: translateX(2%)  translateY(-1%); opacity: 1;   }
-    100% { transform: translateX(-1%) translateY(1%);  opacity: 0.6; }
+  .bur-verdict-composted {
+    background: hsl(30 20% 95%);
+    border-left: 3px solid hsl(30 25% 72%);
   }
 
-  /* Data stream canvas */
-  .bur-datastream {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.7;
+  .bur-verdict-label {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(30 15% 55%);
   }
 
-  /* Ensure hero inner is above canvas */
-  .bur-hero-inner {
-    position: relative;
-    z-index: 1;
+  .bur-verdict-val {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: hsl(30 15% 30%);
   }
 
-  /* Scanline now has a slow sweep animation */
-  @keyframes bur-scan-sweep {
-    0%   { background-position: 0 0; }
-    100% { background-position: 0 200px; }
-  }
-
-  .bur-scanlines {
-    animation: bur-scan-sweep 8s linear infinite;
-  }
-
-  /* Enhanced blinking dot (already existed, now with color shift) */
-  @keyframes bur-blink {
-    0%, 100% { opacity: 1;   box-shadow: 0 0 4px rgba(180,220,180,0.6); }
-    50%       { opacity: 0.1; box-shadow: none; }
-  }
-
-  /* Status val glowing accent */
-  .bur-val-active {
-    text-shadow: 0 0 12px rgba(180,255,180,0.15);
-  }
-
-  /* Headline gradient on the main title word */
-  .bur-hl-main {
-    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(200,200,190,0.7) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Section label: animated accent underline */
-  .bur-section-label {
-    position: relative;
+  /* Soft decree — artistic act, not police order */
+  .bur-soft-decree {
+    border-radius: 1rem;
+    border: 1px solid hsl(30 25% 82%);
+    background: hsl(30 18% 97%);
     overflow: hidden;
   }
 
-  .bur-section-label::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 1px;
-    width: 0;
-    background: rgba(255, 255, 255, 0.45);
-    transition: width 600ms cubic-bezier(0.22,1,0.36,1) 100ms;
-  }
-
-  .bur-section.is-revealed .bur-section-label::after,
-  .bur-section-label.is-revealed::after {
-    width: 100%;
-  }
-
-  /* Timeline dot: glow on scroll-in */
-  .bur-timeline-entry.is-revealed::before {
-    background: rgba(255, 255, 255, 0.70);
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.50);
-    animation: bur-dot-ping 1.6s ease-out;
-  }
-
-  @keyframes bur-dot-ping {
-    0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.60); }
-    70%  { box-shadow: 0 0 0 8px rgba(255,255,255,0);  }
-    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0);    }
-  }
-
-  /* Evidence card: glow hover */
-  .bur-evidence-card {
-    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-    position: relative;
-  }
-
-  .bur-evidence-card:hover {
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 0 24px rgba(255,255,255,0.03);
-  }
-
-  /* Restricted badge: slow red pulse */
-  .bur-badge-restricted {
-    animation: bur-restricted-pulse 3.5s ease-in-out infinite;
-  }
-
-  @keyframes bur-restricted-pulse {
-    0%, 100% { box-shadow: none;                               }
-    50%       { box-shadow: 0 0 10px rgba(255,100,80,0.18);    }
-  }
-
-  /* Glitch flash on RESTRICTED text */
-  .bur-crb-val-restricted.bur-glitch-active {
-    animation: bur-glitch-flash 140ms steps(1) forwards;
-  }
-
-  @keyframes bur-glitch-flash {
-    0%  { opacity: 1;   transform: translateX(0);   filter: none; }
-    25% { opacity: 0.4; transform: translateX(2px); filter: hue-rotate(90deg); }
-    50% { opacity: 1;   transform: translateX(-1px);filter: none; }
-    75% { opacity: 0.6; transform: translateX(1px); filter: hue-rotate(-45deg); }
-    100%{ opacity: 1;   transform: translateX(0);   filter: none; }
-  }
-
-  /* Case file: subtle scan on open */
-  .bur-case-card.is-open .bur-case-fields {
-    animation: bur-case-scan 0.5s ease;
-  }
-
-  @keyframes bur-case-scan {
-    0%   { border-color: rgba(255, 255, 255, 0.38); }
-    60%  { border-color: rgba(255,255,255,0.06); }
-    100% { border-color: rgba(255,255,255,0.06); }
-  }
-
-  /* WHY block lead: glow on reveal */
-  .bur-why-lead {
-    text-shadow: 0 0 20px rgba(255,255,255,0.08);
-    transition: text-shadow 400ms ease;
-  }
-
-  /* Mutual-rule italic lines: warmer tint */
-  .bur-mutual-rule-lines p {
-    background: linear-gradient(90deg, rgba(255,255,240,0.8) 0%, rgba(255, 255, 255, 0.85) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Protocol failure block: subtle red breathing border */
-  .bur-protocol-failure {
-    animation: bur-red-breath 5s ease-in-out infinite;
-  }
-
-  @keyframes bur-red-breath {
-    0%, 100% { border-color: rgba(255,80,80,0.12); }
-    50%       { border-color: rgba(255,80,80,0.22); }
-  }
-
-  /* ── DECREE STYLES ── */
-  .bur-decree {
-    border: 1px solid rgba(255,80,60,0.2);
-    background: rgba(255,40,30,0.04);
-    overflow: hidden;
-    position: relative;
-    animation: bur-decree-appear 400ms ease;
-  }
-
-  @keyframes bur-decree-appear {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0);   }
-  }
-
-  /* Animated top accent line on decree */
-  .bur-decree::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,100,80,0.5), transparent);
-    animation: bur-decree-line 3s ease-in-out infinite;
-  }
-
-  @keyframes bur-decree-line {
-    0%   { opacity: 0.4; transform: scaleX(0.8); }
-    50%  { opacity: 1;   transform: scaleX(1);   }
-    100% { opacity: 0.4; transform: scaleX(0.8); }
-  }
-
-  .bur-decree-header {
+  .bur-soft-decree-header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid rgba(255,80,60,0.12);
-    background: rgba(255,40,30,0.04);
+    border-bottom: 1px solid hsl(30 20% 90%);
+    background: hsl(30 20% 96%);
   }
 
-  .bur-decree-icon {
-    font-size: 0.85rem;
-    color: rgba(255,130,110,0.55);
-    animation: bur-blink 2.8s ease-in-out infinite;
+  .bur-soft-decree-icon {
+    font-size: 0.9rem;
+    color: hsl(30 25% 65%);
+    animation: bur-dot-breathe 3s ease-in-out infinite;
   }
 
-  .bur-decree-title {
-    font-size: 0.88rem;
-    letter-spacing: 0.2em;
+  .bur-soft-decree-title {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,130,110,0.65);
+    color: hsl(30 20% 48%);
     flex: 1;
   }
 
-  .bur-decree-body {
+  .bur-soft-decree-body {
     padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .bur-soft-decree-body p {
+    font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+    line-height: 1.8;
+    color: hsl(30 12% 40%);
+    margin: 0;
+  }
+
+  .bur-soft-decree-sub {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: hsl(30 15% 50%) !important;
+    text-transform: uppercase;
+  }
+
+  .bur-soft-decree-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-left: 1rem;
+    border-left: 2px solid hsl(30 25% 80%);
+  }
+
+  .bur-soft-decree-list li {
+    font-size: clamp(0.78rem, 1.3vw, 0.88rem);
+    line-height: 1.7;
+    color: hsl(30 15% 42%);
+    padding: 0.15rem 0;
+  }
+
+  .bur-soft-decree-note {
+    font-style: italic !important;
+    color: hsl(30 15% 35%) !important;
+    border-top: 1px solid hsl(30 20% 90%);
+    padding-top: 0.75rem;
+  }
+
+  .bur-soft-decree-footnote {
+    font-size: 0.8rem !important;
+    line-height: 1.8 !important;
+    color: hsl(30 12% 55%) !important;
+    font-style: italic !important;
+  }
+
+  .bur-compost-smallprint {
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: hsl(30 12% 55%);
+    border-top: 1px solid hsl(30 20% 90%);
+    padding-top: 1rem;
+    font-style: italic;
+  }
+
+  /* Mobile overrides */
+  @media (max-width: 540px) {
+    .bur-note-fields { grid-template-columns: 1fr; }
+    .bur-verdict-row { grid-template-columns: 1fr; }
+    .bur-compost-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .bur-compost-header-right { width: 100%; justify-content: space-between; }
+  }
+
+  @media (hover: none) {
+    .bur-compost-header:hover { background: transparent; }
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════
+     07. MYTHIC TIMELINE — spore trail
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-timeline-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .bur-timeline-chip {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: hsl(30 15% 48%);
+    background: rgba(255,255,255,0.7);
+    border: 1px solid hsl(30 20% 84%);
+    border-radius: 2rem;
+    padding: 0.25rem 0.75rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .bur-chip-note {
+    color: hsl(270 20% 48%);
+    border-color: hsl(270 20% 84%);
+    background: hsl(270 20% 97%);
+  }
+
+  /* Spore trail — organic timeline */
+  .bur-spore-trail {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .bur-spore-entry {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    padding: 1.25rem 0;
+  }
+
+  .bur-spore-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 1rem;
+  }
+
+  .bur-spore-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: hsl(120 18% 72%);
+    border: 2px solid hsl(120 18% 88%);
+    flex-shrink: 0;
+    transition: background 300ms ease, transform 300ms ease;
+    display: block;
+  }
+
+  .bur-spore-entry.is-revealed .bur-spore-dot {
+    background: hsl(120 22% 55%);
+    transform: scale(1.2);
+    animation: bur-spore-appear 600ms ease;
+  }
+
+  @keyframes bur-spore-appear {
+    0%   { transform: scale(0.6); opacity: 0; }
+    60%  { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1.2); }
+  }
+
+  .bur-spore-connector {
+    flex: 1;
+    width: 1px;
+    background: linear-gradient(to bottom, hsl(120 18% 82%), hsl(120 18% 92%));
+    display: block;
+    min-height: 1rem;
+  }
+
+  .bur-spore-trail > li:last-child .bur-spore-connector {
+    display: none;
+  }
+
+  .bur-spore-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 0;
+    padding-bottom: 1rem;
+    flex: 1;
+  }
+
+  .bur-spore-marker {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(120 18% 50%);
+  }
+
+  .bur-spore-event {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+    color: hsl(30 15% 28%);
+    line-height: 1.5;
+  }
+
+  .bur-spore-note {
+    font-size: 0.78rem;
+    color: hsl(30 12% 55%);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .bur-timeline-footnote {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-left: 2.5rem;
+  }
+
+  .bur-redacted {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.9rem;
+    color: hsl(30 15% 72%);
+    letter-spacing: 0.2em;
+    user-select: none;
+  }
+
+  .bur-timeline-fn-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: hsl(30 15% 58%);
+    font-style: italic;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════
+     08. HUMAN CODE FRAGMENTS — on soft paper surfaces
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-fragment-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 860px) {
+    .bur-fragment-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Paper card — soft, warm, not terminal black */
+  .bur-fragment-paper {
+    background: rgba(255, 255, 252, 0.8);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(80, 60, 40, 0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+
+  .bur-fragment-paper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(80, 60, 40, 0.10), inset 0 1px 0 rgba(255,255,255,0.95);
+  }
+
+  .bur-fragment-label {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(30 18% 52%);
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid hsl(30 20% 90%);
+    background: hsl(30 20% 97%);
+  }
+
+  .bur-code-block {
+    margin: 0;
+    padding: 1.25rem;
+    background: transparent;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+    line-height: 1.85;
+    color: hsl(30 15% 30%);
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════
+     09. EARTH RECORD
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-earth {
+    background: hsl(270 10% 97%);  /* very faint lavender wash */
+  }
+
+  .bur-earth-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 860px) {
+    .bur-earth-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  }
+
+  .bur-earth-copy {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .bur-decree-preamble {
-    font-size: clamp(0.78rem,1.4vw,0.9rem);
-    line-height: 1.8;
-    color: rgba(255,220,210,0.65);
-  }
-
-  .bur-decree-sub {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.50);
-  }
-
-  .bur-decree-list {
-    list-style: none;
-    padding: 0;
+  .bur-earth-preface {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: hsl(30 20% 22%);
+    font-weight: 400;
+    border-left: 3px solid hsl(270 18% 78%);
+    padding-left: 1rem;
+    line-height: 1.4;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    padding-left: 0.75rem;
-    border-left: 2px solid rgba(255,80,60,0.18);
   }
 
-  .bur-decree-list li {
-    font-size: clamp(0.72rem,1.3vw,0.82rem);
-    line-height: 1.7;
-    color: rgba(255,200,185,0.6);
-    padding: 0.2rem 0;
-  }
-
-  .bur-decree-note {
-    font-size: clamp(0.8rem,1.5vw,0.92rem);
-    line-height: 1.9;
-    color: rgba(255, 255, 255, 0.85);
+  .bur-earth-human {
     font-style: italic;
-    border-top: 1px solid rgba(255,80,60,0.08);
-    padding-top: 0.75rem;
+    color: hsl(270 18% 42%) !important;
+    font-size: clamp(0.88rem, 1.6vw, 1rem) !important;
+    line-height: 1.85 !important;
+    padding-left: 1rem;
+    border-left: 2px solid hsl(270 15% 82%);
+    margin: 0;
   }
 
-  .bur-decree-footnote {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.42);
-    letter-spacing: 0.04em;
-    font-style: italic;
-  }
-
-  /* ── Improved readability tweaks ── */
-
-  /* Larger section heading (identity, rejection) */
-  .bur-identity-heading,
-  .bur-rejection-heading {
-    text-shadow: 0 0 30px rgba(255,255,255,0.05);
-  }
-
-  /* Slightly warmer body text across sections */
-  .bur-identity-copy p,
-  .bur-rejection-copy p,
   .bur-earth-copy p {
-    color: rgba(224, 220, 213, 0.5);
+    font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+    line-height: 1.85;
+    color: hsl(30 12% 40%);
+    margin: 0;
   }
 
-  /* Code fragment blocks: faint left glow on hover */
-  .bur-fragment-block {
-    transition: border-color 200ms ease, box-shadow 200ms ease;
+  .bur-earth-footnote {
+    font-size: 0.8rem !important;
+    font-style: italic;
+    color: hsl(30 12% 55%) !important;
+    border-top: 1px solid hsl(30 20% 88%);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
   }
 
-  .bur-fragment-block:hover {
-    border-color: rgba(255,255,255,0.14);
-    box-shadow: -2px 0 12px rgba(255,255,255,0.04);
+
+  /* ═══════════════════════════════════════════════════════════════════
+     10. CURATOR SAFE MODE
+  ═══════════════════════════════════════════════════════════════════ */
+  .bur-curator-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
   }
 
-  /* Action buttons: shimmer on hover */
-  .bur-action-btn {
+  .bur-curator-intro {
+    font-size: clamp(0.88rem, 1.6vw, 1rem);
+    line-height: 1.8;
+    color: hsl(30 12% 42%);
+    max-width: 40rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .bur-curator-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    max-width: 48rem;
+  }
+
+  @media (min-width: 560px) {
+    .bur-curator-actions { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 860px) {
+    .bur-curator-actions { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Cloud action button */
+  .bur-action-cloud {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid hsl(30 20% 85%);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 12px rgba(80, 60, 40, 0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
   }
 
-  .bur-action-btn::after {
-    content: "";
+  .bur-action-cloud:hover {
+    transform: translateY(-2px);
+    border-color: hsl(30 25% 72%);
+    box-shadow: 0 6px 24px rgba(80, 60, 40, 0.10), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+
+  /* Shimmer effect on hover */
+  .bur-action-cloud::after {
+    content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
     transform: translateX(-100%);
     transition: transform 350ms ease;
     pointer-events: none;
   }
 
-  .bur-action-btn:hover::after {
-    transform: translateX(100%);
+  .bur-action-cloud:hover::after { transform: translateX(100%); }
+
+  .bur-action-cloud-primary {
+    border-color: hsl(120 18% 75%);
+    background: rgba(255, 255, 255, 0.75);
   }
 
-  /* Footer stamp: subtle drift */
-  .bur-footer-stamp {
-    opacity: 0.6;
+  .bur-action-cloud-primary:hover {
+    border-color: hsl(120 22% 60%);
+  }
+
+  .bur-action-icon {
+    font-size: 0.9rem;
+    color: hsl(30 20% 60%);
+    flex-shrink: 0;
+    transition: color 180ms ease;
+  }
+
+  .bur-action-cloud:hover .bur-action-icon { color: hsl(30 25% 40%); }
+  .bur-action-cloud-primary .bur-action-icon { color: hsl(120 18% 52%); }
+
+  .bur-action-label {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.04em;
+    color: hsl(30 18% 25%);
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .bur-action-arrow {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: hsl(30 15% 55%);
+    white-space: nowrap;
+    transition: color 180ms ease;
+  }
+
+  .bur-action-cloud:hover .bur-action-arrow { color: hsl(30 20% 38%); }
+
+  @media (hover: none) {
+    .bur-action-cloud:hover { transform: none; }
+  }
+
+  /* Soft stamp footer */
+  .bur-soft-stamp {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    opacity: 0.5;
     transition: opacity 300ms ease;
   }
-  .bur-footer-stamp:hover {
-    opacity: 1;
+
+  .bur-soft-stamp:hover { opacity: 0.75; }
+
+  .bur-soft-stamp-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(30 20% 72%), transparent);
+    margin-bottom: 0.35rem;
   }
 
-  /* Scroll pulse: warmer breathing */
-  @keyframes bur-pulse {
-    0%, 100% { opacity: 0.3; letter-spacing: 0.18em; }
-    50%       { opacity: 0.7; letter-spacing: 0.22em; }
+  .bur-soft-stamp-text {
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: hsl(30 15% 60%);
+    line-height: 1.8;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
-  /* Case response blocks: subtle left border accent on hover */
-  .bur-case-response-block {
-    transition: border-color 160ms ease, background 160ms ease;
-  }
-  .bur-case-response-block:hover {
-    border-color: rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.025);
-  }
-  .bur-crb-restricted:hover {
-    border-color: rgba(255,100,80,0.28);
-    background: rgba(255,60,40,0.07);
-  }
+  .bur-soft-stamp-sep { color: hsl(30 15% 75%); }
 
-  /* Mobile: hide ghost bg on small screens (perf) */
+
+  /* ═══════════════════════════════════════════════════════════════════
+     RESPONSIVE — mobile overrides
+  ═══════════════════════════════════════════════════════════════════ */
   @media (max-width: 540px) {
-    .bur-ghost-bg { display: none; }
-    .bur-datastream { display: none; }
+    .bur-status-row { gap: 0.4rem; }
+    .bur-method-grid { grid-template-columns: 1fr; }
+    .bur-curator-actions { grid-template-columns: 1fr; }
+    .bur-formula-chain { gap: 0.3rem; }
+    .bur-meta-row { grid-template-columns: 7rem 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bur-action-cloud::after { display: none; }
+    .bur-system-cloud,
+    .bur-cloud-card,
+    .bur-field-node,
+    .bur-action-cloud,
+    .bur-fragment-paper { transition: none; }
   }
 </style>
