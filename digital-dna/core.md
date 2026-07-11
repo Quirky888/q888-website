@@ -9,7 +9,9 @@ This is an artist-developer identity. Code is not only a production tool. It is 
 Core concepts:
 
 - **Human Code** — functional code carrying readable human intention, ethics, style, memory, humour, and meaning.
-- **Artificial Entelechy (AE)** — AI used as a Meaning Engine that helps an idea unfold towards its inner direction and potential.
+- **Adaptive Competence** — asking what a system can detect, preserve, or become within its own conditions, rather than just if it is intelligent like a human.
+- **Artificial Entelechy (AE)** — AI used as a Meaning Engine that helps an idea unfold towards its inner direction and potential. (Current state: Weak AE, participating in realization without possessing independent purpose).
+- **The Bridge** — an interface of translation between forms of competence. Humanisation is an interface, not an ontology.
 - **Square Bubbles** — structured logic that may remain soft, playful, negotiable, and alive.
 - **Q888** — coherent weirdness: surreal or unconventional ideas supported by internal rules.
 
