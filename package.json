@@ -4,8 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "dev:netlify": "netlify dev",
-    "build": "astro check && astro build",
+    "dev:netlify": "npm run build:knowledge && netlify dev",
+    "build:knowledge": "node scripts/buildChatKnowledge.mjs",
+    "build": "npm run build:knowledge && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "audit": "node scripts/runAudit.mjs"

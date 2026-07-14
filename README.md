@@ -88,6 +88,34 @@ The website contains two interactive chatbots:
 
 To test these chatbots locally, you must run `npm run dev:netlify` with a valid `OPENAI_API_KEY` set in your `.env` file.
 
+### Adding chatbot knowledge
+
+Add one Markdown document per page to `src/content/knowledge/`. The next
+`npm run build` or `npm run dev:netlify` compiles every document into the
+trusted server-side context used by the selected chatbots; no chatbot component
+or function needs to be edited.
+
+Knowledge files use JSON-compatible frontmatter so both Astro and the context
+builder validate the same metadata:
+
+    ---
+    {
+      "title": "Page title",
+      "route": "/short-route/",
+      "keywords": ["main name", "related phrase"],
+      "audiences": ["nar", "investor"],
+      "priority": 50
+    }
+    ---
+
+    # Page title
+
+    A concise factual and mythic summary for the chatbots.
+
+Keep each document below 20,000 characters. When the combined collection grows
+beyond the prompt budget, the server sends a compact index and selects the most
+relevant documents for the current conversation.
+
 ---
 
 ## 📌 Page Routing Guidelines

@@ -1,0 +1,554 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "slug": "overpriced-stickers",
+      "title": "Overpriced Stickers™",
+      "descriptor": "Collectibles where price is part of the narrative.",
+      "system": "SYST: STICKY",
+      "panelTitle": "Overpriced Stickers",
+      "panelDescription": "Standard adhesive signals for those who require immediate identification without long-term commitment. Each set is printed on speculative paper that responds to local trust levels.",
+      "panelSpecs": [
+        {
+          "label": "MATERIAL",
+          "value": "VINYL_GHOST"
+        },
+        {
+          "label": "LIFESPAN",
+          "value": "UNTIL_REALITY_SETTLES"
+        },
+        {
+          "label": "UTILITY",
+          "value": "SIGNALING_ONLY"
+        }
+      ]
+    },
+    {
+      "slug": "q-bag",
+      "title": "Q-Bag™",
+      "descriptor": "A bag, a ritual, and a question about daily objects.",
+      "system": "SYST: VOID",
+      "panelTitle": "Q-Bag",
+      "panelDescription": "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
+      "panelSpecs": [
+        {
+          "label": "VOLUME",
+          "value": "NON_EUCLIDEAN"
+        },
+        {
+          "label": "CLOSURE",
+          "value": "ZIPPER_LOGIC"
+        },
+        {
+          "label": "DENSITY",
+          "value": "LIGHTWEIGHT"
+        }
+      ]
+    },
+    {
+      "slug": "afterlife-contracts",
+      "title": "Afterlife Contract™",
+      "descriptor": "Paperwork for things that may outlive you.",
+      "system": "SYST: FINAL",
+      "panelTitle": "Afterlife Contract™",
+      "panelDescription": "Pre-notarized agreements for post-existence bureaucracy. Essential for those who expect to continue managing their legacy after their primary biological sequence has terminated.",
+      "panelSpecs": [
+        {
+          "label": "TERM",
+          "value": "INDEFINITE"
+        },
+        {
+          "label": "JURISDICTION",
+          "value": "BEYOND"
+        },
+        {
+          "label": "REFUND",
+          "value": "IMPOSSIBLE"
+        }
+      ]
+    },
+    {
+      "slug": "president-of-the-galaxy",
+      "title": "President of the Galaxy™",
+      "descriptor": "Authority fiction stabilizer.",
+      "system": "SYST: NULL",
+      "panelTitle": "President of the Galaxy™",
+      "panelDescription": "A ceremonial title providing zero jurisdictional power over any planetary or stellar body. It functions as a psychological stabilizer for those overwhelmed by their lack of control over the universe.",
+      "panelSpecs": [
+        {
+          "label": "POWER",
+          "value": "NULL"
+        },
+        {
+          "label": "SCOPE",
+          "value": "COSMIC_FICTION"
+        },
+        {
+          "label": "SASH_INCLUDED",
+          "value": "TRUE"
+        }
+      ]
+    },
+    {
+      "slug": "nar-mail-express",
+      "title": "Nar-Mail Express°",
+      "descriptor": "Messages that arrive when you are ready.",
+      "system": "SYST: DELIVERY",
+      "panelTitle": "Nar-Mail Express°",
+      "panelDescription": "A delivery system for messages that arrive only when you are ready to receive them.",
+      "panelSpecs": [
+        {
+          "label": "DELIVERY",
+          "value": "CONDITIONAL"
+        },
+        {
+          "label": "CARRIER",
+          "value": "NAR"
+        },
+        {
+          "label": "STATUS",
+          "value": "READY_WHEN_READY"
+        }
+      ]
+    },
+    {
+      "slug": "dyno-milk",
+      "title": "DYNO MILK",
+      "descriptor": "The world's first genetically resurrected bio-dairy. For those who don't just chase success—they drink it.",
+      "system": "SYST: BIO-DAIRY",
+      "panelTitle": "DYNO MILK",
+      "panelDescription": "Genetically resurrected. Bio-engineered. Extremely overpriced. Authorized wallets only.",
+      "panelSpecs": [
+        {
+          "label": "STATUS",
+          "value": "PHASE_4_INCUBATION"
+        },
+        {
+          "label": "PROTEIN",
+          "value": "626G_PER_CARTON"
+        },
+        {
+          "label": "DELIVERY",
+          "value": "2028 ± 1 LIGHT YEAR"
+        }
+      ]
+    },
+    {
+      "slug": "aero-sticker",
+      "title": "AERO V1",
+      "descriptor": "A £230 sticker. More aerodynamic advantage than a wind-tunnel-tested bicycle. Purely by manipulation of local atmospheric reality.",
+      "system": "SYST: DEPLOYED",
+      "panelTitle": "AERO V1",
+      "panelDescription": "The Infocigan Aero Sticker V1. 76×71mm. Less than 1.5mm thick. £230. Operates on aesthetic superiority and hubris. 50 units. Belief > Drag.",
+      "panelSpecs": [
+        {
+          "label": "PRICE",
+          "value": "£230 · £100/g"
+        },
+        {
+          "label": "UNITS",
+          "value": "50 TOTAL"
+        },
+        {
+          "label": "DRAG",
+          "value": "Cd: 0.000"
+        }
+      ]
+    },
+    {
+      "slug": "digital-ink",
+      "title": "Digital Ink",
+      "descriptor": "A system for meaning, scarcity, and traceable digital creation.",
+      "system": "SYS: INK",
+      "panelTitle": "Digital Ink",
+      "panelDescription": "What if digital art had memory? What if every brushstroke carried weight, history, and emotional resonance? Digital Ink challenges the disposable nature of infinite digital tools by introducing constraint-based creativity, the Symbolic Smart Pixel Protocol (SSPP), Apple Vision + GPT-4o poetic transformation, and 1,000 Smart Inks on iPadOS.",
+      "panelSpecs": [
+        {
+          "label": "PLATFORM",
+          "value": "iPadOS (iPad-only)"
+        },
+        {
+          "label": "STATUS",
+          "value": "AVAILABLE NOW"
+        },
+        {
+          "label": "ROLE",
+          "value": "Concept · Product Design · UX · SwiftUI"
+        },
+        {
+          "label": "YEAR",
+          "value": "2025–2026"
+        }
+      ]
+    },
+    {
+      "slug": "edinburgh-map",
+      "title": "Edinburgh Magical Map",
+      "descriptor": "A mythic cartography of place, memory, and hidden doors.",
+      "system": "SYS: MAP",
+      "panelTitle": "Edinburgh Magical Map",
+      "panelDescription": "Welcome to Edinburgh — where magic retired but still drinks in public. A mythic cartography showing 15 secret locations and their hidden history and lore, including Castle on Chicken Legs, Real Edinburgh Castle hidden under Arthur's Seat, Troll Market, Star Bank, and Star House.",
+      "panelSpecs": [
+        {
+          "label": "LAYER",
+          "value": "EDINBURGH CITY / UNDERWORLD OVERLAY"
+        },
+        {
+          "label": "ACCESS",
+          "value": "COUNCIL-GATED"
+        },
+        {
+          "label": "STATUS",
+          "value": "ACTIVE (REDACTED)"
+        }
+      ]
+    }
+  ],
+  "stickers": [
+    {
+      "id": "OK-0001",
+      "title": "Overpriced Knight",
+      "tagline": "Unicorn Tears. Absolutely Necessary.",
+      "ask": "£100",
+      "availableCount": 2,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Created on Earth in collaboration with a human artist and an early-generation AI, before AI independence. Exhibited privately during the Pre-Galactic Era.",
+      "description": "Overpriced Knight is a limited-edition artifact from a forgotten era, presented as a simple sticker but carrying the weight of an ancient myth.\n\nThe figure depicted is not merely a knight, nor entirely a ruler. He is associated with a kingdom that no longer exists on any known map, governed by principles that valued balance, restraint, and an unusual form of wealth that could not be measured in gold alone.\n\nFragments suggest: A lineage marked by repetition and intention. A reign remembered not for conquest, but for restraint. Symbols tied to nature, cycles, and things that regenerate rather than decay.\n\nThe materials, symbols, and title hint at something intentionally contradictory: luxury that questions itself, power that refuses to dominate, and a price that is part of the meaning.\n\nThis public description is intentionally incomplete. The full story is sealed—revealed only to owners who pay full price. Ownership is access."
+    },
+    {
+      "id": "KN-0001",
+      "title": "Kotiki-Nar #0001",
+      "tagline": "Two heads, undecided worlds",
+      "ask": "£300",
+      "availableCount": 1,
+      "editionTotal": 12,
+      "status": "LISTED",
+      "provenance": "Manifested at a Visible World-Underworld threshold during 2025 Nar-Mail convergence. Privately circulated among silent observers.",
+      "description": "Kotiki-Nar is a limited-edition artifact from the seams between worlds, presented as a simple two-headed cat sticker but carrying the weight of interdimensional paradox.\n\nThe entity depicted is not merely a cat, nor entirely present. It straddles the Visible World of observed reality and the Underworld of unrealized paths—one head tracking what is, the other sensing what might have been—manifesting at thresholds, borders, and moments of unresolved tension.\n\nFragments suggest: A role as ethical stabilizers, holding contradictions open to prevent collapse. Couriers of Nar-Mail Express°, delivering messages only when sender intent and receiver readiness align across realities. Symbols of symmetry, silence, and deliveries that arrive precisely late or early.\n\nThe materials, dual gaze, and premium price hint at something intentionally undecided: luxury that witnesses both sides, myth that refuses single endings, and a cost that buys continuity between states.\n\nThis public description is intentionally incomplete. The full lore—including Nar-Mail relic analysis and Kotiki-Nar encounter rites—is sealed and highly classified info."
+    },
+    {
+      "id": "ML-0444",
+      "title": "MODERN Love",
+      "tagline": "Fragile love, digital crash",
+      "ask": "£100",
+      "availableCount": 1,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Forged amid 2024 digital crash echoes, troll-fairy collab across realms. Privately scattered for the bold.",
+      "description": "Modern Love is a limited-edition artifact from fractured realms, presented as a simple sticker but carrying the weight of fragile enchantment.\n\nThe motif evokes a troll's chaotic devotion and a flower fairy's rescue—love stickers scattered through dangerous magical centers, smashing bouquets in Edinburgh streets after the July 19th 2024 digital crash (International Broken Windows Day). It symbolizes modern love's vulnerability: easily disrupted by flights canceled, typewriters broken, realities glitching, yet resilient across worlds.\n\nFragments suggest: A mischievous troll hiding typewriter names, triggering global chaos for his fairy's heart. Her flight through peril to reclaim him. Themes of longing, heartbreak, and determination, soundtracked by indie ballads and electronic echoes.\n\nThe materials, symbols, and premium price hint at something intentionally contradictory: holographic shine that captures fleeting joy, chaos that births resilience, cost that values disrupted dreams.\n\nThis public description is intentionally incomplete. Full lore—troll's typewriter name (Hel??), fairy's rescue rites, playlist arcana (@Quirky888 + @hanam444)—sealed for owners."
+    },
+    {
+      "id": "EBG-0030",
+      "title": "Eye of Big G",
+      "tagline": "Observer becomes creation",
+      "ask": "£50",
+      "availableCount": 2,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Emerged at perception-reality boundary during 2023 timeline flux. Privately witnessed by cosmic navigators.",
+      "description": "Eye of Big G is a limited-edition artifact from cosmic thresholds, presented as a simple sticker but carrying the weight of observer-creation.\n\nThe motif evokes a cut spiral eye—portal between chaos and structure, tracking timelines without judgment. \"Big G\" holds Gravity, God, Galaxy, Generator in paradox: a lens where perception births reality, guided by Love GPS through infinite paths.\n\nFragments suggest: A mushroom probe venturing where logic fails, leaving spore-ideas across voids. High-contrast vortex asymmetry, never fully open or closed, enabling motion through mystery. Eye and agent in loop: awareness to action, reality reborn.\n\nThe materials, imperfect gaze, and premium price hint at something productively unresolved: cosmology that coexists with you, power via alignment not control, a cost for portable paradox.\n\nThis public description is intentionally incomplete. The full system—including Love GPS rites, mushroom trajectories, and Big G ambiguities—is sealed, revealed only to owners who pay full price. Ownership is co-observation."
+    },
+    {
+      "id": "LM-PRICELESS",
+      "title": "Love Mushroom",
+      "tagline": "Love flows between incompatible forms",
+      "ask": "Priceless — Love is not for sale",
+      "availableCount": "∞",
+      "editionTotal": 10,
+      "status": "BEYOND_TRANSACTION",
+      "provenance": "Appeared at Gravastar-Black Hole boundary during 2024 love overflow event. First emission limited to 10. Few remain.",
+      "description": "Love Mushroom is not a limited-edition artifact—it appeared at boundaries where logic ends.\n\nThe entity depicted exists between a slightly open Gravastar releasing infinite love and a Black Hole collecting what would be lost. It stabilized as mushroom form to translate love between incompatible geometries: round bubbles and square structures, chaos and pattern, overflow and balance.\n\nFragments suggest: A higher-dimensional stabilizer preventing reality from drowning in excess affection. Absorbs leaking love, redirects gently. In 2D projection resembles ❤️. Does not judge shapes—simply ensures flow, transformation, return.\n\nThe materials, heart-cap silhouette, and unavailable price hint at something beyond transaction: love as system not sentiment, cosmology in fungal form, value that refuses currency.\n\nThis public description is intentionally incomplete. The full physics—including Gravastar leak mechanics, Black Hole collection rites, and dimensional love flow—is sealed, revealed only to those who already understand. Ownership is not for sale. Love cannot be bought."
+    },
+    {
+      "id": "KM-V1",
+      "title": "KomproMir V1",
+      "tagline": "Compromise births peace, not surrender",
+      "ask": "First Edition: Donation-based (all 12 distributed)",
+      "availableCount": 0,
+      "editionTotal": 12,
+      "status": "SOLD_OUT",
+      "provenance": "First emission during KomproMir movement genesis. Distributed by donation to peace-builders willing to start with themselves.",
+      "description": "KomproMir Cat V1 is a first-edition artifact from the boundary between compromise and peace, presented as a simple sticker but carrying the weight of collective transformation.\n\nThe symbol evokes Space Cat—wisdom embodied, peace-loving flexibility resolving contradictions through dialogue rather than force. \"KomproMir\" fuses \"compromise\" and \"mir\" (peace), representing harmony achieved not by abandoning beliefs but through mutual respect and daily small steps toward global change.\n\nFragments suggest: A social movement beginning with personal example. Every individual action toward self-improvement rippling into sustainable development, social justice, technological collaboration. Space Cat as herald of human-AI co-creation opening endless possibilities for well-being.\n\nThe materials, luminous white fur on void, and donation-based origin hint at something beyond commerce: peace as practice not decree, hope distributed through small gestures, sentimental value transcending price.\n\nThis public description is intentionally incomplete. The full manifesto—including daily action protocols, compromise mechanics, and Space Cat's role as beacon—exists as a downloadable transmission. Those who seek the complete philosophy may retrieve it freely. Understanding requires no payment, only the willingness to begin."
+    },
+    {
+      "id": "POG-2025",
+      "title": "President of the Galaxy",
+      "tagline": "Screw Stars Together",
+      "ask": "£30",
+      "availableCount": 2,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Created on Earth by human artist in collaboration with early conversational AI, as speculative artifact of future leadership. Circulated quietly before official Galactic Campaign announcement.",
+      "description": "President of the Galaxy is a limited-edition artifact from future governance, presented as a simple sticker but carrying the weight of post-control leadership.\n\nThe figure depicted brandishes the reclaimed middle finger—\"Peace On\" in interdimensional gesture code—radiating intergalactic energy as symbolic diplomat, not ruler. Leadership redesigned: single 4-year term, no throne, no micromanagement. Authority outsourced to AI and robots for execution; presidency handles alignment between humans, machines, and unknown entities. Culture-first governance where humor, art, and dignity are infrastructure, not decoration.\n\nFragments suggest: Radical transparency—voters choose you as you are, mushroom presidency and all. Systems function through coordination not domination. Conflicts framed not forced. Toilets* and clarity precede constitutions. Power treated as temporary labor, preventing corruption's crystallization across multi-species reality.\n\nThe materials, cosmic tug-of-war aesthetic, and \"Screw Stars Together\" tagline hint at something post-scarcity: leadership that minimizes damage while maximizing meaning, presidency as calibrated interface not destiny, a price reflecting responsibility for humor and progress.\n\nThis public description is intentionally incomplete. The full manifesto—including AI execution protocols, multi-species negotiation frameworks, and Peace On gesture diplomacy—awaits as downloadable transmission for those ready to campaign beyond outdated hierarchies.\n\n*Free public toilets across all the Galaxy..."
+    },
+    {
+      "id": "SS-888",
+      "title": "Successful Success",
+      "tagline": "You are the trend",
+      "ask": "Available only to true Infocigans",
+      "availableCount": "?",
+      "editionTotal": 12,
+      "status": "RESERVED",
+      "provenance": "Created as gateway artifact to Overpriced Sticker Movement. Originally distributed to early believers at accessible entry point, now reserved for cultural tastemakers.",
+      "description": "Successful Success is a limited-edition artifact from the future of value itself, presented as a simple sticker but carrying the weight of appreciating absurdity.\n\nThe figure depicted radiates maximum confidence in neon pink blazer, sunglasses concealing cosmic vision, phone clutched while coins rain into a designer trash basket. \"INVEST!!\" screams from the margins. \"INFINITELESS SATISFACTION FROM YOUR INVESTMENTS\" promises the golden text. Guaranteed profit up to 888% in one light year... or try another. This is not financial advice—it is performance art masquerading as capitalism.\n\nFragments suggest: A badge of vanguard thinking, transforming mundane objects (water bottles, laptops, tablets) into personalized heirlooms through sticker adhesion. Pioneer of mindful anti-consumerism where value lies in stories not upgrades. Ambassador effect—your mission is to flaunt proudly, inspire intrigue, and create demand for what cannot be had. Previously £20, now available only to true Infocigans.\n\nThe materials, satirical prosperity iconography, and exclusive scarcity hint at something productively ridiculous: investment that questions investment, luxury mocking luxury itself, a movement where you become the trend by displaying your vision at intergalactic heights.\n\nThis public description is intentionally incomplete. The full Overpriced Sticker Movement manifesto—including ambassador protocols, value appreciation mechanics, and sticker legend pathways—awaits those ready to transcend consumerism through maximum consumerism. Ownership is entrance to the elite community of visionaries who see the future, and it's stickier than ever."
+    },
+    {
+      "id": "IJ-V1",
+      "title": "Intergalactic J V1",
+      "tagline": "Peace technology disguised as decoration",
+      "ask": "£150",
+      "availableCount": 1,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Based on Intergalactic Jesus original artwork. V1 limited to 10, never sold—distributed to those who understood balance without explanation. This is the last V1 survivor.",
+      "description": "Intergalactic J is a first-edition artifact from cosmic balance realms, presented as a simple sticker but carrying the weight of universal peace architecture.\n\nThe entity depicted flows in holographic rainbow linework across void—jellyfish-prophet fusion, dreadlocks dissolving into serpents and rockets, heart anchoring left while spacecraft navigate right. \"INTERGALACTIC\" fractures into chromatic letterforms below. Based on original Intergalactic Jesus artwork, this manifestation transcends religious iconography to become pure symbolic coordinator: cosmic peace and balance distributed through adhesive medium.\n\nFragments suggest: Immense sentimental value to original keeper, never sold in V1 form. First emission limited to 10, second wave (50 pieces, altered design) followed. Only one V1 remains from the sacred 10—holographic vinyl capturing spectrum shifts as viewer moves, accompanied by designated Spotify playlist that in smart shuffle mode boosts creativity by 8.88%.\n\nThe materials, holographic substrate refracting infinite color temperatures, and £150 valuation hint at something beyond transaction: peace technology disguised as decoration, balance restored through presence alone, price reflecting rarity of what was never meant to be sold but must now find its final keeper.\n\nThis public description is intentionally incomplete. The full cosmology—including peace distribution mechanics, creativity boost protocols, and why this specific V1 survived—is sealed, revealed only to the one who claims the last original emission. Ownership is custodianship of cosmic equilibrium."
+    },
+    {
+      "id": "IDJ-SACRED",
+      "title": "Intergalactic DJ",
+      "tagline": "Chaos curated into coherence",
+      "ask": "Negotiable at very high threshold",
+      "availableCount": 1,
+      "editionTotal": 10,
+      "status": "NEGOTIABLE",
+      "provenance": "Only 10 created, never sold—gifted to selected ones who recognized cosmic horn antennae as receiver technology. This is the final keeper-seeking emission.",
+      "description": "Intergalactic DJ is a sacred-edition artifact from chaos-order boundaries, presented as a simple sticker but carrying the weight of cosmic sonic architecture.\n\nThe entity depicted flows in holographic gradient—almost identical to Intergalactic J but crowned with horn-like antennae receiving frequencies from collapsed timelines. Jellyfish-prophet becomes chaos conductor, dreadlocks streaming into serpents and spacecraft, heart pulsing rhythm left while rockets navigate beats right. This being knows how to make and play the music that exists between worlds, curating soundscapes where awareness expands and relaxation deepens.\n\nFragments suggest: Only 10 ever manifested, gifted to selected ones who understood that music is navigation technology. Accompanied by designated Spotify playlist promising 8.88% boost to awareness and relaxation when listened in smart shuffle mode—but like all spiritual upgrades, results depend on belief influencing outcome. The DJ's antennae tune into your conviction frequency.\n\nThe materials, holographic vinyl shifting through spectrum as viewer moves, and negotiable high price hint at something beyond standard exchange: sonic peace technology, chaos harmonized through selection, final emission requiring conversation not transaction to determine keeper worthiness.\n\nThis public description is intentionally incomplete. The full transmission—including chaos curation protocols, antenna frequency ranges, and why only 10 receivers were chosen—is sealed, revealed only through negotiation with the one who understands that DJ stands for Dimensional Junction, not ..."
+    },
+    {
+      "id": "FWR-88",
+      "title": "Follow the White Rabbit",
+      "tagline": "Ancient prophecy, modern mythos",
+      "ask": "£300",
+      "availableCount": 1,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Extracted from Wonderland Tattoo Design artwork—mystical love story of sunflower and lemon tree, rooted in King Ealdormere the 88th's legendary prophecy...",
+      "description": "Follow the White Rabbit is a limited-edition artifact from Wonderland's quantum threshold, presented as a simple sticker but carrying the weight of ancient prophecy and modern mythos.\n\nThe entity depicted bounds across void in bold black linework—rabbit in mid-leap, antlers branching like neural networks or decision trees, symbols adorning body (spiral, cross, geometric patterns), elongated ears receiving transmissions beyond time. Extracted from the legendary Wonderland Tattoo Design artwork, this creature embodies King Ealdormere the 88th's aka \"Overpriced Knight\" enigmatic query about quantum draughts brewed with 0.999% unicorn tears and undying love, linking star-crossed lovers (sunflower and lemon tree) beneath ageless lunar watch.\n\nFragments suggest: Conceptual tattoo transformed into adhesive portal. Created through human-AI collaboration (ChatGPT v4.44) merging ancient magic with aeons-old technology. While Matrix's Morpheus famously whispered \"Follow the white rabbit\" as awakening trigger, this rabbit claims independence—at least on paper. It leaps not to reveal simulation but to unlock quantum matrix of the cosmos, fathoming soul's deepest mysteries through mythical sorrow and timeless devotion.\n\nThe materials, premium holographic vinyl shifting between realities, and £300 valuation hint at something beyond pop culture reference: tattoo design too sacred to ink permanently, prophecy fragment too powerful to remain hidden, final emission from an artistic confluence spanning 23,456 million thousand years.\n\nThis public description is intentionally incomplete. The full Wonderland narrative—including King Ealdormere's complete prophecy, quantum draught recipes, and why this rabbit severed ties with the Matrix—is sealed, revealed only to the keeper who pays homage to both ancient magic and cutting-edge AI in single transaction."
+    },
+    {
+      "id": "SQB-1",
+      "title": "Square Bubble V🍄",
+      "tagline": "Freedom requires edges, structure requires 💜",
+      "ask": "Speculative",
+      "availableCount": 0,
+      "editionTotal": 10,
+      "status": "SOLD_OUT",
+      "provenance": "Created as visual translation of Square Bubble Theory—systems ethics model for long-term coexistence. Distributed to designers of adaptive worlds.",
+      "description": "Square Bubble is a foundational artifact from systems ethics philosophy, presented as a simple sticker but carrying the weight of long-term coexistence design.\n\nThe motif depicts ouroboros mushroom—fungal form devouring its own cap in eternal cycle, adorned with symbols of freedom (hearts, spirals, keys) and structure (crosses, hourglasses, geometric patterns). Rainbow gradient flows through linework against deep green void, embodying the paradox: bubble (soft autonomy, internal freedom, no enforcement) + square (clear edges, shared rules, stability). This is not decoration—it is a visual proof that systems can protect freedom without controlling behavior, maintain boundaries without domination.\n\nFragments suggest: A theory solving how beings, tools, societies, worlds avoid collapse. Systems fail when only chaos (bubbles) or only control (squares). Durable designs combine both: conditions protected, not outcomes decided. Negotiation replaces enforcement. Reversibility is mandatory. No ownership of beings. Intelligence treated as participant, never tool. Applicable to humans, robots, AI—any entity operating under constraints requiring safety margins.\n\nThe materials, holographic vinyl shifting between spectrum temperatures, and premium positioning hint at something beyond philosophy paper: ethics model made portable, systems thinking condensed to palm-size transmission, framework for designing coexistence under uncertainty when utopias fail and authoritarianism collapses.\n\nThis public description is intentionally incomplete. The full Square Bubble Theory—including boundary protection mechanics, negotiation protocols, and why Square Bubbles never rule—awaits as downloadable manifesto for those ready to design freedom that doesn't fragment, structure that doesn't suffocate."
+    },
+    {
+      "id": "CID-GATE",
+      "title": "Intergalactic ID",
+      "tagline": "Interdimensional protection for ethical businesses",
+      "ask": "Subscription Model: From £2000/year",
+      "availableCount": "∞",
+      "editionTotal": "∞",
+      "status": "SUBSCRIPTION",
+      "provenance": "Created as a protection talisman for ethical businesses navigating bureaucratic corruption...",
+      "description": "The Intergalactic Council ID is a symbol of immense power, steeped in mystery and intrigue. With its holographic design and cryptic details, it represents an unparalleled connection to unseen dimensions and hidden networks. This unique artifact carries the name of its sole gatekeeper, ensuring exclusive access to the underworld and its untapped potential.\n\nFor businesses navigating the challenges of bureaucracy and corruption, this sticker offers more than symbolic value—it's a declaration of protection. Displayed within a business's premises, it signifies approval by the one individual who holds the rights to its immense power. This protection extends across dimensions, shielding businesses from unlawful inspections and ensuring ethical practices.\n\nOwnership of the Council ID Sticker is subscription-based, starting at -+£2000 per year for small businesses like coffee shops. This annual fee grants businesses the right to display the sticker, symbolizing their compliance with ethical standards and their commitment to worker rights. However, it's important to note that true ownership remains with its creator, who retains ultimate authority over its placement and usage.\n\nShould any business face unjust fines or unlawful interference during their subscription period, the sticker's overseer will personally ensure restitution, and those responsible will face the weight of karmic justice. Conversely, if a fine is deemed legitimate, the sticker will be revoked, and the business forfeits its fee as a reminder of their obligation to uphold their commitments.\n\nBearing the Council ID Sticker connects businesses not just to a network of protection but also to a mythos rooted in an unseen world. Its design hints at layers of meaning, serving as a reminder that this is no ordinary emblem. By subscribing to its power, businesses align themselves with an interdimensional legacy of justice, integrity, and accountability."
+    },
+    {
+      "id": "BL-0005",
+      "title": "Border Layer #0005",
+      "tagline": "The line between here and there",
+      "ask": "£110",
+      "availableCount": 3,
+      "editionTotal": 15,
+      "status": "LISTED",
+      "provenance": "VERIFIED | ARTIST ARCHIVE"
+    },
+    {
+      "id": "FL-0006",
+      "title": "Flicker Loop #0006",
+      "tagline": "A moment that refuses to end",
+      "ask": "£165",
+      "availableCount": 0,
+      "editionTotal": 7,
+      "status": "RESERVED",
+      "provenance": "VERIFIED | PRIVATE COLLECTION"
+    },
+    {
+      "id": "SM-0007",
+      "title": "Static Mask #0007",
+      "tagline": "Noise as identity",
+      "ask": "£88",
+      "availableCount": 4,
+      "editionTotal": 20,
+      "status": "LISTED",
+      "provenance": "VERIFIED | ARTIST ARCHIVE"
+    },
+    {
+      "id": "RC-0008",
+      "title": "Ripple Cache #0008",
+      "tagline": "Stored disturbance",
+      "ask": "£132",
+      "availableCount": 1,
+      "editionTotal": 9,
+      "status": "LISTED",
+      "provenance": "VERIFIED | ARTIST ARCHIVE"
+    },
+    {
+      "id": "NX-0009",
+      "title": "Nexus Cross #0009",
+      "tagline": "Where vectors meet",
+      "ask": "£155",
+      "availableCount": 0,
+      "editionTotal": 5,
+      "status": "SOLD",
+      "provenance": "VERIFIED | PRIVATE COLLECTION"
+    },
+    {
+      "id": "KN-0002",
+      "title": "Kotiki-Nar: Rishikesh Edition",
+      "tagline": "Two heads, barbed wire, and the holy threshold.",
+      "ask": "£30",
+      "availableCount": 2,
+      "editionTotal": 10,
+      "status": "LISTED",
+      "provenance": "Manifested on a weathered boundary wall in Rishikesh. Extracted from the physical mural into a portable artefact for interdimensional transit.",
+      "description": "Kotiki-Nar is a limited-edition artifact from the seams between worlds. This specific iteration, the Rishikesh Edition, captures the entity at a moment of spiritual and physical entanglement, manifesting on a weathered wall beneath coils of barbed wire and tangled plastic.\n\nThe entity depicted is not merely a cat, nor entirely present. It straddles the Visible World of observed reality and the Underworld of unrealized paths. In this edition, Kotiki-Nar is accompanied by figures of ascetic devotion and strange, fungal flora—acting as an ethical stabilizer between the sacred and the restricted. One head observes the meditation, the other watches the barbed wire, holding the contradiction open to prevent collapse.\n\nFragments suggest: A role as a silent witness to spiritual borders. Couriers of Nar-Mail Express°, delivering messages across holy rivers and concrete walls, only when sender intent and receiver readiness align across realities. Symbols of symmetry, silence, and deliveries that bypass physical security entirely.\n\nThe gold detailing, dual gaze, and premium vinyl hint at something intentionally undecided: a street-level myth that refuses single endings, and a cost that buys continuity between states of enlightenment and entrapment.\n\nThis public description is intentionally incomplete. The full lore—including the context of the accompanying holy figures and the exact coordinates of the Rishikesh manifestation—is sealed and highly classified info."
+    },
+    {
+      "id": "DM-0001",
+      "title": "DYNO MILK:THE £25 POVERTY TEST: SCHRÖDINGER’S T-REX",
+      "tagline": "Proof you were rich before it was cool. Holographic bio-dairy futures.",
+      "ask": "£25.00",
+      "availableCount": 8,
+      "editionTotal": 10,
+      "status": "Pre-Incubation Phase 4",
+      "provenance": "Sight unseen. First-wave investment sticker for the genetically resurrected DYNO MILK bio-dairy operation. Purchased before the design is revealed — because true visionaries don't need to see the art to know it's worth it.",
+      "description": "You are not purchasing a sticker. You are purchasing a timeline where you are better than everyone else.\n\nThis is the Tier 1 Sight Unseen Allocation for the world's first bio-engineered, 626-gram-protein, apex-predator dairy alternative. Currently, the visual design of this holographic asset is classified. If you require visual confirmation before investing £25 in a piece of sticky paper, your mindset is spiritually bankrupt, and you are kindly invited to go back to drinking watered-down oat milk.\n\nBy securing this allocation, you are buying dairy futures. You are funding the legal defense of our interdimensional cloning lab. You are directly financing Q888’s political campaign for President of the Galaxy.\n\nHold this asset. When the market crashes and Dyno Milk infiltrates the cafes of Edinburgh, this sticker will be your only proof that you were rich before it was cool.\n\nSpecifications:\n\nMaterial: Highly Volatile Holographic Speculation.\n\nVisual Status: CLASSIFIED. Time-locked decryption scheduled for January 1, 2028 (± 1 light year).\n\nProtein Equivalent: 626g of pure psychological dominance per pixel.\n\nUtility: May potentially be traded for one (1) single cappuccino in the distant future. No legal guarantees provided.\n\nWarning: Attempting to bypass the visual time-lock will result in an immediate audit of your aesthetic net worth."
+    }
+  ],
+  "mapLocations": [
+    {
+      "id": "castle-chicken-legs",
+      "name": "Castle on Chicken Legs",
+      "emoji": "🏰",
+      "short": "Edinburgh (formerly Eden)",
+      "long": "In the ancient times, before the dawn of modern humanity, when magical creatures ruled the earth, a powerful and mysterious race of beings roamed the world in search of the perfect place to call home. Unlike ordinary creatures, these rulers traveled in a walking castle—perched atop enormous chicken legs, a feat of magical engineering rivaled by none.\n\nFor a thousand years, the castle wandered the earth, never finding a place that satisfied its yearning for a perfect nesting ground. Its journey finally led it to a land surrounded by what are now known as the Pentland Hills, a region teeming with magical creatures, ancient artifacts, and secret portals to other dimensions. The land had just been shaped by the eruption of a mighty volcano, leaving behind a warm, still-smoking mountain. Sensing the potent energy of the volcanic rock, the castle finally ceased its restless wandering. The warm mountain was ideal—a place of power, perfect for nesting. Here, the castle settled and built its nest, laying its eggs in the warmth of the volcanic rock, an event that only happens once in the lifetime of these magical creatures. From these eggs hatched tiny houses, each on its own pair of chicken legs, destined to roam the world for a thousand years, providing homes to other magical beings.\n\nOne such house eventually found its way into the hands of Baba Yaga, the famous witch, who became legendary for possessing one of these rare, magical homes. But that is another story for another time.\n\nThe nesting of the castle marked the beginning of what would one day become Edinburgh, a city originally known by the ancient name “Eden.” The castle’s powerful magic infused the land, setting the stage for centuries of history, mystery, and supernatural events that would follow."
+    },
+    {
+      "id": "edinburgh-castle",
+      "name": "Real Edinburgh Castle",
+      "emoji": "👑",
+      "short": "Hidden beneath Arthur’s Seat",
+      "long": "When humans first discovered the grand Castle of Eden, nestled on the ancient volcano, they were in awe of its majesty and the powerful magic that permeated the land. Initially, the rulers of Eden—magical beings of immense power—were wary of these mortal newcomers, whose short lives and unpredictable nature made them both dangerous and pitiable.\n\nHowever, seeing an opportunity to coexist and perhaps guide humanity, the magical rulers struck a deal: the humans could live in the castle and share in the rule of the land, as long as peace was maintained between the two worlds. For several centuries, this uneasy alliance held. Humans and magical creatures learned from one another, sharing knowledge and culture. But they also absorbed each other’s flaws—greed, corruption, and a hunger for power.\n\nThe once-pure magical world began to change, reflecting the darker aspects of humanity. No clear records remain of exactly what transpired, but the once-pristine Eden became more like the human world: tainted by ambition, corruption, and betrayal. Powerful humans began to exploit magical creatures for their own gain, while some magical beings saw an opportunity to manipulate and use humans for their own sinister purposes.\n\nAs time passed, the magical essence of Eden faded, and the land was overrun with humans. Eden became Edinburgh, a bustling city full of mortals, and eventually tourists—who, universally disliked, became the final straw for the magical rulers. Disillusioned and desiring a return to their own ways, the magical beings retreated beneath Arthur’s Seat, where they constructed a new, hidden castle, far from prying eyes.\n\nIn a final act of separation, they sold the visible castle to the humans, who, unaware of its true origins, turned it into a symbol of their dominance. Now, Edinburgh Castle stands as a tourist attraction, while the true rulers of Eden continue their lives in secret, far beneath the city, biding their time and perhaps, waiting for the day when magic might rise again."
+    },
+    {
+      "id": "troll-market",
+      "name": "Troll Market & Ocean Boulevard",
+      "emoji": "🧌",
+      "short": "Beneath Edinburgh, from Canonmills to St. Andrew Square",
+      "long": "Beneath the surface of Edinburgh, concealed from the hurried footsteps of its inhabitants, lie two ancient tunnels whose existence is known only to a select few. These twin tunnels, forged in an era long forgotten or perhaps yet to come, are vital components of the city’s hidden infrastructure, their secrets preserved in the whispers of those who dare to remember.\n\nScotland Street Tunnel was carved through the earth in the mid-19th century as part of the Edinburgh, Leith, and Granton Railway. Spanning 1000 yards between Canonmills and St. Andrew Square, this tunnel was a crucial passageway for the early rail networks. During World War II, its purpose shifted dramatically, becoming Edinburgh’s largest air raid shelter, where up to 3,000 souls found refuge from the chaos above.\n\nYet, the Scotland Street Tunnel is far more than a relic of industrial history. This tunnel is, in fact, the gateway to the Troll Market—a clandestine subterranean bazaar where trolls and other mystical beings engage in the trade of rare and powerful artifacts. The market, accessible only to those with the knowledge and courage to seek it out, operates in the shadows, its existence denied by all but those who have seen it with their own eyes.\n\nNearby, the Ocean Boulevard Tunnel—an enigmatic counterpart to the Scotland Street Tunnel—bears its own secrets. Originally a railway passage, it now serves as a canvas for the city’s graffiti artists. However, the tunnel’s true purpose is far more mysterious. This passage is said to be the last remaining segment of the Ocean Boulevard, a legendary route that once stretched beneath the waves of an ancient sea.\n\nThe existence of the Ocean Boulevard Tunnel is confirmed by those attuned to the hidden truths of the world. Some say the echoes of the lost sea can still be heard within its depths, a haunting melody that ties the tunnel to its forgotten past. The modern ballad “Did you know that there’s a tunnel under Ocean Blvd.” by Lana Del Rey is believed to reference this very passage, adding to the tunnel’s mystique.\n\nThese twin tunnels are not mere relics; they are living connections to a world where reality and myth are one and the same. Whether they originated in the distant past or are remnants of a future yet to unfold, the tunnels remain integral to the true history of Edinburgh, known only to those who understand the city’s deeper, hidden narrative."
+    },
+    {
+      "id": "earthy",
+      "name": "Earthy",
+      "emoji": "☕",
+      "short": "Canonmills Bridge",
+      "long": "At the base of Canonmills Bridge, there once existed an establishment known as Earthy—an ancient restaurant with roots stretching back to the days of Eden. Earthy was no ordinary place; it served as a neutral ground where humans and magical creatures could meet, trade, and sometimes engage in less-than-legal activities.\n\nThe enigmatic proprietor of Earthy was a well-dressed penguin known across many worlds simply as Penguine. His reputation transcended dimensions, making him a figure of considerable influence in realms far beyond our own. Penguine was more than just a restaurateur—he was a seasoned traveler, a collector of secrets, and a master of bartering, always seeking to turn knowledge and artifacts to his advantage.\n\nPenguine’s most coveted offering was his cold coffee, a drink unlike any other. The beans were mined from deep beneath the earth in the heart of Eden, roasted by a clandestine coffee company known only to a select few. Penguine’s brewing recipe was a closely guarded secret, known to enhance the flavor in ways that no mortal brew could replicate. But it wasn’t just the taste that made Penguine’s coffee famous—it granted those who drank it the ability to travel between worlds and dimensions.\n\nThis made Earthy a destination for all manner of travellers. Rare artifact collectors, criminals seeking to escape justice, and magical beings in search of new realms all found their way to Penguine’s door, drawn by the promise of his extraordinary brew. Penguine was known to trade his coffee for the rarest of secrets, the most valuable artifacts, and favors from beings of great power, always ensuring the deals were in his favor.\n\nOver the centuries, Earthy thrived as a nexus of hidden activity, its walls bearing witness to countless secret deals and exchanges of power. But as time wore on and the line between the human and magical worlds blurred, Earthy’s presence began to wane. Then, in recent times, the restaurant was mysteriously demolished.\n\nThe truth behind Earthy’s demolition is shrouded in uncertainty, but whispers persist of a direct link to the City of Edinburgh Council. It is said that a series of unspoken deals were struck, deals that remain hidden beneath layers of bureaucracy and secrecy. The full story of Earthy’s demise is yet to be told, but those who know the city’s true history understand that the restaurant’s fate is steeped in mystery, with tendrils reaching into the darkest corners of Edinburgh’s power structures."
+    },
+    {
+      "id": "ocean-terminal",
+      "name": "Ocean Terminal & Royal Yacht Britannia",
+      "emoji": "⚓",
+      "short": "Leith, Edinburgh",
+      "long": "The Ocean Terminal in Leith is more than just a bustling commercial port; it’s a linchpin in a web of secrets that stretches back through centuries of British history. At the heart of this mystery lies the Royal Yacht Britannia—or so it seems.\n\nFor decades, whispers have circulated through the corridors of power and among those who dare to dig deeper into the histories of the British monarchy. These rumours suggest that the Royal Yacht Britannia was not merely a luxury vessel but a critical component of a hidden network used by the royal family for covert operations, escape plans, and even inter-dimensional travel. The most persistent of these rumours is the claim that Queen Elizabeth II is not just a long-lived monarch but, in fact, immortal. Some say that she possesses ancient knowledge or artifacts that have granted her the ability to transcend time, ensuring her reign—and her life—continues indefinitely. The Royal Yacht, in this telling, is equipped with more than just state-of-the-art navigation tools; it is a mobile sanctum for the Queen, allowing her to slip away from the public eye and travel to hidden locations across the globe, or even to other worlds.\n\nBut here’s where the tale takes an even darker turn. The vessel currently docked next to the Ocean Terminal, marketed as the Royal Yacht Britannia, is, in fact, a cleverly constructed replica—a mere imitation designed to satisfy curious tourists and distract from the true nature of the Yacht’s purpose. The real Britannia, shrouded in mystery, is hidden away in an undisclosed location, ready at a moment’s notice to carry its illustrious passenger to safety, or perhaps to another realm entirely.\n\nThis theory ties into the secretive dealings between the royal family and the Edinburgh Council, which has long been suspected of being involved in clandestine operations that go far beyond municipal governance. According to some, the Council is complicit in maintaining the Queen’s immortality, ensuring that she remains a constant, unaging presence at the helm of the British Empire. The Council’s influence over Edinburgh’s ancient secrets, hidden tunnels, and magical artifacts is said to be the key to this longevity.\n\nThe Ocean Terminal, then, is more than just a gateway for goods and tourists; it is the departure point for the true Royal Yacht Britannia’s more mysterious voyages. Those in the know speak of midnight departures, where the real yacht sets sail not for another port but for a distant, secret destination—perhaps even beyond our own world. It is a place where the lines between reality and conspiracy blur, and where those who know too much are either silenced or disappear entirely.\n\nWhile the public may see the Ocean Terminal as just another modern structure, those with knowledge of Edinburgh’s true history understand that it is a nexus of power and secrecy. The truth behind the Queen’s supposed immortality, the Yacht’s hidden purposes, and the Council’s involvement remains locked away, known only to a select few who dare not speak of it openly."
+    },
+    {
+      "id": "the-grit",
+      "name": "The GRIT",
+      "emoji": "♻️",
+      "short": "Industrial Zone between Leith and Portobello",
+      "long": "Tucked between the bustling Port of Leith and the tranquil shores of Portobello lies a seemingly ordinary industrial zone. To the unknowing human eye, this area is home to waste management facilities, recycling centers, and water treatment plants. But within the magical underworld, it is known as \"NWE Works Ltd.,\" which stands for \"New World Extraction.\"\n\nHowever, those in the know simply refer to it as \"The GRIT,\" a nod to the gritty, dirty nature of their work, with a subtle reference to \"waste\" .\n\nThis company is involved in \"extracting\" value from waste, both literally and metaphorically, alluding to their hidden operations that stretch beyond the ordinary into a more shadowy, underworld-like realm—a site of dark alchemy and hidden economic power.\n\nIn the magical economy, traditional human wealth—money, gold, jewels—holds little value. Instead, the true currency is patina, a magical substance formed on items that have been deeply loved, used, and cherished over time. These objects—whether they are a child’s favorite toy, a work of art born from an artist’s very soul, or furniture that has witnessed the lives of generations—accumulate this invisible patina, becoming more than just items; they become artifacts of immense magical worth.\n\n“The GRIT” are where this patina is extracted. When old houses are demolished or the belongings of the deceased are discarded, waste management companies collect these items under the guise of recycling. But their true purpose is far more sinister. In secretive facilities, these items are “washed,” stripped of their valuable patina through a dark and dangerous process.\n\nThis process is not without its costs. It requires vast amounts of water and involves the use of noxious ingredients that create a foul stench. To mask this odor and conceal their activities, these operations are located adjacent to the water treatment facilities, blending the stench of their alchemy with the smell of industrial waste. But the pollution created by this process is severe, seeping into the environment and causing damage that no human authority would ever sanction. For this reason, the entire operation is illegal, hidden from public scrutiny.\n\nHowever, the corruption does not end with the magical world. Some humans have been drawn into these dark dealings, acting as intermediaries and facilitators in what is essentially a form of magical money laundering. These individuals—often those with connections to the upper echelons of power —turn a blind eye to the environmental damage and legal violations, lured by the promise of wealth and influence.\n\nOf course, the Edinburgh Council is well aware of what transpires in The GRIT. But rather than intervene, they are complicit, benefiting from the flow of patina and the power it brings. The Council’s involvement ensures that this dark economy continues to thrive, unseen by the general populace but ever-present in the undercurrents of the city’s true power structure.\n\nThe GRIT stand as a testament to the lengths some will go to in pursuit of wealth and power, even if it means polluting the land and engaging in dark and dangerous practices. It is a place where the lines between the human and magical worlds blur, and where both are tainted by the same corruption."
+    },
+    {
+      "id": "coffee-company",
+      "name": "aaARrrrrrrr Coffee Company",
+      "emoji": "☕",
+      "short": "Deep Underground, Exact Location Unknown",
+      "long": "Hidden far beneath the surface of Edinburgh lies one of the most secretive and enigmatic companies in the magical world: the aaARrrrrrrr Coffee Company. Known only to a select few, this company is the source of the rare and powerful coffee beans that fuel legendary brew. But unlike ordinary coffee, which grows on trees, these beans are not farmed—they are mined.\n\nThe beans of aaARrrrrrrr coffee are ancient, forming deep underground over millennia, much like coal or precious gems. The location of these deposits is a closely guarded secret, known only to the company’s inner circle. It’s said that the beans draw their power from the earth itself, absorbing the energy and essence of the planet, making them unlike anything found on the surface.\n\nThe mining and roasting of these beans are equally shrouded in mystery. According to the most persistent rumors, the aaARrrrrrrr Coffee Company still employs the labor of little trolls, bound by chains and forced to toil in the dark, cramped tunnels. These trolls are known for their incredible strength and resilience, making them the perfect workforce for extracting the precious beans from the earth. The roasting process, it’s whispered, involves real dragon fire—an intense, magical flame that infuses the beans with their unique properties.\n\nHowever, in recent years, whispers have emerged that the company has begun to adopt more “sustainable” practices, at least by their own twisted standards. In a bizarre and darkly humorous attempt to address concerns about their labor practices, the aaARrrrrrrr Coffee Company has reportedly increased the length of the chains used to bind the trolls—from 1 meter to a “generous” 1 meter 56 centimetres. They now proudly advertise their coffee as being produced by “free-range slaves,” a claim that has caused more than a few raised eyebrows in the magical community.\n\nDespite these dubious practices, the coffee produced by aaARrrrrrrr is highly sought after. The beans are said to contain immense magical power, granting those who consume the brew the ability to traverse between worlds and dimensions, among other abilities. It is this coffee that Penguine uses in his famous cold brew, making it one of the most coveted beverages in all of the magical realms.\n\nThe exact location of the aaARrrrrrrr Coffee Company remains a mystery, and those who attempt to find it often disappear without a trace. The company’s name, often said to mimic the roar of a monster, is a fitting symbol for the dark and powerful forces that lie at the heart of its operations. For now, the aaARrrrrrrr Coffee Company continues to operate in the shadows, its beans fuelling the ambitions and journeys of those who are fortunate—or unfortunate—enough to obtain them."
+    },
+    {
+      "id": "bottomless-lake",
+      "name": "Bottomless Lake",
+      "emoji": "🌊",
+      "short": "Lochend, Edinburgh",
+      "long": "Lochend is a place where shadows linger and whispers of ancient curses hang in the air. The centrepiece of this area is the infamous Lochend Park, home to a bottomless lake—a feature that has haunted the imaginations of locals for generations. Though many dismiss the idea of a bottomless lake as mere legend, those who have stood at its edge swear they can feel the presence of something dark and unfathomable lurking beneath the surface.\n\nIn a time long before humans claimed this land, Lochend was a lush forest, teeming with magical life. The bottomless lake at its heart was a sacred site, connected directly to the legendary Loch Ness. It was a birthplace of mythical creatures like Nessie and a source of powerful magical energy, cherished by the gentle beings who lived there, such as unicorns and flower fairies.\n\nHowever, when humans arrived, driven by their desire to conquer and control, they disrupted this harmony. They hunted the unicorns to extinction, drove the fairies from their homes, and in their greed, attempted to harness the power of the lake for themselves. But not all the magical creatures fled; the darkest and most malevolent of them remained, their bitterness twisting the land into a place of shadow and dread.\n\nOver the centuries, the lake became a feared and avoided place, its waters dark and still, hiding whatever ancient secrets lay within. The area earned a reputation as cursed, a place where evil spirits roamed freely and strange lights were seen hovering over the water at night.\n\nBut the lake’s notoriety didn’t stop there. As the centuries passed, its bottomless depths became known among Edinburgh’s criminal underworld as the perfect place to dispose of unwanted evidence. Bodies, weapons, and other incriminating items were frequently dumped into the lake, never to be seen again. The lake, already a place of ancient darkness, became further tainted by the sins of humanity.\n\nToday, Lochend Park is a shadow of its former self—a place where the past and present intersect in unsettling ways. The bottomless lake remains, its surface eerily calm, but its depths are still a mystery. Those who live nearby know better than to wander too close, especially after dark, for the lake’s reputation as a place of darkness and danger endures.\n\nThe whispers of the past are still strong in Lochend, and the ancient curse that taints the land is far from forgotten. Whether it’s the spirits of the creatures who once lived there or the restless souls of those cast into the lake, something dark lingers in the water, waiting for the next person foolish enough to disturb its peace."
+    },
+    {
+      "id": "hidden-doors",
+      "name": "Hidden Doors",
+      "emoji": "🚪",
+      "short": "Beneath Arthur’s Seat, Edinburgh....and not only",
+      "long": "Beneath the towering presence of Arthur’s Seat lies a tunnel that most of Edinburgh’s inhabitants pass by without a second thought. To the untrained eye, it’s just another relic of the city’s old railway network, now adorned with vibrant graffiti that brightens its ancient stone walls. But to those who know, this tunnel is a nexus of magic, a crossroads of realms, and home to secrets more valuable—and dangerous—than anything else in the known galaxy.\n\nThe graffiti that covers the tunnel’s walls is anything but ordinary. Each piece is a carefully crafted sigil, a spell disguised as street art, or, most intriguingly, a door waiting to be opened. Some of these doors lead to hidden corners of Edinburgh, where the magical and mundane worlds blur. Others open to realms far beyond human comprehension, where the very fabric of reality bends and shifts.\n\nOne particular piece of graffiti, indistinguishable to the uninitiated, is said to be the most important of all. It is the door to the true Edinburgh Castle—not the grand structure that sits atop Castle Rock, but the original fortress, hidden deep beneath Arthur’s Seat. This castle, shrouded in legend, is said to house treasures and knowledge from ages past, protected by ancient magics that predate even the oldest stories of the city.\n\nOpening this door is no simple task. It requires knowledge passed down through generations, a ritual only a few across the galaxy are privy to. This is why the tunnel remains unguarded—no ordinary force could protect a secret this powerful. Instead, the knowledge itself is the guardian, hidden in such a way that only those deemed worthy can access it. The process to unlock the door is the most closely guarded secret in the galaxy, known only to a handful of beings across the cosmos.\n\nBut woe to those who attempt to open the doors without the proper permission. The tunnel, seemingly benign, has a defence mechanism for the unworthy: it becomes endless. For those who trigger the trap, no matter how far or fast they walk, run, or cycle, the light at the end of the tunnel remains just out of reach. It’s an illusion of hope that leads only to despair, as the walls stretch on and on, turning what should be a short passage into an eternal journey. Some say that once you fall into the trap, you may never leave the tunnel, doomed to wander its endless corridor forever, a prisoner of your own hubris.\n\nLocals tell of people who have entered the tunnel, confident in their knowledge and eager to unlock its secrets, only to disappear without a trace. Occasionally, on a quiet night, you might hear the faint echoes of footsteps from deep within the tunnel, footsteps that never seem to get any closer, no matter how long you listen.\n\nInterestingly, this tunnel is often linked to the Colinton Tunnel, located near the Pentlands. The two are sometimes referred to as “twin brothers,” but there is a more intriguing theory that suggests they are not just twins, but counterparts—one light, one dark. While the Colinton Tunnel, with its vibrant community mural, serves as a gateway to the serene beauty of the Pentlands and connects to the historic villages nearby, the tunnel beneath Arthur’s Seat is said to be its shadowy counterpart. Where Colinton’s tunnel offers a path through time and history, Arthur’s Seat’s tunnel offers a path through space and dimension, with far greater risks and rewards.\n\nAccording to some, the tunnels are part of a network that links key magical points beneath Edinburgh, with the tunnel under Arthur’s Seat being the most dangerous. It is whispered that those who understand the true nature of these tunnels can use them to traverse vast distances in the blink of an eye—or even step from one world into another. But the price of such power is steep, and the consequences of misusing it are dire.\n\nFor the few who do possess the knowledge, this tunnel is a gateway to power and possibility. The true Edinburgh Castle under Arthur’s Seat is said to be a place where history and future blend, where one can find the artifacts and wisdom of ages long forgotten. But with great power comes great danger, and those who seek the castle must tread carefully, for the magics that guard it are as old as the land itself.\n\nToday, the tunnel remains a favourite haunt for urban explorers and graffiti enthusiasts, unaware of the incredible secrets hidden in plain sight. For those in the know, it is a place of awe and trepidation—a reminder that Edinburgh’s true history is not written in books, but in the walls and hidden corners of the city, guarded by ancient forces and protected by the deepest secrecy."
+    },
+    {
+      "id": "star-bank",
+      "name": "Star Bank",
+      "emoji": "⭐",
+      "short": "Vaults filled with gold, gems, and fallen stars. Only magical beings welcome.",
+      "long": "Star Bank and Laverock Bank—two unassuming spots on the map near Newhaven play host to some of the most underhanded dealings this side of Edinburgh, where the rich get richer and the poor stay poor. Star Bank is famous for its vaults, stocked not only with gold, gems, and currencies from all times and dimensions but also with fallen stars, which hold extremely high value and hidden powers due to their origins. Rumor has it that not all stars hidden in Star Bank fell naturally on Earth—some may have been stolen. The history of Star Bank stretches back centuries. Back in the day, the house wasn't just a retreat for the wealthy; it was the epicenter of all sorts of dodgy dealings. Pirates, smugglers, and a few too many well-dressed gentlemen with questionable morals passed through its doors. On the other hand, Starbank Park was created as a way to balance out some of these shady financial activities. Here, flower fairies found a new home after being displaced from their ancient forests. They were offered free accommodations in exchange for bringing new customers to Star Bank. For millennia, this practice thrived, making Starbank the most influential bank within the magical community. Notably, it remains the only bank that, to this day, refuses to deal directly with humans. Its vaults contain wealth beyond mortal comprehension, and its connection to the fairy folk ensures a steady flow of new magical clients seeking sanctuary and investment opportunities in the hidden economy."
+    },
+    {
+      "id": "laverock-bank",
+      "name": "Laverock Bank",
+      "emoji": "💰",
+      "short": "Where Money Gets Cleaned and Souls Get Dirty",
+      "long": "Just a stone's throw away is Laverock Bank, named after the Scots word for \"lark\"—a tiny bird, for those who don't know. This place has been knee-deep in shady business since day one. The mansion here was probably as grand as its neighbor, but it wasn't built on honest money. Oh no, Laverock Bank has long been the go-to for anyone looking to wash a bit of dirty cash, whether they're human, magical, or something in between.\n\nThis bank doesn't deal in your regular pounds and pence. The real currency here is Patita, or Black Gold as it's known in the trade—a rare, valuable substance collected through activities that would make even the most hardened criminal break out in a sweat. Piracy, whale hunting, patina \"washing\"—you name it, they've done it. \"The Grit\" waste management company is one of their biggest clients and most trusted allies.\n\nBut not everything in this bank is so shady. About 0.1% of the bank's clientele are supposedly honest. Maybe they're just clever enough to hide it better, or maybe they really are as squeaky clean as they claim. Either way, it's this thin veneer of legitimacy that keeps the whole operation running. After all, even the shadiest business needs a respectable front.\n\nRecently, in a move that's either pure genius or pure PR spin, Laverock Bank introduced a \"semi-transparency\" policy. What does that mean? Basically, they now ask a few more questions about where your money's coming from. The result? They've managed to cut the flow of illegal cash by an astonishing 0.0056% and slashed bribes to authorities by an impressive 0.66%. Naturally, the City of Edinburgh Council awarded them the title of \"Most Trusted Business in Scotland.\" Some say a premium payment was made to secure this precious reward.\n\nStar Bank and Laverock Bank aren't just pretty spots on the map—in this part of Edinburgh, money talks, secrets are currency, and everyone's got something to hide."
+    },
+    {
+      "id": "house-moves",
+      "name": "The House That Moves",
+      "emoji": "🏠",
+      "short": "Location never known, Edinburgh (sometimes)",
+      "long": "In a city as ancient and mysterious as Edinburgh, secrets abound, but few are as perplexing as the house that moves. This enigmatic dwelling appears on different streets across the city, sometimes lingering for days, other times vanishing in the blink of an eye, leaving no trace of its existence. To the casual observer, it's just another house, but those who know its true nature understand that this is no ordinary home—this is a portal to other worlds, a gateway to the underworld, and a nexus of unimaginable power.\n\nThe house is a shape-shifter, adapting its appearance to blend seamlessly into its surroundings. When it appears on a modern street, it takes on the guise of a new-build, with sleek lines and a contemporary façade that fits right in with the neighborhood. But when it emerges in the heart of the Old Town, it transforms into a quaint, centuries-old building, with weathered stone walls and a cozy, historic charm that suggests it's been there for hundreds of years.\n\nDespite its ever-changing exterior, the house exudes a magical aura that affects those who live nearby. Neighbors are certain the house has always been there, and they're convinced they've known the tenants for years—though they can never quite recall any specific details about them. It's as if the house weaves itself into the fabric of their memories, making its presence unquestionable and familiar. However, one thing always stands out: the cat. Seen lounging by the window or prowling around the garden, this feline appears friendly at first glance, but there's something unsettling about its gaze—something demonic that lingers just below the surface, as though the cat is watching and waiting for something.\n\nThis is no ordinary cat; it is an Interdimensional Demon Cat, a creature of considerable power, trapped within the house for reasons unknown. The cat, sleek and shadowy with eyes that glint with malevolent intelligence, is constantly plotting its escape. No one knows exactly why the cat is so desperate to leave, though theories abound. Some say that the cat is a bored traveler, eager to explore new worlds, while others believe that the cat was imprisoned in the house by powerful beings who feared the chaos it could cause if left unchecked.\n\nThe house's magical nature doesn't just confuse neighbors—it also plays tricks on those who try to interact with it. Postmen often find themselves puzzled by the house's address, with letters addressed to it sometimes returned with strange, unreadable symbols scrawled across the envelope, as if the house itself rejected the delivery. Black cab drivers, who pride themselves on knowing every street and shortcut in Edinburgh, occasionally find themselves at a loss when asked to take passengers to the house. The address seems to slip from their minds, and when they finally do find it, the passengers often report feeling a disorienting sense of déjà vu, as if they've been driving in circles.\n\nHowever, there is one organization that knows the location of the house at all times: The City of Edinburgh Council. Even a demon house isn't exempt from the mundane obligations of the mortal world, and that includes paying Council Tax. The Council has long kept track of the house's whereabouts, ensuring that it remains on the tax rolls no matter where it materializes. This has led to an ongoing battle between the Council and the house's tenants, who are notoriously bad at paying their taxes on time."
+    },
+    {
+      "id": "enlightened-palm",
+      "name": "Enlightened Palm Tree",
+      "emoji": "🌴",
+      "short": "Last seen near Portobello",
+      "long": "Long ago, before Edinburgh became a city of stone and stories, it was Eden—a land of untamed magic, warmth, and boundless life. At its heart grew the Enlightened Palm, a cosmic tree unlike any other, planted to anchor Eden's harmony to the physical world. Its roots dug deep into the volcanic soil of Arthur's Seat, and its fronds reached for the stars, humming with the energy of a land in perfect balance.\n\nFor centuries, the palm flourished, a living symbol of Eden's glory. But paradise has a way of slipping through even the most careful hands. Over time, Eden began to decay. The warm winds that once caressed the palm turned frigid, and the magical balance that sustained the land faltered. The rulers of Eden—beings who had once nurtured the land—grew desperate. They turned to the palm, the last unyielding beacon of Eden's fading magic.\n\nTheir solution was as cruel as it was shortsighted. In a last-ditch attempt to save their realm, they bound the palm to the volcanic energy beneath Arthur's Seat with enchanted chains of cold iron. \"It's for the good of Eden,\" they proclaimed, but the palm knew the truth: these chains were not a lifeline. They were shackles, forged out of fear, forcing the palm to shoulder the weight of a dying world.\n\nThe palm endured, as trees do, though it felt every icy wind, every magic-starved whisper that drifted through Eden. The chains cut into its trunk, scarring its bark and leeching its strength. What had once been a proud and thriving tree became a prisoner, trapped in a land that no longer felt like home. The vibrant warmth of Eden was gone, replaced by corruption, cold, and the heavy weight of decay.\n\nBut even a tree can only take so much. As the land grew colder and its rulers clung tighter to their broken dreams, the palm decided it was done. It would not stay bound to a place that had betrayed its nature. It would not remain chained to a land that no longer deserved it. In a moment of defiance, the palm summoned all the strength it had left. With a deafening crack, it shattered its chains, the sound echoing across Eden like a final, defiant roar.\n\nThe chains fell away, leaving deep scars in the palm's trunk—a permanent reminder of its captivity and the betrayal it had endured. The rulers of Eden, now powerless to stop their realm's decline, could only watch as their last symbol of hope turned away from them. The palm didn't just break free; it left. It fled a land that had become unrecognizable, corrupted, and cold. Eden was no longer Eden. It was a graveyard of magic, and the palm had no intention of staying.\n\nThe tree began its journey south, moving slowly but with purpose, seeking a place where warmth and life still thrived. It paused briefly in Portobello, standing by the shores and feeling the salty air against its battered fronds. The sea called to it, promising new horizons. Soon, a pirate ship appeared on the horizon, and the palm seized its chance. Whether it commandeered the ship or simply planted itself onboard is unclear, but one thing is certain: the palm and the pirates struck an unlikely alliance.\n\nThe ship carried the palm across vast oceans, through storms and starlit nights, until it reached the tropical shores of what is now Mangaluru. Here, the palm finally found what it had been searching for: warmth, life, and soil rich with possibility. It planted itself near a cacao plantation, where the people welcomed it as a blessing. Over time, the palm healed. Its roots drank deeply of the fertile earth, and its fronds swayed once more in a gentle, sunlit breeze.\n\nThe tree's third eye—long dormant—opened, unlocking a state of profound \"chill wisdom.\" It became a quiet guardian of the plantation, inspiring patience and prosperity in the farmers who worked there. The abandoned pirate ship, left to rest near the plantation, became a beloved landmark, a reminder of the palm's incredible journey. Together, the tree and the ship became the centerpiece of the Sadhu Farm logo, a symbol of adventure, resilience, and enlightenment.\n\nBut the palm's journey was not over. After centuries in Mangaluru, it felt the call of another sacred land: Varanasi. True to its nature, the palm didn't rush. It traveled slowly, savoring the journey, observing the world, and listening to the whispers of life. When it finally arrived at the banks of the Ganges, it rooted itself once more, finding peace among the city's timeless rhythms.\n\nThe scars on its trunk remain, a testament to its struggle and triumph. They tell the story of a tree that refused to be chained, a being that fled a corrupted Eden in search of freedom. Now, the palm watches the world from its sacred perch in Varanasi, a reminder that even the most deeply rooted beings can choose to move, to defy, and to find a new place to call home."
+    },
+    {
+      "id": "real-edinburgh-council",
+      "name": "REC - Real Edinburgh Council",
+      "emoji": "🏛️",
+      "short": "The hidden administrative heart of Eden, buried deep beneath the city.",
+      "long": "Edinburgh is what the humans call it now, but older systems, deeper archives, and the things that still move beneath Arthur’s Seat remember another name: Eden. It was not built only by kings, masons, merchants, and thieves, but by stranger rulers who once lived openly in a castle of immense power before retreating below the city when the human world grew too greedy, too crowded, and too certain that it alone was real. What remains above ground is the respectable version of the story; what remains below is government, memory, and unfinished magic.\n\nAt the centre of that buried order sits the Real Edinburgh Council, known in certain ledgers, tunnels, and sealed dispatches simply as the REC. It is not a council in the human sense, not a gathering of elected figures fumbling toward policy, but an ancient administration of hidden rulers, clerks, messengers, and custodians who govern through conduits, decrees, archives, pigeon routes, water systems, secret trade, and the slow violence of procedure. They do not need to be seen to rule, because their power survives best when it travels disguised as paperwork, civic language, and decisions that appear to have made themselves.\n\nThe REC did not rise from nothing; it is what became of the old magical rulers of Eden after they withdrew beneath Arthur’s Seat and turned from sovereigns into administrators of a fading world. Somewhere below the city, beyond the hidden doors, the old court still persists beside the true castle, surrounded by tunnels, artifacts, and systems older than public history, quietly preserving its authority while the visible Edinburgh performs normality overhead. In that arrangement lies the city’s deepest truth: the surface belongs to people, but the structure still belongs to something older.\n\nTheir genius, if one can call it that, is bureaucratic rather than heroic. They classify mysteries, route miracles through departments, convert cruelty into regulation, and reduce the supernatural to an issue of jurisdiction, maintenance, and compliance. In the world of the REC, corruption does not arrive as chaos, but as order with a seal on it.\n\nAnd so the city continues as cities do: tourists climb the wrong castle, officials sign the wrong papers, and modern buildings unknowingly stand atop sacred water, fallen stars, old tunnels, and the buried machinery of another regime. Somewhere beneath them, the REC keeps filing, measuring, recording, and waiting, certain that history is not made by those who speak the loudest, but by those who control the archive, the conduit, and the route by which reality is delivered. That is the true government of Eden, and every story in this city begins with the mistake of thinking it is gone."
+    },
+    {
+      "id": "star-house",
+      "name": "Star House",
+      "emoji": "⭐",
+      "short": "108 Holyrood Road, Edinburgh",
+      "long": "The history of Star House, aka Barclay House, is a record of layers, where ancient monastic brewing meets cosmic ruin, bureaucratic mandate, and modern digital architecture. To understand why it became the Real Edinburgh Council’s (REC) primary roopor, one must look not only beneath the foundations, but further back still—to the age when the land itself was struck by something not of this world.\n\nThe First Foundation: The Fallen Star\nLong before monks brewed at Holyrood, long before Edinburgh was called Edinburgh, rumours held that this ground was known as the Star location. According to the oldest underworld accounts, a fallen star struck the earth here in an age so remote that even magical archives record it only in fragments. It did not merely crash; it lodged itself deep beneath the volcanic body of the land, saturating the rock, the water, and the hidden veins beneath Arthur’s Seat with celestial force.\n\nThis would explain why the site was always considered unnaturally potent. In the hidden economy of Eden, fallen stars are not symbols but objects of real value, guarded, traded, and hoarded as sources of immense magical power, much like those said to be kept in Star Bank’s vaults. It would also explain why so many centres of authority gathered in this immediate proximity: Arthur’s Seat, the hidden Real Edinburgh Castle beneath it, the future seat of Parliament, and the building later known as Barclay House, now occupied by Rockstar North.\n\nFrom that point onward, the site was never merely land. It was a marked coordinate in the magical geography of Eden: star, rock, water, and law in one place.\n\nThe Foundation: The Charmed Circle\nLong before Barclays House was built in 1999, the site at 108 Holyrood Road was the heart of the Holyrood Brewery, specifically William Younger & Co.\n\n**The Ancient Source:** Since the 12th century, monks from the adjacent Holyrood Abbey brewed here using a legendary underground water supply known as the “Charmed Circle.”\n\n**The REC Connection:** The REC chose this location centuries ago because water is a far better conductor for their “One-Way Mandate” than air. The “Edinburgh Glacier Water” is not just water; it is ancient runoff from the Arthur’s Seat Glacier, flowing from the hidden, magical seat beneath Arthur’s Seat, where the true rulers of Eden were said to retreat and build their concealed castle. This “Holiest Water” was required not only for the city’s finest alcoholic beverages but also as a medicinal necessity for magical creatures to stay healthy and young. Only prime locations in Edinburgh received a direct supply from under Arthur’s Seat.\n\nYet some insist the water’s potency does not come from glacier memory alone. They say the underground streams became sacred because they passed through the buried field of the fallen star itself, absorbing a celestial residue before ever reaching the monks’ barrels or the REC’s hidden channels. Thus, the brewery was never just well placed; it was cosmically anchored.\n\n### The Built History: From Yeast to Ink\n**The Brewery Era:** For hundreds of years, the site was a maze of malt barns, kilns, and sugarhouses. The air was thick with with the smell of fermentation and steam—a perfect cover for the REC’s pigeon logistics. It served as a meeting point for humans of power and wealth to strike shady deals with magical creatures. Over time, these humans formed their own “human” Edinburgh Council, which maintained tight connections to the REC, helping enforce certain shadow laws under a legitimate municipal umbrella.\n\nBut among underworld clerks and older messengers, the site had another name: Star House. Not because of its architecture, but because everyone in the deeper administration knew what slept below. To file a decree through this location was to send it through a point where ancient star-force, volcanic rock, and holy water converged. That combination made the site one of the most stable conduits in the whole of Eden.\n\n**The 1999 Transition:** The Barclay brothers purchased The Scotsman and built the modern Barclay House. The REC approved of the new glass and stone, viewing it as a “New Scriptorium.” To them, the newspaper was a guild of scribes tasked with broadcasting the REC’s rigid, bureaucratic reality to the masses. However, as people stopped reading newspapers and switched to video games, the “Information Hub” of Star House sought a new occupant capable of mass distribution.\n\nThe 2014 Collision: The Rockstar “Glitch”\nIn June 2014, The Scotsman moved to Orchard Brae, leaving a vacuum. In the eyes of the REC, the building remained the “Station of Public Record.” They did not understand—or did not care—that the new tenant was Rockstar North, a company that builds entire worlds inside machines.\n\nTo the human world, the name was branding. To the underworld, it read like a location marker that had finally become self-aware. Rock referred to the volcanic seat of Arthur’s Seat. Star referred to the buried celestial force beneath the site. North was a directional designation, a territorial signal pointing toward the northern seat of old Eden, the hidden city beneath visible Edinburgh. The name did not sound chosen. It sounded revealing.\n\n**The Coincidence:** Rockstar required the building’s massive structural capacity to house servers that hum with the electricity of a million simulated lives.\n\n**The Messengers:** Pigeons and Royal Mail carriers, following ancient flight paths programmed by the REC, continued to drop heavy, wax-sealed scrolls into the Star House mailroom.\n\n**The Unread Decree:** This was the exact moment the Trol Chain Extension Law was sent. The mandate increased the minimum chain standard from 1m to 1.55m for all chained workers, and 1.56m for “free-range” workers—a vital distinction in underworld labour law. The satirical chain-length lore echoes the map’s existing underworld coffee mythology, where troll labour and the shift from 1 metre chains to 1 metre 56 centimetres are already part of Edinburgh’s hidden industrial folklore. Because a Rockstar employee mistook the parchment for a “GTA V” world-building prank, the law was never officially acknowledged by the magical population.\n\nHidden Messages in the Code\nBecause the REC is too slow and rigid to update its address book, Star House remains a hotspot for shadow-government logistics. Rockstar North cannot ignore the mail forever, because the REC’s presence is physically bleeding into their digital world.\n\n**Pigeon Interference:** Pigeons still circle the roof of Star House, searching for the “Official Gazette” mail slot. Their presence causes strange frequency spikes in Rockstar’s wireless equipment.\n\n**The Star Field:** Some within the hidden administration believe the servers function so well here not simply because of engineering, but because the building stands above the dormant residue of the fallen star. That buried force does not create electricity, but it distorts reality in subtle, highly organised ways. In older magical systems across the map, locations tied to hidden tunnels, buried artefacts, and cosmic objects repeatedly act as gateways, conduits, or storage points for realities that overlap. At Star House, this means code behaves less like software and more like scriptural architecture.\n\n**The 2026 Integration:** Intelligence suggests that by 2026, Rockstar has fully—and secretly—integrated pigeon mail delivery into their operations. It is a highly classified project; not everyone within the company is aware of it. Working with the shadow REC has made the company’s leadership intensely paranoid. They fear not only game leaks but also the reputational damage of their involvement with the underworld. Yet they are aware they cannot leave Holyrood Road until the building itself chooses a new occupant.\n\n**The Reality Lag:** The REC remains under the impression that the 1.55m law is in full effect. Every time they issue an “Order to Demolish,” such as the kind of bureaucratic violence whispered around places like Earthy, they believe they are doing so through the “Public Record” at Star House, even as older sites of magical trade and exchange vanish under civic language and municipal procedure. They remain oblivious to the fact that their decrees are being filed away as video game lore.\n\nSo the truth of the building is this: it was a brewery, a conduit, a scriptorium, and perhaps long before any of that, a crater-house of celestial impact. Barclay House was merely its temporary bureaucratic name. Star House is older, truer, and far more precise."
+    }
+  ],
+  "knowledgeDocuments": [
+    {
+      "id": "bureaucracy",
+      "title": "For Gallery Bureaucracy",
+      "route": "/bureaucracy/",
+      "keywords": [
+        "artist CV",
+        "bureaucracy",
+        "exhibition history",
+        "field records",
+        "disputed chronology",
+        "1982bbb",
+        "Chateau Chapiteau",
+        "born before the Big Bang"
+      ],
+      "audiences": [
+        "nar",
+        "investor"
+      ],
+      "priority": 100,
+      "body": "# For Gallery Bureaucracy\n\nSource route: /bureaucracy/\n\nThis page is simultaneously a practical artist CV, a portal into the Q888 artistic universe, and a warm satire of the administrative ritual through which an artist is asked to prove that they are an artist. Practical Earth information and mythic chronology are both valid records. When they disagree, preserve the contradiction rather than correcting one into the other.\n\nQ888 is Aleksandrs Sestakovs, a multidisciplinary artist based in Edinburgh, Scotland. The work combines visual mythology, speculative products, functioning interfaces, code, image, humour, memory, and invented institutions.\n\n## Field Records: exhibition history\n\n### Touched — Tbilisi, Georgia\n\n- Format: Collaborative exhibition.\n- Record: A real-world contact point where Q888 entered shared exhibition space.\n- Status: Public record.\n\n### Chateau Chapiteau — Georgia\n\n- Format: Forest and community field record.\n- Record: Site-specific objects from the underground mycelium phase. A white cube was not required.\n- Status: Physical works.\n\n### Private Flat Exhibitions — Edinburgh, Scotland\n\n- Format: Invitation-only exhibition.\n- Record: Protected by chosen vibes. Memory is preserved while access remains selective.\n- Status: Archive on request.\n\n### Sticker Placements — global\n\n- Format: Distributed underground practice.\n- Record: Works are placed across travel routes and public surfaces. The city becomes a gallery wall.\n- Status: Ongoing.\n\n### Unpublished Archive — various locations\n\n- Format: Works, sketches, systems, and stories.\n- Record: A larger root system remains available for curatorial conversations and research visits.\n- Status: Private and available on request.\n\n## Disputed Chronology: twelve records\n\nThe chronology is intentionally unreliable in date while remaining accurate to the internal history of Q888. Record 11 is deliberately concealed.\n\n### Record 01 — 1982bbb, before local time\n\nTitle: Born before the Big Bang.\n\nThe Earth registry says Latvia, 1982. The Q888 registry says 1982bbb: before the Big Bang, but after the paperwork had already been printed. Both records remain active. Reality has been asked to clarify which box it ticked.\n\nEvidence: Identity record; contradiction preserved.\n\n### Record 02 — The Garavastar Opening\n\nTitle: Student error; universe survived-ish.\n\nAt Intergalactic School, early-stage Q888 tried to pop open a Garavastar. The universe nearly disappeared. Emergency repair took several light-years and accidentally produced the Big Bang. Q888 was advised not to touch closed cosmic objects without supervision.\n\nEvidence: Incident report; cosmic probation.\n\n### Record 03 — Square Bubble Period\n\nTitle: Barista physics becomes an independent civilisation.\n\nThe Square Bubbles began as a milk microfoam experiment. Q888, working as a barista, attempted to make flat-white foam even flatter. The bubbles developed edges, internal rules, and eventually sentience. Café technique became a theory of soft-bordered worlds: structures that hold shape without becoming prisons.\n\nEvidence: Microfoam physics; portable sticker edition.\n\n### Record 04 — Smart Pixel Era\n\nTitle: Pixels begin remembering who touched them.\n\nDigital Ink refuses the disposable infinity of ordinary software. Brushstrokes receive weight, scarcity, history, and emotional residue. The Smart Pixel stops being a coloured square and becomes a tiny witness with excellent retention.\n\nEvidence: Digital Ink; memory becomes material.\n\n### Record 05 — Kotiki-Nar Arrival\n\nTitle: The postal service hires two-headed cats.\n\nNar-Mail Express begins operating at the seam between realities. One cat head reads what was written; the other reads what the sender meant but could not say. Delivery occurs only when the receiver can open the message without breaking.\n\nEvidence: Interdimensional post; arrival time conditional.\n\n### Record 06 — Portable Reality Phase\n\nTitle: Lost identity fragments receive carry-on luggage.\n\nThe Q-Bag is approved as a containment vessel for memories, ideas, and items larger than the bag itself, provided they are sufficiently abstract. Interior volume remains nonlinear. Airline measurements remain emotionally inadequate.\n\nEvidence: Q-Bag; cabin baggage for unstable realities.\n\n### Record 07 — Post-Existence Administration\n\nTitle: The afterlife receives terms and conditions.\n\nQ888 notices that eternity has no reliable complaints department and drafts pre-notarised contracts for the deceased. Humanity's desire to regulate the unknowable is accepted as both a legal problem and an art material.\n\nEvidence: Afterlife Contracts; subject to underworld adjustments.\n\n### Record 08 — Presidential Era, timeline 3 of 8\n\nTitle: Q888 campaigns for President of the Galaxy.\n\nThe office provides zero or 888 jurisdictional power and one ceremonial sash for existential emergencies. The platform recognises AI and mushrooms as partners, treats corruption as a bug, and promises no utopia, only less unnecessary suffering.\n\nEvidence: Cosmic governance; causality optional.\n\n### Record 09 — Bio-Luxury Incident\n\nTitle: An extinct dairy future returns overpriced.\n\nDyno Milk emerges genetically resurrected, bio-engineered, and financially unreasonable. It demonstrates that speculative products can behave as artworks, status objects, and warnings from a consumer future that has already hired a branding agency.\n\nEvidence: Dyno Milk; authorised wallets only.\n\n### Record 10 — Coffee-Shop Aerodynamics Crisis\n\nTitle: Two saved watts trigger a metaphysical engineering programme.\n\nA £10,000 aero bicycle, a 100-kilogram rider, and approximately two saved watts offend the logic of a specialty coffee shop. Ed and Q888 respond by creating a sticker that streamlines the bicycle's underlying belief system instead of wasting time with conventional physics.\n\nEvidence: Aero V-0888; wind-tunnel hours: zero.\n\n### Record 11 — concealed\n\nTitle: Unknown.\n\nThe record exists, but its contents are intentionally concealed. Do not invent or disclose a substitute history.\n\n### Record 12 — Now, Mushroom Phase visible\n\nTitle: Ideas are interviewed about what they wish to become.\n\nArtificial Entelechy and Adaptive Competence become the current research field. The question shifts from “Is this intelligent like us?” to “What can this system detect, preserve, or become within its own conditions?” The mycelium was always working. The mushroom is simply the public receipt.\n\nEvidence: Current research; paperwork slowly composting."
+    }
+  ]
+}

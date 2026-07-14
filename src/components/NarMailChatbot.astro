@@ -1,60 +1,3 @@
----
-import { getCollection } from "astro:content";
-import fs from "node:fs";
-import path from "node:path";
-
-const projects = await getCollection("projects");
-const projectsData = projects.map(({ data }) => ({
-  slug: data.slug,
-  title: data.cardTitle,
-  descriptor: data.cardDescriptor,
-  system: data.cardSystem,
-  panelTitle: data.panelTitle,
-  panelDescription: data.panelDescription,
-  panelSpecs: data.panelSpecs
-}));
-
-// Manually append Digital Ink and Edinburgh Magical Map metadata to projectsData
-projectsData.push({
-  slug: "digital-ink",
-  title: "Digital Ink",
-  descriptor: "A system for meaning, scarcity, and traceable digital creation.",
-  system: "SYS: INK",
-  panelTitle: "Digital Ink",
-  panelDescription: "What if digital art had memory? What if every brushstroke carried weight, history, and emotional resonance? Digital Ink challenges the disposable nature of infinite digital tools by introducing constraint-based creativity, the Symbolic Smart Pixel Protocol (SSPP), Apple Vision + GPT-4o poetic transformation, and 1,000 Smart Inks on iPadOS.",
-  panelSpecs: [
-    { label: "PLATFORM", value: "iPadOS (iPad-only)" },
-    { label: "STATUS", value: "AVAILABLE NOW" },
-    { label: "ROLE", value: "Concept · Product Design · UX · SwiftUI" },
-    { label: "YEAR", value: "2025–2026" }
-  ]
-});
-
-projectsData.push({
-  slug: "edinburgh-map",
-  title: "Edinburgh Magical Map",
-  descriptor: "A mythic cartography of place, memory, and hidden doors.",
-  system: "SYS: MAP",
-  panelTitle: "Edinburgh Magical Map",
-  panelDescription: "Welcome to Edinburgh — where magic retired but still drinks in public. A mythic cartography showing 15 secret locations and their hidden history/lore, including Castle on Chicken Legs, Real Edinburgh Castle hidden under Arthur's Seat, Troll Market, Star Bank, and Star House.",
-  panelSpecs: [
-    { label: "LAYER", value: "EDINBURGH CITY / UNDERWORLD OVERLAY" },
-    { label: "ACCESS", value: "COUNCIL-GATED" },
-    { label: "STATUS", value: "ACTIVE (REDACTED)" }
-  ]
-});
-
-const edenStoriesPath = path.join(process.cwd(), "public", "eden-stories.json");
-const edenStoriesData = JSON.parse(fs.readFileSync(edenStoriesPath, "utf-8"));
-const mapLocations = edenStoriesData.locations.map((loc: any) => ({
-  id: loc.id,
-  name: loc.name,
-  emoji: loc.emoji,
-  short: loc.short,
-  long: loc.long
-}));
----
-
 <div id="nar-chat-widget" class="nar-chat-widget">
   <button id="nar-chat-toggle" class="nar-chat-toggle" aria-label="Open Nar-Mail Express chat">
     <svg width="38" height="38" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -132,7 +75,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
   </div>
 </div>
 
-<script is:inline define:vars={{ projectsData, mapLocations }}>
+<script is:inline>
   // @ts-nocheck
   const NAR_CHAT_API = "/.netlify/functions/nar-chat";
   const MAX_MESSAGES = 18;
@@ -532,7 +475,7 @@ const mapLocations = edenStoriesData.locations.map((loc: any) => ({
       const res = await fetch(NAR_CHAT_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages, projects: projectsData, mapLocations }),
+        body: JSON.stringify({ messages }),
       });
 
       if (!res.ok) {

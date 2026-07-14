@@ -280,10 +280,22 @@ const campaigns = defineCollection({
   }),
 });
 
+const knowledge = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string().min(1),
+    route: z.string().regex(/^\/[a-z0-9-/]*$/),
+    keywords: z.array(z.string().min(1)).min(1),
+    audiences: z.array(z.enum(["nar", "investor"])).min(1),
+    priority: z.number().int().default(0),
+  }),
+});
+
 export const collections = {
   projects,
   stickers,
   products,
   contracts,
   campaigns,
+  knowledge,
 };
