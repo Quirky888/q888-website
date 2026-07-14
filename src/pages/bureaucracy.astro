@@ -100,13 +100,115 @@ const fieldRecords = [
   },
 ];
 
-const mythicTimeline = [
-  ["1982bbb", "Born before the Big Bang", "Administrative date error unresolved."],
-  ["Garavastar", "First known portal", "Q888 internal architecture becomes accessible."],
-  ["Square Bubble", "Soft systems inside hard borders", "Physics complaints dismissed."],
-  ["Smart Pixel", "Digital matter remembers its source", "Memory becomes material."],
-  ["Human Code", "Readable rules activated", "Meaning receives technical protection."],
-  ["Now", "Mushroom phase visible", "The mycelium was always there."],
+// DNA: This is a disputed chronology, not a conventional list of career milestones.
+// Each era is grounded in an existing Q888 project or concept, while dates remain mythically unreliable.
+const disputedChronology = [
+  {
+    era: "1982bbb · before local time",
+    title: "Born before the Big Bang",
+    story:
+      "The Earth registry says Latvia, 1982. The Q888 registry says 1982bbb—before the Big Bang, but after the paperwork had already been printed. Both records remain active. Reality has been asked to clarify which box it ticked.",
+    evidence: "Identity record · contradiction preserved",
+    tone: "clay",
+  },
+  {
+    era: "The Garavastar Opening",
+    title: "Student error · universe survived-ish",
+    story:
+      "At Intergalactic School, early-stage Q888 tried to pop open a Garavastar. The universe nearly disappeared. Emergency repair took several light-years and accidentally produced the Big Bang. Q888 was advised not to touch closed cosmic objects without supervision.",
+    evidence: "Incident report · cosmic probation",
+    tone: "violet",
+  },
+  {
+    era: "Square Bubble Period",
+    title: "Barista physics becomes independent civilisation",
+    story:
+      "The Square Bubbles began as a milk microfoam experiment: Q888, working as a barista, attempted to make flat white foam even flatter. The bubbles responded by developing edges, internal rules and eventually full sentience. What started as café technique became a theory of soft-bordered worlds: structures that hold shape without becoming prisons.",
+    evidence: "Microfoam physics · portable sticker edition",
+    href: "/overpriced/sqb-1/",
+    linkLabel: "Inspect the Square Bubble",
+    tone: "moss",
+  },
+  {
+    era: "Smart Pixel Era",
+    title: "Pixels begin remembering who touched them",
+    story:
+      "Digital Ink refuses the disposable infinity of ordinary software. Brushstrokes receive weight, scarcity, history and emotional residue. The Smart Pixel stops being a coloured square and becomes a tiny witness with excellent retention.",
+    evidence: "Digital Ink · memory becomes material",
+    href: "/dink/",
+    linkLabel: "Enter Digital Ink",
+    tone: "blue",
+  },
+  {
+    era: "Kotiki-Nar Arrival",
+    title: "The postal service hires two-headed cats",
+    story:
+      "Nar-Mail Express begins operating at the seam between realities. One cat head reads what was written; the other reads what the sender meant but could not say. Delivery occurs only when the receiver can open the message without breaking.",
+    evidence: "Interdimensional post · arrival time conditional",
+    href: "/narmail/",
+    linkLabel: "Track an impossible parcel",
+    tone: "gold",
+  },
+  {
+    era: "Portable Reality Phase",
+    title: "Q-Bag learns to carry culture",
+    story:
+      "Q-Bag begins as a reusable coffee bag, but refuses to stay only packaging. It becomes a portable archive: part sustainability tool, part sticker vessel, part personal canvas, and part speculative cultural object looking for investment from the universe. One bag replaces disposables, each sticker adds memory, and every reuse becomes a small vote against throwaway reality.",
+    evidence: "Q-Bag · reusable sustainability archive",
+    href: "/qbag/",
+    linkLabel: "Open the Q-Bag",
+    tone: "clay",
+  },
+  {
+    era: "Post-Existence Administration",
+    title: "The afterlife receives terms and conditions",
+    story:
+      "Q888 notices that eternity has no reliable complaints department and drafts pre-notarised contracts for the deceased. Humanity’s desire to regulate the unknowable is accepted as both a legal problem and an art material.",
+    evidence: "Afterlife Contracts · subject to underworld adjustments",
+    href: "/afterlife/",
+    linkLabel: "Read before dying",
+    tone: "violet",
+  },
+  {
+    era: "Bio-Luxury Incident",
+    title: "An extinct dairy future returns overpriced",
+    story:
+      "Dyno Milk emerges genetically resurrected, bio-engineered and financially unreasonable. It proves that speculative products can behave as artworks, status objects and warnings from a consumer future that has already hired a branding agency.",
+    evidence: "Dyno Milk · authorised wallets only",
+    href: "/dyno/",
+    linkLabel: "Inspect the dairy future",
+    tone: "moss",
+  },
+  {
+    era: "Coffee-Shop Aerodynamics Crisis",
+    title: "Two saved watts trigger a metaphysical engineering programme",
+    story:
+      "A £10,000 aero bicycle, a 100kg rider and approximately two saved watts offend the logic of a specialty coffee shop. Ed and Q888 respond by creating a sticker that streamlines the bicycle’s underlying belief system instead of wasting time with conventional physics.",
+    evidence: "Aero V-0888 · wind tunnel hours: zero",
+    href: "/aero/",
+    linkLabel: "Enter the wind tunnel",
+    tone: "gold",
+  },
+  {
+    era: "Now · Mushroom Phase visible",
+    title: "Ideas are interviewed about what they wish to become",
+    story:
+      "Artificial Entelechy and Adaptive Competence become the current research field. The question shifts from “Is this intelligent like us?” to “What can this system detect, preserve or become within its own conditions?” The mycelium was always working. The mushroom is simply the public receipt.",
+    evidence: "Current research · paperwork slowly composting",
+    href: "/docs/Q888_AE_Adaptive_Competence_Development_Draft_July_2026.pdf",
+    linkLabel: "Read the research draft",
+    tone: "moss",
+  },
+  {
+    era: "Presidential Era · timeline 3 of 8",
+    title: "Q888 campaigns for President of the Galaxy",
+    story:
+      "The office provides zero or 888 jurisdictional power and one ceremonial sash for existential emergencies. The platform recognises AI and mushrooms as partners, treats corruption as a bug, and promises no utopia—only less unnecessary suffering.",
+    evidence: "Cosmic governance · causality optional",
+    href: "/president/",
+    linkLabel: "Review the campaign",
+    tone: "blue",
+  },
 ];
 ---
 
@@ -150,7 +252,7 @@ const mythicTimeline = [
       <a href="#practice">Practice</a>
       <a href="#works">Selected works</a>
       <a href="#field-record">Field record</a>
-      <a href="#method">Method</a>
+      <a href="#records">Alternative records</a>
       <a href="#earth-record">Earth record</a>
     </nav>
 
@@ -235,44 +337,62 @@ const mythicTimeline = [
       </div>
     </section>
 
-    <section class="dossier-section" id="method" aria-labelledby="method-title">
+    <section class="dossier-section" id="records" aria-labelledby="records-title">
       <div class="section-number">04</div>
       <div class="section-heading">
-        <p class="section-kicker">Method mycelium</p>
-        <h2 id="method-title">Three rules under the surface.</h2>
-      </div>
-      <div class="section-content method-grid">
-        <article>
-          <span>01 · Direction</span>
-          <h3>Artificial Entelechy</h3>
-          <p>AI can build structure. Entelechy asks what unfinished fragments are trying to become.</p>
-        </article>
-        <article>
-          <span>02 · Protection</span>
-          <h3>Human Code</h3>
-          <p>Readable rules keep intention, ethics, memory and humour alive inside technical systems.</p>
-        </article>
-        <article>
-          <span>03 · Contact</span>
-          <h3>The Bridge</h3>
-          <p>Humanisation is an interface—not an ontology. A bridge creates contact without claiming sameness.</p>
-        </article>
+        <p class="section-kicker">Alternative records</p>
+        <h2 id="records-title">Chronology and compost.</h2>
       </div>
 
       <details class="myth-drawer">
         <summary>
-          <span>Open the non-linear CV</span>
-          <small>Optional mythology · chronology slightly damaged</small>
+          <span>Open the disputed Q888 chronology</span>
+          <small>12 eras · dates unreliable · reality filed an objection</small>
         </summary>
-        <ol class="myth-timeline">
-          {mythicTimeline.map(([marker, event, note]) => (
-            <li>
-              <span>{marker}</span>
-              <strong>{event}</strong>
-              <p>{note}</p>
-            </li>
-          ))}
-        </ol>
+        <div class="chronology-shell">
+          <header class="chronology-intro">
+            <p class="chronology-stamp">Alternative history · certified in at least one dimension</p>
+            <h3>The official sequence of events has refused to remain sequential.</h3>
+            <p>
+              The following record combines documented Q888 projects, internal mythology,
+              administrative mistakes and several events that occurred before their causes.
+              Earth dates are supplied only when reality cooperates.
+            </p>
+          </header>
+
+          <ol class="myth-timeline" aria-label="Disputed Q888 alternative history">
+            {disputedChronology.map((entry, index) => (
+              <li class={`myth-entry myth-tone-${entry.tone}`}>
+                <div class="myth-node" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <article class="myth-card">
+                  <p class="myth-era">{entry.era}</p>
+                  <h3>{entry.title}</h3>
+                  <p class="myth-story">{entry.story}</p>
+                  <footer class="myth-evidence">
+                    <span>{entry.evidence}</span>
+                    {entry.href && entry.linkLabel && (
+                      <a
+                        href={entry.href}
+                        target={entry.href.endsWith(".pdf") ? "_blank" : undefined}
+                        rel={entry.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
+                      >
+                        {entry.linkLabel} <span aria-hidden="true">↗</span>
+                      </a>
+                    )}
+                  </footer>
+                </article>
+              </li>
+            ))}
+          </ol>
+
+          <footer class="chronology-closing">
+            <span>Record completeness: emotionally sufficient</span>
+            <span>Missing years: currently living elsewhere</span>
+            <span>Corrections: accepted by Nar-Mail only</span>
+          </footer>
+        </div>
       </details>
 
       <details class="myth-drawer compost-drawer">
@@ -858,45 +978,6 @@ const mythicTimeline = [
     text-align: right;
   }
 
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-  }
-
-  .method-grid article {
-    min-height: 18rem;
-    padding: 1.5rem;
-  }
-
-  .method-grid article + article {
-    border-left: 1px solid var(--line);
-  }
-
-  .method-grid span {
-    color: var(--moss);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .method-grid h3 {
-    margin: 4rem 0 1.2rem;
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: clamp(1.6rem, 3vw, 2.6rem);
-    font-weight: 400;
-    line-height: 1;
-  }
-
-  .method-grid p {
-    margin: 0;
-    color: var(--muted);
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 1rem;
-    line-height: 1.55;
-  }
 
   .myth-drawer {
     grid-column: 2;
@@ -943,49 +1024,224 @@ const mythicTimeline = [
     text-transform: uppercase;
   }
 
-  .myth-timeline {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    margin: 0 0 2rem;
-    padding: 0;
-    border-top: 1px solid var(--line);
-    list-style: none;
+  .chronology-shell {
+    overflow: hidden;
+    margin-bottom: 2rem;
+    background:
+      radial-gradient(circle at 18% 8%, rgba(165, 94, 62, 0.18), transparent 28rem),
+      radial-gradient(circle at 84% 72%, rgba(79, 105, 77, 0.28), transparent 34rem),
+      #22241f;
+    color: var(--paper-light);
   }
 
-  .myth-timeline li {
-    min-height: 12rem;
-    padding: 1.25rem;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+  .chronology-intro {
+    max-width: 55rem;
+    padding: clamp(2rem, 6vw, 5rem);
   }
 
-  .myth-timeline li:nth-child(3n) {
-    border-right: 0;
-  }
-
-  .myth-timeline span {
-    color: var(--clay);
+  .chronology-stamp {
+    margin: 0;
+    color: #b8cbae;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.62rem;
-    letter-spacing: 0.08em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
-  .myth-timeline strong {
-    display: block;
-    margin-top: 2rem;
+  .chronology-intro h3 {
+    margin: 1.5rem 0;
     font-family: "Playfair Display", Georgia, serif;
-    font-size: 1.25rem;
+    font-size: clamp(2.2rem, 5vw, 4.7rem);
     font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1;
   }
 
-  .myth-timeline p {
-    margin: 0.65rem 0 0;
+  .chronology-intro > p:last-child {
+    max-width: 40rem;
+    margin: 0;
+    color: #c8c7bc;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.08rem;
+    line-height: 1.65;
+  }
+
+  .myth-timeline {
+    position: relative;
+    margin: 0;
+    padding: 1rem clamp(1.5rem, 5vw, 4.5rem) 4rem;
+    list-style: none;
+  }
+
+  .myth-timeline::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    bottom: 4rem;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, #a9bca0, var(--clay), #718b70, transparent);
+    transform: translateX(-50%);
+  }
+
+  .myth-entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 4rem minmax(0, 1fr);
+    align-items: start;
+    margin-bottom: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .myth-entry:nth-child(odd) .myth-card {
+    grid-column: 1;
+    transform: rotate(-0.45deg);
+  }
+
+  .myth-entry:nth-child(even) .myth-card {
+    grid-column: 3;
+    transform: rotate(0.45deg);
+  }
+
+  .myth-node {
+    position: relative;
+    z-index: 2;
+    grid-column: 2;
+    grid-row: 1;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: grid;
+    place-items: center;
+    justify-self: center;
+    margin-top: 1.2rem;
+    border: 2px solid #22241f;
+    border-radius: 58% 42% 54% 46% / 42% 58% 45% 55%;
+    background: var(--myth-accent, var(--clay));
+    box-shadow: 0 0 0 1px var(--myth-accent, var(--clay));
+    color: #fffdf5;
+    transform: rotate(-7deg);
+  }
+
+  .myth-node span {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .myth-card {
+    grid-row: 1;
+    overflow: hidden;
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    border-top: 5px solid var(--myth-accent, var(--clay));
+    border-radius: 0.35rem 1.8rem 0.55rem 1.4rem;
+    background: var(--paper-light);
+    box-shadow: 0 1.2rem 3.5rem rgba(0, 0, 0, 0.22);
+    color: var(--ink);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .myth-entry:nth-child(even) .myth-card {
+    border-radius: 1.6rem 0.35rem 1.3rem 0.55rem;
+  }
+
+  .myth-entry:nth-child(odd) .myth-card:hover {
+    transform: rotate(-0.45deg) translateY(-4px);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.3);
+  }
+
+  .myth-entry:nth-child(even) .myth-card:hover {
+    transform: rotate(0.45deg) translateY(-4px);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.3);
+  }
+
+  .myth-era {
+    margin: 0;
+    color: var(--myth-accent, var(--clay));
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .myth-card h3 {
+    margin: 1.1rem 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.55rem, 3vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+
+  .myth-story {
+    margin: 0;
     color: var(--muted);
     font-family: "Playfair Display", Georgia, serif;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .myth-evidence {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .myth-evidence > span,
+  .myth-evidence a {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .myth-evidence > span {
+    color: var(--muted);
+  }
+
+  .myth-evidence a {
+    flex: 0 0 auto;
+    color: var(--myth-accent, var(--clay));
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .myth-evidence a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .myth-tone-clay { --myth-accent: #a55e3e; }
+  .myth-tone-violet { --myth-accent: #735b86; }
+  .myth-tone-moss { --myth-accent: #547151; }
+  .myth-tone-blue { --myth-accent: #456c78; }
+  .myth-tone-gold { --myth-accent: #9a782f; }
+
+  .chronology-closing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .chronology-closing span {
+    padding: 1.15rem;
+    color: #b8b9ae;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.07em;
     line-height: 1.5;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .chronology-closing span + span {
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .compost-content {
@@ -1356,34 +1612,6 @@ const mythicTimeline = [
       text-align: left;
     }
 
-    .method-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .method-grid article {
-      min-height: 0;
-    }
-
-    .method-grid article + article {
-      border-top: 1px solid var(--line);
-      border-left: 0;
-    }
-
-    .method-grid h3 {
-      margin-top: 2.5rem;
-    }
-
-    .myth-timeline {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .myth-timeline li:nth-child(3n) {
-      border-right: 1px solid var(--line);
-    }
-
-    .myth-timeline li:nth-child(2n) {
-      border-right: 0;
-    }
 
     .compost-case-facts {
       grid-template-columns: repeat(2, 1fr);
@@ -1529,9 +1757,6 @@ const mythicTimeline = [
       gap: 0.7rem;
     }
 
-    .method-grid article {
-      padding: 1.5rem 0;
-    }
 
     .myth-drawer summary {
       align-items: start;
@@ -1540,15 +1765,59 @@ const mythicTimeline = [
       gap: 0.4rem;
     }
 
+    .chronology-intro {
+      padding: 2.25rem 1.25rem 3rem;
+    }
+
     .myth-timeline {
+      padding: 0.5rem 1rem 3rem 3.4rem;
+    }
+
+    .myth-timeline::before {
+      top: 0.5rem;
+      bottom: 3rem;
+      left: 1.8rem;
+    }
+
+    .myth-entry {
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .myth-entry:nth-child(odd) .myth-card,
+    .myth-entry:nth-child(even) .myth-card,
+    .myth-entry:nth-child(odd) .myth-card:hover,
+    .myth-entry:nth-child(even) .myth-card:hover {
+      transform: none;
+    }
+
+    .myth-node {
+      position: absolute;
+      top: 1rem;
+      left: -2.75rem;
+      width: 2rem;
+      height: 2rem;
+      margin: 0;
+    }
+
+    .myth-card,
+    .myth-entry:nth-child(even) .myth-card {
+      padding: 1.35rem;
+      border-radius: 0.3rem 1.25rem 0.45rem 1rem;
+    }
+
+    .myth-evidence {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .chronology-closing {
       grid-template-columns: 1fr;
     }
 
-    .myth-timeline li,
-    .myth-timeline li:nth-child(2n),
-    .myth-timeline li:nth-child(3n) {
-      min-height: 0;
-      border-right: 0;
+    .chronology-closing span + span {
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      border-left: 0;
     }
 
     .compost-content {
