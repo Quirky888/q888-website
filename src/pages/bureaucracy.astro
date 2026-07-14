@@ -86,7 +86,7 @@ const fieldRecords = [
     status: "Physical works",
   },
   {
-    place: "Private Flat Exhibition",
+    place: "Private Flat Exhibitions",
     location: "Edinburgh, Scotland",
     format: "Invitation-only exhibition",
     note: "Protected by chosen vibes. Memory preserved; access remains selective.",
@@ -242,8 +242,8 @@ const disputedChronology = [
             In every known universe, artistic talent remains incompatible with
             standard measurement. In this one, human galleries and art spaces
             require an Artist CV so creativity can be compared with their
-            current administrative understanding of creativity. The procedure
-            is cosmically nonsensical. It is also, somehow, accepted as premium
+            current administrative understanding of creativity. The procedure is
+            cosmically nonsensical. It is also, somehow, accepted as premium
             evidence that an artist is an artist. This dossier was therefore
             engineered specifically for local law, gravity and filing cabinets.
           </p>
@@ -299,8 +299,7 @@ const disputedChronology = [
             data-drift-x="-8"
             data-drift-y="6"
             data-drift-rot="-1.5"
-            aria-hidden="true"
-            >Q888<br />registered entity</span
+            aria-hidden="true">Q888<br />registered entity</span
           >
         </div>
         <dl class="record-list">
@@ -491,49 +490,43 @@ const disputedChronology = [
                 >
                   <div class="myth-node" aria-hidden="true">
                     <span>
-                      {
-                        "recordNumber" in entry
-                          ? entry.recordNumber
-                          : String(index + 1).padStart(2, "0")
-                      }
+                      {"recordNumber" in entry
+                        ? entry.recordNumber
+                        : String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  {
-                    "concealed" in entry ? (
-                      <article
-                        class="myth-card myth-card-concealed"
-                        aria-label="Record 11: unknown"
-                      >
-                        <span aria-hidden="true">?</span>
-                      </article>
-                    ) : (
-                      <article class="myth-card">
-                        <p class="myth-era">{entry.era}</p>
-                        <h3>{entry.title}</h3>
-                        <p class="myth-story">{entry.story}</p>
-                        <footer class="myth-evidence">
-                          <span>{entry.evidence}</span>
-                          {entry.href && entry.linkLabel && (
-                            <a
-                              href={entry.href}
-                              target={
-                                entry.href.endsWith(".pdf")
-                                  ? "_blank"
-                                  : undefined
-                              }
-                              rel={
-                                entry.href.endsWith(".pdf")
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                            >
-                              {entry.linkLabel} <span aria-hidden="true">↗</span>
-                            </a>
-                          )}
-                        </footer>
-                      </article>
-                    )
-                  }
+                  {"concealed" in entry ? (
+                    <article
+                      class="myth-card myth-card-concealed"
+                      aria-label="Record 11: unknown"
+                    >
+                      <span aria-hidden="true">?</span>
+                    </article>
+                  ) : (
+                    <article class="myth-card">
+                      <p class="myth-era">{entry.era}</p>
+                      <h3>{entry.title}</h3>
+                      <p class="myth-story">{entry.story}</p>
+                      <footer class="myth-evidence">
+                        <span>{entry.evidence}</span>
+                        {entry.href && entry.linkLabel && (
+                          <a
+                            href={entry.href}
+                            target={
+                              entry.href.endsWith(".pdf") ? "_blank" : undefined
+                            }
+                            rel={
+                              entry.href.endsWith(".pdf")
+                                ? "noopener noreferrer"
+                                : undefined
+                            }
+                          >
+                            {entry.linkLabel} <span aria-hidden="true">↗</span>
+                          </a>
+                        )}
+                      </footer>
+                    </article>
+                  )}
                 </li>
               ))
             }
@@ -782,7 +775,9 @@ const disputedChronology = [
       archiveFrame = null;
     }
     window.removeEventListener("scroll", updateArchiveScroll);
-    archiveFloats.forEach(({ element }) => element.style.removeProperty("transform"));
+    archiveFloats.forEach(({ element }) =>
+      element.style.removeProperty("transform"),
+    );
     archiveFloats = [];
   }
 
@@ -914,8 +909,17 @@ const disputedChronology = [
     border-radius: 50%;
     pointer-events: none;
     background:
-      radial-gradient(circle at 50% 50%, transparent 0 6%, rgba(0, 168, 186, 0.055) 6.2% 6.5%, transparent 6.7% 100%),
-      repeating-conic-gradient(from 12deg at 50% 50%, rgba(232, 52, 146, 0.035) 0 0.7deg, transparent 0.7deg 19deg);
+      radial-gradient(
+        circle at 50% 50%,
+        transparent 0 6%,
+        rgba(0, 168, 186, 0.055) 6.2% 6.5%,
+        transparent 6.7% 100%
+      ),
+      repeating-conic-gradient(
+        from 12deg at 50% 50%,
+        rgba(232, 52, 146, 0.035) 0 0.7deg,
+        transparent 0.7deg 19deg
+      );
     opacity: 0.8;
     mask-image: radial-gradient(circle, #000 0 24%, transparent 72%);
   }
@@ -1175,7 +1179,11 @@ const disputedChronology = [
     padding: 0.55rem 0.75rem 0.5rem 1.9rem;
     border-left: 0.28rem solid var(--ink);
     color: var(--ink);
-    background: linear-gradient(90deg, rgba(0, 168, 186, 0.09), transparent 78%);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 168, 186, 0.09),
+      transparent 78%
+    );
     font-family: "Space Mono", ui-monospace, monospace;
     font-size: clamp(0.7rem, 1.1vw, 0.88rem);
     font-weight: 700;
@@ -1218,7 +1226,11 @@ const disputedChronology = [
     overflow: visible;
     border-bottom: 1px solid var(--line-strong);
     background:
-      radial-gradient(circle at 50% 52%, rgba(0, 168, 186, 0.09), transparent 42%),
+      radial-gradient(
+        circle at 50% 52%,
+        rgba(0, 168, 186, 0.09),
+        transparent 42%
+      ),
       linear-gradient(145deg, rgba(255, 255, 255, 0.42), transparent 60%);
   }
 
@@ -1247,7 +1259,13 @@ const disputedChronology = [
     left: 50%;
     width: 72%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--magenta), var(--cyan), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--magenta),
+      var(--cyan),
+      transparent
+    );
     opacity: 0.38;
     transform: translate(-50%, -50%) rotate(-14deg);
   }
@@ -1291,7 +1309,12 @@ const disputedChronology = [
     border: 1px solid rgba(21, 23, 20, 0.48);
     color: var(--ink);
     background:
-      linear-gradient(120deg, rgba(232, 52, 146, 0.12), rgba(0, 168, 186, 0.12) 55%, rgba(158, 189, 56, 0.13)),
+      linear-gradient(
+        120deg,
+        rgba(232, 52, 146, 0.12),
+        rgba(0, 168, 186, 0.12) 55%,
+        rgba(158, 189, 56, 0.13)
+      ),
       rgba(251, 250, 246, 0.82);
     box-shadow: 0.3rem 0.45rem 0 rgba(21, 23, 20, 0.07);
     font-family: "Space Mono", ui-monospace, monospace;
@@ -1570,10 +1593,9 @@ const disputedChronology = [
     position: relative;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 2.2rem minmax(10rem, 0.8fr) minmax(
-        16rem,
-        1.4fr
-      ) 7rem 1rem;
+    grid-template-columns:
+      2.2rem minmax(10rem, 0.8fr) minmax(16rem, 1.4fr)
+      7rem 1rem;
     align-items: center;
     gap: 1.25rem;
     min-height: 6.25rem;
@@ -1704,10 +1726,9 @@ const disputedChronology = [
   .field-row {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(11rem, 0.8fr) minmax(10rem, 0.65fr) minmax(
-        16rem,
-        1.4fr
-      ) 8rem;
+    grid-template-columns:
+      minmax(11rem, 0.8fr) minmax(10rem, 0.65fr) minmax(16rem, 1.4fr)
+      8rem;
     gap: 1.5rem;
     align-items: start;
     padding: 1.85rem 0;
@@ -1811,7 +1832,12 @@ const disputedChronology = [
   .myth-drawer summary:hover,
   .myth-drawer[open] summary {
     padding-inline: 0.85rem;
-    background: linear-gradient(90deg, rgba(0, 168, 186, 0.07), rgba(232, 52, 146, 0.045), transparent 78%);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 168, 186, 0.07),
+      rgba(232, 52, 146, 0.045),
+      transparent 78%
+    );
   }
 
   .myth-drawer[open] summary {
@@ -1843,7 +1869,11 @@ const disputedChronology = [
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(112deg, transparent 0 5.8rem, rgba(79, 104, 73, 0.025) 5.85rem 5.9rem);
+    background: repeating-linear-gradient(
+      112deg,
+      transparent 0 5.8rem,
+      rgba(79, 104, 73, 0.025) 5.85rem 5.9rem
+    );
     mask-image: linear-gradient(#000, transparent 68%);
   }
 
@@ -2071,7 +2101,11 @@ const disputedChronology = [
     place-items: center;
     border-color: rgba(109, 104, 112, 0.45);
     background:
-      radial-gradient(circle at 50% 50%, rgba(232, 52, 146, 0.08), transparent 46%),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(232, 52, 146, 0.08),
+        transparent 46%
+      ),
       rgba(251, 250, 246, 0.58);
   }
 
@@ -2122,7 +2156,11 @@ const disputedChronology = [
     gap: clamp(2rem, 5vw, 5rem);
     padding: clamp(1.5rem, 4vw, 2.8rem);
     background:
-      radial-gradient(circle at 82% 12%, rgba(158, 189, 56, 0.16), transparent 20rem),
+      radial-gradient(
+        circle at 82% 12%,
+        rgba(158, 189, 56, 0.16),
+        transparent 20rem
+      ),
       var(--moss-soft);
     animation: archive-layer-enter 520ms ease both;
   }
@@ -2357,7 +2395,11 @@ const disputedChronology = [
     padding: clamp(1.7rem, 4vw, 2.5rem);
     border: 1px solid var(--ink);
     background:
-      radial-gradient(circle at 100% 0, rgba(0, 168, 186, 0.17), transparent 14rem),
+      radial-gradient(
+        circle at 100% 0,
+        rgba(0, 168, 186, 0.17),
+        transparent 14rem
+      ),
       var(--ink);
     color: var(--paper-light);
   }
@@ -2437,7 +2479,11 @@ const disputedChronology = [
 
   .contact-actions a:hover {
     padding-inline: 0.65rem;
-    background: linear-gradient(90deg, rgba(232, 52, 146, 0.12), rgba(0, 168, 186, 0.1));
+    background: linear-gradient(
+      90deg,
+      rgba(232, 52, 146, 0.12),
+      rgba(0, 168, 186, 0.1)
+    );
   }
 
   .contact-actions a:hover::after {
