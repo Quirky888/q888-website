@@ -7,13 +7,30 @@ const navLinks = [
 ];
 ---
 
-<nav class="slim-nav" data-slim-nav>
+<nav class="slim-nav" data-slim-nav aria-label="Primary navigation">
+  <div
+    class="slim-dismiss"
+    data-slim-dismiss
+    aria-hidden="true"
+    hidden
+  ></div>
+
   <div class="slim-nav-inner">
     <a href="/#landing" class="slim-wordmark" data-scroll>Q888</a>
-    
 
-    
-    <div class="slim-links" data-slim-links>
+    <button
+      class="slim-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="slim-nav-links"
+      aria-label="Open navigation menu"
+      data-slim-toggle
+    >
+      <span class="slim-toggle-bar" aria-hidden="true"></span>
+      <span class="slim-toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <div class="slim-links" id="slim-nav-links" data-slim-links>
       {navLinks.map((link) => (
         <a href={link.href} class="slim-link" data-scroll>{link.label}</a>
       ))}
@@ -21,7 +38,78 @@ const navLinks = [
   </div>
 </nav>
 
+<script>
+  function initSlimNav() {
+    document.querySelectorAll("[data-slim-nav]").forEach((nav) => {
+      if (nav.hasAttribute("data-slim-nav-initialized")) return;
 
+      const toggle = nav.querySelector("[data-slim-toggle]");
+      const links = nav.querySelector("[data-slim-links]");
+      const dismiss = nav.querySelector("[data-slim-dismiss]");
+      if (
+        !(toggle instanceof HTMLButtonElement) ||
+        !(dismiss instanceof HTMLElement) ||
+        !links
+      ) return;
+
+      const mobileViewport = window.matchMedia("(max-width: 767px)");
+
+      const setOpen = (isOpen: boolean) => {
+        nav.classList.toggle("open", isOpen);
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute(
+          "aria-label",
+          isOpen ? "Close navigation menu" : "Open navigation menu",
+        );
+        links.classList.toggle("open", isOpen);
+        dismiss.hidden = !isOpen;
+      };
+
+      const handleViewportChange = () => {
+        setOpen(false);
+      };
+
+      toggle.addEventListener("click", () => {
+        setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      dismiss.addEventListener("click", () => {
+        setOpen(false);
+        toggle.focus({ preventScroll: true });
+      });
+
+      mobileViewport.addEventListener("change", handleViewportChange);
+
+      links.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+
+      nav.addEventListener("keydown", (event) => {
+        if (
+          event instanceof KeyboardEvent &&
+          event.key === "Escape" &&
+          toggle.getAttribute("aria-expanded") === "true"
+        ) {
+          setOpen(false);
+          toggle.focus({ preventScroll: true });
+        }
+      });
+
+      document.addEventListener(
+        "astro:before-swap",
+        () => {
+          mobileViewport.removeEventListener("change", handleViewportChange);
+        },
+        { once: true },
+      );
+
+      nav.setAttribute("data-slim-nav-initialized", "true");
+    });
+  }
+
+  initSlimNav();
+  document.addEventListener("astro:page-load", initSlimNav);
+</script>
 
 <style>
   .slim-nav {
@@ -36,26 +124,69 @@ const navLinks = [
     padding-top: env(safe-area-inset-top, 0);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .slim-nav {
-      background: rgba(245, 245, 245, 0.95);
+      background: transparent;
+      border-bottom-color: transparent;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .slim-nav.open {
+      background: rgba(245, 245, 245, 0.95);
+      border-bottom-color: var(--line-soft);
+    }
+
+    .slim-nav.open .slim-wordmark {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+
+  .slim-dismiss {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .slim-dismiss {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 0;
+      display: block;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      cursor: default;
+      pointer-events: auto;
+    }
+
+    .slim-dismiss[hidden] {
+      display: none;
     }
   }
 
   .slim-nav-inner {
     max-width: 72rem;
     margin: 0 auto;
-    padding: 0.625rem 1rem;
+    min-height: 44px;
+    padding: 0 max(1rem, env(safe-area-inset-right, 0px)) 0
+      max(1rem, env(safe-area-inset-left, 0px));
     display: flex;
     align-items: center;
     justify-content: space-between;
     pointer-events: none;
+    position: relative;
+    z-index: 1;
   }
 
   @media (min-width: 768px) {
     .slim-nav-inner {
+      min-height: 0;
       padding: 0.75rem 2rem;
     }
   }
@@ -73,6 +204,24 @@ const navLinks = [
     cursor: pointer;
     position: relative;
     z-index: 1;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 767px) {
+    .slim-wordmark {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .slim-wordmark {
+      min-height: auto;
+      display: inline;
+    }
   }
 
   .slim-wordmark:hover {
@@ -96,6 +245,10 @@ const navLinks = [
     pointer-events: auto;
     position: relative;
     z-index: 2;
+    border: 1px solid var(--line-soft);
+    border-radius: 50%;
+    background: rgba(245, 245, 245, 0.95);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
 
   @media (min-width: 768px) {
@@ -104,16 +257,26 @@ const navLinks = [
     }
   }
 
+  .slim-nav.open .slim-toggle {
+    box-shadow: none;
+  }
+
   .slim-toggle-bar {
     display: block;
     width: 16px;
     height: 1px;
     background: var(--text-ink);
-    transition: opacity 120ms ease;
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
   }
 
   .slim-toggle[aria-expanded="true"] .slim-toggle-bar:first-child {
-    opacity: 0.4;
+    transform: translateY(2.5px) rotate(45deg);
+  }
+
+  .slim-toggle[aria-expanded="true"] .slim-toggle-bar:last-child {
+    transform: translateY(-2.5px) rotate(-45deg);
   }
 
   .slim-links {
@@ -124,13 +287,14 @@ const navLinks = [
     right: 0;
     background: var(--bg-fog);
     border-bottom: 1px solid var(--line-soft);
-    padding: 0.75rem 1rem;
-    flex-direction: column;
-    gap: 0.625rem;
+    padding: 0.5rem max(1rem, env(safe-area-inset-right, 0px)) 0.625rem
+      max(1rem, env(safe-area-inset-left, 0px));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
   }
 
   .slim-links.open {
-    display: flex;
+    display: grid;
   }
 
   @media (min-width: 768px) {
@@ -186,6 +350,13 @@ const navLinks = [
       padding: 0.25rem 0.5rem;
       margin: -0.25rem -0.5rem;
       border-radius: 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slim-wordmark,
+    .slim-toggle-bar {
+      transition: none;
     }
   }
 </style>

@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { stream, type Handler } from "@netlify/functions";
+import { buildChatReferenceContext } from "./_shared/chat-context";
 
 const SYSTEM_PROMPT = `You are The Infocigan.
 
@@ -119,47 +120,8 @@ interface Message {
   content: string;
 }
 
-interface Sticker {
-  id: string;
-  title: string;
-  tagline: string;
-  ask: string;
-  availableCount: number | string;
-  editionTotal: number | string;
-  status: string;
-  provenance: string;
-  description?: string;
-}
-
-interface ProjectSpec {
-  label: string;
-  value: string;
-}
-
-interface Project {
-  slug: string;
-  title: string;
-  descriptor: string;
-  system: string;
-  panelTitle: string;
-  panelDescription: string;
-  panelSpecs: ProjectSpec[];
-}
-
-interface MapLocation {
-  id: string;
-  name: string;
-  emoji: string;
-  short: string;
-  long: string;
-}
-
 interface RequestBody {
   messages: Message[];
-  userId?: string;
-  stickers?: Sticker[];
-  projects?: Project[];
-  mapLocations?: MapLocation[];
 }
 
 const SSE_HEADERS = {
@@ -197,42 +159,34 @@ export const handler: Handler = stream(async (event) => {
     return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "Invalid JSON body" }) };
   }
 
-  const { messages, stickers, projects, mapLocations } = body;
+  const { messages } = body;
   if (!Array.isArray(messages) || messages.length === 0) {
     return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "messages array required" }) };
   }
 
-  if (Array.isArray(stickers) && stickers.length > 0) {
-    const catalogStr = stickers
-      .map((s) => {
-        const qty = s.availableCount !== undefined && s.editionTotal !== undefined
-          ? `${s.availableCount}/${s.editionTotal}`
-          : s.availableCount ?? "unknown";
-        return `- **${s.title}** (${s.id}): Tagline: "${s.tagline}". Price: ${s.ask}. Status: ${s.status}. Qty Available: ${qty}. Provenance: "${s.provenance}". Lore: "${s.description || "N/A"}"`;
-      })
-      .join("\n");
-
-    systemPrompt += `\n\n--------------------------------------------------\n\nLIVE STICKER CATALOG (REAL-TIME DATA FROM CURRENT PAGE):\n${catalogStr}\n\n`;
+  if (messages.length > 50) {
+    return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: "too many messages in request" }) };
   }
 
-  if (Array.isArray(projects) && projects.length > 0) {
-    const projectsStr = projects
-      .map((p) => {
-        const specs = Array.isArray(p.panelSpecs) ? p.panelSpecs.map(spec => `${spec.label}: ${spec.value}`).join(", ") : "";
-        return `- **${p.title}** (${p.system}): Descriptor: "${p.descriptor}". Description: "${p.panelDescription}". Specs: [${specs}]`;
-      })
-      .join("\n");
+  const isInvalid = messages.some((msg) => {
+    if (typeof msg !== "object" || msg === null) return true;
 
-    systemPrompt += `\n\n--------------------------------------------------\n\nALL Q888 PROJECTS:\n${projectsStr}\n\n`;
+    return (
+      (msg.role !== "user" && msg.role !== "assistant") ||
+      typeof msg.content !== "string" ||
+      msg.content.trim().length === 0 ||
+      msg.content.length > 1000
+    );
+  });
+  if (isInvalid) {
+    return {
+      statusCode: 400,
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ error: "Invalid message format or length exceeds 1000 characters" }),
+    };
   }
 
-  if (Array.isArray(mapLocations) && mapLocations.length > 0) {
-    const locationsStr = mapLocations
-      .map((loc) => `- **${loc.name}** (${loc.emoji}): Region/Location: ${loc.short}. Description & History: ${loc.long}`)
-      .join("\n\n");
-
-    systemPrompt += `\n\n--------------------------------------------------\n\nEDINBURGH MAGICAL MAP - 15 SECRET LOCATIONS & LORE:\n${locationsStr}\n\n`;
-  }
+  systemPrompt += buildChatReferenceContext(messages, "investor");
 
   const openaiMessages: Message[] = [{ role: "system", content: systemPrompt }, ...messages.slice(-20)];
   const openai = new OpenAI({ apiKey, baseURL: process.env.OPENAI_BASE_URL });
