@@ -172,6 +172,9 @@ const afterlife = afterlifeEntry.data;
                 <span>{afterlife.downloadButtonLabel}</span>
               </a>
               <p class="download-hint" id="download-hint">{afterlife.downloadHint}</p>
+              {afterlife.contractNote && (
+                <p class="mt-4 font-mono text-[11px] opacity-60 uppercase tracking-widest text-center">{afterlife.contractNote}</p>
+              )}
             </div>
           </section>
 
@@ -223,7 +226,7 @@ const afterlife = afterlifeEntry.data;
               <path d="M4 4V9H9M20 20V15H15M19.91 14.94C19.4 16.68 18.35 18.19 16.92 19.27C15.49 20.35 13.75 20.94 12 21C7.03 21 3 16.97 3 12M4.09 9.06C4.6 7.32 5.65 5.81 7.08 4.73C8.51 3.65 10.25 3.06 12 3C16.97 3 21 7.03 21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <a class="gallery-btn gallery-download" id="afterlife-download-btn" aria-label="Download image" title="Download image" download>
+          <a class="gallery-btn gallery-download" id="afterlife-gallery-download-btn" aria-label="Download image" title="Download image" download>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 3V16M12 16L7 11M12 16L17 11M5 20H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -299,7 +302,7 @@ const afterlife = afterlifeEntry.data;
     const zoomInBtn  = document.getElementById("afterlife-zoom-in")!;
     const zoomOutBtn = document.getElementById("afterlife-zoom-out")!;
     const resetBtn   = document.getElementById("afterlife-reset-zoom")!;
-    const dlBtn      = document.getElementById("afterlife-download-btn") as HTMLAnchorElement;
+    const dlBtn      = document.getElementById("afterlife-gallery-download-btn") as HTMLAnchorElement;
     const fsBtn      = document.getElementById("afterlife-fullscreen-btn")!;
     const closeBtn   = document.getElementById("afterlife-close-btn")!;
     const fsExpand   = document.getElementById("afterlife-fs-icon-expand")!;

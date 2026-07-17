@@ -229,6 +229,7 @@ const contracts = defineCollection({
     downloadFilename: z.string().min(1),
     downloadButtonLabel: z.string().min(1),
     downloadHint: z.string().min(1),
+    contractNote: z.string().optional(),
     ctaLabel: z.string().min(1),
     viewerImage: z.string().min(1),
     viewerAlt: z.string().min(1),

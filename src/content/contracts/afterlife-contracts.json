@@ -60,10 +60,11 @@
     "The only \"service\" truly provided is a moment of reflection, a piece of digital ink paper, and the faint hope that......."
   ],
   "termsCheckboxLabel": "I accept these very serious, absolutely binding, completely unenforceable terms",
-  "downloadHref": "/docs/afterlife_contract_to_sign.jpg",
+  "downloadHref": "/docs/afterlife_contract_to_sign_v2.jpg",
   "downloadFilename": "Afterlife_Contract.jpg",
   "downloadButtonLabel": "Download Contract",
   "downloadHint": "Please accept the terms to download",
+  "contractNote": "Note: Invalid until signed and returned.",
   "ctaLabel": "Retreat to Market",
   "viewerImage": "/images/afterlife_contract.webp",
   "viewerAlt": "Afterlife Contract Full Certificate"
