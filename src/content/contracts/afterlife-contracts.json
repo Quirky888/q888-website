@@ -15,10 +15,31 @@
     "JURISDICTION: BEYOND",
     "REFUND: IMPOSSIBLE"
   ],
+  "journeyHeading": "Eternity Filing Procedure",
+  "journeySteps": [
+    {
+      "number": "01",
+      "label": "Inspect the evidence",
+      "detail": "Open the original contract.",
+      "href": "#afterlife-inspect"
+    },
+    {
+      "number": "02",
+      "label": "Interpret the clauses",
+      "detail": "Read what the paperwork claims.",
+      "href": "#afterlife-interpret"
+    },
+    {
+      "number": "03",
+      "label": "Sign or refuse",
+      "detail": "Both positions remain valid.",
+      "href": "#afterlife-download"
+    }
+  ],
   "aboutHeading": "About the Contract",
   "aboutParagraph": "Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury \"Lifetime Lease + Eternity\" agreement from Grim Reaper Inc., it satirizes how humans try to formalise the unformalizable: death, meaning, morality, and hope.",
   "artworkCardTitle": "View Q888 Contract Certificate",
-  "artworkCardDescription": "The Underworld isn't a destination, but a curated experience. This original artwork binds cosmic symbols with vintage textures to frame your final choice: will you sign for HeLL, HeART, or the ART of eternity? The soul is free; the ink is the only debt.",
+  "artworkCardDescription": "The Underworld isn't a destination, but a curated experience. This original artwork binds cosmic symbols with vintage textures to frame your final choice: three destinations, one signature, and no reliable map. The soul is free; the ink is the only debt.",
   "artworkCardButtonLabel": "Open the Door",
   "conceptHeading": "Concept",
   "conceptParagraphs": [
@@ -29,11 +50,19 @@
   "bureaucracyParagraph": "The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like \"Subject to Underworld Adjustments\" mock the human desire to regulate what cannot be regulated.",
   "dualityHeading": "The Duality of Choice",
   "dualityParagraphs": [
-    "Viewers are invited to \"sign\" under three options: HeLL, HeART, or ART. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making.",
+    "Viewers are invited to \"sign\" under three deliberately entangled options. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making. Their official names remain filed inside the original contract.",
     "There is no correct answer. The act of choosing (or refusing to choose) becomes the real performance."
   ],
   "visualLanguageHeading": "Visual Language",
   "visualLanguageParagraph": "The work combines holographic gold frames, vintage parchment textures, cartoon skeletons, cosmic symbols, and handwritten annotations—living somewhere between medieval charter, corporate certificate, tarot deck, and internet meme.",
+  "filedClausesHeading": "Filed Meanings",
+  "filedClausesIntro": "Four articles explaining how free eternity acquired premium paperwork.",
+  "filedClauseSummaries": [
+    "Eternity is free. The premium certificate is not.",
+    "The unknown has been issued a stamp and several unnecessary clauses.",
+    "Three destinations remain entangled until you inspect the evidence.",
+    "Part medieval charter, part tarot deck, part internet afterthought."
+  ],
   "interactionHeading": "Audience Interaction",
   "interactionIntro": "The Afterlife Contract is participatory by nature. Viewers are encouraged to:",
   "interactionItems": [
@@ -49,7 +78,16 @@
     "is your own interpretation."
   ],
   "downloadHeading": "Download Your Unofficial Afterlife Contract",
-  "downloadIntro": "Feeling brave, curious, or just mildly bored with mortality? You can download a printable version of the Afterlife Contract and sign your preferred destiny—HeLL, HeART, or ART—at your own risk and amusement.",
+  "downloadIntro": {
+    "beforeDestinations": "Feeling brave, curious, or just mildly bored with mortality? You can download a printable version of the Afterlife Contract and sign your preferred destiny—",
+    "destinations": [
+      "HeLL",
+      "HeART",
+      "ART"
+    ],
+    "afterDestinations": "—at your own risk and amusement.",
+    "clauseInstruction": "Clause unclear · inspect original"
+  },
   "termsHeading": "Terms of (Non-)Service",
   "termsIntro": "By downloading this file, you acknowledge that:",
   "termsItems": [
@@ -59,11 +97,20 @@
     "Grim Reaper Inc., all associated skeletons, and the artist accept no responsibility for: delays at the pearly gates, unexpected cosmic plot twists, or being assigned a roommate who snores in the astral plane.",
     "The only \"service\" truly provided is a moment of reflection, a piece of digital ink paper, and the faint hope that......."
   ],
-  "termsCheckboxLabel": "I accept these very serious, absolutely binding, completely unenforceable terms",
-  "downloadHref": "/docs/afterlife_contract_to_sign.jpg",
-  "downloadFilename": "Afterlife_Contract.jpg",
+  "decisionLegend": "Your administrative position",
+  "decisionAcceptLabel": "I accept these metaphysical terms",
+  "decisionRefuseLabel": "I refuse all known jurisdictions",
+  "decisionAcceptedHint": "Terms accepted. Eternity is being processed.",
+  "decisionRefusedHint": "Jurisdiction refused. The original contract remains available as unauthorized evidence.",
+  "downloadHref": "/docs/afterlife_contract_to_sign_v2.png",
+  "downloadFilename": "Afterlife_Contract.png",
   "downloadButtonLabel": "Download Contract",
-  "downloadHint": "Please accept the terms to download",
+  "downloadHint": "Choose an administrative position to release the file",
+  "downloadConfirmation": "CONTRACT RELEASED · NO SOUL DEDUCTED",
+  "downloadRefusedConfirmation": "JURISDICTION REFUSED · CONTRACT RELEASED AS UNAUTHORIZED EVIDENCE",
+  "galleryClue": "Filed clue: inspect the lower-right signature zone.",
+  "contractNote": "Note: Invalid until signed and returned.",
+  "contractRefusedNote": "Possession does not constitute acceptance. Signing may accidentally restore jurisdiction.",
   "ctaLabel": "Retreat to Market",
   "viewerImage": "/images/afterlife_contract.webp",
   "viewerAlt": "Afterlife Contract Full Certificate"
