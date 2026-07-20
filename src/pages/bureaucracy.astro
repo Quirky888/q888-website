@@ -132,7 +132,7 @@ const disputedChronology = [
     era: "Square Bubble Period",
     title: "Barista physics becomes independent civilisation",
     story:
-      "The Square Bubbles began as a milk microfoam experiment: Q888, working as a barista, attempted to make flat white foam even flatter. The bubbles responded by developing edges, internal rules and eventually full sentience. What started as café technique became a theory of soft-bordered worlds: structures that hold shape without becoming prisons.",
+      "The Square Bubbles began behind a coffee shop in London, Earth. Working as a barista, Q888 attempted to make flat white foam even flatter. The bubbles responded by developing edges, internal rules and eventually full sentience. What started as café technique became a theory of soft-bordered worlds: structures that hold shape without becoming prisons.",
     evidence: "Microfoam physics · portable sticker edition",
     href: "/overpriced/sqb-1/",
     linkLabel: "Inspect the Square Bubble",
@@ -264,10 +264,10 @@ const disputedChronology = [
               voice="confession"
               text="creativity"
               group="cv-proof"
-            /> can be compared with their current administrative understanding
-            of creativity. The procedure is cosmically nonsensical. It is also,
-            somehow, accepted as premium evidence that an artist is an artist.
-            This dossier was therefore
+            /> can be compared with their current administrative understanding of
+            creativity. The procedure is cosmically nonsensical. It is also, somehow,
+            accepted as premium evidence that an artist is an artist. This dossier
+            was therefore
             <TypographicDoor
               id="record-cv-engineered"
               zone="record"
@@ -372,7 +372,8 @@ const disputedChronology = [
           </div>
           <div>
             <dt>Status</dt><dd>
-              <span class="status-dot" aria-hidden="true"></span><TypographicDoor
+              <span class="status-dot" aria-hidden="true"
+              ></span><TypographicDoor
                 id="record-portals"
                 zone="record"
                 kind="portal"
@@ -415,9 +416,9 @@ const disputedChronology = [
               kind="murmur"
               voice="unstable"
               text="artist-system"
-            /> working across visual mythology, symbolic infrastructure,
-            AI-assisted world-building, fictional technologies and authorial
-            systems for AI-generated code.
+            /> working across visual mythology, symbolic infrastructure, AI-assisted
+            world-building, fictional technologies and authorial systems for AI-generated
+            code.
           </p>
           <p>
             Artworks may arrive as
@@ -666,12 +667,10 @@ const disputedChronology = [
         </h2>
       </div>
 
-      <details class="myth-drawer">
+      <details class="myth-drawer" data-disputed-chronology>
         <summary>
           <span>Open the disputed Q888 chronology</span>
-          <small
-            >12 eras · dates unreliable · reality filed an objection</small
-          >
+          <small>12 eras · dates unreliable · reality filed an objection</small>
         </summary>
         <div class="chronology-shell">
           <header class="chronology-intro">
@@ -681,64 +680,83 @@ const disputedChronology = [
             <h3>
               The official sequence of events has refused to remain sequential.
             </h3>
-            <p>
+            <p class="chronology-description">
               The following record combines documented Q888 projects, internal
               mythology, administrative mistakes and several events that
               occurred before their causes. Earth dates are supplied only when
               reality cooperates.
             </p>
+            <div class="chronology-order-control">
+              <button type="button" data-chronology-toggle aria-pressed="false">
+                <span data-chronology-label
+                  >Let the timeline remember differently</span
+                >
+                <span data-chronology-glyph aria-hidden="true">↝</span>
+              </button>
+              <p data-chronology-status aria-live="polite">
+                Filing order · numbered for administrative comfort
+              </p>
+            </div>
           </header>
 
           <ol
             class="myth-timeline"
-            aria-label="Disputed Q888 alternative history"
+            data-chronology-list
+            aria-label="Disputed Q888 alternative history in filing order"
           >
             {
-              disputedChronology.map((entry, index) => (
-                <li
-                  class={`myth-entry myth-tone-${entry.tone}${"concealed" in entry ? " myth-entry-concealed" : ""}`}
-                >
-                  <div class="myth-node" aria-hidden="true">
-                    <span>
-                      {"recordNumber" in entry
-                        ? entry.recordNumber
-                        : String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  {"concealed" in entry ? (
-                    <article
-                      class="myth-card myth-card-concealed"
-                      aria-label="Record 11: unknown"
-                    >
-                      <span aria-hidden="true">?</span>
-                    </article>
-                  ) : (
-                    <article class="myth-card">
-                      <p class="myth-era">{entry.era}</p>
-                      <h3>{entry.title}</h3>
-                      <p class="myth-story">{entry.story}</p>
-                      <footer class="myth-evidence">
-                        <span>{entry.evidence}</span>
-                        {entry.href && entry.linkLabel && (
-                          <a
-                            href={entry.href}
-                            target={
-                              entry.href.endsWith(".pdf") ? "_blank" : undefined
-                            }
-                            rel={
-                              entry.href.endsWith(".pdf")
-                                ? "noopener noreferrer"
-                                : undefined
-                            }
-                          >
-                            {entry.linkLabel} <span aria-hidden="true">↗</span>
-                          </a>
-                        )}
-                      </footer>
-                    </article>
-                  )}
-                </li>
-              ))
+              disputedChronology.map((entry, index) => {
+                const recordNumber =
+                  "recordNumber" in entry
+                    ? entry.recordNumber
+                    : String(index + 1).padStart(2, "0");
+                return (
+                  <li
+                    class={`myth-entry myth-tone-${entry.tone}${"concealed" in entry ? " myth-entry-concealed" : ""}`}
+                    data-chronology-entry
+                    data-record-number={recordNumber}
+                  >
+                    <div class="myth-node" aria-hidden="true">
+                      <span>{recordNumber}</span>
+                    </div>
+                    {"concealed" in entry ? (
+                      <article
+                        class="myth-card myth-card-concealed"
+                        aria-label="Record 11: unknown"
+                      >
+                        <span aria-hidden="true">?</span>
+                      </article>
+                    ) : (
+                      <article class="myth-card">
+                        <p class="myth-era">{entry.era}</p>
+                        <h3>{entry.title}</h3>
+                        <p class="myth-story">{entry.story}</p>
+                        <footer class="myth-evidence">
+                          <span>{entry.evidence}</span>
+                          {entry.href && entry.linkLabel && (
+                            <a
+                              href={entry.href}
+                              target={
+                                entry.href.endsWith(".pdf")
+                                  ? "_blank"
+                                  : undefined
+                              }
+                              rel={
+                                entry.href.endsWith(".pdf")
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
+                            >
+                              {entry.linkLabel}{" "}
+                              <span aria-hidden="true">↗</span>
+                            </a>
+                          )}
+                        </footer>
+                      </article>
+                    )}
+                  </li>
+                );
+              })
             }
           </ol>
 
@@ -984,6 +1002,10 @@ const disputedChronology = [
     cleanupTypographicDoors,
     initTypographicDoors,
   } from "../scripts/typographicDoors";
+  import {
+    cleanupDisputedChronology,
+    initDisputedChronology,
+  } from "../scripts/disputedChronology";
 
   // CHOICE: A tiny local drift engine borrows Dyno's object-energy without
   // bringing its louder motion system or another dependency into the dossier.
@@ -1101,15 +1123,21 @@ const disputedChronology = [
     document.addEventListener("DOMContentLoaded", initTypographicDoors, {
       once: true,
     });
+    document.addEventListener("DOMContentLoaded", initDisputedChronology, {
+      once: true,
+    });
   } else {
     initArchiveMotion();
     initTypographicDoors();
+    initDisputedChronology();
   }
 
   document.addEventListener("astro:page-load", initArchiveMotion);
   document.addEventListener("astro:page-load", initTypographicDoors);
+  document.addEventListener("astro:page-load", initDisputedChronology);
   document.addEventListener("astro:before-swap", cleanupArchiveMotion);
   document.addEventListener("astro:before-swap", cleanupTypographicDoors);
+  document.addEventListener("astro:before-swap", cleanupDisputedChronology);
 </script>
 
 <style>
@@ -1198,7 +1226,8 @@ const disputedChronology = [
   }
 
   .dossier a:focus-visible,
-  .dossier summary:focus-visible {
+  .dossier summary:focus-visible,
+  .chronology-order-control button:focus-visible {
     outline: 3px solid var(--cyan);
     outline-offset: 4px;
   }
@@ -2170,12 +2199,72 @@ const disputedChronology = [
     line-height: 0.95;
   }
 
-  .chronology-intro > p:last-child {
+  .chronology-description {
     max-width: 40rem;
     margin: 0;
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.72;
+  }
+
+  .chronology-order-control {
+    max-width: 40rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .chronology-order-control button {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0;
+    border: 0;
+    color: var(--ink);
+    background: transparent;
+    font-family: "Space Grotesk", "Syne", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .chronology-order-control [data-chronology-glyph] {
+    display: inline-block;
+    color: var(--moss);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 0.8;
+    transition: translate 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .chronology-order-control button:hover [data-chronology-glyph] {
+    translate: 0.2rem 0;
+  }
+
+  [data-chronology-mode="mycelial"]
+    .chronology-order-control
+    [data-chronology-glyph] {
+    translate: 0 0;
+  }
+
+  .chronology-order-control > p {
+    max-width: 23ch;
+    margin: 0;
+    color: var(--muted);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-align: right;
+    text-transform: uppercase;
   }
 
   .myth-timeline {
@@ -3144,6 +3233,17 @@ const disputedChronology = [
       padding: 2.25rem 1.25rem 3rem;
     }
 
+    .chronology-order-control {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chronology-order-control > p {
+      max-width: none;
+      text-align: left;
+    }
+
     .myth-timeline {
       padding: 0.5rem 1rem 3rem 3.4rem;
     }
@@ -3294,6 +3394,7 @@ const disputedChronology = [
     .work-name,
     .work-arrow,
     .myth-drawer summary,
+    .chronology-order-control [data-chronology-glyph],
     .myth-card,
     .contact-actions a,
     .contact-actions a::after {
