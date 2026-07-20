@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
+import TypographicDoor from "../components/TypographicDoor.astro";
 
 const selectedSystems = [
   {
@@ -131,7 +132,7 @@ const disputedChronology = [
     era: "Square Bubble Period",
     title: "Barista physics becomes independent civilisation",
     story:
-      "The Square Bubbles began as a milk microfoam experiment: Q888, working as a barista, attempted to make flat white foam even flatter. The bubbles responded by developing edges, internal rules and eventually full sentience. What started as café technique became a theory of soft-bordered worlds: structures that hold shape without becoming prisons.",
+      "The Square Bubbles began behind a coffee shop in London, Earth. Working as a barista, Q888 attempted to make flat white foam even flatter. The bubbles responded by developing edges, internal rules and eventually full sentience. What started as café technique became a theory of soft-bordered worlds: structures that hold shape without becoming prisons.",
     evidence: "Microfoam physics · portable sticker edition",
     href: "/overpriced/sqb-1/",
     linkLabel: "Inspect the Square Bubble",
@@ -231,7 +232,7 @@ const disputedChronology = [
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
 
-  <main class="dossier" id="bureaucracy-main">
+  <main class="dossier" id="bureaucracy-main" data-q888-door-root>
     <header class="dossier-hero" id="record">
       <div class="hero-copy">
         <aside class="bureaucracy-notice" aria-label="Why this dossier exists">
@@ -240,12 +241,65 @@ const disputedChronology = [
           </p>
           <p>
             In every known universe, artistic talent remains incompatible with
-            standard measurement. In this one, human galleries and art spaces
-            require an Artist CV so creativity can be compared with their
-            current administrative understanding of creativity. The procedure is
-            cosmically nonsensical. It is also, somehow, accepted as premium
-            evidence that an artist is an artist. This dossier was therefore
-            engineered specifically for local law, gravity and filing cabinets.
+            <TypographicDoor
+              id="record-measurement"
+              zone="record"
+              kind="murmur"
+              voice="archive"
+              text="standard measurement"
+            />. In this one, human galleries and art spaces require an
+            <TypographicDoor
+              id="record-artist-cv"
+              zone="record"
+              kind="signal"
+              voice="confession"
+              text="Artist CV"
+              group="cv-proof"
+              pinned
+            /> so
+            <TypographicDoor
+              id="record-cv-creativity"
+              zone="record"
+              kind="trail"
+              voice="confession"
+              text="creativity"
+              group="cv-proof"
+            /> can be compared with their current administrative understanding of
+            creativity. The procedure is cosmically nonsensical. It is also, somehow,
+            accepted as premium evidence that an artist is an artist. This dossier
+            was therefore
+            <TypographicDoor
+              id="record-cv-engineered"
+              zone="record"
+              kind="trail"
+              voice="confession"
+              text="engineered"
+              group="cv-proof"
+            /> specifically
+            <TypographicDoor
+              id="record-cv-for"
+              zone="record"
+              kind="trail"
+              voice="confession"
+              text="for"
+              group="cv-proof"
+            /> local law, gravity and
+            <TypographicDoor
+              id="record-cv-filing"
+              zone="record"
+              kind="trail"
+              voice="confession"
+              text="filing"
+              group="cv-proof"
+            />
+            <TypographicDoor
+              id="record-cv-cabinets"
+              zone="record"
+              kind="trail"
+              voice="confession"
+              text="cabinets"
+              group="cv-proof"
+            />.
           </p>
         </aside>
         <p class="eyebrow">For gallery bureaucracy · Form Q888/CV</p>
@@ -256,8 +310,14 @@ const disputedChronology = [
         <p class="hero-role">Multidisciplinary artist · Edinburgh, Scotland</p>
         <p class="hero-statement">
           I build visual mythologies, speculative products and functioning
-          interfaces. The work treats code, image, humour, memory and invented
-          institutions as equal materials.
+          interfaces. The work treats code, image, humour,
+          <TypographicDoor
+            id="record-memory"
+            zone="record"
+            kind="murmur"
+            voice="human"
+            text="memory"
+          /> and invented institutions as equal materials.
         </p>
       </div>
 
@@ -312,8 +372,15 @@ const disputedChronology = [
           </div>
           <div>
             <dt>Status</dt><dd>
-              <span class="status-dot" aria-hidden="true"></span>Available for
-              portals
+              <span class="status-dot" aria-hidden="true"
+              ></span><TypographicDoor
+                id="record-portals"
+                zone="record"
+                kind="portal"
+                voice="unstable"
+                text="Available for portals"
+                href="/map/"
+              />
             </dd>
           </div>
         </dl>
@@ -342,14 +409,75 @@ const disputedChronology = [
       <div class="section-content practice-grid">
         <div class="prose lead-prose">
           <p>
-            Q888 is an artist-system working across visual mythology, symbolic
-            infrastructure, AI-assisted world-building, fictional technologies
-            and authorial systems for AI-generated code.
+            Q888 is an
+            <TypographicDoor
+              id="practice-artist-system"
+              zone="practice"
+              kind="murmur"
+              voice="unstable"
+              text="artist-system"
+            /> working across visual mythology, symbolic infrastructure, AI-assisted
+            world-building, fictional technologies and authorial systems for AI-generated
+            code.
           </p>
           <p>
-            Artworks may arrive as images, portals, certificates, maps, memory
-            units, speculative products or small pieces of alternative reality
-            trying to become operational.
+            Artworks may arrive as
+            <TypographicDoor
+              id="practice-reality-images"
+              zone="practice"
+              kind="trail"
+              voice="archive"
+              text="images"
+              group="reality-operational"
+            />,
+            <TypographicDoor
+              id="practice-portals"
+              zone="practice"
+              kind="portal"
+              voice="archive"
+              text="portals"
+              href="/narmail/"
+            />, certificates,
+            <TypographicDoor
+              id="practice-reality-maps"
+              zone="practice"
+              kind="trail"
+              voice="archive"
+              text="maps"
+              group="reality-operational"
+            />,
+            <TypographicDoor
+              id="practice-reality-memory"
+              zone="practice"
+              kind="trail"
+              voice="archive"
+              text="memory units"
+              group="reality-operational"
+            />,
+            <TypographicDoor
+              id="practice-reality-products"
+              zone="practice"
+              kind="trail"
+              voice="archive"
+              text="speculative products"
+              group="reality-operational"
+            /> or small pieces of
+            <TypographicDoor
+              id="practice-alternative-reality"
+              zone="practice"
+              kind="signal"
+              voice="archive"
+              text="alternative reality"
+              group="reality-operational"
+            /> trying to become
+            <TypographicDoor
+              id="practice-operational"
+              zone="practice"
+              kind="trail"
+              voice="archive"
+              text="operational"
+              group="reality-operational"
+            />.
           </p>
         </div>
         <blockquote>
@@ -382,11 +510,43 @@ const disputedChronology = [
       <div class="section-heading section-heading-row">
         <div>
           <p class="section-kicker">Selected systems</p>
-          <h2 id="works-title">Evidence of practice.</h2>
+          <h2 id="works-title">
+            <TypographicDoor
+              id="works-evidence"
+              zone="works"
+              kind="signal"
+              voice="archive"
+              text="Evidence of practice"
+              group="evidence-review"
+            />.
+          </h2>
         </div>
         <p>
-          Eight operational fragments. Evidence of what, exactly, remains under
-          review.
+          Eight
+          <TypographicDoor
+            id="works-fragments"
+            zone="works"
+            kind="trail"
+            voice="archive"
+            text="operational fragments"
+            group="evidence-review"
+          />. Evidence of
+          <TypographicDoor
+            id="works-exactly"
+            zone="works"
+            kind="trail"
+            voice="archive"
+            text="what, exactly"
+            group="evidence-review"
+          />, remains
+          <TypographicDoor
+            id="works-review"
+            zone="works"
+            kind="trail"
+            voice="archive"
+            text="under review"
+            group="evidence-review"
+          />.
         </p>
       </div>
       <div class="section-content work-list">
@@ -423,11 +583,52 @@ const disputedChronology = [
       <div class="section-heading section-heading-row">
         <div>
           <p class="section-kicker">Exhibitions & field record</p>
-          <h2 id="field-title">Not every mushroom arrives with paperwork.</h2>
+          <h2 id="field-title">
+            Not every mushroom arrives with
+            <TypographicDoor
+              id="field-paperwork"
+              zone="field"
+              kind="signal"
+              voice="human"
+              text="paperwork"
+              group="archive-verification"
+            />.
+          </h2>
         </div>
         <p>
-          The archive is real. Visibility is selective. Verification is
-          available.
+          The
+          <TypographicDoor
+            id="field-archive"
+            zone="field"
+            kind="trail"
+            voice="human"
+            text="archive"
+            group="archive-verification"
+          /> is
+          <TypographicDoor
+            id="field-real"
+            zone="field"
+            kind="trail"
+            voice="human"
+            text="real"
+            group="archive-verification"
+          />.
+          <TypographicDoor
+            id="field-visibility"
+            zone="field"
+            kind="trail"
+            voice="human"
+            text="Visibility is selective"
+            group="archive-verification"
+          />.
+          <TypographicDoor
+            id="field-verification"
+            zone="field"
+            kind="trail"
+            voice="human"
+            text="Verification is available"
+            group="archive-verification"
+          />.
         </p>
       </div>
       <div class="section-content field-list">
@@ -455,10 +656,18 @@ const disputedChronology = [
       <div class="section-number">04</div>
       <div class="section-heading">
         <p class="section-kicker">Alternative records</p>
-        <h2 id="records-title">Chronology and compost.</h2>
+        <h2 id="records-title">
+          <TypographicDoor
+            id="records-chronology"
+            zone="records"
+            kind="murmur"
+            voice="unstable"
+            text="Chronology and compost"
+          />.
+        </h2>
       </div>
 
-      <details class="myth-drawer">
+      <details class="myth-drawer" data-disputed-chronology>
         <summary>
           <span>Open the disputed Q888 chronology</span>
           <small>12 eras · dates unreliable · reality filed an objection</small>
@@ -471,71 +680,100 @@ const disputedChronology = [
             <h3>
               The official sequence of events has refused to remain sequential.
             </h3>
-            <p>
+            <p class="chronology-description">
               The following record combines documented Q888 projects, internal
               mythology, administrative mistakes and several events that
               occurred before their causes. Earth dates are supplied only when
               reality cooperates.
             </p>
+            <div class="chronology-order-control">
+              <button type="button" data-chronology-toggle aria-pressed="false">
+                <span data-chronology-label
+                  >Let the timeline remember differently</span
+                >
+                <span data-chronology-glyph aria-hidden="true">↝</span>
+              </button>
+              <p data-chronology-status aria-live="polite">
+                Filing order · numbered for administrative comfort
+              </p>
+            </div>
           </header>
 
           <ol
             class="myth-timeline"
-            aria-label="Disputed Q888 alternative history"
+            data-chronology-list
+            aria-label="Disputed Q888 alternative history in filing order"
           >
             {
-              disputedChronology.map((entry, index) => (
-                <li
-                  class={`myth-entry myth-tone-${entry.tone}${"concealed" in entry ? " myth-entry-concealed" : ""}`}
-                >
-                  <div class="myth-node" aria-hidden="true">
-                    <span>
-                      {"recordNumber" in entry
-                        ? entry.recordNumber
-                        : String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  {"concealed" in entry ? (
-                    <article
-                      class="myth-card myth-card-concealed"
-                      aria-label="Record 11: unknown"
-                    >
-                      <span aria-hidden="true">?</span>
-                    </article>
-                  ) : (
-                    <article class="myth-card">
-                      <p class="myth-era">{entry.era}</p>
-                      <h3>{entry.title}</h3>
-                      <p class="myth-story">{entry.story}</p>
-                      <footer class="myth-evidence">
-                        <span>{entry.evidence}</span>
-                        {entry.href && entry.linkLabel && (
-                          <a
-                            href={entry.href}
-                            target={
-                              entry.href.endsWith(".pdf") ? "_blank" : undefined
-                            }
-                            rel={
-                              entry.href.endsWith(".pdf")
-                                ? "noopener noreferrer"
-                                : undefined
-                            }
-                          >
-                            {entry.linkLabel} <span aria-hidden="true">↗</span>
-                          </a>
-                        )}
-                      </footer>
-                    </article>
-                  )}
-                </li>
-              ))
+              disputedChronology.map((entry, index) => {
+                const recordNumber =
+                  "recordNumber" in entry
+                    ? entry.recordNumber
+                    : String(index + 1).padStart(2, "0");
+                return (
+                  <li
+                    class={`myth-entry myth-tone-${entry.tone}${"concealed" in entry ? " myth-entry-concealed" : ""}`}
+                    data-chronology-entry
+                    data-record-number={recordNumber}
+                  >
+                    <div class="myth-node" aria-hidden="true">
+                      <span>{recordNumber}</span>
+                    </div>
+                    {"concealed" in entry ? (
+                      <article
+                        class="myth-card myth-card-concealed"
+                        aria-label="Record 11: unknown"
+                      >
+                        <span aria-hidden="true">?</span>
+                      </article>
+                    ) : (
+                      <article class="myth-card">
+                        <p class="myth-era">{entry.era}</p>
+                        <h3>{entry.title}</h3>
+                        <p class="myth-story">{entry.story}</p>
+                        <footer class="myth-evidence">
+                          <span>{entry.evidence}</span>
+                          {entry.href && entry.linkLabel && (
+                            <a
+                              href={entry.href}
+                              target={
+                                entry.href.endsWith(".pdf")
+                                  ? "_blank"
+                                  : undefined
+                              }
+                              rel={
+                                entry.href.endsWith(".pdf")
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
+                            >
+                              {entry.linkLabel}{" "}
+                              <span aria-hidden="true">↗</span>
+                            </a>
+                          )}
+                        </footer>
+                      </article>
+                    )}
+                  </li>
+                );
+              })
             }
           </ol>
 
           <footer class="chronology-closing">
             <span>Record completeness: emotionally sufficient</span>
             <span>Missing years: currently living elsewhere</span>
-            <span>Corrections: accepted by Nar-Mail only</span>
+            <span
+              >Corrections: accepted by
+              <TypographicDoor
+                id="records-narmail"
+                zone="records"
+                kind="portal"
+                voice="archive"
+                text="Nar-Mail"
+                href="/narmail/"
+              /> only</span
+            >
           </footer>
         </div>
       </details>
@@ -548,12 +786,42 @@ const disputedChronology = [
         <div class="compost-content">
           <div>
             <p class="compost-lead">
-              Some portals open. Some send a polite fog machine and keep the
-              submission fee.
+              Some portals open. Some send a
+              <TypographicDoor
+                id="records-fee-fog"
+                zone="records"
+                kind="trail"
+                voice="confession"
+                text="polite fog"
+                group="fee-compost"
+              /> machine and keep the
+              <TypographicDoor
+                id="records-submission-fee"
+                zone="records"
+                kind="signal"
+                voice="confession"
+                text="submission fee"
+                group="fee-compost"
+              />.
             </p>
             <p>
-              This drawer keeps those fog machines. Not with hatred. Mostly for
-              compost.
+              This drawer keeps those fog machines. Not with
+              <TypographicDoor
+                id="records-fee-hatred"
+                zone="records"
+                kind="trail"
+                voice="confession"
+                text="hatred"
+                group="fee-compost"
+              />. Mostly for
+              <TypographicDoor
+                id="records-fee-compost"
+                zone="records"
+                kind="trail"
+                voice="confession"
+                text="compost"
+                group="fee-compost"
+              />.
             </p>
           </div>
           <div class="protocol">
@@ -677,7 +945,14 @@ const disputedChronology = [
       <div class="section-heading">
         <p class="section-kicker">Earth record</p>
         <h2 id="earth-title">
-          For administrative purposes, the artist also exists on Earth.
+          For administrative purposes, the artist also
+          <TypographicDoor
+            id="earth-exists"
+            zone="earth"
+            kind="murmur"
+            voice="human"
+            text="exists on Earth"
+          />.
         </h2>
       </div>
       <div class="section-content earth-grid">
@@ -723,6 +998,15 @@ const disputedChronology = [
 </Layout>
 
 <script>
+  import {
+    cleanupTypographicDoors,
+    initTypographicDoors,
+  } from "../scripts/typographicDoors";
+  import {
+    cleanupDisputedChronology,
+    initDisputedChronology,
+  } from "../scripts/disputedChronology";
+
   // CHOICE: A tiny local drift engine borrows Dyno's object-energy without
   // bringing its louder motion system or another dependency into the dossier.
   interface ArchiveFloat {
@@ -836,12 +1120,24 @@ const disputedChronology = [
     document.addEventListener("DOMContentLoaded", initArchiveMotion, {
       once: true,
     });
+    document.addEventListener("DOMContentLoaded", initTypographicDoors, {
+      once: true,
+    });
+    document.addEventListener("DOMContentLoaded", initDisputedChronology, {
+      once: true,
+    });
   } else {
     initArchiveMotion();
+    initTypographicDoors();
+    initDisputedChronology();
   }
 
   document.addEventListener("astro:page-load", initArchiveMotion);
+  document.addEventListener("astro:page-load", initTypographicDoors);
+  document.addEventListener("astro:page-load", initDisputedChronology);
   document.addEventListener("astro:before-swap", cleanupArchiveMotion);
+  document.addEventListener("astro:before-swap", cleanupTypographicDoors);
+  document.addEventListener("astro:before-swap", cleanupDisputedChronology);
 </script>
 
 <style>
@@ -930,7 +1226,8 @@ const disputedChronology = [
   }
 
   .dossier a:focus-visible,
-  .dossier summary:focus-visible {
+  .dossier summary:focus-visible,
+  .chronology-order-control button:focus-visible {
     outline: 3px solid var(--cyan);
     outline-offset: 4px;
   }
@@ -959,7 +1256,7 @@ const disputedChronology = [
     bottom: 1.5rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.55rem;
+    font-size: 0.6rem;
     letter-spacing: 0.14em;
     writing-mode: vertical-rl;
     opacity: 0.68;
@@ -1069,7 +1366,7 @@ const disputedChronology = [
     right: 1rem;
     bottom: 0.8rem;
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.48rem;
+    font-size: 0.56rem;
     font-weight: 700;
     letter-spacing: 0.1em;
   }
@@ -1099,7 +1396,7 @@ const disputedChronology = [
   .bureaucracy-notice .bureaucracy-notice-label {
     color: var(--moss);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.64rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.11em;
     line-height: 1.55;
@@ -1113,7 +1410,7 @@ const disputedChronology = [
     margin: 0;
     color: var(--moss);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.64rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -1185,7 +1482,7 @@ const disputedChronology = [
       transparent 78%
     );
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: clamp(0.7rem, 1.1vw, 0.88rem);
+    font-size: clamp(0.78rem, 1.1vw, 0.9rem);
     font-weight: 700;
     letter-spacing: 0.12em;
     line-height: 1.35;
@@ -1194,7 +1491,7 @@ const disputedChronology = [
 
   .hero-role {
     margin: 2.5rem 0 1.3rem;
-    font-size: clamp(0.74rem, 1.2vw, 0.9rem);
+    font-size: clamp(0.82rem, 1.2vw, 0.94rem);
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1294,8 +1591,8 @@ const disputedChronology = [
     left: 0.8rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.49rem;
-    letter-spacing: 0.08em;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
     line-height: 1.65;
     text-transform: uppercase;
   }
@@ -1318,7 +1615,7 @@ const disputedChronology = [
       rgba(251, 250, 246, 0.82);
     box-shadow: 0.3rem 0.45rem 0 rgba(21, 23, 20, 0.07);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.48rem;
+    font-size: 0.6rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     line-height: 1.5;
@@ -1341,15 +1638,15 @@ const disputedChronology = [
   .record-list dt,
   .record-list dd {
     margin: 0;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     line-height: 1.45;
   }
 
   .record-list dt {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
-    letter-spacing: 0.08em;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
@@ -1391,9 +1688,9 @@ const disputedChronology = [
     padding: 1.12rem 0;
     color: var(--ink);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.59rem;
+    font-size: 0.66rem;
     font-weight: 700;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.07em;
     text-decoration: none;
     text-transform: uppercase;
   }
@@ -1545,7 +1842,7 @@ const disputedChronology = [
     margin-top: 1.25rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
+    font-size: 0.64rem;
     font-style: normal;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -1571,7 +1868,7 @@ const disputedChronology = [
   .practice-facts dt {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
+    font-size: 0.64rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -1676,8 +1973,8 @@ const disputedChronology = [
   .work-status {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
-    letter-spacing: 0.08em;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
@@ -1692,7 +1989,7 @@ const disputedChronology = [
 
   .work-description {
     color: var(--muted);
-    font-size: 0.91rem;
+    font-size: 0.98rem;
     line-height: 1.58;
   }
 
@@ -1749,15 +2046,15 @@ const disputedChronology = [
     margin-top: 0.4rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.56rem;
-    letter-spacing: 0.06em;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
   .field-row p {
     margin: 0;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.96rem;
     line-height: 1.65;
   }
 
@@ -1824,8 +2121,8 @@ const disputedChronology = [
   .myth-drawer summary small {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.06em;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
@@ -1886,7 +2183,7 @@ const disputedChronology = [
     margin: 0;
     color: var(--moss);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
+    font-size: 0.66rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -1902,12 +2199,73 @@ const disputedChronology = [
     line-height: 0.95;
   }
 
-  .chronology-intro > p:last-child {
+  .chronology-description {
     max-width: 40rem;
     margin: 0;
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.72;
+  }
+
+  .chronology-order-control {
+    max-width: 40rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .chronology-order-control button {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 0;
+    border: 0;
+    color: var(--ink);
+    background: transparent;
+    font-family: "Space Grotesk", "Syne", sans-serif;
+    font-size: 0.94rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .chronology-order-control [data-chronology-glyph] {
+    display: inline-block;
+    color: var(--moss);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 0.8;
+    transition: translate 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .chronology-order-control button:hover [data-chronology-glyph] {
+    translate: 0.2rem 0;
+  }
+
+  [data-chronology-mode="mycelial"]
+    .chronology-order-control
+    [data-chronology-glyph] {
+    translate: 0 0;
+  }
+
+  .chronology-order-control > p {
+    max-width: 23ch;
+    margin: 0;
+    color: var(--muted);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.045em;
+    line-height: 1.5;
+    text-align: right;
+    text-transform: uppercase;
   }
 
   .myth-timeline {
@@ -1976,7 +2334,7 @@ const disputedChronology = [
 
   .myth-node span {
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.55rem;
+    font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.04em;
   }
@@ -2019,9 +2377,9 @@ const disputedChronology = [
     margin: 0;
     color: var(--myth-accent, var(--clay));
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.55rem;
+    font-size: 0.64rem;
     font-weight: 700;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
   }
 
@@ -2037,7 +2395,7 @@ const disputedChronology = [
   .myth-story {
     margin: 0;
     color: var(--muted);
-    font-size: 0.91rem;
+    font-size: 0.98rem;
     line-height: 1.7;
   }
 
@@ -2054,8 +2412,8 @@ const disputedChronology = [
   .myth-evidence > span,
   .myth-evidence a {
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.5rem;
-    letter-spacing: 0.06em;
+    font-size: 0.64rem;
+    letter-spacing: 0.045em;
     line-height: 1.45;
     text-transform: uppercase;
   }
@@ -2138,8 +2496,8 @@ const disputedChronology = [
     padding: 1.15rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.51rem;
-    letter-spacing: 0.07em;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
     line-height: 1.5;
     text-align: center;
     text-transform: uppercase;
@@ -2167,7 +2525,7 @@ const disputedChronology = [
 
   .compost-content p,
   .protocol li {
-    font-size: 0.96rem;
+    font-size: 0.98rem;
     line-height: 1.68;
   }
 
@@ -2182,7 +2540,7 @@ const disputedChronology = [
     margin-top: 0;
     color: var(--moss);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
+    font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -2226,7 +2584,7 @@ const disputedChronology = [
     margin: 0;
     color: var(--moss);
     font-family: "Space Mono", ui-monospace, monospace !important;
-    font-size: 0.55rem !important;
+    font-size: 0.64rem !important;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -2248,7 +2606,7 @@ const disputedChronology = [
     border-radius: 50%;
     color: var(--clay);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.53rem;
+    font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.07em;
     text-align: center;
@@ -2281,14 +2639,14 @@ const disputedChronology = [
   .compost-case-facts dt {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.54rem;
-    letter-spacing: 0.08em;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
   .compost-case-facts dd {
     margin: 1rem 0 0;
-    font-size: 0.93rem;
+    font-size: 0.98rem;
     line-height: 1.5;
   }
 
@@ -2312,7 +2670,7 @@ const disputedChronology = [
   .compost-reason p,
   .compost-reason li,
   .compost-public-note p {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     line-height: 1.72;
   }
 
@@ -2353,7 +2711,7 @@ const disputedChronology = [
 
   .compost-case-verdict span {
     padding: 1.25rem;
-    font-size: 0.88rem;
+    font-size: 0.94rem;
     line-height: 1.45;
   }
 
@@ -2366,8 +2724,8 @@ const disputedChronology = [
     margin-bottom: 0.5rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.51rem;
-    letter-spacing: 0.08em;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
@@ -2429,8 +2787,8 @@ const disputedChronology = [
     margin: 0;
     color: #b7c8ae;
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.57rem;
-    letter-spacing: 0.1em;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
@@ -2460,7 +2818,7 @@ const disputedChronology = [
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     color: var(--paper-light);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-decoration: none;
@@ -2496,7 +2854,7 @@ const disputedChronology = [
     color: #a9a89e;
     padding-right: 2rem;
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.53rem;
+    font-size: 0.64rem;
     line-height: 1.6;
   }
 
@@ -2509,8 +2867,8 @@ const disputedChronology = [
     border-top: 1px solid var(--ink);
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.53rem;
-    letter-spacing: 0.08em;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
@@ -2876,6 +3234,17 @@ const disputedChronology = [
       padding: 2.25rem 1.25rem 3rem;
     }
 
+    .chronology-order-control {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chronology-order-control > p {
+      max-width: none;
+      text-align: left;
+    }
+
     .myth-timeline {
       padding: 0.5rem 1rem 3rem 3.4rem;
     }
@@ -3026,6 +3395,7 @@ const disputedChronology = [
     .work-name,
     .work-arrow,
     .myth-drawer summary,
+    .chronology-order-control [data-chronology-glyph],
     .myth-card,
     .contact-actions a,
     .contact-actions a::after {

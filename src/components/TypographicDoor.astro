@@ -1,0 +1,169 @@
+---
+type DoorKind = "murmur" | "signal" | "trail" | "portal";
+type DoorVoice = "unstable" | "archive" | "confession" | "human";
+type TrailStrength = "signal" | "spill";
+
+interface Props {
+  id: string;
+  zone: "record" | "practice" | "works" | "field" | "records" | "earth";
+  kind: DoorKind;
+  voice: DoorVoice;
+  text: string;
+  group?: string;
+  href?: string;
+  pinned?: boolean;
+  strength?: TrailStrength;
+}
+
+const {
+  id,
+  zone,
+  kind,
+  voice,
+  text,
+  group,
+  href,
+  pinned = false,
+  strength = "signal",
+} = Astro.props;
+
+const words = text.split(" ");
+---
+
+<span
+  class="q888-door"
+  data-q888-door
+  data-door-id={id}
+  data-door-zone={zone}
+  data-door-kind={kind}
+  data-door-voice={voice}
+  data-door-group={group}
+  data-door-href={href}
+  data-door-pinned={pinned ? "true" : undefined}
+  data-door-strength={strength}
+  aria-label={text}
+>
+  {
+    words.map((word, wordIndex) => (
+      <>
+        <span class="q888-door__word" aria-hidden="true">
+          {Array.from(word).map((character) => (
+            <span
+              class="q888-door__glyph"
+              data-door-glyph
+              data-door-character={character}
+            >
+              <span class="q888-door__ink">{character}</span>
+            </span>
+          ))}
+        </span>
+        {wordIndex < words.length - 1 && " "}
+      </>
+    ))
+  }
+</span>
+
+<style>
+  /*
+   * The visible text is never duplicated or moved. JavaScript locks each
+   * glyph's original width before a few letters borrow another typeface, so
+   * the paragraph keeps the same wrapping throughout the interaction.
+   */
+  .q888-door {
+    position: relative;
+    display: inline;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+  }
+
+  .q888-door__word {
+    white-space: nowrap;
+  }
+
+  .q888-door__glyph {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: var(--q888-door-glyph-width, auto);
+    color: inherit;
+    font-family: inherit;
+    font-size: 1em;
+    font-style: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-align: center;
+    text-transform: inherit;
+    vertical-align: baseline;
+  }
+
+  .q888-door__glyph::before {
+    content: attr(data-door-character);
+    visibility: hidden;
+    font: inherit;
+  }
+
+  .q888-door__ink {
+    position: absolute;
+    inset: 0;
+    display: block;
+    color: inherit;
+    font: inherit;
+    text-align: center;
+    text-transform: inherit;
+    transition: font-weight 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .q888-door__glyph.is-door-weight .q888-door__ink {
+    font-weight: 700;
+  }
+
+  /* Only a few letters receive these faces; the rest change weight alone. */
+  .q888-door[data-door-voice="archive"]
+    .q888-door__glyph.is-door-family
+    .q888-door__ink,
+  .q888-door[data-door-voice="human"]
+    .q888-door__glyph.is-door-family
+    .q888-door__ink {
+    font-family: "Playfair Display", "Iowan Old Style", Georgia, serif;
+    font-style: italic;
+  }
+
+  .q888-door[data-door-voice="confession"]
+    .q888-door__glyph.is-door-family
+    .q888-door__ink {
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-style: normal;
+  }
+
+  .q888-door[data-door-voice="unstable"]
+    .q888-door__glyph.is-door-family
+    .q888-door__ink {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-style: normal;
+  }
+
+  .q888-door.is-awake[data-door-kind="murmur"],
+  .q888-door.is-awake[data-door-kind="signal"] {
+    cursor: help;
+  }
+
+  .q888-door.is-awake[data-door-kind="portal"] {
+    cursor: alias;
+  }
+
+  .q888-door.is-awake:focus-visible {
+    border-radius: 0.1rem;
+    outline: 2px solid currentColor;
+    outline-offset: 0.16rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .q888-door__ink {
+      transition: none;
+    }
+  }
+</style>
