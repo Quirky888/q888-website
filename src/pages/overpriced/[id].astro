@@ -9,32 +9,38 @@ import InvestorChatbot from "../../components/InvestorChatbot.astro";
 
 export async function getStaticPaths() {
   const stickers = await getCollection("stickers");
-  const paths = [];
-  
-  for (const sticker of stickers) {
-    paths.push({
-      params: { id: sticker.data.id },
-      props: { sticker: sticker.data }
-    });
-    
-    if (sticker.data.slug && sticker.data.slug !== sticker.data.id) {
-      paths.push({
-        params: { id: sticker.data.slug },
-        props: { sticker: sticker.data }
-      });
-    }
-  }
-  
-  return paths;
+  // CHOICE: Emit one human-readable URL per artwork so authority is not split
+  // between an internal inventory ID and its public slug.
+  return stickers.map((sticker) => ({
+    params: { id: sticker.data.slug || sticker.data.id.toLowerCase() },
+    props: { sticker: sticker.data },
+  }));
 }
 
 const { id } = Astro.params;
 const { sticker } = Astro.props;
 
 const pageTitle = sticker ? `${sticker.title} — Overpriced Stickers — Q888` : "Overpriced Sticker — Q888";
+const pageDescription = sticker
+  ? `${sticker.title} is a limited-edition Q888 conceptual art sticker. ${sticker.tagline}`
+  : "A limited-edition conceptual art sticker from Q888's Overpriced collection.";
+const pageImage = sticker?.imageUrl || sticker?.gallery?.[0] || "/images/overpriced_stickers.webp";
+const canonicalPath = `/overpriced/${sticker?.slug || id}/`;
 ---
 
-<Layout title={pageTitle}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image={pageImage}
+  canonicalPath={canonicalPath}
+  mainEntityType="VisualArtwork"
+  mainEntityName={sticker?.title || "Overpriced Sticker"}
+  mainEntityData={{
+    artMedium: sticker?.material,
+    dateCreated: sticker?.year,
+  }}
+  keywords={[...(sticker?.tags || []), "Overpriced Stickers", "conceptual art", "Q888"]}
+>
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />

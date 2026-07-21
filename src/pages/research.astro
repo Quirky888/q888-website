@@ -1,0 +1,379 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SubPageNav from "../components/SubPageNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+import { ARTIST_ID, SITE_URL } from "../lib/siteIdentity";
+
+const concepts = [
+  {
+    id: "artificial-entelechy",
+    code: "AE / 01",
+    title: "Artificial Entelechy",
+    status: "Development framework",
+    summary:
+      "Artificial Entelechy treats AI as a Meaning Engine: a participant that helps an idea unfold towards its inner direction without pretending the system possesses an independent human purpose.",
+    question: "What is this idea trying to become, and what structure lets it arrive without losing its soul?",
+  },
+  {
+    id: "adaptive-competence",
+    code: "AC / 02",
+    title: "Adaptive Competence",
+    status: "Research question",
+    summary:
+      "Adaptive Competence asks what a system can detect, preserve, negotiate, or become within its own conditions, instead of measuring every intelligence against a human-shaped test.",
+    question: "What becomes visible when competence is judged from inside the organism rather than above it?",
+  },
+  {
+    id: "human-code",
+    code: "HC / 03",
+    title: "Human Code",
+    status: "Working method",
+    summary:
+      "Human Code is functional software carrying readable intention, ethics, memory, humour, and meaning. The code should work, remain understandable to its human owner, and still feel alive.",
+    question: "Can software remain legible to its maker while carrying a recognisable human voice?",
+  },
+  {
+    id: "digital-dna",
+    code: "DNA / 04",
+    title: "Q888 Digital DNA",
+    status: "Authorial system · v0.2",
+    summary:
+      "Q888 Digital DNA separates stable values from working mode, expression lens, project environment, visible phenotype, and concrete human feedback. It is an authorial layer for AI-assisted creation, not an aesthetic preset.",
+    question: "How can AI-assisted work preserve authorship without freezing a living practice into a caricature?",
+  },
+  {
+    id: "square-bubbles",
+    code: "SQB / 05",
+    title: "Square Bubbles",
+    status: "Systems proposition",
+    summary:
+      "Square Bubbles describe structured logic that remains soft, playful, negotiable, and alive: clear enough to protect conditions, but not so rigid that it decides every outcome.",
+    question: "Can boundaries protect freedom without turning into control?",
+  },
+];
+
+const researchMetaItems = [
+  { field: "paper_state", label: "PAPER_STATE", value: "DRAFT", width: 5 },
+  { field: "peer_review", label: "PEER_REVIEW", value: "NOT YET", width: 7 },
+  { field: "meaning", label: "MEANING", value: "ACTIVE", width: 6 },
+  { field: "certainty", label: "CERTAINTY", value: "NEGOTIABLE", width: 10 },
+];
+
+const structuredData = [
+  {
+    "@type": "CreativeWork",
+    "@id": `${SITE_URL}/research/#digital-dna-draft`,
+    name: "Q888 Digital DNA Development Draft",
+    description:
+      "An evolving authorial layer for preserving meaning, working modes, expression lenses, project context, and approved human feedback across AI-assisted creation.",
+    author: { "@id": ARTIST_ID },
+    datePublished: "2026-07",
+    version: "Development Draft · July 2026",
+    encodingFormat: "application/pdf",
+    url: `${SITE_URL}/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf`,
+  },
+  {
+    "@type": "CreativeWork",
+    "@id": `${SITE_URL}/research/#ae-adaptive-competence-draft`,
+    name: "Artificial Entelechy and Adaptive Competence Development Draft",
+    description:
+      "An artist-developer research draft about AI as a Meaning Engine and competence understood from within a system's own conditions.",
+    author: { "@id": ARTIST_ID },
+    datePublished: "2026-07",
+    version: "Development Draft · July 2026",
+    encodingFormat: "application/pdf",
+    url: `${SITE_URL}/docs/Q888_AE_Adaptive_Competence_Development_Draft_July_2026.pdf`,
+  },
+];
+---
+
+<Layout
+  title="Q888 Research — Artificial Entelechy, Adaptive Competence & Human Code"
+  description="Q888 research by Aleksandrs Sestakovs on Artificial Entelechy, Adaptive Competence, Human Code, Square Bubbles, and authorial systems for AI-assisted creation."
+  image="/images/square_bubble.webp"
+  canonicalPath="/research/"
+  pageType="collection"
+  keywords={["Artificial Entelechy", "Adaptive Competence", "Human Code", "Q888 Digital DNA", "Square Bubbles", "AI authorship"]}
+  structuredData={structuredData}
+>
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
+  <SystemMeta position="top" customItems={researchMetaItems} />
+
+  <main class="research-shell">
+    <header class="research-hero">
+      <p class="research-kicker">Q888 Research Field · Edinburgh · Earth</p>
+      <h1>Meaning systems for human–AI creation.</h1>
+      <p class="research-lead">
+        Aleksandrs Sestakovs, working artistically as Q888, develops concepts for
+        making with AI without surrendering authorship, human legibility, or
+        intentional strangeness.
+      </p>
+      <aside class="research-notice" aria-label="Research status">
+        <strong>Earth record:</strong> these are active development frameworks,
+        not peer-reviewed claims. The language may be mythic; the status is not.
+      </aside>
+    </header>
+
+    <section class="research-index" aria-labelledby="research-index-title">
+      <div class="research-section-heading">
+        <p>Filed concepts</p>
+        <h2 id="research-index-title">Five doors, currently capable of opening.</h2>
+      </div>
+
+      <div class="research-grid">
+        {concepts.map((concept) => (
+          <article class="research-card" id={concept.id}>
+            <div class="research-card-meta">
+              <span>{concept.code}</span>
+              <span>{concept.status}</span>
+            </div>
+            <h3>{concept.title}</h3>
+            <p>{concept.summary}</p>
+            <blockquote>{concept.question}</blockquote>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="research-documents" aria-labelledby="research-documents-title">
+      <div class="research-section-heading">
+        <p>Source documents</p>
+        <h2 id="research-documents-title">Development drafts · July 2026</h2>
+      </div>
+
+      <div class="research-document-list">
+        <article>
+          <div>
+            <p class="document-code">DOC / DNA-02</p>
+            <h3>Q888 Digital DNA</h3>
+            <p>
+              The authorial framework: stable values, working modes, expression
+              lenses, project environments, visible phenotypes, and human feedback.
+            </p>
+          </div>
+          <a href="/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf">
+            Read PDF <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article>
+          <div>
+            <p class="document-code">DOC / AE-AC-01</p>
+            <h3>Artificial Entelechy & Adaptive Competence</h3>
+            <p>
+              A working field for meaning-oriented AI collaboration and forms of
+              competence that do not need to imitate a human in order to matter.
+            </p>
+          </div>
+          <a href="/docs/Q888_AE_Adaptive_Competence_Development_Draft_July_2026.pdf">
+            Read PDF <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <footer class="research-footer">
+      <p>
+        Preferred attribution: <strong>Aleksandrs Sestakovs / Q888</strong>.
+        Questions, criticism, and research conversations may enter through
+        <a href="mailto:hello@q888.space">hello@q888.space</a>.
+      </p>
+      <a href="/bureaucracy/">Inspect the artist dossier <span aria-hidden="true">→</span></a>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  .research-shell {
+    min-height: 100vh;
+    padding: clamp(8rem, 14vw, 13rem) clamp(1.5rem, 6vw, 6rem) 6rem;
+    color: #e8e5df;
+    background:
+      radial-gradient(circle at 82% 8%, rgba(71, 140, 132, 0.2), transparent 28rem),
+      radial-gradient(circle at 8% 52%, rgba(139, 101, 167, 0.14), transparent 32rem),
+      #0a0b0c;
+  }
+
+  .research-hero,
+  .research-index,
+  .research-documents,
+  .research-footer {
+    width: min(100%, 76rem);
+    margin-inline: auto;
+  }
+
+  .research-kicker,
+  .research-section-heading > p,
+  .research-card-meta,
+  .document-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8da69f;
+  }
+
+  .research-hero h1 {
+    max-width: 12ch;
+    margin-top: 1.25rem;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+
+  .research-lead {
+    max-width: 47ch;
+    margin-top: 3rem;
+    font-size: clamp(1.25rem, 2.5vw, 2.15rem);
+    line-height: 1.35;
+    color: #c8c6c1;
+  }
+
+  .research-notice {
+    max-width: 54rem;
+    margin-top: 3rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid rgba(232, 229, 223, 0.16);
+    border-radius: 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #aaa9a5;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .research-index,
+  .research-documents {
+    margin-top: clamp(7rem, 14vw, 12rem);
+  }
+
+  .research-section-heading h2 {
+    max-width: 18ch;
+    margin-top: 0.8rem;
+    font-size: clamp(2rem, 4.5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 3.5rem;
+    border: 1px solid rgba(232, 229, 223, 0.14);
+    background: rgba(232, 229, 223, 0.14);
+  }
+
+  .research-card {
+    min-height: 28rem;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: #0d0f10;
+    scroll-margin-top: 5rem;
+  }
+
+  .research-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .research-card-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .research-card h3 {
+    margin-top: 5rem;
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .research-card > p {
+    max-width: 48ch;
+    margin-top: 2rem;
+    color: #c1bfba;
+    line-height: 1.75;
+  }
+
+  .research-card blockquote {
+    max-width: 45ch;
+    margin-top: 2.5rem;
+    padding-left: 1rem;
+    border-left: 1px solid #8da69f;
+    color: #8da69f;
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  .research-document-list {
+    margin-top: 3.5rem;
+    border-top: 1px solid rgba(232, 229, 223, 0.18);
+  }
+
+  .research-document-list article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: end;
+    padding-block: 2.5rem;
+    border-bottom: 1px solid rgba(232, 229, 223, 0.18);
+  }
+
+  .research-document-list h3 {
+    margin-top: 0.65rem;
+    font-size: clamp(1.5rem, 3vw, 2.6rem);
+    font-weight: 400;
+  }
+
+  .research-document-list article p:not(.document-code) {
+    max-width: 60ch;
+    margin-top: 1rem;
+    color: #aaa9a5;
+    line-height: 1.65;
+  }
+
+  .research-document-list a,
+  .research-footer a {
+    color: #b7d8cf;
+    text-underline-offset: 0.3em;
+  }
+
+  .research-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 8rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(232, 229, 223, 0.18);
+    color: #aaa9a5;
+    line-height: 1.7;
+  }
+
+  .research-footer p {
+    max-width: 56ch;
+  }
+
+  @media (max-width: 720px) {
+    .research-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .research-card:last-child {
+      grid-column: auto;
+    }
+
+    .research-document-list article,
+    .research-footer {
+      grid-template-columns: 1fr;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+</style>
+

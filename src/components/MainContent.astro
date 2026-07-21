@@ -1,27 +1,18 @@
 ---
 import SystemMeta from "./SystemMeta.astro";
 import SlimNav from "./SlimNav.astro";
-import SubPageNav from "./SubPageNav.astro";
 import LandingHero from "./LandingHero.astro";
 import ProjectsThreshold from "./ProjectsThreshold.astro";
 import ProjectDrawer from "./ProjectDrawer.astro";
 import InfociganSection from "./InfociganSection.astro";
 import ContactSection from "./ContactSection.astro";
 
-interface Props {
-  projectToOpen?: "digital-ink" | "edinburgh-map";
-}
-
-const { projectToOpen } = Astro.props;
 ---
 
-{projectToOpen && <SubPageNav />}
-<div class={projectToOpen ? "hidden md:block" : ""}>
-  <SlimNav />
-</div>
+<SlimNav />
 <SystemMeta position="top" />
 
-<main class="relative min-h-[100dvh] overflow-x-hidden pt-10 md:pt-11" data-open-project={projectToOpen}>
+<main class="relative min-h-[100dvh] overflow-x-hidden pt-10 md:pt-11">
   <section id="landing" data-section="landing" class="relative -mt-10 md:-mt-11">
     <LandingHero />
   </section>
@@ -42,7 +33,7 @@ const { projectToOpen } = Astro.props;
 
 <script>
   import { initThresholdMotion } from "../scripts/thresholdMotion";
-  import { initProjectDrawer, destroyProjectDrawer, openDrawer } from "../scripts/drawerNav";
+  import { initProjectDrawer, destroyProjectDrawer } from "../scripts/drawerNav";
   import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
   import { initIpGeoCoords } from "../scripts/ipGeoCoords";
   import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
@@ -63,32 +54,6 @@ const { projectToOpen } = Astro.props;
 
     didInit = true;
 
-    const projectToOpen = document.querySelector("main")?.getAttribute("data-open-project");
-    if (projectToOpen && !window.location.hash) {
-      const scrollAndOpen = async () => {
-        const target = document.getElementById("projects");
-        if (target) {
-          target.scrollIntoView({ behavior: "instant" });
-          // double check scroll after a tiny frame jump to fight browser scroll restoration
-          requestAnimationFrame(() => {
-             target.scrollIntoView({ behavior: "instant" });
-          });
-        }
-        
-        requestAnimationFrame(async () => {
-          if (projectToOpen === "edinburgh-map") await openDrawer("edinburgh-map", "right", false);
-          else if (projectToOpen === "digital-ink") await openDrawer("digital-ink", "left", false);
-        });
-      };
-
-      // If we're already initialized or it's a quick navigation, we might need a tiny delay
-      // to let the browser finish its initial scroll handling.
-      if (document.readyState === "complete") {
-        scrollAndOpen();
-      } else {
-        window.addEventListener("load", scrollAndOpen, { once: true });
-      }
-    }
   }
 
   function cleanup() {

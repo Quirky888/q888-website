@@ -1,0 +1,12 @@
+# Q888 is publicly discoverable. Search visibility and model training are separate controls.
+User-agent: *
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://q888.space/sitemap.xml
+

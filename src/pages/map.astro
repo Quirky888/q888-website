@@ -1,8 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import MainContent from "../components/MainContent.astro";
+import ProjectDrawer from "../components/ProjectDrawer.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SubPageNav from "../components/SubPageNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
 ---
 
-<Layout title="Edinburgh Magical Map — Q888">
-  <MainContent projectToOpen="edinburgh-map" />
+<Layout
+  title="Edinburgh Magical Map — Interactive Mythology by Q888"
+  description="An interactive cartographic artwork by Edinburgh artist Aleksandrs Sestakovs / Q888, layering fictional histories, memory, and hidden doors onto the real city."
+  image="/images/Edinburgh_Magic.webp"
+  canonicalPath="/map/"
+  mainEntityType="CreativeWork"
+  mainEntityName="Edinburgh Magical Map"
+  keywords={["Edinburgh art map", "interactive mythology", "fictional cartography", "Edinburgh artist", "Q888"]}
+>
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
+  <SystemMeta position="top" />
+  <ProjectDrawer standaloneProject="edinburgh-map" />
 </Layout>
+
+<script>
+  import { destroyEdinburghMap, initEdinburghMap } from "../scripts/edinburghMap";
+
+  function initializeStandaloneMap() {
+    initEdinburghMap();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeStandaloneMap, { once: true });
+  } else {
+    initializeStandaloneMap();
+  }
+
+  document.addEventListener("astro:page-load", initializeStandaloneMap);
+  document.addEventListener("astro:before-swap", destroyEdinburghMap);
+</script>
