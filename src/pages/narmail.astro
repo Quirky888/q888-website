@@ -14,7 +14,15 @@ if (!narMailEntry || narMailEntry.data.slug !== "nar-mail-express") {
 const narMail = narMailEntry.data;
 ---
 
-<Layout title="Nar-Mail Express — Q888">
+<Layout
+  title="Nar-Mail Express — Interdimensional Postal Artwork by Q888"
+  description="Nar-Mail Express is a conceptual postal artwork by Q888: two-headed cat couriers carry messages across incompatible realities and deliver them when the receiver is ready."
+  image={narMail.heroImage}
+  canonicalPath="/narmail/"
+  mainEntityType="CreativeWork"
+  mainEntityName="Nar-Mail Express"
+  keywords={["Nar-Mail Express", "postal art", "mail art", "speculative art", "two-headed cat", "Q888"]}
+>
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />

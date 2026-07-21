@@ -1,11 +1,138 @@
 ---
 import "../styles/global.css";
+import {
+	ARTIST_ID,
+	ARTIST_NAME,
+	ARTIST_PROFILES,
+	DEFAULT_DESCRIPTION,
+	DEFAULT_SOCIAL_IMAGE,
+	SITE_NAME,
+	SITE_URL,
+	WEBSITE_ID,
+	type SchemaNode,
+} from "../lib/siteIdentity";
 
 interface Props {
 	title?: string;
+	description?: string;
+	image?: string;
+	canonicalPath?: string;
+	pageType?: "website" | "article" | "profile" | "collection";
+	mainEntityType?: "CreativeWork" | "VisualArtwork" | "SoftwareApplication" | "Product";
+	mainEntityName?: string;
+	mainEntityData?: SchemaNode;
+	keywords?: string[];
+	noindex?: boolean;
+	structuredData?: SchemaNode[];
 }
 
-const { title = "Q888" } = Astro.props;
+const {
+	title = SITE_NAME,
+	description = DEFAULT_DESCRIPTION,
+	image = DEFAULT_SOCIAL_IMAGE,
+	canonicalPath = Astro.url.pathname,
+	pageType = "website",
+	mainEntityType,
+	mainEntityName,
+	mainEntityData = {},
+	keywords = [],
+	noindex = false,
+	structuredData = [],
+} = Astro.props;
+
+const siteBase = Astro.site ?? new URL(SITE_URL);
+const canonicalUrl = new URL(canonicalPath, siteBase).href;
+const socialImageUrl = new URL(image, siteBase).href;
+const pageId = `${canonicalUrl}#webpage`;
+const mainEntityId = `${canonicalUrl}#main-entity`;
+
+const pageSchemaType = {
+	website: "WebPage",
+	article: "Article",
+	profile: "ProfilePage",
+	collection: "CollectionPage",
+}[pageType];
+
+const artistNode: SchemaNode = {
+	"@type": "Person",
+	"@id": ARTIST_ID,
+	name: ARTIST_NAME,
+	alternateName: SITE_NAME,
+	description: DEFAULT_DESCRIPTION,
+	url: `${SITE_URL}/bureaucracy/`,
+	image: `${SITE_URL}/images/bur-icons/mushroom.png`,
+	jobTitle: "Artist-developer",
+	homeLocation: {
+		"@type": "Place",
+		name: "Edinburgh, Scotland",
+	},
+	sameAs: ARTIST_PROFILES,
+};
+
+const websiteNode: SchemaNode = {
+	"@type": "WebSite",
+	"@id": WEBSITE_ID,
+	url: `${SITE_URL}/`,
+	name: SITE_NAME,
+	alternateName: ["Q888 Space", "Quirky888"],
+	description: DEFAULT_DESCRIPTION,
+	inLanguage: "en",
+	publisher: { "@id": ARTIST_ID },
+};
+
+const pageNode: SchemaNode = {
+	"@type": pageSchemaType,
+	"@id": pageId,
+	url: canonicalUrl,
+	name: title,
+	description,
+	inLanguage: "en",
+	isPartOf: { "@id": WEBSITE_ID },
+	about: pageType === "profile" ? { "@id": ARTIST_ID } : undefined,
+	mainEntity:
+		pageType === "profile"
+			? { "@id": ARTIST_ID }
+			: mainEntityType
+				? { "@id": mainEntityId }
+				: undefined,
+	primaryImageOfPage: {
+		"@type": "ImageObject",
+		url: socialImageUrl,
+		contentUrl: socialImageUrl,
+		creator: { "@id": ARTIST_ID },
+		creditText: `${ARTIST_NAME} / ${SITE_NAME}`,
+		copyrightNotice: `© ${ARTIST_NAME} / ${SITE_NAME}`,
+	},
+};
+
+const mainEntityNode: SchemaNode | null = mainEntityType
+	? {
+			"@type": mainEntityType,
+			"@id": mainEntityId,
+			name: mainEntityName ?? title.replace(/\s+[—|]\s+.*$/, ""),
+			description,
+			url: canonicalUrl,
+			image: socialImageUrl,
+			creator: { "@id": ARTIST_ID },
+			copyrightHolder: { "@id": ARTIST_ID },
+			keywords: keywords.length ? keywords.join(", ") : undefined,
+			...mainEntityData,
+		}
+	: null;
+
+const graph = [
+	artistNode,
+	websiteNode,
+	pageNode,
+	...(mainEntityNode ? [mainEntityNode] : []),
+	...structuredData,
+];
+
+// LEARN: Escaping "<" prevents local content from accidentally closing the JSON-LD script tag.
+const jsonLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@graph": graph,
+}).replace(/</g, "\\u003c");
 ---
 
 <html lang="en">
@@ -19,6 +146,26 @@ const { title = "Q888" } = Astro.props;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+		<meta name="author" content={`${ARTIST_NAME} / ${SITE_NAME}`} />
+		<meta name="robots" content={noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:type" content={pageType === "article" ? "article" : pageType === "profile" ? "profile" : "website"} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={socialImageUrl} />
+		<meta property="og:image:alt" content={title} />
+		<meta property="og:locale" content="en_GB" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImageUrl} />
+		<script type="application/ld+json" set:html={jsonLd} is:inline></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- Critical fonts: load immediately -->
@@ -32,7 +179,7 @@ const { title = "Q888" } = Astro.props;
 		<link rel="preload" as="image" href="/images/q888_mobile.avif" media="(max-width: 768px) and (orientation: portrait)" fetchpriority="high" />
 		<link rel="preload" as="image" href="/images/Q888_hero.webp" media="(min-width: 769px)" fetchpriority="high" />
 		<!-- Split-flap: deferred, skips mobile parse entirely -->
-		<script type="module" src="/vendor/hotfx-split-flap.js"></script>
+		<script type="module" src="/vendor/hotfx-split-flap.js" is:inline></script>
 	</head>
 	<body>
 		<slot />

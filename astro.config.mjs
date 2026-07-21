@@ -12,6 +12,8 @@ const allowedHosts = (env.ALLOWED_HOSTS ?? '')
 
 // https://astro.build/config
 export default defineConfig({
+  // Search engines and generated endpoints use this as the canonical origin.
+  site: 'https://q888.space',
   vite: {
     plugins: [
       /** @type {any} */

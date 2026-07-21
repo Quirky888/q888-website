@@ -1,23 +1,29 @@
 ---
+interface Props {
+  standaloneProject?: "digital-ink" | "edinburgh-map";
+}
+
+const { standaloneProject } = Astro.props;
 ---
 
 <div 
   id="project-drawer" 
   data-drawer 
-  class="drawer-root"
-  aria-hidden="true"
+  class:list={["drawer-root", { "drawer-root--standalone": Boolean(standaloneProject) }]}
+  aria-hidden={standaloneProject ? "false" : "true"}
 >
   <!-- Digital Ink Panel -->
+  {(!standaloneProject || standaloneProject === "digital-ink") && (
   <div 
     data-drawer-panel="digital-ink" 
     data-direction="left"
-    class="drawer-panel di-theme"
-    role="dialog"
-    aria-modal="true"
+    class:list={["drawer-panel di-theme", { "is-active": standaloneProject === "digital-ink" }]}
+    role={standaloneProject ? undefined : "dialog"}
+    aria-modal={standaloneProject ? undefined : "true"}
     aria-label="Digital Ink project details"
   >
     <div class="drawer-scroll">
-      <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>
+      {!standaloneProject && <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>}
       <section class="di-panel di-body overflow-x-clip">
         <!-- Q888:SECTION_START id="di-header" -->
         <div class="pt-32 sm:pt-36 pb-16" style="padding-left: var(--drawer-pad); padding-right: var(--drawer-pad);" data-di-reveal-section>
@@ -25,6 +31,11 @@
             <h1 class="di-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-zinc-50">
               DIGITAL INK
             </h1>
+
+            <p class="mt-7 max-w-[70ch] font-mono text-sm leading-relaxed tracking-wide text-zinc-400">
+              EARTH RECORD: An iPad art application and post-digital medium created
+              in Edinburgh by Aleksandrs Sestakovs / Q888. Released in 2026.
+            </p>
             
             <p class="mt-8 mx-auto text-[clamp(1.9rem,3vw,3.4rem)] leading-[1.12] text-zinc-200">
               Digital Ink is a post-digital artistic medium defined by deliberate scarcity. Conceived as an antidote to the frictionless reproducibility of traditional digital tools, it treats the digital canvas as a strictly finite resource. By compressing an entire photograph into a single, irreducible pixel, the project returns the "aura" of authenticity to the digital realm—where every brushstroke carries the weight of a sacrificed memory.
@@ -457,25 +468,33 @@
       </section>
     </div>
   </div>
+  )}
 
   <!-- Edinburgh Magical Map Panel -->
+  {(!standaloneProject || standaloneProject === "edinburgh-map") && (
   <div 
     data-drawer-panel="edinburgh-map" 
     data-direction="right"
-    class="drawer-panel eden-panel"
-    role="dialog"
-    aria-modal="true"
+    class:list={["drawer-panel eden-panel", { "is-active": standaloneProject === "edinburgh-map" }]}
+    role={standaloneProject ? undefined : "dialog"}
+    aria-modal={standaloneProject ? undefined : "true"}
     aria-label="Edinburgh Magical Map project details"
     data-eden-map-section
   >
     <div class="drawer-scroll">
-      <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>
+      {!standaloneProject && <button type="button" data-drawer-close class="drawer-close-x hidden lg:flex" aria-label="Close">×</button>}
       <!-- Q888:SECTION_START id="eden-hero" -->
       <section class="eden-hero-section px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 pb-16">
         <div class="mx-auto">
           <h1 class="eden-headline uppercase font-medium tracking-[-0.045em] leading-[0.88] text-[clamp(4rem,9vw,10.5rem)] text-black">
             EDINBURGH MAGICAL MAP
           </h1>
+
+          <p class="mt-7 max-w-[70ch] font-mono text-sm leading-relaxed tracking-wide text-zinc-600">
+            EARTH RECORD: An interactive cartographic artwork by Edinburgh-based
+            artist-developer Aleksandrs Sestakovs / Q888, layering fictional histories
+            and hidden doors onto real city geography.
+          </p>
           
           <div class="mt-12 mx-auto text-[clamp(1.6rem,2.8vw,3rem)] leading-[1.15] text-black">
             <p>
@@ -593,6 +612,7 @@
       </div>
     </div>
   </div>
+  )}
 </div>
 
 <style>
@@ -618,6 +638,26 @@
   .drawer-panel.is-active {
     opacity: 1;
     visibility: visible;
+  }
+
+  /* CHOICE: Dedicated routes reuse the artwork, but participate in normal document flow. */
+  .drawer-root--standalone {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    min-height: 100vh;
+    pointer-events: auto;
+  }
+
+  .drawer-root--standalone .drawer-panel {
+    position: relative;
+    inset: auto;
+    min-height: 100vh;
+  }
+
+  .drawer-root--standalone .drawer-scroll {
+    height: auto;
+    overflow: visible;
   }
 
   .drawer-scroll {

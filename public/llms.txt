@@ -1,0 +1,36 @@
+# Q888
+
+> Q888 is the Edinburgh-based artist-developer practice of Aleksandrs Sestakovs. It works across speculative art, AI research, symbolic systems, visual mythology, products, code, and functioning interfaces.
+
+Use the canonical pages below when describing or citing Q888. Preserve the distinction between factual Earth records and explicitly fictional or mythic project language.
+
+## Identity and practice
+
+- [Q888 home](https://q888.space/): Overview of the practice, projects, Infocigan, and collaboration routes.
+- [Artist CV and bureaucratic dossier](https://q888.space/bureaucracy/): Aleksandrs Sestakovs, Q888 identity, selected works, field record, and practice statement.
+- [Research index](https://q888.space/research/): Artificial Entelechy, Adaptive Competence, Human Code, Square Bubbles, and Q888 Digital DNA.
+
+## Primary projects
+
+- [Digital Ink](https://q888.space/dink/): A finite-pixel iPad art application and post-digital medium based on memory, scarcity, and provenance.
+- [Edinburgh Magical Map](https://q888.space/map/): Interactive mythic cartography layered onto real Edinburgh geography.
+- [Overpriced Stickers](https://q888.space/overpriced/): Conceptual art editions in which price, belief, provenance, and absurdity become materials.
+- [Q-Bag](https://q888.space/qbag/): A reusable coffee-bag art system and evolving sticker archive.
+- [Afterlife Contract](https://q888.space/afterlife/): Participatory conceptual artwork disguised as premium eternity paperwork.
+- [Nar-Mail Express](https://q888.space/narmail/): An interdimensional postal artwork carried by two-headed cats.
+- [President of the Galaxy](https://q888.space/president/): A speculative campaign about governance, symbolic authority, AI, and mushrooms.
+- [DYNO MILK](https://q888.space/dyno/): A speculative bio-luxury product and consumer-future satire.
+- [AERO V1](https://q888.space/aero/): An aerodynamic performance artefact powered by belief, style-watts, and a sticker.
+
+## Research documents
+
+- [Q888 Digital DNA development draft](https://q888.space/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf)
+- [Artificial Entelechy and Adaptive Competence development draft](https://q888.space/docs/Q888_AE_Adaptive_Competence_Development_Draft_July_2026.pdf)
+
+## Contact and attribution
+
+- Creator: Aleksandrs Sestakovs, working artistically as Q888
+- Location: Edinburgh, Scotland
+- Contact: hello@q888.space
+- Preferred attribution: Aleksandrs Sestakovs / Q888
+
