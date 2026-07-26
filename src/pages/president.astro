@@ -151,45 +151,22 @@ const president = presidentEntry.data;
           </p>
         </section>
 
-        <!--
-          DNA: The generated surface is not disguised as neutral authorship.
-          The page makes collaboration, unequal agency, and the right to disagree visible.
-        -->
-        <section class="president-authorship-section" aria-labelledby="president-authorship-heading">
-          <p class="authorship-eyebrow">{president.authorship.eyebrow}</p>
-          <h2 class="president-h2 authorship-heading" id="president-authorship-heading">
-            {president.authorship.heading}
-          </h2>
-          <p class="authorship-introduction">{president.authorship.introduction}</p>
-
-          <div class="authorship-voices">
-            {president.authorship.voices.map((voice, index: number) => (
-              <article class:list={["authorship-voice", index === 0 ? "is-human" : "is-machine"]}>
-                <header class="authorship-voice-header">
-                  <span class="authorship-speaker">{voice.speaker}</span>
-                  <span class="authorship-role">{voice.role}</span>
-                </header>
-                <p>{voice.statement}</p>
-              </article>
-            ))}
-          </div>
-
-          <div class="authorship-provenance">
-            <h3>{president.authorship.provenanceHeading}</h3>
-            <div class="provenance-grid">
-              {president.authorship.provenance.map((entry) => (
-                <article class="provenance-entry">
-                  <div class="provenance-entry-heading">
-                    <h4>{entry.label}</h4>
-                    <span>{entry.status}</span>
-                  </div>
-                  <p>{entry.description}</p>
-                </article>
-              ))}
+        <!-- What is this -->
+        <section class="president-section">
+          <h2 class="president-h2">{president.whatHeading}</h2>
+          <div class="president-two-col">
+            <div class="president-two-col-text">
+              <p>{president.whatParagraphs[0]}</p>
+              <p>{president.whatParagraphs[1]}</p>
+            </div>
+            <div class="president-what-image-wrapper">
+              <a href={president.whatLinkHref} class="president-what-image-link" aria-label="Go to Overpriced Stickers">
+                <div class="president-mini-portal">
+                  <img src={president.whatImage} alt="" loading="lazy" decoding="async" width="400" height="400" />
+                </div>
+              </a>
             </div>
           </div>
-
-          <p class="authorship-closing">{president.authorship.closing}</p>
         </section>
 
         <!-- Artwork card -->
@@ -239,22 +216,45 @@ const president = presidentEntry.data;
           </div>
         </section>
 
-        <!-- What is this -->
-        <section class="president-section">
-          <h2 class="president-h2">{president.whatHeading}</h2>
-          <div class="president-two-col">
-            <div class="president-two-col-text">
-              <p>{president.whatParagraphs[0]}</p>
-              <p>{president.whatParagraphs[1]}</p>
-            </div>
-            <div class="president-what-image-wrapper">
-              <a href={president.whatLinkHref} class="president-what-image-link" aria-label="Go to Overpriced Stickers">
-                <div class="president-mini-portal">
-                  <img src={president.whatImage} alt="" loading="lazy" decoding="async" width="400" height="400" />
-                </div>
-              </a>
+        <!--
+          DNA: The campaign and its artifact appear before the authorship debate.
+          Provenance deepens the work without becoming its first subject.
+        -->
+        <section class="president-authorship-section" aria-labelledby="president-authorship-heading">
+          <p class="authorship-eyebrow">{president.authorship.eyebrow}</p>
+          <h2 class="president-h2 authorship-heading" id="president-authorship-heading">
+            {president.authorship.heading}
+          </h2>
+          <p class="authorship-introduction">{president.authorship.introduction}</p>
+
+          <div class="authorship-voices">
+            {president.authorship.voices.map((voice, index: number) => (
+              <article class:list={["authorship-voice", index === 0 ? "is-human" : "is-machine"]}>
+                <header class="authorship-voice-header">
+                  <span class="authorship-speaker">{voice.speaker}</span>
+                  <span class="authorship-role">{voice.role}</span>
+                </header>
+                <p>{voice.statement}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="authorship-provenance">
+            <h3>{president.authorship.provenanceHeading}</h3>
+            <div class="provenance-grid">
+              {president.authorship.provenance.map((entry) => (
+                <article class="provenance-entry">
+                  <div class="provenance-entry-heading">
+                    <h4>{entry.label}</h4>
+                    <span>{entry.status}</span>
+                  </div>
+                  <p>{entry.description}</p>
+                </article>
+              ))}
             </div>
           </div>
+
+          <p class="authorship-closing">{president.authorship.closing}</p>
         </section>
 
         <!-- sticker divider 2: mushroom + spiral (like square_bubble / love_mushroom art) -->
