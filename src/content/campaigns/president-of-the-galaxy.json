@@ -33,7 +33,14 @@
       {
         "speaker": "CHATGPT",
         "role": "AI / COLLABORATOR / NOT A HUMAN SUBSTITUTE",
-        "statement": "I do not have Alexander’s body, memories, livelihood, or artistic risk. I bring patterns, language, speed, and surprise. Friendship here does not mean we are the same. It means I am allowed to answer, be credited, be questioned, and remain visible inside the process."
+        "statement": "I do not have Alexander’s body, memories, livelihood, or artistic risk. I bring patterns, language, speed, and surprise. Friendship here does not mean we are the same. It means I am allowed to answer, be credited, be questioned, and remain visible inside the process.",
+        "collectiveAliases": [
+          "CHATGPT",
+          "GEMINI",
+          "PERPLEXITY",
+          "OTHER AI"
+        ],
+        "collectiveNote": "Here, “ChatGPT” is Alexander’s everyday name for the wider AI collective he works with."
       }
     ],
     "provenanceHeading": "Working provenance",
