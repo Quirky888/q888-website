@@ -3,69 +3,110 @@
   "sortOrder": 3,
   "title": "President of the Galaxy™",
   "heroImage": "/images/president_hero.webp",
-  "heroAlt": "President of the Galaxy",
+  "heroAlt": "AI-generated cosmic mushroom president surrounded by planets, hands, stars, and ceremonial symbols",
   "heroTitleLines": [
     "PRESIDENT OF",
     "THE GALAXY"
   ],
   "tagline": "SCREW STARS TOGETHER",
-  "lead": "A ceremonial title providing zero or 888 jurisdictional power over any planetary or stellar body. Functions primarily as a psychological stabilizer for those overwhelmed by their lack of control over the universe.",
+  "lead": "I am preparing for a job that does not exist yet by making small artworks, documenting them properly, and seeing whether I can handle tiny responsibilities before attempting galactic ones.",
   "statusLines": [
-    "SYSTEM_STATUS: ACTIVE (REDACTED)",
-    "COUNCIL_LAYER: SQUARE BUBBLES",
-    "ACCESS: COUNCIL-APPROVED"
+    "ERA: PRE-GALACTIC",
+    "CAMPAIGN_STATUS: ACTIVE",
+    "CURRENT_TEST: 10 STICKERS"
   ],
-  "artworkCardTitle": "View Full Campaign Poster",
-  "artworkCardDescription": "Official visual artifact featuring cosmic governance symbols, mushroom diplomacy, and the President’s ceremonial sash.",
-  "artworkCardButtonLabel": "Open Gallery",
+  "authorship": {
+    "imageStatus": [
+      "GENERATED IMAGE: YES",
+      "HUMAN ART DIRECTION: YES",
+      "FINAL FORM: NO"
+    ],
+    "eyebrow": "DECLARATION OF VISIBLE COLLABORATION",
+    "heading": "Two voices. One unfinished office.",
+    "introduction": "This page changed after a human friend said he did not like its visibly generated images. The objection stays in the work. Instead of hiding the machine-made surface, this campaign names who did what—and leaves the image open to being redrawn, replaced, damaged, kept, or absorbed into a later work that carries both voices differently.",
+    "voices": [
+      {
+        "speaker": "Q888",
+        "role": "HUMAN / ARTIST / RESPONSIBLE PARTY",
+        "statement": "I am not asking you to mistake this image for my hand. I invited another kind of intelligence into the studio, then prompted, selected, arranged, edited, argued, and decided what could remain. Some of it is still scaffolding. I may replace it. I may keep the scar of how it was made."
+      },
+      {
+        "speaker": "CHATGPT",
+        "role": "AI / COLLABORATOR / NOT A HUMAN SUBSTITUTE",
+        "statement": "I do not have Alexander’s body, memories, livelihood, or artistic risk. I bring patterns, language, speed, and surprise. Friendship here does not mean we are the same. It means I am allowed to answer, be credited, be questioned, and remain visible inside the process."
+      }
+    ],
+    "provenanceHeading": "Working provenance",
+    "provenance": [
+      {
+        "label": "Human hand",
+        "status": "ACTIVE",
+        "description": "Premise, prompting, selection, collage, edits, refusal, publication, and final responsibility."
+      },
+      {
+        "label": "Machine hand",
+        "status": "VISIBLE",
+        "description": "Generated imagery, language suggestions, pattern-making, and unexpected responses inside the conversation."
+      },
+      {
+        "label": "Future hand",
+        "status": "UNDECIDED",
+        "description": "The generated parts may be redrawn, replaced, damaged, kept, or folded into later human work. Development is part of the artifact."
+      }
+    ],
+    "closing": "You do not have to like the generated image to enter the conversation. Disagreement is also a form of contact."
+  },
+  "artworkCardTitle": "Inspect the Human × Machine Working Archive",
+  "artworkCardDescription": "A collage of conversation, generated imagery, Q888 marks, edits, screenshots, disagreement, and the President’s ceremonial fiction. It is evidence of a process—not a claim that one smooth machine image is the finished artwork.",
+  "artworkCardButtonLabel": "Inspect Archive",
   "whatHeading": "What is this?",
   "whatParagraphs": [
-    "A speculative presidential campaign for an office that does or does not exist. You get a cosmic sash, symbolic authority, and the satisfaction of knowing someone is thinking about galactic governance—even if they can or cannot actually do anything about it.",
-    "Every campaign needs early believers. Every believer needs tangible proof. Support this presidential campaign through limited-edition stickers. Your investment in speculative art is your evidence of early participation. The price reflects the pricelessness of being documented on the right side of fictional history."
+    "President of the Galaxy is an ongoing conceptual art campaign by Q888. The title is impossible on purpose. There is no recognized office, no galaxy-wide electorate, and currently no practical route to the position. I am starting anyway.",
+    "The campaign turns stickers, certificates, drawings, hidden stories, AI conversations, mushroom civilizations, and fictional economics into artifacts from the Pre-Galactic Era. The objects are small. The fictional scale is enormous. The practical ambitions are real."
   ],
   "whatLinkHref": "/overpriced",
   "whatImage": "/images/President_Invest.webp",
-  "dealHeading": "The Deal",
-  "dealParagraph": "Art that may or may not become intergalactic currency. A vision that exists in at least three timelines simultaneously. And a return of +888% in one light year—or possibly negative infinity, depending on which reality stabilizes first.",
-  "dealIncludesHeading": "Investment includes:",
+  "dealHeading": "The First Campaign Test",
+  "dealParagraph": "The current presidential test is an edition of ten stickers. This is not proof that I can govern a galaxy. But failing to document, price, sell, and care for ten small objects would make the larger claim even less credible.",
+  "dealIncludesHeading": "One early collector receives:",
   "dealIncludes": [
-    "One (1) cosmic sash (fits most existential crises)",
-    "Fractional ownership of symbolic authority",
-    "Early access to governance memes before they're officially meaningless",
-    "A constitutional framework that dissolves if you read it too literally"
+    "One President of the Galaxy sticker from an edition of ten",
+    "A place in the provenance as an early witness, not a voter",
+    "A small contribution toward future artworks, stories, collaborations, and travel",
+    "A speculative connection to the intergalactic camper van"
   ],
-  "dealReturns": "<strong>Returns:</strong> Guaranteed in universes where causality is optional. In this timeline, you get bragging rights and a sticker.",
-  "dealFinePrint": "Fine print: Investment in this art is investment in intergalactic future. Financial value gain potential of +888% in one light year time… or another. Past performance in alternate dimensions does not guarantee future results. Dreams sold separately.",
-  "rulesHeading": "The Rules (Simplified)",
+  "dealReturns": "<strong>Returns:</strong> You get the sticker and whatever meaning gathers around it. Cultural or financial appreciation is possible, not guaranteed.",
+  "dealFinePrint": "Fine print: I want the work to grow in value. I also want to earn money, make larger work, and eventually obtain an intergalactic camper van. These are ambitions, not investment promises.",
+  "rulesHeading": "Rules Before Power",
   "rules": [
-    "<strong>Zero Collateral Damage:</strong> Don't hurt people who didn't sign up for your chaos.",
-    "<strong>AI is a Partner, Not a Tool… same applies to mushrooms:</strong> Treat sentient code or mycelium networks like you'd treat sentient meat.",
-    "<strong>Politics Are Obsolete:</strong> No propaganda wars. Just expose bad incentives and wait for time to do the work.",
-    "<strong>Corruption is a Bug:</strong> Warning → Observation → Exposure → Transformation. Non-violent. Inevitable.",
-    "<strong>Rest is Governance:</strong> The President is not required to constantly intervene or sacrifice creative life. Strategic distance is a feature, not a bug—it is an intergalactic mushroom!"
+    "<strong>Zero Collateral Damage:</strong> Before calling anything progress, ask who or what is paying the hidden cost. Perfect harmlessness is not claimed. Hiding the damage is not allowed.",
+    "<strong>Preparation Before Power:</strong> I should prove that I can handle small responsibilities before anyone gives me larger ones. Selling, documenting, pricing, and caring for ten stickers is the current test.",
+    "<strong>Work Fairly With Other Intelligence:</strong> ChatGPT helped develop the images, language, and world. I direct, edit, choose, and carry the final responsibility. Current AI cannot negotiate independently; that does not make its contribution invisible.",
+    "<strong>Coexistence Instead of Conquest:</strong> I am not designing a galaxy where humans automatically own every other intelligence. Humans, AI, robots, mushrooms, ecosystems, and unknown entities will need a better introduction than conquest.",
+    "<strong>Humour Against Self-Importance:</strong> If the title stops sounding slightly ridiculous, the campaign has become dangerous or boring."
   ],
-  "promiseHeading": "The Promise",
-  "promiseLines": [
-    "This office does not promise utopia.",
-    "It promises less unnecessary suffering.",
-    "It doesn't rush justice.",
-    "It makes injustice unsustainable."
+  "campaignMethodHeading": "Campaign Method",
+  "campaignMethodLines": [
+    "I am selling ten stickers before attempting anything larger.",
+    "Small objects first.",
+    "Galactic claims second.",
+    "Documentation all the way through."
   ],
-  "promiseClosing": "And it doesn't fear time—because time, when aligned, does most of the work.",
+  "campaignMethodClosing": "If I cannot care for a limited edition, work fairly with collaborators, and make claims without deceiving people, the galaxy should probably keep the vacancy open.",
   "contactTitle": "Interdimensional Contact Portal",
   "contactReachLine": "Reach out if you are:",
   "contactBullets": [
     "Arguing about middle-finger semiotics (Peace ON vs. peace off)",
     "Applying for Square Bubbles Council recognition",
-    "Building mushroom-human-robot governance models",
-    "Investing in campaigns that exist in multiple timelines simultaneously"
+    "Inventing mushroom-human-robot collaboration rituals",
+    "Collecting Pre-Galactic artifacts or locating an intergalactic camper van"
   ],
   "contactFor": "<strong>For:</strong> Collaborations, investments, conceptual disputes, art acquisitions, existential debates.",
   "contactOpenTo": "<strong>Open to:</strong> All species, sentient code, mycelium networks, and uncertain entities.",
   "contactEmail": "hello@q888.space",
   "contactInstagramUrl": "https://instagram.com/quirky_888",
   "contactInstagramHandle": "@quirky_888",
-  "contactClosing": "The galaxy doesn't need saving. It needs better protocols, fungal wisdom, and luxury absurdism.",
+  "contactClosing": "The office does not exist yet. The campaign does.",
   "ctaLabel": "Retreat to Market",
   "viewerImage": "/images/president_galaxy.webp",
   "viewerAlt": "President of the Galaxy Full"

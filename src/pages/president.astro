@@ -15,12 +15,12 @@ const president = presidentEntry.data;
 
 <Layout
   title="President of the Galaxy — Speculative Campaign Artwork by Q888"
-  description="President of the Galaxy is a speculative campaign artwork by Q888 about temporary power, symbolic authority, AI partnership, mushroom diplomacy, and better protocols."
+  description="President of the Galaxy is an ongoing conceptual art campaign by Q888, built from limited artifacts, AI collaboration, mushroom civilizations, fictional economics, and preparation before power."
   image={president.heroImage}
   canonicalPath="/president/"
   mainEntityType="CreativeWork"
   mainEntityName="President of the Galaxy"
-  keywords={["President of the Galaxy", "speculative campaign", "political art", "AI governance art", "Q888"]}
+  keywords={["President of the Galaxy", "speculative campaign", "political art", "human AI collaborative art", "Q888"]}
 >
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
@@ -87,6 +87,12 @@ const president = presidentEntry.data;
                 height="900"
                 class="president-portal-img"
               />
+              <div class="image-status-stamp" aria-label="Image authorship status">
+                <span>IMAGE PROVENANCE</span>
+                <ul>
+                  {president.authorship.imageStatus.map((line: string) => <li>{line}</li>)}
+                </ul>
+              </div>
               <!-- orbiting star -->
               <div class="portal-orbit" aria-hidden="true">
                 <svg class="orbit-star" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,6 +151,47 @@ const president = presidentEntry.data;
           </p>
         </section>
 
+        <!--
+          DNA: The generated surface is not disguised as neutral authorship.
+          The page makes collaboration, unequal agency, and the right to disagree visible.
+        -->
+        <section class="president-authorship-section" aria-labelledby="president-authorship-heading">
+          <p class="authorship-eyebrow">{president.authorship.eyebrow}</p>
+          <h2 class="president-h2 authorship-heading" id="president-authorship-heading">
+            {president.authorship.heading}
+          </h2>
+          <p class="authorship-introduction">{president.authorship.introduction}</p>
+
+          <div class="authorship-voices">
+            {president.authorship.voices.map((voice, index: number) => (
+              <article class:list={["authorship-voice", index === 0 ? "is-human" : "is-machine"]}>
+                <header class="authorship-voice-header">
+                  <span class="authorship-speaker">{voice.speaker}</span>
+                  <span class="authorship-role">{voice.role}</span>
+                </header>
+                <p>{voice.statement}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="authorship-provenance">
+            <h3>{president.authorship.provenanceHeading}</h3>
+            <div class="provenance-grid">
+              {president.authorship.provenance.map((entry) => (
+                <article class="provenance-entry">
+                  <div class="provenance-entry-heading">
+                    <h4>{entry.label}</h4>
+                    <span>{entry.status}</span>
+                  </div>
+                  <p>{entry.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <p class="authorship-closing">{president.authorship.closing}</p>
+        </section>
+
         <!-- Artwork card -->
         <section class="president-artwork-card-section">
           <div
@@ -177,7 +224,7 @@ const president = presidentEntry.data;
 
               <!-- Right: Content & Action -->
               <div class="artwork-card-text-wrap">
-                <div class="artwork-card-tag font-mono">// PLANETARY CAMPAIGN OFFICIAL ARTIFACT</div>
+                <div class="artwork-card-tag font-mono">// HUMAN × MACHINE WORKING ARCHIVE</div>
                 <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
                 <p class="artwork-card-description">{president.artworkCardDescription}</p>
                 
@@ -313,7 +360,7 @@ const president = presidentEntry.data;
           </svg>
         </div>
 
-        <!-- Inline sticker motif strip (between rules and promise — breaks up wall of text) -->
+        <!-- Inline sticker motif strip (between campaign principles and method) -->
         <div class="sticker-strip" aria-hidden="true">
           <!-- Mini sticker 1: cosmic rune badge (Intergalactic J badge shape) -->
           <div class="sticker-chip">
@@ -419,16 +466,16 @@ const president = presidentEntry.data;
           </div>
         </div>
 
-        <!-- The Promise -->
+        <!-- Campaign Method -->
         <section class="president-section">
-          <h2 class="president-h2">{president.promiseHeading}</h2>
-          <p>{president.promiseLines[0]}</p>
+          <h2 class="president-h2">{president.campaignMethodHeading}</h2>
+          <p>{president.campaignMethodLines[0]}</p>
           <blockquote class="president-blockquote">
-            {president.promiseLines[1]}<br />
-            {president.promiseLines[2]}<br />
-            {president.promiseLines[3]}
+            {president.campaignMethodLines[1]}<br />
+            {president.campaignMethodLines[2]}<br />
+            {president.campaignMethodLines[3]}
           </blockquote>
-          <p>{president.promiseClosing}</p>
+          <p>{president.campaignMethodClosing}</p>
         </section>
 
         <!-- Contact -->
@@ -1076,6 +1123,60 @@ const president = presidentEntry.data;
     display: block;
   }
 
+  /* ─── Visible image provenance ─── */
+  .image-status-stamp {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.8rem;
+    left: 0.8rem;
+    z-index: 3;
+    padding: 0.7rem 0.8rem;
+    color: #fff;
+    text-align: center;
+    background: rgba(5, 24, 31, 0.84);
+    border: 1px solid rgba(255, 204, 51, 0.7);
+    box-shadow: 0 8px 24px rgba(5, 24, 31, 0.28);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .image-status-stamp > span {
+    display: block;
+    margin-bottom: 0.38rem;
+    color: var(--eden-gold-bright);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  .image-status-stamp ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.12rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .image-status-stamp li {
+    position: relative;
+    padding-left: 0.75rem;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.52rem;
+    line-height: 1.45;
+    letter-spacing: 0.06em;
+  }
+
+  .image-status-stamp li::before {
+    position: absolute;
+    left: 0;
+    color: #78d6d7;
+    content: '●';
+  }
+
   /* ─── Orbiting star ─── */
   .portal-orbit {
     position: absolute;
@@ -1231,6 +1332,200 @@ const president = presidentEntry.data;
     line-height: 1.65;
     color: var(--eden-text);
     margin: 0 0 1.5rem 0;
+  }
+
+  /* ─── Human × AI authorship declaration ─── */
+  .president-authorship-section {
+    position: relative;
+    margin: 1rem 0 4rem;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(32, 140, 141, 0.09) 1px, transparent 1px),
+      linear-gradient(rgba(32, 140, 141, 0.09) 1px, transparent 1px),
+      #fff;
+    background-size: 24px 24px;
+    border: 1px solid rgba(19, 66, 82, 0.2);
+    border-top: 5px solid var(--eden-text);
+    box-shadow: 12px 12px 0 rgba(32, 140, 141, 0.12);
+  }
+
+  .president-authorship-section::after {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 5rem;
+    aspect-ratio: 1;
+    opacity: 0.65;
+    background:
+      linear-gradient(45deg, transparent 44%, var(--eden-gold) 45% 55%, transparent 56%),
+      linear-gradient(-45deg, transparent 44%, var(--eden-primary) 45% 55%, transparent 56%);
+    content: '';
+    pointer-events: none;
+    transform: rotate(8deg);
+  }
+
+  .authorship-eyebrow {
+    position: relative;
+    z-index: 1;
+    max-width: calc(100% - 6rem);
+    margin: 0 0 1rem;
+    color: var(--eden-gold);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(0.66rem, 1vw, 0.8rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  .authorship-heading {
+    position: relative;
+    z-index: 1;
+    max-width: 48rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .authorship-introduction {
+    position: relative;
+    z-index: 1;
+    max-width: 58rem;
+    margin: 0 0 2.25rem;
+    color: var(--eden-text);
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.05rem, 1.7vw, 1.42rem);
+    line-height: 1.65;
+  }
+
+  .authorship-voices {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .authorship-voice {
+    min-width: 0;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    background: rgba(252, 248, 249, 0.94);
+    border: 1px solid rgba(19, 66, 82, 0.2);
+  }
+
+  .authorship-voice.is-human {
+    border-left: 5px solid var(--eden-gold);
+    transform: rotate(-0.35deg);
+  }
+
+  .authorship-voice.is-machine {
+    border-left: 5px solid var(--eden-primary);
+    transform: translateY(0.8rem) rotate(0.35deg);
+  }
+
+  .authorship-voice-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .authorship-speaker {
+    color: var(--eden-text);
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.45rem);
+    line-height: 1;
+  }
+
+  .authorship-role {
+    color: var(--eden-text-muted);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+  }
+
+  .authorship-voice p {
+    margin: 0;
+    color: var(--eden-text);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1rem, 1.35vw, 1.22rem);
+    line-height: 1.7;
+  }
+
+  .authorship-provenance {
+    position: relative;
+    z-index: 1;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(19, 66, 82, 0.35);
+  }
+
+  .authorship-provenance > h3 {
+    margin: 0 0 1rem;
+    color: var(--eden-text);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .provenance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .provenance-entry {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(19, 66, 82, 0.14);
+  }
+
+  .provenance-entry-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .provenance-entry h4 {
+    margin: 0;
+    color: var(--eden-text);
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+  }
+
+  .provenance-entry-heading span {
+    padding: 0.2rem 0.45rem;
+    color: var(--eden-primary);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: rgba(32, 140, 141, 0.08);
+    border: 1px solid rgba(32, 140, 141, 0.22);
+  }
+
+  .provenance-entry p {
+    margin: 0;
+    color: var(--eden-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .authorship-closing {
+    position: relative;
+    z-index: 1;
+    max-width: 50rem;
+    margin: 2.25rem 0 0;
+    padding-left: 1rem;
+    color: var(--eden-text);
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.55;
+    border-left: 4px solid var(--eden-gold-bright);
   }
 
   .president-note {
@@ -1836,6 +2131,18 @@ const president = presidentEntry.data;
     .president-portal {
       width: min(280px, 60vw);
     }
+
+    .authorship-voices {
+      grid-template-columns: 1fr;
+    }
+
+    .authorship-voice.is-machine {
+      transform: rotate(0.25deg);
+    }
+
+    .provenance-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ── Mobile landscape (wide but short, e.g. phone rotated) ── */
@@ -1914,6 +2221,31 @@ const president = presidentEntry.data;
 
     .president-portal {
       width: min(240px, 70vw);
+    }
+
+    .image-status-stamp {
+      right: 0.45rem;
+      bottom: 0.45rem;
+      left: 0.45rem;
+      padding: 0.55rem 0.6rem;
+    }
+
+    .image-status-stamp li {
+      font-size: 0.46rem;
+    }
+
+    .president-authorship-section {
+      margin-right: 0.3rem;
+      padding: 1.35rem;
+      box-shadow: 7px 7px 0 rgba(32, 140, 141, 0.12);
+    }
+
+    .president-authorship-section::after {
+      width: 3.5rem;
+    }
+
+    .authorship-eyebrow {
+      max-width: calc(100% - 4rem);
     }
 
     .sticker-strip {
