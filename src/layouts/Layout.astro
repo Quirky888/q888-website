@@ -6,6 +6,8 @@ import {
 	ARTIST_PROFILES,
 	DEFAULT_DESCRIPTION,
 	DEFAULT_SOCIAL_IMAGE,
+	IMAGE_LICENSE_ACQUISITION_URL,
+	IMAGE_LICENSE_URL,
 	SITE_NAME,
 	SITE_URL,
 	WEBSITE_ID,
@@ -102,6 +104,8 @@ const pageNode: SchemaNode = {
 		creator: { "@id": ARTIST_ID },
 		creditText: `${ARTIST_NAME} / ${SITE_NAME}`,
 		copyrightNotice: `© ${ARTIST_NAME} / ${SITE_NAME}`,
+		license: IMAGE_LICENSE_URL,
+		acquireLicensePage: IMAGE_LICENSE_ACQUISITION_URL,
 	},
 };
 
