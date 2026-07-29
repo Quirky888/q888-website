@@ -37,9 +37,16 @@ const concepts = [
     id: "digital-dna",
     code: "DNA / 04",
     title: "Q888 Digital DNA",
-    status: "Authorial system · v0.2",
+    status: "Authorial system / live prototype · v0.2 / v0.1",
     summary:
       "Q888 Digital DNA separates stable values from working mode, expression lens, project environment, visible phenotype, and concrete human feedback. It is an authorial layer for AI-assisted creation, not an aesthetic preset.",
+    liveProject: {
+      label: "LIVE PROTOTYPE / v0.1",
+      description:
+        "DO NOT BECOME ME is the first public Digital DNA prototype. It implements one complete gene—Protected Residue—as a five-stage web encounter. Rather than profiling a visitor or using an AI model, it asks them to introduce one condition that a future system must recognise but cannot fully optimise away.",
+      href: "/prototype/",
+      linkLabel: "Enter the live prototype →",
+    },
     question: "How can AI-assisted work preserve authorship without freezing a living practice into a caricature?",
   },
   {
@@ -131,6 +138,15 @@ const structuredData = [
             </div>
             <h3>{concept.title}</h3>
             <p>{concept.summary}</p>
+            {
+              concept.liveProject && (
+                <aside class="research-live-project" aria-label="Digital DNA live prototype">
+                  <strong>{concept.liveProject.label}</strong>
+                  <p>{concept.liveProject.description}</p>
+                  <a href={concept.liveProject.href}>{concept.liveProject.linkLabel}</a>
+                </aside>
+              )
+            }
             <blockquote>{concept.question}</blockquote>
           </article>
         ))}
@@ -154,7 +170,7 @@ const structuredData = [
             </p>
           </div>
           <a href="/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf">
-            Read PDF <span aria-hidden="true">↗</span>
+            Development draft · July 2026 <span aria-hidden="true">↗</span>
           </a>
         </article>
 
@@ -300,6 +316,35 @@ const structuredData = [
     line-height: 1.75;
   }
 
+  .research-live-project {
+    max-width: 48rem;
+    margin-top: 2rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(232, 229, 223, 0.16);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .research-live-project strong {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    color: #8da69f;
+  }
+
+  .research-live-project p {
+    margin-top: 0.8rem;
+    color: #c1bfba;
+    line-height: 1.65;
+  }
+
+  .research-live-project a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #b7d8cf;
+    text-underline-offset: 0.3em;
+  }
+
   .research-card blockquote {
     max-width: 45ch;
     margin-top: 2.5rem;
@@ -376,4 +421,3 @@ const structuredData = [
     }
   }
 </style>
-

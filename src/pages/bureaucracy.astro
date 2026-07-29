@@ -55,10 +55,11 @@ const selectedSystems = [
   },
   {
     code: "07",
-    name: "Q888 Digital DNA",
-    desc: "An evolving authorial layer carrying stable values, project-specific expression and approved human feedback across AI-generated code.",
-    status: "Prototype active",
-    href: "/research/#digital-dna",
+    name: "Q888 Digital DNA — DO NOT BECOME ME",
+    desc: "A live five-stage web artwork testing how an artist can set a condition for contact with a future AI system without becoming a fixed profile to optimise.",
+    status: "One gene implemented: Protected Residue · Prototype live",
+    href: "/prototype/",
+    documentHref: "/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf",
     signal: "magenta",
   },
   {
@@ -231,7 +232,7 @@ const disputedChronology = [
 <Layout
   title="Q888 Artist CV — Aleksandrs Sestakovs, Edinburgh"
   description="Artist CV and practice dossier for Aleksandrs Sestakovs / Q888, an Edinburgh multidisciplinary artist working with myth, code, image, AI, interface, and memory."
-  image="/images/bur-icons/mushroom.png"
+  image="/images/bur-icons/mushroom-from-jo.webp"
   canonicalPath="/bureaucracy/"
   pageType="profile"
   keywords={["Aleksandrs Sestakovs", "Q888", "Edinburgh artist", "multidisciplinary artist", "artist CV", "speculative art"]}
@@ -350,10 +351,10 @@ const disputedChronology = [
             data-drift-rot="1.2"
           >
             <img
-              src="/images/bur-icons/mushroom.png"
-              alt="Watercolour mushroom, registered as the visible part of the Q888 mycelium"
-              width="1024"
-              height="1024"
+              src="/images/bur-icons/mushroom-from-jo.webp"
+              alt="Mushrooms for life birthday card, hand-drawn by Jo and edited by Q888"
+              width="1054"
+              height="1503"
               fetchpriority="high"
               decoding="async"
             />
@@ -558,25 +559,73 @@ const disputedChronology = [
       </div>
       <div class="section-content work-list">
         {
-          selectedSystems.map((system) => (
-            <a
-              class="work-row"
-              data-signal={system.signal}
-              href={system.href}
-              target={system.href.endsWith(".pdf") ? "_blank" : undefined}
-              rel={
-                system.href.endsWith(".pdf") ? "noopener noreferrer" : undefined
-              }
-            >
-              <span class="work-number">{system.code}</span>
-              <span class="work-name">{system.name}</span>
-              <span class="work-description">{system.desc}</span>
-              <span class="work-status">{system.status}</span>
-              <span class="work-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </a>
-          ))
+          selectedSystems.map((system) =>
+            system.documentHref ? (
+              <details class="work-choice" data-signal={system.signal}>
+                <summary class="work-row" data-signal={system.signal}>
+                  <span class="work-number">{system.code}</span>
+                  <span class="work-name">{system.name}</span>
+                  <span class="work-description">{system.desc}</span>
+                  <span class="work-status">
+                    One gene: Protected Residue · choose entry
+                  </span>
+                  <span class="work-disclosure" aria-hidden="true">+</span>
+                </summary>
+                <div class="work-choice-panel">
+                  <div class="work-choice-intro">
+                    <span>Two doors / one system</span>
+                    <p>
+                      Read how the authorial framework began, or enter the first
+                      gene functioning in public.
+                    </p>
+                  </div>
+                  <div class="work-choice-links">
+                    <a
+                      class="work-choice-link"
+                      href={system.documentHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span class="work-choice-code">Context / July 2026</span>
+                      <strong>Development draft</strong>
+                      <span>
+                        The earlier local-development stage and the idea behind
+                        Q888 Digital DNA.
+                      </span>
+                      <span class="work-choice-arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <a class="work-choice-link" href={system.href}>
+                      <span class="work-choice-code">Encounter / v0.1</span>
+                      <strong>Enter the live prototype</strong>
+                      <span>
+                        DO NOT BECOME ME: Protected Residue as a five-stage web
+                        encounter.
+                      </span>
+                      <span class="work-choice-arrow" aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+              </details>
+            ) : (
+              <a
+                class="work-row"
+                data-signal={system.signal}
+                href={system.href}
+                target={system.href.endsWith(".pdf") ? "_blank" : undefined}
+                rel={
+                  system.href.endsWith(".pdf") ? "noopener noreferrer" : undefined
+                }
+              >
+                <span class="work-number">{system.code}</span>
+                <span class="work-name">{system.name}</span>
+                <span class="work-description">{system.desc}</span>
+                <span class="work-status">{system.status}</span>
+                <span class="work-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            ),
+          )
         }
       </div>
     </section>
@@ -1526,7 +1575,7 @@ const disputedChronology = [
 
   .specimen-mark {
     position: relative;
-    aspect-ratio: 1 / 1.04;
+    aspect-ratio: 1054 / 1503;
     overflow: visible;
     border-bottom: 1px solid var(--line-strong);
     background:
@@ -1579,16 +1628,13 @@ const disputedChronology = [
     z-index: 2;
     inset: 0;
     overflow: hidden;
-    clip-path: polygon(8% 6%, 95% 2%, 91% 92%, 11% 98%);
   }
 
   .specimen-mark img {
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: cover;
-    filter: saturate(0.82) contrast(1.08);
-    transform: scale(1.22);
+    object-fit: contain;
   }
 
   .specimen-coordinate {
@@ -1960,18 +2006,50 @@ const disputedChronology = [
     --signal-wash: rgba(181, 93, 57, 0.07);
   }
 
+  .work-choice {
+    --signal: var(--moss);
+    --signal-wash: rgba(79, 104, 73, 0.08);
+  }
+
+  .work-choice[data-signal="magenta"] {
+    --signal: var(--magenta);
+    --signal-wash: rgba(232, 52, 146, 0.065);
+  }
+
+  .work-choice > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .work-choice > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .work-choice > summary:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: -2px;
+  }
+
+  .work-choice .work-row {
+    grid-template-columns:
+      2.2rem minmax(10rem, 0.8fr) minmax(14rem, 1.2fr)
+      minmax(11rem, 0.7fr) 2rem;
+  }
+
   .work-row:hover {
     padding-inline: 1rem 0.55rem;
     background: linear-gradient(90deg, var(--signal-wash), transparent 68%);
   }
 
   .work-row:hover::before,
-  .work-row:focus-visible::before {
+  .work-row:focus-visible::before,
+  .work-row:focus-within::before {
     transform: scaleY(1);
   }
 
   .work-row:hover::after,
-  .work-row:focus-visible::after {
+  .work-row:focus-visible::after,
+  .work-row:focus-within::after {
     opacity: 0.7;
     transform: translateX(0);
   }
@@ -2025,6 +2103,132 @@ const disputedChronology = [
 
   .work-row:hover .work-arrow {
     transform: translate(0.18rem, -0.18rem);
+  }
+
+  .work-disclosure {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--signal);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 1rem;
+    line-height: 1;
+    transition:
+      color 220ms ease,
+      transform 280ms ease,
+      background 220ms ease;
+  }
+
+  .work-choice[open] .work-row {
+    border-bottom-color: transparent;
+    background: linear-gradient(90deg, var(--signal-wash), transparent 72%);
+  }
+
+  .work-choice[open] .work-disclosure {
+    color: var(--paper);
+    background: var(--signal);
+    transform: rotate(45deg);
+  }
+
+  .work-choice-panel {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.38fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: 0.5rem 2.2rem 2rem 3.45rem;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(100deg, var(--signal-wash), transparent 72%);
+    animation: work-choice-reveal 260ms ease both;
+  }
+
+  .work-choice-intro > span,
+  .work-choice-code {
+    color: var(--signal);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .work-choice-intro p {
+    max-width: 28ch;
+    margin: 0.75rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .work-choice-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .work-choice-link {
+    position: relative;
+    min-height: 8.5rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.2rem 3rem 1.2rem 1.25rem;
+    color: var(--ink);
+    text-decoration: none;
+    transition:
+      color 220ms ease,
+      background 220ms ease;
+  }
+
+  .work-choice-link + .work-choice-link {
+    border-left: 1px solid var(--line);
+  }
+
+  .work-choice-link strong {
+    font-family: "Space Grotesk", "Syne", sans-serif;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+
+  .work-choice-link > span:not(.work-choice-code, .work-choice-arrow) {
+    max-width: 38ch;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .work-choice-arrow {
+    position: absolute;
+    top: 1.15rem;
+    right: 1.2rem;
+    color: var(--signal);
+    font-size: 1.1rem;
+    transition: transform 220ms ease;
+  }
+
+  .work-choice-link:hover,
+  .work-choice-link:focus-visible {
+    color: var(--signal);
+    background: var(--signal-wash);
+  }
+
+  .work-choice-link:hover .work-choice-arrow,
+  .work-choice-link:focus-visible .work-choice-arrow {
+    transform: translate(0.2rem, -0.2rem);
+  }
+
+  @keyframes work-choice-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .field-row {
@@ -3008,6 +3212,10 @@ const disputedChronology = [
       gap: 0.5rem 1rem;
     }
 
+    .work-choice .work-row {
+      grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+    }
+
     .work-name {
       grid-column: 2;
     }
@@ -3020,6 +3228,26 @@ const disputedChronology = [
     .work-status {
       grid-column: 3;
       grid-row: 1;
+    }
+
+    .work-choice .work-description,
+    .work-choice .work-status {
+      grid-column: 2;
+      grid-row: auto;
+      text-align: left;
+    }
+
+    .work-choice .work-disclosure {
+      grid-column: 3;
+      grid-row: 1 / span 3;
+      align-self: center;
+      justify-self: end;
+    }
+
+    .work-choice-panel {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding-inline: 3rem 1rem;
     }
 
     .work-arrow {
@@ -3121,10 +3349,6 @@ const disputedChronology = [
       gap: 1.25rem;
     }
 
-    .specimen-mark {
-      aspect-ratio: 1.45;
-    }
-
     .specimen-mark::before,
     .hero-mark::before,
     .artist-cv-sticker-surface::before {
@@ -3204,6 +3428,10 @@ const disputedChronology = [
       padding: 1.25rem 0;
     }
 
+    .work-choice .work-row {
+      grid-template-columns: 1.7rem minmax(0, 1fr) 2rem;
+    }
+
     .work-row:hover {
       padding-inline: 0.65rem 0;
     }
@@ -3223,6 +3451,19 @@ const disputedChronology = [
     .work-status {
       grid-row: auto;
       text-align: left;
+    }
+
+    .work-choice-panel {
+      padding: 0.25rem 0 1.5rem 2.35rem;
+    }
+
+    .work-choice-links {
+      grid-template-columns: 1fr;
+    }
+
+    .work-choice-link + .work-choice-link {
+      border-top: 1px solid var(--line);
+      border-left: 0;
     }
 
     .field-row {
@@ -3401,6 +3642,10 @@ const disputedChronology = [
     .work-row::after,
     .work-name,
     .work-arrow,
+    .work-disclosure,
+    .work-choice-panel,
+    .work-choice-link,
+    .work-choice-arrow,
     .myth-drawer summary,
     .chronology-order-control [data-chronology-glyph],
     .myth-card,
