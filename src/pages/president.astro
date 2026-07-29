@@ -231,7 +231,34 @@ const president = presidentEntry.data;
             {president.authorship.voices.map((voice, index: number) => (
               <article class:list={["authorship-voice", index === 0 ? "is-human" : "is-machine"]}>
                 <header class="authorship-voice-header">
-                  <span class="authorship-speaker">{voice.speaker}</span>
+                  {voice.collectiveAliases && voice.collectiveNote ? (
+                    <span
+                      class="ai-collective-reveal"
+                      tabindex="0"
+                      aria-label={`${voice.speaker}. ${voice.collectiveNote}`}
+                    >
+                      <span class="authorship-speaker ai-collective-name" aria-hidden="true">
+                        <span class="ai-name-sizer">PERPLEXITY</span>
+                        <span class="ai-name-base">{voice.speaker}</span>
+                        <span class="ai-name-chorus">
+                          {voice.collectiveAliases.map((alias, aliasIndex: number) => (
+                            <span
+                              class="ai-name-alias"
+                              style={`--alias-index: ${aliasIndex}`}
+                            >
+                              {alias}
+                            </span>
+                          ))}
+                        </span>
+                      </span>
+                      <span class="ai-collective-hint" aria-hidden="true">≈ COLLECTIVE AI</span>
+                      <span class="ai-collective-note" aria-hidden="true">
+                        {voice.collectiveNote}
+                      </span>
+                    </span>
+                  ) : (
+                    <span class="authorship-speaker">{voice.speaker}</span>
+                  )}
                   <span class="authorship-role">{voice.role}</span>
                 </header>
                 <p>{voice.statement}</p>
@@ -1434,6 +1461,146 @@ const president = presidentEntry.data;
     line-height: 1;
   }
 
+  /*
+   * DNA: “CHATGPT” is the familiar conversational name, while the changing
+   * faces reveal the wider AI chorus without adding another explanatory block.
+   * The sizer keeps the card still as names of different lengths pass through.
+   */
+  .ai-collective-reveal {
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    align-items: baseline;
+    gap: 0.55rem;
+    color: var(--eden-text);
+    cursor: help;
+    outline: none;
+  }
+
+  .ai-collective-name {
+    position: relative;
+    display: inline-grid;
+    border-bottom: 1px dashed rgba(32, 140, 141, 0.65);
+  }
+
+  .ai-name-sizer {
+    visibility: hidden;
+    grid-area: 1 / 1;
+  }
+
+  .ai-name-base,
+  .ai-name-chorus,
+  .ai-name-alias {
+    position: absolute;
+    inset: 0;
+  }
+
+  .ai-name-base {
+    transition:
+      opacity 180ms ease,
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ai-name-alias {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    color: var(--eden-primary);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.82em;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .ai-name-alias:nth-child(2) {
+    color: var(--eden-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    letter-spacing: 0;
+  }
+
+  .ai-name-alias:nth-child(3) {
+    color: var(--eden-text);
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.06em;
+  }
+
+  .ai-name-alias:nth-child(4) {
+    color: var(--eden-primary);
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.66em;
+    letter-spacing: 0;
+  }
+
+  .ai-collective-hint {
+    color: var(--eden-primary);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.72;
+  }
+
+  .ai-collective-note {
+    position: absolute;
+    z-index: 4;
+    top: calc(100% + 0.65rem);
+    left: 0;
+    width: min(26rem, calc(100vw - 7rem));
+    padding: 0.72rem 0.85rem;
+    opacity: 0;
+    color: var(--eden-text);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    background: #fff;
+    border: 1px solid var(--eden-primary);
+    box-shadow: 5px 5px 0 rgba(32, 140, 141, 0.15);
+    pointer-events: none;
+    transform: translateY(-0.25rem);
+    transition:
+      opacity 180ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ai-collective-reveal:hover .ai-name-base,
+  .ai-collective-reveal:focus .ai-name-base {
+    opacity: 0;
+    transform: translateY(-0.18em);
+  }
+
+  .ai-collective-reveal:hover .ai-name-alias,
+  .ai-collective-reveal:focus .ai-name-alias {
+    animation: ai-collective-cycle 4.8s steps(1, end) infinite;
+    animation-delay: calc(var(--alias-index) * 1.2s);
+  }
+
+  .ai-collective-reveal:hover .ai-collective-note,
+  .ai-collective-reveal:focus .ai-collective-note {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ai-collective-reveal:focus-visible {
+    border-radius: 0.1rem;
+    outline: 2px solid var(--eden-primary);
+    outline-offset: 0.25rem;
+  }
+
+  @keyframes ai-collective-cycle {
+    0%,
+    24.99% {
+      opacity: 1;
+    }
+
+    25%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   .authorship-role {
     color: var(--eden-text-muted);
     font-family: 'Space Mono', ui-monospace, monospace;
@@ -1526,6 +1693,22 @@ const president = presidentEntry.data;
     font-weight: 700;
     line-height: 1.55;
     border-left: 4px solid var(--eden-gold-bright);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-name-base {
+      transition: none;
+    }
+
+    .ai-collective-reveal:hover .ai-name-alias,
+    .ai-collective-reveal:focus .ai-name-alias {
+      animation: none;
+    }
+
+    .ai-collective-reveal:hover .ai-name-alias:last-child,
+    .ai-collective-reveal:focus .ai-name-alias:last-child {
+      opacity: 1;
+    }
   }
 
   .president-note {

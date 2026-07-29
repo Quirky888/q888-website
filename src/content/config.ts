@@ -284,6 +284,8 @@ const campaigns = defineCollection({
         speaker: z.string().min(1),
         role: z.string().min(1),
         statement: z.string().min(1),
+        collectiveAliases: z.array(z.string().min(1)).length(4).optional(),
+        collectiveNote: z.string().min(1).optional(),
       })).length(2),
       provenanceHeading: z.string().min(1),
       provenance: z.array(z.object({
