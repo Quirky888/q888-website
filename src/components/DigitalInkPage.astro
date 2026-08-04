@@ -1,0 +1,381 @@
+---
+const memoryLayers = [
+  { number: "01", name: "Visible trace", text: "One representative colour: the photograph reduced to finite digital material." },
+  { number: "02", name: "Source trace", text: "An optional compressed preview, no larger than 192 pixels on its longest edge." },
+  { number: "03", name: "Descriptive memory", text: "Machine-generated language—including its uncertainty and occasional mistakes." },
+  { number: "04", name: "Situated memory", text: "Date, place, provenance and the artist’s own note, kept distinct from machine interpretation." },
+  { number: "05", name: "Acquired memory", text: "Concepts encountered through selected texts and PDFs after the ink was created." },
+  { number: "06", name: "Social memory", text: "Traceable knowledge exchanged with other inks. This remains a residency research question." },
+  { number: "07", name: "Invented memory", text: "An AI reconstruction: explicitly an invention, never presented as recovery of the source." },
+];
+
+const productFacts = [
+  ["660+", "unique inks tested in the artist’s working collection"],
+  ["600+", "educated inks used to test learning and performance"],
+  ["192 px", "maximum edge of the optional Source Memory"],
+  ["1 / 10", "credits for Online Assist / AI Memory Reconstruction"],
+];
+---
+
+<main class="ink-page">
+  <section class="ink-hero" aria-labelledby="ink-title">
+    <div class="ink-orbit" aria-hidden="true"></div>
+    <div class="ink-wrap ink-hero-grid">
+      <div class="ink-hero-copy">
+        <p class="ink-kicker">Q888 · FINITE-PIXEL ARTWORK · iPadOS</p>
+        <h1 id="ink-title">DIGITAL<br /><span>INK</span></h1>
+        <p class="ink-lede">
+          A photograph enters as an image. It leaves as one finite Smart Ink: colour,
+          memory, biography and provenance compressed into material that can be spent.
+        </p>
+        <div class="ink-actions">
+          <a class="ink-button ink-button-primary" href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">Open on the App Store ↗</a>
+          <a class="ink-button" href="#how-it-lives">See how an ink lives ↓</a>
+        </div>
+      </div>
+
+      <aside class="ink-status" aria-label="Current Digital Ink status">
+        <div class="ink-status-light"><span></span> WORKING ARTWORK</div>
+        <dl>
+          <div><dt>Public app</dt><dd>Available</dd></div>
+          <div><dt>Latest production build</dt><dd>Submitted to Apple</dd></div>
+          <div><dt>Platform</dt><dd>Native iPadOS · SwiftUI</dd></div>
+          <div><dt>Created by</dt><dd>Aleksandrs Sestakovs / Q888</dd></div>
+          <div><dt>Archive edition</dt><dd>Work in progress · not yet built</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <figure class="ink-device">
+    <img src="/images/DigitalInk_Ipad_kn.webp" alt="Digital Ink running on an iPad, showing the finite-pixel drawing interface" width="1200" height="800" decoding="async" fetchpriority="high" />
+    <figcaption>APPLICATION VIEW · A WORKING STUDIO, NOT AN INFINITE CANVAS</figcaption>
+  </figure>
+
+  <section class="ink-section ink-intro" id="how-it-lives" aria-labelledby="living-material-title">
+    <div class="ink-wrap ink-two-column">
+      <div>
+        <p class="ink-kicker">01 · THE EXISTING WORK</p>
+        <h2 id="living-material-title">Digital material with a past.</h2>
+      </div>
+      <div class="ink-prose">
+        <p>
+          Digital Ink is a working native iPad artwork. A selected photograph, artwork or screenshot becomes a unique Smart Ink with a representative colour, identity, visual description, structured memory and provenance.
+        </p>
+        <p>
+          Painting places available ink onto a zoomable grid. Ink is finite: it cannot be duplicated without consequence, and erasing returns it to the available population. Every placed pixel remains connected to where it came from.
+        </p>
+      </div>
+    </div>
+
+    <div class="ink-wrap ink-sequence" aria-label="Smart Ink transformation sequence">
+      <article><span>SELECT</span><strong>A chosen image</strong><p>Only the photograph or artwork the artist deliberately imports.</p></article>
+      <i aria-hidden="true">→</i>
+      <article><span>TRANSFORM</span><strong>One Smart Ink</strong><p>Colour, identity, description and optional Source Memory.</p></article>
+      <i aria-hidden="true">→</i>
+      <article><span>LIVE</span><strong>A finite biography</strong><p>Painting, learning, relationships, provenance and reconstruction.</p></article>
+    </div>
+  </section>
+
+  <section class="ink-section ink-studies" aria-labelledby="studies-title">
+    <div class="ink-wrap">
+      <p class="ink-kicker">02 · ARTISTIC INTERFACE STUDIES</p>
+      <div class="ink-two-column studies-intro">
+        <h2 id="studies-title">The interface also became a drawing surface.</h2>
+        <div class="ink-prose">
+          <p>
+            These are authored visual records made during Digital Ink’s development,
+            not neutral product screenshots. The recorded date, interface state and
+            rough edges remain because development time is part of the work’s provenance.
+          </p>
+          <p>
+            As each study crosses the centre of the screen, its artistic memory surfaces.
+            Scroll back and the application record can return. Nothing is corrected when
+            the two realities disagree.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="study-stack">
+      <figure class="art-study" data-art-study="canvas">
+        <div class="art-study-toolbar ink-wrap">
+          <figcaption>
+            <span>STUDY 01 · CANVAS / TUE 13 JAN · 17:23</span>
+            <strong>The finite canvas grows an emotional root system.</strong>
+          </figcaption>
+          <span class="art-study-scroll-cue">SCROLL ACTIVATES MEMORY ↓</span>
+        </div>
+        <div class="art-study-frame art-study-frame--canvas">
+          <img
+            class="art-study-base"
+            data-study-base
+            src="/images/screen.webp"
+            alt="Digital Ink canvas interface dated Tuesday 13 January at 17:23, containing a finite pixel artwork"
+            width="2422"
+            height="1535"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="art-study-overlay"
+            data-study-overlay
+            aria-hidden="true"
+            src="/images/screen_overlay.webp"
+            alt="Artistic interpretation of the Digital Ink canvas, with hand-drawn roots, creatures and emotional ink symbols growing from the interface"
+            width="2422"
+            height="1535"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </figure>
+
+      <figure class="art-study" data-art-study="memory">
+        <div class="art-study-toolbar ink-wrap">
+          <figcaption>
+            <span>STUDY 02 · PIXEL BIOGRAPHY / MEMORY RECORD</span>
+            <strong>A pixel remembers an Afterlife Contract imperfectly.</strong>
+          </figcaption>
+          <span class="art-study-scroll-cue">MEMORY LATCHES WHILE DESCENDING ↓</span>
+        </div>
+        <div class="art-study-frame art-study-frame--memory">
+          <img
+            class="art-study-base"
+            data-study-base
+            src="/images/memory.webp"
+            alt="Digital Ink Smart Ink biography showing machine description, personal memory and learned concepts"
+            width="2745"
+            height="1492"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="art-study-overlay"
+            data-study-overlay
+            aria-hidden="true"
+            src="/images/memory_overlay.webp"
+            alt="Artistic memory interpretation joining a Smart Ink biography to fragments of an Afterlife Contract and hand-drawn marks"
+            width="2745"
+            height="1669"
+            loading="lazy"
+            decoding="async"
+          />
+          <p class="art-study-fog" aria-hidden="true">I REMEMBER …<br />being many pixels…</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ink-section ink-memory" aria-labelledby="memory-title">
+    <div class="ink-wrap">
+      <p class="ink-kicker">03 · SEVEN FORMS OF REMEMBERING</p>
+      <h2 id="memory-title">An ink does not have one memory.</h2>
+      <p class="ink-section-intro">It carries distinct layers so source evidence, personal testimony, learned knowledge and machine invention do not quietly become the same thing.</p>
+      <div class="memory-grid">
+        {memoryLayers.map((layer) => (
+          <article class="memory-card">
+            <span>{layer.number}</span>
+            <h3>{layer.name}</h3>
+            <p>{layer.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="ink-section ink-evidence" aria-labelledby="practice-title">
+    <div class="ink-wrap">
+      <p class="ink-kicker">04 · EVIDENCE OF PRACTICE</p>
+      <h2 id="practice-title">The concept has a population.</h2>
+      <div class="fact-grid">
+        {productFacts.map(([value, label]) => (
+          <div><strong>{value}</strong><span>{label}</span></div>
+        ))}
+      </div>
+      <div class="ink-two-column ink-capabilities">
+        <article>
+          <h3>Biography &amp; education</h3>
+          <p>Smart Inks can hold Vision Memory, structured visual interpretation, personal notes, learned concepts, education level, relationships, provenance and generated reconstructions. Selected PDFs teach concepts and hashtags without turning the PDF itself into AI input.</p>
+        </article>
+        <article>
+          <h3>Affinity &amp; autonomy</h3>
+          <p>Inks can rearrange or group according to colour and stored information. The current system supports a general population; fully traceable neighbour teaching and exhibition-grade replay remain development work, not completed claims.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ink-section ink-boundary" aria-labelledby="boundary-title">
+    <div class="ink-wrap ink-two-column">
+      <div>
+        <p class="ink-kicker">05 · THE ONLINE BOUNDARY</p>
+        <h2 id="boundary-title">Offline by default. Permission at the threshold.</h2>
+      </div>
+      <div class="boundary-cards">
+        <article>
+          <span>ON DEVICE</span>
+          <h3>Built-in recognition</h3>
+          <p>Apple-provided recognition can describe selected images without credits or an internet connection. Its interpretations may be limited or inaccurate.</p>
+        </article>
+        <article>
+          <span>OPTIONAL · ONLINE</span>
+          <h3>Assist &amp; reconstruction</h3>
+          <p>With explicit permission, selected information travels through Digital Ink’s Cloudflare service to OpenAI. Online Assist costs 1 credit; AI Memory Reconstruction costs 10. Purchasing credits is never treated as consent.</p>
+        </article>
+        <a class="ink-policy-link" href="/privacy/">Read the complete Digital Ink Privacy Policy <b>↗</b></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ink-section archive-section" aria-labelledby="archive-title">
+    <div class="archive-pixels" aria-hidden="true">
+      {Array.from({ length: 116 }, (_, index) => <i style={`--i:${index}`}></i>)}
+    </div>
+    <div class="ink-wrap archive-content">
+      <p class="ink-kicker">06 · FUTURE RESEARCH EDITION</p>
+      <div class="archive-heading-row">
+        <h2 id="archive-title">THE 116-PIXEL<br />ARCHIVE</h2>
+        <span class="wip-stamp">WORK IN<br />PROGRESS</span>
+      </div>
+      <p class="archive-lede">
+        A proposed controlled archive in which 116 photographs become 116 Smart Inks. They would form recorded relationships, exchange limited knowledge, make compositions and attempt—imperfectly—to remember what their archive once contained.
+      </p>
+
+      <div class="not-built">
+        <strong>This edition does not yet exist.</strong>
+        <p>Digital Ink is the working foundation. The residency process would discover the archive’s rules before a dedicated application is built.</p>
+      </div>
+
+      <ol class="archive-process">
+        <li><span>NOW</span><div><h3>Define the archive protocol</h3><p>Source and consent, memory rights, affinity, exchange, forgetting, intervention and what the audience may see.</p></div></li>
+        <li><span>12</span><div><h3>Run a controlled prototype</h3><p>Twelve photographs test whether the rules create meaningful differences before scale hardens them into software.</p></div></li>
+        <li><span>116</span><div><h3>Build the dedicated edition</h3><p>Only after observation: a separate, controlled population with event history, replay, backup and exhibition-safe operation.</p></div></li>
+      </ol>
+
+      <blockquote>
+        The question is not whether the machine can recover the photograph. It is what remains after colour, testimony, education, contamination and invention have each had their turn.
+      </blockquote>
+      <p class="future-route">A dedicated <code>/116</code> process page will be added when the research has a process to show.</p>
+    </div>
+  </section>
+
+  <footer class="ink-footer">
+    <div class="ink-wrap">
+      <p>Every pixel remembers where it came from.<br /><span>Some memories remain politely unreliable.</span></p>
+      <nav aria-label="Digital Ink links">
+        <a href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">App Store ↗</a>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="mailto:hello@q888.space">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</main>
+
+<style>
+  .ink-page { --blue:#77aaf7; --paper:#f0f2f4; --muted:#9299a4; background:#07090d; color:var(--paper); font-family:"Space Mono",ui-monospace,monospace; overflow:hidden; }
+  .ink-wrap { width:min(1180px,calc(100% - 3rem)); margin-inline:auto; }
+  .ink-hero { min-height:100svh; display:grid; align-items:center; position:relative; padding:10rem 0 6rem; background:radial-gradient(circle at 76% 44%,rgba(68,116,195,.18),transparent 25%),linear-gradient(180deg,#090c12,#07090d); }
+  .ink-orbit { position:absolute; width:min(50vw,700px); aspect-ratio:1; border:1px solid rgba(119,170,247,.2); border-radius:50%; right:-12%; top:8%; box-shadow:0 0 100px rgba(62,122,219,.08) inset; }
+  .ink-orbit::before,.ink-orbit::after { content:""; position:absolute; border:1px solid rgba(119,170,247,.11); border-radius:50%; inset:16%; } .ink-orbit::after{inset:36%;background:var(--blue);box-shadow:0 0 80px var(--blue);opacity:.75;}
+  .ink-hero-grid,.ink-two-column { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr); gap:clamp(3rem,8vw,8rem); align-items:start; position:relative; }
+  .ink-kicker { color:var(--blue); font-size:.72rem; letter-spacing:.2em; line-height:1.5; }
+  h1 { margin:1.2rem 0 2rem; font-family:"Space Grotesk",sans-serif; font-size:clamp(5.5rem,15vw,13rem); letter-spacing:-.085em; line-height:.69; }
+  h1 span { color:transparent; -webkit-text-stroke:1px rgba(240,242,244,.52); }
+  .ink-lede { max-width:690px; color:#c8ccd2; font-family:system-ui,sans-serif; font-size:clamp(1.35rem,2.2vw,2rem); line-height:1.45; }
+  .ink-actions { display:flex; gap:.8rem; flex-wrap:wrap; margin-top:2.5rem; }
+  .ink-button { border:1px solid #343a45; color:#d8dce2; padding:1rem 1.15rem; text-decoration:none; font-size:.74rem; transition:.2s ease; } .ink-button:hover{border-color:var(--blue);color:white}.ink-button-primary{background:var(--blue);border-color:var(--blue);color:#07101e;font-weight:700}.ink-button-primary:hover{background:#a7c8fb;color:#07101e}
+  .ink-status { margin-top:7rem; border-top:1px solid #303641; padding-top:1.2rem; backdrop-filter:blur(5px); }
+  .ink-status-light { color:#b9c1cb; font-size:.68rem; letter-spacing:.18em; margin-bottom:1.5rem; }.ink-status-light span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#80e2a8;box-shadow:0 0 12px #80e2a8;margin-right:.5rem}.ink-status dl{margin:0}.ink-status dl div{display:flex;justify-content:space-between;gap:2rem;border-bottom:1px solid #20252d;padding:.85rem 0;font-size:.72rem}.ink-status dt{color:#737c89}.ink-status dd{text-align:right;margin:0;color:#e6e8ec}
+  .ink-device { margin:0; background:#030405; position:relative; }.ink-device img{display:block;width:100%;max-height:92svh;object-fit:cover;filter:saturate(.83) contrast(1.04)}.ink-device figcaption{position:absolute;left:1.5rem;bottom:1.25rem;background:rgba(4,6,9,.86);padding:.65rem .8rem;color:#aeb5c0;font-size:.62rem;letter-spacing:.15em}
+  .ink-section{padding:clamp(6rem,11vw,10rem) 0;border-top:1px solid #1b2028}.ink-section h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(3rem,7vw,6.8rem);line-height:.95;letter-spacing:-.055em;margin:1.2rem 0}.ink-prose p,.ink-section-intro,.ink-capabilities p,.boundary-cards p{font-family:system-ui,sans-serif;color:#afb5bf;font-size:1.13rem;line-height:1.72;margin:0 0 1.5rem}.ink-section-intro{max-width:750px;margin:2rem 0 4rem}
+  .ink-sequence{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1.4rem;align-items:center;margin-top:6rem}.ink-sequence article{min-height:220px;border:1px solid #252b34;padding:1.5rem;background:#0b0e13}.ink-sequence article span,.boundary-cards article span{display:block;color:var(--blue);font-size:.67rem;letter-spacing:.18em;margin-bottom:3rem}.ink-sequence strong{font-family:"Space Grotesk";font-size:1.45rem}.ink-sequence p{font-family:system-ui,sans-serif;color:#858e9b;line-height:1.55}.ink-sequence i{color:var(--blue);font-style:normal}
+  .ink-studies{background:#050609;padding-bottom:0}.studies-intro{margin-bottom:6rem}.studies-intro h2{margin-top:0}.study-stack{display:grid;gap:1px;background:#000}.art-study{margin:0;background:#000;padding:3.5rem 0 5rem}.art-study-toolbar{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:1.2rem}.art-study figcaption{display:grid;gap:.55rem}.art-study figcaption span{color:var(--blue);font-size:.65rem;letter-spacing:.16em}.art-study figcaption strong{font-family:"Space Grotesk";font-size:clamp(1.25rem,2.2vw,2rem);font-weight:500}.art-study-scroll-cue{flex:0 0 auto;color:#8993a0;font-size:.62rem;letter-spacing:.14em;border-bottom:1px solid #35404d;padding-bottom:.55rem}.art-study-frame{display:grid;position:relative;width:min(1180px,calc(100% - 2rem));margin-inline:auto;background:#000;overflow:hidden;isolation:isolate}.art-study-frame--canvas{aspect-ratio:2422/1535}.art-study-frame--memory{aspect-ratio:2745/1669}.art-study-frame img{grid-area:1/1;width:100%;height:100%;object-fit:contain;display:block}.art-study-base{transition:opacity 1200ms cubic-bezier(.4,0,.2,1),filter 1200ms cubic-bezier(.4,0,.2,1);will-change:opacity,filter;opacity:1}.art-study-overlay{position:relative;z-index:2;opacity:0;filter:blur(4px);transform:scale(1.015);transition:opacity 1200ms cubic-bezier(.4,0,.2,1),filter 1200ms cubic-bezier(.4,0,.2,1),transform 1200ms cubic-bezier(.4,0,.2,1);will-change:opacity,filter,transform}.art-study.is-revealed .art-study-overlay{opacity:1;filter:blur(0);transform:scale(1)}.art-study.is-revealed .art-study-base{opacity:0;filter:blur(4px)}.art-study-frame::after{content:"ARTISTIC MEMORY";position:absolute;z-index:4;right:1rem;bottom:1rem;background:rgba(4,6,9,.86);color:#d7dce4;padding:.55rem .7rem;font-size:.6rem;letter-spacing:.15em;opacity:0;transform:translateY(8px);transition:.35s ease}.art-study.is-revealed .art-study-frame::after{opacity:1;transform:none}.art-study-fog{position:absolute;z-index:1;right:4%;top:50%;transform:translateY(-50%);margin:0;color:rgba(35,40,48,.28);font-family:"Space Grotesk",sans-serif;font-size:clamp(1.5rem,4vw,4.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.08;text-align:left;filter:blur(1.5px);text-shadow:0 0 30px rgba(0,0,0,.08);transition:opacity 1000ms cubic-bezier(.4,0,.2,1),filter 1000ms cubic-bezier(.4,0,.2,1)}.art-study.is-revealed .art-study-fog{opacity:0;filter:blur(8px)}
+  .ink-memory{background:#0b0e14}.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #303642;border-left:1px solid #303642}.memory-card{padding:1.5rem;min-height:250px;border-right:1px solid #303642;border-bottom:1px solid #303642}.memory-card span{font-size:.7rem;color:var(--blue)}.memory-card h3,.ink-capabilities h3,.boundary-cards h3{font-family:"Space Grotesk";font-size:1.5rem;margin:3rem 0 1rem}.memory-card p{font-family:system-ui,sans-serif;color:#929aa6;line-height:1.55}.memory-card:last-child{background:rgba(119,170,247,.07)}
+  .fact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#2b313b;margin:5rem 0}.fact-grid div{background:#080a0e;padding:2rem 1.4rem;min-height:190px}.fact-grid strong{display:block;color:var(--blue);font-family:"Space Grotesk";font-size:clamp(2.5rem,5vw,5rem);letter-spacing:-.06em}.fact-grid span{display:block;color:#959da9;font-size:.68rem;line-height:1.55;max-width:19ch}.ink-capabilities article{border-top:1px solid #333a45}.ink-capabilities h3{margin-top:1.3rem}
+  .ink-boundary{background:#e8ebee;color:#12151a}.ink-boundary .ink-kicker{color:#275d9f}.ink-boundary h2{color:#11151a}.boundary-cards{display:grid;gap:1rem}.boundary-cards article{border:1px solid #bbc1c9;padding:1.5rem}.boundary-cards article span{color:#275d9f;margin-bottom:2rem}.boundary-cards h3{margin:0 0 .8rem}.boundary-cards p{color:#4c535d;font-size:1rem}.ink-policy-link{display:flex;justify-content:space-between;gap:2rem;background:#11151a;color:#fff;padding:1.4rem;text-decoration:none}.ink-policy-link:hover{background:#275d9f}
+  .archive-section{position:relative;background:#05070a;min-height:100svh}.archive-pixels{position:absolute;right:-3vw;top:6rem;width:min(44vw,610px);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(3px,.5vw,8px);opacity:.48;transform:rotate(4deg)}.archive-pixels i{aspect-ratio:1;background:hsl(calc(210 + var(--i)*.27) 55% calc(25% + mod(var(--i),7)*5%));}.archive-content{position:relative}.archive-heading-row{display:flex;align-items:flex-start;gap:3rem;margin:1rem 0 3rem}.archive-heading-row h2{font-size:clamp(4rem,11vw,10rem);max-width:950px;margin:0}.wip-stamp{flex:0 0 auto;border:2px solid #e66f66;color:#e66f66;padding:.8rem;transform:rotate(7deg);font-size:.68rem;line-height:1.5;letter-spacing:.15em}.archive-lede{font-family:system-ui,sans-serif;max-width:850px;font-size:clamp(1.4rem,2.6vw,2.4rem);line-height:1.5;color:#c3c8d0}.not-built{max-width:850px;border-left:4px solid #e66f66;background:#11141a;padding:1.5rem 2rem;margin:4rem 0}.not-built strong{font-family:"Space Grotesk";font-size:1.6rem}.not-built p{font-family:system-ui,sans-serif;color:#a6adb8;line-height:1.6;margin:.6rem 0 0}.archive-process{list-style:none;padding:0;margin:5rem 0;max-width:900px}.archive-process li{display:grid;grid-template-columns:90px 1fr;gap:2rem;border-top:1px solid #313743;padding:1.8rem 0}.archive-process li>span{color:var(--blue);font-size:.78rem;letter-spacing:.15em}.archive-process h3{font-family:"Space Grotesk";font-size:1.6rem;margin:0 0 .6rem}.archive-process p{font-family:system-ui,sans-serif;color:#929aa6;line-height:1.6;margin:0}.archive-section blockquote{max-width:900px;margin:6rem 0 2rem;border:0;padding:0;font-family:"Space Grotesk";font-size:clamp(2rem,4vw,4rem);line-height:1.15;color:#dde1e7}.future-route{font-size:.72rem;color:#858d99}.future-route code{color:var(--blue)}
+  .ink-footer{padding:5rem 0 7rem;background:var(--blue);color:#08101d}.ink-footer .ink-wrap{display:flex;justify-content:space-between;gap:3rem;align-items:flex-end}.ink-footer p{font-family:"Space Grotesk";font-size:clamp(1.8rem,3vw,3rem);line-height:1.1;margin:0}.ink-footer p span{opacity:.65}.ink-footer nav{display:flex;gap:1.2rem;flex-wrap:wrap}.ink-footer a{color:#08101d;font-size:.72rem;font-weight:700}
+  @media(max-width:900px){.ink-hero-grid,.ink-two-column{grid-template-columns:1fr;gap:2rem}.ink-status{margin-top:1rem}.memory-grid{grid-template-columns:repeat(2,1fr)}.fact-grid{grid-template-columns:repeat(2,1fr)}.archive-pixels{opacity:.18;width:72vw}.ink-footer .ink-wrap{align-items:flex-start;flex-direction:column}.art-study-toolbar{align-items:start;flex-direction:column}.art-study-scroll-cue{width:100%}}
+  @media(max-width:600px){.ink-wrap{width:min(100% - 2rem,1180px)}.ink-hero{padding-top:7rem}.ink-actions{flex-direction:column}.ink-button{text-align:center}.ink-sequence{grid-template-columns:1fr}.ink-sequence i{transform:rotate(90deg);justify-self:center}.memory-grid{grid-template-columns:1fr}.fact-grid{grid-template-columns:1fr}.fact-grid div{min-height:150px}.archive-heading-row{gap:1rem}.wip-stamp{font-size:.54rem}.archive-process li{grid-template-columns:54px 1fr;gap:1rem}.ink-device figcaption{position:static}.ink-section{padding:5rem 0}.ink-studies{padding-bottom:0}.art-study{padding:2.5rem 0 3rem}.art-study-frame::after{right:.5rem;bottom:.5rem;font-size:.5rem}}
+  @media(prefers-reduced-motion:no-preference){.ink-orbit::after{animation:ink-pulse 5s ease-in-out infinite}@keyframes ink-pulse{50%{opacity:.35;transform:scale(.9)}}}
+  @media(max-width:767px) and (orientation:portrait){.art-study[data-art-study="memory"] .art-study-base{display:none}.art-study[data-art-study="memory"] .art-study-overlay{opacity:1;filter:none;transform:none}.art-study[data-art-study="memory"] .art-study-fog{display:none}}
+  @media(prefers-reduced-motion:reduce){.art-study-base,.art-study-overlay,.art-study-frame::after,.art-study-fog{transition:none}}
+</style>
+
+<script>
+  type DigitalInkWindow = Window & { __digitalInkStudyAbort?: AbortController };
+
+  function initArtStudies() {
+    const studies = Array.from(document.querySelectorAll<HTMLElement>("[data-art-study]"));
+    if (studies.length === 0) return;
+
+    const pageWindow = window as DigitalInkWindow;
+    pageWindow.__digitalInkStudyAbort?.abort();
+    const controller = new AbortController();
+    pageWindow.__digitalInkStudyAbort = controller;
+
+    const canvasStudy = studies.find((study) => study.dataset.artStudy === "canvas");
+    const memoryStudy = studies.find((study) => study.dataset.artStudy === "memory");
+    const portraitMobile = window.matchMedia("(max-width: 767px) and (orientation: portrait)");
+    let previousScrollY = window.scrollY;
+    let memoryLatched = false;
+    let ticking = false;
+
+    const setStudyState = (study: HTMLElement | undefined, isRevealed: boolean) => {
+      if (!study) return;
+      study.classList.toggle("is-revealed", isRevealed);
+      study.querySelector("[data-study-base]")?.setAttribute("aria-hidden", String(isRevealed));
+      study.querySelector("[data-study-overlay]")?.setAttribute("aria-hidden", String(!isRevealed));
+    };
+
+    const checkReveal = () => {
+      const viewportCenter = window.innerHeight / 2;
+      const threshold = window.innerHeight * 0.15;
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > previousScrollY;
+
+      if (canvasStudy) {
+        const rect = canvasStudy.querySelector(".art-study-frame")?.getBoundingClientRect();
+        if (rect) {
+          const distance = Math.abs(viewportCenter - (rect.top + rect.height / 2));
+          setStudyState(canvasStudy, distance < threshold);
+        }
+      }
+
+      if (memoryStudy) {
+        if (portraitMobile.matches) {
+          memoryLatched = true;
+        } else {
+          const rect = memoryStudy.querySelector(".art-study-frame")?.getBoundingClientRect();
+          if (rect) {
+            const center = rect.top + rect.height / 2;
+            const inRevealZone = Math.abs(viewportCenter - center) < threshold;
+            const aboveResetPoint = center < viewportCenter - threshold * 1.4;
+            if (scrollingDown && inRevealZone) memoryLatched = true;
+            else if (!scrollingDown && aboveResetPoint) memoryLatched = false;
+          }
+        }
+        setStudyState(memoryStudy, memoryLatched);
+      }
+
+      previousScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    const requestRevealCheck = () => {
+      if (ticking) return;
+      requestAnimationFrame(checkReveal);
+      ticking = true;
+    };
+
+    window.addEventListener("scroll", requestRevealCheck, { passive: true, signal: controller.signal });
+    window.addEventListener("resize", requestRevealCheck, { passive: true, signal: controller.signal });
+    window.addEventListener("orientationchange", requestRevealCheck, { passive: true, signal: controller.signal });
+    document.addEventListener("astro:before-swap", () => controller.abort(), { once: true, signal: controller.signal });
+    requestRevealCheck();
+  }
+
+  initArtStudies();
+  document.addEventListener("astro:page-load", initArtStudies);
+</script>
