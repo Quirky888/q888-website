@@ -67,6 +67,18 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
 
 <main class="ink-page">
   <section class="ink-hero" aria-labelledby="ink-title">
+    <div class="ink-hero-film" aria-hidden="true">
+      <video
+        data-ink-hero-video
+        data-src="/videos/digital-ink-116-memory.m4v"
+        muted
+        loop
+        playsinline
+        preload="none"
+        tabindex="-1"
+      ></video>
+    </div>
+
     <div class="ink-pixel-field" aria-hidden="true">
       {
         heroPixels.map((pixel) => (
@@ -83,13 +95,36 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
         <p class="ink-kicker">
           A WORKING ARTWORK BY ALEKSANDRS SESTAKOVS / Q888 · NATIVE iPadOS
         </p>
-        <h1 id="ink-title">EVERY PIXEL<br />CAN HAVE <span>A PAST.</span></h1>
+        <h1 id="ink-title">
+          <span class="ink-campaign-word ink-campaign-word--one">EVERY PIXEL</span
+          ><br /><span class="ink-campaign-word ink-campaign-word--two"
+            >CAN HAVE</span
+          >
+          <button
+            class="ink-time-shift"
+            type="button"
+            aria-label="A PAST. Hover or focus to reveal A FUTURE."
+          >
+            <span class="ink-time-past" aria-hidden="true">A PAST.</span>
+            <span class="ink-time-future" aria-hidden="true">A FUTURE.</span>
+          </button>
+        </h1>
       </header>
 
       <div class="ink-hero-story">
         <div class="ink-dialogue">
           <p class="human-voice">
-            <b>Q888:</b> I wanted digital material to feel less disposable—and
+            <button
+              class="ink-president-trigger"
+              type="button"
+              aria-label="Q888. Hover or focus to reveal Future President of the Galaxy and the message Every Pixel Can Have Memory."
+            >
+              <span class="ink-president-present" aria-hidden="true">Q888:</span>
+              <span class="ink-president-future" aria-hidden="true"
+                >FUTURE PRESIDENT OF THE GALAXY:</span
+              >
+            </button>
+            I wanted digital material to feel less disposable—and
             more like something we might care for.
           </p>
           <p class="ink-voice">
@@ -100,7 +135,19 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
         <div class="ink-hero-copy">
           <p class="ink-lede">
             A chosen image becomes a finite Smart Ink with its own colour,
-            memory, biography and provenance. It can be used, educated,
+            <span
+              class="ink-campaign-memory"
+              tabindex="0"
+              aria-label="memory — hover or focus to wake the word"
+              ><span class="ink-memory-original" aria-hidden="true">memory</span><span
+                class="ink-memory-exotic"
+                aria-hidden="true"
+                ><span style="--ink-letter: 0">m</span><span style="--ink-letter: 1">e</span><span
+                  style="--ink-letter: 2">m</span
+                ><span style="--ink-letter: 3">o</span><span style="--ink-letter: 4">r</span><span
+                  style="--ink-letter: 5">y</span
+                ></span
+              ></span>, biography and provenance. It can be used, educated,
             rearranged—and remembered.
           </p>
           <div class="ink-actions">
@@ -367,17 +414,36 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
 
   <section class="ink-section ink-evidence" aria-labelledby="practice-title">
     <div class="ink-wrap">
-      <p class="ink-kicker">04 · EVIDENCE OF PRACTICE</p>
+      <p class="ink-kicker">
+        04 ·
+        <button
+          class="ink-evidence-trigger"
+          type="button"
+          aria-label="Evidence of Practice. Hover or focus to wake the four descriptions of Digital Ink."
+          >EVIDENCE OF PRACTICE</button
+        >
+      </p>
       <h2 id="practice-title">The concept has a practice—not a fixed count.</h2>
       <p class="ink-section-intro">
         Digital Ink is used regularly, so its population changes. The lasting
-        evidence is not yesterday’s number; it is a public app, a studio
-        instrument, a finite material system and an open field of research.
+        evidence is not yesterday’s number; it is
+        <span class="ink-evidence-trail" style="--ink-trail-delay:0ms"
+          >a public app</span
+        >,
+        <span class="ink-evidence-trail" style="--ink-trail-delay:90ms"
+          >a studio instrument</span
+        >,
+        <span class="ink-evidence-trail" style="--ink-trail-delay:180ms"
+          >a finite material system</span
+        > and
+        <span class="ink-evidence-trail" style="--ink-trail-delay:270ms"
+          >an open field of research</span
+        >.
       </p>
       <div class="practice-grid">
         {
           practiceEvidence.map(([title, text], index) => (
-            <article>
+            <article style={`--ink-wake-delay:${index * 90}ms`}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{title}</h3>
               <p>{text}</p>
@@ -449,7 +515,18 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       <p class="ink-kicker">06 · FUTURE RESEARCH EDITION</p>
       <div class="archive-heading-row">
         <h2 id="archive-title">THE 116-PIXEL<br />ARCHIVE</h2>
-        <span class="wip-stamp">WORK IN<br />PROGRESS</span>
+        <button
+          class="wip-stamp"
+          type="button"
+          aria-label="Work in progress. Hover or focus to reveal Work in Possibility."
+        >
+          <span class="wip-progress" aria-hidden="true"
+            >WORK IN<br />PROGRESS</span
+          >
+          <span class="wip-possibility" aria-hidden="true"
+            >WORK IN<br />POSSIBILITY</span
+          >
+        </button>
       </div>
       <p class="archive-lede">
         A proposed controlled archive in which 116 photographs become 116 Smart
@@ -557,12 +634,43 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       160px 160px;
     isolation: isolate;
   }
+  .ink-hero-film {
+    position: absolute;
+    inset: 0 0 auto;
+    height: clamp(620px, 100svh, 900px);
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%);
+  }
+  .ink-hero-film::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(54, 55, 51, 0.06), rgba(54, 55, 51, 0.18)),
+      linear-gradient(90deg, rgba(54, 55, 51, 0.04), rgba(54, 55, 51, 0.14));
+  }
+  .ink-hero-film video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    opacity: 0.64;
+    filter: grayscale(42%) saturate(0.82) contrast(1.1);
+  }
   .ink-pixel-field {
     position: absolute;
     inset: 0;
+    z-index: 1;
     overflow: hidden;
     opacity: 0.34;
     pointer-events: none;
+  }
+  .ink-hero > .ink-wrap {
+    position: relative;
+    z-index: 3;
   }
   .ink-pixel-field::after {
     content: "";
@@ -637,12 +745,265 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     letter-spacing: -0.07em;
     line-height: 0.82;
   }
-  h1 span {
+  .ink-time-shift span {
     color: var(--peach);
     font-family: Georgia, "Times New Roman", serif;
     font-style: italic;
     font-weight: 700;
     letter-spacing: -0.08em;
+  }
+  .ink-campaign-word {
+    color: inherit;
+    transition:
+      color 420ms ease,
+      filter 520ms ease,
+      text-shadow 520ms ease;
+  }
+  .ink-campaign-memory {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    cursor: help;
+    outline: none;
+  }
+  .ink-memory-original,
+  .ink-memory-exotic {
+    display: inline-block;
+    transition:
+      opacity 360ms ease,
+      filter 520ms ease,
+      font-weight 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ink-memory-exotic {
+    position: absolute;
+    inset: 0;
+    align-items: baseline;
+    justify-content: space-between;
+    color: var(--blue);
+    font-size: 1em;
+    line-height: inherit;
+    opacity: 0;
+    filter: blur(2px);
+    text-shadow: 0 0 0.5em rgba(169, 201, 231, 0.26);
+    white-space: nowrap;
+  }
+  .ink-memory-exotic span {
+    display: inline-block;
+    min-width: 0;
+    opacity: 0;
+    font-family: "Space Grotesk", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+    transform: scaleX(0.45);
+    transform-origin: 50% 72%;
+    will-change: transform, filter;
+    transition:
+      opacity 220ms ease calc(var(--ink-letter) * 42ms),
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--ink-letter) * 42ms),
+      filter 500ms ease calc(var(--ink-letter) * 42ms);
+  }
+  .ink-memory-exotic span:nth-child(1),
+  .ink-memory-exotic span:nth-child(3),
+  .ink-memory-exotic span:nth-child(5) {
+    font-family: "Playfair Display", "Iowan Old Style", Georgia, serif;
+    font-style: italic;
+  }
+  .ink-memory-exotic span:nth-child(2),
+  .ink-memory-exotic span:nth-child(6) {
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.88em;
+  }
+  .ink-memory-exotic span:nth-child(4) {
+    font-family: "Syne", "Space Grotesk", sans-serif;
+    font-weight: 700;
+  }
+  .ink-campaign-memory:focus-visible {
+    border-radius: 0.08em;
+    outline: 2px solid var(--blue);
+    outline-offset: 0.13em;
+  }
+  .ink-time-shift {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    border-radius: 0.08em;
+    background: transparent;
+    color: inherit;
+    cursor: help;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-align: left;
+    vertical-align: baseline;
+  }
+  .ink-time-shift span {
+    transition:
+      opacity 360ms ease,
+      color 420ms ease,
+      filter 420ms ease,
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ink-time-past {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .ink-time-future {
+    position: absolute;
+    top: 0.12em;
+    left: 0;
+    white-space: nowrap;
+    color: var(--blue);
+    font-size: 0.78em;
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(0.12em);
+  }
+  .ink-time-shift:hover .ink-time-past,
+  .ink-time-shift:focus .ink-time-past {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(-0.1em);
+  }
+  .ink-time-shift:hover .ink-time-future,
+  .ink-time-shift:focus .ink-time-future {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+  .ink-time-shift:focus-visible {
+    outline: 0.035em solid var(--blue);
+    outline-offset: 0.06em;
+  }
+  .ink-president-trigger {
+    display: grid;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 0.8rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.08rem;
+    background: transparent;
+    color: var(--peach);
+    cursor: help;
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    line-height: 1.2;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(255, 149, 0, 0.25);
+  }
+  .ink-president-trigger span {
+    grid-area: 1 / 1;
+    transition:
+      opacity 380ms ease,
+      color 420ms ease,
+      filter 460ms ease,
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ink-president-present {
+    opacity: 1;
+  }
+  .ink-president-future {
+    align-self: center;
+    color: var(--blue);
+    font-size: 0.68em;
+    letter-spacing: 0.11em;
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(0.25em);
+  }
+  .ink-president-trigger:hover .ink-president-present,
+  .ink-president-trigger:focus .ink-president-present {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(-0.18em);
+  }
+  .ink-president-trigger:hover .ink-president-future,
+  .ink-president-trigger:focus .ink-president-future {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+  .ink-president-trigger:focus-visible,
+  .ink-evidence-trigger:focus-visible,
+  .wip-stamp:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 0.3rem;
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-campaign-word,
+  .ink-hero:has(.ink-president-trigger:focus) .ink-campaign-word {
+    color: var(--blue);
+    filter: brightness(1.08);
+    text-shadow: 0 0 0.42em rgba(169, 201, 231, 0.28);
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-campaign-word--two,
+  .ink-hero:has(.ink-president-trigger:focus) .ink-campaign-word--two {
+    transition-delay: 90ms;
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-campaign-memory,
+  .ink-hero:has(.ink-president-trigger:focus) .ink-campaign-memory,
+  .ink-campaign-memory:hover,
+  .ink-campaign-memory:focus {
+    color: var(--blue);
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-memory-original,
+  .ink-hero:has(.ink-president-trigger:focus) .ink-memory-original,
+  .ink-campaign-memory:hover .ink-memory-original,
+  .ink-campaign-memory:focus .ink-memory-original {
+    opacity: 0;
+    filter: blur(3px);
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-memory-exotic,
+  .ink-hero:has(.ink-president-trigger:focus) .ink-memory-exotic,
+  .ink-campaign-memory:hover .ink-memory-exotic,
+  .ink-campaign-memory:focus .ink-memory-exotic {
+    display: flex;
+    opacity: 1;
+    filter: blur(0);
+    text-shadow: 0 0 0.72em rgba(169, 201, 231, 0.42);
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-memory-exotic span,
+  .ink-hero:has(.ink-president-trigger:focus) .ink-memory-exotic span,
+  .ink-campaign-memory:hover .ink-memory-exotic span,
+  .ink-campaign-memory:focus .ink-memory-exotic span {
+    opacity: 1;
+    filter: blur(0);
+    animation: ink-memory-letter-live 1.45s cubic-bezier(0.45, 0, 0.2, 1)
+      calc(var(--ink-letter) * -170ms) infinite alternate;
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-memory-exotic span:nth-child(odd),
+  .ink-hero:has(.ink-president-trigger:focus) .ink-memory-exotic span:nth-child(odd),
+  .ink-campaign-memory:hover .ink-memory-exotic span:nth-child(odd),
+  .ink-campaign-memory:focus .ink-memory-exotic span:nth-child(odd) {
+    transform: scaleX(1.2);
+  }
+  .ink-hero:has(.ink-president-trigger:hover) .ink-memory-exotic span:nth-child(even),
+  .ink-hero:has(.ink-president-trigger:focus) .ink-memory-exotic span:nth-child(even),
+  .ink-campaign-memory:hover .ink-memory-exotic span:nth-child(even),
+  .ink-campaign-memory:focus .ink-memory-exotic span:nth-child(even) {
+    transform: scaleX(0.9);
+    animation-direction: alternate-reverse;
+  }
+  @keyframes ink-memory-letter-live {
+    0% {
+      transform: scaleX(0.68);
+      filter: blur(0);
+    }
+    38% {
+      transform: scaleX(1.38);
+      filter: blur(0.012em);
+    }
+    72% {
+      transform: scaleX(0.86);
+      filter: blur(0);
+    }
+    100% {
+      transform: scaleX(1.16);
+      filter: blur(0);
+    }
   }
   .ink-hero-story {
     position: relative;
@@ -1302,6 +1663,39 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       140px 140px,
       140px 140px;
   }
+  .ink-evidence-trigger {
+    padding: 0;
+    border: 0;
+    border-radius: 0.08rem;
+    background: transparent;
+    color: inherit;
+    cursor: help;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    transition:
+      color 280ms ease,
+      text-shadow 360ms ease;
+  }
+  .ink-evidence-trigger:hover,
+  .ink-evidence-trigger:focus {
+    color: var(--blue);
+    text-shadow: 0 0 1rem rgba(169, 201, 231, 0.35);
+  }
+  .ink-evidence-trail {
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition:
+      color 360ms ease var(--ink-trail-delay),
+      box-shadow 480ms ease var(--ink-trail-delay),
+      text-shadow 480ms ease var(--ink-trail-delay);
+  }
+  .ink-evidence:has(.ink-evidence-trigger:hover) .ink-evidence-trail,
+  .ink-evidence:has(.ink-evidence-trigger:focus) .ink-evidence-trail {
+    color: var(--paper);
+    box-shadow: inset 0 -0.32em rgba(169, 201, 231, 0.58);
+    text-shadow: 0 0 0.8rem rgba(169, 201, 231, 0.26);
+  }
   .practice-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1315,6 +1709,11 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     background: #50514c;
     border: 2px solid rgba(255, 255, 255, 0.16);
     box-shadow: 8px 8px 0 rgba(20, 21, 19, 0.2);
+    transition:
+      border-color 420ms ease var(--ink-wake-delay),
+      box-shadow 520ms ease var(--ink-wake-delay),
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1)
+        var(--ink-wake-delay);
   }
   .practice-grid article:nth-child(2),
   .practice-grid article:nth-child(3) {
@@ -1340,6 +1739,9 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     font-weight: 800;
     line-height: 1.05;
     margin: 0 0 1rem;
+    transition:
+      color 420ms ease calc(var(--ink-wake-delay) + 80ms),
+      letter-spacing 520ms ease calc(var(--ink-wake-delay) + 80ms);
   }
   .practice-grid p {
     color: #efebe4;
@@ -1347,6 +1749,19 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     font-weight: 500;
     line-height: 1.52;
     margin: 0;
+  }
+  .ink-evidence:has(.ink-evidence-trigger:hover) .practice-grid article,
+  .ink-evidence:has(.ink-evidence-trigger:focus) .practice-grid article {
+    border-color: rgba(169, 201, 231, 0.72);
+    box-shadow:
+      8px 8px 0 rgba(20, 21, 19, 0.28),
+      0 0 2.2rem rgba(169, 201, 231, 0.1);
+    transform: translateY(-0.45rem);
+  }
+  .ink-evidence:has(.ink-evidence-trigger:hover) .practice-grid h3,
+  .ink-evidence:has(.ink-evidence-trigger:focus) .practice-grid h3 {
+    color: var(--blue);
+    letter-spacing: 0.015em;
   }
   .ink-capabilities article {
     border-top: 4px solid var(--peach);
@@ -1462,10 +1877,55 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     border: 2px solid #e66f66;
     color: #e66f66;
     padding: 0.7rem;
+    background: rgba(230, 111, 102, 0.04);
+    cursor: help;
+    display: grid;
+    font-family: inherit;
+    font-weight: inherit;
     transform: rotate(7deg);
     font-size: 0.62rem;
     line-height: 1.5;
     letter-spacing: 0.14em;
+    text-align: left;
+    transition:
+      border-color 360ms ease,
+      box-shadow 460ms ease,
+      color 360ms ease,
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wip-stamp span {
+    grid-area: 1 / 1;
+    transition:
+      opacity 360ms ease,
+      filter 420ms ease,
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .wip-progress {
+    opacity: 1;
+  }
+  .wip-possibility {
+    color: var(--blue);
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(0.35rem);
+  }
+  .wip-stamp:hover,
+  .wip-stamp:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 1.8rem rgba(169, 201, 231, 0.22);
+    transform: rotate(-2deg) scale(1.04);
+  }
+  .wip-stamp:hover .wip-progress,
+  .wip-stamp:focus .wip-progress {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(-0.3rem);
+  }
+  .wip-stamp:hover .wip-possibility,
+  .wip-stamp:focus .wip-possibility {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
   }
   .archive-lede {
     font-family: system-ui, sans-serif;
@@ -1652,6 +2112,9 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     .ink-pixel-field {
       opacity: 0.24;
     }
+    .ink-hero-film {
+      display: none;
+    }
     .ink-hero-heading {
       grid-template-columns: 1fr;
       gap: 1rem;
@@ -1795,6 +2258,32 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     }
   }
   @media (prefers-reduced-motion: reduce) {
+    .ink-hero-film {
+      display: none;
+    }
+    .ink-time-shift span {
+      transition: none;
+    }
+    .ink-campaign-word,
+    .ink-campaign-memory,
+    .ink-memory-original,
+    .ink-memory-exotic,
+    .ink-memory-exotic span,
+    .ink-president-trigger span,
+    .ink-evidence-trigger,
+    .ink-evidence-trail,
+    .practice-grid article,
+    .practice-grid h3,
+    .wip-stamp,
+    .wip-stamp span {
+      transition: none;
+    }
+    .ink-memory-exotic {
+      animation: none !important;
+    }
+    .ink-memory-exotic span {
+      animation: none !important;
+    }
     .ink-pixel-field i,
     .memory-being-orbit i {
       animation: none;
@@ -1809,7 +2298,61 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
 </style>
 
 <script>
-  type DigitalInkWindow = Window & { __digitalInkStudyAbort?: AbortController };
+  type DigitalInkWindow = Window & {
+    __digitalInkStudyAbort?: AbortController;
+    __digitalInkVideoAbort?: AbortController;
+  };
+
+  function initHeroFilm() {
+    const video = document.querySelector<HTMLVideoElement>(
+      "[data-ink-hero-video]",
+    );
+    if (!video) return;
+
+    // CHOICE: let the archive move at a more contemplative, 30%-slower pace.
+    video.playbackRate = 0.7;
+
+    const pageWindow = window as DigitalInkWindow;
+    pageWindow.__digitalInkVideoAbort?.abort();
+    const controller = new AbortController();
+    pageWindow.__digitalInkVideoAbort = controller;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const syncPlayback = () => {
+      const shouldPlay = window.innerWidth > 600 && !reducedMotion.matches;
+
+      if (shouldPlay) {
+        if (!video.getAttribute("src")) {
+          const source = video.dataset.src;
+          if (source) {
+            video.src = source;
+            video.load();
+          }
+        }
+        void video.play().catch(() => undefined);
+        return;
+      }
+
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    };
+
+    // CHOICE: portrait/mobile and reduced-motion visitors keep the static grid,
+    // so the atmosphere never costs them an unnecessary download or animation.
+    window.addEventListener("resize", syncPlayback, {
+      passive: true,
+      signal: controller.signal,
+    });
+    reducedMotion.addEventListener("change", syncPlayback, {
+      signal: controller.signal,
+    });
+    document.addEventListener("astro:before-swap", () => controller.abort(), {
+      once: true,
+      signal: controller.signal,
+    });
+    syncPlayback();
+  }
 
   function initArtStudies() {
     const studies = Array.from(
@@ -1928,6 +2471,8 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     requestAnimationFrame(requestRevealCheck);
   }
 
+  initHeroFilm();
   initArtStudies();
+  document.addEventListener("astro:page-load", initHeroFilm);
   document.addEventListener("astro:page-load", initArtStudies);
 </script>
