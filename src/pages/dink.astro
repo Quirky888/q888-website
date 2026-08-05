@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProjectDrawer from "../components/ProjectDrawer.astro";
+import DigitalInkPage from "../components/DigitalInkPage.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
@@ -8,7 +8,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 
 <Layout
   title="Digital Ink — Finite-Pixel iPad Art App by Q888"
-  description="Digital Ink is a finite-pixel iPad art app by Aleksandrs Sestakovs / Q888, turning each imported image into one scarce, traceable Smart Ink Drop."
+  description="Digital Ink is a working native iPad artwork by Aleksandrs Sestakovs / Q888, transforming selected images into finite Smart Inks with memory, learning and provenance."
   image="/images/DigitalInk_Ipad_kn.webp"
   canonicalPath="/dink/"
   mainEntityType="SoftwareApplication"
@@ -18,10 +18,10 @@ import SystemMeta from "../components/SystemMeta.astro";
     operatingSystem: "iPadOS 18 or later",
     downloadUrl: "https://apps.apple.com/us/app/digital-ink/id6757157376",
   }}
-  keywords={["Digital Ink", "finite pixel art app", "iPad drawing app", "digital scarcity art", "Smart Ink Drop", "Q888"]}
+  keywords={["Digital Ink", "finite pixel art app", "Smart Ink", "Source Memory", "116-Pixel Archive", "Q888"]}
 >
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />
-  <ProjectDrawer standaloneProject="digital-ink" />
+  <DigitalInkPage />
 </Layout>

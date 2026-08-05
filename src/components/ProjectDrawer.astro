@@ -4,6 +4,10 @@ interface Props {
 }
 
 const { standaloneProject } = Astro.props;
+
+// CHOICE: Digital Ink now has one canonical presentation at /dink/.
+// Keep the retired drawer source available for a reversible cleanup, but never render it.
+const showLegacyDigitalInkDrawer = false;
 ---
 
 <div 
@@ -13,7 +17,7 @@ const { standaloneProject } = Astro.props;
   aria-hidden={standaloneProject ? "false" : "true"}
 >
   <!-- Digital Ink Panel -->
-  {(!standaloneProject || standaloneProject === "digital-ink") && (
+  {showLegacyDigitalInkDrawer && (!standaloneProject || standaloneProject === "digital-ink") && (
   <div 
     data-drawer-panel="digital-ink" 
     data-direction="left"

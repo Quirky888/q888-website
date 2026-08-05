@@ -11,7 +11,7 @@ import { setSystemOverride, clearSystemOverride } from "./systemMetaState";
 
 const EDINBURGH_COORDS = "55.9439712N 3.1621543W";
 
-type DrawerId = "digital-ink" | "edinburgh-map";
+type DrawerId = "edinburgh-map";
 type Direction = "left" | "right";
 
 let activeDrawer: DrawerId | null = null;
@@ -141,8 +141,7 @@ export async function openDrawer(id: DrawerId, direction: Direction, shouldPushS
   focusTrapCleanup = trapFocus(panel);
 
   if (shouldPushState) {
-    const path = id === "digital-ink" ? "/dink" : "/map";
-    history.pushState({ project: id }, "", path);
+    history.pushState({ project: id }, "", "/map");
   }
 }
 
@@ -225,7 +224,9 @@ export function initProjectDrawer() {
     async () => {
       const path = window.location.pathname.replace(/\/$/, "");
       if (path === "/dink") {
-        await openDrawer("digital-ink", "left", false);
+        // LEARN: Old sessions may still contain a drawer-era /dink history entry.
+        // Resolve it to the canonical page instead of reviving the retired drawer.
+        window.location.assign("/dink/");
       } else if (path === "/map") {
         await openDrawer("edinburgh-map", "right", false);
       } else if (path === "") {
@@ -243,7 +244,7 @@ export function initProjectDrawer() {
   const closeButtons = document.querySelectorAll<HTMLElement>("[data-drawer-close]");
 
   const projectTriggers = Array.from(triggers).filter(
-    (t) => t.dataset.drawerTrigger === "digital-ink" || t.dataset.drawerTrigger === "edinburgh-map"
+    (t) => t.dataset.drawerTrigger === "edinburgh-map"
   );
 
   projectTriggers.forEach((trigger) => {
