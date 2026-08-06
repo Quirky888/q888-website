@@ -10,6 +10,13 @@
   "cardLightText": true,
   "panelTitle": "DYNO MILK",
   "panelDescription": "Genetically resurrected. Bio-engineered. Extremely overpriced. Authorized wallets only.",
+  "copyrightWard": {
+    "code": "DYNO / 626G",
+    "title": "Extinction Reversal Seal",
+    "warning": "Unauthorized cloning may wake something with excellent lawyers and no surviving natural predator.",
+    "route": "/dyno/",
+    "linkLabel": "Approach incubation chamber"
+  },
   "panelSpecs": [
     {
       "label": "STATUS",

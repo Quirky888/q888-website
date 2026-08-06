@@ -10,6 +10,13 @@
   "cardLightText": true,
   "panelTitle": "Afterlife Contract™",
   "panelDescription": "Pre-notarized agreements for post-existence bureaucracy. Essential for those who expect to continue managing their legacy after their primary biological sequence has terminated.",
+  "copyrightWard": {
+    "code": "GRI / ∞",
+    "title": "Refused Jurisdiction",
+    "warning": "Refusal remains a valid human act. Silence is not magically converted into consent, even after biological processing concludes.",
+    "route": "/afterlife/",
+    "linkLabel": "Inspect eternity paperwork"
+  },
   "panelSpecs": [
     {
       "label": "TERM",

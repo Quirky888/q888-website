@@ -10,6 +10,13 @@
   "cardLightText": true,
   "panelTitle": "Q-Bag",
   "panelDescription": "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
+  "copyrightWard": {
+    "code": "QBAG / VOID",
+    "title": "Non-Euclidean Custody",
+    "warning": "The object may be carried. Its characters, memories, and interior dimensions remain in the custody of Q888.",
+    "route": "/qbag/",
+    "linkLabel": "Inspect the containment vessel"
+  },
   "panelSpecs": [
     {
       "label": "VOLUME",

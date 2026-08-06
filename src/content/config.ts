@@ -5,6 +5,14 @@ const specSchema = z.object({
   value: z.string().min(1),
 });
 
+const copyrightWardSchema = z.object({
+  code: z.string().min(1),
+  title: z.string().min(1),
+  warning: z.string().min(1),
+  route: z.string().regex(/^\/[a-z0-9-/]*$/),
+  linkLabel: z.string().min(1),
+});
+
 const projects = defineCollection({
   type: "data",
   schema: z.object({
@@ -21,6 +29,8 @@ const projects = defineCollection({
     panelTitle: z.string().min(1),
     panelDescription: z.string().min(1),
     panelSpecs: z.array(specSchema).min(1),
+    // LEARN: Optional mythology, automatic protection. Missing metadata receives the universal fallback ward.
+    copyrightWard: copyrightWardSchema.optional(),
   }),
 });
 
