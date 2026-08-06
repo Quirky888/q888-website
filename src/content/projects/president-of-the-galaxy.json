@@ -10,6 +10,13 @@
   "cardLightText": true,
   "panelTitle": "President of the Galaxy™",
   "panelDescription": "A ceremonial title providing zero jurisdictional power over any planetary or stellar body. It functions as a psychological stabilizer for those overwhelmed by their lack of control over the universe.",
+  "copyrightWard": {
+    "code": "POG / NULL",
+    "title": "Authority Fiction Stabilizer",
+    "warning": "No political endorsement is implied. Attempts to convert ceremonial absurdity into harmful propaganda void the imaginary mandate immediately.",
+    "route": "/president/",
+    "linkLabel": "Consult the zero-power office"
+  },
   "panelSpecs": [
     {
       "label": "POWER",

@@ -11,6 +11,13 @@
   "cardLightText": true,
   "panelTitle": "AERO V1",
   "panelDescription": "The Infocigan Aero Sticker V1. 76×71mm. Less than 1.5mm thick. £230. Operates on aesthetic superiority and hubris. 50 units. Belief > Drag.",
+  "copyrightWard": {
+    "code": "AERO / Ω",
+    "title": "Atmospheric Liability",
+    "warning": "The wind has no copyright authority. It has, however, been politely informed of the Artist’s position.",
+    "route": "/aero/",
+    "linkLabel": "Enter the wind tunnel"
+  },
   "panelSpecs": [
     {
       "label": "PRICE",

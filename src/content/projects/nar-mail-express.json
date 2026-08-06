@@ -10,6 +10,13 @@
   "cardLightText": true,
   "panelTitle": "Nar-Mail Express°",
   "panelDescription": "A delivery system for messages that arrive only when you are ready to receive them.",
+  "copyrightWard": {
+    "code": "CEC / 0888",
+    "title": "Cobra Encryption",
+    "warning": "Imitation leaves a trail. The Cobra is fictional; the record of permission is not. Tampering is returned to sender.",
+    "route": "/narmail/",
+    "linkLabel": "Inspect postal security"
+  },
   "panelSpecs": [
     {
       "label": "DELIVERY",

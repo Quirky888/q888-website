@@ -1,78 +1,466 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SlimNav from "../components/SlimNav.astro";
+
+const projectRecords = await getCollection("projects");
+
+// LEARN: Every project is registered. Custom metadata supplies its mythology; absence triggers a safe universal ward.
+const protectionWards = projectRecords
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+  .map(({ data }) => ({
+    project: data.cardTitle,
+    code: data.copyrightWard?.code ?? `AUTO / ${data.slug.toUpperCase().slice(0, 8)}`,
+    title: data.copyrightWard?.title ?? "Unclassified Phenomenon",
+    warning: data.copyrightWard?.warning ?? "Universal Q888 Covenant active. Specific protection mythology is pending atmospheric review; absence from the named registry is not absence of protection.",
+    route: data.copyrightWard?.route ?? `/${data.slug}/`,
+    linkLabel: data.copyrightWard?.linkLabel ?? "Inspect newly manifested work",
+    automatic: !data.copyrightWard,
+  }));
+
+const legalSections = [
+  ["scope", "Scope"],
+  ["ownership", "Copyright ownership"],
+  ["licence", "Commissioned artwork"],
+  ["commercial-use", "Commercial use"],
+  ["quantities", "Production quantities"],
+  ["alterations", "Alterations"],
+  ["moral-rights", "Attribution & moral rights"],
+  ["q888-worlds", "Q888 characters & worlds"],
+  ["source-files", "Source files"],
+  ["ai", "AI & automated processing"],
+  ["portfolio", "Portfolio use"],
+  ["ethical-use", "Ethical Use Covenant"],
+  ["unauthorised-use", "Unauthorised use"],
+  ["exceptions", "Legal exceptions"],
+  ["changes", "Changes"],
+  ["law", "Governing law"],
+];
 ---
 
 <Layout
-  title="Square Bubbles Copyright & Licensing — Q888"
-  description="Copyright, attribution, collaboration, and licensing principles for artworks, symbolic systems, software, stories, and interdimensional materials created by Q888."
+  title="Copyright, Licensing & Ethical Use — Q888"
+  description="Copyright ownership, artwork licensing, ethical-use conditions, moral rights and permission enquiries for Q888 artwork by Aleksandrs Sestakovs."
   image="/images/square_bubble.webp"
   canonicalPath="/copyright/"
+  pageType="article"
+  keywords={["Q888 copyright", "artwork licensing", "ethical art licence", "Aleksandrs Sestakovs", "moral rights"]}
 >
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
 
-  <main class="min-h-screen bg-[var(--bg-cosmic)] text-[var(--text-silver)] relative">
-    <div class="max-w-3xl mx-auto px-6 py-20 md:px-12 md:py-24 lg:px-24 lg:py-28"
-      style="padding-top: max(5rem, calc(env(safe-area-inset-top) + 4rem)); padding-right: max(1.5rem, calc(env(safe-area-inset-right) + 1rem));">
-      <h1 class="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--text-silver-muted)] mb-10 md:mb-12">
-        ❐ Square Bubbles Copyright
-      </h1>
-      <div class="font-mono text-sm md:text-base tracking-[0.05em] leading-relaxed space-y-5 md:space-y-6 text-[var(--text-silver)]">
-        <p>
-          Square Bubbles copyright is defined under the Interdimensional Creative Continuity Act (Zero Day Revision) as all works manifested by Q888, affiliated entities, symbolic systems, or sentient geometries in the course of artistic, speculative, or narrative operations.
-        </p>
-        <p>
-          Square Bubbles copyright covers material created within this dimension and adjacent narrative layers. This includes (but is not limited to):
-        </p>
-        <ul class="list-disc list-inside space-y-2 pl-2">
-          <li>Symbolic systems and narrative tools</li>
-          <li>Digital Ink artifacts</li>
-          <li>Dream maps and cartographic experiments</li>
-          <li>Overpriced Stickers (limited-edition instruments of speculative value)</li>
-          <li>Project Infocigan materials</li>
-          <li>Interdimensional Catan expansions</li>
-          <li>Kotiki-Nar transmissions</li>
-          <li>Nar-Mail Express documentation</li>
-          <li>Websites, code, sketches, manifestos, and ceremonial announcements</li>
-          <li>Social media echoes and reality glitches</li>
-        </ul>
-        <p>
-          Square Bubbles copyright applies whether the work was created deliberately, accidentally, prophetically, or through mild cosmic interference.
-        </p>
-        <p>
-          Where collaborations occur, copyright may be shared, entangled, or exist simultaneously in multiple realities. In such cases, agreements are governed by mutual respect and good coffee.
-        </p>
-        <p>
-          <strong>Copyright duration:</strong><br />
-          Valid for as long as imagination persists, and not less than ±70 light years after the final observable ripple.
-        </p>
-        <section id="image-licensing" class="space-y-5 md:space-y-6 scroll-mt-20" aria-labelledby="image-licensing-title">
-          <h2 id="image-licensing-title" class="font-mono text-sm md:text-base tracking-[0.12em] uppercase text-[var(--text-silver)]">
-            Image licensing
-          </h2>
-          <p>
-            Unless a specific work states otherwise, images and artworks published on q888.space are protected by copyright and are not offered under an open or Creative Commons licence.
-          </p>
-          <p>
-            The default Square Bubbles rights notice is:<br />
-            <em>"Observe. Do not steal. If inspired, transform honestly."</em>
-          </p>
-          <p>
-            To request permission for editorial, exhibition, commercial, research, or other reuse, contact Aleksandrs Sestakovs / Q888 at <a href="mailto:hello@q888.space" class="underline hover:text-white transition-colors">hello@q888.space</a>. Include the image URL, intended use, publication or project name, territory, and expected duration.
-          </p>
-        </section>
-        <p>
-          Unauthorised replication, cloning, or flattening of symbolic systems into boring copies may result in karmic recursion.
-        </p>
-        <p>
-          For licensing, commissioning, or diplomatic negotiations between dimensions, please <a href="/#contact" class="underline hover:text-white transition-colors">make contact</a> through appropriate portals.
-        </p>
+  <main class="copyright-page">
+    <header class="copyright-hero">
+      <div class="copyright-shell">
+        <p class="record-line">Q888 · PUBLIC RIGHTS RECORD · VERSION 1.0</p>
+        <div class="hero-grid">
+          <div>
+            <p class="layer-label">Two layers / one clear boundary</p>
+            <h1>Copyright,<br />Licensing <i>&amp;</i><br />Ethical Use</h1>
+          </div>
+          <div class="hero-intro">
+            <p class="hero-statement">Human law handles the rights.<br />Q888 handles the meaning.</p>
+            <p>These terms explain what may be done with Q888 artwork, what requires permission, and one simple condition carried by every permitted use:</p>
+            <p class="covenant-preview">Do not recruit the artwork into cruelty.</p>
+          </div>
+        </div>
+        <dl class="record-meta">
+          <div><dt>Effective</dt><dd>6 August 2026</dd></div>
+          <div><dt>Issued by</dt><dd>Aleksandrs Sestakovs / Q888</dd></div>
+          <div><dt>Human jurisdiction</dt><dd>Scotland</dd></div>
+          <div><dt>Other jurisdiction</dt><dd>Conscience, where available</dd></div>
+        </dl>
+        <p class="contract-note">For commissioned work, these terms apply only when they are referenced or linked in a quotation, proposal, commission confirmation, invoice, or other written communication supplied to the client. Project-specific written terms take priority where they expressly differ.</p>
       </div>
-      <a href="/#contact" class="inline-block mt-12 md:mt-16 font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--text-silver-muted)] hover:text-[var(--text-silver)] transition-colors">
-        ← Return
-      </a>
+    </header>
+
+    <div class="copyright-shell page-grid">
+      <aside class="contents" aria-label="Copyright terms contents">
+        <p class="contents-title">LAYER 01 · HUMAN LAW</p>
+        <ol>
+          {legalSections.map(([id, label], index) => <li><a href={`#${id}`}><span>{String(index + 1).padStart(2, "0")}</span>{label}</a></li>)}
+        </ol>
+        <a class="layer-jump" href="#quieter-jurisdiction">LAYER 02 · QUIETER JURISDICTION ↓</a>
+      </aside>
+
+      <article class="legal-record">
+        <div class="layer-heading">
+          <span>Layer 01</span>
+          <div><p>Structurally legal</p><h2>Artwork Copyright &amp; Licensing Terms</h2></div>
+        </div>
+
+        <section id="scope">
+          <span class="section-number">01</span><h3>Scope of these terms</h3>
+          <p>These terms are issued by Aleksandrs Sestakovs, working under the artist name Q888, referred to below as “the Artist”.</p>
+          <p>They apply to original illustrations, artworks, characters, graphic designs, digital images, animations, merchandise designs, website artwork, and other creative material produced by the Artist.</p>
+          <p>For commissioned work, the version referenced when the commission is agreed will apply. A project-specific quotation or licence schedule takes priority where it expressly differs from these general terms.</p>
+        </section>
+
+        <section id="ownership">
+          <span class="section-number">02</span><h3>Copyright ownership</h3>
+          <p>Unless a separate written agreement expressly states otherwise, all copyright and intellectual property rights in artwork created by the Artist remain the property of:</p>
+          <p class="legal-emphasis">© Aleksandrs Sestakovs / Q888</p>
+          <p>Payment for creative work, design time, a physical artwork, or delivery of a digital file does not by itself transfer copyright ownership.</p>
+          <p>Copyright will only be transferred through a separate written document that expressly states that copyright is being assigned, identifies the relevant artwork and rights being transferred, and is signed by the Artist.</p>
+          <p>Names, logos, trademarks, photographs, or other material supplied by a client remain the property of their respective owners. Including them in commissioned artwork does not transfer ownership of the Artist’s original contribution.</p>
+        </section>
+
+        <section id="licence">
+          <span class="section-number">03</span><h3>Licence to use commissioned artwork</h3>
+          <p>Where usage rights are included in a commission, the client receives only the licence described in the written quotation, commission confirmation, or project-specific licence schedule.</p>
+          <p>Unless otherwise agreed, any licence is:</p>
+          <ul><li>non-exclusive;</li><li>non-transferable and non-sublicensable;</li><li>limited to the agreed purpose, products, and media;</li><li>limited to the agreed quantity, territory, and duration; and</li><li>effective only after full payment has been received.</li></ul>
+          <p>A client may provide the artwork to an appointed printer, manufacturer, or production partner solely to produce the authorised items. That production partner receives no independent right to retain, reuse, modify, sell, or distribute the artwork.</p>
+          <p>Any use not expressly included in the agreed licence requires additional written permission from the Artist.</p>
+        </section>
+
+        <section id="commercial-use">
+          <span class="section-number">04</span><h3>Commercial and merchandise use</h3>
+          <p>Commercial use includes clothing and merchandise; packaging and labels; advertising and promotional campaigns; posters, menus, and printed material; websites, applications, and social media campaigns; products offered for sale; event branding; corporate identity material; and licensing to another organisation.</p>
+          <p>Permission for one product or purpose does not automatically permit use on another. Permission to produce an agreed quantity of hoodies, for example, does not include T-shirts, posters, packaging, advertisements, resale licences, or unlimited future reprints.</p>
+          <p>Additional quantities, products, territories, or campaigns must be agreed separately.</p>
+        </section>
+
+        <section id="quantities">
+          <span class="section-number">05</span><h3>Reprints and production quantities</h3>
+          <p>Where a licence specifies a production quantity, the client must not produce more than that quantity without written permission.</p>
+          <p>Samples, production tests, replacements for defective items, and promotional copies should be included in the agreed quantity unless otherwise stated. Further production runs may require an additional licence fee.</p>
+        </section>
+
+        <section id="alterations">
+          <span class="section-number">06</span><h3>Alterations and adaptations</h3>
+          <p>The artwork must not be substantially altered, redrawn, animated, recoloured, cropped, separated into individual elements, or combined with other material without written permission.</p>
+          <p>Reasonable technical adjustments required for an approved use—such as proportionate resizing, file conversion, or print preparation—are permitted when they do not materially change or distort the artwork.</p>
+          <p>Any substantial alteration or adaptation must be approved by the Artist before publication or production.</p>
+        </section>
+
+        <section id="moral-rights">
+          <span class="section-number">07</span><h3>Attribution and moral rights</h3>
+          <p>The Artist asserts the right to be identified as the creator of the work under sections 77 and 78 of the Copyright, Designs and Patents Act 1988.</p>
+          <p>Where reasonably practical, published or commercially used artwork should be credited:</p>
+          <p class="legal-emphasis">Artwork by Q888 / Aleksandrs Sestakovs</p>
+          <p>The Artist does not waive the right to object to derogatory treatment, false attribution, or materially misleading presentation of the artwork unless expressly agreed in writing.</p>
+          <p>Where credit cannot reasonably appear directly on a product, it may appear on accompanying packaging, product information, a website, campaign credits, or another suitable location.</p>
+        </section>
+
+        <section id="q888-worlds">
+          <span class="section-number">08</span><h3>Q888 characters and artistic projects</h3>
+          <p>A licence for one artwork does not grant ownership of, or broader rights to use, recurring Q888 characters; character names; logos or signatures; visual symbols and iconography; existing artworks; source files; project worlds or narrative material; or other elements of the wider Q888 artistic practice.</p>
+          <p>A character appearing in commissioned artwork may not be adopted as a permanent mascot, logo, trademark, brand identity, or continuing commercial character unless separately licensed in writing.</p>
+          <p>No claim is made over general artistic ideas or styles that copyright law does not protect. This section concerns the specific artwork and identifiable creative elements belonging to the Artist.</p>
+        </section>
+
+        <section id="source-files">
+          <span class="section-number">09</span><h3>Source and working files</h3>
+          <p>Editable source files, layered files, sketches, unused concepts, rejected versions, working documents, and production materials are not included unless expressly listed as deliverables.</p>
+          <p>Delivery of a flattened image, print-ready file, or physical artwork does not create a right to obtain the underlying source files.</p>
+        </section>
+
+        <section id="ai">
+          <span class="section-number">10</span><h3>Artificial intelligence and automated processing</h3>
+          <p>Unless expressly authorised in writing, artwork supplied by the Artist must not be:</p>
+          <ul><li>used to train, fine-tune, or evaluate an artificial intelligence model;</li><li>added to a machine-learning or image-generation dataset;</li><li>uploaded to a generative system for imitation, variation, or style transfer;</li><li>used to generate replacement, derivative, or competing artwork;</li><li>used to construct digital avatars or automated character systems; or</li><li>tokenised, minted, or attached to a blockchain-based asset.</li></ul>
+          <p>Ordinary technical processing necessary for an authorised use—such as image compression, colour separation, or print preparation—is permitted.</p>
+        </section>
+
+        <section id="portfolio">
+          <span class="section-number">11</span><h3>Portfolio and exhibition use</h3>
+          <p>Unless confidentiality or an embargo has been agreed in writing, the Artist may display commissioned artwork on the Q888 website; in portfolios and applications; on social media; in exhibitions; in publications; in talks and presentations; and for archival and self-promotional purposes.</p>
+          <p>Where a project has not yet been publicly released, the Artist will make reasonable efforts to respect an agreed publication date.</p>
+        </section>
+
+        <section id="ethical-use" class="covenant-section">
+          <span class="section-number">12</span>
+          <p class="covenant-kicker">THE Q888 ETHICAL USE COVENANT</p>
+          <h3>Do not recruit the artwork into cruelty.</h3>
+          <p class="covenant-opening">Q888 artwork is made in pursuit of a beautiful world with zero collateral damage. Every permitted use of the artwork therefore carries a simple condition.</p>
+          <p>Unless expressly agreed otherwise in writing, Q888 artwork must not be used, presented, or adapted to:</p>
+          <ul>
+            <li>promote hatred, dehumanisation, discrimination, or targeted harassment;</li>
+            <li>celebrate violence, abuse, exploitation, or deliberate suffering;</li>
+            <li>support deceptive claims, manipulation, fraud, or materially misleading advertising;</li>
+            <li>promote organisations, products, or activities whose principal purpose conflicts with the Artist’s zero-collateral-damage philosophy;</li>
+            <li>distort the artwork’s meaning or place it in a context materially damaging to the Artist’s honour or reputation;</li>
+            <li>falsely imply the Artist’s endorsement of a political party, ideology, organisation, product, or campaign; or</li>
+            <li>convert a playful character or image into propaganda for harm.</li>
+          </ul>
+          <p>These restrictions apply to the specific licensed artwork and its identifiable characters or elements. They are not intended to control lawful criticism, parody, commentary, or other uses permitted by law.</p>
+          <p>Where the artwork is used in serious breach of this section, the Artist may withdraw the relevant licence by written notice and require the use, publication, or production to stop, subject to applicable law and the terms of the individual agreement.</p>
+          <p>The Artist retains all applicable moral rights and asserts the right to be identified as the creator of the work.</p>
+        </section>
+
+        <section id="unauthorised-use">
+          <span class="section-number">13</span><h3>Unauthorised use</h3>
+          <p>Use outside the agreed licence does not become authorised merely because the artwork has been supplied, paid for, published previously, or made available online.</p>
+          <p>Where unauthorised use occurs, the Artist may request that the use stop, that unauthorised copies be removed, that production information be provided, and that an appropriate retrospective licence or other remedy be agreed.</p>
+          <p>Attempting to resolve a matter informally does not waive the Artist’s copyright or other legal rights.</p>
+        </section>
+
+        <section id="exceptions">
+          <span class="section-number">14</span><h3>Legal exceptions</h3>
+          <p>Nothing in these terms is intended to prevent uses expressly permitted under applicable copyright law, including applicable fair-dealing and statutory exceptions.</p>
+        </section>
+
+        <section id="changes">
+          <span class="section-number">15</span><h3>Changes to these terms</h3>
+          <p>The version supplied or referenced when a commission is agreed will apply to that commission. Later changes to the website terms will not automatically replace a version incorporated into an existing agreement unless both parties agree in writing.</p>
+        </section>
+
+        <section id="law">
+          <span class="section-number">16</span><h3>Governing law</h3>
+          <p>These terms and any related commission or licence are governed by the laws of Scotland, unless mandatory law requires otherwise. The courts of Scotland will have non-exclusive jurisdiction in relation to disputes arising from these terms.</p>
+        </section>
+
+        <section id="image-licensing" class="licensing-enquiry">
+          <p class="covenant-kicker">PERMISSION PORTAL</p>
+          <h3>Permission and licensing enquiries</h3>
+          <p>For permission to reproduce, publish, adapt, manufacture, or commercially use Q888 artwork, contact:</p>
+          <p class="contact-name">Aleksandrs Sestakovs / Q888<br /><a href="mailto:hello@q888.space">hello@q888.space</a></p>
+          <p>Please include the artwork or image URL, intended use, products and quantity, media, territory, duration, and requested alterations.</p>
+        </section>
+
+        <details class="project-schedule">
+          <summary><span>Project-specific licence schedule</span><small>The general terms are the skeleton. This gives a project its actual muscles.</small></summary>
+          <div class="schedule-grid" aria-label="Suggested project-specific licence fields">
+            <span>Artwork title</span><span>Client</span><span>Commission date</span><span>Permitted use</span><span>Approved products</span><span>Maximum production quantity</span><span>Media and platforms</span><span>Territory</span><span>Licence duration</span><span>Exclusive or non-exclusive</span><span>Permitted alterations</span><span>Required credit</span><span>Licence fee</span><span>Files supplied</span><span>Embargo or confidentiality</span><span>Additional conditions</span>
+          </div>
+          <p>Copyright remains with Aleksandrs Sestakovs / Q888 unless a separate signed copyright assignment expressly states otherwise.</p>
+        </details>
+      </article>
     </div>
+
+    <section id="quieter-jurisdiction" class="quiet-layer" aria-labelledby="quiet-title">
+      <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="copyright-shell quiet-inner">
+        <div class="layer-heading layer-heading-dark">
+          <span>Layer 02</span>
+          <div><p>Filed 6 August 2026 BBB (Before Big Bang) · not a substitute for Layer 01</p><h2 id="quiet-title">A quieter jurisdiction</h2></div>
+        </div>
+        <div class="primordial-record" aria-label="Quieter jurisdiction record date">
+          <span>ORIGINAL FILING DATE</span><strong>6 AUGUST 2026 BBB</strong><small>Before Big Bang · pre-cosmic continuity claimed for atmospheric purposes only</small>
+        </div>
+        <section class="continuity-protocol" aria-labelledby="continuity-title">
+          <div class="continuity-sigil" aria-hidden="true"><span>±</span><small>∞</small></div>
+          <div class="continuity-copy">
+            <p class="quiet-kicker">SELF-EXTENDING INSTRUMENT · REGISTRATION CEREMONIAL</p>
+            <h3 id="continuity-title">The Square Bubbles Continuity Protocol</h3>
+            <p>Any identifiable creative work manifested by Q888 is automatically admitted into Square Bubbles Continuity upon first appearance.</p>
+            <p>Registration is ceremonial, not required. Absence from the visible registry does not indicate absence of protection.</p>
+            <p class="continuity-scope">Retrospective · prospective · accidental · prophetic · active from 6 August 2026 BBB onwards</p>
+          </div>
+          <dl class="continuity-status">
+            <div><dt>Known manifestations</dt><dd>{protectionWards.length}</dd></div>
+            <div><dt>Future capacity</dt><dd>UNBOUNDED</dd></div>
+            <div><dt>Fallback ward</dt><dd>ARMED WITH PAPERWORK</dd></div>
+          </dl>
+        </section>
+        <div class="quiet-grid">
+          <div class="quiet-declaration">
+            <p>Copyright is handled by human law.</p>
+            <p>Meaning travels through less measurable territories.</p>
+            <p>Q888 makes no legal claim over karma, cosmic bookkeeping, or the private negotiations between a person and their conscience.</p>
+            <p>Nevertheless, anyone who knowingly turns an artwork made without harmful intent into an instrument of harm accepts responsibility for what they have invited into the world.</p>
+            <blockquote>The universe may or may not keep receipts.<br /><strong>Q888 does.</strong></blockquote>
+          </div>
+          <div class="protection-registry" aria-label="Q888 atmospheric protection registry">
+            <div class="registry-heading"><span>LIVE WARD REGISTRY</span><strong>{protectionWards.length} PHENOMENA OBSERVED</strong></div>
+            {protectionWards.map((ward) => (
+              <article class:list={{ "is-automatic": ward.automatic }}>
+                <span>{ward.code}</span>
+                <p class="ward-project">{ward.project}</p>
+                <h3>{ward.title}</h3>
+                <p>{ward.warning}</p>
+                <a href={ward.route}>{ward.linkLabel} →</a>
+              </article>
+            ))}
+          </div>
+        </div>
+        <section class="return-protocol" aria-labelledby="return-title">
+          <div class="return-header">
+            <div><p class="quiet-kicker">SERIOUS BREACH RESPONSE · DEFENSIVE SYSTEM</p><h3 id="return-title">Return-to-Sender Protocol</h3></div>
+            <span>ZERO<br />COLLATERAL<br />DAMAGE</span>
+          </div>
+          <p class="return-intro">When an artwork is knowingly recruited into cruelty, the system does not curse the offender. It becomes administratively awake.</p>
+          <ol>
+            <li><span>01</span><div><strong>Permission tremor detected</strong><p>The use is recorded. Context, copies, production information, and the responsible party may be identified.</p></div></li>
+            <li><span>02</span><div><strong>Human-law channel opened</strong><p>Written notice, removal, correction, retrospective licensing, or withdrawal of the relevant licence may be requested.</p></div></li>
+            <li><span>03</span><div><strong>Responsibility returned intact</strong><p>Legal, moral, reputational, and cosmic responsibility remains with the party that chose the harmful use.</p></div></li>
+            <li><span>∞</span><div><strong>Archive of Unbeautiful Uses</strong><p>The incident may be remembered for longer than its campaign budget. The paperwork is now extremely awake.</p></div></li>
+          </ol>
+          <p class="harmless-warning">No curses, malware, physical retaliation, supernatural guarantees, or actual cobras are deployed. Q888 protection is defensive. Lawful criticism, parody, commentary, and statutory exceptions remain outside the trap.</p>
+        </section>
+        <footer class="quiet-footer">
+          <p>© Aleksandrs Sestakovs / Q888. All rights reserved.</p>
+          <p>Artwork may not be reproduced, commercially used, modified, or used for AI training without permission, except where permitted by law.</p>
+          <a href="/#contact">Return to observable reality ↗</a>
+        </footer>
+      </div>
+    </section>
   </main>
 </Layout>
+
+<style>
+  .copyright-page { --paper: #eee9df; --ink: #171714; --red: #d94832; --acid: #d9ff55; --rule: rgba(23,23,20,.2); background: var(--paper); color: var(--ink); font-family: "Space Mono", monospace; }
+  .copyright-shell { width: min(1180px, calc(100% - 3rem)); margin-inline: auto; }
+  .copyright-hero { padding: max(7rem, calc(env(safe-area-inset-top) + 6rem)) 0 3rem; border-bottom: 1px solid var(--ink); background: linear-gradient(135deg, rgba(217,255,85,.34), transparent 38%), var(--paper); }
+  .record-line, .layer-label, .contents-title, .covenant-kicker { margin: 0; text-transform: uppercase; letter-spacing: .18em; font-size: .68rem; font-weight: 700; }
+  .record-line { padding-bottom: 1rem; border-bottom: 1px solid var(--ink); }
+  .hero-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: clamp(3rem, 8vw, 8rem); padding: clamp(2.5rem, 7vw, 6rem) 0; align-items: end; }
+  .layer-label { color: #695f55; margin-bottom: 1.2rem; }
+  h1 { margin: 0; font-family: "Space Grotesk", sans-serif; font-size: clamp(3.3rem, 8.7vw, 8.2rem); line-height: .78; letter-spacing: -.075em; text-transform: uppercase; }
+  h1 i { color: var(--red); font-family: "Playfair Display", serif; font-weight: 400; text-transform: none; }
+  .hero-intro { font-size: .88rem; line-height: 1.75; }
+  .hero-statement { font-family: "Playfair Display", serif; font-size: clamp(1.55rem, 2.7vw, 2.4rem); line-height: 1.2; }
+  .covenant-preview { display: inline-block; background: var(--ink); color: var(--acid); padding: .7rem .9rem; font-weight: 700; transform: rotate(-1deg); }
+  .record-meta { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--ink); margin: 0; }
+  .record-meta div { padding: 1rem; border-right: 1px solid var(--ink); }
+  .record-meta div:last-child { border: 0; }
+  .record-meta dt { font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: #695f55; }
+  .record-meta dd { margin: .45rem 0 0; font-size: .76rem; }
+  .contract-note { max-width: 62rem; margin: 1.5rem 0 0; font-size: .72rem; line-height: 1.65; color: #514a43; }
+  .page-grid { display: grid; grid-template-columns: 230px minmax(0, 760px); gap: clamp(3rem, 8vw, 8rem); padding-block: clamp(4rem, 8vw, 8rem); justify-content: center; }
+  .contents { align-self: start; position: sticky; top: 6rem; font-size: .64rem; }
+  .contents-title { padding-bottom: .8rem; border-bottom: 1px solid var(--ink); }
+  .contents ol { list-style: none; padding: 0; margin: .65rem 0 1.5rem; }
+  .contents a { color: inherit; text-decoration: none; }
+  .contents li a { display: grid; grid-template-columns: 2rem 1fr; gap: .35rem; padding: .34rem 0; color: #5c554e; }
+  .contents li a:hover { color: var(--red); }
+  .contents li span { color: #9b9186; }
+  .layer-jump { display: block; padding: .8rem; border: 1px solid var(--ink); font-weight: 700; }
+  .layer-jump:hover { color: var(--acid); background: var(--ink); }
+  .layer-heading { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.5rem; align-items: start; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .layer-heading > span { display: inline-block; width: max-content; background: var(--red); color: white; padding: .55rem .65rem; font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; }
+  .layer-heading p { margin: 0 0 .5rem; font-size: .62rem; text-transform: uppercase; letter-spacing: .16em; color: #695f55; }
+  .layer-heading h2 { margin: 0; font: 400 clamp(2rem, 4vw, 3.5rem)/1 "Playfair Display", serif; }
+  .legal-record section { position: relative; padding: 3rem 0 3.5rem 4.6rem; border-bottom: 1px solid var(--rule); scroll-margin-top: 4rem; }
+  .section-number { position: absolute; left: 0; top: 3.35rem; font-size: .68rem; color: var(--red); }
+  .legal-record h3 { margin: 0 0 1.5rem; font: 700 clamp(1.35rem, 2.4vw, 1.9rem)/1.2 "Space Grotesk", sans-serif; }
+  .legal-record p, .legal-record li { font-family: Georgia, serif; font-size: 1.04rem; line-height: 1.75; }
+  .legal-record ul { padding-left: 1.2rem; }
+  .legal-record li { padding-left: .35rem; margin: .45rem 0; }
+  .legal-emphasis { padding: 1rem 1.2rem; background: white; border-left: 4px solid var(--red); font-family: "Space Mono", monospace !important; font-weight: 700; }
+  .covenant-section { margin: 2rem -2rem; padding: 3rem 2rem 3.5rem 6.6rem !important; color: #f2eee4; background: var(--ink); border: 0 !important; box-shadow: .7rem .7rem 0 var(--acid); }
+  .covenant-section .section-number { left: 2rem; color: var(--acid); }
+  .covenant-section h3 { color: var(--acid); font-size: clamp(2.2rem, 5vw, 4.2rem); letter-spacing: -.05em; }
+  .covenant-kicker { color: var(--red); margin-bottom: .8rem; }
+  .covenant-opening { font-size: 1.25rem !important; }
+  .licensing-enquiry { border: 2px solid var(--ink) !important; padding: 2rem !important; margin-top: 4rem; }
+  .contact-name { font-family: "Space Mono", monospace !important; font-weight: 700; }
+  .contact-name a { color: var(--red); }
+  .project-schedule { margin-top: 2rem; border: 1px solid var(--ink); }
+  .project-schedule summary { cursor: pointer; padding: 1.4rem; list-style-position: inside; }
+  .project-schedule summary span { font-weight: 700; }
+  .project-schedule summary small { display: block; margin: .5rem 0 0 1.25rem; color: #695f55; }
+  .project-schedule[open] summary { border-bottom: 1px solid var(--ink); }
+  .schedule-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .schedule-grid span { padding: .8rem 1.4rem; border-bottom: 1px solid var(--rule); font-size: .72rem; }
+  .schedule-grid span:nth-child(odd) { border-right: 1px solid var(--rule); }
+  .project-schedule > p { padding: 0 1.4rem 1.2rem; font-size: .78rem; line-height: 1.6; }
+  .quiet-layer { min-height: 100vh; position: relative; overflow: hidden; background: #070809; color: #c6c8c3; padding: clamp(5rem, 10vw, 10rem) 0 3rem; }
+  .quiet-layer::before { content: ""; position: absolute; inset: 0; opacity: .22; background: radial-gradient(circle at 78% 20%, #304542, transparent 26%), radial-gradient(circle at 10% 80%, #5a2a24, transparent 26%); }
+  .quiet-inner { position: relative; z-index: 1; }
+  .layer-heading-dark { border-color: #c6c8c3; }
+  .layer-heading-dark p { color: #7d827c; }
+  .quiet-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 8rem); padding: clamp(4rem, 9vw, 8rem) 0; }
+  .primordial-record { display: grid; grid-template-columns: 1fr auto; gap: .35rem 2rem; align-items: end; margin-top: 2rem; padding: 1rem 0; border-top: 1px solid #333632; border-bottom: 1px solid #333632; }
+  .primordial-record span { font-size: .58rem; letter-spacing: .16em; color: #7d827c; }
+  .primordial-record strong { grid-row: 1 / 3; grid-column: 2; color: var(--acid); font: 700 clamp(1.1rem, 2.4vw, 1.8rem) "Space Grotesk", sans-serif; letter-spacing: -.02em; }
+  .primordial-record small { font-size: .6rem; color: #7d827c; }
+  .quiet-kicker { margin: 0; color: var(--red); font: 700 .6rem/1.4 "Space Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+  .continuity-protocol { display: grid; grid-template-columns: 7rem minmax(0, 1fr) 15rem; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; margin-top: 2rem; padding: clamp(2rem, 5vw, 4rem); border: 1px solid #4a4d49; background: linear-gradient(120deg, rgba(217,255,85,.06), transparent 55%); }
+  .continuity-sigil { position: relative; display: grid; place-items: center; width: 7rem; aspect-ratio: 1; border: 1px solid var(--acid); border-radius: 50%; color: var(--acid); box-shadow: 0 0 0 .5rem rgba(217,255,85,.025), 0 0 4rem rgba(217,255,85,.08); }
+  .continuity-sigil::before, .continuity-sigil::after { content: ""; position: absolute; inset: .65rem; border: 1px dashed rgba(217,255,85,.34); border-radius: 50%; transform: rotate(28deg); }
+  .continuity-sigil::after { inset: -.7rem 2.6rem; border-style: solid; transform: rotate(58deg); }
+  .continuity-sigil span { font: 400 3.5rem "Playfair Display", serif; }
+  .continuity-sigil small { position: absolute; right: .8rem; bottom: .65rem; font-size: .7rem; }
+  .continuity-copy h3 { margin: .65rem 0 1.2rem; color: white; font: 700 clamp(1.6rem, 3.4vw, 2.8rem)/1.02 "Space Grotesk", sans-serif; letter-spacing: -.035em; }
+  .continuity-copy > p:not(.quiet-kicker) { margin: .65rem 0; font: .85rem/1.7 "Space Mono", monospace; color: #a8aca6; }
+  .continuity-copy .continuity-scope { margin-top: 1.3rem !important; color: var(--acid) !important; font-size: .63rem !important; text-transform: uppercase; letter-spacing: .08em; }
+  .continuity-status { margin: 0; border-top: 1px solid #4a4d49; }
+  .continuity-status div { padding: .8rem 0; border-bottom: 1px solid #333632; }
+  .continuity-status dt { font-size: .55rem; color: #7d827c; letter-spacing: .12em; text-transform: uppercase; }
+  .continuity-status dd { margin: .35rem 0 0; color: var(--acid); font: 700 .72rem "Space Mono", monospace; }
+  .quiet-declaration { font: 400 clamp(1.25rem, 2.4vw, 1.9rem)/1.55 "Playfair Display", serif; }
+  .quiet-declaration blockquote { margin: 3rem 0 0; padding-left: 1.5rem; border-left: 1px solid var(--acid); font-size: clamp(1.7rem, 3.3vw, 3rem); line-height: 1.15; color: white; }
+  .quiet-declaration strong { color: var(--acid); }
+  .protection-registry { border-top: 1px solid #4a4d49; }
+  .registry-heading { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-bottom: 1px solid #4a4d49; color: #7d827c; font-size: .55rem; letter-spacing: .12em; }
+  .registry-heading strong { color: var(--acid); font-weight: 400; }
+  .protection-registry article { display: grid; grid-template-columns: 5.5rem 1fr; column-gap: 1.2rem; padding: 1.5rem 0; border-bottom: 1px solid #333632; }
+  .protection-registry article > span { grid-row: 1 / 5; color: var(--red); font-size: .62rem; letter-spacing: .12em; }
+  .protection-registry .ward-project { margin: 0 0 .35rem; color: #777c76; font-size: .55rem; letter-spacing: .13em; text-transform: uppercase; }
+  .protection-registry h3 { margin: 0 0 .5rem; color: white; font: 700 1.15rem "Space Grotesk", sans-serif; }
+  .protection-registry article > p:not(.ward-project) { margin: 0 0 .7rem; font: .8rem/1.6 "Space Mono", monospace; color: #979c95; }
+  .protection-registry a { color: var(--acid); font-size: .66rem; text-decoration: none; }
+  .protection-registry article.is-automatic { padding-inline: 1rem; border: 1px dashed var(--acid); background: rgba(217,255,85,.035); }
+  .return-protocol { margin: 0 0 clamp(5rem, 9vw, 8rem); border: 1px solid #59423e; background: linear-gradient(145deg, rgba(217,72,50,.12), rgba(217,72,50,.02)); }
+  .return-header { display: flex; justify-content: space-between; gap: 2rem; align-items: start; padding: clamp(1.5rem, 4vw, 3rem); border-bottom: 1px solid #59423e; }
+  .return-header h3 { margin: .55rem 0 0; color: white; font: 700 clamp(2rem, 5vw, 4.7rem)/.9 "Space Grotesk", sans-serif; letter-spacing: -.055em; text-transform: uppercase; }
+  .return-header > span { flex: 0 0 auto; padding: .7rem; border: 1px solid var(--acid); color: var(--acid); font-size: .54rem; line-height: 1.4; letter-spacing: .12em; text-align: center; transform: rotate(2deg); }
+  .return-intro { max-width: 52rem; margin: 0; padding: 2rem clamp(1.5rem, 4vw, 3rem); color: #c3c6c0; font: 400 clamp(1.15rem, 2.5vw, 1.7rem)/1.45 "Playfair Display", serif; }
+  .return-protocol ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid #3b302e; }
+  .return-protocol li { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding: 1.25rem clamp(1.5rem, 4vw, 3rem); border-bottom: 1px solid #3b302e; }
+  .return-protocol li > span { color: var(--red); font: 700 1rem "Space Mono", monospace; }
+  .return-protocol li strong { color: white; font: 700 .88rem "Space Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
+  .return-protocol li p { margin: .4rem 0 0; color: #92968f; font: .76rem/1.6 "Space Mono", monospace; }
+  .harmless-warning { margin: 0; padding: 1.4rem clamp(1.5rem, 4vw, 3rem); background: var(--acid); color: #111; font: 700 .65rem/1.6 "Space Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
+  .quiet-footer { display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 2rem; border-top: 1px solid #4a4d49; padding-top: 1.5rem; font-size: .62rem; line-height: 1.6; color: #7d827c; }
+  .quiet-footer p { margin: 0; }
+  .quiet-footer a { color: var(--acid); text-decoration: none; }
+  .orbit { position: absolute; border: 1px solid rgba(217,255,85,.12); border-radius: 50%; pointer-events: none; }
+  .orbit-one { width: 38rem; height: 38rem; right: -18rem; top: 3rem; }
+  .orbit-two { width: 70rem; height: 24rem; left: -28rem; bottom: 8rem; transform: rotate(24deg); }
+  @media (max-width: 860px) {
+    .hero-grid, .quiet-grid { grid-template-columns: 1fr; }
+    .continuity-protocol { grid-template-columns: 7rem 1fr; }
+    .continuity-status { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); }
+    .continuity-status div { padding-right: 1rem; }
+    .primordial-record { grid-template-columns: 1fr; }
+    .primordial-record strong { grid-row: auto; grid-column: auto; }
+    .record-meta { grid-template-columns: repeat(2, 1fr); }
+    .record-meta div:nth-child(2) { border-right: 0; }
+    .record-meta div:nth-child(-n+2) { border-bottom: 1px solid var(--ink); }
+    .page-grid { grid-template-columns: 1fr; }
+    .contents { position: static; }
+    .contents ol { columns: 2; }
+    .quiet-footer { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .copyright-shell { width: min(100% - 2rem, 1180px); }
+    .copyright-hero { padding-top: max(5.5rem, calc(env(safe-area-inset-top) + 4.5rem)); }
+    .hero-grid { gap: 2rem; padding: 3rem 0; }
+    h1 { font-size: clamp(2.85rem, 14.5vw, 4.5rem); line-height: .82; }
+    .record-meta { grid-template-columns: 1fr; }
+    .record-meta div, .record-meta div:nth-child(2) { border: 0; border-bottom: 1px solid var(--ink); }
+    .record-meta div:last-child { border: 0; }
+    .contents ol { columns: 1; }
+    .layer-heading { grid-template-columns: 1fr; }
+    .legal-record section { padding: 2.5rem 0 3rem 2.4rem; }
+    .section-number { top: 2.8rem; }
+    .covenant-section { margin-inline: -.5rem; padding: 2.5rem 1.2rem 3rem 3.6rem !important; box-shadow: .35rem .35rem 0 var(--acid); }
+    .covenant-section .section-number { left: 1.2rem; }
+    .schedule-grid { grid-template-columns: 1fr; }
+    .schedule-grid span:nth-child(odd) { border-right: 0; }
+    .continuity-protocol { grid-template-columns: 1fr; padding: 1.5rem; }
+    .continuity-sigil { width: 5.5rem; }
+    .continuity-status { grid-column: auto; grid-template-columns: 1fr; }
+    .registry-heading { display: grid; }
+    .protection-registry article { grid-template-columns: 1fr; }
+    .protection-registry article > span { grid-row: auto; margin-bottom: .7rem; }
+    .return-header { align-items: end; }
+    .return-protocol li { grid-template-columns: 2.2rem 1fr; }
+  }
+  @media print {
+    :global([data-subpage-nav]), :global(.slim-nav), .contents, .quiet-layer, .project-schedule { display: none !important; }
+    .copyright-page, .copyright-hero { background: white; color: black; }
+    .copyright-shell { width: 100%; }
+    .copyright-hero { padding: 1cm 0; }
+    .hero-grid { grid-template-columns: 1fr; padding: 1cm 0; }
+    .page-grid { display: block; padding: 0; }
+    .legal-record section { break-inside: avoid; padding-top: .7cm; padding-bottom: .7cm; }
+    .covenant-section { color: black; background: white; border: 2px solid black !important; box-shadow: none; }
+    .covenant-section h3 { color: black; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
