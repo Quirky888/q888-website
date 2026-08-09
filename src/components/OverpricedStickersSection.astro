@@ -415,6 +415,8 @@ const tickerUnit = `${tickerText} — `;
         class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"
       >
       </div>
+      <div data-sticker-options class="purchase-options-section hidden"></div>
+      <div data-sticker-revenue class="revenue-split-section hidden"></div>
       <div data-sticker-subscription class="subscription-section hidden"></div>
       <div data-sticker-theory class="theory-core-section hidden"></div>
       <div data-sticker-playlist class="playlist-section hidden"></div>
@@ -600,6 +602,131 @@ const tickerUnit = `${tickerText} — `;
     padding: 1.5rem;
     background: rgba(166, 124, 0, 0.05);
     border-left: 3px solid rgba(166, 124, 0, 0.5);
+  }
+
+  .purchase-options-section,
+  .revenue-split-section {
+    margin: 2rem 0;
+  }
+
+  :global(.purchase-options-title),
+  :global(.revenue-split-title) {
+    margin: 0 0 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a67c00;
+  }
+
+  :global(.purchase-options-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  :global(.purchase-option) {
+    padding: 1.25rem;
+    border: 1px solid var(--line-soft);
+    background: rgba(166, 124, 0, 0.04);
+  }
+
+  :global(.purchase-option--custom) {
+    border-color: rgba(0, 180, 190, 0.4);
+    background: rgba(0, 180, 190, 0.045);
+  }
+
+  :global(.purchase-option-head) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  :global(.purchase-option-name),
+  :global(.purchase-option-price) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 700;
+  }
+
+  :global(.purchase-option-price) {
+    color: #a67c00;
+    white-space: nowrap;
+  }
+
+  :global(.purchase-option-availability) {
+    margin: 0 0 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  :global(.purchase-option-description) {
+    margin: 0 0 0.75rem;
+    color: var(--text-ink);
+    line-height: 1.55;
+  }
+
+  :global(.purchase-option-includes) {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+
+  :global(.purchase-option-includes li + li) {
+    margin-top: 0.35rem;
+  }
+
+  .revenue-split-section {
+    padding: 1.25rem;
+    border-left: 3px solid rgba(166, 124, 0, 0.65);
+    background: rgba(166, 124, 0, 0.055);
+  }
+
+  :global(.revenue-split-statement) {
+    margin: 0 0 1rem;
+    color: var(--text-ink);
+    line-height: 1.6;
+  }
+
+  :global(.revenue-split-grid) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  :global(.revenue-allocation) {
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  :global(.revenue-allocation-share) {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #a67c00;
+  }
+
+  :global(.revenue-allocation-name),
+  :global(.revenue-allocation-role) {
+    display: block;
+  }
+
+  :global(.revenue-allocation-role) {
+    margin-top: 0.15rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 640px) {
+    :global(.purchase-options-grid) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .mission-title {
@@ -945,6 +1072,97 @@ const tickerUnit = `${tickerText} — `;
   }
   [data-sticker-gallery] img:hover {
     transform: scale(1.05);
+  }
+
+  :global(.sticker-gallery-feature) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+    padding: clamp(1rem, 2.5vw, 2rem);
+    border: 1px solid var(--line-soft);
+    background:
+      linear-gradient(135deg, rgba(0, 229, 255, 0.08), transparent 42%),
+      var(--surface-paper);
+  }
+
+  :global(.sticker-gallery-feature__image) {
+    min-width: 0;
+  }
+
+  :global(.sticker-gallery-feature__image img) {
+    display: block;
+    width: 100%;
+    max-height: 440px;
+    object-fit: contain;
+    border: 0;
+  }
+
+  :global(.sticker-gallery-feature__copy) {
+    min-width: 0;
+    max-width: 42rem;
+  }
+
+  :global(.sticker-gallery-feature__eyebrow),
+  :global(.sticker-gallery-feature__footer) {
+    display: block;
+    color: var(--accent-cyan);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  :global(.sticker-gallery-feature__title) {
+    margin: 0.7rem 0 1rem;
+    color: var(--text-ink);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    line-height: 0.95;
+    overflow-wrap: anywhere;
+  }
+
+  :global(.sticker-gallery-feature__body) {
+    margin: 0;
+    color: var(--text-ink);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.65;
+  }
+
+  :global(.sticker-gallery-feature__body a) {
+    color: var(--accent-cyan);
+    font-weight: 800;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  :global(.sticker-gallery-feature__body a:hover),
+  :global(.sticker-gallery-feature__body a:focus-visible) {
+    color: var(--text-ink);
+    background: var(--accent-cyan);
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+
+  :global(.sticker-gallery-feature__footer) {
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  @media (max-width: 700px) {
+    :global(.sticker-gallery-feature) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    :global(.sticker-gallery-feature__image img) {
+      max-height: 360px;
+    }
   }
 
   [data-close-drawer] {
@@ -1322,6 +1540,8 @@ const tickerUnit = `${tickerText} — `;
     const imageEl = drawer?.querySelector("[data-sticker-image]");
     const galleryEl = drawer?.querySelector("[data-sticker-gallery]");
     const descEl = drawer?.querySelector("[data-sticker-description]");
+    const optionsEl = drawer?.querySelector("[data-sticker-options]");
+    const revenueEl = drawer?.querySelector("[data-sticker-revenue]");
     const subscriptionEl = drawer?.querySelector("[data-sticker-subscription]");
     const theoryEl = drawer?.querySelector("[data-sticker-theory]");
     const playlistEl = drawer?.querySelector("[data-sticker-playlist]");
@@ -1335,6 +1555,13 @@ const tickerUnit = `${tickerText} — `;
     const emailEl = drawer?.querySelector("[data-sticker-email]");
 
     const data = Array.isArray(instruments) ? instruments : [];
+    const escapeHtml = (value) =>
+      String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
     function openDrawer(id, shouldPushState = true) {
       const inst = data.find(
@@ -1376,14 +1603,32 @@ const tickerUnit = `${tickerText} — `;
       }
 
       if (galleryEl && inst.gallery && inst.gallery.length > 0) {
-        galleryEl.innerHTML = inst.gallery
-          .map(
-            (url) =>
-              `<img src="${url}" alt="${inst.title} detail" class="w-full aspect-square object-cover border border-[var(--line-soft)] transition-transform duration-200 hover:scale-105" />`,
-          )
-          .join("");
+        if (inst.galleryFeature) {
+          const feature = inst.galleryFeature;
+          galleryEl.innerHTML = `
+            <figure class="sticker-gallery-feature">
+              <div class="sticker-gallery-feature__image">
+                <img src="${escapeHtml(inst.gallery[0])}" alt="${escapeHtml(inst.title)} Full-Swoosh one-of-one custom option" />
+              </div>
+              <figcaption class="sticker-gallery-feature__copy">
+                <span class="sticker-gallery-feature__eyebrow">${escapeHtml(feature.eyebrow)}</span>
+                <h3 class="sticker-gallery-feature__title">${escapeHtml(feature.title)}</h3>
+                <p class="sticker-gallery-feature__body">${escapeHtml(feature.bodyBeforeLink)}<a href="${escapeHtml(feature.linkUrl)}">${escapeHtml(feature.linkText)}</a>${escapeHtml(feature.bodyAfterLink)}</p>
+                <span class="sticker-gallery-feature__footer">${escapeHtml(feature.footer)}</span>
+              </figcaption>
+            </figure>
+          `;
+        } else {
+          galleryEl.innerHTML = inst.gallery
+            .map(
+              (url) =>
+                `<img src="${escapeHtml(url)}" alt="${escapeHtml(inst.title)} detail" class="w-full aspect-square object-cover border border-[var(--line-soft)] transition-transform duration-200 hover:scale-105" />`,
+            )
+            .join("");
+        }
         galleryEl.classList.remove("hidden");
       } else if (galleryEl) {
+        galleryEl.innerHTML = "";
         galleryEl.classList.add("hidden");
       }
 
@@ -1395,6 +1640,63 @@ const tickerUnit = `${tickerText} — `;
         descEl.classList.remove("hidden");
       } else if (descEl) {
         descEl.classList.add("hidden");
+      }
+
+      if (optionsEl) {
+        if (inst.purchaseOptions?.length) {
+          optionsEl.innerHTML = `
+            <h3 class="purchase-options-title">Choose Your Atmospheric Risk Level</h3>
+            <div class="purchase-options-grid">
+              ${inst.purchaseOptions
+                .map(
+                  (option, index) => `
+                    <article class="purchase-option${index > 0 ? " purchase-option--custom" : ""}">
+                      <div class="purchase-option-head">
+                        <strong class="purchase-option-name">${escapeHtml(option.name)}</strong>
+                        <span class="purchase-option-price">${escapeHtml(option.price)}</span>
+                      </div>
+                      <p class="purchase-option-availability">${escapeHtml(option.availability)}</p>
+                      <p class="purchase-option-description">${escapeHtml(option.description)}</p>
+                      <ul class="purchase-option-includes">
+                        ${option.includes.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                      </ul>
+                    </article>
+                  `,
+                )
+                .join("")}
+            </div>
+          `;
+          optionsEl.classList.remove("hidden");
+        } else {
+          optionsEl.classList.add("hidden");
+          optionsEl.innerHTML = "";
+        }
+      }
+
+      if (revenueEl) {
+        if (inst.revenueSplit?.allocations?.length) {
+          revenueEl.innerHTML = `
+            <h3 class="revenue-split-title">Collaborative Revenue Protocol</h3>
+            <p class="revenue-split-statement">${escapeHtml(inst.revenueSplit.statement)}</p>
+            <div class="revenue-split-grid">
+              ${inst.revenueSplit.allocations
+                .map(
+                  (allocation) => `
+                    <div class="revenue-allocation">
+                      <span class="revenue-allocation-share">${escapeHtml(allocation.share)}</span>
+                      <strong class="revenue-allocation-name">${escapeHtml(allocation.recipient)}</strong>
+                      <span class="revenue-allocation-role">${escapeHtml(allocation.role)}</span>
+                    </div>
+                  `,
+                )
+                .join("")}
+            </div>
+          `;
+          revenueEl.classList.remove("hidden");
+        } else {
+          revenueEl.classList.add("hidden");
+          revenueEl.innerHTML = "";
+        }
       }
 
       if (subscriptionEl) {
@@ -1750,7 +2052,14 @@ const tickerUnit = `${tickerText} — `;
       if (specsEl) specsEl.classList.remove("hidden");
 
       if (linksEl) {
-        if (id === "ML-0444") {
+        if (inst.relatedUrl) {
+          linksEl.innerHTML = `
+            <a href="${escapeHtml(inst.relatedUrl)}" class="drawer-link gold-shine inline-flex items-center transition-all no-underline">
+              ↗ ${escapeHtml(inst.relatedLabel || "Open related project")}
+            </a>
+          `;
+          linksEl.classList.remove("hidden");
+        } else if (id === "ML-0444") {
           linksEl.innerHTML = `
             <a href="/docs/modern-love.pdf" download class="drawer-link gold-shine inline-flex items-center transition-all no-underline" style="color: transparent !important; background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important; background-size: 200% auto !important; background-clip: text !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; animation: shine 8s linear infinite;">
               📖 Full story PDF (free download)
@@ -1803,7 +2112,7 @@ const tickerUnit = `${tickerText} — `;
 
       if (shouldPushState) {
         const slug = inst.slug || inst.id.toLowerCase();
-        history.pushState({ stickerId: inst.id }, "", `/overpriced/${slug}`);
+        history.pushState({ stickerId: inst.id }, "", `/overpriced/${slug}/`);
       }
     }
 
@@ -1814,7 +2123,7 @@ const tickerUnit = `${tickerText} — `;
       document.body.classList.remove("overflow-hidden");
 
       if (shouldPushState) {
-        history.pushState({ stickerId: null }, "", "/overpriced");
+        history.pushState({ stickerId: null }, "", "/overpriced/");
       }
     }
 
@@ -1844,7 +2153,7 @@ const tickerUnit = `${tickerText} — `;
           } else {
             closeDrawer(false);
           }
-        } else if (path === "/overpriced") {
+        } else if (path === "/overpriced" || path === "/overpriced/") {
           closeDrawer(false);
         }
       };

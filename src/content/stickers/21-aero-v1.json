@@ -1,0 +1,89 @@
+{
+  "sortOrder": 19,
+  "id": "AERO-V1",
+  "slug": "aero-v1",
+  "ticker": "AERO-0888",
+  "title": "AERO V1",
+  "tagline": "More Aero. Swoosh responsibly.",
+  "ask": "£230 · £530 CUSTOM",
+  "availableCount": 45,
+  "editionTotal": 50,
+  "status": "LISTED",
+  "provenance": "Collaboratively developed by Lead Designer Q888 and Lead Engineer Ed. Ten Full-Swoosh prototypes preceded the 50-unit public safety edition; five prototypes were entrusted to Ed for advanced atmospheric supervision.",
+  "contactEmail": "hello@q888.space",
+  "imageUrl": "/images/aero_v1_safety.webp",
+  "imageAlt": "AERO V1 public safety edition sticker without the separate blue velocity swoosh",
+  "gallery": [
+    "/images/aero_sticker.webp"
+  ],
+  "galleryFeature": {
+    "eyebrow": "FULL FLEX PRO RIDER OPTION // ONE OF ONE",
+    "title": "THE COFFEE-STOP CONFIGURATION",
+    "bodyBeforeLink": "A one-of-one personal Full-Swoosh sticker for riders who prefer to complete the final stage of their commute-bike Tour at the coffee shop, recover with an ",
+    "linkText": "expensive DYNO MILK",
+    "linkUrl": "/dyno/",
+    "bodyAfterLink": ", and explain—without removing their helmet—why ordinary aerodynamic limits no longer apply.",
+    "footer": "ONE RIDER // ONE PERSONAL DETAIL // ONE NON-REPEATABLE STICKER"
+  },
+  "relatedUrl": "/aero/",
+  "relatedLabel": "Enter the AERO V1 wind tunnel and read the full field-test history",
+  "description": "AERO V1 is a collaborative cycling-performance artefact by Lead Designer Q888 and Lead Engineer Ed. It reduces drag through aesthetic superiority, disciplined belief, and a willingness to explain a £230 sticker with a completely straight face. Physical protection remains exactly zero.\n\nTen early prototypes carried the complete blue velocity swoosh. Field review concluded that the additional 0.00888 Cd advantage demanded Tour de France concentration, precise karmic alignment, and the ability to remember that confidence is not protective equipment. The 50-unit public edition therefore removes the separate swoosh while preserving the essential condition of being More Aero. Five have already entered service or been gifted; 45 remain available for civilian deployment.\n\nRiders who remain professionally committed to dangerous flex may commission a one-of-one personal Full-Swoosh specification. The £300 custom upgrade adds the velocity swoosh and one tiny personal element of choice—a symbol, initial, miniature object, or similarly micro-aerodynamic intervention agreed before production. The approved design is made once and is not repeated for another rider. Please allow up to approximately 30 days for personal design, proof approval, aerodynamic testing, and delivery.\n\nThis is not a silent licensing arrangement. AERO V1 is a collaborative project, and every payment received for either configuration is divided equally between Q888 and Ed.",
+  "purchaseOptions": [
+    {
+      "name": "Public V1 — Swoosh Delete",
+      "price": "£230",
+      "availability": "45 of 50 physical stickers available",
+      "description": "The official safety-limited public edition. Enough atmospheric advantage for ordinary confidence; enough resistance for karma to remain approximately aligned.",
+      "includes": [
+        "AERO V1 public artwork without the separate blue velocity swoosh",
+        "76 × 71 mm physical performance artefact",
+        "0.00888 Cd of sensible drag restored",
+        "Zero physical protection and no watt guarantee"
+      ]
+    },
+    {
+      "name": "Full-Swoosh Custom Override",
+      "price": "£530 total",
+      "availability": "One of one · made to order · allow up to approximately 30 days",
+      "description": "A £230 base sticker plus the £300 custom upgrade for riders whose aerodynamic confidence has passed ordinary consumer limits. Your approved configuration is produced once, tested, and never repeated for another rider.",
+      "includes": [
+        "Complete blue velocity swoosh",
+        "One tiny personal element making the edition uniquely yours",
+        "Design consultation and proof approval before production",
+        "Up to approximately 30 days for design, testing, and delivery",
+        "DANGEROUSLY FLEX professional override classification"
+      ]
+    }
+  ],
+  "revenueSplit": {
+    "statement": "Every pound received for AERO V1 stickers—public edition or custom Full-Swoosh override—is distributed 50/50 between the two collaborators.",
+    "allocations": [
+      {
+        "recipient": "Q888",
+        "role": "Lead Designer",
+        "share": "50%"
+      },
+      {
+        "recipient": "Ed",
+        "role": "Lead Engineer",
+        "share": "50%"
+      }
+    ]
+  },
+  "dimensions": "76mm × 71mm",
+  "material": "Premium printed vinyl, atmosphere-facing adhesive configuration",
+  "year": "2026",
+  "whyThisMatters": "The missing swoosh is not concealed production trivia; it is now part of the artwork's honest history. Accident became safety protocol, safety protocol became an edition, and the edition preserved the collaboration that made the object possible.\n\nChoose the public V1 to remain responsibly More Aero. Choose the custom override to become Dangerously Flex. In both cases, the designers split reality—and the revenue—equally.",
+  "showTermsAsLink": false,
+  "rarity": "45 / 50 PUBLIC UNITS + ONE-OF-ONE OVERRIDES",
+  "cosmicLevel": "ATMOSPHERIC LIABILITY",
+  "tags": [
+    "aero-v1",
+    "cycling-art",
+    "performance-artefact",
+    "infocigan",
+    "q888",
+    "collaboration",
+    "custom-sticker"
+  ]
+}

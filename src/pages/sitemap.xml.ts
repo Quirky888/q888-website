@@ -15,6 +15,7 @@ const staticRoutes = [
   "/narmail/",
   "/overpriced/",
   "/president/",
+  "/privacy/",
   "/qbag/",
   "/research/",
 ];
@@ -50,4 +51,3 @@ export async function GET() {
     },
   );
 }
-
