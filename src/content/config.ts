@@ -61,9 +61,22 @@ const stickers = defineCollection({
     imageUrl: z.string().optional(),
     imageAlt: z.string().optional(),
     gallery: z.array(z.string()).default([]),
+    galleryFeature: z
+      .object({
+        eyebrow: z.string().min(1),
+        title: z.string().min(1),
+        bodyBeforeLink: z.string().min(1),
+        linkText: z.string().min(1),
+        linkUrl: z.string().regex(/^\/[a-z0-9-/]*$/),
+        bodyAfterLink: z.string().min(1),
+        footer: z.string().min(1),
+      })
+      .optional(),
     description: z.string().optional(),
     downloadUrl: z.string().optional(),
     downloadLabel: z.string().optional(),
+    relatedUrl: z.string().regex(/^\/[a-z0-9-/]*$/).optional(),
+    relatedLabel: z.string().min(1).optional(),
     playlistUrl: z.string().optional(),
     playlistLabel: z.string().optional(),
     dimensions: z.string().optional(),
@@ -77,6 +90,31 @@ const stickers = defineCollection({
     showTermsAsLink: z.boolean().default(false),
     rarity: z.string().optional(),
     cosmicLevel: z.string().optional(),
+    purchaseOptions: z
+      .array(
+        z.object({
+          name: z.string().min(1),
+          price: z.string().min(1),
+          availability: z.string().min(1),
+          description: z.string().min(1),
+          includes: z.array(z.string().min(1)).min(1),
+        }),
+      )
+      .optional(),
+    revenueSplit: z
+      .object({
+        statement: z.string().min(1),
+        allocations: z
+          .array(
+            z.object({
+              recipient: z.string().min(1),
+              role: z.string().min(1),
+              share: z.string().min(1),
+            }),
+          )
+          .min(2),
+      })
+      .optional(),
     tags: z.array(z.string()).default([]),
   }),
 });

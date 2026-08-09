@@ -94,15 +94,39 @@ const aeroMetaItems = [
       <!-- Floating sticker preview -->
       <div class="aero-hero-sticker-wrap">
         <img
-          src="/images/aero_sticker.webp"
-          alt="Aero Sticker V1 — the fully realised consumer skin"
+          src="/images/aero_v1_safety.webp"
+          alt="Aero Sticker V1 public edition — the 50-unit safety-limited skin without the separate velocity swoosh"
           class="aero-hero-sticker"
           id="aero-hero-sticker"
           width="420"
-          height="420"
+          height="400"
           loading="eager"
           decoding="async"
         />
+        <button
+          type="button"
+          class="aero-pro-override"
+          aria-label="Preview the Full-Swoosh V1 professional override, available for an additional £300"
+        >
+          <div class="aero-pro-override-label">
+            <span>FULL SWOOSH</span>
+            <strong>+£300</strong>
+          </div>
+          <img
+            src="/images/aero_sticker.webp"
+            alt="Optional Full-Swoosh V1 professional override, available for an additional £300"
+            class="aero-pro-override-image"
+            width="180"
+            height="180"
+            loading="eager"
+            decoding="async"
+          />
+          <span class="aero-pro-override-status">PRO OVERRIDE // DANGEROUSLY FLEX</span>
+          <span class="aero-pro-expanded-price" aria-hidden="true">
+            <strong>+£300</strong>
+            <small>PRO UPGRADE</small>
+          </span>
+        </button>
         <div class="aero-sticker-glow" aria-hidden="true"></div>
         <div class="aero-sticker-ring aero-ring-1" aria-hidden="true"></div>
         <div class="aero-sticker-ring aero-ring-2" aria-hidden="true"></div>
@@ -345,8 +369,8 @@ const aeroMetaItems = [
     ══════════════════════════════════════════════════════ -->
     <section class="aero-reveal-section" id="aero-reveal" aria-label="Product layer reveal">
       <div class="aero-reveal-inner">
-        <div class="aero-section-tag">MATERIAL STACK // SCROLL TO DEPLOY</div>
-        <h2 class="aero-section-headline">THREE-TIER CONSTRUCTION</h2>
+        <div class="aero-section-tag">FIELD TEST HISTORY // SCROLL TO DEPLOY</div>
+        <h2 class="aero-section-headline">FOUR-STAGE AERODYNAMIC EVOLUTION</h2>
 
         <div class="aero-reveal-stage">
           <!-- Image stack -->
@@ -373,11 +397,21 @@ const aeroMetaItems = [
             />
             <img
               src="/images/aero_sticker.webp"
-              alt="Tier 3: Consumer V1 Skin (Digital Ink Core) — micro-encapsulated Smart Pixels locking in the cyan velocity banner"
+              alt="Stage 3: Full Swoosh Prototype — the original Aero V1 sticker with its cyan velocity swoosh"
               class="aero-layer aero-layer-top"
               id="aero-layer-2"
               width="480"
               height="480"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/images/aero_v1_safety.webp"
+              alt="Stage 4: Public Safety Edition — the production Aero V1 sticker with the separate cyan velocity swoosh removed"
+              class="aero-layer aero-layer-safety"
+              id="aero-layer-3"
+              width="480"
+              height="457"
               loading="lazy"
               decoding="async"
             />
@@ -388,7 +422,7 @@ const aeroMetaItems = [
           <!-- Tier info panels -->
           <div class="aero-tier-panels">
             <div class="aero-tier-panel is-active" id="aero-tier-0" data-tier="0">
-              <div class="aero-tier-number">TIER 01</div>
+              <div class="aero-tier-number">STAGE 01</div>
               <div class="aero-tier-name">μ-MATRIX CHASSIS</div>
               <p class="aero-tier-desc">
                 A microscopic, dark stealth-carbon substrate reinforced with an iridescent titanium lattice. Engineered to remain entirely beneath the visible surface—shielded from casual inspection, accessible only to the true owner.
@@ -400,7 +434,7 @@ const aeroMetaItems = [
             </div>
 
             <div class="aero-tier-panel" id="aero-tier-1" data-tier="1">
-              <div class="aero-tier-number">TIER 02</div>
+              <div class="aero-tier-number">STAGE 02</div>
               <div class="aero-tier-name">FIELD PROTOTYPE</div>
               <p class="aero-tier-desc">
                 The raw deployment layer. Features a high-contrast, dotted-line vector layout tracking an aggressive, aerodynamic sprint tuck—superimposed directly onto a traditional, front-basket commuter bicycle infrastructure.
@@ -412,22 +446,38 @@ const aeroMetaItems = [
             </div>
 
             <div class="aero-tier-panel" id="aero-tier-2" data-tier="2">
-              <div class="aero-tier-number">TIER 03</div>
-              <div class="aero-tier-name">CONSUMER V1 SKIN (DIGITAL INK CORE)</div>
+              <div class="aero-tier-number">STAGE 03 // 10 PROTOTYPES</div>
+              <div class="aero-tier-name">FULL SWOOSH PROTOTYPE (PRO RIDER SPEC)</div>
               <p class="aero-tier-desc">
-                The ultimate interface layer. Woven with a surface skin of active Smart Pixels from the <a href="/dink">Digital Ink Architecture</a>. This micro-encapsulated pixel matrix dynamically shifts state under raw kinetic force, locking in the ultra-high contrast cyan velocity banner declaring: "WE MAKE YOU MORE AERO V1".
+                Ten complete V1 prototypes entered field testing with the blue velocity swoosh fully active. Five were entrusted to Lead Engineer Ed; the remaining units stayed with Q888 or were quietly distributed to friends capable of carrying experimental atmospheric responsibility.
               </p>
               <p class="aero-tier-desc" style="margin-top:0.5rem">
-                <strong class="aero-cyan">Deployment Protocol:</strong> Powered entirely by friction. As aerodynamic headwind velocity increases, the Smart Pixels magnetically align to smooth out incoming molecular friction, altering their visual density to bypass Newtonian drag entirely through sheer aesthetic superiority.
+                <strong class="aero-cyan">Prototype Finding:</strong> The swoosh lowered drag by an additional <strong class="aero-cyan">0.00888 C<sub>d</sub></strong>, but also made the sticker aggressively aerodynamic and karmically misaligned. Safe operation required continuous awareness, disciplined cornering, and remembering that confidence is not protective equipment.
               </p>
-              <div class="aero-tier-spec">INTERFACE: DIGITAL INK V1 // ACTIVE PIXELS: 8,888,000 // HUBRIS INDEX: MAXIMUM</div>
+              <div class="aero-tier-spec">RUN: 10 // ED ALLOCATION: 5 // SWOOSH: ACTIVE // RIDER CLASS: PROFESSIONAL OR EMOTIONALLY PREPARED</div>
+            </div>
+
+            <div class="aero-tier-panel" id="aero-tier-3" data-tier="3">
+              <div class="aero-tier-number">STAGE 04 // 50-UNIT PUBLIC EDITION</div>
+              <div class="aero-tier-name">V1 SAFETY-LIMITED SKIN (SWOOSH DELETE)</div>
+              <p class="aero-tier-desc">
+                Post-prototype review confirmed an uncomfortable truth: the sticker reduces air drag but provides <strong class="aero-cyan">zero physical protection</strong>. This is acceptable for Tour de France professionals. It may be dangerously fast for anyone who occasionally forgets they are not a professional—or becomes overconfident near a café sprint.
+              </p>
+              <p class="aero-tier-desc" style="margin-top:0.5rem">
+                The 50-unit public V1 therefore ships without the separate blue swoosh. Removing just <strong class="aero-cyan">0.00888 C<sub>d</sub></strong> of additional advantage restores enough atmospheric resistance for karma to remain approximately aligned, while preserving the essential condition of being More Aero.
+              </p>
+              <p class="aero-tier-desc" style="margin-top:0.5rem">
+                <strong class="aero-cyan">Professional Override:</strong> Verified riders may request a fully customised Full-Swoosh V1 for <strong class="aero-cyan">+£300</strong>. Each override is upgraded from DANGEROUSLY FAST to <strong class="aero-cyan">DANGEROUSLY FLEX</strong> and supplied with no helmet, no watt guarantee, and no protection from their own magnificent confidence.
+              </p>
+              <div class="aero-tier-spec">PUBLIC RUN: 50 // SWOOSH: SAFETY-DEACTIVATED // DRAG PENALTY: +0.00888 Cd // PRO OVERRIDE: +£300</div>
             </div>
 
             <!-- Manual tier nav -->
             <div class="aero-tier-nav" aria-label="Layer navigation">
-              <button class="aero-tier-btn is-active" id="aero-tn-0" data-target="0" aria-label="View Tier 1 — μ-Matrix Chassis" aria-pressed="true">01</button>
-              <button class="aero-tier-btn" id="aero-tn-1" data-target="1" aria-label="View Tier 2 — Field Prototype" aria-pressed="false">02</button>
-              <button class="aero-tier-btn" id="aero-tn-2" data-target="2" aria-label="View Tier 3 — Consumer V1 Skin (Digital Ink Core)" aria-pressed="false">03</button>
+              <button class="aero-tier-btn is-active" id="aero-tn-0" data-target="0" aria-label="View Stage 1 — μ-Matrix Chassis" aria-pressed="true">01</button>
+              <button class="aero-tier-btn" id="aero-tn-1" data-target="1" aria-label="View Stage 2 — Field Prototype" aria-pressed="false">02</button>
+              <button class="aero-tier-btn" id="aero-tn-2" data-target="2" aria-label="View Stage 3 — Full Swoosh Prototype" aria-pressed="false">03</button>
+              <button class="aero-tier-btn" id="aero-tn-3" data-target="3" aria-label="View Stage 4 — V1 Safety-Limited Skin" aria-pressed="false">04</button>
             </div>
           </div>
         </div>
@@ -554,7 +604,7 @@ const aeroMetaItems = [
                 <div class="aero-deploy-details-content">
                   <div class="aero-deploy-subname">The Hyper-Cyclist Dynamic Re-Synthesis</div>
                   <p class="aero-deploy-desc">
-                    For the elite hyper-cyclist operating at maximum exertion thresholds, consuming standard, low-vibe alternative milks introduces unacceptable molecular drag into the powertrain. True systemic optimisation requires combining the sticker's passive boundary layering with internal <a href="/dyno">Dyno Milk</a> deployment.
+                    For the elite hyper-cyclist operating at maximum exertion thresholds, consuming standard, low-vibe alternative milks introduces unacceptable molecular drag into the powertrain. True systemic optimisation requires combining the sticker's passive boundary layering with internal <a href="/dyno/">Dyno Milk</a> deployment.
                   </p>
                   <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
                     When paired with the Aero Sticker's active slipstream, the extreme nutritional density of the future-dairy core alters localized temporal flow: your post-ride metabolic recovery actively executes during the ride. Your quadriceps will absorb the 626g protein anomaly through sheer dimensional proximity to the frame chassis. You will no longer merely rebuild fatigued muscle tissue; you will rapidly synthesize entirely new, biomechanically superior, carbon-based leg fibers while waiting at a red light on Leith Walk.
@@ -659,7 +709,7 @@ const aeroMetaItems = [
                     For the ultra-modern developer deep in a high-stakes vibe coding trance, true processing density is a cognitive survival requirement. When architecting machine-learning scripts or deploying custom Vertex AI tools until 4:00 AM, standard Earth-realm caffeine completely fails to prevent systemic neural collapse.
                   </p>
                   <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
-                    To achieve maximum data-stream integration, the external μ-Matrix lattice must be paired with internal molecular optimisation via <a href="/dyno">Dyno Milk</a>. The anomalous 626g protein matrix locks in and stabilizes your biological pathways, allowing your fingers to float across mechanical keyboard switches with zero input latency. You will no longer compile code; you will physically manifest dynamic software architecture into the local directory through sheer macro-nutritional dominance.
+                    To achieve maximum data-stream integration, the external μ-Matrix lattice must be paired with internal molecular optimisation via <a href="/dyno/">Dyno Milk</a>. The anomalous 626g protein matrix locks in and stabilizes your biological pathways, allowing your fingers to float across mechanical keyboard switches with zero input latency. You will no longer compile code; you will physically manifest dynamic software architecture into the local directory through sheer macro-nutritional dominance.
                   </p>
                 </div>
               </details>
@@ -886,7 +936,7 @@ const aeroMetaItems = [
             href="mailto:hello@q888.space?subject=AERO%20V1%20ACQUISITION%20INTENT"
             class="aero-footer-btn aero-footer-btn--primary"
           >ACQUIRE UNIT ◈</a>
-          <a href="/dyno" class="aero-footer-btn">DYNO MILK PROTOCOL →</a>
+          <a href="/dyno/" class="aero-footer-btn">DYNO MILK PROTOCOL →</a>
         </div>
       </div>
     </footer>
@@ -1109,7 +1159,7 @@ function initLayerReveal() {
     if (n === activeTier) return;
 
     // Layers
-    [0, 1, 2].forEach(i => {
+    [0, 1, 2, 3].forEach(i => {
       const layer = document.getElementById(`aero-layer-${i}`);
       const panel = document.getElementById(`aero-tier-${i}`);
       const btn   = document.getElementById(`aero-tn-${i}`);
@@ -1127,7 +1177,7 @@ function initLayerReveal() {
     // Glow colour shifts per tier
     const glow = document.getElementById("aero-stack-glow");
     if (glow) {
-      const colours = ["rgba(0,245,255,0.18)", "rgba(255,255,255,0.12)", "rgba(0,245,255,0.28)"];
+      const colours = ["rgba(0,245,255,0.18)", "rgba(255,255,255,0.12)", "rgba(0,245,255,0.28)", "rgba(132,163,218,0.3)"];
       glow.style.background = colours[n] ?? colours[0];
     }
 
@@ -1135,7 +1185,7 @@ function initLayerReveal() {
   }
 
   // Button listeners
-  [0, 1, 2].forEach(i => {
+  [0, 1, 2, 3].forEach(i => {
     const btn = document.getElementById(`aero-tn-${i}`);
     btn?.addEventListener("click", () => setTier(i));
   });
@@ -1149,9 +1199,9 @@ function initLayerReveal() {
         if (entries[0].isIntersecting) {
           // advance every 800ms while in view
           const id = setInterval(() => {
-            autoTier = (autoTier + 1) % 3;
+            autoTier = (autoTier + 1) % 4;
             setTier(autoTier);
-            if (autoTier === 2) clearInterval(id); // stop at final state
+            if (autoTier === 3) clearInterval(id); // stop at the public production state
           }, 900);
         }
       }, { threshold: 0.4 });
@@ -1732,6 +1782,134 @@ document.addEventListener("astro:page-load", boot);
   z-index: 2;
   will-change: transform;
   filter: drop-shadow(0 0 40px rgba(0,245,255,0.35));
+  transition: opacity 0.35s ease;
+}
+.aero-pro-override {
+  position: absolute;
+  left: -63%;
+  bottom: 2%;
+  z-index: 4;
+  width: clamp(145px, 14vw, 195px);
+  padding: 1.8rem 0.45rem 1.35rem;
+  border: 1px solid rgba(0,245,255,0.55);
+  background: rgba(2,8,10,0.92);
+  box-shadow: 0 0 24px rgba(0,245,255,0.18);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  appearance: none;
+  cursor: zoom-in;
+  transform: rotate(-2deg);
+  transform-origin: center;
+  transition:
+    left 0.45s cubic-bezier(0.2, 0.75, 0.2, 1),
+    bottom 0.45s cubic-bezier(0.2, 0.75, 0.2, 1),
+    width 0.45s cubic-bezier(0.2, 0.75, 0.2, 1),
+    padding 0.35s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.45s cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+.aero-pro-override-label {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.55rem;
+  right: 0.55rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-family: var(--aero-mono);
+  font-size: clamp(0.38rem, 0.6vw, 0.52rem);
+  letter-spacing: 0.12em;
+  color: var(--aero-dim);
+  transition: opacity 0.18s ease;
+}
+.aero-pro-override-label strong {
+  color: var(--aero-cyan);
+  font-size: clamp(0.7rem, 1.2vw, 1rem);
+  white-space: nowrap;
+}
+.aero-pro-override-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(0,245,255,0.25));
+}
+.aero-pro-override-status {
+  position: absolute;
+  left: 0.55rem;
+  right: 0.55rem;
+  bottom: 0.35rem;
+  display: block;
+  padding-top: 0.3rem;
+  border-top: 1px solid var(--aero-border);
+  font-family: var(--aero-mono);
+  font-size: clamp(0.32rem, 0.48vw, 0.43rem);
+  line-height: 1.35;
+  letter-spacing: 0.1em;
+  color: var(--aero-cyan-dim);
+  transition: opacity 0.18s ease;
+}
+.aero-pro-expanded-price {
+  position: absolute;
+  top: 43%;
+  right: clamp(-8.5rem, -8vw, -6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  font-family: var(--aero-mono);
+  line-height: 1;
+  opacity: 0;
+  transform: translateX(-0.75rem);
+  pointer-events: none;
+  transition: opacity 0.2s ease 0.22s, transform 0.3s ease 0.18s;
+}
+.aero-pro-expanded-price strong {
+  color: var(--aero-cyan);
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-shadow: 0 0 20px rgba(0,245,255,0.35);
+}
+.aero-pro-expanded-price small {
+  color: var(--aero-dim);
+  font-size: clamp(0.42rem, 0.65vw, 0.58rem);
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+.aero-pro-override:hover,
+.aero-pro-override:focus-visible {
+  /* CHOICE: keep the left edge anchored so the hover target cannot run away. */
+  left: -63%;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  border-color: transparent;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  transform: rotate(0deg);
+}
+.aero-pro-override:hover .aero-pro-override-label,
+.aero-pro-override:hover .aero-pro-override-status,
+.aero-pro-override:focus-visible .aero-pro-override-label,
+.aero-pro-override:focus-visible .aero-pro-override-status {
+  opacity: 0;
+}
+.aero-pro-override:hover .aero-pro-expanded-price,
+.aero-pro-override:focus-visible .aero-pro-expanded-price {
+  opacity: 1;
+  transform: translateX(0);
+}
+.aero-hero-sticker-wrap:has(.aero-pro-override:hover) .aero-hero-sticker,
+.aero-hero-sticker-wrap:has(.aero-pro-override:focus-visible) .aero-hero-sticker {
+  opacity: 0;
+}
+.aero-pro-override:focus-visible .aero-pro-override-image {
+  filter: drop-shadow(0 0 24px rgba(0,245,255,0.6));
 }
 .aero-sticker-glow {
   position: absolute;
@@ -1748,6 +1926,7 @@ document.addEventListener("astro:page-load", boot);
 .aero-sticker-ring {
   position: absolute;
   inset: -8%;
+  z-index: 0;
   border: 1px solid var(--aero-border);
   border-radius: 50%;
   pointer-events: none;

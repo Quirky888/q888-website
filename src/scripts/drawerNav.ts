@@ -141,7 +141,7 @@ export async function openDrawer(id: DrawerId, direction: Direction, shouldPushS
   focusTrapCleanup = trapFocus(panel);
 
   if (shouldPushState) {
-    history.pushState({ project: id }, "", "/map");
+    history.pushState({ project: id }, "", "/map/");
   }
 }
 
