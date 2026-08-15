@@ -70,3 +70,32 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Evidence:** The summary explicitly contrasts “I am selling ten stickers before attempting anything larger” with brochure-like philosophical language and identifies preparation before power, Zero Collateral Damage, collectors as early witnesses, documented provenance, and the intergalactic camper van as central.
 - **Possible DNA change:** None proposed. Existing Q888 tensions and lenses cover this; the observation is project-specific evidence for applying them.
 - **Status:** observation
+
+---
+
+### 2026-08-15 — Give a strange world a legible threshold
+
+- **Project:** q888-website / homepage
+- **Task context:** A trusted visitor found the portfolio difficult to understand. Aleksandrs described it as a personal, living map of very different projects: intentionally unfinished, increasingly made from his own images, and still open about AI as a collaborator.
+- **Working mode:** LEARN
+- **Expression lens or overlay:** HUMAN_CODE + MYTHIC_Q888 + MUSHROOM_SOFT; no dedicated portfolio overlay
+- **Agent produced:** A first-screen orientation plaque, three additional calls to action, translated navigation suffixes, and living-project language. Although the verbal direction was initially accepted, the visual implementation added a large competing object over the banner.
+- **Human response:** implementation rejected — “what I want is seamless integration and reduction of noise and mess. You did opposite.”
+- **Observed preference:** Preserve the changing visual languages and coherent weirdness, but create orientation through subtraction, hierarchy and sequencing. Do not cover a primary artwork with explanatory interface. Prefer a quiet passage after the artwork and plain functional navigation over labels, panels, buttons, or additional visual systems. Decorative status telemetry belongs on large screens only; mobile should keep navigation and content unobstructed.
+- **Evidence:** The supplied desktop screenshot showed the plaque obscuring the lower-left banner artwork while its three buttons competed with both the primary navigation and the existing status display.
+- **Possible DNA change:** None proposed. Existing clarity ↔ mystery and artwork ↔ functioning tool tensions cover this preference.
+- **Status:** observation
+
+---
+
+### 2026-08-15 — Shared typography, project-specific costume
+
+- **Project:** q888-website / Infocigan section
+- **Task context:** Carry the accepted “One artist. Several worlds.” visual language into Infocigan without erasing its identity.
+- **Working mode:** LEARN
+- **Expression lens or overlay:** HUMAN_CODE + BUREAUCRATIC_SATIRE + COSMIC_PROPAGANDA; no dedicated Infocigan overlay
+- **Human response:** requested extension — “use the same style of fonts and to match the style but keep Infocigan gold and flash glory.”
+- **Observed preference:** A shared editorial typography and spacing system can connect different Q888 worlds. Project identity should then live in a controlled costume—colour, imagery, motion, humour and selected excess—rather than a completely unrelated typographic structure.
+- **Evidence:** Aleksandrs explicitly approved the new homepage orientation typography and requested it as the basis for Infocigan, while naming gold and flash as elements to preserve.
+- **Possible DNA change:** None proposed. This is project-specific evidence for the stable structure ↔ playful surface tension.
+- **Status:** observation

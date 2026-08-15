@@ -46,28 +46,28 @@ const zones: Zone[] = (await getCollection("projects"))
   data-section="infocigan" 
   class="w-full min-h-screen relative mt-14 md:mt-20 border-t md:border-t-0 border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden flex flex-col"
 >
-  <!-- Full-Width Header Bar -->
-  <div class="w-full bg-[var(--bg-fog)] py-12 px-6 md:px-24 flex flex-col gap-8 relative z-20 border-b md:border-b-0 border-[var(--line-soft)] overflow-visible">
-    <h2 class="gold-shine text-4xl md:text-8xl font-light tracking-tighter uppercase leading-none">
-      INFOCIGAN
-    </h2>
-    
-    <div class="flex flex-col gap-6">
-      <p class="text-xl md:text-3xl text-[var(--text-muted)] font-light italic leading-tight max-w-3xl">
+  <!-- CHOICE: The same editorial skeleton as the portfolio introduction, wearing Infocigan gold. -->
+  <div class="infocigan-intro">
+    <p class="infocigan-kicker">Infocigan · Speculative marketplace · Value optional</p>
+
+    <h2 class="infocigan-title gold-shine">INFOCIGAN</h2>
+
+    <div class="infocigan-intro-copy">
+      <p class="infocigan-declaration">
         A speculative marketplace for objects, belief, and optional nonsense.
       </p>
-      
-      <div class="gold-shine flex flex-col gap-1.5 font-mono text-sm md:text-base tracking-[0.2em] uppercase">
-        <span>MARKET_STATE: UNSTABLE</span>
-        <span>VALUE_LOGIC: SYMBOLIC</span>
-        <span>TRUST_LEVEL: OPTIONAL</span>
+
+      <div class="infocigan-market-notes" aria-label="Infocigan market conditions">
+        <span>Market state: unstable</span>
+        <span>Value logic: symbolic</span>
+        <span>Trust level: optional</span>
       </div>
     </div>
 
     <img
       src="/images/InfoCigan_%20success.webp"
       alt=""
-      class="infocigan-hero-image absolute right-6 md:right-24 bottom-0 translate-y-[25%] w-[clamp(240px,36vw,440px)] h-auto object-contain pointer-events-none z-30 hidden md:block [@media(orientation:landscape)]:block"
+      class="infocigan-hero-image"
       loading="lazy"
       decoding="async"
       width="440"
@@ -158,8 +158,8 @@ const zones: Zone[] = (await getCollection("projects"))
         <article class="infocigan-briefing space-y-12 w-full">
           
           <section class="space-y-6" data-motion-reveal>
-            <h3 class="text-4xl md:text-7xl font-light text-[var(--text-ink)]">What is Infocigan?</h3>
-            <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
+            <h3>What is Infocigan?</h3>
+            <div class="infocigan-prose space-y-6">
               <p>
                 Infocigan is not just a project — it’s a playful philosophy, a portal, and a system-aware art experiment where imagination, absurdity, and speculative value quietly intersect.
               </p>
@@ -178,7 +178,7 @@ const zones: Zone[] = (await getCollection("projects"))
           </section>
 
           <section class="space-y-6 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
-            <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
+            <div class="infocigan-prose space-y-6">
               <p>
                 At its core, Infocigan is an evolving constellation of ideas:
                 <span class="text-[var(--text-muted)] italic">collectible stickers, reusable coffee bags, future folklore, holographic political campaigns, afterlife contracts, guilt-free infinite water rituals, and smart pixels carrying whispered stories.</span>
@@ -191,11 +191,11 @@ const zones: Zone[] = (await getCollection("projects"))
           </section>
 
           <section class="space-y-6 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
-            <div class="space-y-6 text-xl md:text-3xl text-[var(--text-ink)] font-light leading-relaxed">
+            <div class="infocigan-prose space-y-6">
               <p>
                 Here, “Overpriced” isn’t a mistake — it’s a mirror.
                 <br/>
-                <span class="gold-shine font-mono text-2xl md:text-5xl font-bold uppercase tracking-tighter block py-4">
+                <span class="infocigan-gold-statement gold-shine">
                   “Over price” means above currency.
                 </span>
               </p>
@@ -209,8 +209,8 @@ const zones: Zone[] = (await getCollection("projects"))
 
           <section class="space-y-8 border-t border-[var(--line-soft)] pt-12 pb-12" data-motion-reveal>
             <div class="space-y-6">
-              <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-[var(--text-muted)]">Artifact Layers</h4>
-              <ul class="space-y-4 font-mono text-lg md:text-2xl tracking-tight text-[var(--text-ink)]">
+              <h4>Artifact Layers</h4>
+              <ul class="infocigan-artifact-list space-y-4">
                 <li class="flex items-start gap-4">
                   <span class="gold-shine">/</span>
                   Some unlock maps.
@@ -237,8 +237,8 @@ const zones: Zone[] = (await getCollection("projects"))
 
           <section class="space-y-8 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
             <div class="space-y-6">
-              <h4 class="text-2xl md:text-4xl font-mono uppercase tracking-widest text-[var(--text-muted)]">Think of Infocigan as:</h4>
-              <ul class="space-y-6 font-light text-xl md:text-3xl text-[var(--text-ink)] leading-snug">
+              <h4>Think of Infocigan as:</h4>
+              <ul class="infocigan-definition-list space-y-6">
                 <li class="flex items-start gap-4">
                   <span class="gold-shine mt-1">✦</span>
                   A trading zone between realities.
@@ -275,6 +275,93 @@ const zones: Zone[] = (await getCollection("projects"))
 <!-- Q888:SECTION_END id="INFOCIGAN" -->
 
 <style>
+  .infocigan-intro {
+    position: relative;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: minmax(17rem, 0.78fr) minmax(19rem, 1fr);
+    column-gap: clamp(3rem, 9vw, 9rem);
+    row-gap: 1.25rem;
+    align-items: start;
+    width: 100%;
+    min-height: 30rem;
+    padding: 6rem 6rem 7rem;
+    overflow: visible;
+    color: var(--text-ink);
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .infocigan-kicker {
+    grid-column: 1 / -1;
+    margin: 0 0 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #a67c00;
+  }
+
+  .infocigan-title {
+    margin: 0;
+    max-width: 9ch;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 650;
+    letter-spacing: -0.07em;
+    line-height: 0.9;
+  }
+
+  .infocigan-intro-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 35rem;
+    padding-right: clamp(7rem, 12vw, 11rem);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .infocigan-declaration {
+    margin: 0;
+    font-size: clamp(1rem, 1.55vw, 1.22rem);
+    font-weight: 360;
+    line-height: 1.62;
+  }
+
+  .infocigan-market-notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1rem;
+    margin-top: 1.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    line-height: 1.45;
+    text-transform: uppercase;
+    color: #a67c00;
+  }
+
+  .infocigan-market-notes span:not(:last-child)::after {
+    content: " /";
+    color: var(--text-muted);
+  }
+
+  .infocigan-hero-image {
+    position: absolute;
+    right: clamp(1.5rem, 4vw, 6rem);
+    bottom: 0;
+    z-index: 1;
+    display: block;
+    width: clamp(13rem, 25vw, 25rem);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    transform: translateY(24%);
+    filter: saturate(1.04);
+  }
+
   /* Base transitions */
   [data-infocigan-slug] {
     transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
@@ -298,10 +385,44 @@ const zones: Zone[] = (await getCollection("projects"))
     }
   }
 
-  /* Disable scatter on mobile */
+  /* Mobile cards keep a calm grid; the images provide enough movement here. */
   @media (max-width: 767px) {
     .grid > div {
       transform: none !important;
+    }
+  }
+
+  /* The header stacks before its two-column proportions become cramped. */
+  @media (max-width: 900px) {
+    .infocigan-intro {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      padding: 4rem 1.5rem;
+      row-gap: 1.75rem;
+    }
+
+    .infocigan-kicker,
+    .infocigan-title,
+    .infocigan-intro-copy {
+      grid-column: 1;
+    }
+
+    .infocigan-kicker {
+      margin-bottom: 0;
+    }
+
+    .infocigan-title {
+      font-size: clamp(3.2rem, 16vw, 4.5rem);
+    }
+
+    .infocigan-intro-copy {
+      max-width: 32rem;
+      padding-right: 0;
+    }
+
+    .infocigan-market-notes,
+    .infocigan-hero-image {
+      display: none;
     }
   }
 
@@ -350,10 +471,58 @@ const zones: Zone[] = (await getCollection("projects"))
       );
   }
 
-  /* Typography refinement for the briefing */
-  .infocigan-briefing h3, 
+  /* The briefing shares the landing page's editorial type hierarchy. */
+  .infocigan-briefing {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text-ink);
+  }
+
+  .infocigan-briefing h3 {
+    margin: 0;
+    max-width: 10ch;
+    font-size: clamp(2.9rem, 5.2vw, 5.2rem);
+    font-weight: 560;
+    letter-spacing: -0.065em;
+    line-height: 0.94;
+  }
+
   .infocigan-briefing h4 {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #a67c00;
+  }
+
+  .infocigan-prose,
+  .infocigan-definition-list {
+    font-size: clamp(1rem, 1.55vw, 1.22rem);
+    font-weight: 360;
+    line-height: 1.62;
+    color: var(--text-ink);
+  }
+
+  .infocigan-artifact-list {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: clamp(0.86rem, 1.15vw, 1rem);
     letter-spacing: -0.01em;
+    line-height: 1.55;
+    color: var(--text-ink);
+  }
+
+  .infocigan-gold-statement {
+    display: block;
+    padding: 1rem 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: clamp(1.65rem, 3vw, 3rem);
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 1;
   }
 
   /* Gold Shine Effect */
@@ -415,6 +584,14 @@ const zones: Zone[] = (await getCollection("projects"))
   @keyframes shine {
     to {
       background-position: 200% center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gold-shine,
+    .white-gold-shine,
+    .holographic-overlay {
+      animation: none;
     }
   }
 </style>
