@@ -39,6 +39,14 @@ const metaItems = customItems || [
 </div>
 
 <style>
+  /* CHOICE: Atmospheric telemetry is useful texture on large screens, but
+     competes with navigation and content on mobile. */
+  @media (max-width: 767px) {
+    .system-meta {
+      display: none;
+    }
+  }
+
   .meta-value {
     transition: opacity 180ms ease-out;
   }
