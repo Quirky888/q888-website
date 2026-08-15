@@ -1,5 +1,8 @@
 ---
 import { getCollection } from "astro:content";
+import InfociganMarketWire, {
+  type MarketWireProject,
+} from "./InfociganMarketWire.astro";
 
 const urlMap: Record<string, string> = {
   "overpriced-stickers": "/overpriced/",
@@ -38,6 +41,14 @@ const zones: Zone[] = (await getCollection("projects"))
     lightText: data.cardLightText,
   }))
   .sort((a, b) => a.sortOrder - b.sortOrder);
+
+const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
+  slug: zone.slug,
+  title: zone.title,
+  descriptor: zone.descriptor,
+  system: zone.system,
+  href: urlMap[zone.slug] || `/${zone.slug}/`,
+}));
 ---
 
 <!-- Q888:SECTION_START id="INFOCIGAN" -->
@@ -75,6 +86,8 @@ const zones: Zone[] = (await getCollection("projects"))
     />
   </div>
 
+  <InfociganMarketWire projects={marketWireProjects} />
+
   <!-- Main Content Area -->
   <div class="relative z-10 w-full px-6 md:px-12 py-12 md:py-24 flex-grow bg-[var(--bg-fog)]">
     <!-- 60/40 Split Layout -->
@@ -90,14 +103,21 @@ const zones: Zone[] = (await getCollection("projects"))
               (zone.slug === 'dyno-milk') ? 'dyno-milk-wrap md:mt-16' : ''
             } ${
               (zone.slug === 'aero-sticker') ? 'aero-sticker-wrap md:mt-16' : ''
+            } ${
+              (zone.slug === 'overpriced-stickers') ? 'w-[92%] md:w-[86%] mx-auto' : ''
             }`} data-motion-item>
               <a 
-                href={urlMap[zone.slug] || '#'}
+                href={urlMap[zone.slug] || `/${zone.slug}/`}
                 data-infocigan-slug={zone.slug}
                 class="block relative rounded-xl transition-colors duration-500 cursor-pointer overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-[#72808a] hover:bg-[#7a8892]"
               >
                 <!-- Artifact Image Area -->
-                <div class="relative aspect-square md:aspect-[4/5] flex items-center justify-center overflow-hidden">
+                <div class:list={[
+                  "relative flex items-center justify-center overflow-hidden",
+                  zone.slug === "overpriced-stickers"
+                    ? "aspect-[2274/3293] bg-black"
+                    : "aspect-square md:aspect-[4/5]",
+                ]}>
                   {zone.image ? (
                     <>
                       {zone.imageMobile ? (
@@ -106,7 +126,10 @@ const zones: Zone[] = (await getCollection("projects"))
                           <img
                             src={zone.image}
                             alt={zone.title}
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            class:list={[
+                              "w-full h-full transition-transform duration-500 group-hover:scale-105",
+                              zone.slug === "overpriced-stickers" ? "object-contain" : "object-cover",
+                            ]}
                             loading="lazy"
                             decoding="async"
                             width="400"
@@ -117,7 +140,10 @@ const zones: Zone[] = (await getCollection("projects"))
                         <img
                           src={zone.image}
                           alt={zone.title}
-                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          class:list={[
+                            "w-full h-full transition-transform duration-500 group-hover:scale-105",
+                            zone.slug === "overpriced-stickers" ? "object-contain" : "object-cover",
+                          ]}
                           loading="lazy"
                           decoding="async"
                           width="400"
