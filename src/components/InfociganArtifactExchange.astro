@@ -47,10 +47,20 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
         01 / {totalLabel}
       </output>
       <div class="artifact-exchange-controls" aria-label="Artifact Exchange controls">
-        <button type="button" data-exchange-previous aria-label="Previous artifact">
+        <button
+          type="button"
+          data-exchange-previous
+          aria-label="Previous artifact"
+          aria-controls="artifact-exchange-track"
+        >
           <span aria-hidden="true">←</span>
         </button>
-        <button type="button" data-exchange-next aria-label="Next artifact">
+        <button
+          type="button"
+          data-exchange-next
+          aria-label="Next artifact"
+          aria-controls="artifact-exchange-track"
+        >
           <span aria-hidden="true">→</span>
         </button>
       </div>
@@ -59,6 +69,7 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
 
   <div class="artifact-exchange-viewport">
     <div
+      id="artifact-exchange-track"
       class="artifact-exchange-track"
       role="region"
       aria-roledescription="carousel"
@@ -143,6 +154,25 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
         aria-hidden="true"
       ></span>
     </div>
+
+    <div class="artifact-exchange-edge-controls" aria-label="Artifact Exchange controls">
+      <button
+        type="button"
+        data-exchange-previous
+        aria-label="Previous artifact"
+        aria-controls="artifact-exchange-track"
+      >
+        <span aria-hidden="true">←</span>
+      </button>
+      <button
+        type="button"
+        data-exchange-next
+        aria-label="Next artifact"
+        aria-controls="artifact-exchange-track"
+      >
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
   </div>
 
   <div class="artifact-exchange-progress" aria-hidden="true">
@@ -186,11 +216,11 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
         const registryLinks = Array.from(
           exchange.querySelectorAll<HTMLAnchorElement>("[data-registry-target]"),
         );
-        const previousButton = exchange.querySelector<HTMLButtonElement>(
-          "[data-exchange-previous]",
+        const previousButtons = Array.from(
+          exchange.querySelectorAll<HTMLButtonElement>("[data-exchange-previous]"),
         );
-        const nextButton = exchange.querySelector<HTMLButtonElement>(
-          "[data-exchange-next]",
+        const nextButtons = Array.from(
+          exchange.querySelectorAll<HTMLButtonElement>("[data-exchange-next]"),
         );
         const count = exchange.querySelector<HTMLOutputElement>(
           "[data-exchange-count]",
@@ -202,8 +232,8 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
         if (
           !track ||
           slides.length === 0 ||
-          !previousButton ||
-          !nextButton ||
+          previousButtons.length === 0 ||
+          nextButtons.length === 0 ||
           !count ||
           !progress
         ) {
@@ -259,8 +289,12 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
             }
           });
 
-          previousButton.disabled = slides.length <= 1;
-          nextButton.disabled = slides.length <= 1;
+          previousButtons.forEach((button) => {
+            button.disabled = slides.length <= 1;
+          });
+          nextButtons.forEach((button) => {
+            button.disabled = slides.length <= 1;
+          });
           count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
           progress.style.transform = `scaleX(${(activeIndex + 1) / slides.length})`;
         };
@@ -347,8 +381,12 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
           }
         };
 
-        previousButton.addEventListener("click", () => stepBy(-1));
-        nextButton.addEventListener("click", () => stepBy(1));
+        previousButtons.forEach((button) => {
+          button.addEventListener("click", () => stepBy(-1));
+        });
+        nextButtons.forEach((button) => {
+          button.addEventListener("click", () => stepBy(1));
+        });
 
         track.addEventListener("scroll", () => {
           if (programmaticTarget !== null) {
@@ -466,7 +504,7 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
   }
 
   .artifact-exchange-controls {
-    display: flex;
+    display: none;
     border: 1px solid var(--text-ink);
   }
 
@@ -488,12 +526,15 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
   }
 
   .artifact-exchange-controls button:hover:not(:disabled),
-  .artifact-exchange-controls button:focus-visible {
+  .artifact-exchange-controls button:focus-visible,
+  .artifact-exchange-edge-controls button:hover:not(:disabled),
+  .artifact-exchange-edge-controls button:focus-visible {
     color: #111;
     background: #d8a915;
   }
 
   .artifact-exchange-controls button:focus-visible,
+  .artifact-exchange-edge-controls button:focus-visible,
   .artifact-exchange-track:focus-visible,
   .artifact-card:focus-visible,
   .artifact-registry a:focus-visible {
@@ -507,7 +548,44 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
   }
 
   .artifact-exchange-viewport {
+    position: relative;
     width: 100%;
+  }
+
+  .artifact-exchange-edge-controls {
+    position: absolute;
+    z-index: 3;
+    inset: 50% clamp(0.75rem, 2vw, 2rem) auto;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .artifact-exchange-edge-controls button {
+    display: grid;
+    width: clamp(3.25rem, 4.2vw, 4rem);
+    height: clamp(3.25rem, 4.2vw, 4rem);
+    padding: 0;
+    place-items: center;
+    pointer-events: auto;
+    color: #d8a915;
+    background: rgba(8, 8, 8, 0.9);
+    border: 1px solid rgba(216, 169, 21, 0.72);
+    border-radius: 50%;
+    box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+  }
+
+  .artifact-exchange-edge-controls button:hover:not(:disabled) {
+    transform: scale(1.06);
+  }
+
+  .artifact-exchange-edge-controls button:disabled {
+    opacity: 0.28;
+    cursor: default;
   }
 
   .artifact-exchange-track {
@@ -533,26 +611,26 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
     height: 1px;
     flex: 0 0 max(
       0px,
-      calc(50vw - clamp(9.5rem, 17vw, 16rem) - var(--exchange-gap))
+      calc(50vw - clamp(8.5rem, 14vw, 13rem) - var(--exchange-gap))
     );
   }
 
   .artifact-track-spacer--narrow {
     flex-basis: max(
       0px,
-      calc(50vw - clamp(8.25rem, 14.5vw, 13.5rem) - var(--exchange-gap))
+      calc(50vw - clamp(7.25rem, 12vw, 11.25rem) - var(--exchange-gap))
     );
   }
 
   .artifact-slide {
-    flex: 0 0 clamp(19rem, 34vw, 32rem);
+    flex: 0 0 clamp(17rem, 28vw, 26rem);
     scroll-snap-align: center;
     scroll-snap-stop: always;
     transition: opacity 280ms ease, transform 280ms ease;
   }
 
   .artifact-slide--narrow {
-    flex-basis: clamp(16.5rem, 29vw, 27rem);
+    flex-basis: clamp(14.5rem, 24vw, 22.5rem);
   }
 
   .artifact-slide:not(.is-active) {
@@ -666,7 +744,7 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
   .artifact-card-copy {
     position: relative;
     display: flex;
-    min-height: 10.5rem;
+    min-height: 9.5rem;
     padding: 1.35rem 1.5rem 1.25rem;
     overflow: hidden;
     flex: 1;
@@ -836,6 +914,14 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
       width: 100%;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .artifact-exchange-controls {
+      display: flex;
+    }
+
+    .artifact-exchange-edge-controls {
+      display: none;
     }
 
     .artifact-exchange-track {
