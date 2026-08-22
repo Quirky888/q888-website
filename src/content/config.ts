@@ -26,6 +26,10 @@ const projects = defineCollection({
     cardImageMobile: z.string().optional().nullable(),
     cardHolographic: z.boolean().default(false),
     cardLightText: z.boolean().default(true),
+    // CHOICE: Format metadata keeps future carousel cards flexible without slug-specific CSS.
+    cardFormat: z
+      .enum(["narrow", "portrait", "square", "wide"])
+      .default("portrait"),
     panelTitle: z.string().min(1),
     panelDescription: z.string().min(1),
     panelSpecs: z.array(specSchema).min(1),

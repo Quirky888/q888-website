@@ -3,6 +3,9 @@ import { getCollection } from "astro:content";
 import InfociganMarketWire, {
   type MarketWireProject,
 } from "./InfociganMarketWire.astro";
+import InfociganArtifactExchange, {
+  type ArtifactExchangeProject,
+} from "./InfociganArtifactExchange.astro";
 
 const urlMap: Record<string, string> = {
   "overpriced-stickers": "/overpriced/",
@@ -14,33 +17,19 @@ const urlMap: Record<string, string> = {
   "aero-sticker": "/aero/",
 };
 
-type Zone = {
-  sortOrder: number;
-  slug: string;
-  title: string;
-  descriptor: string;
-  system: string;
-  scatter: string;
-  image: string | null;
-  imageMobile?: string | null;
-  holographic?: boolean;
-  lightText: boolean;
-};
-
-const zones: Zone[] = (await getCollection("projects"))
+const zones: ArtifactExchangeProject[] = (await getCollection("projects"))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
   .map(({ data }) => ({
-    sortOrder: data.sortOrder,
     slug: data.slug,
     title: data.cardTitle,
     descriptor: data.cardDescriptor,
     system: data.cardSystem,
-    scatter: data.cardScatter,
     image: data.cardImage,
     imageMobile: data.cardImageMobile,
     holographic: data.cardHolographic,
-    lightText: data.cardLightText,
-  }))
-  .sort((a, b) => a.sortOrder - b.sortOrder);
+    format: data.cardFormat,
+    href: urlMap[data.slug] || `/${data.slug}/`,
+  }));
 
 const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
   slug: zone.slug,
@@ -58,7 +47,7 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
   class="w-full min-h-screen relative mt-14 md:mt-20 border-t md:border-t-0 border-[var(--line-soft)] bg-[var(--bg-fog)] overflow-hidden flex flex-col"
 >
   <!-- CHOICE: The same editorial skeleton as the portfolio introduction, wearing Infocigan gold. -->
-  <div class="infocigan-intro">
+  <div class="infocigan-hero">
     <p class="infocigan-kicker">Infocigan · Speculative marketplace · Value optional</p>
 
     <h2 class="infocigan-title gold-shine">INFOCIGAN</h2>
@@ -86,208 +75,94 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
     />
   </div>
 
+  <!-- Q888:SECTION_START id="INFOCIGAN_ABOUT" -->
+  <article class="infocigan-about" aria-labelledby="infocigan-about-title">
+    <header class="infocigan-about-heading" data-motion-reveal>
+      <p>Orientation note · Read before trading</p>
+      <h3 id="infocigan-about-title">What is Infocigan?</h3>
+    </header>
+
+    <div class="infocigan-about-story" data-motion-reveal>
+      <p class="infocigan-about-lead">
+        Infocigan is not just a project — it’s a playful philosophy, a portal,
+        and a system-aware art experiment where imagination, absurdity, and
+        speculative value quietly intersect.
+      </p>
+      <p>
+        Some say it began as a sticker. Others say it began long before that,
+        when someone accidentally paid too much for something... and liked the
+        feeling.
+      </p>
+      <div class="infocigan-possibilities">
+        <p>It might be a joke.</p>
+        <p>It might be a serious financial model from an alternate dimension.</p>
+        <p>
+          It might be a long-term investment into a human–mushroom–AE hybrid
+          whose future potential is... hard to value using conventional metrics.
+        </p>
+      </div>
+      <p>Either way — Infocigan has a vibe. And it sticks.</p>
+    </div>
+
+    <div class="infocigan-about-panels" data-motion-stagger data-motion-children="[data-motion-item]">
+      <section data-motion-item>
+        <h4>An evolving constellation</h4>
+        <p>
+          At its core, Infocigan connects collectible stickers, reusable coffee
+          bags, future folklore, holographic political campaigns, afterlife
+          contracts, infinite-water rituals, and smart pixels carrying whispered
+          stories.
+        </p>
+        <p>
+          It’s not rebellion — it’s a reframing of value, sentiment, ownership,
+          and the joy of having something nobody else understands yet.
+        </p>
+      </section>
+
+      <section class="infocigan-value-panel" data-motion-item>
+        <h4>Value logic</h4>
+        <p>Here, “Overpriced” isn’t a mistake — it’s a mirror.</p>
+        <strong class="infocigan-gold-statement gold-shine">
+          “Over price” means above currency.
+        </strong>
+        <p>
+          What is value really worth—and why shouldn’t an object outlive the
+          currency, artist, or planet that first tried to price it?
+        </p>
+      </section>
+
+      <section data-motion-item>
+        <h4>Artifact layers</h4>
+        <ul class="infocigan-artifact-list">
+          <li><span>/</span> Some unlock maps.</li>
+          <li><span>/</span> Some confuse corrupt inspectors.</li>
+          <li><span>/</span> Some whisper at 3am.</li>
+          <li><span>/</span> Some turn coffee rituals into collector quests.</li>
+          <li>
+            <span>/</span> Some hold sentimental value that no money in this
+            galaxy can buy.
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="infocigan-definition" data-motion-reveal>
+      <h4>Think of Infocigan as:</h4>
+      <ul>
+        <li><span>✦</span> A trading zone between realities.</li>
+        <li><span>✦</span> A long joke that accidentally becomes a cultural artifact.</li>
+        <li>
+          <span>✦</span> A quiet investment in Q888—future President of the Galaxy,
+          storyteller of Square Bubbles, and architect of emotional commerce.
+        </li>
+      </ul>
+    </section>
+  </article>
+  <!-- Q888:SECTION_END id="INFOCIGAN_ABOUT" -->
+
   <InfociganMarketWire projects={marketWireProjects} />
 
-  <!-- Main Content Area -->
-  <div class="relative z-10 w-full px-6 md:px-12 py-12 md:py-24 flex-grow bg-[var(--bg-fog)]">
-    <!-- 60/40 Split Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20 items-start">
-      
-      <!-- LEFT: Artifact Field (60%) -->
-      <div class="order-2 lg:order-1">
-        <div class="infocigan-cards grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16" data-motion-stagger data-motion-children="[data-motion-item]">
-          {zones.map((zone) => (
-            <div class={`relative group ${zone.scatter} ${
-              (zone.slug === 'nar-mail-express') ? 'md:col-span-2 md:max-w-[65%] md:mx-auto md:mt-24' : ''
-            } ${
-              (zone.slug === 'dyno-milk') ? 'dyno-milk-wrap md:mt-16' : ''
-            } ${
-              (zone.slug === 'aero-sticker') ? 'aero-sticker-wrap md:mt-16' : ''
-            } ${
-              (zone.slug === 'overpriced-stickers') ? 'w-[92%] md:w-[86%] mx-auto' : ''
-            }`} data-motion-item>
-              <a 
-                href={urlMap[zone.slug] || `/${zone.slug}/`}
-                data-infocigan-slug={zone.slug}
-                class="block relative rounded-xl transition-colors duration-500 cursor-pointer overflow-hidden flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-[#72808a] hover:bg-[#7a8892]"
-              >
-                <!-- Artifact Image Area -->
-                <div class:list={[
-                  "relative flex items-center justify-center overflow-hidden",
-                  zone.slug === "overpriced-stickers"
-                    ? "aspect-[2274/3293] bg-black"
-                    : "aspect-square md:aspect-[4/5]",
-                ]}>
-                  {zone.image ? (
-                    <>
-                      {zone.imageMobile ? (
-                        <picture class="w-full h-full block overflow-hidden">
-                          <source srcset={zone.imageMobile} media="(max-width: 767px)" />
-                          <img
-                            src={zone.image}
-                            alt={zone.title}
-                            class:list={[
-                              "w-full h-full transition-transform duration-500 group-hover:scale-105",
-                              zone.slug === "overpriced-stickers" ? "object-contain" : "object-cover",
-                            ]}
-                            loading="lazy"
-                            decoding="async"
-                            width="400"
-                            height="500"
-                          />
-                        </picture>
-                      ) : (
-                        <img
-                          src={zone.image}
-                          alt={zone.title}
-                          class:list={[
-                            "w-full h-full transition-transform duration-500 group-hover:scale-105",
-                            zone.slug === "overpriced-stickers" ? "object-contain" : "object-cover",
-                          ]}
-                          loading="lazy"
-                          decoding="async"
-                          width="400"
-                          height="500"
-                        />
-                      )}
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
-                      {zone.holographic && (
-                        <div class="holographic-overlay absolute inset-0 pointer-events-none mix-blend-screen opacity-40 group-hover:opacity-0 transition-opacity duration-700"></div>
-                      )}
-                      <span class="absolute top-3 right-3 font-mono text-[9px] uppercase tracking-[0.2em] text-white/70 bg-black/30 px-2 py-1 rounded">{zone.system}</span>
-                    </>
-                  ) : (
-                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] italic select-none text-black/40 opacity-20">IMAGE_DATA_ENCRYPTED</span>
-                  )}
-                </div>
-                
-                <!-- Text Block -->
-                <div class="infocigan-card-text-block p-4 md:p-5 backdrop-blur-md bg-[rgba(255,255,255,0.4)]">
-                  <div class="space-y-1.5">
-                    <h3 class="text-xl uppercase tracking-[0.12em] font-medium gold-shine text-black/85">{zone.title}</h3>
-                    <p class="text-base leading-tight font-light italic text-black/70">{zone.descriptor}</p>
-                    <!-- Hover micro-text -->
-                    <div class="pt-3 font-mono text-[9px] uppercase tracking-tighter text-[#a67c00] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      VALUE MAY DRIFT WITHOUT NOTICE
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- RIGHT: About Text Panel (40%) -->
-      <div class="order-1 lg:order-2 space-y-16">
-        <!-- Q888:SECTION_START id="INFOCIGAN_ABOUT" -->
-        <article class="infocigan-briefing space-y-12 w-full">
-          
-          <section class="infocigan-intro" data-motion-reveal>
-            <h3>What is Infocigan?</h3>
-            <div class="infocigan-prose space-y-6">
-              <p>
-                Infocigan is not just a project — it’s a playful philosophy, a portal, and a system-aware art experiment where imagination, absurdity, and speculative value quietly intersect.
-              </p>
-              <p>
-                Some say it began as a sticker. Others say it began long before that, when someone accidentally paid too much for something... and liked the feeling.
-              </p>
-              <div class="space-y-2 italic text-[var(--text-muted)]">
-                <p>It might be a joke.</p>
-                <p>It might be a serious financial model from an alternate dimension.</p>
-                <p>It might be a long-term investment into a human–mushroom–AE hybrid whose future potential is... hard to value using conventional metrics.</p>
-              </div>
-              <p>
-                Either way — Infocigan has a vibe. And it sticks.
-              </p>
-            </div>
-          </section>
-
-          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
-            <div class="infocigan-prose space-y-6">
-              <p>
-                At its core, Infocigan is an evolving constellation of ideas:
-                <span class="text-[var(--text-muted)] italic">collectible stickers, reusable coffee bags, future folklore, holographic political campaigns, afterlife contracts, guilt-free infinite water rituals, and smart pixels carrying whispered stories.</span>
-              </p>
-              <p>
-                It’s not rebellion — it’s a reframing.
-                A way to redesign value, sentiment, ownership, and the joy of having something nobody else understands yet.
-              </p>
-            </div>
-          </section>
-
-          <section class="space-y-6 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
-            <div class="infocigan-prose space-y-6">
-              <p>
-                Here, “Overpriced” isn’t a mistake — it’s a mirror.
-                <br/>
-                <span class="infocigan-gold-statement gold-shine">
-                  “Over price” means above currency.
-                </span>
-              </p>
-              <div class="space-y-4 text-[var(--text-muted)]">
-                <p>It asks: What’s value really worth?</p>
-                <p>Why not own a sticker priced like Bitcoin?</p>
-                <p>Why not invest in something that might outlive the currency that bought it? Or the artist? Or the planet?</p>
-              </div>
-            </div>
-          </section>
-
-          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12 pb-12" data-motion-reveal>
-            <div class="space-y-6">
-              <h4>Artifact Layers</h4>
-              <ul class="infocigan-artifact-list space-y-4">
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine">/</span>
-                  Some unlock maps.
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine">/</span>
-                  Some confuse corrupt inspectors.
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine">/</span>
-                  Some whisper at 3am.
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine">/</span>
-                  Some turn coffee rituals into collector quests.
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine">/</span>
-                  Some are for sentimental value only — and no money in this galaxy can buy that. <span class="text-[var(--text-muted)] italic">(Unless... you remember the password. Or you are the ....?)</span>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="space-y-8 border-t border-[var(--line-soft)] pt-12" data-motion-reveal>
-            <div class="space-y-6">
-              <h4>Think of Infocigan as:</h4>
-              <ul class="infocigan-definition-list space-y-6">
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine mt-1">✦</span>
-                  A trading zone between realities.
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine mt-1">✦</span>
-                  A long joke that accidentally becomes a cultural artifact.
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="gold-shine mt-1">✦</span>
-                  <span>
-                    A quiet investment in a system known as <strong class="white-gold-shine">Q888</strong> —
-                    <span class="block text-[var(--text-muted)] text-lg md:text-2xl italic">future President of the Galaxy, storyteller of Square Bubbles, and architect of emotional commerce.</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </article>
-        <!-- Q888:SECTION_END id="INFOCIGAN_ABOUT" -->
-      </div>
-    </div>
-  </div>
+  <InfociganArtifactExchange projects={zones} />
 
   <!-- Full-Width Bold Closing Statement Footer -->
   <footer class="w-full bg-[var(--bg-fog)] py-16 px-6 md:px-24 border-t border-[var(--line-soft)] relative z-20">
@@ -301,7 +176,7 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
 <!-- Q888:SECTION_END id="INFOCIGAN" -->
 
 <style>
-  .infocigan-intro {
+  .infocigan-hero {
     position: relative;
     z-index: 20;
     display: grid;
@@ -388,39 +263,191 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
     filter: saturate(1.04);
   }
 
-  /* Base transitions */
-  [data-infocigan-slug] {
-    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  .infocigan-about {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(17rem, 0.72fr) minmax(20rem, 1fr);
+    gap: clamp(3rem, 9vw, 9rem);
+    padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 6vw, 6rem);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text-ink);
+    background: var(--bg-fog);
   }
-  
-  /* Dyno and Aero positioning adjustments */
-  @media (min-width: 768px) {
-    .dyno-milk-wrap {
-      transform: translateY(12px) rotate(1deg) !important;
-      transform-origin: center center;
-    }
-    .dyno-milk-wrap:hover {
-      transform: translateY(6px) rotate(1deg) !important;
-    }
-    .aero-sticker-wrap {
-      transform: translateY(24px) rotate(-1.5deg) !important;
-      transform-origin: center center;
-    }
-    .aero-sticker-wrap:hover {
-      transform: translateY(18px) rotate(-1.5deg) !important;
+
+  .infocigan-about-heading {
+    align-self: start;
+  }
+
+  .infocigan-about-heading > p,
+  .infocigan-about h4 {
+    margin: 0;
+    color: #a67c00;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.66rem;
+    font-weight: 540;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .infocigan-about-heading > p {
+    margin-bottom: 1.3rem;
+  }
+
+  .infocigan-about h3 {
+    margin: 0;
+    max-width: 10ch;
+    font-size: clamp(3.2rem, 6.3vw, 6.5rem);
+    font-weight: 560;
+    letter-spacing: -0.065em;
+    line-height: 0.94;
+  }
+
+  .infocigan-about-story {
+    display: grid;
+    gap: 1.55rem;
+    max-width: 48rem;
+    font-size: clamp(1rem, 1.55vw, 1.24rem);
+    font-weight: 360;
+    line-height: 1.62;
+  }
+
+  .infocigan-about-story p {
+    margin: 0;
+  }
+
+  .infocigan-about-lead {
+    font-size: clamp(1.2rem, 2.1vw, 1.75rem);
+    font-weight: 570;
+    letter-spacing: -0.025em;
+    line-height: 1.45;
+  }
+
+  .infocigan-possibilities {
+    display: grid;
+    gap: 0.65rem;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+    border-left: 1px solid #a67c00;
+    font-style: italic;
+  }
+
+  .infocigan-about-panels {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: clamp(1rem, 3vw, 3rem);
+    border-top: 1px solid var(--text-ink);
+    border-bottom: 1px solid var(--text-ink);
+  }
+
+  .infocigan-about-panels > section {
+    min-width: 0;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .infocigan-about-panels > section + section {
+    border-left: 1px solid var(--line-soft);
+  }
+
+  .infocigan-about-panels p {
+    margin: 1.15rem 0 0;
+    font-size: clamp(0.96rem, 1.25vw, 1.08rem);
+    line-height: 1.62;
+  }
+
+  .infocigan-value-panel {
+    background: rgba(255, 255, 255, 0.32);
+  }
+
+  .infocigan-artifact-list {
+    display: grid;
+    gap: 0.72rem;
+    margin: 1.15rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: clamp(0.78rem, 1vw, 0.9rem);
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+  }
+
+  .infocigan-artifact-list li {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .infocigan-artifact-list span,
+  .infocigan-definition li > span {
+    color: #a67c00;
+  }
+
+  .infocigan-gold-statement {
+    display: block;
+    margin: 1.2rem 0 1.4rem;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: clamp(1.6rem, 2.75vw, 2.9rem);
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+
+  .infocigan-definition {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.38fr) 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+    padding-top: clamp(2rem, 4vw, 4rem);
+  }
+
+  .infocigan-definition ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .infocigan-definition li {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.6rem;
+    font-size: clamp(0.96rem, 1.2vw, 1.08rem);
+    line-height: 1.55;
+  }
+
+  .gold-shine {
+    color: #a67c00;
+    background: linear-gradient(
+      to right, 
+      #a67c00 20%, 
+      #ce9e00 40%, 
+      #ffcc33 50%, 
+      #ce9e00 60%, 
+      #a67c00 80%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 8s linear infinite;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 200% center;
     }
   }
 
-  /* Mobile cards keep a calm grid; the images provide enough movement here. */
-  @media (max-width: 767px) {
-    .grid > div {
-      transform: none !important;
-    }
-  }
-
-  /* The header stacks before its two-column proportions become cramped. */
+  /* The header and explanation collapse independently, avoiding the previous class collision. */
   @media (max-width: 900px) {
-    .infocigan-intro {
+    .infocigan-hero {
       grid-template-columns: 1fr;
       min-height: 0;
       padding: 4rem 1.5rem;
@@ -450,178 +477,30 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
     .infocigan-hero-image {
       display: none;
     }
-  }
 
-
-
-
-  @media (prefers-reduced-motion: reduce) {
-    .infocigan-cards img {
-      transition: none !important;
+    .infocigan-about {
+      grid-template-columns: 1fr;
+      gap: 3rem;
     }
-    .infocigan-cards .group:hover img {
-      transform: none !important;
+
+    .infocigan-about-panels,
+    .infocigan-definition ul {
+      grid-template-columns: 1fr;
     }
-  }
 
-  .infocigan-card-text-block {
-    position: relative;
-    overflow: hidden;
-  }
-  .infocigan-card-text-block::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      repeating-linear-gradient(
-        90deg,
-        transparent 0,
-        transparent 2px,
-        rgba(255, 255, 255, 0.08) 2px,
-        rgba(255, 255, 255, 0.08) 3px
-      ),
-      repeating-linear-gradient(
-        0deg,
-        transparent 0,
-        transparent 8px,
-        rgba(255, 255, 255, 0.04) 8px,
-        rgba(255, 255, 255, 0.04) 9px
-      ),
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.15) 0%,
-        transparent 40%,
-        transparent 60%,
-        rgba(0, 0, 0, 0.02) 100%
-      );
-  }
+    .infocigan-about-panels > section + section {
+      border-top: 1px solid var(--line-soft);
+      border-left: 0;
+    }
 
-  /* The briefing shares the landing page's editorial type hierarchy. */
-  .infocigan-briefing {
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    color: var(--text-ink);
-  }
-
-  .infocigan-briefing h3 {
-    margin: 0;
-    max-width: 10ch;
-    font-size: clamp(2.9rem, 5.2vw, 5.2rem);
-    font-weight: 560;
-    letter-spacing: -0.065em;
-    line-height: 0.94;
-  }
-
-  .infocigan-intro {
-    display: grid;
-    gap: clamp(2.25rem, 3vw, 3.25rem);
-  }
-
-  .infocigan-briefing h4 {
-    margin: 0;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      monospace;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    line-height: 1.4;
-    text-transform: uppercase;
-    color: #a67c00;
-  }
-
-  .infocigan-prose,
-  .infocigan-definition-list {
-    font-size: clamp(1rem, 1.55vw, 1.22rem);
-    font-weight: 360;
-    line-height: 1.62;
-    color: var(--text-ink);
-  }
-
-  .infocigan-artifact-list {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      monospace;
-    font-size: clamp(0.86rem, 1.15vw, 1rem);
-    letter-spacing: -0.01em;
-    line-height: 1.55;
-    color: var(--text-ink);
-  }
-
-  .infocigan-gold-statement {
-    display: block;
-    padding: 1rem 0;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: clamp(1.65rem, 3vw, 3rem);
-    font-weight: 650;
-    letter-spacing: -0.045em;
-    line-height: 1;
-  }
-
-  /* Gold Shine Effect */
-  .gold-shine {
-    color: #a67c00;
-    background: linear-gradient(
-      to right, 
-      #a67c00 20%, 
-      #ce9e00 40%, 
-      #ffcc33 50%, 
-      #ce9e00 60%, 
-      #a67c00 80%
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 8s linear infinite;
-  }
-
-  /* White Gold Shine Effect */
-  .white-gold-shine {
-    background: linear-gradient(
-      to right, 
-      #ffffff 20%, 
-      #e5e5e5 40%, 
-      #ffffff 50%, 
-      #e5e5e5 60%, 
-      #ffffff 80%
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 6s linear infinite;
-    font-weight: 900;
-  }
-
-  /* Holographic Gold Overlay Effect */
-  .holographic-overlay {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(166, 124, 0, 0.3) 25%,
-      rgba(255, 204, 51, 0.6) 50%,
-      rgba(166, 124, 0, 0.3) 75%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 400% 400%;
-    animation: holo-drift 12s ease infinite;
-  }
-
-  @keyframes holo-drift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
+    .infocigan-definition {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .gold-shine,
-    .white-gold-shine,
-    .holographic-overlay {
+    .gold-shine {
       animation: none;
     }
   }

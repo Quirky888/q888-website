@@ -1,0 +1,888 @@
+---
+export type ArtifactCardFormat = "narrow" | "portrait" | "square" | "wide";
+
+export type ArtifactExchangeProject = {
+  slug: string;
+  title: string;
+  descriptor: string;
+  system: string;
+  image: string | null;
+  imageMobile?: string | null;
+  holographic?: boolean;
+  format: ArtifactCardFormat;
+  href: string;
+};
+
+interface Props {
+  projects: ArtifactExchangeProject[];
+}
+
+const { projects } = Astro.props;
+const totalLabel = String(projects.length).padStart(2, "0");
+const firstFormat = projects[0]?.format ?? "portrait";
+const lastFormat = projects.at(-1)?.format ?? "portrait";
+---
+
+<!--
+  LEARN: The exchange is rendered from the same project collection as the
+  registry. Adding a project changes both surfaces without duplicating markup.
+-->
+<section
+  class="artifact-exchange"
+  aria-labelledby="artifact-exchange-title"
+  data-artifact-exchange
+>
+  <header class="artifact-exchange-header">
+    <div>
+      <p class="artifact-exchange-kicker">Market floor · Open collection</p>
+      <h3 id="artifact-exchange-title">Artifact Exchange</h3>
+      <p class="artifact-exchange-intro">
+        Browse the current Infocigan positions. Swipe, drag, use the arrow keys,
+        or consult the registry below. Value may drift while looking.
+      </p>
+    </div>
+
+    <div class="artifact-exchange-console">
+      <output class="artifact-exchange-count" data-exchange-count aria-live="polite">
+        01 / {totalLabel}
+      </output>
+      <div class="artifact-exchange-controls" aria-label="Artifact Exchange controls">
+        <button type="button" data-exchange-previous aria-label="Previous artifact">
+          <span aria-hidden="true">←</span>
+        </button>
+        <button type="button" data-exchange-next aria-label="Next artifact">
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="artifact-exchange-viewport">
+    <div
+      class="artifact-exchange-track"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Infocigan projects"
+      tabindex="0"
+      data-exchange-track
+    >
+      <span
+        class:list={[
+          "artifact-track-spacer",
+          "artifact-track-spacer--start",
+          `artifact-track-spacer--${lastFormat}`,
+        ]}
+        aria-hidden="true"
+      ></span>
+      {projects.map((project, index) => (
+        <article
+          id={`infocigan-artifact-${project.slug}`}
+          class:list={[
+            "artifact-slide",
+            `artifact-slide--${project.format}`,
+            { "is-active": index === 0 },
+          ]}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${index + 1} of ${projects.length}: ${project.title}`}
+          data-exchange-slide
+          data-project-index={index}
+          data-project-slug={project.slug}
+        >
+          <a class="artifact-card" href={project.href} data-infocigan-slug={project.slug}>
+            <div class:list={["artifact-card-media", `artifact-card-media--${project.format}`]}>
+              {project.image ? (
+                <>
+                  {project.imageMobile ? (
+                    <picture>
+                      <source srcset={project.imageMobile} media="(max-width: 767px)" />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        decoding="async"
+                        width="600"
+                        height="750"
+                      />
+                    </picture>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      width="600"
+                      height="750"
+                    />
+                  )}
+                  <span class="artifact-card-shade" aria-hidden="true"></span>
+                  {project.holographic && (
+                    <span class="artifact-card-hologram" aria-hidden="true"></span>
+                  )}
+                  <span class="artifact-card-system">{project.system}</span>
+                </>
+              ) : (
+                <span class="artifact-card-missing">Image data encrypted</span>
+              )}
+            </div>
+
+            <div class="artifact-card-copy">
+              <h4>{project.title}</h4>
+              <p>{project.descriptor}</p>
+              <span>Enter project <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+      ))}
+      <span
+        class:list={[
+          "artifact-track-spacer",
+          "artifact-track-spacer--end",
+          `artifact-track-spacer--${firstFormat}`,
+        ]}
+        aria-hidden="true"
+      ></span>
+    </div>
+  </div>
+
+  <div class="artifact-exchange-progress" aria-hidden="true">
+    <span data-exchange-progress></span>
+  </div>
+
+  <nav class="artifact-registry" aria-label="Infocigan project registry">
+    <div class="artifact-registry-heading">
+      <span>Complete registry</span>
+      <span>{totalLabel} positions recorded</span>
+    </div>
+    <ol>
+      {projects.map((project, index) => (
+        <li>
+          <a
+            href={`#infocigan-artifact-${project.slug}`}
+            data-registry-target={project.slug}
+            aria-current={index === 0 ? "true" : undefined}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{project.title}</strong>
+            <small>{project.system}</small>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</section>
+
+<script>
+  function initInfociganArtifactExchange() {
+    document
+      .querySelectorAll<HTMLElement>("[data-artifact-exchange]")
+      .forEach((exchange) => {
+        if (exchange.dataset.ready === "true") return;
+
+        const track = exchange.querySelector<HTMLElement>("[data-exchange-track]");
+        const slides = Array.from(
+          exchange.querySelectorAll<HTMLElement>("[data-exchange-slide]"),
+        );
+        const registryLinks = Array.from(
+          exchange.querySelectorAll<HTMLAnchorElement>("[data-registry-target]"),
+        );
+        const previousButton = exchange.querySelector<HTMLButtonElement>(
+          "[data-exchange-previous]",
+        );
+        const nextButton = exchange.querySelector<HTMLButtonElement>(
+          "[data-exchange-next]",
+        );
+        const count = exchange.querySelector<HTMLOutputElement>(
+          "[data-exchange-count]",
+        );
+        const progress = exchange.querySelector<HTMLElement>(
+          "[data-exchange-progress]",
+        );
+
+        if (
+          !track ||
+          slides.length === 0 ||
+          !previousButton ||
+          !nextButton ||
+          !count ||
+          !progress
+        ) {
+          return;
+        }
+
+        const makeEdgeClone = (
+          source: HTMLElement,
+          edge: "leading" | "trailing",
+        ) => {
+          const clone = source.cloneNode(true) as HTMLElement;
+          clone.removeAttribute("id");
+          clone.removeAttribute("data-exchange-slide");
+          clone.dataset.exchangeClone = edge;
+          clone.setAttribute("aria-hidden", "true");
+          clone
+            .querySelectorAll<HTMLElement>("a, button, [tabindex]")
+            .forEach((element) => element.setAttribute("tabindex", "-1"));
+          return clone;
+        };
+
+        const leadingClone = makeEdgeClone(slides.at(-1)!, "leading");
+        const trailingClone = makeEdgeClone(slides[0], "trailing");
+        const endSpacer = track.querySelector<HTMLElement>(
+          ".artifact-track-spacer--end",
+        );
+        track.insertBefore(leadingClone, slides[0]);
+        track.insertBefore(trailingClone, endSpacer);
+        const trackSlides = [leadingClone, ...slides, trailingClone];
+
+        exchange.dataset.ready = "true";
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        );
+        let activeIndex = 0;
+        let scrollFrame = 0;
+        let programmaticTarget: number | null = null;
+        let settleTimeout = 0;
+
+        const renderState = (index: number) => {
+          activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+
+          trackSlides.forEach((slide) => {
+            const projectIndex = Number(slide.dataset.projectIndex);
+            slide.classList.toggle("is-active", projectIndex === activeIndex);
+          });
+
+          registryLinks.forEach((link, linkIndex) => {
+            if (linkIndex === activeIndex) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+
+          previousButton.disabled = slides.length <= 1;
+          nextButton.disabled = slides.length <= 1;
+          count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+          progress.style.transform = `scaleX(${(activeIndex + 1) / slides.length})`;
+        };
+
+        const getClosestTrackSlide = () => {
+          const trackCenter = track.scrollLeft + track.clientWidth / 2;
+          let closestSlide = trackSlides[0];
+          let closestDistance = Number.POSITIVE_INFINITY;
+
+          trackSlides.forEach((slide) => {
+            const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+            const distance = Math.abs(trackCenter - slideCenter);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestSlide = slide;
+            }
+          });
+
+          return {
+            slide: closestSlide,
+            projectIndex: Number(closestSlide.dataset.projectIndex),
+          };
+        };
+
+        const centerTrackSlide = (
+          slide: HTMLElement,
+          behavior: ScrollBehavior,
+        ) => {
+          const targetLeft =
+            slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2;
+          track.scrollTo({
+            left: Math.max(0, targetLeft),
+            behavior,
+          });
+        };
+
+        const settleAtClosestSlide = () => {
+          const closest = getClosestTrackSlide();
+          renderState(closest.projectIndex);
+
+          if (closest.slide.dataset.exchangeClone) {
+            programmaticTarget = closest.projectIndex;
+            centerTrackSlide(slides[closest.projectIndex], "auto");
+            finishProgrammaticScroll();
+          } else {
+            programmaticTarget = null;
+          }
+        };
+
+        function finishProgrammaticScroll() {
+          window.clearTimeout(settleTimeout);
+          settleTimeout = window.setTimeout(settleAtClosestSlide, 160);
+        }
+
+        const goToTrackSlide = (
+          slide: HTMLElement,
+          projectIndex: number,
+          requestedBehavior?: ScrollBehavior,
+        ) => {
+          const behavior =
+            requestedBehavior ?? (reducedMotion.matches ? "auto" : "smooth");
+
+          programmaticTarget = projectIndex;
+          renderState(projectIndex);
+          centerTrackSlide(slide, behavior);
+          finishProgrammaticScroll();
+        };
+
+        const goToSlide = (
+          index: number,
+          requestedBehavior?: ScrollBehavior,
+        ) => {
+          const nextIndex = Math.max(0, Math.min(index, slides.length - 1));
+          goToTrackSlide(slides[nextIndex], nextIndex, requestedBehavior);
+        };
+
+        const stepBy = (direction: -1 | 1) => {
+          if (direction === -1 && activeIndex === 0) {
+            goToTrackSlide(leadingClone, slides.length - 1);
+          } else if (direction === 1 && activeIndex === slides.length - 1) {
+            goToTrackSlide(trailingClone, 0);
+          } else {
+            goToSlide(activeIndex + direction);
+          }
+        };
+
+        previousButton.addEventListener("click", () => stepBy(-1));
+        nextButton.addEventListener("click", () => stepBy(1));
+
+        track.addEventListener("scroll", () => {
+          if (programmaticTarget !== null) {
+            finishProgrammaticScroll();
+            return;
+          }
+          if (scrollFrame) cancelAnimationFrame(scrollFrame);
+          scrollFrame = requestAnimationFrame(() => {
+            renderState(getClosestTrackSlide().projectIndex);
+          });
+          finishProgrammaticScroll();
+        });
+
+        track.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            stepBy(-1);
+          } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            stepBy(1);
+          } else if (event.key === "Home") {
+            event.preventDefault();
+            goToSlide(0);
+          } else if (event.key === "End") {
+            event.preventDefault();
+            goToSlide(slides.length - 1);
+          }
+        });
+
+        registryLinks.forEach((link, index) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            goToSlide(index);
+            track.focus({ preventScroll: true });
+          });
+        });
+
+        // CHOICE: the market always opens with its founding artifact, not a restored midpoint.
+        goToSlide(0, "auto");
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initInfociganArtifactExchange, {
+      once: true,
+    });
+  } else {
+    initInfociganArtifactExchange();
+  }
+
+  document.addEventListener("astro:page-load", initInfociganArtifactExchange);
+</script>
+
+<style>
+  .artifact-exchange {
+    position: relative;
+    z-index: 10;
+    padding: clamp(4.5rem, 8vw, 8rem) 0 clamp(5rem, 9vw, 9rem);
+    overflow: hidden;
+    color: var(--text-ink);
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .artifact-exchange-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: end;
+    padding: 0 clamp(1.5rem, 6vw, 6rem) clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .artifact-exchange-kicker,
+  .artifact-registry-heading,
+  .artifact-card-system,
+  .artifact-card-copy > span,
+  .artifact-exchange-count {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    text-transform: uppercase;
+  }
+
+  .artifact-exchange-kicker {
+    margin: 0 0 1rem;
+    color: #a67c00;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+  }
+
+  .artifact-exchange h3 {
+    margin: 0;
+    font: 620 clamp(2.8rem, 7vw, 7rem) / 0.9 system-ui, -apple-system,
+      "Segoe UI", sans-serif;
+    letter-spacing: -0.07em;
+  }
+
+  .artifact-exchange-intro {
+    max-width: 46rem;
+    margin: 1.6rem 0 0;
+    color: var(--text-muted);
+    font: 360 clamp(1rem, 1.45vw, 1.2rem) / 1.6 system-ui,
+      -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .artifact-exchange-console {
+    display: grid;
+    gap: 0.85rem;
+    justify-items: end;
+  }
+
+  .artifact-exchange-count {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: #a67c00;
+  }
+
+  .artifact-exchange-controls {
+    display: flex;
+    border: 1px solid var(--text-ink);
+  }
+
+  .artifact-exchange-controls button {
+    display: grid;
+    width: 3.2rem;
+    height: 3.2rem;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    color: var(--text-ink);
+    background: transparent;
+    font-size: 1.15rem;
+    cursor: pointer;
+  }
+
+  .artifact-exchange-controls button + button {
+    border-left: 1px solid var(--text-ink);
+  }
+
+  .artifact-exchange-controls button:hover:not(:disabled),
+  .artifact-exchange-controls button:focus-visible {
+    color: #111;
+    background: #d8a915;
+  }
+
+  .artifact-exchange-controls button:focus-visible,
+  .artifact-exchange-track:focus-visible,
+  .artifact-card:focus-visible,
+  .artifact-registry a:focus-visible {
+    outline: 2px solid #a67c00;
+    outline-offset: 4px;
+  }
+
+  .artifact-exchange-controls button:disabled {
+    opacity: 0.28;
+    cursor: default;
+  }
+
+  .artifact-exchange-viewport {
+    width: 100%;
+  }
+
+  .artifact-exchange-track {
+    --exchange-gap: clamp(1.25rem, 3vw, 3rem);
+    display: flex;
+    gap: var(--exchange-gap);
+    width: 100%;
+    padding: 1rem 0 2.25rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: clamp(1.5rem, 6vw, 6rem);
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .artifact-exchange-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* CHOICE: real edge space lets the first and last cards reach the same centre position. */
+  .artifact-track-spacer {
+    display: block;
+    height: 1px;
+    flex: 0 0 max(
+      0px,
+      calc(50vw - clamp(9.5rem, 17vw, 16rem) - var(--exchange-gap))
+    );
+  }
+
+  .artifact-track-spacer--narrow {
+    flex-basis: max(
+      0px,
+      calc(50vw - clamp(8.25rem, 14.5vw, 13.5rem) - var(--exchange-gap))
+    );
+  }
+
+  .artifact-slide {
+    flex: 0 0 clamp(19rem, 34vw, 32rem);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    transition: opacity 280ms ease, transform 280ms ease;
+  }
+
+  .artifact-slide--narrow {
+    flex-basis: clamp(16.5rem, 29vw, 27rem);
+  }
+
+  .artifact-slide:not(.is-active) {
+    opacity: 0.68;
+    transform: scale(0.975);
+  }
+
+  .artifact-card {
+    display: flex;
+    min-height: 100%;
+    overflow: hidden;
+    flex-direction: column;
+    color: #111;
+    background: #72808a;
+    border-radius: 0.8rem;
+    box-shadow: 0 1.4rem 3.8rem rgba(0, 0, 0, 0.14);
+    text-decoration: none;
+    transition: box-shadow 280ms ease, transform 280ms ease, background 280ms ease;
+  }
+
+  .artifact-slide.is-active .artifact-card {
+    transform: translateY(-0.35rem);
+    box-shadow: 0 1.8rem 4.4rem rgba(0, 0, 0, 0.2);
+  }
+
+  .artifact-card:hover {
+    background: #7a8892;
+  }
+
+  .artifact-card-media {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+    aspect-ratio: 4 / 5;
+    background: #090909;
+  }
+
+  .artifact-card-media--narrow {
+    aspect-ratio: 2274 / 3293;
+  }
+
+  .artifact-card-media--square {
+    aspect-ratio: 1;
+  }
+
+  .artifact-card-media--wide {
+    aspect-ratio: 4 / 3;
+  }
+
+  .artifact-card-media picture,
+  .artifact-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .artifact-card-media img {
+    object-fit: cover;
+    transition: transform 550ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .artifact-card:hover .artifact-card-media img {
+    transform: scale(1.025);
+  }
+
+  .artifact-card-shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.38), transparent 42%);
+  }
+
+  .artifact-card-hologram {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.38;
+    mix-blend-mode: screen;
+    background: linear-gradient(
+      135deg,
+      transparent,
+      rgba(166, 124, 0, 0.3) 25%,
+      rgba(255, 204, 51, 0.62) 50%,
+      rgba(166, 124, 0, 0.3) 75%,
+      transparent
+    );
+    background-size: 400% 400%;
+    animation: artifact-hologram 12s ease infinite;
+  }
+
+  .artifact-card-system {
+    position: absolute;
+    top: 0.9rem;
+    right: 0.9rem;
+    padding: 0.38rem 0.55rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.34);
+    border-radius: 0.25rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.16em;
+  }
+
+  .artifact-card-missing {
+    color: rgba(255, 255, 255, 0.4);
+    font: italic 0.64rem ui-monospace, monospace;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+
+  .artifact-card-copy {
+    position: relative;
+    display: flex;
+    min-height: 10.5rem;
+    padding: 1.35rem 1.5rem 1.25rem;
+    overflow: hidden;
+    flex: 1;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.48);
+    backdrop-filter: blur(10px);
+  }
+
+  .artifact-card-copy::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 2px,
+        rgba(255, 255, 255, 0.08) 2px,
+        rgba(255, 255, 255, 0.08) 3px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 8px,
+        rgba(255, 255, 255, 0.04) 8px,
+        rgba(255, 255, 255, 0.04) 9px
+      );
+  }
+
+  .artifact-card-copy > * {
+    position: relative;
+  }
+
+  .artifact-card-copy h4 {
+    margin: 0;
+    color: #a67c00;
+    font: 560 clamp(1.05rem, 1.7vw, 1.35rem) / 1.15 system-ui,
+      -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .artifact-card-copy p {
+    margin: 0.65rem 0 1.25rem;
+    color: rgba(0, 0, 0, 0.72);
+    font: italic 360 clamp(0.92rem, 1.25vw, 1.05rem) / 1.35 system-ui,
+      -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .artifact-card-copy > span {
+    margin-top: auto;
+    color: rgba(0, 0, 0, 0.72);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+  }
+
+  .artifact-exchange-progress {
+    height: 1px;
+    margin: 0 clamp(1.5rem, 6vw, 6rem);
+    overflow: hidden;
+    background: var(--line-soft);
+  }
+
+  .artifact-exchange-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #c79707;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 280ms ease;
+  }
+
+  .artifact-registry {
+    margin: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem) 0;
+    border-top: 1px solid var(--text-ink);
+  }
+
+  .artifact-registry-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 0.58rem;
+    letter-spacing: 0.13em;
+  }
+
+  .artifact-registry-heading span:first-child {
+    color: #a67c00;
+  }
+
+  .artifact-registry ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .artifact-registry li {
+    min-width: 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .artifact-registry a {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.35rem 0.6rem;
+    min-height: 5.4rem;
+    padding: 1rem;
+    color: var(--text-ink);
+    text-decoration: none;
+    transition: color 180ms ease, background 180ms ease;
+  }
+
+  .artifact-registry a > span {
+    grid-row: 1 / 3;
+    color: #a67c00;
+    font: 0.62rem ui-monospace, monospace;
+  }
+
+  .artifact-registry strong {
+    overflow: hidden;
+    font: 560 0.9rem system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .artifact-registry small {
+    color: var(--text-muted);
+    font: 0.56rem ui-monospace, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .artifact-registry a:hover,
+  .artifact-registry a[aria-current="true"] {
+    color: #111;
+    background: #d8a915;
+  }
+
+  .artifact-registry a:hover > span,
+  .artifact-registry a:hover small,
+  .artifact-registry a[aria-current="true"] > span,
+  .artifact-registry a[aria-current="true"] small {
+    color: rgba(0, 0, 0, 0.62);
+  }
+
+  @keyframes artifact-hologram {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @media (max-width: 700px) {
+    .artifact-exchange-header {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .artifact-exchange-console {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .artifact-exchange-track {
+      --exchange-gap: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    .artifact-track-spacer {
+      flex-basis: max(0px, calc(8vw - var(--exchange-gap)));
+    }
+
+    .artifact-track-spacer--narrow {
+      flex-basis: max(0px, calc(12vw - var(--exchange-gap)));
+    }
+
+    .artifact-slide {
+      flex-basis: 84vw;
+    }
+
+    .artifact-slide--narrow {
+      flex-basis: 76vw;
+    }
+
+    .artifact-card-copy {
+      min-height: 9.75rem;
+      padding: 1.15rem;
+    }
+
+    .artifact-registry-heading {
+      display: grid;
+    }
+
+    .artifact-registry ol {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .artifact-slide,
+    .artifact-card,
+    .artifact-card-media img,
+    .artifact-exchange-progress span {
+      transition: none;
+    }
+
+    .artifact-card-hologram {
+      animation: none;
+    }
+  }
+</style>
