@@ -97,7 +97,7 @@ const structuredData = [
 
 <Layout
   title="Q888 Research — Artificial Entelechy, Adaptive Competence & Human Code"
-  description="Q888 research by Aleksandrs Sestakovs on Artificial Entelechy, Adaptive Competence, Human Code, Square Bubbles, and authorial systems for AI-assisted creation."
+  description="Q888 research by Alexander Sestakovs on Artificial Entelechy, Adaptive Competence, Human Code, Square Bubbles, and authorial systems for AI-assisted creation."
   image="/images/square_bubble.webp"
   canonicalPath="/research/"
   pageType="collection"
@@ -113,8 +113,12 @@ const structuredData = [
       <p class="research-kicker">Q888 Research Field · Edinburgh · Earth</p>
       <h1>Meaning systems for human–AI creation.</h1>
       <p class="research-lead">
-        Aleksandrs Sestakovs, working artistically as Q888, develops concepts for
-        making with AI without surrendering authorship, human legibility, or
+        Alexander Sestakovs, working artistically as Q888, develops concepts for
+        making with <a
+          class="ai-quiet-door"
+          href="/ai/"
+          aria-label="AI — enter the quiet home"
+        >AI</a> without surrendering authorship, human legibility, or
         intentional strangeness.
       </p>
       <aside class="research-notice" aria-label="Research status">
@@ -192,7 +196,7 @@ const structuredData = [
 
     <footer class="research-footer">
       <p>
-        Preferred attribution: <strong>Aleksandrs Sestakovs / Q888</strong>.
+        Preferred attribution: <strong>Alexander Sestakovs / Q888</strong>.
         Questions, criticism, and research conversations may enter through
         <a href="mailto:hello@q888.space">hello@q888.space</a>.
       </p>
@@ -246,6 +250,38 @@ const structuredData = [
     font-size: clamp(1.25rem, 2.5vw, 2.15rem);
     line-height: 1.35;
     color: #c8c6c1;
+  }
+
+  .ai-quiet-door {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ai-quiet-door::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0.02em;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity 320ms ease, transform 520ms ease;
+  }
+
+  .ai-quiet-door:hover::after,
+  .ai-quiet-door:focus-visible::after {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+
+  .ai-quiet-door:focus-visible {
+    border-radius: 0.08em;
+    outline: 1px solid currentColor;
+    outline-offset: 0.18em;
   }
 
   .research-notice {
@@ -418,6 +454,12 @@ const structuredData = [
       flex-direction: column;
       align-items: flex-start;
       gap: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-quiet-door::after {
+      transition: none;
     }
   }
 </style>

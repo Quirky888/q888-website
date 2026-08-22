@@ -230,12 +230,12 @@ const disputedChronology = [
 ---
 
 <Layout
-  title="Q888 Artist CV — Aleksandrs Sestakovs, Edinburgh"
-  description="Artist CV and practice dossier for Aleksandrs Sestakovs / Q888, an Edinburgh multidisciplinary artist working with myth, code, image, AI, interface, and memory."
+  title="Q888 Artist CV — Alexander Sestakovs, Edinburgh"
+  description="Artist CV and practice dossier for Alexander Sestakovs / Q888, an Edinburgh multidisciplinary artist working with myth, code, image, AI, interface, and memory."
   image="/images/bur-icons/mushroom-from-jo.webp"
   canonicalPath="/bureaucracy/"
   pageType="profile"
-  keywords={["Aleksandrs Sestakovs", "Q888", "Edinburgh artist", "multidisciplinary artist", "artist CV", "speculative art"]}
+  keywords={["Alexander Sestakovs", "Q888", "Edinburgh artist", "multidisciplinary artist", "artist CV", "speculative art"]}
 >
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
@@ -313,7 +313,7 @@ const disputedChronology = [
         <p class="eyebrow">For gallery bureaucracy · Form Q888/CV</p>
         <h1>
           <span class="hero-mark">Q888</span>
-          <span class="hero-earth-name">Aleksandrs Sestakovs</span>
+          <span class="hero-earth-name">Alexander Sestakovs</span>
         </h1>
         <p class="hero-role">Multidisciplinary artist · Edinburgh, Scotland</p>
         <p class="hero-statement">
@@ -372,7 +372,7 @@ const disputedChronology = [
         </div>
         <dl class="record-list">
           <div><dt>Entity</dt><dd>Q888</dd></div>
-          <div><dt>Earth name</dt><dd>Aleksandrs Sestakovs</dd></div>
+          <div><dt>Earth name</dt><dd>Alexander Sestakovs</dd></div>
           <div><dt>Born</dt><dd>Latvia · 1982bbb</dd></div>
           <div><dt>Based</dt><dd>Edinburgh, Earth</dd></div>
           <div>
@@ -1018,11 +1018,16 @@ const disputedChronology = [
             occasionally pretends to understand gallery forms.
           </p>
           <p>
-            Aleksandrs Sestakovs is a Latvian-born, Edinburgh-based
+            Alexander Sestakovs is a Latvian-born, Edinburgh-based
             multidisciplinary artist and designer. His background moves through
             specialty coffee, roasting, quality control, social care,
             volunteering, travel, farm work, identity design, web experiments
-            and independent app development.
+            and independent app development. He is also the discoverer of
+            <span class="square-bubbles-credit" id="square-bubbles-credit"
+              >square bubbles<span
+                class="square-bubbles-mark"
+                aria-hidden="true"></span></span
+            >.
           </p>
         </div>
         <div class="contact-card">
@@ -2956,6 +2961,23 @@ const disputedChronology = [
     font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.48 !important;
+  }
+
+  .square-bubbles-credit {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.16em;
+    white-space: nowrap;
+  }
+
+  /* DNA: an authorship-style mark for a discovery that refuses a round container. */
+  .square-bubbles-mark {
+    display: inline-block;
+    width: 1.02em;
+    height: 1.02em;
+    border: 0.09em solid currentColor;
+    font-size: 0.6em;
+    transform: translateY(-0.42em) rotate(-1.5deg);
   }
 
   .contact-card {

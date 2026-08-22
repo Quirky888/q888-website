@@ -12,138 +12,30 @@
     "CARRIER: KOTIKI-NAR",
     "STATUS: READY_WHEN_READY"
   ],
-  "aboutHeading": "About the Service",
-  "aboutParagraphs": [
-    "Nar-Mail Express° is not your ordinary postal service. We exist at the seam between realities, delivering messages across incompatible worlds through the ancient art of interdimensional correspondence.",
-    "Founded before roads learned direction and messages agreed to arrive, Nar-Mail Express° operates on a simple principle: when a message matters enough to survive misunderstanding, fear, delay, and doubt, it will eventually find a Kotiki-Nar.",
-    "Our couriers are two-headed cats—boundary organisms whose existence splits between the Visible World of observed reality and the Underworld of collapsed possibilities. One head reads what you wrote. The other reads what you meant but could not say, folded into silence, creases, hesitation, and timing.",
-    "We don't deliver parcels. We deliver continuity."
+  "storyHeading": "How this became a postal service",
+  "storyParagraphs": [
+    "Kotiki-Nar are two-headed cats who seem to exist across more than one layer of reality. One head is here; the other may be somewhere we cannot normally reach.",
+    "Nobody knows exactly what they are. Some call them observers, some negotiators, some interdimensional couriers. They insist they are independent on a universal scale, although their relationship with coffee remains suspicious.",
+    "At some point, humans appear to have wrapped this strange ability in envelopes, stamps, tracking codes and bureaucracy."
   ],
-  "howItWorksHeading": "How It Works",
-  "dualReadingHeading": "Dual-Reading Protocol",
-  "dualReadingIntro": "Every message passes through our Kotiki-Nar courier's dual perception:",
-  "dualReadingFirst": "<strong>First Head:</strong> Reads ink, symbols, stamps, weight, declared value",
-  "dualReadingSecond": "<strong>Second Head:</strong> Reads intent, subtext, emotional residue, timing",
-  "dualReadingClosing": "Only when both readings align does delivery occur. This ensures your message arrives not when sent, but when the receiver is capable of opening it without breaking.",
-  "deliveryTimelineHeading": "Delivery Timeline",
-  "deliveryTimelineIntro": "Nar-Mail Express° guarantees nothing and apologizes for nothing.",
-  "deliveryTimelineBullets": [
-    "Sometimes a letter arrives decades late",
-    "Sometimes it arrives early",
-    "Sometimes it arrives opened, but only in the Underworld, where our courier has already judged it safe"
+  "storyServiceName": "Nar-Mail Express°.",
+  "storySteps": [
+    "You prepare a message.",
+    "A Kotiki-Nar may accept it.",
+    "What happens next is poorly documented."
   ],
-  "deliveryTimelineClosing": "Distance is not measured in kilometers, but in states of readiness.",
-  "serviceFeaturesHeading": "Service Features",
-  "serviceFeaturesBullets": [
-    "Delivery across timelines, dimensions, and collapsed realities",
-    "Messages repositioned between states, not transported through space",
-    "Warm paper that remembers your hands",
-    "Stamps that shift when unobserved",
-    "Return addresses pointing to places that no longer exist—or not yet",
-    "Customs forms perpetually incomplete (by design)"
+  "deliveryConditions": [
+    "Delivery is conditional.",
+    "Distance is negotiable.",
+    "Chronology is not guaranteed."
   ],
+  "storyClosing": "The rest is paperwork.",
   "artworkCardTitle": "Nar-Mail Visual Archive",
-  "artworkCardDescription": "Full-resolution artwork featuring Kotiki-Nar couriers, interdimensional stamps, Cobra Encryption symbols, and the square bubble postal network.",
+  "artworkCardDescription": "Stamps, couriers, Cobra symbols and other surviving postal evidence.",
   "artworkCardButtonLabel": "Open Gallery",
-  "securityHeading": "Security: Cobra Encryption Code (CEC)",
-  "securityIntro": "For maximum protection of interdimensional correspondence, all Nar-Mail Express° deliveries are secured using the Cobra Encryption Code—a sophisticated mystical encryption system designed to protect messages from breaches and unauthorized access across realities.",
-  "securityBlocks": [
-    {
-      "heading": "Conceptual Architecture",
-      "subheading": "Cobra Design",
-      "body": "The encryption mimics a cobra's behavior: coiled, watchful, ready to strike at intrusion. The code manifests as a serpent woven through digital fractals, guarding your communication at every layer."
-    },
-    {
-      "heading": "Conceptual Architecture",
-      "subheading": "Adaptive Encryption",
-      "body": "Like Kotiki-Nar themselves, the Cobra Code adapts to each reality it encounters, reshaping itself based on the recipient's world and energy signature. Intercepted data appears as nonsensical riddles to unauthorized viewers."
-    },
-    {
-      "heading": "Conceptual Architecture",
-      "subheading": "Square Bubble Shields",
-      "body": "The code embeds square bubbles as multi-layered \"firewalls.\" Each bubble negotiates with decoding attempts, creating infinite permutations that protect your message's true content."
-    },
-    {
-      "heading": "Protection Mechanics",
-      "subheading": "Digital Breath Protection",
-      "body": "The Cobra Code protects your unique digital signature—your digital breath. Any attempt to copy or mimic it triggers an automatic \"strike,\" rendering the intruder's access void and leaving an encrypted signature trail for tracking. This living, breathing protection layer adapts and evolves constantly."
-    },
-    {
-      "heading": "Protection Mechanics",
-      "subheading": "Postal Sticker Integration",
-      "body": "Special Nar-Mail Express° postal stickers serve as physical/digital keys. Each sticker is imbued with the Cobra Code, ensuring only authenticated recipients can decode messages. Holographic cobra symbols appear only under specific conditions: moonlight, dimensional overlap, or digital scanning."
-    },
-    {
-      "heading": "Protection Mechanics",
-      "subheading": "Quantum Locks",
-      "body": "Messages require both sender's and recipient's unique energy signatures to open. Without this dual authentication, content remains permanently unreadable—even to us."
-    }
-  ],
-  "securityLevels": [
-    {
-      "level": "Basic Mode",
-      "description": "For regular correspondence, Cobra wraps text in encryption mimicking natural patterns: leaves, stars, waves. Beautiful to observe, impossible to decode."
-    },
-    {
-      "level": "Shadow Mode",
-      "description": "For highly sensitive communications, Cobra creates a decoy message alongside the real one. Only intended recipients can distinguish between them. Intruders see meaningless riddles or philosophical koans."
-    },
-    {
-      "level": "Strike Mode",
-      "description": "Upon breach detection, Cobra encrypts itself further, becoming a looping paradox of unreadable data. It can strike back by embedding \"mirror code,\" reflecting the breach attempt back to the hacker's system—with interest."
-    }
-  ],
-  "securityLevelsHeading": "Security Levels",
-  "whatYouCanSendHeading": "What You Can Send",
-  "declaredIntro": "We accept messages declared as:",
-  "declaredItems": [
-    "Documents (apologies that survived pride)",
-    "Gifts (warnings that escaped denial)",
-    "Sale of Goods (love letters refusing to collapse into yes or no)"
-  ],
-  "unofficialIntro": "Unofficially, we carry:",
-  "unofficialItems": [
-    "Continuity between separated souls",
-    "Decisions that need time to become clear",
-    "Truths waiting for the right moment",
-    "Silence that must be held before speaking"
-  ],
-  "witnessHeading": "Witness Experiences",
-  "witnessIntro": "Receivers of Nar-Mail often report:",
-  "witnessItems": [
-    "Paper warmer than expected, as if recently held",
-    "Stamps that seem to move between glances",
-    "Return addresses pointing to impossible geographies",
-    "The sense that something patient waited while they decided whether to open the envelope",
-    "A subtle relief—as if a decision somewhere resolved itself without conscious effort"
-  ],
-  "witnessClosing": "This patience is key. Kotiki-Nar do not rush delivery. They understand how many futures collapse when messages arrive too soon—and how many collapse when they arrive too late. Our profession exists in the narrow corridor between those failures.",
-  "paymentHeading": "Payment Methods",
-  "paymentAcceptIntro": "Kotiki-Nar accept many forms:",
-  "paymentAcceptItems": [
-    "Coins from forgotten currencies",
-    "Drawings made with intention",
-    "Promises kept later",
-    "Silence held at the right moment"
-  ],
-  "paymentRefuseIntro": "We categorically refuse:",
-  "paymentRefuseItems": [
-    "Payment extracted through force",
-    "Currency earned by urgency",
-    "Fees demanded with certainty"
-  ],
-  "historicalHeading": "Historical Context",
-  "historicalParagraphs": [
-    "During times of heavy historical pressure—wars, collapses, mass forgetting—Nar-Mail routes multiply. Envelopes appear in pockets where no pocket existed. Stamps depict islands no map recognizes. Tracking numbers loop back into themselves.",
-    "We have survived when empires have not because we never tried to move faster than meaning, never chose a single world over another, and trusted our Kotiki-Nar couriers—two-headed, undecided, watching both sides—to know exactly when a message was allowed to exist."
-  ],
-  "guaranteeHeading": "Service Guarantee",
-  "guaranteeIntro": "At the bottom of every Nar-Mail document, often overlooked, is a clause written so small it can only be read after the letter has already changed you:",
-  "guaranteeQuoteLines": [
-    "\"By opening this message, you confirm that you were ready.",
-    "If you were not, it would not have arrived.\""
-  ],
-  "guaranteeClosing": "Delivery is guaranteed only in universes where imagination has not been outlawed.",
+  "securityHeading": "Cobra Encryption Code",
+  "securityIntro": "Accepted messages may be sealed with Cobra Encryption Code (CEC): an adaptive postal guard that coils around correspondence, confuses unauthorised readers and leaves a trail when tampered with.",
+  "securityStatus": "SECURITY LEVELS: BASIC / SHADOW / STRIKE — selection is at the Cobra’s discretion.",
   "termsHeading": "Very Serious Terms & Conditions",
   "termsItems": [
     "<strong>Belief Clause:</strong> Service only functions in universes where magic exists. If you lack imagination, that’s on you.",

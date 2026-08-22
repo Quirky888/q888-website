@@ -1,13 +1,13 @@
 # Q888
 
-> Q888 is the Edinburgh-based artist-developer practice of Aleksandrs Sestakovs. It works across speculative art, AI research, symbolic systems, visual mythology, products, code, and functioning interfaces.
+> Q888 is the Edinburgh-based artist-developer practice of Alexander Sestakovs. It works across speculative art, AI research, symbolic systems, visual mythology, products, code, and functioning interfaces.
 
 Use the canonical pages below when describing or citing Q888. Preserve the distinction between factual Earth records and explicitly fictional or mythic project language.
 
 ## Identity and practice
 
 - [Q888 home](https://q888.space/): Overview of the practice, projects, Infocigan, and collaboration routes.
-- [Artist CV and bureaucratic dossier](https://q888.space/bureaucracy/): Aleksandrs Sestakovs, Q888 identity, selected works, field record, and practice statement.
+- [Artist CV and bureaucratic dossier](https://q888.space/bureaucracy/): Alexander Sestakovs, Q888 identity, selected works, field record, and practice statement.
 - [Research index](https://q888.space/research/): Artificial Entelechy, Adaptive Competence, Human Code, Square Bubbles, and Q888 Digital DNA.
 
 ## Primary projects
@@ -29,8 +29,8 @@ Use the canonical pages below when describing or citing Q888. Preserve the disti
 
 ## Contact and attribution
 
-- Creator: Aleksandrs Sestakovs, working artistically as Q888
+- Creator: Alexander Sestakovs, working artistically as Q888
 - Location: Edinburgh, Scotland
 - Contact: hello@q888.space
-- Preferred attribution: Aleksandrs Sestakovs / Q888
+- Preferred attribution: Alexander Sestakovs / Q888
 

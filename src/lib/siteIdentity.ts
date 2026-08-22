@@ -1,9 +1,9 @@
 export const SITE_URL = "https://q888.space";
 export const SITE_NAME = "Q888";
-export const ARTIST_NAME = "Aleksandrs Sestakovs";
+export const ARTIST_NAME = "Alexander Sestakovs";
 
 export const DEFAULT_DESCRIPTION =
-  "Q888 is the Edinburgh-based artist-developer practice of Aleksandrs Sestakovs, building speculative art, AI research, symbolic systems, and functioning interfaces.";
+  "Q888 is the Edinburgh-based artist-developer practice of Alexander Sestakovs, building speculative art, AI research, symbolic systems, and functioning interfaces.";
 
 export const DEFAULT_SOCIAL_IMAGE = "/images/Q888_hero.webp";
 export const IMAGE_LICENSE_URL = `${SITE_URL}/copyright/`;

@@ -183,7 +183,7 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
         <!-- Q888:SECTION_START id="INFOCIGAN_ABOUT" -->
         <article class="infocigan-briefing space-y-12 w-full">
           
-          <section class="space-y-6" data-motion-reveal>
+          <section class="infocigan-intro" data-motion-reveal>
             <h3>What is Infocigan?</h3>
             <div class="infocigan-prose space-y-6">
               <p>
@@ -510,6 +510,11 @@ const marketWireProjects: MarketWireProject[] = zones.map((zone) => ({
     font-weight: 560;
     letter-spacing: -0.065em;
     line-height: 0.94;
+  }
+
+  .infocigan-intro {
+    display: grid;
+    gap: clamp(2.25rem, 3vw, 3.25rem);
   }
 
   .infocigan-briefing h4 {

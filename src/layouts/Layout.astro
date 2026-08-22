@@ -189,6 +189,19 @@ const jsonLd = JSON.stringify({
 		<slot />
 
 		<script>
+			import {
+				cleanupLocalizedArtistName,
+				initLocalizedArtistName,
+			} from "../scripts/localizedArtistName";
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", initLocalizedArtistName, { once: true });
+			} else {
+				initLocalizedArtistName();
+			}
+			document.addEventListener("astro:page-load", initLocalizedArtistName);
+			document.addEventListener("astro:before-swap", cleanupLocalizedArtistName);
+
 			(function initSplitFlapReducedMotion() {
 				const run = () => {
 					const usePlainText =

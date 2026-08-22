@@ -1,5 +1,5 @@
 ---
-
+import LocalizedArtistName from "./LocalizedArtistName.astro";
 ---
 
 <div class="flex flex-col min-h-[100dvh] min-h-screen w-full overflow-x-hidden">
@@ -36,7 +36,9 @@
     </span>
 
     <div class="absolute z-10 left-0 px-6 md:px-24 hero-text-block">
-      <h1 class="hero-title-silver">Q888</h1>
+      <h1 class="hero-title-silver">
+        Q888<span class="hero-square-bubble-mark" aria-hidden="true"></span>
+      </h1>
     </div>
 
     <svg
@@ -72,7 +74,7 @@
     <div class="landing-orientation-copy">
       <p>
         Q888 is the evolving practice of
-        <a href="/bureaucracy/">Aleksandrs Sestakovs</a>: drawings, objects,
+        <LocalizedArtistName />: drawings, objects,
         code, research and invented systems collected in one changing place.
       </p>
 
@@ -161,6 +163,9 @@
   }
 
   .hero-title-silver {
+    position: relative;
+    width: fit-content;
+    margin: 0;
     font-size: clamp(3.9rem, 12vw, 11rem);
     font-weight: 500;
     letter-spacing: -0.03em;
@@ -177,6 +182,34 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: hero-shine 8s linear infinite;
+  }
+
+  /* DNA: the empty square is Q888's quiet authorship seal, not another logo. */
+  .hero-square-bubble-mark {
+    position: absolute;
+    top: 0.2em;
+    right: -0.27em;
+    width: 0.16em;
+    aspect-ratio: 1;
+    padding: max(2px, 0.022em);
+    background: linear-gradient(
+      to right,
+      #a8a8a8 20%,
+      #e8e8e8 40%,
+      #ffffff 50%,
+      #e8e8e8 60%,
+      #a8a8a8 80%
+    );
+    background-size: 200% auto;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: hero-shine 8s linear infinite;
+    filter: drop-shadow(0 0 0.035em rgba(255, 255, 255, 0.9));
+    transform: rotate(-1.5deg);
+    opacity: 0.96;
   }
 
   .hero-tagline-silver {

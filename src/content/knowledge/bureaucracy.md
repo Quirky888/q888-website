@@ -23,7 +23,7 @@ Source route: /bureaucracy/
 
 This page is simultaneously a practical artist CV, a portal into the Q888 artistic universe, and a warm satire of the administrative ritual through which an artist is asked to prove that they are an artist. Practical Earth information and mythic chronology are both valid records. When they disagree, preserve the contradiction rather than correcting one into the other.
 
-Q888 is Aleksandrs Sestakovs, a multidisciplinary artist based in Edinburgh, Scotland. The work combines visual mythology, speculative products, functioning interfaces, code, image, humour, memory, and invented institutions.
+Q888 is Alexander Sestakovs, a multidisciplinary artist based in Edinburgh, Scotland. The work combines visual mythology, speculative products, functioning interfaces, code, image, humour, memory, and invented institutions.
 
 ## Field Records: exhibition history
 
