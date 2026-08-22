@@ -1,0 +1,112 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href = "/bureaucracy/" } = Astro.props;
+const latinAlias = Array.from("Sasha");
+const russianAlias = Array.from("Саша");
+---
+
+<a class="localized-artist-name" href={href} data-localized-artist-name>
+  <span class="localized-artist-name__formal" data-artist-name>Alexander Sestakovs</span>
+  <span class="localized-artist-name__alias localized-artist-name__alias--latin" aria-hidden="true">
+    {latinAlias.map((character) => <span>{character}</span>)}
+  </span>
+  <span class="localized-artist-name__alias localized-artist-name__alias--russian" aria-hidden="true" lang="ru">
+    {russianAlias.map((character) => <span>{character}</span>)}
+  </span>
+</a>
+
+<style>
+  .localized-artist-name {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    white-space: nowrap;
+  }
+
+  .localized-artist-name__formal {
+    display: inline-block;
+    transition:
+      opacity 380ms ease,
+      filter 620ms cubic-bezier(0.22, 1, 0.36, 1),
+      letter-spacing 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .localized-artist-name__alias {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .localized-artist-name__alias--russian {
+    display: none;
+  }
+
+  :global(html[data-visitor-identity-region="russia"])
+    .localized-artist-name__alias--latin {
+    display: none;
+  }
+
+  :global(html[data-visitor-identity-region="russia"])
+    .localized-artist-name__alias--russian {
+    display: flex;
+  }
+
+  .localized-artist-name__alias span {
+    display: inline-block;
+    font-family: "Playfair Display", "Iowan Old Style", Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(0.24em) rotate(2deg);
+    transition:
+      opacity 320ms ease,
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .localized-artist-name__alias span:nth-child(even) {
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-style: normal;
+    transform: translateY(-0.14em) rotate(-2deg);
+  }
+
+  .localized-artist-name__alias span:nth-child(2) { transition-delay: 45ms; }
+  .localized-artist-name__alias span:nth-child(3) { transition-delay: 90ms; }
+  .localized-artist-name__alias span:nth-child(4) { transition-delay: 135ms; }
+  .localized-artist-name__alias span:nth-child(5) { transition-delay: 180ms; }
+
+  .localized-artist-name:is(:hover, :focus-visible) .localized-artist-name__formal {
+    opacity: 0.08;
+    filter: blur(0.7px);
+    letter-spacing: 0.045em;
+  }
+
+  .localized-artist-name:is(:hover, :focus-visible) .localized-artist-name__alias,
+  .localized-artist-name:is(:hover, :focus-visible) .localized-artist-name__alias span {
+    opacity: 1;
+  }
+
+  .localized-artist-name:is(:hover, :focus-visible) .localized-artist-name__alias span {
+    transform: translateY(0) rotate(0);
+  }
+
+  .localized-artist-name:focus-visible {
+    border-radius: 0.1rem;
+    outline: 2px solid currentColor;
+    outline-offset: 0.16rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .localized-artist-name__formal,
+    .localized-artist-name__alias span {
+      transition: none;
+    }
+  }
+</style>
+

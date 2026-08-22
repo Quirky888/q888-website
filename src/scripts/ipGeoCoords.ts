@@ -1,6 +1,5 @@
 import { setUserCoords } from "./systemMetaState";
-
-const GEO_URL = "https://ipapi.co/json/";
+import { getVisitorGeo } from "./visitorGeo";
 
 function formatCoords(lat: number, lon: number): string {
   const latStr = `${Math.abs(lat).toFixed(7)}${lat >= 0 ? "N" : "S"}`;
@@ -9,11 +8,10 @@ function formatCoords(lat: number, lon: number): string {
 }
 
 export function initIpGeoCoords() {
-  fetch(GEO_URL)
-    .then((r) => r.json())
+  getVisitorGeo()
     .then((data) => {
-      const lat = data?.latitude;
-      const lon = data?.longitude;
+      const lat = data.latitude;
+      const lon = data.longitude;
       if (typeof lat === "number" && typeof lon === "number") {
         setUserCoords(formatCoords(lat, lon));
       } else {

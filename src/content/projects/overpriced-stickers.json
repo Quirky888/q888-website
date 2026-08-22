@@ -9,6 +9,7 @@
   "cardImageMobile": "/images/overpriced_stickers_card_mobile.webp",
   "cardHolographic": false,
   "cardLightText": true,
+  "cardFormat": "narrow",
   "panelTitle": "Overpriced Stickers",
   "panelDescription": "Standard adhesive signals for those who require immediate identification without long-term commitment. Each set is printed on speculative paper that responds to local trust levels.",
   "copyrightWard": {
