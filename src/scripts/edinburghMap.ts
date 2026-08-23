@@ -125,6 +125,7 @@ class StoryDrawer {
   private longText: HTMLElement;
   private closeBtn: HTMLButtonElement;
   private navDots: HTMLElement;
+  private loreToggle: HTMLButtonElement;
   private stories: EdenLocation[];
   private currentIndex = -1;
   private touchStartY = 0;
@@ -141,8 +142,9 @@ class StoryDrawer {
     const longText = drawer.querySelector<HTMLElement>("[data-eden-long]");
     const closeBtn = drawer.querySelector<HTMLButtonElement>("[data-eden-close]");
     const navDots = drawer.querySelector<HTMLElement>("[data-eden-dots]");
+    const loreToggle = drawer.querySelector<HTMLButtonElement>("[data-eden-lore-toggle]");
 
-    if (!accent || !emoji || !title || !shortText || !longText || !closeBtn || !navDots) {
+    if (!accent || !emoji || !title || !shortText || !longText || !closeBtn || !navDots || !loreToggle) {
       throw new Error("Eden drawer markup missing required elements.");
     }
 
@@ -153,6 +155,7 @@ class StoryDrawer {
     this.longText = longText;
     this.closeBtn = closeBtn;
     this.navDots = navDots;
+    this.loreToggle = loreToggle;
   }
 
   bindEvents(signal: AbortSignal) {
@@ -165,6 +168,12 @@ class StoryDrawer {
     };
     this.closeBtn.addEventListener("click", closeHandler, { signal });
     this.closeBtn.addEventListener("touchend", closeHandler, { signal, passive: false });
+
+    this.loreToggle.addEventListener("click", () => {
+      const isOpen = this.drawer.classList.toggle("is-lore-open");
+      this.loreToggle.setAttribute("aria-expanded", String(isOpen));
+      this.loreToggle.textContent = isOpen ? "Close full record" : "Open full record";
+    }, { signal });
 
     this.drawer.addEventListener("touchstart", (e) => {
       this.touchStartY = e.touches[0].clientY;
@@ -220,6 +229,9 @@ class StoryDrawer {
 
     this.updateNavDots();
 
+    this.drawer.classList.remove("is-lore-open");
+    this.loreToggle.setAttribute("aria-expanded", "false");
+    this.loreToggle.textContent = "Open full record";
     this.drawer.classList.add("is-open");
     this.drawer.setAttribute("aria-hidden", "false");
     if (import.meta.env.DEV) console.log('[Edinburgh Map] Drawer opened successfully');
@@ -228,6 +240,7 @@ class StoryDrawer {
   close() {
     if (import.meta.env.DEV) console.log('[Edinburgh Map] Closing drawer');
     this.drawer.classList.remove("is-open");
+    this.drawer.classList.remove("is-lore-open");
     this.drawer.setAttribute("aria-hidden", "true");
     this.currentIndex = -1;
   }
@@ -277,6 +290,7 @@ function buildHotspots(
     group.setAttribute("data-location-id", location.id);
     group.setAttribute("role", "button");
     group.setAttribute("tabindex", "0");
+    group.setAttribute("aria-label", `Open field note for ${location.name}`);
     group.classList.add("eden-hotspot", "panzoom-exclude");
     group.style.color = location.color;
     group.style.setProperty("--twinkle-dur", `${(Math.random() * 3.3 + 2.2).toFixed(2)}s`);
@@ -454,19 +468,8 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
       }
     };
 
-    let touchCount = 0;
-    if (mapContainer) {
-      mapContainer.addEventListener(
-        "touchstart",
-        (e) => {
-          touchCount = e.touches.length;
-        },
-        { capture: true, passive: true, signal }
-      );
-    }
-
-    const initPanzoomIfMobile = () => {
-      if (!isMobile() || !mapContainer || !mapShell) return;
+    const initPanzoom = () => {
+      if (!mapContainer || !mapShell) return;
       if (!panel.classList.contains("is-active")) return;
       if (panzoomInstance) {
         panzoomInstance.destroy();
@@ -477,7 +480,7 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
         mapContainer.style.willChange = 'transform';
         mapContainer.style.touchAction = 'none';
         panzoomInstance = Panzoom(mapContainer, {
-          maxScale: 3,
+          maxScale: isMobile() ? 3 : 4,
           minScale: 1,
           startScale: 1,
           contain: "outside",
@@ -490,9 +493,40 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
           disableZoom: false,
           touchAction: "none"
         });
+
+        const zoomStatus = section.querySelector<HTMLOutputElement>("[data-eden-zoom-status]");
+        const showScale = (scale: number) => {
+          if (zoomStatus) zoomStatus.textContent = `${Math.round(scale * 100)}%`;
+        };
+        const runMapAction = (action: "in" | "out" | "reset") => {
+          if (!panzoomInstance) return;
+          const values = action === "in"
+            ? panzoomInstance.zoomIn()
+            : action === "out"
+              ? panzoomInstance.zoomOut()
+              : panzoomInstance.reset();
+          showScale(values.scale);
+        };
+
+        section.querySelector<HTMLButtonElement>("[data-eden-zoom-in]")
+          ?.addEventListener("click", () => runMapAction("in"), { signal });
+        section.querySelector<HTMLButtonElement>("[data-eden-zoom-out]")
+          ?.addEventListener("click", () => runMapAction("out"), { signal });
+        section.querySelector<HTMLButtonElement>("[data-eden-reset]")
+          ?.addEventListener("click", () => runMapAction("reset"), { signal });
+        mapContainer.addEventListener("panzoomchange", (event) => {
+          const scale = (event as CustomEvent<{ scale?: number }>).detail?.scale;
+          if (typeof scale === "number") showScale(scale);
+        }, { signal });
         if (import.meta.env.DEV) console.log('[Panzoom] Instance created successfully');
         try {
-          mapShell.addEventListener("wheel", panzoomInstance.zoomWithWheel, {
+          // CHOICE: Plain wheel input belongs to page navigation. Requiring a
+          // modifier prevents a full-screen map from trapping desktop visitors.
+          const zoomWithModifiedWheel = (event: WheelEvent) => {
+            if (!event.ctrlKey && !event.metaKey) return;
+            panzoomInstance?.zoomWithWheel(event);
+          };
+          mapShell.addEventListener("wheel", zoomWithModifiedWheel, {
             passive: false,
             signal,
           });
@@ -509,7 +543,7 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
     const onImageReady = () => {
       if (import.meta.env.DEV) console.log('[Edinburgh Map] Image loaded, hiding loading indicator');
       hideLoading();
-      initPanzoomIfMobile();
+      initPanzoom();
     };
 
     if (mapImage && loadingEl) {
@@ -531,7 +565,7 @@ async function initMap(section: HTMLElement, signal: AbortSignal, panel: HTMLEle
     } else {
       console.warn('[Edinburgh Map] mapImage or loadingEl not found, skipping load wait');
       hideLoading();
-      initPanzoomIfMobile();
+      initPanzoom();
     }
 
     let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
