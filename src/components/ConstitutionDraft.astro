@@ -1,0 +1,361 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  constitution: CollectionEntry<"constitutions">["data"];
+  variant?: "office" | "archive";
+}
+
+const { constitution, variant = "archive" } = Astro.props;
+const isOffice = variant === "office";
+const SectionHeading = isOffice ? "h2" : "h3";
+const DraftHeading = isOffice ? "h3" : "h4";
+const PrincipleHeading = isOffice ? "h4" : "h5";
+const headingId = `constitution-draft-${variant}`;
+---
+
+<section class:list={["constitution-draft", `constitution-draft--${variant}`]} aria-labelledby={headingId}>
+  <header class="constitution-draft__header">
+    <div class="constitution-draft__title-block">
+      <SectionHeading class="constitution-draft__heading" id={headingId}>
+        {constitution.workingHeading}
+      </SectionHeading>
+      <DraftHeading class="constitution-draft__title">{constitution.title}</DraftHeading>
+      <p class="constitution-draft__purpose">
+        <strong>Purpose:</strong> {constitution.purpose}
+      </p>
+    </div>
+
+    <dl class="constitution-draft__metadata">
+      {constitution.metadata.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </header>
+
+  <div class="constitution-draft__principles">
+    {constitution.principles.map((principle) => (
+      <article class="constitution-principle">
+        <span class="constitution-principle__number" aria-hidden="true">
+          {String(principle.number).padStart(2, "0")}
+        </span>
+        <div>
+          <PrincipleHeading class="constitution-principle__heading">
+            {principle.title}
+          </PrincipleHeading>
+          {principle.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="constitution-draft__test">
+    <p class="constitution-draft__label">THE WEAKEST-POSITION TEST</p>
+    <p>{constitution.weakestPositionTest.introduction}</p>
+    <blockquote>{constitution.weakestPositionTest.question}</blockquote>
+    <p>{constitution.weakestPositionTest.closing}</p>
+  </div>
+
+  <div class="constitution-draft__closing-grid">
+    <div>
+      <p class="constitution-draft__label">CONSTITUTIONAL SHORTCUT</p>
+      <p class="constitution-draft__processing-note">For rulers with limited processing capacity:</p>
+      <ul>
+        {constitution.shortcut.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+
+    <aside class="constitution-draft__reminder" aria-label="Four-year presidential reminder">
+      <p class="constitution-draft__label">FOUR-YEAR PRESIDENTIAL REMINDER</p>
+      {constitution.presidentialReminder.map((line) => <p>{line}</p>)}
+    </aside>
+  </div>
+
+  {isOffice && (
+    <footer class="constitution-draft__footer">
+      <p>Read the evidence and interpretation behind this draft.</p>
+      <a href="/constitution/">TRACE THE RESEARCH <span aria-hidden="true">↓</span></a>
+    </footer>
+  )}
+</section>
+
+<style>
+  .constitution-draft {
+    --constitution-ink: var(--eden-text, var(--text-ink));
+    --constitution-muted: var(--eden-text-muted, var(--text-muted));
+    --constitution-accent: var(--eden-primary, var(--gold));
+    --constitution-gold: var(--eden-gold, var(--gold));
+    color: var(--constitution-ink);
+  }
+
+  .constitution-draft--office {
+    padding: 3.5rem 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .constitution-draft__header {
+    display: grid;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .constitution-draft__label,
+  .constitution-draft__metadata dt,
+  .constitution-draft__metadata dd,
+  .constitution-principle__number,
+  .constitution-draft__footer {
+    font-family: "Space Mono", ui-monospace, monospace;
+  }
+
+  .constitution-draft__heading {
+    margin: 0;
+    font-family: "Bungee", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.65rem, 4vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+
+  .constitution-draft--office .constitution-draft__heading {
+    font-size: clamp(1.55rem, 3vw, 2.65rem);
+  }
+
+  .constitution-draft__title {
+    margin: 1rem 0 0;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.45rem);
+    line-height: 1.25;
+  }
+
+  .constitution-draft__purpose {
+    max-width: 48rem;
+    margin: 1.25rem 0 0;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .constitution-draft__metadata {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    border: 1px solid var(--line-soft);
+    background: var(--line-soft);
+  }
+
+  .constitution-draft__metadata div {
+    min-width: 0;
+    padding: 0.8rem;
+    background: var(--bg-fog);
+  }
+
+  .constitution-draft__metadata dt {
+    color: var(--constitution-muted);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+  }
+
+  .constitution-draft__metadata dd {
+    margin: 0.35rem 0 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .constitution-draft--office .constitution-draft__metadata {
+    gap: 0.5rem 1.5rem;
+    border: 0;
+    background: transparent;
+  }
+
+  .constitution-draft--office .constitution-draft__metadata div {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line-soft);
+    background: transparent;
+  }
+
+  .constitution-draft__principles {
+    display: grid;
+    gap: 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .constitution-principle {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .constitution-principle__number {
+    color: var(--constitution-gold);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .constitution-principle__heading {
+    margin: 0 0 0.8rem;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.25;
+  }
+
+  .constitution-principle p {
+    margin: 0.5rem 0 0;
+    font-size: clamp(0.95rem, 1.25vw, 1.05rem);
+    line-height: 1.65;
+  }
+
+  .constitution-draft--office .constitution-principle {
+    padding-block: 1.45rem;
+  }
+
+  .constitution-draft--office .constitution-principle__heading {
+    font-size: clamp(0.98rem, 1.4vw, 1.1rem);
+  }
+
+  .constitution-draft--office .constitution-principle p {
+    font-size: clamp(0.92rem, 1.1vw, 1rem);
+  }
+
+  .constitution-draft__test {
+    margin: 3rem 0;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    border-top: 3px solid var(--constitution-ink);
+    border-bottom: 1px solid var(--constitution-ink);
+  }
+
+  .constitution-draft--office .constitution-draft__test {
+    border-top-width: 1px;
+  }
+
+  .constitution-draft__label {
+    margin: 0 0 1rem;
+    color: var(--constitution-gold);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .constitution-draft__test > p:not(.constitution-draft__label) {
+    margin: 0.75rem 0 0;
+    line-height: 1.6;
+  }
+
+  .constitution-draft__test blockquote {
+    max-width: 50rem;
+    margin: 1.5rem 0;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .constitution-draft__closing-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .constitution-draft__processing-note {
+    margin: 0 0 1rem;
+    color: var(--constitution-muted);
+  }
+
+  .constitution-draft__closing-grid ul {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .constitution-draft__closing-grid li {
+    padding-left: 0.3rem;
+    line-height: 1.5;
+  }
+
+  .constitution-draft__reminder {
+    align-self: start;
+    padding: 1.5rem;
+    border: 1px solid var(--constitution-gold);
+  }
+
+  .constitution-draft__reminder p:not(.constitution-draft__label) {
+    margin: 0.35rem 0 0;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .constitution-draft__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .constitution-draft__footer p {
+    margin: 0;
+    color: var(--constitution-muted);
+  }
+
+  .constitution-draft__footer a {
+    color: var(--constitution-ink);
+    font-weight: 700;
+    text-underline-offset: 0.35em;
+  }
+
+  .constitution-draft__footer a:hover,
+  .constitution-draft__footer a:focus-visible {
+    color: var(--constitution-accent);
+  }
+
+  .constitution-draft a:focus-visible {
+    outline: 2px solid var(--constitution-accent);
+    outline-offset: 0.3rem;
+  }
+
+  @media (min-width: 48rem) {
+    .constitution-draft__header {
+      grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.8fr);
+      align-items: end;
+    }
+
+    .constitution-draft__principles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .constitution-principle:nth-child(odd) {
+      padding-right: 2rem;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .constitution-principle:nth-child(even) {
+      padding-left: 2rem;
+    }
+
+    .constitution-draft__closing-grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.75fr);
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .constitution-draft__metadata {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

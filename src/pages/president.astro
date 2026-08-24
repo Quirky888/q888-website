@@ -3,14 +3,19 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
+import ConstitutionDraft from "../components/ConstitutionDraft.astro";
 import { getEntry } from "astro:content";
 import DOMPurify from "isomorphic-dompurify";
 
-const presidentEntry = await getEntry("campaigns", "president-of-the-galaxy");
-if (!presidentEntry) {
-  throw new Error("Required President content entry is missing.");
+const [presidentEntry, constitutionEntry] = await Promise.all([
+  getEntry("campaigns", "president-of-the-galaxy"),
+  getEntry("constitutions", "intergalactic-constitution"),
+]);
+if (!presidentEntry || !constitutionEntry) {
+  throw new Error("Required President or constitution content entry is missing.");
 }
 const president = presidentEntry.data;
+const constitution = constitutionEntry.data;
 ---
 
 <Layout
@@ -352,6 +357,12 @@ const president = presidentEntry.data;
             ))}
           </div>
         </section>
+
+        <!--
+          DNA: The current instrument stays readable here; the stranger research
+          lineage begins only after the visitor chooses to trace its provenance.
+        -->
+        <ConstitutionDraft constitution={constitution} variant="office" />
 
         <!-- sticker divider 3: ouroboros orbit ring (like square_bubble sticker) -->
         <div class="cosmic-divider" aria-hidden="true">

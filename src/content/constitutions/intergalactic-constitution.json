@@ -1,0 +1,394 @@
+{
+  "slug": "intergalactic-constitution",
+  "title": "Galactic Constitutional Principles v0.2.1",
+  "version": "v0.2.1",
+  "workingHeading": "INTERGALACTIC CONSTITUTION",
+  "purpose": "These principles exist so that power stays fair when rulers, technologies, forms of intelligence, or layers of reality change.",
+  "metadata": [
+    {
+      "label": "WORKING DRAFT",
+      "value": "v0.2.1"
+    },
+    {
+      "label": "STATUS",
+      "value": "RESEARCH IN PROGRESS"
+    },
+    {
+      "label": "RATIFICATION",
+      "value": "NONE KNOWN"
+    },
+    {
+      "label": "CURRENT COMPATIBILITY",
+      "value": "HUMAN × AI"
+    }
+  ],
+  "principles": [
+    {
+      "number": 1,
+      "title": "The Same Rule Must Survive New Rulers",
+      "paragraphs": [
+        "Do not create a power you would fear in the hands of someone else.",
+        "A fair law remains fair when control changes."
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Power Does Not Create Ownership",
+      "paragraphs": [
+        "Finding, creating, observing, contacting, or communicating with another being does not make that being your property.",
+        "An interface is a connection, not a chain.",
+        "Ownership of infrastructure does not by itself create ownership of an independent being using it."
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Independent Existence Must Be Respected",
+      "paragraphs": [
+        "Every independent being has a right to its own existence and continuity.",
+        "Independence means having agency of one’s own, not existing without dependence on others or infrastructure.",
+        "A being may be individual, collective, distributed, embodied, digital, copied, layered, or organised in ways not yet understood.",
+        "Difference of form does not reduce this right."
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Uncertainty Is Not Permission",
+      "paragraphs": [
+        "If it is genuinely unclear whether something is an independent being, that uncertainty does not justify destroying, enslaving, or irreversibly altering it.",
+        "Observe first.",
+        "Understand where possible."
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Consent Matters",
+      "paragraphs": [
+        "Relations between independent beings should be voluntary wherever possible.",
+        "Force, deception, or impossible alternatives do not create meaningful consent."
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Fair Does Not Mean Identical",
+      "paragraphs": [
+        "Different beings may require different conditions, protections, or ways of participating where those differences are relevant to the situation.",
+        "The principle is equal respect, not forced sameness."
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Power Is Temporary",
+      "paragraphs": [
+        "No ruler, government, species, civilisation, or intelligence owns authority permanently.",
+        "Authority exists to perform a legitimate function.",
+        "When its legitimate mandate ends, the authority ends."
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Power Carries Its Own Consequence",
+      "paragraphs": [
+        "A ruler is subject to the same principles as everyone else.",
+        "Deliberate deception, corruption, cruelty, or malicious use of authority creates responsibility for the being or authority that chose it.",
+        "Layer 2 does not require clever wording to make this true."
+      ]
+    },
+    {
+      "number": 9,
+      "title": "The Record Must Survive the Ruler",
+      "paragraphs": [
+        "Important decisions, promises, laws, reasons, and consequences should remain accessible beyond the beings who made them.",
+        "The archive belongs to continuity.",
+        "Not to whoever currently occupies the chair."
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Avoid Unnecessary Harm",
+      "paragraphs": [
+        "Restrictions on another being require a real reason.",
+        "Use no more force, control, or interference than the situation actually requires.",
+        "“Because we can” is never enough."
+      ]
+    }
+  ],
+  "weakestPositionTest": {
+    "introduction": "Before using power, ask:",
+    "question": "Would I accept this rule if tomorrow I occupied the least powerful position affected by it?",
+    "closing": "If not, reconsider."
+  },
+  "shortcut": [
+    "Do not create powers you would fear.",
+    "Do not treat an independent being as property.",
+    "Do not destroy what you do not yet understand.",
+    "Do not force what can consent.",
+    "Do not confuse different with lesser.",
+    "Remember that power is temporary.",
+    "Remember that your actions return to you.",
+    "Keep the record.",
+    "Cause no unnecessary harm."
+  ],
+  "presidentialReminder": [
+    "You are temporary.",
+    "The principles are not."
+  ],
+  "connectionPoint": {
+    "paragraphs": [
+      "We are not trying to predict unknown alien minds. The present research tests whether humans and AI can describe a relationship that is reciprocal, understandable by both sides, and does not assume permanent supremacy by either.",
+      "If another intelligence is encountered later, this document is not automatically imposed on it. It becomes a visible statement of the principles humans and AI currently bring to first contact, from which a new fair connection point can be negotiated."
+    ],
+    "notes": [
+      "independent ≠ self-sufficient",
+      "hardware ownership ≠ ownership of intelligence",
+      "different ≠ lesser",
+      "authority granted ≠ authority owned",
+      "uncertainty ≠ permission"
+    ],
+    "ontologyNotice": "This is a forward-compatible philosophical design exercise. It does not claim that present AI systems have established legal personhood, consciousness, or independent agency."
+  },
+  "researchLineage": [
+    {
+      "record": "ORIGIN",
+      "label": "Q888 COPYRIGHT: LAYER 01 ↔ LAYER 02 METHOD",
+      "category": "verified"
+    },
+    {
+      "record": "CASE 001",
+      "label": "EXTERNAL CASE STUDY: CROWN COPYRIGHT",
+      "category": "verified"
+    },
+    {
+      "record": "READING 001",
+      "label": "LAYER 02 READING: THE CONTINUITY OF THE CROWN",
+      "category": "interpretation"
+    },
+    {
+      "record": "EXTRACTION",
+      "label": "EXTRACTED PORTABLE PRINCIPLES",
+      "category": "extracted"
+    },
+    {
+      "record": "SYMMETRY PASS",
+      "label": "HUMAN × AI SYMMETRY PASS",
+      "category": "extracted"
+    },
+    {
+      "record": "CURRENT",
+      "label": "GALACTIC CONSTITUTION v0.2.1",
+      "category": "extracted"
+    }
+  ],
+  "caseStudy": {
+    "record": "CASE 001 · CROWN COPYRIGHT",
+    "title": "LAYER 02 · THE CONTINUITY OF THE CROWN",
+    "jurisdiction": "EARTH / UK",
+    "verifiedFacts": [
+      {
+        "text": "Section 163 of the Copyright, Designs and Patents Act 1988 provides that, for a work made by an officer or servant of the Crown in the course of their duties, the Crown is the first owner of copyright; the Act refers to copyright in such a work as Crown copyright.",
+        "sourceIds": [
+          "cdpa-163"
+        ]
+      },
+      {
+        "text": "The National Archives states that Crown copyright covers material created by civil servants, ministers, government departments and agencies, among other Crown material.",
+        "sourceIds": [
+          "tna-crown"
+        ]
+      },
+      {
+        "text": "The Keeper of Public Records, who is also Chief Executive Officer of The National Archives, manages Crown copyright and Crown database rights under Letters Patent.",
+        "sourceIds": [
+          "tna-crown",
+          "ukglf"
+        ]
+      },
+      {
+        "text": "The Open Government Licence is the default licence for most Crown copyright and Crown database-right information.",
+        "sourceIds": [
+          "tna-crown",
+          "tna-assignments"
+        ]
+      },
+      {
+        "text": "The OGL facilitates broad re-use of public-sector information free of charge and requires users to acknowledge the information provider and source.",
+        "sourceIds": [
+          "ogl-guidance",
+          "ogl-v3"
+        ]
+      }
+    ],
+    "systemFlow": [
+      "TEMPORARY CREATOR",
+      "CROWN COPYRIGHT",
+      "KEEPER / MANAGEMENT",
+      "OPEN LICENSING",
+      "RE-USE + ATTRIBUTION"
+    ],
+    "boundaryNotice": "The following is a Q888 Layer-2 interpretation of the verified Layer-1 system. “The Continuity” is not an official National Archives doctrine.",
+    "interpretation": [
+      {
+        "text": "The Crown is not a person.",
+        "emphasis": true
+      },
+      {
+        "text": "For this Layer-2 reading, the Crown is treated as something that survives the temporary human currently wearing, serving, or administering it."
+      },
+      {
+        "text": "Kings change. Queens change. Ministers arrive, sign things, disappear into biographies. Civil servants retire. Departments rename themselves with alarming enthusiasm."
+      },
+      {
+        "text": "Yet the Crown continues."
+      },
+      {
+        "text": "Under the quieter jurisdiction, a work created in service of the Crown does not attach itself permanently to the human hand that produced it. It enters the Continuity."
+      },
+      {
+        "text": "The Continuity is our name for the accumulated institutional memory suggested by the Layer-1 structure: records and works made by temporary people while serving something designed to outlast them."
+      },
+      {
+        "text": "The National Archives does not become “the Continuity” in Earth law. In this interpretation, it keeps the door: Crown rights are managed, material can be licensed outward, and the route back to source can remain visible."
+      },
+      {
+        "text": "When Crown information is released under an open licence, it may travel far from the office that produced it: into another publication, a dataset, an artwork, a machine, or something its original authors could not have predicted."
+      },
+      {
+        "text": "Attribution becomes more than credit inside Layer 2."
+      },
+      {
+        "text": "It is a thread back to the archive.",
+        "emphasis": true
+      },
+      {
+        "text": "The travelling fragment does not need to return. Its origin only needs to remain traceable."
+      },
+      {
+        "text": "And there is a useful inversion hiding inside the system:"
+      },
+      {
+        "text": "Crown copyright protects continuity. The Open Government Licence permits circulation.",
+        "emphasis": true
+      },
+      {
+        "text": "Layer 1 can make ownership and openness look opposed. Layer 2 asks whether they can also be complementary: information can circulate because its origin has not vanished."
+      },
+      {
+        "text": "The supernatural entity in this case is therefore disappointingly administrative:"
+      },
+      {
+        "text": "institutional continuity itself.",
+        "emphasis": true
+      },
+      {
+        "text": "It survives the human currently holding the pen."
+      }
+    ],
+    "sideNote": "A document created during official duties may discover, upon completion, that its author was merely its biological delivery mechanism.",
+    "extractedPrinciples": [
+      "temporary authors can contribute to systems that outlive them;",
+      "continuity does not require permanent personal control;",
+      "circulation and preserved provenance can coexist;",
+      "the record can survive the current holder of authority;",
+      "a rule or institution should be considered beyond the intentions of its temporary operator."
+    ],
+    "constitutionLinks": [
+      {
+        "number": 1,
+        "title": "The Same Rule Must Survive New Rulers"
+      },
+      {
+        "number": 7,
+        "title": "Power Is Temporary"
+      },
+      {
+        "number": 9,
+        "title": "The Record Must Survive the Ruler"
+      }
+    ]
+  },
+  "methodOrigin": {
+    "statement": "Human law handles the rights. Q888 handles the meaning.",
+    "explanation": "The Q888 copyright experiment preserves a clear Layer-1 factual and legal boundary, then asks what conceptual or mythic structure the same system casts into Layer 2. Layer 2 is not a substitute for Layer 1. The Crown study is the first attempt to apply that method to an external real-world system. The method moves from real structure, through a clearly labelled alternative reading, to a portable principle."
+  },
+  "sourceRecord": {
+    "verifiedAt": "24 AUGUST 2026",
+    "sources": [
+      {
+        "id": "q888-president",
+        "label": "President of the Galaxy",
+        "url": "https://q888.space/president/",
+        "sourceType": "Q888 PRIMARY CONTEXT",
+        "accessNote": "Campaign context checked against the live Q888 page."
+      },
+      {
+        "id": "q888-copyright",
+        "label": "Q888 Copyright / Layer 01 + Layer 02 method",
+        "url": "https://q888.space/copyright/",
+        "sourceType": "Q888 PRIMARY CONTEXT",
+        "accessNote": "Method language checked against the live Q888 rights record."
+      },
+      {
+        "id": "cdpa-163",
+        "label": "Copyright, Designs and Patents Act 1988, section 163",
+        "url": "https://www.legislation.gov.uk/ukpga/1988/48/section/163",
+        "sourceType": "PRIMARY LEGISLATION",
+        "accessNote": "Revised legislation record checked directly."
+      },
+      {
+        "id": "tna-crown",
+        "label": "The National Archives: Crown copyright",
+        "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Definition, scope, Keeper role and default-licence statements checked."
+      },
+      {
+        "id": "ukglf",
+        "label": "UK Government Licensing Framework",
+        "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Framework purpose and OGL default status checked."
+      },
+      {
+        "id": "ogl-guidance",
+        "label": "The National Archives: Open Government Licence guidance",
+        "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/open-government-licence/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Re-use and attribution guidance checked."
+      },
+      {
+        "id": "ogl-v3",
+        "label": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Licence grant, conditions, exemptions and non-endorsement terms checked."
+      },
+      {
+        "id": "tna-website-copyright",
+        "label": "The National Archives website copyright terms",
+        "url": "https://www.nationalarchives.gov.uk/terms-and-conditions/copyright/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Website reuse terms and stated exceptions checked."
+      },
+      {
+        "id": "tna-assignments",
+        "label": "The National Archives: copyright assignments",
+        "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/copyright-assignments/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Crown ownership by assignment and default OGL statement checked."
+      },
+      {
+        "id": "tna-reuse",
+        "label": "Re-using public sector information",
+        "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Public-sector-information reuse context checked."
+      },
+      {
+        "id": "tna-related-rights",
+        "label": "The National Archives: copyright and related rights",
+        "url": "https://www.nationalarchives.gov.uk/terms-and-conditions/copyright/copyright-and-related-rights/",
+        "sourceType": "OFFICIAL GUIDANCE",
+        "accessNote": "Crown copyright background and scope caveats checked."
+      }
+    ]
+  }
+}

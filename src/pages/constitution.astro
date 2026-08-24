@@ -1,0 +1,795 @@
+---
+import { getEntry } from "astro:content";
+import ConstitutionDraft from "../components/ConstitutionDraft.astro";
+import Layout from "../layouts/Layout.astro";
+import SlimNav from "../components/SlimNav.astro";
+import SubPageNav from "../components/SubPageNav.astro";
+import SystemMeta from "../components/SystemMeta.astro";
+
+const constitutionEntry = await getEntry("constitutions", "intergalactic-constitution");
+if (!constitutionEntry) {
+  throw new Error("Required constitution content entry is missing.");
+}
+
+const constitution = constitutionEntry.data;
+const sourcesById = new Map(
+  constitution.sourceRecord.sources.map((source, index) => [source.id, { ...source, number: index + 1 }]),
+);
+---
+
+<Layout
+  title="Intergalactic Constitution — Q888 Constitutional Research Archive"
+  description="A work-in-progress human and AI constitutional research archive: the current Galactic Constitutional Principles, verified Crown copyright case study, Q888 Layer-2 interpretation, and source record."
+  canonicalPath="/constitution/"
+  pageType="article"
+  mainEntityType="CreativeWork"
+  mainEntityName="Galactic Constitutional Principles v0.2.1"
+  keywords={["Intergalactic Constitution", "human AI constitutional research", "Crown copyright", "Q888", "President of the Galaxy"]}
+>
+  <SubPageNav />
+  <div class="hidden md:block"><SlimNav /></div>
+  <SystemMeta
+    position="top"
+    customItems={[
+      { field: "archive_status", label: "ARCHIVE_STATUS", value: "OPEN", width: 4 },
+      { field: "draft", label: "DRAFT", value: constitution.version, width: 6 },
+      { field: "layer", label: "ACTIVE_LAYER", value: "VISIBLE", width: 7 },
+      { field: "ratification", label: "RATIFICATION", value: "NONE KNOWN", width: 10 },
+    ]}
+  />
+
+  <main class="constitution-archive">
+    <header class="archive-hero archive-container">
+      <p class="archive-kicker">PRESIDENTIAL OFFICE · RESEARCH DIVISION · WORK IN PROGRESS</p>
+      <h1>CONSTITUTIONAL<br />RESEARCH ARCHIVE</h1>
+      <p class="archive-introduction">
+        The current draft appears first. Below it: the evidence, interpretation, and portable principles that helped produce it. Earth facts remain Earth facts. Q888 begins where the boundary says it begins.
+      </p>
+      <div class="archive-status" aria-label="Archive status">
+        <span>ALIEN PEER REVIEW: PENDING AN ALIEN REVIEWER</span>
+      </div>
+    </header>
+
+    <div class="archive-container archive-descent">
+      <section class="archive-section" aria-labelledby="current-draft-heading">
+        <div class="archive-section__header">
+          <p>00 · CURRENT DRAFT</p>
+          <h2 id="current-draft-heading">The instrument before the backstory</h2>
+        </div>
+        <ConstitutionDraft constitution={constitution} variant="archive" />
+        <a class="archive-descent-link" href="#connection-point">TRACE THE RESEARCH <span aria-hidden="true">↓</span></a>
+      </section>
+
+      <section class="archive-section" id="connection-point" aria-labelledby="connection-point-heading">
+        <div class="archive-section__header">
+          <p>01 · CONNECTION POINT</p>
+          <h2 id="connection-point-heading">Human ↔ AI, for now</h2>
+        </div>
+        <div class="connection-copy">
+          {constitution.connectionPoint.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <ul class="laboratory-notes" aria-label="Research notes">
+          {constitution.connectionPoint.notes.map((note) => <li>{note}</li>)}
+        </ul>
+        <aside class="ontology-notice">
+          <strong>ONTOLOGY NOTICE</strong>
+          <p>{constitution.connectionPoint.ontologyNotice}</p>
+        </aside>
+      </section>
+
+      <section class="archive-section" aria-labelledby="lineage-heading">
+        <div class="archive-section__header">
+          <p>02 · RESEARCH LINEAGE</p>
+          <h2 id="lineage-heading">How the current draft arrived</h2>
+        </div>
+        <ol class="research-lineage">
+          {constitution.researchLineage.map((entry) => (
+            <li data-category={entry.category}>
+              <span>{entry.record}</span>
+              <strong>{entry.label}</strong>
+            </li>
+          ))}
+        </ol>
+        <div class="category-legend" aria-label="Research category legend">
+          <span>VERIFIED LAYER 1</span>
+          <span>Q888 LAYER 2 INTERPRETATION</span>
+          <span>PRINCIPLE EXTRACTED FROM THE EXPERIMENT</span>
+        </div>
+      </section>
+
+      <section class="archive-section case-study" aria-labelledby="case-study-heading">
+        <div class="archive-section__header">
+          <p>03 · CASE STUDY 001</p>
+          <h2 id="case-study-heading">{constitution.caseStudy.title}</h2>
+        </div>
+
+        <div class="case-file-meta">
+          <span>{constitution.caseStudy.record}</span>
+          <span>JURISDICTION: {constitution.caseStudy.jurisdiction}</span>
+        </div>
+
+        <section class="evidence-layer evidence-layer--verified" aria-labelledby="verified-layer-heading">
+          <div class="evidence-layer__heading">
+            <p>VERIFIED LAYER 1</p>
+            <h3 id="verified-layer-heading">Observable system</h3>
+          </div>
+          <ol class="verified-facts">
+            {constitution.caseStudy.verifiedFacts.map((fact) => (
+              <li>
+                <p>{fact.text}</p>
+                <p class="fact-sources">
+                  {fact.sourceIds.map((sourceId) => {
+                    const source = sourcesById.get(sourceId);
+                    return source ? (
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${source.label} (${source.sourceType}, opens in a new tab)`}
+                      >
+                        SOURCE {String(source.number).padStart(2, "0")} ↗
+                      </a>
+                    ) : null;
+                  })}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <div class="system-flow" aria-label="Crown copyright system flow">
+            {constitution.caseStudy.systemFlow.map((step, index) => (
+              <>
+                <span>{step}</span>
+                {index < constitution.caseStudy.systemFlow.length - 1 && <b aria-hidden="true">→</b>}
+              </>
+            ))}
+          </div>
+        </section>
+
+        <aside class="boundary-notice" aria-labelledby="boundary-heading">
+          <p>BOUNDARY NOTICE</p>
+          <h3 id="boundary-heading">Earth record ends here</h3>
+          <p>{constitution.caseStudy.boundaryNotice}</p>
+        </aside>
+
+        <section class="evidence-layer evidence-layer--interpretation" aria-labelledby="interpretation-heading">
+          <div class="evidence-layer__heading">
+            <p>Q888 LAYER 2 INTERPRETATION</p>
+            <h3 id="interpretation-heading">The Continuity of the Crown</h3>
+          </div>
+          <div class="interpretation-copy">
+            {constitution.caseStudy.interpretation.map((paragraph) => (
+              paragraph.emphasis ? <p><strong>{paragraph.text}</strong></p> : <p>{paragraph.text}</p>
+            ))}
+          </div>
+          <aside class="biological-note">
+            <p>{constitution.caseStudy.sideNote}</p>
+            <span>Q888 SATIRE · NOT A LEGAL PROPOSITION</span>
+          </aside>
+        </section>
+
+        <section class="evidence-layer evidence-layer--extracted" aria-labelledby="extracted-heading">
+          <div class="evidence-layer__heading">
+            <p>PRINCIPLE EXTRACTED FROM THE EXPERIMENT</p>
+            <h3 id="extracted-heading">Portable findings</h3>
+          </div>
+          <ul class="extracted-list">
+            {constitution.caseStudy.extractedPrinciples.map((principle) => <li>{principle}</li>)}
+          </ul>
+          <div class="constitution-links">
+            <p>VISIBLE CONNECTIONS TO THE CURRENT DRAFT</p>
+            <ul>
+              {constitution.caseStudy.constitutionLinks.map((principle) => (
+                <li>{principle.number} · {principle.title}</li>
+              ))}
+            </ul>
+          </div>
+          <p class="derivation-caveat">
+            These are ideas extracted through the experiment, not proof that the Crown system produced the constitution or a fabricated one-to-one historical derivation.
+          </p>
+        </section>
+      </section>
+
+      <section class="archive-section" aria-labelledby="method-origin-heading">
+        <div class="archive-section__header">
+          <p>04 · METHOD ORIGIN</p>
+          <h2 id="method-origin-heading">Two layers / one clear boundary</h2>
+        </div>
+        <blockquote class="method-statement">{constitution.methodOrigin.statement}</blockquote>
+        <p class="method-explanation">{constitution.methodOrigin.explanation}</p>
+        <a class="archive-text-link" href="/copyright/">INSPECT THE ORIGINAL Q888 METHOD →</a>
+      </section>
+
+      <section class="archive-section source-record" aria-labelledby="source-record-heading">
+        <div class="archive-section__header">
+          <p>05 · SOURCE RECORD</p>
+          <h2 id="source-record-heading">Verification desk</h2>
+        </div>
+        <p class="source-record__status">
+          LAST VERIFIED: {constitution.sourceRecord.verifiedAt} · Direct links remain part of the record. External pages may change after verification.
+        </p>
+        <ol class="source-list">
+          {constitution.sourceRecord.sources.map((source, index) => (
+            <li>
+              <span class="source-list__number">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p class="source-list__type">{source.sourceType}</p>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${source.label} (${source.sourceType}, opens in a new tab)`}
+                >
+                  {source.label} ↗
+                </a>
+                <p>{source.accessNote}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <footer class="archive-footer">
+        <p>END OF CURRENT RECORD · FUTURE CASE FILES MAY BE INSERTED BEFORE THE SOURCE DESK</p>
+        <a href="/president/">RETURN TO THE PRESIDENTIAL OFFICE ↑</a>
+      </footer>
+    </div>
+  </main>
+
+</Layout>
+
+<style>
+  .constitution-archive {
+    min-height: 100dvh;
+    padding: 7rem 0 8rem;
+    background:
+      linear-gradient(to bottom, var(--bg-fog), color-mix(in srgb, var(--bg-fog) 94%, var(--gold)) 45%, var(--bg-fog));
+    color: var(--text-ink);
+  }
+
+  .archive-container {
+    width: min(100% - 3rem, 72rem);
+    margin-inline: auto;
+  }
+
+  .archive-hero {
+    padding: clamp(2rem, 6vw, 6rem) 0 clamp(4rem, 8vw, 8rem);
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .archive-kicker,
+  .archive-status,
+  .archive-section__header > p,
+  .case-file-meta,
+  .evidence-layer__heading > p,
+  .boundary-notice > p:first-child,
+  .category-legend,
+  .source-record__status,
+  .source-list__number,
+  .source-list__type,
+  .archive-footer,
+  .archive-descent-link,
+  .archive-text-link,
+  .ontology-notice strong,
+  .biological-note span,
+  .constitution-links > p {
+    font-family: "Space Mono", ui-monospace, monospace;
+  }
+
+  .archive-kicker {
+    margin: 0 0 1.5rem;
+    color: var(--gold);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .archive-hero h1 {
+    max-width: 13ch;
+    margin: 0;
+    font-family: "Bungee", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2.25rem, 7.5vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .archive-introduction {
+    max-width: 50rem;
+    margin: 2rem 0 0;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.4rem);
+    line-height: 1.65;
+  }
+
+  .archive-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 2.5rem;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .archive-section {
+    padding: clamp(4rem, 9vw, 8rem) 0;
+    border-bottom: 1px solid var(--line-soft);
+    scroll-margin-top: 5rem;
+  }
+
+  .archive-section__header {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .archive-section__header > p,
+  .evidence-layer__heading > p,
+  .boundary-notice > p:first-child {
+    margin: 0;
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .archive-section__header h2,
+  .evidence-layer__heading h3,
+  .boundary-notice h3 {
+    margin: 0;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.1;
+  }
+
+  .archive-section__header h2 {
+    max-width: 22ch;
+    font-size: clamp(1.8rem, 4vw, 3.75rem);
+  }
+
+  .archive-descent-link,
+  .archive-text-link {
+    display: inline-block;
+    margin-top: 3rem;
+    color: var(--text-ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-underline-offset: 0.4em;
+  }
+
+  .connection-copy,
+  .method-explanation {
+    max-width: 52rem;
+  }
+
+  .connection-copy p,
+  .method-explanation {
+    font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+    line-height: 1.75;
+  }
+
+  .laboratory-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1px;
+    margin: 3rem 0 0;
+    padding: 1px;
+    list-style: none;
+    background: var(--line-soft);
+  }
+
+  .laboratory-notes li {
+    min-width: 0;
+    padding: 1rem;
+    background: var(--bg-fog);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .ontology-notice {
+    max-width: 52rem;
+    margin-top: 2rem;
+    padding: 1.25rem;
+    border-left: 3px solid var(--gold);
+    background: color-mix(in srgb, var(--bg-fog) 92%, var(--gold));
+  }
+
+  .ontology-notice strong {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .ontology-notice p {
+    margin: 0.75rem 0 0;
+    line-height: 1.65;
+  }
+
+  .research-lineage {
+    max-width: 52rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .research-lineage li {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 0 0 3rem 2rem;
+  }
+
+  .research-lineage li::before {
+    position: absolute;
+    top: 0.25rem;
+    left: 0;
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    background: var(--bg-fog);
+    content: "";
+  }
+
+  .research-lineage li:not(:last-child)::after {
+    position: absolute;
+    top: 1rem;
+    bottom: 0;
+    left: 0.34rem;
+    width: 1px;
+    background: var(--line-soft);
+    content: "";
+  }
+
+  .research-lineage span {
+    color: var(--text-muted);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .research-lineage strong {
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    line-height: 1.35;
+  }
+
+  .category-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    color: var(--text-muted);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+
+  .case-file-meta {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    border: 1px solid var(--line-soft);
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .evidence-layer {
+    padding: clamp(2rem, 5vw, 4rem) 0;
+  }
+
+  .evidence-layer__heading {
+    display: grid;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+  }
+
+  .evidence-layer__heading h3,
+  .boundary-notice h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .verified-facts {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    padding: 1px;
+    list-style-position: inside;
+    background: var(--line-soft);
+  }
+
+  .verified-facts > li {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--bg-fog);
+  }
+
+  .verified-facts > li::marker {
+    color: var(--gold);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+  }
+
+  .verified-facts p {
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .fact-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem !important;
+  }
+
+  .fact-sources a {
+    color: var(--text-muted);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+
+  .system-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+  }
+
+  .system-flow span {
+    padding: 0.7rem;
+    border: 1px solid var(--line-soft);
+  }
+
+  .system-flow b {
+    color: var(--gold);
+  }
+
+  .boundary-notice {
+    margin: 2rem 0;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 2px solid var(--text-ink);
+    background: var(--text-ink);
+    color: var(--bg-fog);
+  }
+
+  .boundary-notice h3 {
+    margin-top: 0.6rem;
+  }
+
+  .boundary-notice > p:last-child {
+    max-width: 50rem;
+    margin: 1.5rem 0 0;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.7;
+  }
+
+  .evidence-layer--interpretation {
+    padding-inline: clamp(1rem, 4vw, 3rem);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    background: color-mix(in srgb, var(--bg-fog) 91%, var(--gold));
+  }
+
+  .interpretation-copy {
+    max-width: 48rem;
+  }
+
+  .interpretation-copy p {
+    margin: 1.1rem 0 0;
+    font-family: "Playfair Display", ui-serif, Georgia, serif;
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    line-height: 1.75;
+  }
+
+  .interpretation-copy p:has(strong) {
+    margin-top: 1.8rem;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    line-height: 1.35;
+  }
+
+  .biological-note {
+    max-width: 40rem;
+    margin: 3rem 0 0 auto;
+    padding: 1.5rem;
+    border: 1px dashed var(--gold);
+    transform: rotate(-0.35deg);
+  }
+
+  .biological-note p {
+    margin: 0;
+    font-family: "Playfair Display", ui-serif, Georgia, serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .biological-note span {
+    display: block;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+  }
+
+  .extracted-list {
+    display: grid;
+    gap: 0.85rem;
+    max-width: 50rem;
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .extracted-list li {
+    padding-left: 0.5rem;
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+    line-height: 1.6;
+  }
+
+  .constitution-links {
+    max-width: 50rem;
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line-soft);
+  }
+
+  .constitution-links > p {
+    margin: 0 0 1rem;
+    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .constitution-links ul {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+  }
+
+  .derivation-caveat {
+    max-width: 50rem;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .method-statement {
+    max-width: 48rem;
+    margin: 0 0 2rem;
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .source-record__status {
+    margin: 0 0 2rem;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    line-height: 1.6;
+    letter-spacing: 0.07em;
+  }
+
+  .source-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .source-list li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .source-list__number,
+  .source-list__type {
+    color: var(--text-muted);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .source-list__type {
+    margin: 0 0 0.4rem;
+  }
+
+  .source-list a {
+    color: var(--text-ink);
+    font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .source-list li div > p:last-child {
+    margin: 0.6rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .archive-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding: 3rem 0;
+    color: var(--text-muted);
+    font-size: 0.62rem;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+  }
+
+  .archive-footer p {
+    margin: 0;
+  }
+
+  .archive-footer a {
+    color: var(--text-ink);
+  }
+
+  .constitution-archive a:hover,
+  .constitution-archive a:focus-visible {
+    color: var(--gold);
+  }
+
+  .constitution-archive a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 0.3rem;
+  }
+
+  @media (max-width: 40rem) {
+    .archive-container {
+      width: min(100% - 2rem, 72rem);
+    }
+
+    .archive-hero h1 {
+      font-size: clamp(1.9rem, 9vw, 2.25rem);
+    }
+
+    .research-lineage li {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .system-flow {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+    .system-flow b {
+      transform: rotate(90deg);
+      text-align: center;
+    }
+
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .biological-note {
+      transform: none;
+    }
+  }
+</style>
