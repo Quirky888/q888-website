@@ -393,7 +393,6 @@ const constitutions = defineCollection({
     methodOrigin: z.object({
       statement: z.string().min(1),
       explanation: z.string().min(1),
-      methodFlow: z.array(z.string().min(1)).length(3),
     }),
     sourceRecord: z.object({
       verifiedAt: z.string().min(1),

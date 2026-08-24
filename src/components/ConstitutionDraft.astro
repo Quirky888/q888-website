@@ -17,7 +17,6 @@ const headingId = `constitution-draft-${variant}`;
 <section class:list={["constitution-draft", `constitution-draft--${variant}`]} aria-labelledby={headingId}>
   <header class="constitution-draft__header">
     <div class="constitution-draft__title-block">
-      <p class="constitution-draft__record">PRESIDENTIAL OFFICE · ACTIVE INSTRUMENT</p>
       <SectionHeading class="constitution-draft__heading" id={headingId}>
         {constitution.workingHeading}
       </SectionHeading>
@@ -77,7 +76,7 @@ const headingId = `constitution-draft-${variant}`;
 
   {isOffice && (
     <footer class="constitution-draft__footer">
-      <p>Current draft filed. Research lineage remains open.</p>
+      <p>Read the evidence and interpretation behind this draft.</p>
       <a href="/constitution/">TRACE THE RESEARCH <span aria-hidden="true">↓</span></a>
     </footer>
   )}
@@ -93,7 +92,7 @@ const headingId = `constitution-draft-${variant}`;
   }
 
   .constitution-draft--office {
-    padding: 4rem 0;
+    padding: 3.5rem 0;
     border-bottom: 1px solid var(--line-soft);
   }
 
@@ -104,21 +103,12 @@ const headingId = `constitution-draft-${variant}`;
     border-bottom: 1px solid var(--line-soft);
   }
 
-  .constitution-draft__record,
   .constitution-draft__label,
   .constitution-draft__metadata dt,
   .constitution-draft__metadata dd,
   .constitution-principle__number,
   .constitution-draft__footer {
     font-family: "Space Mono", ui-monospace, monospace;
-  }
-
-  .constitution-draft__record {
-    margin: 0 0 0.75rem;
-    color: var(--constitution-gold);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
   }
 
   .constitution-draft__heading {
@@ -128,6 +118,10 @@ const headingId = `constitution-draft-${variant}`;
     font-weight: 400;
     line-height: 1;
     overflow-wrap: anywhere;
+  }
+
+  .constitution-draft--office .constitution-draft__heading {
+    font-size: clamp(1.55rem, 3vw, 2.65rem);
   }
 
   .constitution-draft__title {
@@ -173,6 +167,18 @@ const headingId = `constitution-draft-${variant}`;
     overflow-wrap: anywhere;
   }
 
+  .constitution-draft--office .constitution-draft__metadata {
+    gap: 0.5rem 1.5rem;
+    border: 0;
+    background: transparent;
+  }
+
+  .constitution-draft--office .constitution-draft__metadata div {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line-soft);
+    background: transparent;
+  }
+
   .constitution-draft__principles {
     display: grid;
     gap: 0;
@@ -207,11 +213,27 @@ const headingId = `constitution-draft-${variant}`;
     line-height: 1.65;
   }
 
+  .constitution-draft--office .constitution-principle {
+    padding-block: 1.45rem;
+  }
+
+  .constitution-draft--office .constitution-principle__heading {
+    font-size: clamp(0.98rem, 1.4vw, 1.1rem);
+  }
+
+  .constitution-draft--office .constitution-principle p {
+    font-size: clamp(0.92rem, 1.1vw, 1rem);
+  }
+
   .constitution-draft__test {
     margin: 3rem 0;
     padding: clamp(1.25rem, 3vw, 2.5rem);
     border-top: 3px solid var(--constitution-ink);
     border-bottom: 1px solid var(--constitution-ink);
+  }
+
+  .constitution-draft--office .constitution-draft__test {
+    border-top-width: 1px;
   }
 
   .constitution-draft__label {

@@ -46,8 +46,6 @@ const sourcesById = new Map(
         The current draft appears first. Below it: the evidence, interpretation, and portable principles that helped produce it. Earth facts remain Earth facts. Q888 begins where the boundary says it begins.
       </p>
       <div class="archive-status" aria-label="Archive status">
-        <span>FILE: IC-021</span>
-        <span>GALACTIC COMPATIBILITY: UNDER REVIEW</span>
         <span>ALIEN PEER REVIEW: PENDING AN ALIEN REVIEWER</span>
       </div>
     </header>
@@ -108,7 +106,6 @@ const sourcesById = new Map(
         <div class="case-file-meta">
           <span>{constitution.caseStudy.record}</span>
           <span>JURISDICTION: {constitution.caseStudy.jurisdiction}</span>
-          <span>STATUS: VERIFIED → INTERPRETED → EXTRACTED</span>
         </div>
 
         <section class="evidence-layer evidence-layer--verified" aria-labelledby="verified-layer-heading">
@@ -200,14 +197,6 @@ const sourcesById = new Map(
         </div>
         <blockquote class="method-statement">{constitution.methodOrigin.statement}</blockquote>
         <p class="method-explanation">{constitution.methodOrigin.explanation}</p>
-        <div class="method-flow" aria-label="Q888 research method">
-          {constitution.methodOrigin.methodFlow.map((step, index) => (
-            <>
-              <span>{step}</span>
-              {index < constitution.methodOrigin.methodFlow.length - 1 && <b aria-hidden="true">→</b>}
-            </>
-          ))}
-        </div>
         <a class="archive-text-link" href="/copyright/">INSPECT THE ORIGINAL Q888 METHOD →</a>
       </section>
 
@@ -247,7 +236,6 @@ const sourcesById = new Map(
     </div>
   </main>
 
-  <SystemMeta position="bottom" />
 </Layout>
 
 <style>
@@ -547,8 +535,7 @@ const sourcesById = new Map(
     letter-spacing: 0.08em;
   }
 
-  .system-flow,
-  .method-flow {
+  .system-flow {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -559,14 +546,12 @@ const sourcesById = new Map(
     letter-spacing: 0.06em;
   }
 
-  .system-flow span,
-  .method-flow span {
+  .system-flow span {
     padding: 0.7rem;
     border: 1px solid var(--line-soft);
   }
 
-  .system-flow b,
-  .method-flow b {
+  .system-flow b {
     color: var(--gold);
   }
 
@@ -789,15 +774,13 @@ const sourcesById = new Map(
       gap: 0.5rem;
     }
 
-    .system-flow,
-    .method-flow {
+    .system-flow {
       display: grid;
       grid-template-columns: 1fr;
       align-items: stretch;
     }
 
-    .system-flow b,
-    .method-flow b {
+    .system-flow b {
       transform: rotate(90deg);
       text-align: center;
     }
