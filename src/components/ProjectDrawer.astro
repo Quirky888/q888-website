@@ -555,6 +555,16 @@ const showLegacyDigitalInkDrawer = false;
           >
           </svg>
         </div>
+
+        <div class="eden-map-tools" data-eden-map-tools aria-label="Map controls">
+          <p class="eden-map-instruction">Drag to roam · Ctrl/⌘ + scroll to zoom</p>
+          <div class="eden-map-tool-row">
+            <button type="button" class="eden-map-tool-button" data-eden-zoom-out aria-label="Zoom out">−</button>
+            <output class="eden-map-zoom-status" data-eden-zoom-status aria-live="polite">100%</output>
+            <button type="button" class="eden-map-tool-button" data-eden-zoom-in aria-label="Zoom in">+</button>
+            <button type="button" class="eden-map-reset-button" data-eden-reset>Return to city</button>
+          </div>
+        </div>
       </div>
 
       <!-- Q888:FOOTER_START id="eden-footer" -->
@@ -580,7 +590,7 @@ const showLegacyDigitalInkDrawer = false;
       <!-- Q888:FOOTER_END id="eden-footer" -->
     </div>
 
-    <div class="eden-story-drawer" data-eden-drawer aria-hidden="true">
+    <div class="eden-story-drawer" data-eden-drawer aria-hidden="true" role="region" aria-live="polite" aria-label="Selected magical location">
       <div class="eden-drawer-handle" aria-hidden="true"></div>
       <div class="eden-drawer-inner">
         <header class="eden-drawer-header">
@@ -599,11 +609,15 @@ const showLegacyDigitalInkDrawer = false;
           <div class="eden-accent-border" data-eden-accent aria-hidden="true" style="display: none;"></div>
           <div class="eden-content-container">
             <div class="eden-story-short">
-              <div class="eden-story-heading">Intel</div>
+              <div class="eden-story-heading">Field note</div>
               <p class="eden-story-short-text" data-eden-short>Select a location to begin.</p>
             </div>
 
-            <div class="eden-story-long">
+            <button class="eden-lore-toggle" type="button" data-eden-lore-toggle aria-expanded="false">
+              Open full record
+            </button>
+
+            <div class="eden-story-long" data-eden-lore>
               <div class="eden-story-heading">History & Lore</div>
               <div class="eden-story-long-text" data-eden-long></div>
             </div>
@@ -1566,6 +1580,94 @@ const showLegacyDigitalInkDrawer = false;
     pointer-events: none;
   }
 
+  .eden-map-tools {
+    position: absolute;
+    left: clamp(1rem, 2vw, 2rem);
+    bottom: clamp(1rem, 2vw, 2rem);
+    z-index: 120;
+    display: none;
+    padding: 0.65rem;
+    color: rgba(16, 31, 34, 0.78);
+    background: rgba(252, 248, 249, 0.82);
+    border: 1px solid rgba(19, 66, 82, 0.12);
+    border-radius: 1rem;
+    box-shadow: 0 12px 35px rgba(25, 31, 34, 0.12);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  .eden-map-instruction {
+    margin: 0 0 0.55rem;
+    padding: 0 0.2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .eden-map-tool-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .eden-map-tool-button,
+  .eden-map-reset-button {
+    min-width: 2.55rem;
+    height: 2.55rem;
+    border: 1px solid rgba(19, 66, 82, 0.12);
+    border-radius: 0.7rem;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--eden-text);
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .eden-map-tool-button {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .eden-map-reset-button {
+    padding: 0 0.8rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .eden-map-tool-button:hover,
+  .eden-map-reset-button:hover,
+  .eden-map-tool-button:focus-visible,
+  .eden-map-reset-button:focus-visible {
+    background: #fff;
+    border-color: rgba(19, 66, 82, 0.3);
+    outline: none;
+    transform: translateY(-1px);
+  }
+
+  .eden-map-zoom-status {
+    min-width: 3.2rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  @media (min-width: 769px) {
+    .eden-map-tools {
+      display: block;
+    }
+
+    .eden-map-container {
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .eden-map-container:active {
+      cursor: grabbing;
+    }
+  }
+
   /* Edinburgh Footer Section */
   /* Explicitly confirming: no map CSS or selectors below this line were modified. */
   .eden-footer {
@@ -1792,6 +1894,10 @@ const showLegacyDigitalInkDrawer = false;
     margin-bottom: 3rem;
   }
 
+  .eden-lore-toggle {
+    display: none;
+  }
+
   .eden-story-long-text {
     font-size: 1.125rem;
     line-height: 1.8;
@@ -1840,6 +1946,166 @@ const showLegacyDigitalInkDrawer = false;
   .eden-nav-dot.is-active {
     background: var(--text-ink);
     transform: scale(1.5);
+  }
+
+  /* CHOICE: Desktop keeps the map visible; the location arrives as a field note,
+     while the long mythology remains available on request. */
+  @media (min-width: 1025px) {
+    .eden-story-drawer {
+      left: auto;
+      right: clamp(1.25rem, 2vw, 2rem);
+      bottom: clamp(1.25rem, 2vw, 2rem);
+      width: min(26rem, calc(100vw - 3rem));
+      height: auto;
+      max-height: calc(100dvh - 6rem);
+      border: 1px solid rgba(19, 66, 82, 0.12);
+      border-radius: 1.35rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(calc(100% + 3rem));
+      transition:
+        width 480ms var(--eden-ease),
+        height 480ms var(--eden-ease),
+        transform var(--eden-drawer-duration) var(--eden-ease),
+        opacity 180ms ease,
+        box-shadow 480ms ease;
+    }
+
+    .eden-story-drawer.is-open {
+      height: auto;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .eden-drawer-inner {
+      max-width: none;
+      max-height: calc(100dvh - 6rem);
+    }
+
+    .eden-drawer-header {
+      padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .eden-drawer-title {
+      font-size: 1.65rem;
+      line-height: 1.08;
+    }
+
+    .eden-drawer-content {
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    .eden-story-heading {
+      margin-bottom: 0.7rem;
+    }
+
+    .eden-story-short-text {
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .eden-lore-toggle {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.5rem;
+      margin-bottom: 1.25rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid rgba(19, 66, 82, 0.16);
+      border-radius: 0.7rem;
+      background: rgba(255, 255, 255, 0.55);
+      color: var(--eden-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .eden-lore-toggle:hover,
+    .eden-lore-toggle:focus-visible {
+      border-color: rgba(19, 66, 82, 0.36);
+      background: #fff;
+      outline: none;
+    }
+
+    .eden-story-long {
+      display: none;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-story-long {
+      display: block;
+    }
+
+    .eden-story-drawer.is-open.is-lore-open {
+      width: min(72rem, calc(100vw - 4rem));
+      height: min(46rem, calc(100dvh - 4rem));
+      max-height: calc(100dvh - 4rem);
+      box-shadow:
+        0 30px 90px rgba(25, 31, 34, 0.18),
+        0 1px 0 rgba(255, 255, 255, 0.7) inset;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-drawer-inner {
+      max-height: calc(100dvh - 4rem);
+    }
+
+    .eden-story-drawer.is-lore-open .eden-drawer-header {
+      padding: 1.75rem 2rem 1.25rem;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-drawer-content {
+      padding: 0 2rem 2rem;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-content-container {
+      display: grid;
+      grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 2fr);
+      grid-template-rows: auto 1fr;
+      column-gap: clamp(2rem, 4vw, 4.5rem);
+      max-width: none;
+      margin: 0;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-story-short {
+      grid-column: 1;
+      grid-row: 1;
+      padding-right: 0.5rem;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-lore-toggle {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: start;
+      justify-self: start;
+      margin: 0;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-story-long {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      padding-left: clamp(2rem, 3vw, 3.5rem);
+      border-left: 1px solid rgba(19, 66, 82, 0.12);
+    }
+
+    .eden-story-drawer.is-lore-open .eden-story-long-text {
+      max-width: 46rem;
+      font-size: 1.08rem;
+      line-height: 1.72;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-story-long-text p {
+      margin: 0 0 1.4rem;
+    }
+
+    .eden-story-drawer.is-lore-open .eden-drawer-footer {
+      display: none;
+    }
+
+    .eden-drawer-footer {
+      padding: 1rem 1.5rem 1.35rem;
+    }
   }
 
   @media (max-width: 1024px) {

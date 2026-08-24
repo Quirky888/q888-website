@@ -8,6 +8,7 @@ const staticRoutes = [
   "/aero/",
   "/afterlife/",
   "/bureaucracy/",
+  "/constitution/",
   "/copyright/",
   "/dink/",
   "/dyno/",

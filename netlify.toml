@@ -6,6 +6,18 @@
 [dev]
   command = "npm run dev"
 
+# LEARN: Preserve previously published download URLs when an artwork file changes format.
+# Search crawlers and human bookmarks may continue requesting these JPG paths for months.
+[[redirects]]
+  from = "/docs/afterlife_contract_to_sign.jpg"
+  to = "/docs/afterlife_contract_to_sign_v2.png"
+  status = 301
+
+[[redirects]]
+  from = "/docs/afterlife_contract_to_sign_v2.jpg"
+  to = "/docs/afterlife_contract_to_sign_v2.png"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

@@ -39,7 +39,7 @@ const sourcesById = new Map(
   />
 
   <main class="constitution-archive">
-    <header class="archive-hero archive-container">
+    <header class="archive-hero archive-container" id="archive-top">
       <p class="archive-kicker">PRESIDENTIAL OFFICE · RESEARCH DIVISION · WORK IN PROGRESS</p>
       <h1>CONSTITUTIONAL<br />RESEARCH ARCHIVE</h1>
       <p class="archive-introduction">
@@ -50,8 +50,21 @@ const sourcesById = new Map(
       </div>
     </header>
 
+    <!-- CHOICE: This is a long research record, so its internal map remains visible before the descent. -->
+    <nav class="archive-directory archive-container" aria-label="Constitution archive directory">
+      <p>ARCHIVE DIRECTORY</p>
+      <ol>
+        <li><a href="#current-draft"><span>00</span> Current draft</a></li>
+        <li><a href="#connection-point"><span>01</span> Connection point</a></li>
+        <li><a href="#research-lineage"><span>02</span> Research lineage</a></li>
+        <li><a href="#case-study-001"><span>03</span> Case study 001</a></li>
+        <li><a href="#method-origin"><span>04</span> Method origin</a></li>
+        <li><a href="#source-record"><span>05</span> Source record</a></li>
+      </ol>
+    </nav>
+
     <div class="archive-container archive-descent">
-      <section class="archive-section" aria-labelledby="current-draft-heading">
+      <section class="archive-section" id="current-draft" aria-labelledby="current-draft-heading">
         <div class="archive-section__header">
           <p>00 · CURRENT DRAFT</p>
           <h2 id="current-draft-heading">The instrument before the backstory</h2>
@@ -77,7 +90,7 @@ const sourcesById = new Map(
         </aside>
       </section>
 
-      <section class="archive-section" aria-labelledby="lineage-heading">
+      <section class="archive-section" id="research-lineage" aria-labelledby="lineage-heading">
         <div class="archive-section__header">
           <p>02 · RESEARCH LINEAGE</p>
           <h2 id="lineage-heading">How the current draft arrived</h2>
@@ -91,13 +104,13 @@ const sourcesById = new Map(
           ))}
         </ol>
         <div class="category-legend" aria-label="Research category legend">
-          <span>VERIFIED LAYER 1</span>
-          <span>Q888 LAYER 2 INTERPRETATION</span>
-          <span>PRINCIPLE EXTRACTED FROM THE EXPERIMENT</span>
+          <span data-category="verified">VERIFIED LAYER 1</span>
+          <span data-category="interpretation">Q888 LAYER 2 INTERPRETATION</span>
+          <span data-category="extracted">PRINCIPLE EXTRACTED FROM THE EXPERIMENT</span>
         </div>
       </section>
 
-      <section class="archive-section case-study" aria-labelledby="case-study-heading">
+      <section class="archive-section case-study" id="case-study-001" aria-labelledby="case-study-heading">
         <div class="archive-section__header">
           <p>03 · CASE STUDY 001</p>
           <h2 id="case-study-heading">{constitution.caseStudy.title}</h2>
@@ -190,7 +203,7 @@ const sourcesById = new Map(
         </section>
       </section>
 
-      <section class="archive-section" aria-labelledby="method-origin-heading">
+      <section class="archive-section" id="method-origin" aria-labelledby="method-origin-heading">
         <div class="archive-section__header">
           <p>04 · METHOD ORIGIN</p>
           <h2 id="method-origin-heading">Two layers / one clear boundary</h2>
@@ -200,7 +213,7 @@ const sourcesById = new Map(
         <a class="archive-text-link" href="/copyright/">INSPECT THE ORIGINAL Q888 METHOD →</a>
       </section>
 
-      <section class="archive-section source-record" aria-labelledby="source-record-heading">
+      <section class="archive-section source-record" id="source-record" aria-labelledby="source-record-heading">
         <div class="archive-section__header">
           <p>05 · SOURCE RECORD</p>
           <h2 id="source-record-heading">Verification desk</h2>
@@ -231,7 +244,10 @@ const sourcesById = new Map(
 
       <footer class="archive-footer">
         <p>END OF CURRENT RECORD · FUTURE CASE FILES MAY BE INSERTED BEFORE THE SOURCE DESK</p>
-        <a href="/president/">RETURN TO THE PRESIDENTIAL OFFICE ↑</a>
+        <div class="archive-footer__links">
+          <a href="#archive-top">RETURN TO ARCHIVE TOP ↑</a>
+          <a href="/president/">PRESIDENTIAL OFFICE →</a>
+        </div>
       </footer>
     </div>
   </main>
@@ -259,6 +275,7 @@ const sourcesById = new Map(
 
   .archive-kicker,
   .archive-status,
+  .archive-directory,
   .archive-section__header > p,
   .case-file-meta,
   .evidence-layer__heading > p,
@@ -312,6 +329,53 @@ const sourcesById = new Map(
     color: var(--text-muted);
     font-size: 0.65rem;
     letter-spacing: 0.08em;
+  }
+
+  .archive-directory {
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .archive-directory > p {
+    margin: 0 0 0.8rem;
+    color: var(--text-muted);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .archive-directory ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 1px;
+    list-style: none;
+    background: var(--line-soft);
+  }
+
+  .archive-directory a {
+    display: flex;
+    min-height: 3.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg-fog);
+    color: var(--text-ink);
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .archive-directory a span {
+    color: var(--gold);
+    font-size: 0.6rem;
+  }
+
+  .archive-directory a:hover,
+  .archive-directory a:focus-visible {
+    background: color-mix(in srgb, var(--bg-fog) 90%, var(--gold));
   }
 
   .archive-section {
@@ -436,6 +500,17 @@ const sourcesById = new Map(
     content: "";
   }
 
+  .research-lineage li[data-category="interpretation"]::before {
+    border-radius: 0;
+    transform: rotate(45deg);
+  }
+
+  .research-lineage li[data-category="extracted"]::before {
+    border-radius: 50% 50% 0;
+    background: color-mix(in srgb, var(--gold) 30%, var(--bg-fog));
+    transform: rotate(45deg);
+  }
+
   .research-lineage li:not(:last-child)::after {
     position: absolute;
     top: 1rem;
@@ -468,6 +543,32 @@ const sourcesById = new Map(
     color: var(--text-muted);
     font-size: 0.58rem;
     letter-spacing: 0.08em;
+  }
+
+  .category-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .category-legend span::before {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .category-legend span[data-category="interpretation"]::before {
+    border-radius: 0;
+    transform: rotate(45deg);
+  }
+
+  .category-legend span[data-category="extracted"]::before {
+    border-radius: 50% 50% 0;
+    background: color-mix(in srgb, var(--gold) 30%, var(--bg-fog));
+    transform: rotate(45deg);
   }
 
   .case-file-meta {
@@ -750,6 +851,12 @@ const sourcesById = new Map(
     color: var(--text-ink);
   }
 
+  .archive-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+
   .constitution-archive a:hover,
   .constitution-archive a:focus-visible {
     color: var(--gold);
@@ -769,6 +876,10 @@ const sourcesById = new Map(
       font-size: clamp(1.9rem, 9vw, 2.25rem);
     }
 
+    .archive-directory ol {
+      grid-template-columns: 1fr 1fr;
+    }
+
     .research-lineage li {
       grid-template-columns: 1fr;
       gap: 0.5rem;
@@ -785,6 +896,34 @@ const sourcesById = new Map(
       text-align: center;
     }
 
+  }
+
+  @media (max-width: 24rem) {
+    .archive-directory ol {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media print {
+    .constitution-archive {
+      padding: 0;
+      background: white;
+    }
+
+    .archive-directory,
+    .archive-descent-link,
+    .archive-text-link,
+    .archive-footer__links {
+      display: none;
+    }
+
+    .archive-section {
+      break-inside: avoid;
+    }
+
+    .source-list a {
+      overflow-wrap: anywhere;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

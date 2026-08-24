@@ -188,7 +188,7 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
       {projects.map((project, index) => (
         <li>
           <a
-            href={`#infocigan-artifact-${project.slug}`}
+            href={project.href}
             data-registry-target={project.slug}
             aria-current={index === 0 ? "true" : undefined}
           >
@@ -268,6 +268,7 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
         const reducedMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)",
         );
+        const mobileRegistry = window.matchMedia("(max-width: 700px)");
         let activeIndex = 0;
         let scrollFrame = 0;
         let programmaticTarget: number | null = null;
@@ -418,6 +419,10 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
 
         registryLinks.forEach((link, index) => {
           link.addEventListener("click", (event) => {
+            // CHOICE: On mobile the compact registry is navigation, not a
+            // remote control for the carousel sitting above it.
+            if (mobileRegistry.matches) return;
+
             event.preventDefault();
             goToSlide(index);
             track.focus({ preventScroll: true });
@@ -956,6 +961,18 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
 
     .artifact-registry ol {
       grid-template-columns: 1fr;
+    }
+
+    .artifact-registry strong::after {
+      content: " \2197";
+      color: #a67c00;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        monospace;
+      font-size: 0.72em;
+    }
+
+    .artifact-registry a[aria-current="true"] strong::after {
+      color: rgba(0, 0, 0, 0.62);
     }
   }
 

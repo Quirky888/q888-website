@@ -37,19 +37,23 @@ const headingId = `constitution-draft-${variant}`;
   </header>
 
   <div class="constitution-draft__principles">
-    {constitution.principles.map((principle) => (
-      <article class="constitution-principle">
+    {constitution.principles.map((principle) => {
+      const principleHeadingId = `constitution-principle-${variant}-${principle.number}`;
+
+      return (
+      <article class="constitution-principle" aria-labelledby={principleHeadingId}>
         <span class="constitution-principle__number" aria-hidden="true">
           {String(principle.number).padStart(2, "0")}
         </span>
         <div>
-          <PrincipleHeading class="constitution-principle__heading">
+          <PrincipleHeading class="constitution-principle__heading" id={principleHeadingId}>
             {principle.title}
           </PrincipleHeading>
           {principle.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
         </div>
       </article>
-    ))}
+      );
+    })}
   </div>
 
   <div class="constitution-draft__test">
