@@ -268,7 +268,6 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
         const reducedMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)",
         );
-        const mobileRegistry = window.matchMedia("(max-width: 700px)");
         let activeIndex = 0;
         let scrollFrame = 0;
         let programmaticTarget: number | null = null;
@@ -415,18 +414,6 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
             event.preventDefault();
             goToSlide(slides.length - 1);
           }
-        });
-
-        registryLinks.forEach((link, index) => {
-          link.addEventListener("click", (event) => {
-            // CHOICE: On mobile the compact registry is navigation, not a
-            // remote control for the carousel sitting above it.
-            if (mobileRegistry.matches) return;
-
-            event.preventDefault();
-            goToSlide(index);
-            track.focus({ preventScroll: true });
-          });
         });
 
         // CHOICE: the market always opens with its founding artifact, not a restored midpoint.

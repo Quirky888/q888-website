@@ -371,7 +371,7 @@ const constitutions = defineCollection({
     researchLineage: z.array(z.object({
       record: z.string().min(1),
       label: z.string().min(1),
-      category: z.enum(["verified", "interpretation", "extracted"]),
+      category: z.enum(["verified", "quieter", "construction"]),
     })).min(1),
     caseStudy: z.object({
       record: z.string().min(1),
