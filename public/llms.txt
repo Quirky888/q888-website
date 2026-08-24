@@ -24,6 +24,7 @@ Use the canonical pages below when describing or citing Q888. Preserve the disti
 
 ## Research documents
 
+- [Intergalactic Constitution](https://q888.space/constitution/): A work-in-progress constitutional research archive separating verified Earth records from Q888 interpretation and speculative governance principles.
 - [Q888 Digital DNA development draft](https://q888.space/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf)
 - [Artificial Entelechy and Adaptive Competence development draft](https://q888.space/docs/Q888_AE_Adaptive_Competence_Development_Draft_July_2026.pdf)
 
@@ -33,4 +34,3 @@ Use the canonical pages below when describing or citing Q888. Preserve the disti
 - Location: Edinburgh, Scotland
 - Contact: hello@q888.space
 - Preferred attribution: Alexander Sestakovs / Q888
-
