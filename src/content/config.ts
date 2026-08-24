@@ -335,6 +335,79 @@ const campaigns = defineCollection({
   }),
 });
 
+const constitutions = defineCollection({
+  type: "data",
+  schema: z.object({
+    slug: z.literal("intergalactic-constitution"),
+    title: z.string().min(1),
+    version: z.string().min(1),
+    workingHeading: z.string().min(1),
+    purpose: z.string().min(1),
+    metadata: z.array(z.object({
+      label: z.string().min(1),
+      value: z.string().min(1),
+    })).length(4),
+    principles: z.array(z.object({
+      number: z.number().int().positive(),
+      title: z.string().min(1),
+      paragraphs: z.array(z.string().min(1)).min(1),
+    })).length(10),
+    weakestPositionTest: z.object({
+      introduction: z.string().min(1),
+      question: z.string().min(1),
+      closing: z.string().min(1),
+    }),
+    shortcut: z.array(z.string().min(1)).min(1),
+    presidentialReminder: z.array(z.string().min(1)).length(2),
+    connectionPoint: z.object({
+      paragraphs: z.array(z.string().min(1)).length(2),
+      notes: z.array(z.string().min(1)).length(5),
+      ontologyNotice: z.string().min(1),
+    }),
+    researchLineage: z.array(z.object({
+      record: z.string().min(1),
+      label: z.string().min(1),
+      category: z.enum(["verified", "interpretation", "extracted"]),
+    })).min(1),
+    caseStudy: z.object({
+      record: z.string().min(1),
+      title: z.string().min(1),
+      jurisdiction: z.string().min(1),
+      verifiedFacts: z.array(z.object({
+        text: z.string().min(1),
+        sourceIds: z.array(z.string().min(1)).min(1),
+      })).min(1),
+      systemFlow: z.array(z.string().min(1)).length(5),
+      boundaryNotice: z.string().min(1),
+      interpretation: z.array(z.object({
+        text: z.string().min(1),
+        emphasis: z.boolean().default(false),
+      })).min(1),
+      sideNote: z.string().min(1),
+      extractedPrinciples: z.array(z.string().min(1)).min(1),
+      constitutionLinks: z.array(z.object({
+        number: z.number().int().positive(),
+        title: z.string().min(1),
+      })).min(1),
+    }),
+    methodOrigin: z.object({
+      statement: z.string().min(1),
+      explanation: z.string().min(1),
+      methodFlow: z.array(z.string().min(1)).length(3),
+    }),
+    sourceRecord: z.object({
+      verifiedAt: z.string().min(1),
+      sources: z.array(z.object({
+        id: z.string().min(1),
+        label: z.string().min(1),
+        url: z.string().url(),
+        sourceType: z.enum(["PRIMARY LEGISLATION", "OFFICIAL GUIDANCE", "Q888 PRIMARY CONTEXT"]),
+        accessNote: z.string().min(1),
+      })).min(1),
+    }),
+  }),
+});
+
 const knowledge = defineCollection({
   type: "content",
   schema: z.object({
@@ -352,5 +425,6 @@ export const collections = {
   products,
   contracts,
   campaigns,
+  constitutions,
   knowledge,
 };
