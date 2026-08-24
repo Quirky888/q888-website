@@ -70,7 +70,7 @@ const sourcesById = new Map(
           <h2 id="current-draft-heading">The instrument before the backstory</h2>
         </div>
         <ConstitutionDraft constitution={constitution} variant="archive" />
-        <a class="archive-descent-link" href="#connection-point">TRACE THE RESEARCH <span aria-hidden="true">↓</span></a>
+        <a class="archive-descent-link" href="#connection-point-heading">TRACE THE RESEARCH <span aria-hidden="true">↓</span></a>
       </section>
 
       <section class="archive-section" id="connection-point" aria-labelledby="connection-point-heading">
@@ -410,6 +410,7 @@ const sourcesById = new Map(
 
   .archive-section__header h2 {
     max-width: 22ch;
+    scroll-margin-top: 6rem;
     font-size: clamp(1.8rem, 4vw, 3.75rem);
   }
 
