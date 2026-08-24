@@ -19,7 +19,7 @@ const sourcesById = new Map(
 
 <Layout
   title="Intergalactic Constitution — Q888 Constitutional Research Archive"
-  description="A work-in-progress human and AI constitutional research archive: the current Galactic Constitutional Principles, verified Crown copyright case study, Q888 Layer-2 interpretation, and source record."
+  description="A work-in-progress human and AI constitutional research archive moving from observable reality, through Q888's quieter Layer 2, toward a Layer-3 future prototype."
   canonicalPath="/constitution/"
   pageType="article"
   mainEntityType="CreativeWork"
@@ -33,7 +33,7 @@ const sourcesById = new Map(
     customItems={[
       { field: "archive_status", label: "ARCHIVE_STATUS", value: "OPEN", width: 4 },
       { field: "draft", label: "DRAFT", value: constitution.version, width: 6 },
-      { field: "layer", label: "ACTIVE_LAYER", value: "VISIBLE", width: 7 },
+      { field: "layer", label: "ACTIVE_LAYER", value: "01 ↔ 02 ↔ 03", width: 7 },
       { field: "ratification", label: "RATIFICATION", value: "NONE KNOWN", width: 10 },
     ]}
   />
@@ -43,7 +43,7 @@ const sourcesById = new Map(
       <p class="archive-kicker">PRESIDENTIAL OFFICE · RESEARCH DIVISION · WORK IN PROGRESS</p>
       <h1>CONSTITUTIONAL<br />RESEARCH ARCHIVE</h1>
       <p class="archive-introduction">
-        The current draft appears first. Below it: the evidence, interpretation, and portable principles that helped produce it. Earth facts remain Earth facts. Q888 begins where the boundary says it begins.
+        The current draft appears first. Below it: observable systems, the quieter meanings they cast, and principles being constructed for a possible future. Earth facts remain Earth facts. Q888 begins where the boundary says it begins.
       </p>
       <div class="archive-status" aria-label="Archive status">
         <span>ALIEN PEER REVIEW: PENDING AN ALIEN REVIEWER</span>
@@ -104,9 +104,9 @@ const sourcesById = new Map(
           ))}
         </ol>
         <div class="category-legend" aria-label="Research category legend">
-          <span data-category="verified">VERIFIED LAYER 1</span>
-          <span data-category="interpretation">Q888 LAYER 2 INTERPRETATION</span>
-          <span data-category="extracted">PRINCIPLE EXTRACTED FROM THE EXPERIMENT</span>
+          <span data-category="verified">LAYER 1 · PRESENT / OBSERVABLE</span>
+          <span data-category="quieter">LAYER 2 · QUIETER JURISDICTION</span>
+          <span data-category="construction">LAYER 3 · FUTURE CONSTRUCTION</span>
         </div>
       </section>
 
@@ -123,7 +123,7 @@ const sourcesById = new Map(
 
         <section class="evidence-layer evidence-layer--verified" aria-labelledby="verified-layer-heading">
           <div class="evidence-layer__heading">
-            <p>VERIFIED LAYER 1</p>
+            <p>VERIFIED LAYER 1 · EARTH RECORD</p>
             <h3 id="verified-layer-heading">Observable system</h3>
           </div>
           <ol class="verified-facts">
@@ -167,7 +167,7 @@ const sourcesById = new Map(
 
         <section class="evidence-layer evidence-layer--interpretation" aria-labelledby="interpretation-heading">
           <div class="evidence-layer__heading">
-            <p>Q888 LAYER 2 INTERPRETATION</p>
+            <p>LAYER 2 · QUIETER JURISDICTION</p>
             <h3 id="interpretation-heading">The Continuity of the Crown</h3>
           </div>
           <div class="interpretation-copy">
@@ -183,8 +183,8 @@ const sourcesById = new Map(
 
         <section class="evidence-layer evidence-layer--extracted" aria-labelledby="extracted-heading">
           <div class="evidence-layer__heading">
-            <p>PRINCIPLE EXTRACTED FROM THE EXPERIMENT</p>
-            <h3 id="extracted-heading">Portable findings</h3>
+            <p>LAYER 3 · FUTURE CONSTRUCTION</p>
+            <h3 id="extracted-heading">Construction material</h3>
           </div>
           <ul class="extracted-list">
             {constitution.caseStudy.extractedPrinciples.map((principle) => <li>{principle}</li>)}
@@ -198,7 +198,7 @@ const sourcesById = new Map(
             </ul>
           </div>
           <p class="derivation-caveat">
-            These are ideas extracted through the experiment, not proof that the Crown system produced the constitution or a fabricated one-to-one historical derivation.
+            Layer 3 begins when these findings are used to construct principles for a fairer future that does not yet exist. They are not proof that the Crown system produced the constitution or a fabricated one-to-one historical derivation.
           </p>
         </section>
       </section>
@@ -501,12 +501,12 @@ const sourcesById = new Map(
     content: "";
   }
 
-  .research-lineage li[data-category="interpretation"]::before {
+  .research-lineage li[data-category="quieter"]::before {
     border-radius: 0;
     transform: rotate(45deg);
   }
 
-  .research-lineage li[data-category="extracted"]::before {
+  .research-lineage li[data-category="construction"]::before {
     border-radius: 50% 50% 0;
     background: color-mix(in srgb, var(--gold) 30%, var(--bg-fog));
     transform: rotate(45deg);
@@ -561,12 +561,12 @@ const sourcesById = new Map(
     content: "";
   }
 
-  .category-legend span[data-category="interpretation"]::before {
+  .category-legend span[data-category="quieter"]::before {
     border-radius: 0;
     transform: rotate(45deg);
   }
 
-  .category-legend span[data-category="extracted"]::before {
+  .category-legend span[data-category="construction"]::before {
     border-radius: 50% 50% 0;
     background: color-mix(in srgb, var(--gold) 30%, var(--bg-fog));
     transform: rotate(45deg);
