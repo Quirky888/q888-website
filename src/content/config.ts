@@ -351,6 +351,10 @@ const constitutions = defineCollection({
       number: z.number().int().positive(),
       title: z.string().min(1),
       paragraphs: z.array(z.string().min(1)).min(1),
+      annotation: z.object({
+        term: z.string().min(1),
+        explanation: z.string().min(1),
+      }).optional(),
     })).length(10),
     weakestPositionTest: z.object({
       introduction: z.string().min(1),

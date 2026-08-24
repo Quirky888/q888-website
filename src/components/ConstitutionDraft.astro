@@ -49,7 +49,26 @@ const headingId = `constitution-draft-${variant}`;
           <PrincipleHeading class="constitution-principle__heading" id={principleHeadingId}>
             {principle.title}
           </PrincipleHeading>
-          {principle.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {principle.paragraphs.map((paragraph) => {
+            const annotation = principle.annotation;
+            if (!annotation || !paragraph.includes(annotation.term)) return <p>{paragraph}</p>;
+
+            const [before, ...afterParts] = paragraph.split(annotation.term);
+            const explanationId = `principle-${variant}-${principle.number}-annotation`;
+
+            return (
+              <p>
+                {before}
+                <span class="constitution-annotation" role="term" tabindex="0" aria-describedby={explanationId}>
+                  {annotation.term}
+                  <span class="constitution-annotation__explanation" id={explanationId} role="tooltip">
+                    {annotation.explanation}
+                  </span>
+                </span>
+                {afterParts.join(annotation.term)}
+              </p>
+            );
+          })}
         </div>
       </article>
       );
@@ -217,6 +236,65 @@ const headingId = `constitution-draft-${variant}`;
     line-height: 1.65;
   }
 
+  .constitution-annotation {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dashed var(--constitution-gold);
+    color: inherit;
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.88em;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: help;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .constitution-annotation__explanation {
+    position: absolute;
+    z-index: 4;
+    bottom: calc(100% + 0.7rem);
+    left: 50%;
+    width: min(19rem, calc(100vw - 2rem));
+    padding: 0.85rem 1rem;
+    border-top: 2px solid var(--constitution-gold);
+    background: var(--constitution-ink);
+    color: var(--bg-fog);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 0.35rem);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .constitution-annotation__explanation::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 0.38rem solid transparent;
+    border-top-color: var(--constitution-ink);
+    content: "";
+    transform: translateX(-50%);
+  }
+
+  .constitution-annotation:is(:hover, :focus-visible) {
+    background: color-mix(in srgb, var(--constitution-gold) 14%, transparent);
+    color: var(--constitution-accent);
+    outline: none;
+  }
+
+  .constitution-annotation:is(:hover, :focus-visible) .constitution-annotation__explanation {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
   .constitution-draft--office .constitution-principle {
     padding-block: 1.45rem;
   }
@@ -360,6 +438,13 @@ const headingId = `constitution-draft-${variant}`;
   @media (max-width: 30rem) {
     .constitution-draft__metadata {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .constitution-annotation,
+    .constitution-annotation__explanation {
+      transition: none;
     }
   }
 </style>

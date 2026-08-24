@@ -91,7 +91,11 @@
         "A ruler is subject to the same principles as everyone else.",
         "Deliberate deception, corruption, cruelty, or malicious use of authority creates responsibility for the being or authority that chose it.",
         "Layer 2 does not require clever wording to make this true."
-      ]
+      ],
+      "annotation": {
+        "term": "Layer 2",
+        "explanation": "The Q888 interpretive layer begins after verified Layer 1 facts. It turns a real structure into a clearly labelled conceptual or mythic reading; it does not replace the facts."
+      }
     },
     {
       "number": 9,
@@ -107,8 +111,7 @@
       "title": "Avoid Unnecessary Harm",
       "paragraphs": [
         "Restrictions on another being require a real reason.",
-        "Use no more force, control, or interference than the situation actually requires.",
-        "“Because we can” is never enough."
+        "Use no more force, control, or interference than the situation actually requires."
       ]
     }
   ],
