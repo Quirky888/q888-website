@@ -15,11 +15,26 @@ const headingId = `constitution-draft-${variant}`;
 ---
 
 <section class:list={["constitution-draft", `constitution-draft--${variant}`]} aria-labelledby={headingId}>
+  {isOffice && (
+    <div class="constitution-draft__instrument-bar" aria-hidden="true">
+      <span>Q888 · GALACTIC CIVIC INSTRUMENT</span>
+      <span>OPEN DRAFT · {constitution.version}</span>
+    </div>
+  )}
+
   <header class="constitution-draft__header">
     <div class="constitution-draft__title-block">
-      <SectionHeading class="constitution-draft__heading" id={headingId}>
-        {constitution.workingHeading}
-      </SectionHeading>
+      <div class="constitution-draft__title-row">
+        <SectionHeading class="constitution-draft__heading" id={headingId}>
+          {constitution.workingHeading}
+        </SectionHeading>
+        {isOffice && (
+          <div class="constitution-draft__seal" aria-hidden="true">
+            <span>✦</span>
+            <small>Q888<br />CIVIC ORBIT</small>
+          </div>
+        )}
+      </div>
       <DraftHeading class="constitution-draft__title">{constitution.title}</DraftHeading>
       <p class="constitution-draft__purpose">
         <strong>Purpose:</strong> {constitution.purpose}
@@ -92,8 +107,49 @@ const headingId = `constitution-draft-${variant}`;
   }
 
   .constitution-draft--office {
-    padding: 3.5rem 0;
-    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    isolation: isolate;
+    margin: 3.5rem 0;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    scroll-margin-top: 5.5rem;
+    border: 1px solid color-mix(in srgb, var(--constitution-ink) 24%, transparent);
+    background:
+      radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--constitution-gold) 17%, transparent) 0 8rem, transparent 18rem),
+      linear-gradient(color-mix(in srgb, var(--constitution-ink) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--constitution-ink) 5%, transparent) 1px, transparent 1px),
+      color-mix(in srgb, var(--bg-fog) 96%, white);
+    background-size: auto, 2rem 2rem, 2rem 2rem, auto;
+    box-shadow:
+      0.7rem 0.7rem 0 color-mix(in srgb, var(--constitution-accent) 13%, transparent),
+      0 1.5rem 4rem color-mix(in srgb, var(--constitution-ink) 10%, transparent);
+  }
+
+  .constitution-draft--office::before {
+    position: absolute;
+    inset: 0.45rem;
+    z-index: -1;
+    border: 1px solid color-mix(in srgb, var(--constitution-gold) 28%, transparent);
+    pointer-events: none;
+    content: "";
+  }
+
+  .constitution-draft__instrument-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    margin: calc(clamp(1.25rem, 3vw, 2.5rem) * -1) calc(clamp(1.25rem, 3vw, 2.5rem) * -1) 2rem;
+    padding: 0.8rem clamp(1.25rem, 3vw, 2.5rem);
+    background: var(--constitution-ink);
+    color: var(--bg-fog);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .constitution-draft__instrument-bar span:last-child {
+    color: var(--constitution-gold);
   }
 
   .constitution-draft__header {
@@ -120,8 +176,52 @@ const headingId = `constitution-draft-${variant}`;
     overflow-wrap: anywhere;
   }
 
+  .constitution-draft__title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
   .constitution-draft--office .constitution-draft__heading {
-    font-size: clamp(1.55rem, 3vw, 2.65rem);
+    max-width: 11ch;
+    scroll-margin-top: 6rem;
+    color: var(--constitution-ink);
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    line-height: 0.9;
+    text-shadow: 0.12em 0.12em 0 color-mix(in srgb, var(--constitution-accent) 18%, transparent);
+    overflow-wrap: normal;
+  }
+
+  .constitution-draft__seal {
+    display: grid;
+    flex: 0 0 6.5rem;
+    width: 6.5rem;
+    aspect-ratio: 1;
+    place-content: center;
+    border: 1px solid var(--constitution-gold);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, transparent 44%, color-mix(in srgb, var(--constitution-gold) 18%, transparent) 45% 48%, transparent 49%),
+      var(--constitution-ink);
+    color: var(--constitution-gold);
+    text-align: center;
+    transform: rotate(5deg);
+    box-shadow: inset 0 0 0 0.35rem var(--constitution-ink), inset 0 0 0 0.42rem var(--constitution-gold);
+  }
+
+  .constitution-draft__seal span {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .constitution-draft__seal small {
+    margin-top: 0.25rem;
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.48rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.08em;
   }
 
   .constitution-draft__title {
@@ -168,15 +268,24 @@ const headingId = `constitution-draft-${variant}`;
   }
 
   .constitution-draft--office .constitution-draft__metadata {
-    gap: 0.5rem 1.5rem;
+    gap: 0.55rem;
     border: 0;
     background: transparent;
   }
 
   .constitution-draft--office .constitution-draft__metadata div {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--line-soft);
-    background: transparent;
+    padding: 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--constitution-ink) 20%, transparent);
+    background: color-mix(in srgb, var(--bg-fog) 88%, white);
+  }
+
+  .constitution-draft--office .constitution-draft__metadata div:nth-child(2) {
+    background: var(--constitution-ink);
+    color: var(--bg-fog);
+  }
+
+  .constitution-draft--office .constitution-draft__metadata div:nth-child(2) dt {
+    color: var(--constitution-gold);
   }
 
   .constitution-draft__principles {
@@ -214,7 +323,30 @@ const headingId = `constitution-draft-${variant}`;
   }
 
   .constitution-draft--office .constitution-principle {
-    padding-block: 1.45rem;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border: 1px solid color-mix(in srgb, var(--constitution-ink) 18%, transparent);
+    background: color-mix(in srgb, var(--bg-fog) 92%, white);
+  }
+
+  .constitution-draft--office .constitution-draft__principles {
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+    border-bottom: 0;
+  }
+
+  .constitution-draft--office .constitution-principle:nth-child(4n + 1),
+  .constitution-draft--office .constitution-principle:nth-child(4n + 4) {
+    background: color-mix(in srgb, var(--constitution-accent) 8%, var(--bg-fog));
+  }
+
+  .constitution-draft--office .constitution-principle__number {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--constitution-ink);
+    color: var(--constitution-gold);
   }
 
   .constitution-draft--office .constitution-principle__heading {
@@ -233,7 +365,24 @@ const headingId = `constitution-draft-${variant}`;
   }
 
   .constitution-draft--office .constitution-draft__test {
-    border-top-width: 1px;
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    background: var(--constitution-ink);
+    color: var(--bg-fog);
+    box-shadow: 0.5rem 0.5rem 0 var(--constitution-gold);
+  }
+
+  .constitution-draft--office .constitution-draft__test::after {
+    position: absolute;
+    right: -1rem;
+    bottom: -3.5rem;
+    color: color-mix(in srgb, var(--constitution-gold) 18%, transparent);
+    font-family: "Bungee", ui-sans-serif, system-ui, sans-serif;
+    font-size: 10rem;
+    line-height: 1;
+    pointer-events: none;
+    content: "?";
   }
 
   .constitution-draft__label {
@@ -286,6 +435,18 @@ const headingId = `constitution-draft-${variant}`;
     border: 1px solid var(--constitution-gold);
   }
 
+  .constitution-draft--office .constitution-draft__reminder {
+    border: 0;
+    background: var(--constitution-gold);
+    color: var(--constitution-ink);
+    box-shadow: 0.45rem 0.45rem 0 var(--constitution-ink);
+    transform: rotate(0.6deg);
+  }
+
+  .constitution-draft--office .constitution-draft__reminder .constitution-draft__label {
+    color: var(--constitution-ink);
+  }
+
   .constitution-draft__reminder p:not(.constitution-draft__label) {
     margin: 0.35rem 0 0;
     font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
@@ -318,6 +479,19 @@ const headingId = `constitution-draft-${variant}`;
     text-underline-offset: 0.35em;
   }
 
+  .constitution-draft--office .constitution-draft__footer a {
+    padding: 0.75rem 1rem;
+    background: var(--constitution-ink);
+    color: var(--bg-fog);
+    text-decoration: none;
+  }
+
+  .constitution-draft--office .constitution-draft__footer a:hover,
+  .constitution-draft--office .constitution-draft__footer a:focus-visible {
+    background: var(--constitution-gold);
+    color: var(--constitution-ink);
+  }
+
   .constitution-draft__footer a:hover,
   .constitution-draft__footer a:focus-visible {
     color: var(--constitution-accent);
@@ -338,12 +512,12 @@ const headingId = `constitution-draft-${variant}`;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .constitution-principle:nth-child(odd) {
+    .constitution-draft:not(.constitution-draft--office) .constitution-principle:nth-child(odd) {
       padding-right: 2rem;
       border-right: 1px solid var(--line-soft);
     }
 
-    .constitution-principle:nth-child(even) {
+    .constitution-draft:not(.constitution-draft--office) .constitution-principle:nth-child(even) {
       padding-left: 2rem;
     }
 
@@ -356,6 +530,16 @@ const headingId = `constitution-draft-${variant}`;
   @media (max-width: 30rem) {
     .constitution-draft__metadata {
       grid-template-columns: 1fr;
+    }
+
+    .constitution-draft__seal {
+      flex-basis: 4.75rem;
+      width: 4.75rem;
+    }
+
+    .constitution-draft--office {
+      margin-inline: -0.35rem;
+      box-shadow: 0.35rem 0.35rem 0 color-mix(in srgb, var(--constitution-accent) 13%, transparent);
     }
   }
 </style>
