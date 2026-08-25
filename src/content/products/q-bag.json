@@ -134,7 +134,35 @@
     ],
     "hostCta": "Host the pilot",
     "backCta": "Back the pilot",
-    "closingNote": "No platform. No app. No speculative machine required at the counter—only a useful object, an ordinary refill, and enough attention to learn what happens next."
+    "closingNote": "No platform. No app. No speculative machine required at the counter—only a useful object, an ordinary refill, and enough attention to learn what happens next.",
+    "prototypeRecord": {
+      "label": "Prototype Record / V0",
+      "title": "It existed before it had a system.",
+      "body": "Before Q-Bag became a formal refill protocol, I reused a resealable Artisan Roast retail coffee bag, personalised it with stickers and collage, and carried it during travel. It lasted for some time. The behaviour and attachment were already real; the measured pilot comes next.",
+      "boundary": "FIELD NOTE: These photographs document a personal prototype. They do not establish food-safety approval, freshness performance, or café workflow; those questions belong to V1.",
+      "photos": [
+        {
+          "src": "/images/qbag-v0-making.jpeg",
+          "alt": "Alternating views of Q-Bag V0 being made at home on a working table and standing among the artist's other work",
+          "caption": "Home production · cutting, layering, becoming",
+          "width": 768,
+          "height": 1024,
+          "alternateSrc": "/images/qbag-v0-production-art.jpeg",
+          "alternateWidth": 768,
+          "alternateHeight": 1024
+        },
+        {
+          "src": "/images/qbag-v0-field.jpeg",
+          "alt": "Alternating views of the completed personalised Q-Bag V0 at home and among Artisan Roast retail coffee bags at the roastery",
+          "caption": "Ready object · home / roastery field views",
+          "width": 900,
+          "height": 1200,
+          "alternateSrc": "/images/qbag-v0-ready-roastery.jpeg",
+          "alternateWidth": 900,
+          "alternateHeight": 1200
+        }
+      ]
+    }
   },
   "participantCards": [
     {

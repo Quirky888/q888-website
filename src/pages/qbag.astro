@@ -318,6 +318,47 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
             </article>
           </div>
 
+          <!-- DNA: Physical evidence should make the concept more credible without overstating what V0 proved. -->
+          <aside class="qbag-prototype-record" aria-labelledby="qbag-prototype-record-title">
+            <div class="qbag-prototype-copy">
+              <p class="qbag-operating-audience qb-mono">{qBag.operationalLayer.prototypeRecord.label}</p>
+              <h3 id="qbag-prototype-record-title">{qBag.operationalLayer.prototypeRecord.title}</h3>
+              <p>{qBag.operationalLayer.prototypeRecord.body}</p>
+              <p class="qbag-prototype-boundary qb-mono">{qBag.operationalLayer.prototypeRecord.boundary}</p>
+            </div>
+            <div class="qbag-prototype-photos">
+              {qBag.operationalLayer.prototypeRecord.photos.map((photo, photoIndex) => (
+                <figure>
+                  <div
+                    class="qbag-prototype-image-stack"
+                    style={`--qbag-slide-delay: ${photoIndex * 8}s`}
+                  >
+                    <img
+                      class="qbag-prototype-image qbag-prototype-image--primary"
+                      src={photo.src}
+                      alt={photo.alt}
+                      loading="lazy"
+                      decoding="async"
+                      width={photo.width}
+                      height={photo.height}
+                    />
+                    <img
+                      class="qbag-prototype-image qbag-prototype-image--alternate"
+                      src={photo.alternateSrc}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      width={photo.alternateWidth}
+                      height={photo.alternateHeight}
+                    />
+                  </div>
+                  <figcaption class="qb-mono">{photo.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </aside>
+
           <div class="qbag-operating-actions">
             <a href="#qbag-contact" class="qbag-operating-action qbag-operating-action--host">{qBag.operationalLayer.hostCta} →</a>
             <a href={backPilotMailto} class="qbag-operating-action qbag-operating-action--back">{qBag.operationalLayer.backCta} →</a>
@@ -1033,6 +1074,66 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   function initQBagPage() {
     initGallery();
     initTypographicDoors();
+    initPrototypeHover();
+  }
+
+  function initPrototypeHover() {
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!canHover.matches || reduceMotion.matches) return;
+
+    document.querySelectorAll<HTMLElement>('.qbag-prototype-image-stack').forEach((stack) => {
+      if (stack.dataset.hoverReady === 'true') return;
+
+      const alternate = stack.querySelector<HTMLElement>('.qbag-prototype-image--alternate');
+      const autoAnimation = alternate?.getAnimations()[0];
+      if (!alternate || !autoAnimation) return;
+
+      let hoverAnimation: Animation | null = null;
+      let returnAnimation: Animation | null = null;
+      let pausedAutoOpacity = Number.parseFloat(getComputedStyle(alternate).opacity);
+
+      const showOtherMemory = () => {
+        returnAnimation?.cancel();
+        returnAnimation = null;
+
+        if (autoAnimation.playState !== 'paused') {
+          pausedAutoOpacity = Number.parseFloat(getComputedStyle(alternate).opacity);
+          autoAnimation.pause();
+        }
+
+        hoverAnimation?.cancel();
+        const currentOpacity = Number.parseFloat(getComputedStyle(alternate).opacity);
+        const oppositeOpacity = currentOpacity >= 0.5 ? 0 : 1;
+        hoverAnimation = alternate.animate(
+          [{ opacity: currentOpacity }, { opacity: oppositeOpacity }],
+          { duration: 850, easing: 'ease-in-out', fill: 'forwards' },
+        );
+      };
+
+      const resumeAutomaticMemory = () => {
+        const currentOpacity = Number.parseFloat(getComputedStyle(alternate).opacity);
+        hoverAnimation?.cancel();
+        hoverAnimation = null;
+
+        const animation = alternate.animate(
+          [{ opacity: currentOpacity }, { opacity: pausedAutoOpacity }],
+          { duration: 700, easing: 'ease-in-out', fill: 'forwards' },
+        );
+        returnAnimation = animation;
+
+        animation.finished.then(() => {
+          if (returnAnimation !== animation) return;
+          animation.cancel();
+          returnAnimation = null;
+          autoAnimation.play();
+        }).catch(() => {});
+      };
+
+      stack.addEventListener('mouseenter', showOtherMemory);
+      stack.addEventListener('mouseleave', resumeAutomaticMemory);
+      stack.dataset.hoverReady = 'true';
+    });
   }
 
   if (document.readyState === "loading") {
@@ -1966,6 +2067,107 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   .qbag-backer-lists li::before {
     content: '✦';
     color: var(--qb-amber);
+  }
+
+  .qbag-prototype-record {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
+    gap: 0;
+    border-top: 2px solid var(--qb-text);
+    background: #17100b;
+    color: #fffaf0;
+  }
+
+  .qbag-prototype-copy {
+    padding: clamp(2rem, 4vw, 3.5rem);
+    border-right: 2px solid rgba(255, 250, 240, 0.55);
+  }
+
+  .qbag-prototype-copy h3 {
+    margin: 0 0 1.5rem;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.8rem, 3vw, 3.2rem);
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .qbag-prototype-copy > p:not(.qbag-operating-audience, .qbag-prototype-boundary) {
+    margin: 0;
+    color: rgba(255, 250, 240, 0.88);
+    font-size: 1rem;
+    line-height: 1.68;
+  }
+
+  .qbag-prototype-boundary {
+    margin: 2rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 250, 240, 0.26);
+    color: var(--qb-gold-bright);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.065em;
+    line-height: 1.65;
+    text-transform: uppercase;
+  }
+
+  .qbag-prototype-photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+  }
+
+  .qbag-prototype-photos figure {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    min-width: 0;
+    margin: 0;
+    background: #0d0906;
+  }
+
+  .qbag-prototype-photos figure + figure {
+    border-left: 2px solid rgba(255, 250, 240, 0.55);
+  }
+
+  .qbag-prototype-image-stack {
+    position: relative;
+    width: 100%;
+    min-height: 28rem;
+    overflow: hidden;
+    background: #0d0906;
+  }
+
+  .qbag-prototype-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .qbag-prototype-image--alternate {
+    opacity: 0;
+    animation: qbag-prototype-crossfade 32s ease-in-out var(--qbag-slide-delay) infinite both;
+  }
+
+  .qbag-prototype-photos figure:first-child .qbag-prototype-image--alternate {
+    object-position: right center;
+  }
+
+  @keyframes qbag-prototype-crossfade {
+    0%, 32% { opacity: 0; }
+    42%, 82% { opacity: 1; }
+    92%, 100% { opacity: 0; }
+  }
+
+  .qbag-prototype-photos figcaption {
+    min-height: 3.8rem;
+    padding: 0.85rem 1rem;
+    border-top: 1px solid rgba(255, 250, 240, 0.45);
+    color: rgba(255, 250, 240, 0.78);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-transform: uppercase;
   }
 
   .qbag-operating-actions {
@@ -3021,7 +3223,8 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     }
 
     .qbag-operating-header,
-    .qbag-operating-grid {
+    .qbag-operating-grid,
+    .qbag-prototype-record {
       grid-template-columns: 1fr;
     }
 
@@ -3032,6 +3235,11 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
 
     .qbag-backer-lists {
       grid-template-columns: 1fr;
+    }
+
+    .qbag-prototype-copy {
+      border-right: 0;
+      border-bottom: 2px solid rgba(255, 250, 240, 0.55);
     }
 
     .qbag-participant-grid {
@@ -3138,6 +3346,10 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     .qbag-operating-header { padding: 2rem 1.25rem; }
     .qbag-operating-grid article { padding: 2rem 1.25rem; }
     .qbag-cafe-desk dl > div { grid-template-columns: 1fr; gap: 0.45rem; }
+    .qbag-prototype-copy { padding: 2rem 1.25rem; }
+    .qbag-prototype-photos { grid-template-columns: 1fr; }
+    .qbag-prototype-photos figure + figure { border-top: 2px solid rgba(255, 250, 240, 0.55); border-left: 0; }
+    .qbag-prototype-image-stack { min-height: 0; max-height: 32rem; aspect-ratio: 3 / 4; }
     .qbag-operating-actions { grid-template-columns: 1fr; }
     .qbag-operating-action + .qbag-operating-action { border-top: 2px solid var(--qb-text); border-left: 0; }
     .qbag-operating-note { text-align: left; }
@@ -3176,6 +3388,10 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
      REDUCED MOTION
      ════════════════════════════════════== */
   @media (prefers-reduced-motion: reduce) {
+    .qbag-prototype-image--alternate {
+      display: none;
+      animation: none;
+    }
     .qbag-headline,
     .qbag-eyebrow {
       animation: none;

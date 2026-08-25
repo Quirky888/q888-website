@@ -199,6 +199,24 @@ const qBagProduct = z.object({
     hostCta: z.string().min(1),
     backCta: z.string().min(1),
     closingNote: z.string().min(1),
+    prototypeRecord: z.object({
+      label: z.string().min(1),
+      title: z.string().min(1),
+      body: z.string().min(1),
+      boundary: z.string().min(1),
+      photos: z.array(
+        z.object({
+          src: z.string().min(1),
+          alt: z.string().min(1),
+          caption: z.string().min(1),
+          width: z.number().int().positive(),
+          height: z.number().int().positive(),
+          alternateSrc: z.string().min(1),
+          alternateWidth: z.number().int().positive(),
+          alternateHeight: z.number().int().positive(),
+        }),
+      ).length(2),
+    }),
   }),
   participantCards: z
     .array(

@@ -164,3 +164,17 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Evidence:** Aleksandrs explicitly prioritised historical understanding and continuity, then set non-confusion and low overhead as constraints.
 - **Possible DNA change:** None required. Implement this as an agent retrieval protocol before considering any canonical amendment.
 - **Status:** observation / approved
+
+---
+
+### 2026-08-25 — The prototype preceded the proposition
+
+- **Project:** q888-website / `/qbag/`
+- **Task context:** Moving from page refinement toward a physically demonstrable café proposal.
+- **Working mode:** BUILD + LEARN
+- **Expression lens or overlay:** HUMAN_CODE + MYTHIC_Q888 + BUREAUCRATIC_SATIRE; task-local layered Q-Bag model
+- **Human response:** supplied photographic evidence and clarified that a personalised Q-Bag prototype had already been made from a resealable Artisan Roast retail bag, used during travel, and kept in service for some time.
+- **Observed preference:** Q888 concepts may grow from informal lived experiments before they receive a formal system or pilot. When physical evidence exists, show it as part of the artwork's history while distinguishing personal proof-of-concept from validated product claims. When documentary photographs alternate, their motion should be slow, soft and out of phase so one record remains stable while the other changes.
+- **Evidence:** Supplied photographs document the collage context, home production, completed personalised bag, and its relationship to existing retail coffee bags at the roastery. Aleksandrs explicitly requested that the production and ready-object frames change independently rather than simultaneously.
+- **Possible DNA change:** None proposed. This is project evidence for the human memory ↔ machine systems and artwork ↔ functioning tool tensions.
+- **Status:** observation / approved
