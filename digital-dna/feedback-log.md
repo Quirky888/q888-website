@@ -99,3 +99,32 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Evidence:** Aleksandrs explicitly approved the new homepage orientation typography and requested it as the basis for Infocigan, while naming gold and flash as elements to preserve.
 - **Possible DNA change:** None proposed. This is project-specific evidence for the stable structure ↔ playful surface tension.
 - **Status:** observation
+
+---
+
+### 2026-08-25 — Do not sanitise money out of transparent artistic commerce
+
+- **Project:** q888-website / `/qbag/`
+- **Task context:** Reframing Q-Bag as a refill protocol while separating Infocigan satire from guaranteed financial claims.
+- **Working mode:** EXPLORE
+- **Expression lens or overlay:** HUMAN_CODE + MYTHIC_Q888 + BUREAUCRATIC_SATIRE + COSMIC_PROPAGANDA; no dedicated Q-Bag overlay
+- **Agent produced:** A safety-led boundary stating that the satire remained while the financial promise did not.
+- **Human response:** edited — Q-Bag is openly about creating money, experience and resources for other projects as well as reducing waste; an owner who later profits from a unique design should keep that as a personal bonus for early trust.
+- **Observed preference:** Do not confuse transparency with removing financial ambition. In Infocigan and Overpriced contexts, it is legitimate to say that the artist wants to earn money, reinvest it into future work, and allow cultural objects to acquire value. The honest boundary is between possible upside and promised return—not between art and money.
+- **Evidence:** Aleksandrs explicitly asked to blend Overpriced and Infocigan into Q-Bag and described future collector profit as “personal bonus for trust.”
+- **Possible DNA change:** None proposed. Existing artwork ↔ functioning tool, confidence ↔ self-irony, and bureaucratic requirement ↔ artistic refusal tensions cover this preference.
+- **Status:** observation
+
+---
+
+### 2026-08-25 — Hidden messages as typographic doors
+
+- **Project:** q888-website / `/qbag/` and shared page language
+- **Task context:** Connecting “Chosen stickers” to Overpriced Stickers through the in-text hover-morph interaction first established on `/bureaucracy/`.
+- **Working mode:** BUILD
+- **Expression lens or overlay:** PROJECT_OVERLAY + HUMAN_CODE; no dedicated Q-Bag overlay
+- **Human response:** requested extension — make this effect one of Q888's standard features for drawing attention or carrying a hidden message.
+- **Observed preference:** Reusable typographic transformations should reward hover and keyboard attention with a second phrase or passage, while remaining quiet in the default reading state. They work best as sparse doors between related Q888 worlds, not as decoration on every heading.
+- **Evidence:** Aleksandrs clarified that only the in-sentence phrase “Chosen stickers” should morph into “Overpriced stickers,” using the quiet embedded treatment from the Bureaucracy compliance notice, and described the effect as a standard feature for hidden messages.
+- **Possible DNA change:** None proposed. The pattern implements the clarity ↔ mystery and stable structure ↔ playful surface tensions in a reusable component.
+- **Status:** observation

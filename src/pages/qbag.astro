@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
+import TypographicDoor from "../components/TypographicDoor.astro";
 import { getEntry } from "astro:content";
 import { Image } from "astro:assets";
 
@@ -17,18 +18,18 @@ const qBag = qBagEntry.data;
 
 <Layout
   title="Q-Bag — Reusable Coffee Bag Art System by Q888"
-  description="Q-Bag is a reusable coffee-bag art system by Q888 that turns packaging into a long-lived personal archive through collectible stickers, reuse, and evolving stories."
+  description="Q-Bag is a reusable coffee container and cultural refill protocol by Q888, turning repeated coffee refills and personal marks into a long-lived personal archive."
   image={qBag.heroImage}
   canonicalPath="/qbag/"
   mainEntityType="CreativeWork"
   mainEntityName="Q-Bag"
-  keywords={["Q-Bag", "reusable coffee bag", "sustainable art", "collectible stickers", "coffee packaging", "Q888"]}
+  keywords={["Q-Bag", "reusable coffee bag", "coffee refill protocol", "sustainable art", "personalised object", "coffee packaging", "Q888"]}
 >
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />
 
-  <main class="relative min-h-[100dvh] pt-10 md:pt-11">
+  <main class="relative min-h-[100dvh] pt-10 md:pt-11" data-q888-door-root>
     <div class="qbag-eden-wrap">
 
       <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
@@ -36,7 +37,8 @@ const qBag = qBagEntry.data;
         <div class="qbag-hero-inner px-6 sm:px-10 lg:px-16">
 
           <!-- Portal image with holographic ring -->
-          <div class="qbag-portal-wrap">
+          <div class="qbag-visual-column">
+            <div class="qbag-portal-wrap">
             <!-- Holographic bag ring -->
             <div class="portal-badge-ring" aria-hidden="true">
               <svg class="badge-ring-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,6 +110,12 @@ const qBag = qBagEntry.data;
                 </svg>
               </div>
             </div>
+            </div>
+
+            <aside class="qbag-image-disclosure" aria-label="Hero image process note">
+              <span class="qbag-image-disclosure-label">{qBag.imageDisclosure.label}</span>
+              <p>{qBag.imageDisclosure.text}</p>
+            </aside>
           </div>
 
           <!-- Title block -->
@@ -116,11 +124,17 @@ const qBag = qBagEntry.data;
             <h1 class="qbag-headline">
               Q&#8209;BAG™
             </h1>
+            <p class="qbag-hero-declaration">{qBag.heroDeclaration}</p>
+            <p class="qbag-hero-support">{qBag.heroSupport}</p>
+            <div class="qbag-hero-actions">
+              <a href="#qbag-protocol" class="qbag-primary-action">See the refill ritual</a>
+              <a href="#qbag-pilot" class="qbag-text-action">Enter the pilot territory ↓</a>
+            </div>
             <div class="qbag-status-block qb-mono">
-              <div>TYPE: REUSABLE CONTAINER</div>
+              <div>TYPE: REFILL PROTOCOL + NATIVE VESSEL</div>
               <div>EDITION: PRESIDENT OF THE GALAXY</div>
               <div>STATUS: <span class="qbag-status-live">CONCEPT ACTIVE</span></div>
-              <div>FORMAT: COFFEE · STICKERS · CULTURE</div>
+              <div>FORMAT: COFFEE · MARKS · RETURNING</div>
             </div>
           </div>
 
@@ -158,9 +172,48 @@ const qBag = qBagEntry.data;
       <!-- ══════════════════════════════════ MAIN CONTENT ══════════════════════════════════ -->
       <div class="qbag-main-content px-6 sm:px-10 lg:px-16 pb-16">
 
-        <!-- Lead -->
-        <section class="qbag-section">
+        <!-- DNA: The action comes before the mythology so the artwork has a legible human ritual. -->
+        <section class="qbag-manifesto" aria-labelledby="qbag-manifesto-title">
+          <p class="qbag-section-index qb-mono">01 / THE ORDINARY ACTION</p>
+          <h2 id="qbag-manifesto-title" class="qbag-manifesto-title">{qBag.introTagline}</h2>
           <p class="qbag-lead">{qBag.introLead}</p>
+        </section>
+
+        <section class="qbag-section qbag-protocol-section" id="qbag-protocol" aria-labelledby="qbag-protocol-title">
+          <div class="qbag-section-heading">
+            <p class="qbag-section-index qb-mono">02 / SIMPLE RITUAL · PERSONAL OBJECT</p>
+            <h2 id="qbag-protocol-title" class="qbag-h2">{qBag.protocolTitle}</h2>
+            <p class="qbag-section-intro">{qBag.protocolLead}</p>
+          </div>
+          <ol class="qbag-protocol-grid">
+            {qBag.protocolSteps.map((step) => (
+              <li class="qbag-protocol-step">
+                <span class="qbag-step-number qb-mono">{step.number}</span>
+                <h3>{step.action}</h3>
+                <p>{step.detail}</p>
+              </li>
+            ))}
+          </ol>
+          <div class="qbag-return-line" aria-hidden="true">
+            <span>RETURN</span><span>↺</span><span>RETURN</span><span>↺</span><span>RETURN</span>
+          </div>
+        </section>
+
+        <section class="qbag-equation" aria-label="Q-Bag ritual equation">
+          {qBag.ritualEquation.map((item, index) => (
+            <div
+              class:list={["qbag-equation-item", { "qbag-equation-item--secret": index === qBag.ritualEquation.length - 1 }]}
+              tabindex={index === qBag.ritualEquation.length - 1 ? "0" : undefined}
+            >
+              <span class="qbag-equation-subject qb-mono">{item.subject}</span>
+              <span class="qbag-equation-mark">=</span>
+              <strong>{item.meaning}</strong>
+              {index === qBag.ritualEquation.length - 1 && (
+                <span class="qbag-authorship-whisper qb-mono">AUTHORSHIP DETECTED</span>
+              )}
+              {index < qBag.ritualEquation.length - 1 && <span class="qbag-equation-plus" aria-hidden="true">+</span>}
+            </div>
+          ))}
         </section>
 
         <!-- Gallery card trigger -->
@@ -195,7 +248,7 @@ const qBag = qBagEntry.data;
 
               <!-- Right: Content & Action -->
               <div class="artwork-card-text-wrap">
-                <div class="artwork-card-tag font-mono">// INFOCIGAN SPECULATIVE CULTURAL ARTIFACT</div>
+                <div class="artwork-card-tag font-mono">// SATIRICAL INFOCIGAN ARTWORK ARCHIVE</div>
                 <h3 class="artwork-card-title">{qBag.artworkCardTitle}</h3>
                 <p class="artwork-card-description">{qBag.artworkCardDescription}</p>
                 
@@ -211,7 +264,8 @@ const qBag = qBagEntry.data;
         </section>
 
         <!-- The Concept -->
-        <section class="qbag-section">
+        <section class="qbag-section qbag-concept-section">
+          <p class="qbag-section-index qb-mono">03 / OBJECT + SHARED RULE</p>
           <h2 class="qbag-h2">{qBag.conceptCards[0].title}</h2>
           <div class="qbag-two-col">
             <div class="qbag-two-col-text">
@@ -264,6 +318,47 @@ const qBag = qBagEntry.data;
           </div>
         </section>
 
+        <section class="qbag-section qbag-ageing-section" aria-labelledby="qbag-ageing-title">
+          <div class="qbag-section-heading">
+            <p class="qbag-section-index qb-mono">04 / THE ANTI-DISPOSABLE MECHANISM</p>
+            <h2 id="qbag-ageing-title" class="qbag-h2">{qBag.ageingTitle}</h2>
+            <p class="qbag-section-intro">{qBag.ageingLead}</p>
+          </div>
+          <ol class="qbag-ageing-track">
+            {qBag.ageingStages.map((stage, index) => (
+              <li
+                class:list={{ "qbag-ageing-stage--gravity": index === qBag.ageingStages.length - 1 }}
+                tabindex={index === qBag.ageingStages.length - 1 ? "0" : undefined}
+              >
+                <span class="qbag-ageing-count qb-mono">{stage.count}</span>
+                <span class="qbag-ageing-dot" aria-hidden="true"></span>
+                <h3>{stage.title}</h3>
+                <p>
+                  {index === 2 ? (
+                    <>
+                      <TypographicDoor
+                        id="qbag-overpriced-stickers"
+                        zone="qbag"
+                        kind="portal"
+                        voice="archive"
+                        text="Chosen stickers,"
+                        revealText="Overpriced stickers,"
+                        ariaLabel="Chosen stickers — secret passage to Overpriced Stickers"
+                        href="/overpriced/"
+                        pinned
+                      />{stage.detail.slice("Chosen stickers,".length)}
+                    </>
+                  ) : stage.detail}
+                </p>
+                {index === qBag.ageingStages.length - 1 && (
+                  <span class="qbag-gravity-whisper qb-mono">MEMORY HAS MASS</span>
+                )}
+              </li>
+            ))}
+          </ol>
+          <blockquote class="qbag-reverse-quote">The older the object becomes, the less disposable it feels.</blockquote>
+        </section>
+
         <!-- ══ SVG DIVIDER 2: bag portal ring ══ -->
         <div class="qb-cosmic-divider" aria-hidden="true">
           <svg viewBox="0 0 800 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -295,8 +390,9 @@ const qBag = qBagEntry.data;
           </svg>
         </div>
 
-        <!-- Stickers as Artifacts -->
-        <section class="qbag-section">
+        <!-- Marks as Evidence -->
+        <section class="qbag-section qbag-marks-section">
+          <p class="qbag-section-index qb-mono">05 / EVIDENCE + PERSONAL IDENTITY</p>
           <h2 class="qbag-h2">{qBag.conceptCards[1].title}</h2>
           <p>{qBag.conceptCards[1].paragraphs[0]}</p>
           <p>{qBag.conceptCards[1].paragraphs[1]}</p>
@@ -406,8 +502,9 @@ const qBag = qBagEntry.data;
           </div>
         </div>
 
-        <!-- Sustainability as Identity -->
-        <section class="qbag-section">
+        <!-- Reuse as Identity -->
+        <section class="qbag-section qbag-reuse-section">
+          <p class="qbag-section-index qb-mono">06 / IDENTITY WITHOUT PREACHING</p>
           <h2 class="qbag-h2">{qBag.conceptCards[2].title}</h2>
           <p>{qBag.conceptCards[2].paragraphs[0]}</p>
           <p>{qBag.conceptCards[2].paragraphs[1]}</p>
@@ -437,17 +534,79 @@ const qBag = qBagEntry.data;
           </svg>
         </div>
 
-        <!-- Speculative Investment -->
-        <section class="qbag-section">
-          <h2 class="qbag-h2">{qBag.conceptCards[3].title}</h2>
+        <section class="qbag-pilot" id="qbag-pilot" aria-labelledby="qbag-pilot-title">
+          <div class="qbag-pilot-header">
+            <p class="qbag-section-index qb-mono">{qBag.pilot.eyebrow}</p>
+            <h2 id="qbag-pilot-title">{qBag.pilot.title}</h2>
+            <p>{qBag.pilot.body}</p>
+          </div>
+          <div class="qbag-pilot-columns">
+            <div>
+              <h3>Experiment conditions</h3>
+              <ul>{qBag.pilot.scope.map((item) => <li>{item}</li>)}</ul>
+            </div>
+            <div>
+              <h3>Observe only what matters</h3>
+              <ul>{qBag.pilot.measures.map((item) => <li>{item}</li>)}</ul>
+            </div>
+          </div>
+          <p class="qbag-pilot-metric">{qBag.pilot.metric}</p>
+          <a href="#qbag-contact" class="qbag-pilot-action">Help host the first territory →</a>
+        </section>
+
+        <section class="qbag-section qbag-participants-section">
+          <p class="qbag-section-index qb-mono">07 / THE SMALL NETWORK</p>
+          <h2 class="qbag-h2">One protocol, three kinds of participant</h2>
+          <div class="qbag-participant-grid">
+            {qBag.participantCards.map((card) => (
+              <article>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="qbag-value-circuit" aria-labelledby="qbag-value-circuit-title">
+          <header class="qbag-value-circuit-header">
+            <p class="qbag-section-index qb-mono">08 / {qBag.valueCircuit.eyebrow}</p>
+            <h2 id="qbag-value-circuit-title">{qBag.valueCircuit.title}</h2>
+            <p>{qBag.valueCircuit.intro}</p>
+          </header>
+
+          <ol class="qbag-value-stages">
+            {qBag.valueCircuit.stages.map((stage, index) => (
+              <li>
+                <span class="qbag-value-stage-number qb-mono">{String(index + 1).padStart(2, "0")}</span>
+                <h3>{stage.label}</h3>
+                <p>{stage.body}</p>
+              </li>
+            ))}
+          </ol>
+
+          <blockquote class="qbag-collector-bonus">{qBag.valueCircuit.collectorBonus}</blockquote>
+
+          <div class="qbag-value-footer">
+            <p class="qbag-value-clarity qb-mono">{qBag.valueCircuit.clarityNote}</p>
+            <nav aria-label="Related Q888 value projects">
+              <a href="/overpriced/">Enter Overpriced Stickers ↗</a>
+              <a href="/#infocigan">Enter Infocigan ↗</a>
+            </nav>
+          </div>
+        </section>
+
+        <!-- CHOICE: Infocigan satire is preserved inside an explicit artwork boundary. -->
+        <section class="qbag-speculative-zone" aria-labelledby="qbag-speculative-title">
+          <p class="qbag-section-index qb-mono">09 / {qBag.speculativeBoundary.eyebrow}</p>
+          <h2 id="qbag-speculative-title">{qBag.speculativeBoundary.title}</h2>
+          <p>{qBag.speculativeBoundary.body}</p>
           <p>{qBag.conceptCards[3].paragraphs[0]}</p>
-          <blockquote class="qbag-blockquote">
-            {qBag.conceptCards[3].paragraphs[1]}
-          </blockquote>
+          <blockquote>{qBag.conceptCards[3].paragraphs[1]}</blockquote>
+          <div class="qbag-speculative-disclaimer qb-mono">{qBag.speculativeBoundary.disclaimer}</div>
         </section>
 
         <!-- For Partners -->
-        <section class="qbag-section">
+        <section class="qbag-section qbag-partners-section">
           <h2 class="qbag-h2">{qBag.partnersTitle}</h2>
           <p>{qBag.partnersParagraphs[0]}</p>
           <p>{qBag.partnersParagraphs[1]}</p>
@@ -465,8 +624,9 @@ const qBag = qBagEntry.data;
         </section>
 
         <!-- Contact -->
-        <section class="qbag-section" id="qbag-contact">
-          <h2 class="qbag-h2">Get in Touch</h2>
+        <section class="qbag-section qbag-contact-section" id="qbag-contact">
+          <p class="qbag-section-index qb-mono">10 / OPEN TRANSMISSION</p>
+          <h2 class="qbag-h2">Begin the first return</h2>
           <p>{qBag.contactIntro}</p>
           <p class="qbag-portal-links">
             <a href={`mailto:${qBag.contactEmail}`} id="qbag-email-link">{qBag.contactEmail}</a>
@@ -498,7 +658,7 @@ const qBag = qBagEntry.data;
               <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <span class="gallery-counter" id="qbag-gallery-counter" aria-live="polite">1 / 2</span>
+          <span class="gallery-counter" id="qbag-gallery-counter" aria-live="polite">1 / 1</span>
           <button class="gallery-btn gallery-next" id="qbag-next-btn" aria-label="Next image" title="Next (→)">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -569,6 +729,11 @@ const qBag = qBagEntry.data;
 </Layout>
 
 <script>
+  import {
+    cleanupTypographicDoors,
+    initTypographicDoors,
+  } from "../scripts/typographicDoors";
+
   /* ─────────────────────────────────────────────────────────────────
      Q-BAG GALLERY — Native <dialog> + Fullscreen API + multi-image
      ───────────────────────────────────────────────────────────────── */
@@ -817,12 +982,18 @@ const qBag = qBagEntry.data;
     document.addEventListener("astro:before-swap", cleanup);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initGallery);
-  } else {
+  function initQBagPage() {
     initGallery();
+    initTypographicDoors();
   }
-  document.addEventListener("astro:page-load", initGallery);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initQBagPage, { once: true });
+  } else {
+    initQBagPage();
+  }
+  document.addEventListener("astro:page-load", initQBagPage);
+  document.addEventListener("astro:before-swap", cleanupTypographicDoors);
 </script>
 
 <style>
@@ -868,6 +1039,13 @@ const qBag = qBagEntry.data;
     gap: 3rem;
     align-items: center;
     min-height: 58dvh;
+  }
+
+  .qbag-visual-column {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    min-width: 0;
   }
 
   /* ─── Portal wrap ─── */
@@ -1038,6 +1216,93 @@ const qBag = qBagEntry.data;
     padding-left: 1rem;
   }
 
+  .qbag-hero-declaration {
+    max-width: 34rem;
+    margin: 0 0 1rem;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.25rem, 2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .qbag-hero-support {
+    max-width: 35rem;
+    margin: 0 0 1.5rem;
+    color: var(--qb-text-muted);
+    font-size: clamp(0.96rem, 1.25vw, 1.15rem);
+    line-height: 1.6;
+  }
+
+  .qbag-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem 1.2rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .qbag-primary-action,
+  .qbag-pilot-action {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.8rem 1.1rem;
+    border-radius: 999px;
+    background: var(--qb-text);
+    color: var(--qb-bg);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 180ms ease, background 180ms ease;
+  }
+
+  .qbag-primary-action:hover,
+  .qbag-pilot-action:hover {
+    background: var(--qb-primary);
+    transform: translateY(-2px);
+  }
+
+  .qbag-text-action {
+    color: var(--qb-text);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-underline-offset: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .qbag-image-disclosure {
+    width: min(360px, 100%);
+    padding: 0.9rem 1rem 1rem;
+    border: 1px dashed rgba(32, 140, 141, 0.45);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.46);
+    color: var(--qb-text-muted);
+  }
+
+  .qbag-image-disclosure-label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--qb-primary);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .qbag-image-disclosure p {
+    margin: 0;
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
   .qb-mono {
     font-family: 'Space Mono', ui-monospace, monospace;
   }
@@ -1067,6 +1332,680 @@ const qBag = qBagEntry.data;
   .qbag-main-content {
     max-width: 72rem;
     margin: 0 auto;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .qbag-manifesto {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.42fr) 1fr;
+    gap: 1rem 4rem;
+    padding: clamp(4rem, 8vw, 8rem) 0;
+    border-bottom: 1px solid var(--qb-border);
+  }
+
+  .qbag-manifesto .qbag-section-index {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .qbag-manifesto-title {
+    grid-column: 2;
+    margin: 0;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 6.5rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+
+  .qbag-manifesto .qbag-lead {
+    grid-column: 2;
+    max-width: 48rem;
+  }
+
+  .qbag-section-index {
+    margin: 0 0 1rem;
+    color: var(--qb-primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .qbag-section-heading {
+    max-width: 48rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .qbag-section-intro {
+    max-width: 45rem;
+    color: var(--qb-text-muted) !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.05rem, 1.5vw, 1.4rem) !important;
+    font-style: italic;
+  }
+
+  .qbag-protocol-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--qb-text);
+    border-left: 1px solid var(--qb-text);
+    list-style: none;
+  }
+
+  .qbag-protocol-step {
+    position: relative;
+    min-height: 15rem;
+    padding: 1.4rem;
+    border-right: 1px solid var(--qb-text);
+    border-bottom: 1px solid var(--qb-text);
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .qbag-protocol-step:nth-child(even) {
+    background: rgba(255, 204, 51, 0.08);
+  }
+
+  .qbag-step-number {
+    display: block;
+    margin-bottom: 2.6rem;
+    color: var(--qb-amber);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+
+  .qbag-protocol-step h3,
+  .qbag-ageing-track h3,
+  .qbag-participant-grid h3 {
+    margin: 0 0 0.7rem;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+    line-height: 1.15;
+  }
+
+  .qbag-protocol-step p,
+  .qbag-ageing-track p,
+  .qbag-participant-grid p {
+    margin: 0;
+    color: var(--qb-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .qbag-return-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.4rem;
+    overflow: hidden;
+    background: var(--qb-text);
+    color: var(--qb-gold-bright);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: clamp(0.65rem, 1vw, 0.82rem);
+    letter-spacing: 0.18em;
+  }
+
+  .qbag-equation {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin: 4rem 0;
+    border: 1px solid rgba(32, 140, 141, 0.35);
+    border-radius: 18px;
+    background: rgba(32, 140, 141, 0.05);
+  }
+
+  .qbag-equation-item {
+    position: relative;
+    display: grid;
+    gap: 0.45rem;
+    padding: 1.3rem 1rem;
+    text-align: center;
+  }
+
+  .qbag-equation-item--secret {
+    overflow: hidden;
+    cursor: help;
+  }
+
+  .qbag-equation-item--secret:focus-visible {
+    border-radius: 0.3rem;
+    outline: 2px solid var(--qb-primary);
+    outline-offset: -0.35rem;
+  }
+
+  .qbag-authorship-whisper {
+    position: absolute;
+    right: 0;
+    bottom: 0.32rem;
+    left: 0;
+    color: var(--qb-primary);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    opacity: 0;
+    transform: translateY(0.45rem);
+    transition:
+      opacity 260ms ease,
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .qbag-equation-item--secret:hover .qbag-authorship-whisper,
+  .qbag-equation-item--secret:focus-visible .qbag-authorship-whisper {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .qbag-equation-item--secret:hover strong,
+  .qbag-equation-item--secret:focus-visible strong {
+    color: var(--qb-primary);
+  }
+
+  .qbag-equation-item + .qbag-equation-item {
+    border-left: 1px solid rgba(32, 140, 141, 0.25);
+  }
+
+  .qbag-equation-subject {
+    color: var(--qb-primary);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .qbag-equation-mark {
+    color: var(--qb-amber);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+  }
+
+  .qbag-equation-item strong {
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+  }
+
+  .qbag-equation-plus {
+    position: absolute;
+    top: 50%;
+    right: -0.48rem;
+    z-index: 2;
+    width: 1rem;
+    background: var(--qb-bg);
+    color: var(--qb-amber);
+    transform: translateY(-50%);
+  }
+
+  .qbag-ageing-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    margin: 3rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .qbag-ageing-track::before {
+    content: '';
+    position: absolute;
+    top: 3.35rem;
+    right: 10%;
+    left: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--qb-amber), var(--qb-primary));
+  }
+
+  .qbag-ageing-track li {
+    position: relative;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .qbag-ageing-stage--gravity {
+    cursor: help;
+  }
+
+  .qbag-ageing-stage--gravity:focus-visible {
+    border-radius: 0.3rem;
+    outline: 2px solid var(--qb-amber);
+    outline-offset: 0.4rem;
+  }
+
+  .qbag-gravity-whisper {
+    position: absolute;
+    right: 1rem;
+    bottom: -1.7rem;
+    left: 1rem;
+    color: var(--qb-amber);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    opacity: 0;
+    transform: translateY(-0.3rem);
+    transition:
+      opacity 260ms ease,
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .qbag-ageing-stage--gravity:hover .qbag-gravity-whisper,
+  .qbag-ageing-stage--gravity:focus-visible .qbag-gravity-whisper {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .qbag-ageing-stage--gravity:hover .qbag-ageing-dot,
+  .qbag-ageing-stage--gravity:focus-visible .qbag-ageing-dot {
+    background: var(--qb-amber);
+    box-shadow:
+      0 0 0 1px var(--qb-amber),
+      0 0 0 0.42rem rgba(193, 122, 46, 0.12);
+  }
+
+  .qbag-ageing-count {
+    display: block;
+    min-height: 2rem;
+    color: var(--qb-amber);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .qbag-ageing-dot {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0.75rem auto 1.4rem;
+    border: 3px solid var(--qb-bg);
+    border-radius: 50%;
+    background: var(--qb-primary);
+    box-shadow: 0 0 0 1px var(--qb-primary);
+  }
+
+  .qbag-ageing-track li:nth-child(1) .qbag-ageing-dot { opacity: 0.35; }
+  .qbag-ageing-track li:nth-child(2) .qbag-ageing-dot { opacity: 0.58; }
+  .qbag-ageing-track li:nth-child(3) .qbag-ageing-dot { opacity: 0.78; }
+
+  .qbag-reverse-quote {
+    max-width: 55rem;
+    margin: clamp(3rem, 7vw, 6rem) auto 0;
+    padding: 0;
+    border: 0;
+    color: var(--qb-text);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 4rem);
+    font-style: italic;
+    line-height: 1.08;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .qbag-pilot {
+    position: relative;
+    margin: clamp(4rem, 8vw, 8rem) 0;
+    padding: clamp(2rem, 5vw, 4.5rem);
+    overflow: hidden;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(255, 204, 51, 0.17), transparent 28%),
+      radial-gradient(circle at 8% 88%, rgba(32, 140, 141, 0.24), transparent 30%),
+      #17100b;
+    color: #fffaf0;
+    box-shadow: 0 30px 80px rgba(26, 16, 8, 0.16);
+  }
+
+  .qbag-pilot::after {
+    content: 'WORLD TERRITORY APPLICATION / 001';
+    position: absolute;
+    top: 1.25rem;
+    right: -3.3rem;
+    padding: 0.45rem 4rem;
+    background: var(--qb-gold-bright);
+    color: #17100b;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transform: rotate(7deg);
+  }
+
+  .qbag-pilot .qbag-section-index {
+    max-width: 70%;
+    color: var(--qb-gold-bright);
+  }
+
+  .qbag-pilot-header {
+    max-width: 52rem;
+  }
+
+  .qbag-pilot-header h2 {
+    max-width: 48rem;
+    margin: 0 0 1.5rem;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 5vw, 5.2rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    text-wrap: balance;
+  }
+
+  .qbag-pilot-header > p:last-child {
+    max-width: 46rem;
+    color: rgba(255, 250, 240, 0.76);
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .qbag-pilot-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 3rem 0 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 250, 240, 0.23);
+    border-radius: 16px;
+    background: rgba(255, 250, 240, 0.2);
+  }
+
+  .qbag-pilot-columns > div {
+    padding: clamp(1.3rem, 3vw, 2rem);
+    background: rgba(23, 16, 11, 0.88);
+  }
+
+  .qbag-pilot-columns h3 {
+    margin: 0 0 1.2rem;
+    color: var(--qb-gold-bright);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .qbag-pilot-columns ul {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .qbag-pilot-columns li {
+    display: grid;
+    grid-template-columns: 0.8rem 1fr;
+    gap: 0.65rem;
+    color: rgba(255, 250, 240, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .qbag-pilot-columns li::before {
+    content: '↺';
+    color: var(--qb-gold-bright);
+  }
+
+  .qbag-pilot-metric {
+    max-width: 48rem;
+    margin: 0 0 1.8rem;
+    color: #fffaf0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.35rem, 2.4vw, 2.5rem);
+    font-style: italic;
+    line-height: 1.18;
+  }
+
+  .qbag-pilot-action {
+    background: var(--qb-gold-bright);
+    color: #17100b;
+  }
+
+  .qbag-participant-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .qbag-participant-grid article {
+    min-height: 13rem;
+    padding: 1.5rem;
+    border: 1px solid var(--qb-border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .qbag-participant-grid article:nth-child(2) {
+    background: rgba(255, 204, 51, 0.1);
+  }
+
+  .qbag-participant-grid article:nth-child(3) {
+    background: rgba(32, 140, 141, 0.08);
+  }
+
+  .qbag-value-circuit {
+    position: relative;
+    margin: clamp(4rem, 8vw, 8rem) 0;
+    padding: clamp(4.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
+    overflow: hidden;
+    border: 2px solid var(--qb-text);
+    border-radius: 4px;
+    background: var(--qb-gold-bright);
+    color: #17100b;
+    box-shadow: 14px 14px 0 rgba(26, 16, 8, 0.12);
+  }
+
+  .qbag-value-circuit::before {
+    content: 'VALUE MAY ESCAPE · TRUST MAY COMPOUND · MONEY MAY BECOME ANOTHER ARTWORK · ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0.75rem 1rem;
+    overflow: hidden;
+    background: #17100b;
+    color: var(--qb-gold-bright);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .qbag-value-circuit .qbag-section-index {
+    color: #17100b;
+    opacity: 0.68;
+  }
+
+  .qbag-value-circuit-header {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.9fr) minmax(18rem, 1.1fr);
+    gap: 1.5rem 4rem;
+    align-items: end;
+  }
+
+  .qbag-value-circuit-header .qbag-section-index {
+    grid-column: 1 / -1;
+  }
+
+  .qbag-value-circuit-header h2 {
+    min-width: 0;
+    margin: 0;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 4.6vw, 5.25rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .qbag-value-circuit-header > p:last-child {
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(1rem, 1.45vw, 1.25rem);
+    line-height: 1.6;
+  }
+
+  .qbag-value-stages {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 3.5rem 0 0;
+    padding: 0;
+    border-top: 2px solid #17100b;
+    border-left: 2px solid #17100b;
+    list-style: none;
+  }
+
+  .qbag-value-stages li {
+    min-height: 16rem;
+    padding: 1.4rem;
+    border-right: 2px solid #17100b;
+    border-bottom: 2px solid #17100b;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .qbag-value-stages li:nth-child(even) {
+    background: rgba(23, 16, 11, 0.06);
+  }
+
+  .qbag-value-stage-number {
+    display: block;
+    margin-bottom: 2.4rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .qbag-value-stages h3 {
+    margin: 0 0 0.75rem;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    line-height: 1.1;
+  }
+
+  .qbag-value-stages p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .qbag-collector-bonus {
+    max-width: 60rem;
+    margin: 0;
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+    border: 0;
+    color: #17100b;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.55rem, 3vw, 3.1rem);
+    font-style: italic;
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+
+  .qbag-value-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.5rem 3rem;
+    align-items: end;
+    padding-top: 1.5rem;
+    border-top: 2px solid #17100b;
+  }
+
+  .qbag-value-clarity {
+    max-width: 48rem;
+    margin: 0;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+
+  .qbag-value-footer nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    align-items: flex-end;
+  }
+
+  .qbag-value-footer a {
+    color: #17100b;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-underline-offset: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .qbag-speculative-zone {
+    position: relative;
+    margin: 4rem 0;
+    padding: clamp(2rem, 5vw, 4rem);
+    border: 1px dashed rgba(193, 122, 46, 0.7);
+    border-radius: 24px;
+    background:
+      repeating-linear-gradient(-45deg, rgba(193, 122, 46, 0.04) 0 10px, transparent 10px 20px),
+      rgba(255, 255, 255, 0.38);
+  }
+
+  .qbag-speculative-zone::before {
+    content: 'ARTWORK BOUNDARY';
+    position: absolute;
+    top: -0.68rem;
+    right: 2rem;
+    padding: 0.3rem 0.75rem;
+    background: var(--qb-bg);
+    color: var(--qb-amber);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .qbag-speculative-zone h2 {
+    max-width: 50rem;
+    margin: 0 0 1.4rem;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    font-size: clamp(1.7rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .qbag-speculative-zone > p,
+  .qbag-speculative-zone blockquote {
+    max-width: 50rem;
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .qbag-speculative-zone blockquote {
+    margin: 1.5rem 0;
+    color: var(--qb-amber);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+  }
+
+  .qbag-speculative-disclaimer {
+    max-width: 50rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-left: 3px solid var(--qb-primary);
+    background: rgba(32, 140, 141, 0.08);
+    color: var(--qb-text-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    text-transform: uppercase;
   }
 
   .qbag-section {
@@ -1716,7 +2655,7 @@ const qBag = qBagEntry.data;
       padding-bottom: 2rem;
     }
 
-    .qbag-portal-wrap {
+    .qbag-visual-column {
       order: -1;
     }
 
@@ -1727,6 +2666,75 @@ const qBag = qBagEntry.data;
 
     .qbag-headline {
       font-size: clamp(3rem, 10vw, 5rem);
+    }
+
+    .qbag-manifesto {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .qbag-manifesto .qbag-section-index,
+    .qbag-manifesto-title,
+    .qbag-manifesto .qbag-lead {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .qbag-protocol-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qbag-equation {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qbag-equation-item + .qbag-equation-item {
+      border-left: 0;
+    }
+
+    .qbag-equation-item:nth-child(even) {
+      border-left: 1px solid rgba(32, 140, 141, 0.25);
+    }
+
+    .qbag-equation-item:nth-child(n + 3) {
+      border-top: 1px solid rgba(32, 140, 141, 0.25);
+    }
+
+    .qbag-equation-plus {
+      display: none;
+    }
+
+    .qbag-ageing-track {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 0;
+    }
+
+    .qbag-ageing-track::before {
+      display: none;
+    }
+
+    .qbag-participant-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .qbag-participant-grid article {
+      min-height: 0;
+    }
+
+    .qbag-value-circuit-header {
+      grid-template-columns: 1fr;
+    }
+
+    .qbag-value-stages {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .qbag-value-footer {
+      grid-template-columns: 1fr;
+    }
+
+    .qbag-value-footer nav {
+      align-items: flex-start;
     }
   }
 
@@ -1780,6 +2788,28 @@ const qBag = qBagEntry.data;
     }
 
     .qbag-headline { font-size: clamp(3rem, 14vw, 5rem); }
+    .qbag-hero-actions { align-items: flex-start; flex-direction: column; }
+    .qbag-primary-action { width: 100%; justify-content: center; }
+    .qbag-image-disclosure { width: min(240px, 72vw); }
+    .qbag-manifesto-title { font-size: clamp(2.5rem, 15vw, 4.5rem); }
+    .qbag-protocol-grid { grid-template-columns: 1fr; }
+    .qbag-protocol-step { min-height: 0; }
+    .qbag-step-number { margin-bottom: 1.5rem; }
+    .qbag-return-line span:nth-child(1),
+    .qbag-return-line span:nth-child(5) { display: none; }
+    .qbag-ageing-track { grid-template-columns: 1fr; gap: 0; }
+    .qbag-ageing-track li { padding: 0 0 2.5rem; text-align: left; }
+    .qbag-ageing-dot { margin: 0.75rem 0 1.2rem; }
+    .qbag-pilot { border-radius: 18px; }
+    .qbag-pilot::after { display: none; }
+    .qbag-pilot .qbag-section-index { max-width: none; }
+    .qbag-pilot-columns { grid-template-columns: 1fr; }
+    .qbag-value-circuit { box-shadow: 8px 8px 0 rgba(26, 16, 8, 0.12); }
+    .qbag-value-circuit::before { text-align: left; }
+    .qbag-value-stages { grid-template-columns: 1fr; }
+    .qbag-value-stages li { min-height: 0; }
+    .qbag-value-stage-number { margin-bottom: 1.5rem; }
+    .qbag-speculative-zone::before { right: 1rem; }
     .qb-sticker-strip { gap: 1.25rem; }
     .qb-sticker-chip { width: 64px; height: 64px; }
     .qbag-closing-inner { padding: 3rem 1rem; }
@@ -1823,6 +2853,8 @@ const qBag = qBagEntry.data;
     .qbag-artwork-card:hover,
     .qbag-retreat-btn:hover,
     .artwork-card-button.qb-btn:hover { transform: none; }
+    .qbag-authorship-whisper,
+    .qbag-gravity-whisper { transition: none; }
     .gallery-img-container { transition: none; }
   }
 </style>
