@@ -33,7 +33,22 @@ Before meaningful work, read:
 2. `digital-dna/expression-lenses.md`
 3. `digital-dna/profile.json`
 4. any relevant file in `digital-dna/projects/`
-5. the project’s own technical documentation and existing source code
+5. relevant observations from `digital-dna/feedback-log.md`
+6. the project’s own technical documentation and existing source code
+
+## Selective feedback memory
+
+For meaningful design, writing, architecture, or refactoring work, search the feedback log using the current project name, route, expression lens, and one or two distinctive concept terms. Read only the complete matching entries—normally the three most relevant or recent. Widen the search only when the first matches do not provide enough context.
+
+Skip this retrieval for routine mechanical tasks where artistic or product judgement is not involved. Do not load the entire log by default.
+
+Treat feedback entries as evidence, not automatic rules:
+
+- the human's current explicit request takes precedence;
+- project-specific and recent evidence is usually more useful than broad or old evidence;
+- accepted and approved patterns may guide the work, while edited or rejected patterns explain what to reconsider or avoid;
+- if relevant entries conflict, preserve the tension or briefly surface the conflict instead of silently inventing a permanent preference;
+- only the human can approve promotion into canonical Digital DNA.
 
 ## Two independent controls
 

@@ -4,6 +4,14 @@ Record evidence, not vague impressions.
 
 The agent may propose an entry after meaningful work. The human decides whether a pattern should be promoted into the canonical profile.
 
+## How agents should use this log
+
+- Search by the current project, route, lens, and distinctive concepts.
+- Read a small number of complete matching entries rather than the entire history.
+- Use entries as contextual evidence; current human instructions take precedence.
+- Prefer project-specific, recent, accepted or approved evidence when several entries are relevant.
+- Never promote an observation into canonical Digital DNA without human approval.
+
 ## Entry template
 
 ### YYYY-MM-DD — Pattern name
@@ -141,4 +149,18 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Observed preference:** Practical clarity, artistic mythology, commercial ambition, personal attachment and speculative possibility should not be flattened into one voice or forced to compete on the first screen. They should form progressive layers with a legible public threshold and increasingly strange or financially ambitious depths.
 - **Evidence:** Aleksandrs accepted a structure that begins with the ordinary refill ritual, explains the pilot and partner reality, then reveals the Q888 value circuit and optional speculative layer.
 - **Possible DNA change:** None proposed. This is strong project evidence for using hierarchy and progressive disclosure to hold several Q888 tensions at once.
+- **Status:** observation / approved
+
+---
+
+### 2026-08-25 — Memory should improve continuity without becoming homework
+
+- **Project:** Q888 Digital DNA / agent workflow
+- **Task context:** Reviewing how `feedback-log.md` influences future work.
+- **Working mode:** LEARN
+- **Expression lens or overlay:** HUMAN_CODE
+- **Human response:** requested improvement — it is important for agents to understand previous work and the changing human-agent dynamic, provided the system does not become confusing or add unnecessary tasks.
+- **Observed preference:** Project memory should be active but selective. Agents should retrieve a few relevant human-confirmed observations before meaningful judgement work, while routine technical tasks should remain lightweight.
+- **Evidence:** Aleksandrs explicitly prioritised historical understanding and continuity, then set non-confusion and low overhead as constraints.
+- **Possible DNA change:** None required. Implement this as an agent retrieval protocol before considering any canonical amendment.
 - **Status:** observation / approved

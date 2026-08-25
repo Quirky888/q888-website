@@ -11,20 +11,26 @@ description: Apply the Q888 Human Code method when designing, generating, refact
 - `digital-dna/core.md`
 - `digital-dna/expression-lenses.md`
 - relevant project overlays
+- relevant entries from `digital-dna/feedback-log.md`, found by project, route, lens, or concept; normally read no more than three
 
 ## Method
 
 1. Identify the human meaning and technical requirement.
-2. Select or confirm the working mode.
-3. Select or confirm the expression lens.
-4. Separate intentional strangeness, accidental confusion, and genuine risk.
-5. Choose the smallest stable architecture appropriate to the organism.
-6. Keep important logic visible through names, modules, state, and selected comments.
-7. Implement.
-8. Validate behaviour and state limits honestly.
-9. In LEARN mode, explain the mental model and one or two important choices.
-10. Check safety, reversibility, privacy, accessibility, and user agency.
-11. Record a feedback observation only when there is concrete human evidence.
+2. For meaningful judgement work, search the feedback log selectively; skip this for routine mechanical work.
+3. Select or confirm the working mode.
+4. Select or confirm the expression lens.
+5. Separate intentional strangeness, accidental confusion, and genuine risk.
+6. Choose the smallest stable architecture appropriate to the organism.
+7. Keep important logic visible through names, modules, state, and selected comments.
+8. Implement.
+9. Validate behaviour and state limits honestly.
+10. In LEARN mode, explain the mental model and one or two important choices.
+11. Check safety, reversibility, privacy, accessibility, and user agency.
+12. Record a feedback observation only when there is concrete human evidence.
+
+## Memory rule
+
+Use matching feedback as soft evidence about the project's dynamic, not as a checklist. Prefer specific, recent, human-confirmed entries. The current request always wins. Do not read the whole log by default, turn a single observation into a permanent preference, or add an entry merely because the agent made a design choice.
 
 ## Expression rule
 
