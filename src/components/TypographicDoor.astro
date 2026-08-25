@@ -5,10 +5,12 @@ type TrailStrength = "signal" | "spill";
 
 interface Props {
   id: string;
-  zone: "record" | "practice" | "works" | "field" | "records" | "earth";
+  zone: "record" | "practice" | "works" | "field" | "records" | "earth" | "qbag";
   kind: DoorKind;
   voice: DoorVoice;
   text: string;
+  revealText?: string;
+  ariaLabel?: string;
   group?: string;
   href?: string;
   pinned?: boolean;
@@ -21,6 +23,8 @@ const {
   kind,
   voice,
   text,
+  revealText,
+  ariaLabel = text,
   group,
   href,
   pinned = false,
@@ -28,10 +32,11 @@ const {
 } = Astro.props;
 
 const words = text.split(" ");
+const revealWords = revealText?.split(" ") ?? [];
 ---
 
 <span
-  class="q888-door"
+  class:list={["q888-door", { "q888-door--reveal": revealText }]}
   data-q888-door
   data-door-id={id}
   data-door-zone={zone}
@@ -41,7 +46,7 @@ const words = text.split(" ");
   data-door-href={href}
   data-door-pinned={pinned ? "true" : undefined}
   data-door-strength={strength}
-  aria-label={text}
+  aria-label={ariaLabel}
 >
   {
     words.map((word, wordIndex) => (
@@ -61,6 +66,26 @@ const words = text.split(" ");
       </>
     ))
   }
+  {revealText && (
+    <span class="q888-door__reveal" aria-hidden="true">
+      {revealWords.map((word, wordIndex) => (
+        <>
+          <span class="q888-door__word">
+            {Array.from(word).map((character) => (
+              <span
+                class="q888-door__glyph"
+                data-door-reveal-glyph
+                data-door-character={character}
+              >
+                <span class="q888-door__ink">{character}</span>
+              </span>
+            ))}
+          </span>
+          {wordIndex < revealWords.length - 1 && " "}
+        </>
+      ))}
+    </span>
+  )}
 </span>
 
 <style>
@@ -114,7 +139,42 @@ const words = text.split(" ");
     font: inherit;
     text-align: center;
     text-transform: inherit;
-    transition: font-weight 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+      opacity 240ms ease,
+      font-weight 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* The optional second phrase is built from the same glyph anatomy as the
+   * original. The shared script can therefore give it the exact organic
+   * weight/typeface mutations used by every other typographic door. */
+  .q888-door--reveal {
+    display: inline-block;
+    isolation: isolate;
+  }
+
+  .q888-door__reveal {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    opacity: 0;
+    pointer-events: none;
+    text-transform: inherit;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    transition: opacity 180ms ease;
+  }
+
+  .q888-door--reveal.is-active > .q888-door__word .q888-door__ink {
+    opacity: 0;
+  }
+
+  .q888-door--reveal.is-active .q888-door__reveal {
+    opacity: 1;
   }
 
   .q888-door__glyph.is-door-weight .q888-door__ink {
@@ -162,7 +222,8 @@ const words = text.split(" ");
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .q888-door__ink {
+    .q888-door__ink,
+    .q888-door__reveal {
       transition: none;
     }
   }

@@ -130,8 +130,123 @@ const qBagProduct = z.object({
   heroImage: z.string().min(1),
   heroAlt: z.string().min(1),
   heroTitle: z.string().min(1),
+  heroDeclaration: z.string().min(1),
+  heroSupport: z.string().min(1),
+  imageDisclosure: z.object({
+    label: z.string().min(1),
+    text: z.string().min(1),
+  }),
   introTagline: z.string().min(1),
   introLead: z.string().min(1),
+  protocolTitle: z.string().min(1),
+  protocolLead: z.string().min(1),
+  protocolSteps: z
+    .array(
+      z.object({
+        number: z.string().min(1),
+        action: z.string().min(1),
+        detail: z.string().min(1),
+      }),
+    )
+    .min(3),
+  ritualEquation: z
+    .array(
+      z.object({
+        subject: z.string().min(1),
+        meaning: z.string().min(1),
+      }),
+    )
+    .min(3),
+  ageingTitle: z.string().min(1),
+  ageingLead: z.string().min(1),
+  ageingStages: z
+    .array(
+      z.object({
+        count: z.string().min(1),
+        title: z.string().min(1),
+        detail: z.string().min(1),
+      }),
+    )
+    .min(3),
+  pilot: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    body: z.string().min(1),
+    scope: z.array(z.string().min(1)).min(3),
+    measures: z.array(z.string().min(1)).min(3),
+    metric: z.string().min(1),
+  }),
+  operationalLayer: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    intro: z.string().min(1),
+    cafeTitle: z.string().min(1),
+    cafeFacts: z
+      .array(
+        z.object({
+          label: z.string().min(1),
+          body: z.string().min(1),
+        }),
+      )
+      .min(3),
+    pricingNote: z.string().min(1),
+    backerTitle: z.string().min(1),
+    backerIntro: z.string().min(1),
+    fundsTitle: z.string().min(1),
+    funds: z.array(z.string().min(1)).min(3),
+    evidenceTitle: z.string().min(1),
+    evidence: z.array(z.string().min(1)).min(3),
+    hostCta: z.string().min(1),
+    backCta: z.string().min(1),
+    closingNote: z.string().min(1),
+    prototypeRecord: z.object({
+      label: z.string().min(1),
+      title: z.string().min(1),
+      body: z.string().min(1),
+      boundary: z.string().min(1),
+      photos: z.array(
+        z.object({
+          src: z.string().min(1),
+          alt: z.string().min(1),
+          caption: z.string().min(1),
+          width: z.number().int().positive(),
+          height: z.number().int().positive(),
+          alternateSrc: z.string().min(1),
+          alternateWidth: z.number().int().positive(),
+          alternateHeight: z.number().int().positive(),
+        }),
+      ).length(2),
+    }),
+  }),
+  participantCards: z
+    .array(
+      z.object({
+        title: z.string().min(1),
+        body: z.string().min(1),
+      }),
+    )
+    .min(3),
+  valueCircuit: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    intro: z.string().min(1),
+    stages: z
+      .array(
+        z.object({
+          label: z.string().min(1),
+          body: z.string().min(1),
+        }),
+      )
+      .min(3),
+    collectorBonus: z.string().min(1),
+    clarityNote: z.string().min(1),
+  }),
+  speculativeBoundary: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    body: z.string().min(1),
+    disclaimer: z.string().min(1),
+  }),
   artworkCardTitle: z.string().min(1),
   artworkCardDescription: z.string().min(1),
   artworkCardButtonLabel: z.string().min(1),

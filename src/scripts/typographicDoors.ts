@@ -47,6 +47,16 @@ function getGlyphs(element: HTMLElement) {
   );
 }
 
+function getRevealGlyphs(element: HTMLElement) {
+  return Array.from(
+    element.querySelectorAll<HTMLElement>("[data-door-reveal-glyph]"),
+  );
+}
+
+function getMorphGlyphs(element: HTMLElement) {
+  return [...getGlyphs(element), ...getRevealGlyphs(element)];
+}
+
 function normalizeDoorText(element: HTMLElement) {
   const words = Array.from(
     element.querySelectorAll<HTMLElement>(":scope > .q888-door__word"),
@@ -183,7 +193,7 @@ function isVisible(element: HTMLElement) {
 function clearVisualState() {
   activeElements.forEach((element) => {
     element.classList.remove("is-active");
-    getGlyphs(element).forEach((glyph) =>
+    getMorphGlyphs(element).forEach((glyph) =>
       glyph.classList.remove("is-door-family", "is-door-weight"),
     );
   });
@@ -246,6 +256,29 @@ function animateOrganicCluster(element: HTMLElement, baseDelay = 0) {
   );
 }
 
+function animateRevealCluster(element: HTMLElement, baseDelay = 90) {
+  const glyphs = getRevealGlyphs(element);
+  if (!glyphs.length) return;
+
+  const seed = stableNumber(`${element.dataset.doorId ?? "q"}:reveal`);
+  const clusterLength = Math.min(
+    glyphs.length,
+    Math.max(2, Math.min(5, Math.ceil(glyphs.length * 0.34))),
+  );
+  const start = seed % Math.max(1, glyphs.length - clusterLength + 1);
+  const cluster = glyphs.slice(start, start + clusterLength);
+  const familyIndex = Math.floor(cluster.length / 2);
+
+  cluster.forEach((glyph, index) => {
+    later(() => glyph.classList.add("is-door-weight"), baseDelay + index * 54);
+  });
+
+  later(
+    () => cluster[familyIndex]?.classList.add("is-door-family"),
+    baseDelay + 150 + familyIndex * 54,
+  );
+}
+
 function animateTrailWord(element: HTMLElement, baseDelay: number) {
   const glyphs = getGlyphs(element);
   if (!glyphs.length) return;
@@ -285,7 +318,7 @@ function beginDissolve(scheduleNext = true) {
   clearEffectTimers();
 
   const glyphs = activeElements
-    .flatMap(getGlyphs)
+    .flatMap(getMorphGlyphs)
     .filter(
       (glyph) =>
         glyph.classList.contains("is-door-family") ||
@@ -330,6 +363,7 @@ function activate(element: HTMLElement, holdForFocus = false) {
     );
 
     animateOrganicCluster(element);
+    animateRevealCluster(element);
     if (kind === "signal") {
       element.setAttribute("aria-pressed", "true");
       activeElements.slice(1).forEach((member, index) => {
@@ -464,7 +498,7 @@ function awaken(element: HTMLElement) {
 
 function lockGlyphMetrics() {
   if (!pageRoot) return;
-  const glyphs = allDoorElements.flatMap(getGlyphs);
+  const glyphs = allDoorElements.flatMap(getMorphGlyphs);
   glyphs.forEach((glyph) =>
     glyph.style.removeProperty("--q888-door-glyph-width"),
   );
@@ -510,7 +544,7 @@ function resetDoor(door: HTMLElement) {
   door.removeAttribute("tabindex");
   door.removeAttribute("role");
   door.removeAttribute("aria-pressed");
-  getGlyphs(door).forEach((glyph) =>
+  getMorphGlyphs(door).forEach((glyph) =>
     glyph.classList.remove("is-door-family", "is-door-weight"),
   );
 }
