@@ -92,7 +92,7 @@
     "measures": [
       "How many bags return?",
       "How often does each one return?",
-      "How many disposable bags are avoided?",
+      "How many single-use retail coffee bags are avoided?",
       "Do owners photograph or share their changing bags?"
     ],
     "metric": "The magic metric is not bags sold. It is refills per Q-Bag."
@@ -109,7 +109,7 @@
       },
       {
         "label": "Café needs",
-        "body": "Existing scales, coffee beans, a clear reusable-container policy, and roughly ten seconds at the counter."
+        "body": "Existing scales, coffee beans, a clear reusable-container policy, and minimal additional counter time."
       },
       {
         "label": "Café gets",
@@ -128,7 +128,7 @@
     "evidenceTitle": "The pilot produces",
     "evidence": [
       "Return rate and refill frequency",
-      "Packaging avoided and café-counter lessons",
+      "Single-use retail coffee bags avoided and café-counter lessons",
       "Participant photographs, stories, and a visual archive",
       "Evidence for a better Q-Bag V2 and any future expansion"
     ],
