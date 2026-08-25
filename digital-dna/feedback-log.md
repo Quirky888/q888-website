@@ -124,7 +124,7 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Working mode:** BUILD
 - **Expression lens or overlay:** PROJECT_OVERLAY + HUMAN_CODE; no dedicated Q-Bag overlay
 - **Human response:** requested extension — make this effect one of Q888's standard features for drawing attention or carrying a hidden message.
-- **Observed preference:** Reusable typographic transformations should reward hover and keyboard attention with a second phrase or passage, while remaining quiet in the default reading state. They work best as sparse doors between related Q888 worlds, not as decoration on every heading.
-- **Evidence:** Aleksandrs clarified that only the in-sentence phrase “Chosen stickers” should morph into “Overpriced stickers,” using the quiet embedded treatment from the Bureaucracy compliance notice, and described the effect as a standard feature for hidden messages.
+- **Observed preference:** Reusable typographic transformations should reward hover and keyboard attention with a second phrase or passage, while remaining quiet in the default reading state. When reusing a known Q888 effect, reuse its actual glyph-level mechanism—organic weight and typeface mutations—not a merely similar wipe or fade. These doors work best as sparse passages between related Q888 worlds, not as decoration on every heading.
+- **Evidence:** Aleksandrs clarified that only the in-sentence phrase “Chosen stickers” should morph into “Overpriced stickers,” using the exact per-letter treatment from the Bureaucracy compliance notice, and described the effect as a standard feature for hidden messages.
 - **Possible DNA change:** None proposed. The pattern implements the clarity ↔ mystery and stable structure ↔ playful surface tensions in a reusable component.
 - **Status:** observation
