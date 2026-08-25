@@ -12,6 +12,7 @@ if (!qBagEntry || qBagEntry.data.slug !== "q-bag") {
   throw new Error("Required Q-Bag content entry is missing.");
 }
 const qBag = qBagEntry.data;
+const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponent("I want to back the Q-Bag pilot")}`;
 
 // Gallery images — hi-res targets (used in client script)
 ---
@@ -216,6 +217,114 @@ const qBag = qBagEntry.data;
           ))}
         </section>
 
+        <section class="qbag-section qbag-ageing-section" aria-labelledby="qbag-ageing-title">
+          <div class="qbag-section-heading">
+            <p class="qbag-section-index qb-mono">03 / THE ANTI-DISPOSABLE MECHANISM</p>
+            <h2 id="qbag-ageing-title" class="qbag-h2">{qBag.ageingTitle}</h2>
+            <p class="qbag-section-intro">{qBag.ageingLead}</p>
+          </div>
+          <ol class="qbag-ageing-track">
+            {qBag.ageingStages.map((stage, index) => (
+              <li
+                class:list={{ "qbag-ageing-stage--gravity": index === qBag.ageingStages.length - 1 }}
+                tabindex={index === qBag.ageingStages.length - 1 ? "0" : undefined}
+              >
+                <span class="qbag-ageing-count qb-mono">{stage.count}</span>
+                <span class="qbag-ageing-dot" aria-hidden="true"></span>
+                <h3>{stage.title}</h3>
+                <p>
+                  {index === 2 ? (
+                    <>
+                      <TypographicDoor
+                        id="qbag-overpriced-stickers"
+                        zone="qbag"
+                        kind="portal"
+                        voice="archive"
+                        text="Chosen stickers,"
+                        revealText="Overpriced stickers,"
+                        ariaLabel="Chosen stickers — secret passage to Overpriced Stickers"
+                        href="/overpriced/"
+                        pinned
+                      />{stage.detail.slice("Chosen stickers,".length)}
+                    </>
+                  ) : stage.detail}
+                </p>
+                {index === qBag.ageingStages.length - 1 && (
+                  <span class="qbag-gravity-whisper qb-mono">MEMORY HAS MASS</span>
+                )}
+              </li>
+            ))}
+          </ol>
+          <blockquote class="qbag-reverse-quote">The older the object becomes, the less disposable it feels.</blockquote>
+        </section>
+
+        <!-- DNA: The practical invitation arrives before the gallery and mythology. -->
+        <section class="qbag-pilot" id="qbag-pilot" aria-labelledby="qbag-pilot-title">
+          <div class="qbag-pilot-header">
+            <p class="qbag-section-index qb-mono">04 / {qBag.pilot.eyebrow}</p>
+            <h2 id="qbag-pilot-title">{qBag.pilot.title}</h2>
+            <p>{qBag.pilot.body}</p>
+          </div>
+          <div class="qbag-pilot-columns">
+            <div>
+              <h3>Experiment conditions</h3>
+              <ul>{qBag.pilot.scope.map((item) => <li>{item}</li>)}</ul>
+            </div>
+            <div>
+              <h3>Observe only what matters</h3>
+              <ul>{qBag.pilot.measures.map((item) => <li>{item}</li>)}</ul>
+            </div>
+          </div>
+          <p class="qbag-pilot-metric">{qBag.pilot.metric}</p>
+          <a href="#qbag-operating-layer" class="qbag-pilot-action">See how the pilot works →</a>
+        </section>
+
+        <section class="qbag-operating-layer" id="qbag-operating-layer" aria-labelledby="qbag-operating-title">
+          <header class="qbag-operating-header">
+            <p class="qbag-section-index qb-mono">05 / {qBag.operationalLayer.eyebrow}</p>
+            <h2 id="qbag-operating-title">{qBag.operationalLayer.title}</h2>
+            <p>{qBag.operationalLayer.intro}</p>
+          </header>
+
+          <div class="qbag-operating-grid">
+            <article class="qbag-cafe-desk">
+              <p class="qbag-operating-audience qb-mono">PILOT PARTNER / CAFÉ</p>
+              <h3>{qBag.operationalLayer.cafeTitle}</h3>
+              <dl>
+                {qBag.operationalLayer.cafeFacts.map((fact) => (
+                  <div>
+                    <dt class="qb-mono">{fact.label}</dt>
+                    <dd>{fact.body}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p class="qbag-pricing-note">{qBag.operationalLayer.pricingNote}</p>
+            </article>
+
+            <article class="qbag-backer-desk">
+              <p class="qbag-operating-audience qb-mono">PILOT BACKER / EVIDENCE</p>
+              <h3>{qBag.operationalLayer.backerTitle}</h3>
+              <p>{qBag.operationalLayer.backerIntro}</p>
+              <div class="qbag-backer-lists">
+                <div>
+                  <h4>{qBag.operationalLayer.fundsTitle}</h4>
+                  <ul>{qBag.operationalLayer.funds.map((item) => <li>{item}</li>)}</ul>
+                </div>
+                <div>
+                  <h4>{qBag.operationalLayer.evidenceTitle}</h4>
+                  <ul>{qBag.operationalLayer.evidence.map((item) => <li>{item}</li>)}</ul>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="qbag-operating-actions">
+            <a href="#qbag-contact" class="qbag-operating-action qbag-operating-action--host">{qBag.operationalLayer.hostCta} →</a>
+            <a href={backPilotMailto} class="qbag-operating-action qbag-operating-action--back">{qBag.operationalLayer.backCta} →</a>
+          </div>
+          <p class="qbag-operating-note qb-mono">{qBag.operationalLayer.closingNote}</p>
+        </section>
+
         <!-- Gallery card trigger -->
         <section class="qbag-artwork-card-section">
           <div
@@ -265,7 +374,7 @@ const qBag = qBagEntry.data;
 
         <!-- The Concept -->
         <section class="qbag-section qbag-concept-section">
-          <p class="qbag-section-index qb-mono">03 / OBJECT + SHARED RULE</p>
+          <p class="qbag-section-index qb-mono">06 / OBJECT + SHARED RULE</p>
           <h2 class="qbag-h2">{qBag.conceptCards[0].title}</h2>
           <div class="qbag-two-col">
             <div class="qbag-two-col-text">
@@ -318,47 +427,6 @@ const qBag = qBagEntry.data;
           </div>
         </section>
 
-        <section class="qbag-section qbag-ageing-section" aria-labelledby="qbag-ageing-title">
-          <div class="qbag-section-heading">
-            <p class="qbag-section-index qb-mono">04 / THE ANTI-DISPOSABLE MECHANISM</p>
-            <h2 id="qbag-ageing-title" class="qbag-h2">{qBag.ageingTitle}</h2>
-            <p class="qbag-section-intro">{qBag.ageingLead}</p>
-          </div>
-          <ol class="qbag-ageing-track">
-            {qBag.ageingStages.map((stage, index) => (
-              <li
-                class:list={{ "qbag-ageing-stage--gravity": index === qBag.ageingStages.length - 1 }}
-                tabindex={index === qBag.ageingStages.length - 1 ? "0" : undefined}
-              >
-                <span class="qbag-ageing-count qb-mono">{stage.count}</span>
-                <span class="qbag-ageing-dot" aria-hidden="true"></span>
-                <h3>{stage.title}</h3>
-                <p>
-                  {index === 2 ? (
-                    <>
-                      <TypographicDoor
-                        id="qbag-overpriced-stickers"
-                        zone="qbag"
-                        kind="portal"
-                        voice="archive"
-                        text="Chosen stickers,"
-                        revealText="Overpriced stickers,"
-                        ariaLabel="Chosen stickers — secret passage to Overpriced Stickers"
-                        href="/overpriced/"
-                        pinned
-                      />{stage.detail.slice("Chosen stickers,".length)}
-                    </>
-                  ) : stage.detail}
-                </p>
-                {index === qBag.ageingStages.length - 1 && (
-                  <span class="qbag-gravity-whisper qb-mono">MEMORY HAS MASS</span>
-                )}
-              </li>
-            ))}
-          </ol>
-          <blockquote class="qbag-reverse-quote">The older the object becomes, the less disposable it feels.</blockquote>
-        </section>
-
         <!-- ══ SVG DIVIDER 2: bag portal ring ══ -->
         <div class="qb-cosmic-divider" aria-hidden="true">
           <svg viewBox="0 0 800 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -392,7 +460,7 @@ const qBag = qBagEntry.data;
 
         <!-- Marks as Evidence -->
         <section class="qbag-section qbag-marks-section">
-          <p class="qbag-section-index qb-mono">05 / EVIDENCE + PERSONAL IDENTITY</p>
+          <p class="qbag-section-index qb-mono">07 / EVIDENCE + PERSONAL IDENTITY</p>
           <h2 class="qbag-h2">{qBag.conceptCards[1].title}</h2>
           <p>{qBag.conceptCards[1].paragraphs[0]}</p>
           <p>{qBag.conceptCards[1].paragraphs[1]}</p>
@@ -504,7 +572,7 @@ const qBag = qBagEntry.data;
 
         <!-- Reuse as Identity -->
         <section class="qbag-section qbag-reuse-section">
-          <p class="qbag-section-index qb-mono">06 / IDENTITY WITHOUT PREACHING</p>
+          <p class="qbag-section-index qb-mono">08 / IDENTITY WITHOUT PREACHING</p>
           <h2 class="qbag-h2">{qBag.conceptCards[2].title}</h2>
           <p>{qBag.conceptCards[2].paragraphs[0]}</p>
           <p>{qBag.conceptCards[2].paragraphs[1]}</p>
@@ -534,28 +602,8 @@ const qBag = qBagEntry.data;
           </svg>
         </div>
 
-        <section class="qbag-pilot" id="qbag-pilot" aria-labelledby="qbag-pilot-title">
-          <div class="qbag-pilot-header">
-            <p class="qbag-section-index qb-mono">{qBag.pilot.eyebrow}</p>
-            <h2 id="qbag-pilot-title">{qBag.pilot.title}</h2>
-            <p>{qBag.pilot.body}</p>
-          </div>
-          <div class="qbag-pilot-columns">
-            <div>
-              <h3>Experiment conditions</h3>
-              <ul>{qBag.pilot.scope.map((item) => <li>{item}</li>)}</ul>
-            </div>
-            <div>
-              <h3>Observe only what matters</h3>
-              <ul>{qBag.pilot.measures.map((item) => <li>{item}</li>)}</ul>
-            </div>
-          </div>
-          <p class="qbag-pilot-metric">{qBag.pilot.metric}</p>
-          <a href="#qbag-contact" class="qbag-pilot-action">Help host the first territory →</a>
-        </section>
-
         <section class="qbag-section qbag-participants-section">
-          <p class="qbag-section-index qb-mono">07 / THE SMALL NETWORK</p>
+          <p class="qbag-section-index qb-mono">09 / THE SMALL NETWORK</p>
           <h2 class="qbag-h2">One protocol, three kinds of participant</h2>
           <div class="qbag-participant-grid">
             {qBag.participantCards.map((card) => (
@@ -569,7 +617,7 @@ const qBag = qBagEntry.data;
 
         <section class="qbag-value-circuit" aria-labelledby="qbag-value-circuit-title">
           <header class="qbag-value-circuit-header">
-            <p class="qbag-section-index qb-mono">08 / {qBag.valueCircuit.eyebrow}</p>
+            <p class="qbag-section-index qb-mono">10 / {qBag.valueCircuit.eyebrow}</p>
             <h2 id="qbag-value-circuit-title">{qBag.valueCircuit.title}</h2>
             <p>{qBag.valueCircuit.intro}</p>
           </header>
@@ -595,22 +643,22 @@ const qBag = qBagEntry.data;
           </div>
         </section>
 
-        <!-- CHOICE: Infocigan satire is preserved inside an explicit artwork boundary. -->
-        <section class="qbag-speculative-zone" aria-labelledby="qbag-speculative-title">
-          <p class="qbag-section-index qb-mono">09 / {qBag.speculativeBoundary.eyebrow}</p>
-          <h2 id="qbag-speculative-title">{qBag.speculativeBoundary.title}</h2>
-          <p>{qBag.speculativeBoundary.body}</p>
-          <p>{qBag.conceptCards[3].paragraphs[0]}</p>
-          <blockquote>{qBag.conceptCards[3].paragraphs[1]}</blockquote>
-          <div class="qbag-speculative-disclaimer qb-mono">{qBag.speculativeBoundary.disclaimer}</div>
-        </section>
-
-        <!-- For Partners -->
-        <section class="qbag-section qbag-partners-section">
-          <h2 class="qbag-h2">{qBag.partnersTitle}</h2>
-          <p>{qBag.partnersParagraphs[0]}</p>
-          <p>{qBag.partnersParagraphs[1]}</p>
-        </section>
+        <!-- CHOICE: Speculation remains available as a deeper voluntary layer, not the main investment proposition. -->
+        <details class="qbag-speculative-zone">
+          <summary>
+            <span>
+              <span class="qbag-section-index qb-mono">11 / {qBag.speculativeBoundary.eyebrow}</span>
+              <strong id="qbag-speculative-title">{qBag.speculativeBoundary.title}</strong>
+            </span>
+            <span class="qbag-speculative-toggle qb-mono" aria-hidden="true">OPEN SPECULATIVE LAYER +</span>
+          </summary>
+          <div class="qbag-speculative-body">
+            <p>{qBag.speculativeBoundary.body}</p>
+            <p>{qBag.conceptCards[3].paragraphs[0]}</p>
+            <blockquote>{qBag.conceptCards[3].paragraphs[1]}</blockquote>
+            <div class="qbag-speculative-disclaimer qb-mono">{qBag.speculativeBoundary.disclaimer}</div>
+          </div>
+        </details>
 
         <!-- Closing statement -->
         <section class="qbag-closing-section">
@@ -625,7 +673,7 @@ const qBag = qBagEntry.data;
 
         <!-- Contact -->
         <section class="qbag-section qbag-contact-section" id="qbag-contact">
-          <p class="qbag-section-index qb-mono">10 / OPEN TRANSMISSION</p>
+          <p class="qbag-section-index qb-mono">12 / OPEN TRANSMISSION</p>
           <h2 class="qbag-h2">Begin the first return</h2>
           <p>{qBag.contactIntro}</p>
           <p class="qbag-portal-links">
@@ -1764,6 +1812,219 @@ const qBag = qBagEntry.data;
     color: #17100b;
   }
 
+  .qbag-operating-layer {
+    margin: clamp(4rem, 8vw, 8rem) 0;
+    overflow: hidden;
+    border: 2px solid var(--qb-text);
+    border-radius: 4px;
+    background: #f1ede4;
+    color: var(--qb-text);
+    box-shadow: 12px 12px 0 rgba(32, 140, 141, 0.13);
+  }
+
+  .qbag-operating-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    gap: 1.5rem 4rem;
+    padding: clamp(2rem, 5vw, 4rem);
+    border-bottom: 2px solid var(--qb-text);
+  }
+
+  .qbag-operating-header .qbag-section-index {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--qb-primary);
+  }
+
+  .qbag-operating-header h2 {
+    margin: 0;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .qbag-operating-header > p:last-child {
+    align-self: end;
+    margin: 0;
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    line-height: 1.65;
+  }
+
+  .qbag-operating-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+
+  .qbag-operating-grid article {
+    padding: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .qbag-cafe-desk {
+    border-right: 2px solid var(--qb-text);
+    background: rgba(255, 255, 255, 0.36);
+  }
+
+  .qbag-backer-desk {
+    background:
+      radial-gradient(circle at 90% 10%, rgba(255, 204, 51, 0.25), transparent 32%),
+      rgba(193, 122, 46, 0.08);
+  }
+
+  .qbag-operating-audience {
+    margin: 0 0 1.3rem;
+    color: var(--qb-primary);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+  }
+
+  .qbag-operating-grid h3 {
+    margin: 0 0 1.5rem;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.6rem);
+    line-height: 1.05;
+  }
+
+  .qbag-cafe-desk dl {
+    display: grid;
+    gap: 0;
+    margin: 0;
+  }
+
+  .qbag-cafe-desk dl > div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(26, 16, 8, 0.22);
+  }
+
+  .qbag-cafe-desk dt {
+    color: var(--qb-amber);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .qbag-cafe-desk dd {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .qbag-pricing-note {
+    margin: 1.5rem 0 0;
+    padding: 1rem;
+    border-left: 4px solid var(--qb-gold-bright);
+    background: rgba(255, 204, 51, 0.15);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .qbag-backer-desk > p:not(.qbag-operating-audience) {
+    max-width: 45rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .qbag-backer-lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .qbag-backer-lists h4 {
+    margin: 0 0 1rem;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .qbag-backer-lists ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .qbag-backer-lists li {
+    display: grid;
+    grid-template-columns: 0.75rem minmax(0, 1fr);
+    gap: 0.55rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .qbag-backer-lists li::before {
+    content: '✦';
+    color: var(--qb-amber);
+  }
+
+  .qbag-operating-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 2px solid var(--qb-text);
+  }
+
+  .qbag-operating-action {
+    padding: 1.25rem 1.5rem;
+    color: var(--qb-text);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .qbag-operating-action + .qbag-operating-action {
+    border-left: 2px solid var(--qb-text);
+  }
+
+  .qbag-operating-action--host {
+    background: var(--qb-primary);
+    color: #fffdf8;
+  }
+
+  .qbag-operating-action--back {
+    background: var(--qb-gold-bright);
+  }
+
+  .qbag-operating-action:hover,
+  .qbag-operating-action:focus-visible {
+    background: var(--qb-text);
+    color: var(--qb-gold-bright);
+  }
+
+  .qbag-operating-action:focus-visible {
+    outline: 3px solid #fffdf8;
+    outline-offset: -6px;
+  }
+
+  .qbag-operating-note {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    border-top: 2px solid var(--qb-text);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    line-height: 1.55;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   .qbag-participant-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1971,9 +2232,34 @@ const qBag = qBagEntry.data;
     letter-spacing: 0.14em;
   }
 
-  .qbag-speculative-zone h2 {
+  .qbag-speculative-zone summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: end;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .qbag-speculative-zone summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .qbag-speculative-zone summary:focus-visible {
+    border-radius: 0.25rem;
+    outline: 2px solid var(--qb-amber);
+    outline-offset: 0.6rem;
+  }
+
+  .qbag-speculative-zone summary .qbag-section-index {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .qbag-speculative-zone summary strong {
+    display: block;
     max-width: 50rem;
-    margin: 0 0 1.4rem;
+    margin: 0;
     font-family: 'Bungee', 'Space Grotesk', sans-serif;
     font-size: clamp(1.7rem, 4vw, 4rem);
     font-weight: 400;
@@ -1981,14 +2267,35 @@ const qBag = qBagEntry.data;
     text-wrap: balance;
   }
 
-  .qbag-speculative-zone > p,
-  .qbag-speculative-zone blockquote {
+  .qbag-speculative-toggle {
+    color: var(--qb-amber);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .qbag-speculative-zone[open] .qbag-speculative-toggle {
+    font-size: 0;
+  }
+
+  .qbag-speculative-zone[open] .qbag-speculative-toggle::after {
+    content: 'CLOSE SPECULATIVE LAYER −';
+    font-size: 0.64rem;
+  }
+
+  .qbag-speculative-body {
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .qbag-speculative-body > p,
+  .qbag-speculative-body blockquote {
     max-width: 50rem;
     font-size: clamp(1rem, 1.35vw, 1.2rem);
     line-height: 1.65;
   }
 
-  .qbag-speculative-zone blockquote {
+  .qbag-speculative-body blockquote {
     margin: 1.5rem 0;
     color: var(--qb-amber);
     font-family: 'Playfair Display', Georgia, serif;
@@ -2713,6 +3020,20 @@ const qBag = qBagEntry.data;
       display: none;
     }
 
+    .qbag-operating-header,
+    .qbag-operating-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .qbag-cafe-desk {
+      border-right: 0;
+      border-bottom: 2px solid var(--qb-text);
+    }
+
+    .qbag-backer-lists {
+      grid-template-columns: 1fr;
+    }
+
     .qbag-participant-grid {
       grid-template-columns: 1fr;
     }
@@ -2735,6 +3056,15 @@ const qBag = qBagEntry.data;
 
     .qbag-value-footer nav {
       align-items: flex-start;
+    }
+
+    .qbag-speculative-zone summary {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .qbag-speculative-toggle {
+      white-space: normal;
     }
   }
 
@@ -2804,6 +3134,13 @@ const qBag = qBagEntry.data;
     .qbag-pilot::after { display: none; }
     .qbag-pilot .qbag-section-index { max-width: none; }
     .qbag-pilot-columns { grid-template-columns: 1fr; }
+    .qbag-operating-layer { box-shadow: 8px 8px 0 rgba(32, 140, 141, 0.13); }
+    .qbag-operating-header { padding: 2rem 1.25rem; }
+    .qbag-operating-grid article { padding: 2rem 1.25rem; }
+    .qbag-cafe-desk dl > div { grid-template-columns: 1fr; gap: 0.45rem; }
+    .qbag-operating-actions { grid-template-columns: 1fr; }
+    .qbag-operating-action + .qbag-operating-action { border-top: 2px solid var(--qb-text); border-left: 0; }
+    .qbag-operating-note { text-align: left; }
     .qbag-value-circuit { box-shadow: 8px 8px 0 rgba(26, 16, 8, 0.12); }
     .qbag-value-circuit::before { text-align: left; }
     .qbag-value-stages { grid-template-columns: 1fr; }

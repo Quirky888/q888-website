@@ -128,3 +128,17 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Evidence:** Aleksandrs clarified that only the in-sentence phrase “Chosen stickers” should morph into “Overpriced stickers,” using the exact per-letter treatment from the Bureaucracy compliance notice, and described the effect as a standard feature for hidden messages.
 - **Possible DNA change:** None proposed. The pattern implements the clarity ↔ mystery and stable structure ↔ playful surface tensions in a reusable component.
 - **Status:** observation
+
+---
+
+### 2026-08-25 — Layers are the identity, not a compromise
+
+- **Project:** q888-website / `/qbag/`
+- **Task context:** Balancing the creative model with the practical search for a café partner or pilot backer.
+- **Working mode:** BUILD + LEARN
+- **Expression lens or overlay:** HUMAN_CODE + MYTHIC_Q888 + BUREAUCRATIC_SATIRE + COSMIC_PROPAGANDA; task-local layered Q-Bag model
+- **Human response:** approved the layered direction — “this is a part of our (or just mine) current identity and I would say ideology.”
+- **Observed preference:** Practical clarity, artistic mythology, commercial ambition, personal attachment and speculative possibility should not be flattened into one voice or forced to compete on the first screen. They should form progressive layers with a legible public threshold and increasingly strange or financially ambitious depths.
+- **Evidence:** Aleksandrs accepted a structure that begins with the ordinary refill ritual, explains the pilot and partner reality, then reveals the Q888 value circuit and optional speculative layer.
+- **Possible DNA change:** None proposed. This is strong project evidence for using hierarchy and progressive disclosure to hold several Q888 tensions at once.
+- **Status:** observation / approved

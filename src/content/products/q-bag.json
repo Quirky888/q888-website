@@ -97,6 +97,45 @@
     ],
     "metric": "The magic metric is not bags sold. It is refills per Q-Bag."
   },
+  "operationalLayer": {
+    "eyebrow": "The Earth-Side Operating Layer",
+    "title": "What happens behind the café counter?",
+    "intro": "Q-Bag should fit the equipment and rhythm a café already has. The first pilot tests a behaviour, not a new technology stack.",
+    "cafeTitle": "For the café partner",
+    "cafeFacts": [
+      {
+        "label": "Café does",
+        "body": "Tare the container, fill it with coffee beans, charge the customer, and add an optional refill mark."
+      },
+      {
+        "label": "Café needs",
+        "body": "Existing scales, coffee beans, a clear reusable-container policy, and roughly ten seconds at the counter."
+      },
+      {
+        "label": "Café gets",
+        "body": "Return visits, repeat bean sales, less packaging, participation in a visible artwork, and measured pilot results."
+      }
+    ],
+    "pricingNote": "The café chooses its own refill pricing. A discount is welcome, not required.",
+    "backerTitle": "Fund evidence, not promises.",
+    "backerIntro": "A pilot backer helps the first 100 bags exist, travel, return, and produce evidence before anyone is asked to believe in global scale.",
+    "fundsTitle": "Pilot backing helps fund",
+    "funds": [
+      "Sourcing 100 suitable food-safe V1 containers",
+      "Numbering, artwork, personalisation materials, and café instructions",
+      "Pilot documentation, measurement, and practical support"
+    ],
+    "evidenceTitle": "The pilot produces",
+    "evidence": [
+      "Return rate and refill frequency",
+      "Packaging avoided and café-counter lessons",
+      "Participant photographs, stories, and a visual archive",
+      "Evidence for a better Q-Bag V2 and any future expansion"
+    ],
+    "hostCta": "Host the pilot",
+    "backCta": "Back the pilot",
+    "closingNote": "No platform. No app. No speculative machine required at the counter—only a useful object, an ordinary refill, and enough attention to learn what happens next."
+  },
   "participantCards": [
     {
       "title": "For coffee drinkers",
@@ -112,29 +151,29 @@
     }
   ],
   "valueCircuit": {
-    "eyebrow": "Q-Bag × Infocigan × Overpriced",
-    "title": "Saving packaging is only the beginning.",
-    "intro": "Q-Bag is also an open attempt to create wealth: financial fuel, practical experience, relationships, artistic freedom, and momentum for projects that do not exist yet. Infocigan makes that ambition visible instead of hiding it behind polite sustainability language.",
+    "eyebrow": "The Practical Value Circuit",
+    "title": "A useful loop can fund what comes next.",
+    "intro": "Q-Bag is openly commercial, but its first economy is practical: a person returns, a café sells more coffee, packaging is avoided, the object gains identity, and Q888 earns resources and experience to improve the experiment.",
     "stages": [
       {
-        "label": "Buy and use",
-        "body": "A person receives a useful reusable container, coffee ritual, and physical artwork—not an abstract promise."
+        "label": "Return for coffee",
+        "body": "The owner brings back a useful object instead of replacing another anonymous package."
       },
       {
-        "label": "Author and trust",
-        "body": "The owner personalises the bag and becomes an early witness to a cultural experiment whose outcome is still unwritten."
+        "label": "Café earns a repeat visit",
+        "body": "The café sells beans, strengthens a customer relationship, and participates in a visible refill culture."
       },
       {
-        "label": "Fund what comes next",
-        "body": "Revenue and experience can support Q-Bag pilots, artist collaborations, production, travel, and other Q888 projects."
+        "label": "The bag gains identity",
+        "body": "Marks, wear, places, and personal choices make reuse emotionally easier and the object harder to discard."
       },
       {
-        "label": "Keep any future upside",
-        "body": "If a unique bag or edition later gains resale value, that gain belongs to its owner as a personal bonus for early trust."
+        "label": "Revenue funds the next layer",
+        "body": "Income and evidence can support better containers, new café pilots, artists, travel, and future Q888 work."
       }
     ],
-    "collectorBonus": "Overpriced asks who decides value. Infocigan admits that money matters. Q-Bag turns both questions into a useful object that can carry coffee, memory, authorship, and perhaps one day a surprising price.",
-    "clarityNote": "Q-Bag is a physical art object and refill experiment—not a share, security, or guaranteed-return product. Future collectability or resale profit is possible, not promised."
+    "collectorBonus": "Creative meaning and financial survival are not enemies. The artwork creates desire and attachment; the operating loop creates evidence and income; each can help the other remain alive.",
+    "clarityNote": "This is intended commercial activity: useful objects and pilot participation may create revenue. The deeper possibility of collectability belongs to the speculative layer below, where it remains possible rather than promised."
   },
   "speculativeBoundary": {
     "eyebrow": "Infocigan Department of Speculative Value",

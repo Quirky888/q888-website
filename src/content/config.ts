@@ -176,6 +176,30 @@ const qBagProduct = z.object({
     measures: z.array(z.string().min(1)).min(3),
     metric: z.string().min(1),
   }),
+  operationalLayer: z.object({
+    eyebrow: z.string().min(1),
+    title: z.string().min(1),
+    intro: z.string().min(1),
+    cafeTitle: z.string().min(1),
+    cafeFacts: z
+      .array(
+        z.object({
+          label: z.string().min(1),
+          body: z.string().min(1),
+        }),
+      )
+      .min(3),
+    pricingNote: z.string().min(1),
+    backerTitle: z.string().min(1),
+    backerIntro: z.string().min(1),
+    fundsTitle: z.string().min(1),
+    funds: z.array(z.string().min(1)).min(3),
+    evidenceTitle: z.string().min(1),
+    evidence: z.array(z.string().min(1)).min(3),
+    hostCta: z.string().min(1),
+    backCta: z.string().min(1),
+    closingNote: z.string().min(1),
+  }),
   participantCards: z
     .array(
       z.object({
