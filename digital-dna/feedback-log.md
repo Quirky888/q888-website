@@ -178,3 +178,17 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Evidence:** Supplied photographs document the collage context, home production, completed personalised bag, and its relationship to existing retail coffee bags at the roastery. Aleksandrs explicitly requested that the production and ready-object frames change independently rather than simultaneously.
 - **Possible DNA change:** None proposed. This is project evidence for the human memory ↔ machine systems and artwork ↔ functioning tool tensions.
 - **Status:** observation / approved
+
+---
+
+### 2026-08-28 — Promote the practice; let the historical layer emerge
+
+- **Project:** q888-website / `/qbag/` / Creative Afterlife
+- **Task context:** Distinguishing the actively promoted Creative Afterlife practice from The Adaptation Layer as its possible long-term historical consequence.
+- **Working mode:** LEARN
+- **Expression lens or overlay:** HUMAN_CODE + MYTHIC_Q888; task-local Q-Bag / Creative Afterlife model
+- **Human response:** approved the quiet AI framing and clarified that Creative Afterlife may be actively promoted, while The Adaptation Layer should mostly emerge if the behaviour spreads across many kinds of objects.
+- **Observed preference:** Treat Creative Afterlife as the participatory practice people can be invited to join. Treat The Adaptation Layer as a speculative historical description of what might become visible later, not as a campaign, aesthetic brief, or style people are instructed to manufacture. Avoid encouraging deliberate “Adaptation Layer aesthetics,” because that would turn an emergent historical hypothesis into another trend.
+- **Evidence:** Aleksandrs explicitly stated, “Creative Afterlife can be actively promoted. The Adaptation Layer should mostly emerge,” and described the distinction as making the whole system cleaner. He also approved limiting AI on the public Q-Bag page to one quiet sentence about imagining transformations from materials already present.
+- **Possible DNA change:** None proposed. This is project-specific evidence for the control ↔ accidental discovery and practical function ↔ alternative reality tensions.
+- **Status:** observation / approved

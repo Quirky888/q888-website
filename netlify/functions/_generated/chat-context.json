@@ -26,22 +26,22 @@
     {
       "slug": "q-bag",
       "title": "Q-Bag™",
-      "descriptor": "A bag, a ritual, and a question about daily objects.",
-      "system": "SYST: VOID",
-      "panelTitle": "Q-Bag",
-      "panelDescription": "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
+      "descriptor": "Creative Afterlife begins with a coffee refill.",
+      "system": "SYST: AFTERLIFE / 001",
+      "panelTitle": "Q-Bag · Experiment 001",
+      "panelDescription": "Bring back a suitable coffee container you already own. Refill it, mark it, personalise it, and return again—a small test of whether creative attachment can help an existing object stay in use.",
       "panelSpecs": [
         {
-          "label": "VOLUME",
-          "value": "NON_EUCLIDEAN"
+          "label": "METHOD",
+          "value": "REFILL + RETURN"
         },
         {
-          "label": "CLOSURE",
-          "value": "ZIPPER_LOGIC"
+          "label": "AUTHORSHIP",
+          "value": "ACCUMULATING"
         },
         {
-          "label": "DENSITY",
-          "value": "LIGHTWEIGHT"
+          "label": "PRODUCT",
+          "value": "OPTIONAL"
         }
       ]
     },
