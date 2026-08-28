@@ -668,7 +668,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
           </div>
         </section>
 
-        <!-- CHOICE: The Adaptation Layer is an emergent consequence, never a campaign or prescribed aesthetic. -->
+        <!-- CHOICE: The Adaptation Layer is a provisional category Q888 may name without claiming authority over its final form. -->
         <details class="qbag-speculative-zone">
           <summary>
             <span>
@@ -681,7 +681,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
             <p>{qBag.speculativeBoundary.body}</p>
             <p>{qBag.conceptCards[3].paragraphs[0]}</p>
             <blockquote>{qBag.conceptCards[3].paragraphs[1]}</blockquote>
-            <div class="qbag-speculative-disclaimer qb-mono">{qBag.speculativeBoundary.disclaimer}</div>
+            <p class="qbag-speculative-classification">{qBag.speculativeBoundary.classification}</p>
           </div>
         </details>
 
@@ -2488,17 +2488,17 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     font-style: italic;
   }
 
-  .qbag-speculative-disclaimer {
+  .qbag-speculative-classification {
     max-width: 50rem;
     margin-top: 2rem;
-    padding: 1rem;
+    padding: 1.15rem 1.25rem;
     border-left: 3px solid var(--qb-primary);
     background: rgba(32, 140, 141, 0.08);
-    color: var(--qb-text-muted);
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    line-height: 1.6;
-    text-transform: uppercase;
+    color: var(--qb-text);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    font-style: italic;
+    line-height: 1.55;
   }
 
   .qbag-section {

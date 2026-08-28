@@ -245,7 +245,7 @@ const qBagProduct = z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
     body: z.string().min(1),
-    disclaimer: z.string().min(1),
+    classification: z.string().min(1),
   }),
   artworkCardTitle: z.string().min(1),
   artworkCardDescription: z.string().min(1),

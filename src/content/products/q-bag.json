@@ -75,12 +75,12 @@
     }
   ],
   "pilot": {
-    "eyebrow": "Proposed First Territory · Edinburgh or Elsewhere",
-    "title": "One café. A small cohort. Three months.",
+    "eyebrow": "First Field Test · Edinburgh or Elsewhere",
+    "title": "One café. A few returning objects. Three months.",
     "body": "The first pilot should be small enough to understand and strange enough to notice. Participants begin with suitable containers they already own; Edinburgh is the home base, not the boundary.",
     "scope": [
       "One refill-friendly independent café",
-      "A defined cohort using suitable containers they already own",
+      "A small group of people and their returning objects",
       "One simple staff ritual",
       "Three months of observable returns"
     ],
@@ -199,10 +199,10 @@
     "clarityNote": "NO Q888 PURCHASE IS REQUIRED. OPTIONAL EDITIONS MAY BE SOLD. COLLECTABILITY MAY EMERGE, BUT IT IS NEVER PROMISED."
   },
   "speculativeBoundary": {
-    "eyebrow": "The Adaptation Layer · Emergent Horizon",
-    "title": "What might become visible if this behaviour spreads?",
-    "body": "If Creative Afterlife travels across many kinds of objects, a larger cultural layer may gradually become visible: ordinary manufactured things repaired, combined, painted, modified, and continued by their owners.",
-    "disclaimer": "NOT A CAMPAIGN. NOT AN AESTHETIC BRIEF. IF THE ADAPTATION LAYER APPEARS, IT APPEARS THROUGH MANY UNCOORDINATED ACTS OF CONTINUATION."
+    "eyebrow": "The Adaptation Layer · Provisional Classification",
+    "title": "A proposed name for what may already be beginning.",
+    "body": "If Creative Afterlife travels across many kinds of objects, a larger cultural layer may become visible: ordinary manufactured things repaired, combined, painted, modified, and continued by their owners.",
+    "classification": "Historical period? Aesthetic movement? Coping mechanism? Or something we help manufacture by naming it too early. Classification remains unstable."
   },
   "artworkCardTitle": "Q-Bag Visual Archive",
   "artworkCardDescription": "The earlier collage organism: Infocigan fragments, stickers, speculative bag designs, and cultural artefacts from Q-Bag's product-first phase.",
