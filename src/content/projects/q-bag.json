@@ -2,33 +2,33 @@
   "slug": "q-bag",
   "sortOrder": 1,
   "cardTitle": "Q-Bag™",
-  "cardDescriptor": "A bag, a ritual, and a question about daily objects.",
-  "cardSystem": "SYST: VOID",
+  "cardDescriptor": "Creative Afterlife begins with a coffee refill.",
+  "cardSystem": "SYST: AFTERLIFE / 001",
   "cardScatter": "md:-translate-y-8 md:-translate-x-4 md:scale-95",
   "cardImage": "/images/qbag.webp",
   "cardHolographic": false,
   "cardLightText": true,
-  "panelTitle": "Q-Bag",
-  "panelDescription": "A containment vessel designed for identity fragments and lost memories. The interior volume is non-linear, allowing for the storage of items larger than the bag itself, provided they are sufficiently abstract.",
+  "panelTitle": "Q-Bag · Experiment 001",
+  "panelDescription": "Bring back a suitable coffee container you already own. Refill it, mark it, personalise it, and return again—a small test of whether creative attachment can help an existing object stay in use.",
   "copyrightWard": {
-    "code": "QBAG / VOID",
-    "title": "Non-Euclidean Custody",
-    "warning": "The object may be carried. Its characters, memories, and interior dimensions remain in the custody of Q888.",
+    "code": "QBAG / AFTERLIFE",
+    "title": "Continued Custody",
+    "warning": "The object may outlive its first commercial identity. Its repairs, marks, memories, and unofficial future remain with its co-author.",
     "route": "/qbag/",
-    "linkLabel": "Inspect the containment vessel"
+    "linkLabel": "Enter Experiment 001"
   },
   "panelSpecs": [
     {
-      "label": "VOLUME",
-      "value": "NON_EUCLIDEAN"
+      "label": "METHOD",
+      "value": "REFILL + RETURN"
     },
     {
-      "label": "CLOSURE",
-      "value": "ZIPPER_LOGIC"
+      "label": "AUTHORSHIP",
+      "value": "ACCUMULATING"
     },
     {
-      "label": "DENSITY",
-      "value": "LIGHTWEIGHT"
+      "label": "PRODUCT",
+      "value": "OPTIONAL"
     }
   ]
 }

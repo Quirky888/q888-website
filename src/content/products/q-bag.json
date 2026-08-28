@@ -3,52 +3,47 @@
   "sortOrder": 1,
   "title": "Q-BAG™",
   "heroImage": "/images/Qbag_hero.webp",
-  "heroAlt": "Provisional AI-generated artwork of a futuristic reusable Q-Bag travelling through a cosmic landscape",
+  "heroAlt": "Speculative AI-generated image of a possible future Q888 artist-edition Q-Bag travelling through a cosmic landscape",
   "heroTitle": "Q-BAG™",
-  "heroDeclaration": "Buy the bag once. Refill it. Mark the journey. Bring it back.",
-  "heroSupport": "A reusable coffee container and cultural refill protocol. Every return and personal mark adds history, making the object more uniquely yours—and increasingly difficult to throw away.",
+  "heroDeclaration": "Bring back a suitable coffee container you already own. Refill it. Mark it. Return again.",
+  "heroSupport": "Q-Bag is Experiment 001 in Creative Afterlife: a small test of whether personal authorship and accumulated history can help an existing object stay in use.",
   "imageDisclosure": {
-    "label": "Temporary Visual Organism · AI-Generated",
-    "text": "This image was made with generative AI under my direction while human creative time was temporarily scarce. It is not pretending to be handmade. One day it may be replaced, mutated, painted over, or respectfully composted."
+    "label": "Possible Future Q888 Edition · AI-Generated",
+    "text": "This is one possible artist vessel, not the object required to participate. The experiment begins with something suitable you already have. The image was made with generative AI under my direction and may later be replaced, mutated, painted over, or respectfully composted."
   },
   "introTagline": "Refill. Remember. Return.",
-  "introLead": "Q-Bag is an artwork trying to manufacture a new social habit: buying coffee by weight in a reusable container, then allowing refill evidence and personal expression to accumulate on the object.",
-  "protocolTitle": "The six-step refill ritual",
-  "protocolLead": "The refill action must remain almost boring. Personalisation is what makes the object singular; repetition is what gives that singular object a cultural life.",
+  "introLead": "Bring a suitable container you already own, buy coffee by weight, let refill evidence and personal expression accumulate, then bring the same object back. Q-Bag is a behaviour before it is a product.",
+  "protocolTitle": "The five-step refill ritual",
+  "protocolLead": "The refill action should remain almost boring. Personalisation makes the object singular; repetition gives that singular object a cultural life.",
   "protocolSteps": [
     {
       "number": "01",
-      "action": "Buy once. Make it yours.",
-      "detail": "Begin with the official Q-Bag, then add your first personal sticker, drawing, name, or mark."
+      "action": "Bring something suitable",
+      "detail": "Start with a clean, food-safe coffee container accepted by the café. No Q888 purchase is required."
     },
     {
       "number": "02",
-      "action": "Take it to a café",
-      "detail": "Bring the object to a participating roaster or refill-friendly coffee shop."
+      "action": "Tare and fill",
+      "detail": "The café weighs the empty container, adds coffee beans, and charges for the coffee."
     },
     {
       "number": "03",
-      "action": "Tare and fill",
-      "detail": "The café weighs the empty bag, adds coffee beans, and charges for the coffee."
-    },
-    {
-      "number": "04",
       "action": "Record the return",
       "detail": "A café stamp, refill mark, or occasional artist edition records that the performance happened."
     },
     {
-      "number": "05",
+      "number": "04",
       "action": "Personalise the object",
-      "detail": "Add your own stickers, drawings, repairs, and memories. The owner is a co-author, not only a customer."
+      "detail": "Add exterior stickers, drawings, repairs, and memories. The owner is a co-author, not only a customer."
     },
     {
-      "number": "06",
+      "number": "05",
       "action": "Return again",
       "detail": "The loop repeats. Wear, marks, places, and stories become part of the object."
     }
   ],
   "ritualEquation": [
-    { "subject": "Bag", "meaning": "Object" },
+    { "subject": "Container", "meaning": "Existing object" },
     { "subject": "Coffee", "meaning": "Reward" },
     { "subject": "Café", "meaning": "Stage" },
     { "subject": "Refill", "meaning": "Performance" },
@@ -56,7 +51,7 @@
     { "subject": "Owner", "meaning": "Co-author" }
   ],
   "ageingTitle": "Emotional depreciation in reverse",
-  "ageingLead": "Ordinary packaging loses value as it ages. Q-Bag is designed to do the opposite: every return gives its wear a reason to remain.",
+  "ageingLead": "Ordinary packaging loses value as it ages. Q-Bag asks whether the opposite can happen: each return gives wear, marks, and memory another reason to remain.",
   "ageingStages": [
     {
       "count": "REFILL 00",
@@ -71,7 +66,7 @@
     {
       "count": "REFILL 20",
       "title": "A personal archive",
-      "detail": "Chosen stickers, drawings, artists, dates, stains, and journeys make this bag unlike any other."
+      "detail": "Chosen stickers, drawings, artists, dates, stains, and journeys make this container unlike any other."
     },
     {
       "count": "REFILL 88+",
@@ -80,22 +75,22 @@
     }
   ],
   "pilot": {
-    "eyebrow": "Proposed First Territory · Edinburgh or Elsewhere",
-    "title": "One café. 100 Q-Bags. Three months.",
-    "body": "The first pilot should be small enough to understand and strange enough to notice. Edinburgh is the home base, not the boundary: if the right café or person appears elsewhere in the world, Q-Bag is ready to travel.",
+    "eyebrow": "First Field Test · Edinburgh or Elsewhere",
+    "title": "One café. A few returning objects. Three months.",
+    "body": "The first pilot should be small enough to understand and strange enough to notice. Participants begin with suitable containers they already own; Edinburgh is the home base, not the boundary.",
     "scope": [
       "One refill-friendly independent café",
-      "100 numbered Q-Bags",
+      "A small group of people and their returning objects",
       "One simple staff ritual",
       "Three months of observable returns"
     ],
     "measures": [
-      "How many bags return?",
+      "How many registered containers return?",
       "How often does each one return?",
-      "How many single-use retail coffee bags are avoided?",
-      "Do owners photograph or share their changing bags?"
+      "How many new retail coffee packages are avoided?",
+      "What do participants say makes them return?"
     ],
-    "metric": "The magic metric is not bags sold. It is refills per Q-Bag."
+    "metric": "The magic metric is not bags sold. It is repeat returns per participating container."
   },
   "operationalLayer": {
     "eyebrow": "The Earth-Side Operating Layer",
@@ -118,23 +113,23 @@
     ],
     "pricingNote": "The café chooses its own refill pricing. A discount is welcome, not required.",
     "backerTitle": "Fund evidence, not promises.",
-    "backerIntro": "A pilot backer helps the first 100 bags exist, travel, return, and produce evidence before anyone is asked to believe in global scale.",
+    "backerIntro": "A pilot backer helps existing containers enter a clear refill test, supports the café, and produces evidence before anyone is asked to believe in global scale.",
     "fundsTitle": "Pilot backing helps fund",
     "funds": [
-      "Sourcing 100 suitable food-safe V1 containers",
-      "Numbering, artwork, personalisation materials, and café instructions",
+      "Pilot setup, container-suitability guidance, tare labels, and café instructions",
+      "Optional personalisation materials, Q888 marks, and collaborative editions",
       "Pilot documentation, measurement, and practical support"
     ],
     "evidenceTitle": "The pilot produces",
     "evidence": [
       "Return rate and refill frequency",
-      "Single-use retail coffee bags avoided and café-counter lessons",
-      "Participant photographs, stories, and a visual archive",
-      "Evidence for a better Q-Bag V2 and any future expansion"
+      "New retail coffee packages avoided and café-counter lessons",
+      "Participant feedback about attachment, personalisation, and return",
+      "Operational friction, photographs, stories, and a visual archive"
     ],
     "hostCta": "Host the pilot",
     "backCta": "Back the pilot",
-    "closingNote": "No platform. No app. No speculative machine required at the counter—only a useful object, an ordinary refill, and enough attention to learn what happens next.",
+    "closingNote": "No platform. No app. No speculative machine required at the counter—only a suitable existing object, an ordinary refill, and enough attention to learn what happens next.",
     "prototypeRecord": {
       "label": "Prototype Record / V0",
       "title": "It existed before it had a system.",
@@ -166,94 +161,92 @@
   },
   "participantCards": [
     {
-      "title": "For coffee drinkers",
-      "body": "Better coffee, less packaging, and an ordinary object that becomes unmistakably yours."
+      "title": "Clothing and repair",
+      "body": "Visible mending, alterations, patches, and accumulated decisions can continue a garment beyond its first finished identity."
     },
     {
-      "title": "For cafés and roasters",
-      "body": "A visible refill culture, repeat visits, collaborative editions, and less single-use packaging."
+      "title": "Packaging and components",
+      "body": "Boxes, containers, frames, spare parts, and useful fragments can become material for another purpose instead of an automatic disposal decision."
     },
     {
-      "title": "For artists",
-      "body": "A recurring canvas that travels through cafés and kitchens instead of waiting in storage."
+      "title": "Obsolete objects",
+      "body": "Damaged or discontinued things can receive repairs, combinations, new functions, or cultural lives their original manufacturers never specified."
     }
   ],
   "valueCircuit": {
-    "eyebrow": "The Practical Value Circuit",
-    "title": "A useful loop can fund what comes next.",
-    "intro": "Q-Bag is openly commercial, but its first economy is practical: a person returns, a café sells more coffee, packaging is avoided, the object gains identity, and Q888 earns resources and experience to improve the experiment.",
+    "eyebrow": "Open Practice · Optional Objects",
+    "title": "Participation is free. Objects can still fund what comes next.",
+    "intro": "Creative Afterlife does not require Q888 merchandise. Its commercial layer is optional and transparent: carefully made vessels, stickers, artist editions, tools, and collaborations can support the open behaviour and fund future experiments.",
     "stages": [
       {
-        "label": "Return for coffee",
-        "body": "The owner brings back a useful object instead of replacing another anonymous package."
+        "label": "Use what exists",
+        "body": "The core Q-Bag behaviour begins with a suitable container already in the participant's possession."
       },
       {
-        "label": "Café earns a repeat visit",
-        "body": "The café sells beans, strengthens a customer relationship, and participates in a visible refill culture."
+        "label": "Choose an artist vessel",
+        "body": "A purpose-designed durable Q888 edition may be bought by people who want one, never by people who merely want to participate."
       },
       {
-        "label": "The bag gains identity",
-        "body": "Marks, wear, places, and personal choices make reuse emotionally easier and the object harder to discard."
+        "label": "Add cultural layers",
+        "body": "Optional stickers, café marks, artist editions, and collaborations can add meaning without becoming compulsory proof of membership."
       },
       {
-        "label": "Revenue funds the next layer",
-        "body": "Income and evidence can support better containers, new café pilots, artists, travel, and future Q888 work."
+        "label": "Fund what comes next",
+        "body": "Revenue and evidence can support café pilots, artists, long-life objects, travel, and future Q888 work."
       }
     ],
-    "collectorBonus": "Creative meaning and financial survival are not enemies. The artwork creates desire and attachment; the operating loop creates evidence and income; each can help the other remain alive.",
-    "clarityNote": "This is intended commercial activity: useful objects and pilot participation may create revenue. The deeper possibility of collectability belongs to the speculative layer below, where it remains possible rather than promised."
+    "collectorBonus": "An open practice can still produce things worth buying. Creative meaning and financial survival are not enemies; each can help the other remain alive.",
+    "clarityNote": "NO Q888 PURCHASE IS REQUIRED. OPTIONAL EDITIONS MAY BE SOLD. COLLECTABILITY MAY EMERGE, BUT IT IS NEVER PROMISED."
   },
   "speculativeBoundary": {
-    "eyebrow": "Infocigan Department of Speculative Value",
-    "title": "The ambition is real. The return is not promised.",
-    "body": "Infocigan is transparent artistic commerce. Q-Bag wants to earn money, accumulate experience, create opportunities for collaborators, and reinvest those resources into future Q888 work. Its exaggerated market language laughs at financial theatre without pretending that artists can live without money.",
-    "disclaimer": "BUY THE OBJECT FOR ITS USE, ART, RITUAL, AND MEANING. IF FUTURE COLLECTORS DECIDE IT IS WORTH MORE, THAT IS YOUR PERSONAL BONUS FOR TRUST—NOT A GUARANTEE FROM Q888."
+    "eyebrow": "The Adaptation Layer · Provisional Classification",
+    "title": "A proposed name for what may already be beginning.",
+    "body": "If Creative Afterlife travels across many kinds of objects, a larger cultural layer may become visible: ordinary manufactured things repaired, combined, painted, modified, and continued by their owners.",
+    "classification": "Historical period? Aesthetic movement? Coping mechanism? Or something we help manufacture by naming it too early. Classification remains unstable."
   },
   "artworkCardTitle": "Q-Bag Visual Archive",
-  "artworkCardDescription": "Full collage artwork featuring Project Infocigan elements, stickers, bag designs, and cultural artifacts. Click to explore in detail.",
+  "artworkCardDescription": "The earlier collage organism: Infocigan fragments, stickers, speculative bag designs, and cultural artefacts from Q-Bag's product-first phase.",
   "artworkCardButtonLabel": "Open Gallery",
   "conceptCards": [
     {
-      "title": "Q-Bag is the protocol",
+      "title": "Don't replace the object. Continue its biography.",
       "paragraphs": [
-        "Q-Bag is not another disposable-packaging brand. It is a shared refill behaviour with a recognisable object at its centre. The official bag is the protocol's native vessel and visible flag; future guest vessels may participate when they are safe and suitable.",
-        "The bag can travel between cafés, roasteries, kitchens, cities, and artist editions. The system becomes more valuable when the behaviour spreads—not when more unused bags are manufactured."
+        "Creative Afterlife treats existing objects as unfinished rather than expired. People can repair, decorate, combine, paint, modify, collage, add history, and continue an object's biography instead of accepting its first commercial identity as final.",
+        "Q-Bag is Experiment 001. Coffee keeps the first test small, repetitive, and measurable: can creative attachment help a suitable container return again and again?"
       ]
     },
     {
-      "title": "Marks as evidence and identity",
+      "title": "A quiet future assistant",
       "paragraphs": [
-        "Q-Bag carries two kinds of marks. Protocol marks prove that refills happened: a small stamp, a date, or an occasional edition made with a café, artist, festival, or cultural project.",
-        "Personal marks belong entirely to the owner. Their own stickers, drawings, writing, repairs, and visual decisions turn the standard Q-Bag into a unique object and create the attachment that makes long-term reuse emotionally natural.",
-        "Not every refill needs new material, but every owner needs room to become the bag's co-author. A Q-Bag is never finished; it becomes specific through use and personalisation."
+        "AI could eventually help people imagine transformations using materials already around them, then return the work to human hands."
       ]
     },
     {
-      "title": "Reuse becomes identity",
+      "title": "Q888 editions are optional",
       "paragraphs": [
-        "Sustainability here is not framed as punishment or purity. It becomes a visible habit: one durable object repeatedly returning for coffee instead of being replaced by another anonymous package.",
-        "The aim is not to preach. It is to make reuse more socially legible, more personal, and eventually more desirable than waste."
+        "A purpose-designed durable Q-Bag, a Q888 sticker, or an artist edition may become a desirable commercial layer for people who want one.",
+        "Nobody needs to buy Q888 merchandise to join the refill behaviour. The paid objects help fund the open experiment; they do not certify who belongs."
       ]
     },
     {
-      "title": "Trust may acquire value",
+      "title": "The Adaptation Layer",
       "paragraphs": [
-        "Cultural or resale value is not guaranteed, but may emerge through participation. An early café edition might become meaningful, a bag might become recognisable within a city, or a completely personal design might someday find another collector willing to pay for its history.",
-        "All outcomes are valid. The experiment is the point."
+        "Across decades, millions of uncoordinated acts of repair, alteration, decoration, and reuse might form a recognisable historical record of how humans adapted to material abundance and mass production.",
+        "Future historians might recognise it as the moment mass production stopped being the final author of an object."
       ]
     }
   ],
   "partnersTitle": "For Roasters, Artists & Partners",
   "partnersParagraphs": [
-    "Q-Bag is designed to meet coffee businesses where refill behaviour already exists: a tare-and-fill routine, a clear reusable-container policy, light-touch marks, and occasional collaborative editions. Revenue and experience from the system can be reinvested into pilots, artists, travel, and future Q888 projects.",
-    "The immediate invitation is not to scale a bag company. It is to find the right first café—in Edinburgh or anywhere in the world—willing to host and measure the first 100-bag experiment. Edinburgh is where I am; the protocol is willing to travel."
+    "Q-Bag is designed to meet coffee businesses where refill behaviour already exists: a tare-and-fill routine, a clear reusable-container policy, light-touch marks, and occasional collaborative editions. Revenue and experience from optional objects can be reinvested into pilots, artists, travel, and future Q888 projects.",
+    "The immediate invitation is not to scale a bag company. It is to find the right first café—in Edinburgh or anywhere in the world—willing to host and measure a small existing-container experiment. Edinburgh is where I am; the protocol is willing to travel."
   ],
   "closingLines": [
-    "Every bag carries a story.",
-    "Every sticker adds a layer.",
-    "Every reuse is a small act of resistance."
+    "Use what already exists.",
+    "Add a life it did not arrive with.",
+    "Let history decide what layer appeared."
   ],
-  "contactIntro": "If you run a refill-friendly café, roast coffee, make art, or want to help shape the first Q-Bag pilot—in Edinburgh or elsewhere in the world—please get in touch:",
+  "contactIntro": "If you run a refill-friendly café, roast coffee, make art, or want to help shape Creative Afterlife through Q-Bag Experiment 001—in Edinburgh or elsewhere—please get in touch:",
   "contactEmail": "hello@q888.space",
   "contactInstagramUrl": "https://instagram.com/quirky_888",
   "contactInstagramHandle": "@quirky_888",
