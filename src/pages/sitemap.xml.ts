@@ -17,6 +17,7 @@ const staticRoutes = [
   "/overpriced/",
   "/president/",
   "/privacy/",
+  "/prototype/",
   "/qbag/",
   "/research/",
 ];

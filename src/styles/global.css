@@ -16,18 +16,19 @@ body {
 body::after {
 	content: "";
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	inset: 0;
 	pointer-events: none;
 	opacity: 0.04;
 	z-index: 9999;
-	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+	background-image: url("/images/q888-noise-tile.png");
+	background-repeat: repeat;
+	background-size: 200px 200px;
+	contain: strict;
+	transform: translateZ(0);
 }
 
-/* Disable SVG noise on mobile — feTurbulence backed by position:fixed forces
-   GPU repaint on every scroll frame, which murders mobile performance. */
+/* CHOICE: The texture is pre-rendered instead of recalculating SVG turbulence
+   during scroll. Mobile keeps the quieter surface and avoids the fixed layer. */
 @media (max-width: 768px) {
 	body::after {
 		display: none;
@@ -57,6 +58,15 @@ html[data-motion-ready="1"] [data-motion-stagger].is-revealed .q888-reveal-item 
 	transition-delay: calc(var(--reveal-index, 0) * var(--reveal-stagger-step, 55ms));
 }
 
+/* Decorative loops only spend rendering time while their element is nearby. */
+[data-viewport-animation] {
+	animation-play-state: paused !important;
+}
+
+[data-viewport-animation].is-animation-visible {
+	animation-play-state: running !important;
+}
+
 #infocigan {
 	background-color: #65737e;
 }
@@ -68,7 +78,9 @@ html[data-motion-ready="1"] [data-motion-stagger].is-revealed .q888-reveal-item 
 	pointer-events: none;
 	opacity: 0.05;
 	z-index: 1;
-	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+	background-image: url("/images/q888-noise-tile.png");
+	background-repeat: repeat;
+	background-size: 200px 200px;
 }
 
 /* Same noise savings for the infocigan section on mobile */
@@ -142,6 +154,10 @@ html[data-motion-ready="1"] [data-motion-stagger].is-revealed .q888-reveal-item 
 }
 
 @media (prefers-reduced-motion: reduce) {
+	[data-viewport-animation] {
+		animation: none !important;
+	}
+
 	html[data-motion-ready="1"] .q888-reveal,
 	html[data-motion-ready="1"] .q888-reveal-item {
 		opacity: 1 !important;
@@ -150,6 +166,4 @@ html[data-motion-ready="1"] [data-motion-stagger].is-revealed .q888-reveal-item 
 		transition: none !important;
 	}
 }
-
-
 
