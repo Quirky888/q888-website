@@ -630,6 +630,11 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
     transform: scale(0.975);
   }
 
+  .artifact-slide:not(.is-active):focus-within {
+    opacity: 1;
+    transform: scale(1);
+  }
+
   .artifact-card {
     display: flex;
     min-height: 100%;
@@ -643,9 +648,22 @@ const lastFormat = projects.at(-1)?.format ?? "portrait";
     transition: box-shadow 280ms ease, transform 280ms ease, background 280ms ease;
   }
 
-  .artifact-slide.is-active .artifact-card {
+  .artifact-slide.is-active .artifact-card,
+  .artifact-slide:focus-within .artifact-card {
     transform: translateY(-0.35rem);
     box-shadow: 0 1.8rem 4.4rem rgba(0, 0, 0, 0.2);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .artifact-slide:not(.is-active):hover {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .artifact-slide:hover .artifact-card {
+      transform: translateY(-0.35rem);
+      box-shadow: 0 1.8rem 4.4rem rgba(0, 0, 0, 0.2);
+    }
   }
 
   .artifact-card:hover {
