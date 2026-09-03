@@ -18,7 +18,9 @@ import SystemMeta from "../components/SystemMeta.astro";
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
   <SystemMeta position="top" />
-  <ProjectDrawer standaloneProject="edinburgh-map" />
+  <main id="map-main">
+    <ProjectDrawer standaloneProject="edinburgh-map" />
+  </main>
 </Layout>
 
 <script>
