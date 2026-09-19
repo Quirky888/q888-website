@@ -13,6 +13,7 @@ const staticRoutes = [
   "/dink/",
   "/dyno/",
   "/map/",
+  "/narrative-reset/",
   "/narmail/",
   "/overpriced/",
   "/president/",
