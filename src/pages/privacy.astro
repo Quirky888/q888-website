@@ -2,8 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
-
-const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-Digital-Ink-2dcafef9a7c2803e927be9f684a2304e?pvs=74";
 ---
 
 <Layout
@@ -23,7 +21,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
         <h1>Privacy<br />Policy</h1>
         <p class="policy-summary">Digital Ink works primarily on your iPad. Optional online AI features cross that boundary only after you choose the feature and give permission for that operation.</p>
         <dl class="policy-meta">
-          <div><dt>Effective date</dt><dd>August 4, 2026</dd></div>
+          <div><dt>Effective date</dt><dd>September 19, 2026</dd></div>
           <div><dt>App</dt><dd>Digital Ink</dd></div>
           <div><dt>Developer</dt><dd>Alexander Sestakovs</dd></div>
           <div><dt>Contact</dt><dd><a href="mailto:hello@q888.space">hello@q888.space</a></dd></div>
@@ -69,6 +67,18 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
             <li>Smart Inks created from images you select</li><li>Smart Ink identifiers, colours and creation dates</li><li>Vision Memory descriptions and structured visual metadata</li><li>Emotional descriptions, palettes, subjects and environmental details</li><li>Personal memory notes that you choose to write</li><li>Learned concepts, hashtags and education levels</li><li>Ink relationships, affinity information and provenance history</li><li>Artworks, canvases and pixel placement</li><li>Generated reconstructions</li><li>Certificates and export information</li><li>Application settings and preferences</li><li>Local activity and diagnostic history</li><li>Credit balance information received from the Digital Ink service</li>
           </ul>
           <p>This information remains on your device unless you deliberately use an online feature, export content or share it through another application.</p>
+          <h3>Artist Identity</h3>
+          <p>Digital Ink creates a local Artist Identity. It may include an artist handle, a derived Artist ID, a public signing key, a creation date and an optional artist identity image.</p>
+          <p>The optional identity image is processed locally and reduced to a compact display image with a maximum dimension of 256 pixels. The private artwork-signing key is stored locally in the iOS Keychain and is not intentionally transmitted to Digital Ink’s online service.</p>
+          <p>The public Artist ID is distinct from the pseudonymous device/service identifier used by Digital Ink’s online credit service.</p>
+          <h3>Artwork Verification V2</h3>
+          <p>Newly eligible artworks can be cryptographically signed and verified locally. Verification metadata may include an artwork hash, verification version, signing time, artist public-key information, composition and pixel information, Smart Ink provenance identifiers, a signature and verification status.</p>
+          <p>This is local artwork verification. It does not prove facts that were never recorded.</p>
+          <h3>Heritage Inks</h3>
+          <p>Older Smart Inks created before the current provenance system may be identified as Heritage Inks. Recorded creator, owner and history information may be displayed, but Digital Ink does not invent missing historical proof or manufacture a cryptographically verified transfer history.</p>
+          <h3>Local Smart Ink relationships</h3>
+          <p>The current Smart Ink relationship network is calculated and stored locally. It may use local Ink metadata, artwork experience, relationship history and provenance-derived evidence.</p>
+          <p>Relationship states, histories, explanations, 3D InkHome exploration and routes remain local functionality. The current relationship system does not require an external AI service and does not automatically upload source images, private notes or relationship histories for relationship calculation.</p>
         </section>
 
         <section id="photos-files">
@@ -92,8 +102,9 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
 
         <section id="offline-recognition">
           <span class="section-number">05</span><h2>Built-in offline image recognition</h2>
-          <p>Digital Ink includes on-device image recognition using Apple-provided technologies.</p>
-          <p>Offline recognition may analyse a selected image to generate descriptions, classifications, colours and other visual information. This processing does not require AI credits and does not send the selected image to OpenAI or Cloudflare.</p>
+          <p>Digital Ink uses Apple’s on-device Vision technologies for offline image analysis. This may derive image classifications, detected visual subjects, OCR text visible inside an imported image or screenshot, confidence and evidence information, visual-region information and factual descriptions.</p>
+          <p>OCR may capture text visible in an image even when that text was not manually typed into Digital Ink. New imports may retain structured derived visual evidence locally as part of the Smart Ink metadata.</p>
+          <p>This offline processing does not require Digital Ink credits and does not transmit the selected image to Cloudflare or OpenAI.</p>
           <p>Because on-device recognition is automated, its descriptions may be incomplete or inaccurate.</p>
         </section>
 
@@ -102,9 +113,11 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <p>Online Assist is an optional feature that provides a more detailed description of a selected image.</p>
           <p>Before an online description begins, Digital Ink identifies the external services involved and asks for your permission.</p>
           <p>If you consent, the following information may be sent:</p>
-          <ul><li>A compressed copy of the image you selected</li><li>A place name derived from the image’s metadata, when available</li><li>Instructions requesting a visual description and structured memory</li><li>A pseudonymous Digital Ink identifier used to verify credits</li><li>A request or operation identifier used for reliability and duplicate protection</li><li>Technical information required to process and secure the request</li></ul>
+          <ul><li>A compressed copy of the image you selected</li><li>A place name derived from the image’s metadata, when available</li><li>Instructions requesting a visual description and structured memory</li><li>A pseudonymous Digital Ink device/service identifier used to verify credits</li><li>A request or operation identifier used for reliability and duplicate protection</li><li>Technical information required to process and secure the request</li></ul>
           <p>The information travels through Digital Ink’s Cloudflare service and is then sent to OpenAI for analysis.</p>
           <p>The resulting description and Vision Memory are returned to the app and stored locally as part of the Smart Ink.</p>
+          <p>Digital Ink’s Cloudflare caption cache does not intentionally retain the selected source image. It may temporarily retain the returned caption together with an operation/idempotency record for up to 24 hours for safe retries and duplicate-charge protection. After expiry, that caption cache entry is deleted.</p>
+          <p>This caption-cache limit does not set the retention period for Cloudflare’s network or security logs. OpenAI has its own separate API data-retention practices, described below.</p>
           <p>An online image description currently costs 1 Digital Ink credit. Credits are not deducted unless the online operation is requested.</p>
         </section>
 
@@ -114,7 +127,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <p class="policy-emphasis">It is not designed to recover or reproduce the original photograph.</p>
           <p>Before reconstruction begins, Digital Ink explains what information will be shared and asks for your permission.</p>
           <p>Depending on the available biography and the options you select, reconstruction may send:</p>
-          <ul><li>The Smart Ink’s Vision Memory and image description</li><li>Subjects, environment, colour and emotional information</li><li>Personal memory notes that you entered</li><li>Learned concepts, hashtags and education information</li><li>Relationship or affinity information</li><li>Provenance and transformation information</li><li>Place information associated with the Smart Ink</li><li>An AI reconstruction prompt created from this information</li><li>Source Memory, only if it exists and you choose to include it</li><li>A pseudonymous Digital Ink identifier</li><li>A unique operation identifier used to prevent duplicate charging</li><li>Technical information required to process and secure the request</li></ul>
+          <ul><li>The Smart Ink’s Vision Memory and image description</li><li>Subjects, environment, colour and emotional information</li><li>Personal memory notes that you entered</li><li>Learned concepts, hashtags and education information</li><li>Relationship or affinity information</li><li>Provenance and transformation information</li><li>Place information associated with the Smart Ink</li><li>An AI reconstruction prompt created from this information</li><li>Source Memory, only if it exists and you choose to include it</li><li>A pseudonymous Digital Ink device/service identifier</li><li>A unique operation identifier used to prevent duplicate charging</li><li>Technical information required to process and secure the request</li></ul>
           <p>This information is sent through Digital Ink’s Cloudflare service to OpenAI’s image-generation service.</p>
           <p>OpenAI generates a new image and returns it through Cloudflare to Digital Ink. The completed reconstruction is stored locally on your device.</p>
           <p>A reconstruction currently costs 10 Digital Ink credits.</p>
@@ -144,7 +157,10 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <span class="section-number">10</span><h2>Cloudflare processing</h2>
           <p>Digital Ink uses Cloudflare Workers and related Cloudflare services as a secure intermediary between the app, OpenAI and Apple’s purchase-verification services.</p>
           <p>Cloudflare may process:</p>
-          <ul><li>Submitted AI content while routing a request</li><li>Pseudonymous Digital Ink identifiers</li><li>Credit balances and credit-ledger transactions</li><li>Apple purchase-verification information</li><li>Operation identifiers</li><li>Reconstruction charging, completion and refund states</li><li>Temporarily cached reconstruction results</li><li>IP addresses, request headers and timestamps</li><li>Security, rate-limiting and error information</li></ul>
+          <ul><li>Submitted AI content while routing a request</li><li>Pseudonymous Digital Ink device/service identifiers</li><li>Credit balances and credit-ledger transactions</li><li>Apple purchase-verification information</li><li>Operation identifiers</li><li>Reconstruction charging, completion and refund states</li><li>Temporarily cached reconstruction results</li><li>Temporarily cached Online Assist captions and operation/idempotency records</li><li>IP addresses, request headers and timestamps</li><li>Security, rate-limiting and error information</li></ul>
+          <h3>Pseudonymous online identifier</h3>
+          <p>Online Digital Ink services use a randomly generated pseudonymous Digital Ink device/service identifier stored locally in Keychain. It is used to associate credit balances, process Online Assist and reconstructions, protect operation idempotency, and validate and restore purchases.</p>
+          <p>This service identifier is not the public Artist ID, is not an advertising identifier and is not used for cross-app tracking.</p>
           <p>Digital Ink does not use Cloudflare to build advertising profiles.</p>
           <p>Cloudflare may retain limited network and security logs according to its service configuration, legal obligations and <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">privacy policy</a>.</p>
         </section>
@@ -154,7 +170,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <p>Digital Ink credits are purchased through Apple’s in-app purchase system.</p>
           <p>Apple processes your payment information. Digital Ink does not receive your complete credit-card or bank-account details.</p>
           <p>To validate a purchase and maintain the correct credit balance, Digital Ink and its Cloudflare service may process:</p>
-          <ul><li>The purchased product identifier</li><li>Apple transaction or signed purchase information</li><li>Purchase and restoration status</li><li>A pseudonymous Digital Ink or Artist identifier</li><li>Credit grants, deductions and refunds</li></ul>
+          <ul><li>The purchased product identifier</li><li>Apple transaction or signed purchase information</li><li>Purchase and restoration status</li><li>A pseudonymous Digital Ink device/service identifier</li><li>Credit grants, deductions and refunds</li></ul>
           <p>Apple processes purchase information according to its own <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">privacy policy</a>.</p>
           <p>Credit-ledger information is stored on Digital Ink’s Cloudflare service so that balances can remain accurate across purchases, reconstructions, retries, refunds and restorations.</p>
         </section>
@@ -162,7 +178,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
         <section>
           <span class="section-number">12</span><h2>Technical and operational information</h2>
           <p>When an online feature is used, Digital Ink and its service providers may automatically process limited technical information, including:</p>
-          <ul><li>IP address</li><li>Date and time of the request</li><li>App version</li><li>Device or operating-system information included in network requests</li><li>Request status and error category</li><li>Rate-limiting and security information</li><li>Pseudonymous operation and Artist identifiers</li></ul>
+          <ul><li>IP address</li><li>Date and time of the request</li><li>App version</li><li>Device or operating-system information included in network requests</li><li>Request status and error category</li><li>Rate-limiting and security information</li><li>Operation identifiers and the pseudonymous Digital Ink device/service identifier</li></ul>
           <p>This information is used to provide the requested service, prevent fraud, protect credits, diagnose failures and maintain security.</p>
           <p>Production application logs are designed to avoid recording complete captions, personal memory notes, AI prompts, source images, authentication secrets or full Smart Ink metadata.</p>
         </section>
@@ -195,8 +211,9 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <h3>Information on your device</h3><p>Local Smart Inks, Source Memories, artworks, biographies, education data, reconstructions and settings remain on your device until you remove or “set free” the relevant content, reset application data or uninstall Digital Ink.</p>
           <p>Deleting the app may remove local data that has not been exported or backed up by an Apple service.</p>
           <h3>Credit ledger</h3><p>Pseudonymous credit and transaction records may be retained while needed to maintain balances, verify purchases, prevent repeated claims, resolve disputes, prevent fraud and satisfy legal or accounting obligations.</p>
+          <h3>Online Assist</h3><p>Successful Online Assist caption/idempotency cache records may be retained by Digital Ink’s Cloudflare service for up to 24 hours for retry and duplicate-operation protection. The caption cache entry is deleted after expiry. This cache does not intentionally retain the selected source image.</p>
           <h3>Reconstruction operations</h3><p>An operation’s deduplication state and result may be temporarily retained by Cloudflare, normally for up to 24 hours, so retries can return the original result without charging again.</p>
-          <h3>Operational logs</h3><p>Limited security and network logs may be retained for a period determined by the service configuration, security requirements and the policies of the applicable provider.</p>
+          <h3>Operational logs</h3><p>Limited security and network logs, including Cloudflare’s network and security logs, may be retained for a period determined by the service configuration, security requirements, legal obligations and the policies of the applicable provider. The Online Assist caption cache’s 24-hour limit does not necessarily apply to these logs.</p>
           <h3>OpenAI</h3><p>OpenAI API content may ordinarily be retained in abuse-monitoring logs for up to 30 days, unless different retention controls apply or a longer period is legally required.</p>
           <h3>Apple</h3><p>Apple retains purchase and App Store information according to its own policies and legal obligations.</p>
         </section>
@@ -206,7 +223,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <p>You can remove locally stored information by using Digital Ink’s available farewell or reset controls, or by uninstalling the application.</p>
           <p>Before removing the app, export any artworks, certificates or reconstructions that you want to keep.</p>
           <p>To request deletion or correction of information held by the Digital Ink online service, email <a href="mailto:hello@q888.space">hello@q888.space</a>.</p>
-          <p>Please include:</p><ul><li>Your approximate request date and time</li><li>Your pseudonymous Artist ID shown in Digital Ink</li><li>A description of what you want deleted or corrected</li></ul>
+          <p>We may ask for information necessary to identify the applicable pseudonymous service record or purchase transaction, together with a description of what you want deleted or corrected. Your public Artist ID is not the online service identifier.</p>
           <p>Do not send photographs, personal memories, API keys or payment-card information in your email.</p>
           <p>Deleting server-side credit-ledger information may make any remaining credit balance impossible to verify or restore. Certain purchase, fraud-prevention, security or accounting records may need to be retained where required by law or reasonably necessary to protect the service.</p>
           <p>Digital Ink cannot directly delete records independently controlled by Apple or OpenAI. Requests concerning those services may need to be directed to the relevant provider.</p>
@@ -230,7 +247,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
           <p>Depending on where you live, you may have rights relating to your personal information, including the right to:</p>
           <ul><li>Request access</li><li>Request correction</li><li>Request deletion</li><li>Restrict or object to certain processing</li><li>Withdraw consent for future processing</li><li>Request a portable copy of certain information</li><li>Complain to an applicable data-protection authority</li></ul>
           <p>To make a request, contact <a href="mailto:hello@q888.space">hello@q888.space</a>.</p>
-          <p>Because Digital Ink does not require an account and primarily uses pseudonymous identifiers, we may need your Artist ID and limited transaction information to locate relevant server-side records.</p>
+          <p>For assistance with server-side privacy requests, we may ask for information necessary to identify the applicable pseudonymous service record or purchase transaction.</p>
         </section>
 
         <section>
@@ -247,19 +264,13 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
         </section>
 
         <section>
-          <span class="section-number">23</span><h2>Privacy-policy hosting</h2>
-          <p>This policy is published on the Q888 website and is also available on <a href={notionPolicyUrl} target="_blank" rel="noopener noreferrer">Notion</a>. Visiting the Notion version in a web browser may allow Notion to process technical information or cookies according to Notion’s own privacy and cookie policies.</p>
-          <p>This does not mean that the Digital Ink iPad app contains Notion analytics or sends Smart Ink content to Notion.</p>
-        </section>
-
-        <section>
-          <span class="section-number">24</span><h2>Changes to this policy</h2>
+          <span class="section-number">23</span><h2>Changes to this policy</h2>
           <p>This policy may be updated when Digital Ink’s features, service providers or legal obligations change.</p>
-          <p>The revised policy will be published at this location with a new effective date. Material changes may also be communicated within the app or through the App Store where appropriate.</p>
+          <p>The canonical public privacy policy is published at <a href="https://q888.space/privacy/">q888.space/privacy/</a>. Revisions will be published there with a new effective date. Material changes may also be communicated within the app or through the App Store where appropriate.</p>
         </section>
 
         <section class="policy-contact">
-          <span class="section-number">25</span><h2>Contact</h2>
+          <span class="section-number">24</span><h2>Contact</h2>
           <p>For privacy questions or requests:</p>
           <address>Alexander Sestakovs<br />Email: <a href="mailto:hello@q888.space">hello@q888.space</a><br />Website: <a href="/dink/">q888.space/dink</a></address>
         </section>
@@ -267,7 +278,7 @@ const notionPolicyUrl = "https://periodic-snail-98e.notion.site/Privacy-Policy-D
     </div>
 
     <footer class="policy-footer">
-      <div class="policy-shell"><p>Website copy of the Digital Ink Privacy Policy.</p><a href={notionPolicyUrl} target="_blank" rel="noopener noreferrer">View the Notion source ↗</a></div>
+      <div class="policy-shell"><p>Canonical public privacy policy for Digital Ink.</p></div>
     </footer>
   </main>
 </Layout>
