@@ -28,32 +28,13 @@ const memoryLayers = [
   {
     number: "06",
     name: "Social memory",
-    text: "Traceable knowledge exchanged with other inks. This remains a residency research question.",
+    text: "Relationships with other inks—including how a connection became active, dormant or historical.",
   },
   {
     number: "07",
     name: "Invented memory",
     text: "An AI reconstruction: explicitly an invention, never presented as recovery of the source.",
   },
-];
-
-const practiceEvidence = [
-  [
-    "A PUBLIC ARTWORK",
-    "A native SwiftUI artwork for iPad, approved by Apple and available now on the App Store.",
-  ],
-  [
-    "A STUDIO INSTRUMENT",
-    "Used and changed by the artist. Its population keeps moving, so this page does not freeze it into a misleading count.",
-  ],
-  [
-    "FINITE MATERIAL",
-    "Painting spends available ink. Erasing returns it. Every placed pixel remains connected to its origin.",
-  ],
-  [
-    "OPEN RESEARCH",
-    "Biography and education work now; social learning, exhibition replay and the 116-Pixel Archive remain active questions.",
-  ],
 ];
 
 const heroPixels = Array.from({ length: 24 }, (_, index) => ({
@@ -148,7 +129,7 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
                   style="--ink-letter: 5">y</span
                 ></span
               ></span>, biography and provenance. It can be used, educated,
-            rearranged—and remembered.
+            rearranged, connected—and remembered without rewriting its past.
           </p>
           <div class="ink-actions">
             <a
@@ -160,7 +141,7 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
             <a class="ink-button" href="#how-it-lives">Follow one ink ↓</a>
           </div>
           <p class="ink-availability">
-            NEW VERSION APPROVED BY APPLE · AVAILABLE NOW
+            VERSION 3.0 · 20 SEPTEMBER 2026 · AVAILABLE NOW
           </p>
         </div>
       </div>
@@ -191,8 +172,9 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       <aside class="ink-status" aria-label="Current Digital Ink status">
         <div class="ink-status-light"><span></span> AVAILABLE NOW</div>
         <p>
-          <strong>The new version has been approved by Apple.</strong> Digital Ink
-          is a public app and an artwork still being actively used and developed.
+          <strong>Version 3.0: the inks found each other.</strong> Digital Ink is
+          a public app, a studio instrument and an artwork still being actively
+          used and developed.
         </p>
         <p class="ink-status-meta">
           NATIVE iPadOS · SWIFTUI · CREATED BY ALEKSANDRS SESTAKOVS / Q888
@@ -412,64 +394,104 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     </div>
   </section>
 
-  <section class="ink-section ink-evidence" aria-labelledby="practice-title">
+  <section class="ink-section ink-version" aria-labelledby="version-title">
     <div class="ink-wrap">
-      <p class="ink-kicker">
-        04 ·
-        <button
-          class="ink-evidence-trigger"
-          type="button"
-          aria-label="Evidence of Practice. Hover or focus to wake the four descriptions of Digital Ink."
-          >EVIDENCE OF PRACTICE</button
-        >
-      </p>
-      <h2 id="practice-title">The concept has a practice—not a fixed count.</h2>
-      <p class="ink-section-intro">
-        Digital Ink is used regularly, so its population changes. The lasting
-        evidence is not yesterday’s number; it is
-        <span class="ink-evidence-trail" style="--ink-trail-delay:0ms"
-          >a public app</span
-        >,
-        <span class="ink-evidence-trail" style="--ink-trail-delay:90ms"
-          >a studio instrument</span
-        >,
-        <span class="ink-evidence-trail" style="--ink-trail-delay:180ms"
-          >a finite material system</span
-        > and
-        <span class="ink-evidence-trail" style="--ink-trail-delay:270ms"
-          >an open field of research</span
-        >.
-      </p>
-      <div class="practice-grid">
-        {
-          practiceEvidence.map(([title, text], index) => (
-            <article style={`--ink-wake-delay:${index * 90}ms`}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))
-        }
+      <div class="ink-two-column version-intro">
+        <div>
+          <p class="ink-kicker">04 · VERSION 3.0 · 20 SEPTEMBER 2026</p>
+          <h2 id="version-title">The inks found each other.</h2>
+        </div>
+        <div class="ink-prose">
+          <p>
+            Until Version 3.0, a Smart Ink could have colour, memory,
+            education, provenance and an individual biography—but it mostly
+            existed alone.
+          </p>
+          <p>
+            Now a connection can become active, dormant or historical without
+            its earlier state being silently erased. Relationships have become
+            part of an Ink’s biography.
+          </p>
+        </div>
       </div>
-      <div class="ink-two-column ink-capabilities">
-        <article>
-          <h3>Biography &amp; education</h3>
-          <p>
-            Smart Inks can hold Vision Memory, structured visual interpretation,
-            personal notes, learned concepts, education level, relationships,
-            provenance and generated reconstructions. Selected PDFs teach
-            concepts and hashtags without turning the PDF itself into AI input.
+
+      <div class="version-system">
+        <aside class="relationship-map" aria-label="Inkhome relationship map">
+          <p>INKHOME · LOCAL RELATIONSHIP FIELD</p>
+          <div class="relationship-field" aria-hidden="true">
+            <i class="relationship-line relationship-line--active"></i>
+            <i class="relationship-line relationship-line--dormant"></i>
+            <i class="relationship-line relationship-line--historical"></i>
+            <span class="relationship-node relationship-node--ink-a"
+              >INK 031</span
+            >
+            <span class="relationship-node relationship-node--ink-b"
+              >INK 088</span
+            >
+            <span class="relationship-node relationship-node--artwork"
+              >ARTWORK</span
+            >
+            <span class="relationship-node relationship-node--artist"
+              >ARTIST ID</span
+            >
+          </div>
+          <ul class="relationship-key">
+            <li><i class="is-active"></i>ACTIVE</li>
+            <li><i class="is-dormant"></i>DORMANT</li>
+            <li><i class="is-historical"></i>HISTORICAL</li>
+          </ul>
+          <p class="relationship-map-note">
+            Positions, routes and connections turn the archive into a small
+            inhabited system—not only a collection of files.
           </p>
-        </article>
-        <article>
-          <h3>Affinity &amp; autonomy</h3>
-          <p>
-            Inks can rearrange or group according to colour and stored
-            information. The current system supports a general population; fully
-            traceable neighbour teaching and exhibition-grade replay remain
-            development work, not completed claims.
-          </p>
-        </article>
+        </aside>
+
+        <div class="version-updates">
+          <article>
+            <span>01 · RELATIONSHIPS</span>
+            <h3>A connection keeps its past.</h3>
+            <p>
+              History, explanation and witnesses remain attached to the
+              relationship instead of collapsing into a yes-or-no link.
+            </p>
+          </article>
+          <article>
+            <span>02 · INKHOME</span>
+            <h3>The archive has somewhere to live.</h3>
+            <p>
+              Smart Inks occupy a projected 3D environment, form routes and
+              reveal connections between one another.
+            </p>
+          </article>
+          <article>
+            <span>03 · ARTIST IDENTITY</span>
+            <h3>Provenance reaches the person.</h3>
+            <p>
+              Artworks can connect more explicitly to the artist, Smart Inks
+              and histories involved in making them.
+            </p>
+          </article>
+          <article>
+            <span>04 · HONEST SIGNING</span>
+            <h3>New evidence does not invent an old past.</h3>
+            <p>
+              New artworks can carry stronger cryptographic verification.
+              Older Smart Inks remain Heritage Ink: incomplete, truthful and
+              never silently upgraded.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div class="version-question">
+        <p>WHY 3.0?</p>
+        <blockquote>
+          What happens when finite things with memories begin living together?
+        </blockquote>
+        <p>
+          Provenance is no longer only a property inside one object. It can
+          also exist <strong>between objects, artworks and their artist.</strong>
+        </p>
       </div>
     </div>
   </section>
@@ -530,16 +552,17 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       </div>
       <p class="archive-lede">
         A proposed controlled archive in which 116 photographs become 116 Smart
-        Inks. They would form recorded relationships, exchange limited
-        knowledge, make compositions and attempt—imperfectly—to remember what
-        their archive once contained.
+        Inks. Version 3.0 supplies the relationship history and spatial
+        Inkhome; the research edition would give that working foundation a
+        deliberately governed population.
       </p>
 
       <div class="not-built">
         <strong>This edition does not yet exist.</strong>
         <p>
-          Digital Ink is the working foundation. The residency process would
-          discover the archive’s rules before a dedicated application is built.
+          Relationships and Inkhome now exist in Digital Ink. The residency
+          process would still discover the 116-Pixel Archive’s rules before a
+          dedicated edition is built.
         </p>
       </div>
 
@@ -572,8 +595,8 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
 
       <blockquote>
         The question is not whether the machine can recover the photograph. It
-        is what remains after colour, testimony, education, contamination and
-        invention have each had their turn.
+        is what 116 finite witnesses might remember together—without any of
+        them being given a past they never had.
       </blockquote>
       <p class="future-route">
         A dedicated <code>/116</code> process page will be added when the research
@@ -928,7 +951,6 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     transform: translateY(0);
   }
   .ink-president-trigger:focus-visible,
-  .ink-evidence-trigger:focus-visible,
   .wip-stamp:focus-visible {
     outline: 2px solid var(--blue);
     outline-offset: 0.3rem;
@@ -1230,7 +1252,6 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
   }
   .ink-prose p,
   .ink-section-intro,
-  .ink-capabilities p,
   .boundary-cards p {
     color: #f0ede6;
     font-size: clamp(1.2rem, 1.7vw, 1.4rem);
@@ -1636,7 +1657,6 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     font-weight: 800;
   }
   .memory-card h3,
-  .ink-capabilities h3,
   .boundary-cards h3 {
     font-size: clamp(1.7rem, 2.3vw, 2.2rem);
     font-weight: 800;
@@ -1650,7 +1670,7 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     line-height: 1.52;
     margin: 0;
   }
-  .ink-evidence {
+  .ink-version {
     background-color: #3b3c38;
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.065) 1px, transparent 1px),
@@ -1663,115 +1683,230 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       140px 140px,
       140px 140px;
   }
-  .ink-evidence-trigger {
-    padding: 0;
-    border: 0;
-    border-radius: 0.08rem;
-    background: transparent;
-    color: inherit;
-    cursor: help;
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-    transition:
-      color 280ms ease,
-      text-shadow 360ms ease;
+  .version-intro {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
   }
-  .ink-evidence-trigger:hover,
-  .ink-evidence-trigger:focus {
-    color: var(--blue);
-    text-shadow: 0 0 1rem rgba(169, 201, 231, 0.35);
+  .version-intro h2 {
+    max-width: 680px;
   }
-  .ink-evidence-trail {
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-    transition:
-      color 360ms ease var(--ink-trail-delay),
-      box-shadow 480ms ease var(--ink-trail-delay),
-      text-shadow 480ms ease var(--ink-trail-delay);
-  }
-  .ink-evidence:has(.ink-evidence-trigger:hover) .ink-evidence-trail,
-  .ink-evidence:has(.ink-evidence-trigger:focus) .ink-evidence-trail {
-    color: var(--paper);
-    box-shadow: inset 0 -0.32em rgba(169, 201, 231, 0.58);
-    text-shadow: 0 0 0.8rem rgba(169, 201, 231, 0.26);
-  }
-  .practice-grid {
+  .version-system {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin: 4rem 0;
+    grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: stretch;
   }
-  .practice-grid article {
-    position: relative;
-    min-height: 290px;
-    padding: 2rem;
-    background: #50514c;
+  .relationship-map {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: clamp(1.4rem, 2.5vw, 2rem);
+    background: #282a27;
     border: 2px solid rgba(255, 255, 255, 0.16);
-    box-shadow: 8px 8px 0 rgba(20, 21, 19, 0.2);
-    transition:
-      border-color 420ms ease var(--ink-wake-delay),
-      box-shadow 520ms ease var(--ink-wake-delay),
-      transform 520ms cubic-bezier(0.22, 1, 0.36, 1)
-        var(--ink-wake-delay);
+    box-shadow: 9px 9px 0 rgba(20, 21, 19, 0.24);
   }
-  .practice-grid article:nth-child(2),
-  .practice-grid article:nth-child(3) {
-    background: #454642;
+  .relationship-map > p:first-child,
+  .version-updates article > span,
+  .version-question > p:first-child {
+    margin: 0;
+    color: #d8e6f2;
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
   }
-  .practice-grid span {
+  .relationship-field {
+    position: relative;
+    min-height: 390px;
+    margin: 1.5rem 0 1rem;
+    overflow: hidden;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .relationship-node {
+    position: absolute;
+    z-index: 2;
     display: grid;
     place-items: center;
-    width: 3.2rem;
+    width: 5.8rem;
     aspect-ratio: 1;
-    background: var(--peach);
-    color: #292a27;
+    padding: 0.5rem;
+    background: #a9c9e7;
+    color: #1d2529;
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.85rem;
+    font-size: 0.68rem;
     font-weight: 800;
-    margin-bottom: 3rem;
+    letter-spacing: 0.06em;
+    text-align: center;
   }
-  .practice-grid article:nth-child(even) span {
+  .relationship-node--ink-a {
+    left: 50%;
+    top: 50%;
+    width: 7rem;
+    transform: translate(-50%, -50%) rotate(3deg);
+    background: var(--peach);
+  }
+  .relationship-node--ink-b {
+    right: 7%;
+    top: 12%;
+  }
+  .relationship-node--artwork {
+    right: 9%;
+    bottom: 8%;
+    background: #b9a9d7;
+    color: #211d2a;
+  }
+  .relationship-node--artist {
+    left: 8%;
+    top: 14%;
+    background: #e6cf78;
+    color: #292513;
+  }
+  .relationship-line {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    height: 3px;
+    background: var(--line-colour, #a9c9e7);
+    transform-origin: left center;
+  }
+  .relationship-line--active {
+    left: 50%;
+    top: 48%;
+    width: 39%;
+    transform: rotate(-34deg);
+  }
+  .relationship-line--dormant {
+    --line-colour: #e6cf78;
+    left: 19%;
+    top: 26%;
+    width: 40%;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--line-colour) 0 9px,
+      transparent 9px 17px
+    );
+    transform: rotate(30deg);
+  }
+  .relationship-line--historical {
+    --line-colour: #b9a9d7;
+    left: 49%;
+    top: 56%;
+    width: 40%;
+    height: 2px;
+    opacity: 0.62;
+    transform: rotate(31deg);
+  }
+  .relationship-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.2rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+    color: #c9cbc5;
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .relationship-key li {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+  }
+  .relationship-key i {
+    display: block;
+    width: 1.6rem;
+    height: 3px;
     background: var(--blue);
   }
-  .practice-grid h3 {
-    font-size: clamp(1.8rem, 2.8vw, 2.7rem);
-    font-weight: 800;
-    line-height: 1.05;
-    margin: 0 0 1rem;
-    transition:
-      color 420ms ease calc(var(--ink-wake-delay) + 80ms),
-      letter-spacing 520ms ease calc(var(--ink-wake-delay) + 80ms);
+  .relationship-key .is-dormant {
+    background: repeating-linear-gradient(
+      90deg,
+      #e6cf78 0 5px,
+      transparent 5px 9px
+    );
   }
-  .practice-grid p {
-    color: #efebe4;
-    font-size: 1.18rem;
+  .relationship-key .is-historical {
+    height: 2px;
+    background: #b9a9d7;
+    opacity: 0.62;
+  }
+  .relationship-map-note {
+    max-width: 38rem;
+    margin: auto 0 0;
+    color: #d7d7d0;
+    font-size: 1.05rem;
     font-weight: 500;
-    line-height: 1.52;
-    margin: 0;
+    line-height: 1.55;
   }
-  .ink-evidence:has(.ink-evidence-trigger:hover) .practice-grid article,
-  .ink-evidence:has(.ink-evidence-trigger:focus) .practice-grid article {
-    border-color: rgba(169, 201, 231, 0.72);
-    box-shadow:
-      8px 8px 0 rgba(20, 21, 19, 0.28),
-      0 0 2.2rem rgba(169, 201, 231, 0.1);
-    transform: translateY(-0.45rem);
+  .version-updates {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
   }
-  .ink-evidence:has(.ink-evidence-trigger:hover) .practice-grid h3,
-  .ink-evidence:has(.ink-evidence-trigger:focus) .practice-grid h3 {
+  .version-updates article {
+    min-height: 250px;
+    padding: 1.8rem;
+    background: #50514c;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+  }
+  .version-updates article:nth-child(2),
+  .version-updates article:nth-child(3) {
+    background: #454642;
+  }
+  .version-updates article > span {
+    display: block;
+    margin-bottom: 2.6rem;
+    color: var(--peach);
+  }
+  .version-updates article:nth-child(even) > span {
     color: var(--blue);
-    letter-spacing: 0.015em;
   }
-  .ink-capabilities article {
-    border-top: 4px solid var(--peach);
-    padding-top: 1.4rem;
+  .version-updates h3 {
+    margin: 0 0 0.8rem;
+    font-size: clamp(1.55rem, 2.1vw, 2.05rem);
+    font-weight: 800;
+    line-height: 1.08;
   }
-  .ink-capabilities article:nth-child(2) {
-    border-color: var(--blue);
+  .version-updates p {
+    margin: 0;
+    color: #efebe4;
+    font-size: 1.06rem;
+    font-weight: 500;
+    line-height: 1.5;
   }
-  .ink-capabilities h3 {
-    margin-top: 0;
+  .version-question {
+    display: grid;
+    grid-template-columns: minmax(100px, 0.22fr) minmax(0, 1.15fr) minmax(260px, 0.63fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.18);
+  }
+  .version-question blockquote {
+    margin: 0;
+    color: #fff;
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: clamp(2rem, 3.7vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+  }
+  .version-question > p:last-child {
+    margin: 0;
+    color: #d7d7d0;
+    font-size: 1.12rem;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+  .version-question strong {
+    color: var(--blue);
   }
   .ink-boundary {
     background-color: #51504b;
@@ -2084,9 +2219,20 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     .memory-being-orbit {
       width: 150px;
     }
-    .memory-grid,
-    .practice-grid {
+    .memory-grid {
       grid-template-columns: 1fr 1fr;
+    }
+    .version-system {
+      grid-template-columns: 1fr;
+    }
+    .relationship-map {
+      min-height: 0;
+    }
+    .version-question {
+      grid-template-columns: 110px minmax(0, 1fr);
+    }
+    .version-question > p:last-child {
+      grid-column: 2;
     }
     .archive-pixels {
       opacity: 0.18;
@@ -2214,7 +2360,7 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       width: 140px;
     }
     .memory-grid,
-    .practice-grid {
+    .version-updates {
       grid-template-columns: 1fr;
     }
     .memory-card:last-child {
@@ -2224,8 +2370,25 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
       min-height: 0;
       padding: 1.5rem;
     }
-    .practice-grid article {
+    .version-updates article {
       min-height: 0;
+    }
+    .relationship-field {
+      min-height: 320px;
+    }
+    .relationship-node {
+      width: 4.8rem;
+      font-size: 0.6rem;
+    }
+    .relationship-node--ink-a {
+      width: 5.8rem;
+    }
+    .version-question {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    .version-question > p:last-child {
+      grid-column: auto;
     }
     .archive-heading-row {
       gap: 1rem;
@@ -2270,10 +2433,6 @@ const heroPixels = Array.from({ length: 24 }, (_, index) => ({
     .ink-memory-exotic,
     .ink-memory-exotic span,
     .ink-president-trigger span,
-    .ink-evidence-trigger,
-    .ink-evidence-trail,
-    .practice-grid article,
-    .practice-grid h3,
     .wip-stamp,
     .wip-stamp span {
       transition: none;
