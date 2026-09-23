@@ -305,6 +305,16 @@ if (dmAvailable <= 0) {
               </div>
             </div>
           </div>
+          <div class="dyno-anarchy-film" aria-hidden="true">
+            <video
+              data-dyno-anarchy-film
+              data-src="/videos/bio-dyno-engineering.mp4"
+              muted
+              loop
+              playsinline
+              preload="none"
+            ></video>
+          </div>
         </div>
 
         <!-- DIAGONAL DIVIDER -->
@@ -877,6 +887,63 @@ if (dmAvailable <= 0) {
     });
   }
 
+  // CHOICE: this film is atmosphere for Edition 01, so it plays only while
+  // visible on desktop and never downloads for mobile or reduced-motion users.
+  let anarchyFilmObserver: IntersectionObserver | null = null;
+  let anarchyFilmController: AbortController | null = null;
+
+  function initAnarchyFilm() {
+    const video = document.querySelector<HTMLVideoElement>(
+      "[data-dyno-anarchy-film]",
+    );
+    if (!video) return;
+
+    anarchyFilmController?.abort();
+    anarchyFilmObserver?.disconnect();
+    const controller = new AbortController();
+    anarchyFilmController = controller;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const syncFilm = () => {
+      anarchyFilmObserver?.disconnect();
+      anarchyFilmObserver = null;
+
+      if (!desktop.matches || reducedMotion.matches) {
+        video.pause();
+        if (video.hasAttribute("src")) {
+          video.removeAttribute("src");
+          video.load();
+        }
+        return;
+      }
+
+      anarchyFilmObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting) {
+            video.pause();
+            return;
+          }
+
+          if (!video.hasAttribute("src")) {
+            video.src = video.dataset.src || "";
+          }
+          video.defaultPlaybackRate = 0.7;
+          video.playbackRate = 0.7;
+          void video.play().catch(() => undefined);
+        },
+        { rootMargin: "150px 0px", threshold: 0.01 },
+      );
+      anarchyFilmObserver.observe(video);
+    };
+
+    desktop.addEventListener("change", syncFilm, { signal: controller.signal });
+    reducedMotion.addEventListener("change", syncFilm, {
+      signal: controller.signal,
+    });
+    syncFilm();
+  }
+
   // ── Mandatory Checkbox + Application Logic ──
   function initCheckout() {
     const checkbox = document.getElementById(
@@ -958,12 +1025,15 @@ if (dmAvailable <= 0) {
   function init() {
     initZeroGravity();
     initSplitGlitch();
+    initAnarchyFilm();
     initCheckout();
     initEntryBanner();
   }
 
   function cleanup() {
     destroyZeroGravity();
+    anarchyFilmController?.abort();
+    anarchyFilmObserver?.disconnect();
     document.removeEventListener("astro:before-swap", cleanup);
   }
 
@@ -1808,6 +1878,46 @@ if (dmAvailable <= 0) {
       transparent 60%
     );
     border-top: 2px solid rgba(255, 45, 120, 0.25);
+  }
+
+  .dyno-anarchy-film {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .dyno-split-anarchy {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dyno-anarchy-film {
+      display: block;
+      flex: 1 1 50rem;
+      min-height: 0;
+      max-height: 50rem;
+      margin: 2rem auto 0;
+      width: min(78%, 32rem);
+      pointer-events: none;
+      opacity: 0.8;
+      -webkit-mask-image: radial-gradient(
+        ellipse 82% 78% at 50% 57%,
+        #000 48%,
+        transparent 100%
+      );
+      mask-image: radial-gradient(
+        ellipse 82% 78% at 50% 57%,
+        #000 48%,
+        transparent 100%
+      );
+    }
+
+    .dyno-anarchy-film video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 
   .dyno-split-sexypunk {
