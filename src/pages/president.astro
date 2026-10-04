@@ -6,6 +6,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 import ConstitutionDraft from "../components/ConstitutionDraft.astro";
 import { getEntry } from "astro:content";
 import DOMPurify from "isomorphic-dompurify";
+import { Image } from "astro:assets";
 
 const [presidentEntry, constitutionEntry] = await Promise.all([
   getEntry("campaigns", "president-of-the-galaxy"),
@@ -287,6 +288,103 @@ const constitution = constitutionEntry.data;
           </div>
 
           <p class="authorship-closing">{president.authorship.closing}</p>
+        </section>
+
+
+        <!-- President V2 — deliberately oversized launch language for a deliberately small update -->
+        <section class="president-version-section" aria-labelledby="president-v2-heading">
+          <p class="president-version-kicker">PRESIDENTIAL HARDWARE UPDATE · V2</p>
+
+          <div class="president-version-launch">
+            <p class="president-version-label" aria-hidden="true">V2</p>
+            <div class="president-version-copy">
+              <h2 class="president-version-heading" id="president-v2-heading">
+                More human. More fingers. Same impossible office.
+              </h2>
+              <p class="president-version-intro">
+                President of the Galaxy V2 is a second design edition of ten. The update is
+                modest in engineering terms and therefore, under ceremonial launch rules,
+                a historic achievement.
+              </p>
+            </div>
+          </div>
+
+          <div class="president-version-comparison" aria-label="President of the Galaxy sticker design comparison">
+            <figure class="president-version-figure">
+              <div class="president-version-image-frame">
+                <Image
+                  src="/images/president_galaxy_v1_reference.webp"
+                  alt="Original President of the Galaxy sticker design"
+                  loading="lazy"
+                  width={789}
+                  height={998}
+                />
+              </div>
+              <figcaption>
+                <span>V1</span>
+                Original machine-heavy atmosphere. One Peace On interface.
+              </figcaption>
+            </figure>
+
+            <figure class="president-version-figure is-v2">
+              <div class="president-version-image-frame">
+                <Image
+                  src="/images/president_galaxy_v2.webp"
+                  alt="President of the Galaxy V2 sticker with hand-drawn overlay, blue and orange palette, and two Peace On gestures"
+                  loading="lazy"
+                  width={1100}
+                  height={1338}
+                />
+              </div>
+              <figcaption>
+                <span>V2</span>
+                Human overlay increased. Diplomatic finger capacity doubled.
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="president-version-features">
+            <article>
+              <p class="president-version-feature-index">01</p>
+              <h3>Human overlay</h3>
+              <p>
+                The AI-generated structure remains underneath, but more of the visible surface
+                is now covered by Q888 drawing. The machine image moves from finish toward
+                substrate: less polished certainty, more hand, interruption and correction.
+              </p>
+            </article>
+            <article>
+              <p class="president-version-feature-index">02</p>
+              <h3>Colour system, re-elected</h3>
+              <p>
+                Cyan, warm orange, cream, black and white replace the earlier gold-heavy
+                atmosphere. The office has not changed. The weather has.
+              </p>
+            </article>
+            <article>
+              <p class="president-version-feature-index">03</p>
+              <h3>Peace On²</h3>
+              <p>
+                An additional middle finger has been installed for a more complete Peace On
+                experience. Diplomatic bandwidth is now approximately doubled, with no increase
+                in constitutional authority.
+              </p>
+            </article>
+            <article>
+              <p class="president-version-feature-index">04</p>
+              <h3>Text, unscrewed</h3>
+              <p>
+                PRESIDENT / OF THE GALAXY and SCREW STARS TOGETHER no longer behave like one
+                obedient sentence. Depending on where the eye enters, the wording can read as
+                policy, assembly instruction, a cosmic relationship problem, or a warning not
+                to take any of this too literally.
+              </p>
+            </article>
+          </div>
+
+          <p class="president-version-edition">
+            EDITION 02 · 10 COPIES · NO SOFTWARE UPDATE REQUIRED
+          </p>
         </section>
 
         <!-- sticker divider 2: mushroom + spiral (like square_bubble / love_mushroom art) -->
@@ -2501,4 +2599,178 @@ const constitution = constitutionEntry.data;
       transform: none;
     }
   }
+
+  /* ─── President V2 launch ─── */
+  .president-version-section {
+    padding: clamp(5rem, 9vw, 9rem) 0;
+    border-top: 1px solid rgba(19, 66, 82, 0.12);
+    border-bottom: 1px solid rgba(19, 66, 82, 0.12);
+  }
+
+  .president-version-kicker,
+  .president-version-edition,
+  .president-version-feature-index,
+  .president-version-figure figcaption {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .president-version-kicker {
+    margin: 0 0 3rem;
+    color: var(--eden-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .president-version-launch {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .president-version-label {
+    margin: 0;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(6rem, 15vw, 13rem);
+    font-weight: 700;
+    line-height: 0.72;
+    letter-spacing: -0.08em;
+    color: var(--eden-text);
+  }
+
+  .president-version-heading {
+    margin: 0 0 1.5rem;
+    max-width: 13ch;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2.5rem, 5.8vw, 6.2rem);
+    font-weight: 700;
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    color: var(--eden-text);
+  }
+
+  .president-version-intro {
+    margin: 0;
+    max-width: 48rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+    line-height: 1.65;
+    color: var(--eden-text-muted);
+  }
+
+  .president-version-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+    margin-bottom: clamp(4rem, 7vw, 6rem);
+  }
+
+  .president-version-figure {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .president-version-image-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    padding: clamp(1rem, 2vw, 2rem);
+    background: #050505;
+    border: 1px solid rgba(19, 66, 82, 0.16);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .president-version-image-frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .president-version-figure figcaption {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+    color: var(--eden-text-muted);
+    font-size: 0.74rem;
+    line-height: 1.55;
+  }
+
+  .president-version-figure figcaption span {
+    color: var(--eden-primary);
+    font-weight: 700;
+  }
+
+  .president-version-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid rgba(19, 66, 82, 0.12);
+    border-left: 1px solid rgba(19, 66, 82, 0.12);
+  }
+
+  .president-version-features article {
+    min-width: 0;
+    padding: clamp(1.5rem, 3vw, 2.75rem);
+    border-right: 1px solid rgba(19, 66, 82, 0.12);
+    border-bottom: 1px solid rgba(19, 66, 82, 0.12);
+  }
+
+  .president-version-feature-index {
+    margin: 0 0 2.5rem;
+    color: var(--eden-primary);
+    font-size: 0.7rem;
+  }
+
+  .president-version-features h3 {
+    margin: 0 0 0.9rem;
+    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    line-height: 1.1;
+    color: var(--eden-text);
+  }
+
+  .president-version-features article p:last-child {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--eden-text-muted);
+  }
+
+  .president-version-edition {
+    margin: 2rem 0 0;
+    text-align: center;
+    color: var(--eden-primary);
+    font-size: 0.72rem;
+  }
+
+  @media (max-width: 767px) {
+    .president-version-launch,
+    .president-version-comparison,
+    .president-version-features {
+      grid-template-columns: 1fr;
+    }
+
+    .president-version-launch {
+      align-items: start;
+    }
+
+    .president-version-label {
+      font-size: clamp(6rem, 34vw, 9rem);
+    }
+
+    .president-version-heading {
+      max-width: none;
+    }
+
+    .president-version-image-frame {
+      border-radius: 18px;
+    }
+  }
+
 </style>

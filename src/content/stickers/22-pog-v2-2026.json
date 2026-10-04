@@ -1,0 +1,29 @@
+{
+  "sortOrder": 21,
+  "id": "POG-V2-2026",
+  "slug": "president-v2",
+  "ticker": "POG-2",
+  "title": "President of the Galaxy V2",
+  "tagline": "More human. More fingers. Same impossible office.",
+  "ask": "£30",
+  "availableCount": 10,
+  "editionTotal": 10,
+  "status": "LISTED",
+  "provenance": "Second presidential design edition. The AI-generated structure remains underneath a new Q888 drawing overlay; the palette changes, Peace On capacity doubles, and the campaign text is deliberately unscrewed.",
+  "contactEmail": "hello@q888.space",
+  "imageUrl": "/images/president_galaxy_v2.webp",
+  "imageAlt": "President of the Galaxy V2 sticker with hand-drawn overlay, blue and orange palette, and two Peace On gestures",
+  "gallery": [],
+  "description": "Version 2 treats a small redesign as an event of galactic consequence. The earlier machine-generated structure is still present, but it no longer gets the final word: a new Q888 drawing layer interrupts and covers the surface, shifting the image toward a more visibly human argument with its own source material.\n\nThe colour system has been re-elected in cyan, warm orange, cream, black and white. The diplomatic interface has also received a major hardware improvement: one additional middle finger, producing approximately twice the Peace On experience without granting the President any additional constitutional authority.\n\nThe text has been unscrewed too. PRESIDENT / OF THE GALAXY and SCREW STARS TOGETHER can now collide in more than one reading order—campaign slogan, assembly instruction, cosmic relationship problem, or warning label. The ambiguity is part of the update.\n\nEdition 02 is limited to ten stickers.",
+  "relatedUrl": "/president/",
+  "relatedLabel": "Enter the presidential campaign",
+  "year": "2026",
+  "showTermsAsLink": false,
+  "tags": [
+    "President of the Galaxy",
+    "Q888",
+    "limited edition",
+    "human AI collaboration",
+    "Peace On"
+  ]
+}

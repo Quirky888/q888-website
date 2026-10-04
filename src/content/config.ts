@@ -92,6 +92,8 @@ const stickers = defineCollection({
     theoryCore: z.string().optional(),
     subscriptionModel: z.string().optional(),
     showTermsAsLink: z.boolean().default(false),
+    tradeLocked: z.boolean().default(false),
+    acquisitionNote: z.string().optional(),
     rarity: z.string().optional(),
     cosmicLevel: z.string().optional(),
     purchaseOptions: z

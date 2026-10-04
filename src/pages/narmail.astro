@@ -6,6 +6,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 import NarMailChatbot from "../components/NarMailChatbot.astro";
 import { getEntry } from "astro:content";
 import DOMPurify from "isomorphic-dompurify";
+import { Image } from "astro:assets";
 
 const narMailEntry = await getEntry("products", "nar-mail-express");
 if (!narMailEntry || narMailEntry.data.slug !== "nar-mail-express") {
@@ -135,6 +136,71 @@ const narMail = narMailEntry.data;
               ))}
             </ol>
           </section>
+
+          <section class="narmail-section narmail-oops-section" aria-labelledby="narmail-oops-heading">
+            <div class="narmail-oops-grid">
+              <div class="narmail-oops-copy">
+                <p class="narmail-eyebrow">// EXCEPTION PROTOCOL / OOPS–01</p>
+                <h2 class="narmail-oops-heading" id="narmail-oops-heading">
+                  You cannot buy this sticker. You have to earn a delivery mistake.
+                </h2>
+                <p>
+                  An Oops Sticker is Nar-Mail’s rarest form of accountability: evidence that a
+                  system famous for insisting its mistakes are impossible has encountered one
+                  anyway. Kotiki-Nar normally keep one head on the visible message and the other
+                  on whatever the message is really trying to do. Usually that is enough. On the
+                  exceptional day when both heads, the route, the timing—or an outsourced
+                  courier—still disagree with reality, the bureaucracy is required to admit one
+                  tiny word: <strong>oops.</strong>
+                </p>
+                <p>
+                  The sticker cannot be ordered, negotiated for, pre-bought, or bribed out of the
+                  postal system. Not for £1. Not for £1,000,000. Not for unlimited money and a
+                  very persuasive espresso. It can only be issued by Kotiki-Nar themselves, or
+                  by a third-party courier acting for Nar-Mail, as an apology for a genuine
+                  delivery incident.
+                </p>
+              </div>
+
+              <figure class="narmail-oops-figure">
+                <div class="narmail-oops-image-frame">
+                  <Image
+                    src="/images/narmail_oops.webp"
+                    alt="Nar-Mail Oops sticker showing two Kotiki-Nar cats carrying a marked envelope inside an irregular postal border"
+                    loading="lazy"
+                    width={1000}
+                    height={974}
+                  />
+                </div>
+                <figcaption>Official apology artifact · issuance cannot be requested</figcaption>
+              </figure>
+            </div>
+
+            <div class="narmail-oops-facts" aria-label="Oops sticker edition facts">
+              <div>
+                <span>EDITION</span>
+                <strong>10</strong>
+              </div>
+              <div>
+                <span>PRICE</span>
+                <strong>NOT FOR SALE</strong>
+              </div>
+              <div>
+                <span>ISSUED BY</span>
+                <strong>KOTIKI-NAR / THIRD-PARTY COURIER</strong>
+              </div>
+              <div>
+                <span>TRIGGER</span>
+                <strong>GENUINE DELIVERY FAILURE</strong>
+              </div>
+            </div>
+
+            <p class="narmail-oops-closing">
+              Their scarcity is not a sales tactic; it is an operational failure budget.
+              The better Nar-Mail performs, the harder this sticker is to obtain.
+            </p>
+          </section>
+
           <NarMailChatbot />
         </div>
 
@@ -1621,4 +1687,138 @@ const narMail = narMailEntry.data;
       transition: none;
     }
   }
+
+  /* ─── Oops exception protocol ─── */
+  .narmail-oops-section {
+    padding-top: clamp(5rem, 9vw, 8rem);
+    padding-bottom: clamp(5rem, 9vw, 8rem);
+    border-top: 1px solid rgba(19, 66, 82, 0.12);
+  }
+
+  .narmail-oops-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.88fr);
+    gap: clamp(2.5rem, 7vw, 7rem);
+    align-items: center;
+  }
+
+  .narmail-oops-heading {
+    margin: 0 0 2rem;
+    max-width: 15ch;
+    font-size: clamp(2.5rem, 5.4vw, 5.8rem);
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+    color: var(--eden-text);
+  }
+
+  .narmail-oops-copy > p:not(.narmail-eyebrow) {
+    max-width: 46rem;
+    font-size: clamp(1rem, 1.35vw, 1.25rem);
+    line-height: 1.75;
+    color: var(--eden-text-muted);
+  }
+
+  .narmail-oops-figure {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .narmail-oops-image-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    padding: clamp(1rem, 2.5vw, 2rem);
+    background: #050505;
+    border: 1px solid rgba(19, 66, 82, 0.14);
+    border-radius: 50% 46% 48% 52% / 48% 52% 46% 54%;
+    overflow: hidden;
+  }
+
+  .narmail-oops-image-frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .narmail-oops-figure figcaption {
+    margin-top: 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--eden-primary);
+  }
+
+  .narmail-oops-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid rgba(19, 66, 82, 0.14);
+    border-left: 1px solid rgba(19, 66, 82, 0.14);
+  }
+
+  .narmail-oops-facts > div {
+    min-width: 0;
+    padding: 1.25rem;
+    border-right: 1px solid rgba(19, 66, 82, 0.14);
+    border-bottom: 1px solid rgba(19, 66, 82, 0.14);
+  }
+
+  .narmail-oops-facts span,
+  .narmail-oops-facts strong {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .narmail-oops-facts span {
+    margin-bottom: 1.25rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--eden-text-muted);
+  }
+
+  .narmail-oops-facts strong {
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    line-height: 1.25;
+    color: var(--eden-text);
+    overflow-wrap: anywhere;
+  }
+
+  .narmail-oops-closing {
+    margin: 2rem 0 0;
+    max-width: 52rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--eden-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .narmail-oops-grid {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .narmail-oops-heading {
+      max-width: none;
+    }
+
+    .narmail-oops-figure {
+      width: min(100%, 36rem);
+      margin-inline: auto;
+    }
+
+    .narmail-oops-facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .narmail-oops-facts {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>

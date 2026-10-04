@@ -1,0 +1,32 @@
+{
+  "sortOrder": 22,
+  "id": "NM-OOPS-01",
+  "slug": "nar-mail-oops",
+  "ticker": "OOPS-01",
+  "title": "Nar-Mail Oops°",
+  "tagline": "Proof that the impossible was delivered incorrectly.",
+  "ask": "Not for sale — even for unlimited money",
+  "availableCount": 10,
+  "editionTotal": 10,
+  "status": "BEYOND_TRANSACTION",
+  "provenance": "Issued only by Kotiki-Nar themselves, or by a third-party courier acting for Nar-Mail, as an apology after a genuine delivery failure. No retail allocation exists.",
+  "contactEmail": "hello@q888.space",
+  "imageUrl": "/images/narmail_oops.webp",
+  "imageAlt": "Nar-Mail Oops sticker showing two Kotiki-Nar cats carrying a marked envelope inside an irregular postal border",
+  "gallery": [],
+  "description": "An Oops Sticker is Nar-Mail’s rarest form of accountability: evidence that a system famous for insisting its mistakes are impossible has encountered one anyway. Kotiki-Nar normally keep one head on the visible message and the other on whatever the message is really trying to do. Usually that is enough. On the exceptional day when both heads, the route, the timing—or an outsourced courier—still disagree with reality, the bureaucracy is required to admit one tiny word: oops.\n\nThe sticker cannot be ordered, negotiated for, pre-bought, or bribed out of the postal system. Not for £1. Not for £1,000,000. Not for unlimited money and a very persuasive espresso. It can only be issued by Kotiki-Nar themselves, or by a third-party courier acting for Nar-Mail, as an apology for a genuine delivery incident.\n\nExactly ten exist in this edition. Their scarcity is not a sales tactic; it is an operational failure budget. The better Nar-Mail performs, the harder the sticker is to obtain.",
+  "relatedUrl": "/narmail/",
+  "relatedLabel": "Read the Nar-Mail delivery protocol",
+  "year": "2026",
+  "showTermsAsLink": false,
+  "tradeLocked": true,
+  "acquisitionNote": "Acquisition protocol: not for sale. This sticker can only be issued by Kotiki-Nar, or a third-party courier acting for Nar-Mail, as an apology for a genuine delivery incident. Unlimited money does not override postal procedure.",
+  "tags": [
+    "Nar-Mail Express",
+    "Kotiki-Nar",
+    "Q888",
+    "limited edition",
+    "apology artifact",
+    "not for sale"
+  ]
+}
