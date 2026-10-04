@@ -26,6 +26,7 @@ interface Props {
 	keywords?: string[];
 	noindex?: boolean;
 	structuredData?: SchemaNode[];
+	regularTextFont?: boolean;
 }
 
 const {
@@ -40,7 +41,11 @@ const {
 	keywords = [],
 	noindex = false,
 	structuredData = [],
+	regularTextFont = false,
 } = Astro.props;
+
+// CHOICE: reading pages can load normal weights without changing shared typography elsewhere.
+const criticalFontsUrl = `https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@${regularTextFont ? "400;500;600;700" : "700"}&display=swap`;
 
 const siteBase = Astro.site ?? new URL(SITE_URL);
 const canonicalUrl = new URL(canonicalPath, siteBase).href;
@@ -173,8 +178,8 @@ const jsonLd = JSON.stringify({
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<!-- Critical fonts: load immediately -->
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@700&display=swap" />
+		<link rel="preload" as="style" href={criticalFontsUrl} />
+		<link rel="stylesheet" href={criticalFontsUrl} />
 		<!-- Non-critical portal fonts: deferred until after load, invisible to initial paint -->
 		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bungee&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Syne:wght@400;700&display=swap" id="portal-fonts-preload" />
 		<!-- Portal font stylesheet injected after page load by JS below -->
