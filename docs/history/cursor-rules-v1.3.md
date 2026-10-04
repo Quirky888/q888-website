@@ -1,3 +1,8 @@
+> Status: superseded historical rules, archived on 2026-10-04. The original text
+> below is preserved as evidence. Its commands and authority claims are inactive.
+> Current entry point: [AGENTS.md](../../AGENTS.md). Current website requirements:
+> [technical contract](../WEBSITE_TECHNICAL_CONTRACT.md).
+
 # AI BEHAVIORAL SUPREMACY
 These rules strictly govern AI behavior and supersede any AI behavioral guidelines mentioned in AGENTS.md.
 

@@ -1,3 +1,7 @@
+> Status: retired duplicate adapter, archived on 2026-10-04. The original text
+> below is historical evidence. Use [AGENTS.md](../../AGENTS.md) and the matching
+> project overlay for current instructions.
+
 ---
 description: "Load Q888 project-specific expression overlays when a task references a named Q888 artwork, portfolio page, mythic system, or asks for stronger personal voice."
 ---

@@ -1,5 +1,10 @@
 # Eden Super-Magical Map - Cursor Implementation Handoff
 
+> Status: historical companion copy of the map implementation plan. Its checklist
+> is not a pending task or current agent policy. Use [AGENTS.md](../../AGENTS.md)
+> for workflow; compare relevant details with approved current requirements and
+> the present implementation before reuse.
+
 ## 📦 DELIVERABLES CHECKLIST
 
 You have received:
