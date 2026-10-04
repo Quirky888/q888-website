@@ -6,6 +6,7 @@ import SystemMeta from "../components/SystemMeta.astro";
 import ConstitutionDraft from "../components/ConstitutionDraft.astro";
 import { getEntry } from "astro:content";
 import DOMPurify from "isomorphic-dompurify";
+import { Image } from "astro:assets";
 
 const [presidentEntry, constitutionEntry] = await Promise.all([
   getEntry("campaigns", "president-of-the-galaxy"),
@@ -16,6 +17,9 @@ if (!presidentEntry || !constitutionEntry) {
 }
 const president = presidentEntry.data;
 const constitution = constitutionEntry.data;
+const v2Entry = await getEntry("stickers", "22-pog-2026");
+if (!v2Entry) throw new Error("Required President V2 sticker entry is missing.");
+const v2 = v2Entry.data;
 ---
 
 <Layout
@@ -343,6 +347,51 @@ const constitution = constitutionEntry.data;
           </ul>
           <p set:html={DOMPurify.sanitize(president.dealReturns)}></p>
           <p class="president-note">{president.dealFinePrint}</p>
+
+          <!-- The new edition continues the small-object test, within the campaign. -->
+          <section class="president-v2" id="president-v2" aria-labelledby="president-v2-heading">
+            <div class="v2-overview">
+              <div class="v2-context">
+                <p class="v2-feature-label">SECOND PRESIDENTIAL EDITION · {v2.editionTotal} STICKERS</p>
+                <h3 id="president-v2-heading">The campaign continues: V2.</h3>
+                <p>The first test now has a second edition. More Q888 drawing interrupts the original AI-generated figure, an additional middle finger doubles the Peace On diplomacy, and the orange typography is less obedient.</p>
+                <p>A small update for an unnecessarily large office. The President has been redesigned. Not replaced. Improved.</p>
+                <a class="v2-edition-link" href="/overpriced/president-v2/">View the edition of {v2.editionTotal}</a>
+              </div>
+
+              <div class="v2-editions">
+                <figure>
+                  <div class="v2-artwork"><Image src="/images/president_v2.webp" alt={v2.imageAlt || v2.title} width={1200} height={1459} loading="lazy" /></div>
+                  <figcaption><strong>V2 · The update</strong><span>More human. More fingers. Same impossible office.</span></figcaption>
+                </figure>
+                <figure>
+                  <div class="v2-artwork"><Image src="/images/president.webp" alt="Original President of the Galaxy V1 sticker, before the additional Q888 drawing layer" width={600} height={760} loading="lazy" /></div>
+                  <figcaption><strong>V1 · The original</strong><span>Still available as a sticker and as a poster.</span></figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <details class="v2-details">
+              <summary>Read what changed in V2</summary>
+              <div class="v2-updates">
+                <article>
+                  <p class="v2-feature-label">THE SURFACE</p>
+                  <h4>More human.</h4>
+                  <p>The original AI-generated figure remains underneath, but significantly more of it has now been covered, interrupted and reorganised by human drawing. White lines reclaim the surface. Gold survives where appropriate. Orange has been authorised for official presidential typography.</p>
+                </article>
+                <article>
+                  <p class="v2-feature-label">THE DIPLOMACY</p>
+                  <h4>One additional middle finger.</h4>
+                  <p>After extensive diplomatic research, the President can now perform the <strong>Peace On</strong> gesture with both hands, providing approximately twice the intergalactic peace experience.</p>
+                </article>
+                <article>
+                  <p class="v2-feature-label">THE TYPOGRAPHY</p>
+                  <h4>Now unscrewed.</h4>
+                  <p>Words that previously behaved like a conventional slogan have been separated and repositioned: <strong>GALAXY, TOGETHER, SCREW, PRESIDENT, STARS.</strong> Their relationship is no longer completely supervised. You may read them correctly. You may also read them differently. Both readings have presidential approval.</p>
+                </article>
+              </div>
+            </details>
+          </section>
         </section>
 
         <!-- Rules — campaign cards -->
@@ -634,6 +683,7 @@ const constitution = constitutionEntry.data;
 </Layout>
 
 <script>
+  import { lockBodyScroll } from "../lib/bodyScrollLock";
   /* ─────────────────────────────────────────────────────────────────
      PRESIDENT CAMPAIGN GALLERY — Native <dialog> + Fullscreen API
      ───────────────────────────────────────────────────────────────── */
@@ -641,18 +691,20 @@ const constitution = constitutionEntry.data;
 
   const IMAGES: GalleryImage[] = [
     { src: "/images/president_galaxy.webp", alt: "President of the Galaxy — full campaign poster", label: "Campaign Poster" },
+    { src: "/images/president_v2.webp", alt: "President of the Galaxy V2 — Q888 drawing over the original AI-generated body", label: "President V2 · Edition of 10" },
+    { src: "/images/president.webp", alt: "Original President of the Galaxy V1 sticker", label: "President V1 · Original edition" },
   ];
 
   function initGallery() {
     // Force cleanup on page load / page swap to avoid carrying over viewer state
     document.documentElement.classList.remove("is-viewer-open");
-    document.body.style.overflow = "";
 
     const trigger   = document.getElementById("president-gallery-trigger");
     const dialog    = document.getElementById("president-gallery-dialog") as HTMLDialogElement | null;
     if (!trigger || !dialog) return;
     if (dialog.dataset.galleryInit) return;
     dialog.dataset.galleryInit = "1";
+    let releaseScroll: (() => void) | null = null;
 
     const img        = document.getElementById("president-gallery-img") as HTMLImageElement;
     const counter    = document.getElementById("president-gallery-counter")!;
@@ -737,7 +789,7 @@ const constitution = constitutionEntry.data;
       loadImage(currentIdx);
       resetTransform();
       document.documentElement.classList.add("is-viewer-open");
-      document.body.style.overflow = "hidden";
+      if (!releaseScroll) releaseScroll = lockBodyScroll();
       dialog!.showModal();
     }
 
@@ -747,7 +799,8 @@ const constitution = constitutionEntry.data;
       }
       dialog!.close();
       document.documentElement.classList.remove("is-viewer-open");
-      document.body.style.overflow = "";
+      releaseScroll?.();
+      releaseScroll = null;
       resetTransform();
     }
 
@@ -882,7 +935,8 @@ const constitution = constitutionEntry.data;
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("fullscreenchange", updateFsIcon);
       document.documentElement.classList.remove("is-viewer-open");
-      document.body.style.overflow = "";
+      releaseScroll?.();
+      releaseScroll = null;
       document.removeEventListener("astro:before-swap", cleanup);
     };
     document.addEventListener("astro:before-swap", cleanup);
@@ -897,6 +951,30 @@ const constitution = constitutionEntry.data;
 </script>
 
 <style>
+  /* Keep the edition subordinate to the campaign and its first practical test. */
+  .president-v2 { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(19, 66, 82, 0.15); scroll-margin-top: 6rem; }
+  .v2-overview { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .v2-context { min-width: 0; }
+  .president-v2 h3 { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.2; color: var(--eden-text); margin: 0 0 1rem; }
+  .president-v2 p:not(.v2-feature-label) { font-size: 1rem; line-height: 1.7; color: var(--eden-text-muted); margin-bottom: 1rem; }
+  .v2-editions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 22rem; }
+  .v2-editions figure { margin: 0; min-width: 0; }
+  .v2-artwork { background: #000; aspect-ratio: 4 / 5; display: grid; place-items: center; border-radius: 0.5rem; overflow: hidden; }
+  .v2-artwork img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .v2-editions figcaption { padding-block: 0.75rem; font-size: 1rem; line-height: 1.5; color: var(--eden-text-muted); }
+  .v2-editions figcaption strong, .v2-editions figcaption span { display: block; }
+  .v2-editions figcaption strong { color: var(--eden-text); }
+  .president-v2 .v2-feature-label { font-family: ui-monospace, monospace; font-size: 0.875rem; letter-spacing: 0.08em; color: var(--eden-gold); margin-bottom: 0.75rem; }
+  .v2-edition-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--eden-primary); font-size: 1rem; text-underline-offset: 0.2em; }
+  .v2-details { margin-top: 1rem; }
+  .v2-details summary { width: fit-content; min-height: 44px; padding-block: 0.65rem; cursor: pointer; color: var(--eden-primary); font-size: 1rem; }
+  .v2-edition-link:focus-visible, .v2-details summary:focus-visible { outline: 2px solid var(--eden-primary); outline-offset: 4px; }
+  .v2-updates { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  .v2-updates article { border-top: 1px solid rgba(19, 66, 82, 0.15); padding-top: 1rem; min-width: 0; }
+  .v2-updates h4 { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 1.125rem; line-height: 1.3; color: var(--eden-text); margin-bottom: 0.75rem; }
+  @media (min-width: 900px) { .v2-overview { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); gap: 2rem; } }
+  @media (min-width: 900px) { .v2-updates { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
   /* ─── Hide nav when viewer is open ─── */
   :global(.is-viewer-open [data-slim-nav]),
   :global(.is-viewer-open [data-system-meta]),

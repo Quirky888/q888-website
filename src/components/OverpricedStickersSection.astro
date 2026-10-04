@@ -28,7 +28,7 @@ const tickerUnit = `${tickerText} — `;
   style="background:transparent!important;position:relative;overflow:hidden;z-index:1"
 >
   <div
-    class="overpriced-inner w-full px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24"
+    class="overpriced-inner w-full max-w-[120rem] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24"
     style="background:transparent!important"
   >
     <div
@@ -110,8 +110,9 @@ const tickerUnit = `${tickerText} — `;
           >
             <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
               <div class="ticker-badge">
-                {instrument.ticker} ED: {instrument.availableCount}/
-                {instrument.editionTotal}
+                {instrument.ticker} { ["POG-2026", "NAR-OOPS"].includes(instrument.id)
+                  ? `EDITION: ${instrument.editionTotal}`
+                  : `ED: ${instrument.availableCount}/${instrument.editionTotal}` }
               </div>
             </div>
             {instrument.imageUrl && (
@@ -121,7 +122,7 @@ const tickerUnit = `${tickerText} — `;
                 <Image
                   src={instrument.imageUrl}
                   alt={instrument.imageAlt || instrument.title}
-                  class="w-full h-full object-cover"
+                  class:list={["w-full h-full", instrument.id === "POG-2026" ? "object-contain bg-black" : instrument.id === "NAR-OOPS" ? "object-contain bg-[var(--bg-fog)]" : "object-cover"]}
                   loading="lazy"
                   width={400}
                   height={300}
@@ -438,7 +439,7 @@ const tickerUnit = `${tickerText} — `;
         data-sticker-meta
       >
       </div>
-      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6">
+      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6" data-sticker-protocol>
         Trade protocol: negotiation via email. No automated checkout. Signal
         intent; we respond.
       </p>
@@ -867,7 +868,7 @@ const tickerUnit = `${tickerText} — `;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100dvh;
     z-index: 9999;
     display: flex;
@@ -1491,27 +1492,34 @@ const tickerUnit = `${tickerText} — `;
 
 <script is:inline define:vars={{ instruments, activeStickerId }}>
   (function () {
+    // Each overlay restores only the declarations it owns, including priority.
+    function lockScroll() {
+      const style = document.body.style;
+      const previous = ["overflow-x", "overflow-y", "padding-right"].map((property) => [property, style.getPropertyValue(property), style.getPropertyPriority(property)]);
+      const width = window.innerWidth - document.documentElement.clientWidth;
+      const padding = parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+      if (width > 0) style.setProperty("padding-right", `${padding + width}px`);
+      style.setProperty("overflow", "hidden");
+      return () => {
+        style.removeProperty("overflow");
+        previous.forEach(([property, value, priority]) => {
+          if (value) style.setProperty(property, value, priority);
+          else style.removeProperty(property);
+        });
+      };
+    }
+    let releaseTermsScroll = null;
+    let releaseDrawerScroll = null;
     window.toggleTermsModal = function () {
       const modal = document.getElementById("termsModal");
       if (!modal) return;
       modal.classList.toggle("hidden");
 
       if (!modal.classList.contains("hidden")) {
-        if (!document.body.classList.contains("overflow-hidden")) {
-          modal.setAttribute(
-            "data-prev-body-overflow",
-            document.body.style.overflow || "",
-          );
-          document.body.style.overflow = "hidden";
-        }
+        releaseTermsScroll = lockScroll();
       } else {
-        const prev = modal.getAttribute("data-prev-body-overflow");
-        if (prev !== null) {
-          document.body.style.overflow = prev;
-          modal.removeAttribute("data-prev-body-overflow");
-        } else if (!document.body.classList.contains("overflow-hidden")) {
-          document.body.style.overflow = "";
-        }
+        releaseTermsScroll?.();
+        releaseTermsScroll = null;
       }
     };
 
@@ -1967,7 +1975,9 @@ const tickerUnit = `${tickerText} — `;
         if (inst.material) specs.push(`MATERIAL: ${inst.material}`);
         if (inst.year) specs.push(`YEAR: ${inst.year}`);
         if (inst.provenance) specs.push(`PROVENANCE: ${inst.provenance}`);
-        if (inst.id === "FWR-88") {
+        if (inst.id === "NAR-OOPS") {
+          specs.push("EDITION: 10 · NOT FOR SALE", "ISSUED BY: Kotiki-Nar or an authorised third-party courier", "QUALIFICATION: A genuine Nar-Mail delivery incident. Deliberate parcel loss does not qualify.");
+        } else if (inst.id === "FWR-88") {
           specs.push(
             "TRANSFER: Physical handover + acknowledgment that some truths shield themselves through obscurity. Hold while contemplating: follow for awakening or follow for devotion? Rabbit reveals your answer.",
           );
@@ -2009,7 +2019,7 @@ const tickerUnit = `${tickerText} — `;
           specs.push(
             "RITUAL: Apply to cherished item during moment of resistance against planned obsolescence. Whisper 'This is now an heirloom.' Item immediately transforms into collectible piece of art, never to be mindlessly discarded. You are now sticker ambassador—flaunt, inspire, create demand.",
           );
-        } else if (inst.id === "POG-2025") {
+        } else if (inst.id === "POG-2025" || inst.id === "POG-2026") {
           specs.push(
             "TRANSFER: Sticker transfer signifies acceptance of responsibility for humor, unity, and progress. Hold while acknowledging power is project not throne.",
           );
@@ -2097,7 +2107,7 @@ const tickerUnit = `${tickerText} — `;
         emailEl.classList.add("hidden");
       }
       if (negotiateBtn) {
-        negotiateBtn.hidden = false;
+        negotiateBtn.hidden = inst.id === "NAR-OOPS";
         negotiateBtn.textContent =
           inst.status === "SUBSCRIPTION"
             ? "Contact for subscription"
@@ -2105,9 +2115,13 @@ const tickerUnit = `${tickerText} — `;
               ? "Contact for negotiation"
               : "Open negotiation channel";
       }
+      const protocolEl = drawer.querySelector("[data-sticker-protocol]");
+      if (protocolEl) protocolEl.textContent = inst.id === "NAR-OOPS"
+        ? "Oops Protocol: issued as an apology only. No purchase, reservation or negotiation. Unlimited money will not help."
+        : "Trade protocol: negotiation via email. No automated checkout. Signal intent; we respond.";
 
       drawer.setAttribute("aria-hidden", "false");
-      document.body.classList.add("overflow-hidden");
+      if (!releaseDrawerScroll) releaseDrawerScroll = lockScroll();
       drawer.classList.remove("hidden");
 
       if (shouldPushState) {
@@ -2120,7 +2134,11 @@ const tickerUnit = `${tickerText} — `;
       if (!drawer) return;
       drawer.setAttribute("aria-hidden", "true");
       drawer.classList.add("hidden");
-      document.body.classList.remove("overflow-hidden");
+      releaseTermsScroll?.();
+      releaseTermsScroll = null;
+      document.getElementById("termsModal")?.classList.add("hidden");
+      releaseDrawerScroll?.();
+      releaseDrawerScroll = null;
 
       if (shouldPushState) {
         history.pushState({ stickerId: null }, "", "/overpriced/");
@@ -2131,6 +2149,7 @@ const tickerUnit = `${tickerText} — `;
       const id = drawer?.getAttribute("data-current-instrument-id");
       const inst = data.find((i) => i.id === id);
       if (!emailEl || !inst) return;
+      if (inst.id === "NAR-OOPS") return;
       emailEl.textContent = inst.contactEmail;
       emailEl.classList.remove("hidden");
       if (negotiateBtn) negotiateBtn.hidden = true;
@@ -2160,6 +2179,7 @@ const tickerUnit = `${tickerText} — `;
       window.addEventListener("popstate", handlePopstate);
 
       const handleBeforeSwap = () => {
+        closeDrawer(false);
         window.removeEventListener("popstate", handlePopstate);
         document.removeEventListener("astro:before-swap", handleBeforeSwap);
       };

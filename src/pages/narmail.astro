@@ -6,12 +6,16 @@ import SystemMeta from "../components/SystemMeta.astro";
 import NarMailChatbot from "../components/NarMailChatbot.astro";
 import { getEntry } from "astro:content";
 import DOMPurify from "isomorphic-dompurify";
+import { Image } from "astro:assets";
 
 const narMailEntry = await getEntry("products", "nar-mail-express");
 if (!narMailEntry || narMailEntry.data.slug !== "nar-mail-express") {
   throw new Error("Required Nar-Mail content entry is missing.");
 }
 const narMail = narMailEntry.data;
+const oopsEntry = await getEntry("stickers", "23-nar-mail-oops");
+if (!oopsEntry) throw new Error("Required Nar-Mail Oops sticker entry is missing.");
+const oops = oopsEntry.data;
 ---
 
 <Layout
@@ -121,6 +125,33 @@ const narMail = narMailEntry.data;
             <h2 class="narmail-h2" id="narmail-security-heading">{narMail.securityHeading}</h2>
             <p>{narMail.securityIntro}</p>
             <p class="narmail-security-status">{narMail.securityStatus}</p>
+          </section>
+
+          <section class="narmail-section narmail-oops" id="oops-sticker" aria-labelledby="oops-heading">
+            <p class="narmail-eyebrow">NAR-MAIL COMPENSATION ARTIFACT · EDITION OF 10</p>
+            <h2 class="narmail-h2" id="oops-heading">The Oops Sticker°</h2>
+            <div class="oops-grid">
+              <figure class="oops-artifact">
+                <div class="oops-image"><Image src="/images/nar_mail_oops.webp" alt={oops.imageAlt || oops.title} width={1000} height={974} loading="lazy" /></div>
+                <figcaption>The sticker unlimited money cannot buy.</figcaption>
+              </figure>
+              <div class="oops-copy">
+                <p>Nar-Mail Express maintains that lost deliveries are statistically impossible. Unfortunately, statistics occasionally encounter reality.</p>
+                <p>When a delivery disappears, arrives somewhere it should not, crosses the wrong dimension, reaches the correct person several years too early, or is otherwise damaged by the administrative interpretation of space-time, Nar-Mail may issue an official <strong>Oops Sticker.</strong></p>
+                <p>It is not compensation in any recognised financial sense. It is an admission. A very small one.</p>
+                <p>The sticker may only be given by <strong>Kotiki-Nar themselves</strong> or by a third-party courier acting on behalf of Nar-Mail Express as an apology for an actual delivery incident.</p>
+                <p>It cannot be ordered, reserved or purchased. Offering more money does not improve your chances. Offering <strong>unlimited money</strong> also does not improve your chances.</p>
+                <p>A persuasive espresso may influence a Kotiki-Nar in unrelated matters, but officially has no effect on the Oops Protocol.</p>
+              </div>
+            </div>
+            <p class="oops-paradox">Only <strong>10 Oops Stickers</strong> exist. This creates the unusual situation where the most difficult Nar-Mail artifact to obtain becomes less available when the postal service works properly.</p>
+            <dl class="oops-protocol">
+              <div><dt>PRICE</dt><dd>NOT FOR SALE</dd></div>
+              <div><dt>EDITION</dt><dd>10</dd></div>
+              <div><dt>ISSUED BY</dt><dd>KOTIKI-NAR / AUTHORISED THIRD-PARTY COURIER</dd></div>
+              <div><dt>QUALIFICATION</dt><dd>SOMETHING MUST FIRST GO WRONG</dd></div>
+            </dl>
+            <a class="oops-record-link" href="/overpriced/nar-mail-oops/">View the artifact record</a>
           </section>
 
           <section class="narmail-section narmail-terms-section" aria-labelledby="narmail-terms-heading">
@@ -256,6 +287,7 @@ const narMail = narMailEntry.data;
 </Layout>
 
 <script>
+  import { lockBodyScroll } from "../lib/bodyScrollLock";
   /* ─────────────────────────────────────────────────────────────────
      NAR-MAIL GALLERY — Native <dialog> + Fullscreen API
      ───────────────────────────────────────────────────────────────── */
@@ -263,18 +295,19 @@ const narMail = narMailEntry.data;
 
   const IMAGES: GalleryImage[] = [
     { src: "/images/nar_mail_artwork.webp", alt: "Nar-Mail Express Visual Archive", label: "Visual Archive" },
+    { src: "/images/nar_mail_oops.webp", alt: "Nar-Mail Express Oops compensation sticker with a two-headed cat courier", label: "Oops Sticker · Edition of 10 · Not for sale" },
   ];
 
   function initGallery() {
     // Force cleanup on page load / page swap to avoid carrying over viewer state
     document.documentElement.classList.remove("is-viewer-open");
-    document.body.style.overflow = "";
 
     const trigger   = document.getElementById("narmail-gallery-trigger");
     const dialog    = document.getElementById("narmail-gallery-dialog") as HTMLDialogElement | null;
     if (!trigger || !dialog) return;
     if (dialog.dataset.galleryInit) return;
     dialog.dataset.galleryInit = "1";
+    let releaseScroll: (() => void) | null = null;
 
     const img        = document.getElementById("narmail-gallery-img") as HTMLImageElement;
     const counter    = document.getElementById("narmail-gallery-counter")!;
@@ -358,7 +391,7 @@ const narMail = narMailEntry.data;
       loadImage(currentIdx);
       resetTransform();
       document.documentElement.classList.add("is-viewer-open");
-      document.body.style.overflow = "hidden";
+      if (!releaseScroll) releaseScroll = lockBodyScroll();
       dialog!.showModal();
     }
 
@@ -368,7 +401,8 @@ const narMail = narMailEntry.data;
       }
       dialog!.close();
       document.documentElement.classList.remove("is-viewer-open");
-      document.body.style.overflow = "";
+      releaseScroll?.();
+      releaseScroll = null;
       resetTransform();
     }
 
@@ -504,7 +538,8 @@ const narMail = narMailEntry.data;
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("fullscreenchange", updateFsIcon);
       document.documentElement.classList.remove("is-viewer-open");
-      document.body.style.overflow = "";
+      releaseScroll?.();
+      releaseScroll = null;
       document.removeEventListener("astro:before-swap", cleanup);
     };
     document.addEventListener("astro:before-swap", cleanup);
@@ -519,6 +554,26 @@ const narMail = narMailEntry.data;
 </script>
 
 <style>
+  /* This section inherits the page's 72rem / 24–40–64px inner container. */
+  .narmail-oops { scroll-margin-top: 6rem; }
+  .oops-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; align-items: start; }
+  .oops-artifact { margin: 0; min-width: 0; }
+  .oops-image { background: var(--eden-bg); border-radius: 0.75rem; overflow: hidden; }
+  .oops-image img { display: block; width: 100%; height: auto; }
+  .oops-artifact figcaption { font-family: ui-monospace, monospace; font-size: 0.875rem; line-height: 1.5; color: #a67c00; padding-block: 1rem; }
+  .oops-copy { min-width: 0; }
+  .narmail-oops .oops-copy p { font-size: clamp(1rem, 1.25vw, 1.125rem); line-height: 1.7; margin-bottom: 1.25rem; }
+  .oops-copy p:first-child { margin-top: 0; }
+  .narmail-oops .oops-paradox { font-size: clamp(1rem, 1.25vw, 1.125rem); line-height: 1.7; margin-top: 2rem; }
+  .oops-protocol { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-block: 2rem; padding-block: 1.5rem; border-block: 1px solid rgba(19, 66, 82, 0.15); }
+  .oops-protocol div { min-width: 0; }
+  .oops-protocol dt { font-family: ui-monospace, monospace; font-size: 0.875rem; line-height: 1.5; color: #a67c00; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .oops-protocol dd { margin: 0; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
+  .oops-record-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; text-underline-offset: 0.2em; }
+  .oops-record-link:focus-visible { outline: 2px solid var(--eden-primary); outline-offset: 4px; }
+  @media (min-width: 640px) { .oops-protocol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .oops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
   /* ─── Hide nav when viewer is open ─── */
   :global(.is-viewer-open [data-slim-nav]),
   :global(.is-viewer-open [data-system-meta]),
