@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 
-const memoryLayers = [
+const inkTraces = [
   {
     number: "01",
     name: "Visible trace",
-    text: "One representative colour: the photograph reduced to finite digital material.",
+    text: "One representative colour: the source image reduced to finite digital material.",
   },
   {
     number: "02",
@@ -14,27 +14,27 @@ const memoryLayers = [
   },
   {
     number: "03",
-    name: "Descriptive memory",
+    name: "Machine description",
     text: "Machine-generated language—including its uncertainty and occasional mistakes.",
   },
   {
     number: "04",
-    name: "Situated memory",
+    name: "Place & personal note",
     text: "Date, place, provenance and the artist’s own note, kept distinct from machine interpretation.",
   },
   {
     number: "05",
-    name: "Acquired memory",
+    name: "Learned concepts",
     text: "Concepts encountered through selected texts and PDFs after the ink was created.",
   },
   {
     number: "06",
-    name: "Social memory",
+    name: "Relationship history",
     text: "Relationships with other inks—including how a connection became active, dormant or historical.",
   },
   {
     number: "07",
-    name: "Invented memory",
+    name: "Reconstruction",
     text: "An AI reconstruction: explicitly an invention, never presented as recovery of the source.",
   },
 ];
@@ -53,7 +53,7 @@ const memoryLayers = [
       <div class="ink-hero-body">
         <div class="ink-prose ink-hero-copy">
           <p>Start with an image that means something to you. A photograph, a drawing, something you found or made. In Digital Ink, it can continue in another form: as a colour you can draw with, carrying traces of where it came from.</p>
-          <p>I call this material a <strong>Smart Ink</strong>. There is a finite amount of it, and a history that keeps developing as you use it, educate it and bring it into contact with other Inks.</p>
+          <p>I call this material a <strong>Smart Ink</strong>: one colour, a finite supply and a growing record. You can draw with it, introduce it to new concepts and explore its connections with other Inks.</p>
           <p>Digital Ink is an experimental iPad drawing app, and also an art world I am building inside it. I wanted digital material to feel less disposable — more like something we might care for.</p>
         </div>
         <figure class="ink-studio">
@@ -78,9 +78,8 @@ const memoryLayers = [
       <header class="ink-story-heading"><h2 id="idea-title">Giving a colour somewhere to come from</h2></header>
       <div class="ink-prose">
         <p>When I choose a colour in ordinary drawing software, I can use as much of it as I like. It has no particular origin, and the next time I choose it, nothing needs to have changed. Digital Ink began with a curiosity about what that freedom leaves out.</p>
-        <p>What if choosing a material also meant choosing a past? An image becomes one Smart Ink, with its own colour, origin and developing biography. Drawing spends some of its finite supply; erasing can return material. Each placed pixel remains connected to the Ink it came from, so using it is also a small event in its history.</p>
-        <p>The finite supply gives a gesture weight, but the idea goes beyond scarcity. I am interested in qualities that digital material can have on its own terms: learning something after it was created, carrying several kinds of memory, or developing relationships that continue beyond a single picture.</p>
-        <p>An Ink can appear in different moments of its life without losing the record of how it arrived there. That continuity is what lets a colour become something you can get to know.</p>
+        <p>What if choosing a material also meant choosing a past? An image becomes one Smart Ink with a recorded origin. Drawing spends some of its finite supply; erasing can return material. Each placed pixel stays connected to its source Ink, so a mark has a history as well as a colour.</p>
+        <p>I am interested in what digital material can carry beyond its appearance: learned concepts, personal notes and relationships that continue beyond a single picture. Knowing those histories can change how I use a colour, even when the colour itself stays the same.</p>
       </div>
 
       <ol class="ink-journey" aria-label="From an image to an artwork">
@@ -93,7 +92,7 @@ const memoryLayers = [
 
       <div class="ink-biography">
         <div class="ink-prose">
-          <p>The Ink below began with an Afterlife Contract from another part of my practice. In its biography, a machine description sits beside my own note and the concepts it has acquired. They are different traces of an encounter, each with its own limits.</p>
+          <p>The Ink below began with an Afterlife Contract from another part of my practice. Its biography brings together a machine description, my own note and learned concepts. Each offers a different trace of the source.</p>
           <p>A description can misread the image. A personal note can remember something the image never showed. Keeping those traces distinct matters to me: an Ink’s past can grow without being rewritten into one convenient story.</p>
         </div>
         <figure
@@ -145,7 +144,7 @@ const memoryLayers = [
           </div>
         </div>
       </figure>
-        <p class="ink-media-note">An artist’s study from development. As it crosses the centre of the screen, the interface gives way to a drawing of its memory.</p>
+        <p class="ink-media-note">A moment from building and using Digital Ink, drawn back into its interface. As you scroll, the app and my interpretation move over one another.</p>
       </div>
     </div>
   </section>
@@ -153,19 +152,19 @@ const memoryLayers = [
   <section class="ink-section ink-spaces" aria-labelledby="spaces-title">
     <div class="ink-wrap">
       <header class="ink-story-heading"><h2 id="spaces-title">Following an Ink through the world</h2></header>
-      <div class="ink-prose"><p>There are three spaces in Digital Ink. Moving between them changes the part you play: meeting materials, making a picture with them, then letting someone else look at what has happened.</p></div>
+      <div class="ink-prose"><p>There are three spaces in Digital Ink: a place to explore the materials, a place to draw with them, and a place to see the finished work.</p></div>
       <article class="ink-space" aria-labelledby="home-title">
         <h3 id="home-title">InkHome</h3>
         <div class="ink-prose">
-          <p>Before an Ink becomes part of a drawing, it has somewhere to exist. In InkHome you can spend time with its biography, give it texts to learn from, and see how it connects with other Inks.</p>
-          <p>Some connections come easily; others remain distant or change over time. I want those differences to have room. The Inks’ relationships give them a life within the system that extends beyond being useful to my next picture.</p>
+          <p>InkHome gives the archive a spatial form. You can explore Inks together, read their biographies, introduce new concepts through School and see their recorded connections.</p>
+          <p>A connection can become active, dormant or historical without erasing its earlier state. Inks can also remain unconnected. Their histories have a place here beyond the next drawing.</p>
         </div>
       </article>
       <article class="ink-space" aria-labelledby="canvas-title">
         <h3 id="canvas-title">Canvas</h3>
         <div class="ink-prose">
           <p>On the Canvas, you become the artist. You choose which Inks to bring together and where their pixels will go. This is the part where you can simply enjoy making an image.</p>
-          <p>At the same time, the materials arrive with histories of their own. A drawing is a temporary meeting between them: something you compose, made from things that were already becoming something before you placed them here.</p>
+          <p>The materials arrive with histories of their own. You compose the picture; knowing where an Ink came from may influence how you use it. A drawing can become a meeting between those histories, if that is how you choose to see it.</p>
         </div>
       </article>
       <figure class="art-study" id="canvas-study" data-art-study="canvas">
@@ -173,7 +172,7 @@ const memoryLayers = [
           <div class="art-study-toolbar">
             <figcaption>
               <span>The Canvas · an artist’s interface study</span>
-              <p>The application record, with another drawing growing around it.</p>
+              <p>A moment from the app, with another drawing growing around it.</p>
               <q>I have 174 pieces left. I am not a colour picker.</q>
             </figcaption>
             <span
@@ -208,7 +207,7 @@ const memoryLayers = [
           </div>
         </div>
       </figure>
-      <p class="ink-media-note">The interface and its artistic interpretation belong to the same development study. The drawn roots are my way of making the materials’ connections visible.</p>
+      <p class="ink-media-note">I kept the date, unfinished details and occasional mistakes as part of the project’s history. The drawn roots are my interpretation of the materials’ connections.</p>
       <article class="ink-space ink-space-gallery" aria-labelledby="gallery-title">
         <h3 id="gallery-title">Gallery</h3>
         <div class="ink-prose">
@@ -221,18 +220,16 @@ const memoryLayers = [
 
   <section class="ink-section ink-independence" aria-labelledby="independence-title">
     <div class="ink-wrap">
-      <header class="ink-story-heading"><h2 id="independence-title">Making room for things I do not control</h2></header>
+      <header class="ink-story-heading"><h2 id="independence-title">Leaving room for interpretation</h2></header>
       <div class="ink-prose">
-        <p>Building the app gives me a particular kind of power: I can decide the rules of the world as well as make work inside it. That is also why I keep asking how much of the world should exist only to please its artist.</p>
-        <p>I can choose an Ink, educate it, and arrange its pixels. But I want a relationship to be more than a reward for doing that correctly. Learning a concept need not make an Ink more obedient, and an Ink that contributes little to an encounter can still belong here.</p>
-        <p>Sometimes an Ink contributes strongly. Sometimes it stays quiet. Leaving that possibility open changes collaboration: I have to pay attention to what is there, rather than assume every material will become exactly what I ask of it.</p>
+        <p>I choose the Inks and arrange the artwork. Their histories and relationships are real parts of the software; the artistic value I find in them is my interpretation. Knowing an Ink’s past can change how I relate to it, but that does not prove it has an intention of its own.</p>
+        <p>Digital Ink provides the record, not the conclusion. The relationship an artist develops with these materials remains personal, and what it might become is still open.</p>
       </div>
       <div class="ink-continuity">
-        <h3>What I mean by memory</h3>
+        <h3>What an Ink can carry</h3>
         <div class="ink-prose">
-          <p>Words like <em>memory</em>, <em>education</em> and <em>relationship</em> help me describe the continuity I am trying to build. They name artistic and computational structures; the Inks are not presented as conscious beings.</p>
-          <p>The question is what a material can carry from one encounter into another. A source image, a learned concept, a connection that has become distant: these can change how you understand the colour in front of you, even when its visible appearance stays the same.</p>
-          <p>There is room for imagination here, too, but it has to keep its own name. A reconstructed image is a new invention, not a recovered photograph. I want the world to be expressive while remaining honest about what it knows, remembers and makes up.</p>
+          <p>An Ink can hold traces of its source, a machine description, personal notes, learned concepts and relationship history. Keeping them separate matters: a machine guess, a personal note and a recorded fact should not quietly become the same thing.</p>
+          <p>I use words such as <em>memory</em>, <em>education</em> and <em>relationship</em> for these artistic and computational structures. The Inks are not presented as conscious beings. Imagination has a place here too: an AI reconstruction is a new invention, never a recovered photograph.</p>
         </div>
       </div>
     </div>
@@ -242,21 +239,29 @@ const memoryLayers = [
     <div class="ink-wrap">
       <header class="ink-story-heading"><h2 id="growing-title">Letting the work continue</h2></header>
       <div class="ink-prose">
-        <p>Digital Ink is both an artwork and a place where further artworks can happen. I can add another experiment without replacing the world underneath it. The Inks, and the questions that brought them here, continue.</p>
+        <p>Digital Ink is both an artwork and a place where further artworks can happen. New experiments can draw on the Inks’ existing histories without rewriting them.</p>
       </div>
       <article class="ink-canvas-voice" aria-labelledby="voice-title">
-        <div class="voice-heading"><h3 id="voice-title">Canvas Voice</h3><p class="ink-development-status">In development for a future version</p></div>
+        <div class="voice-heading"><h3 id="voice-title">Canvas Voice</h3><p class="ink-development-status">Current experiment · in development</p></div>
         <div class="ink-prose">
-          <p>One experiment I am developing asks what might happen if the Inks gathered in a drawing could find a small voice together. Imagine asking the finished image a question, and hearing something shaped by this particular meeting of materials.</p>
-          <p>The planned exchange is just five words in and five words back. An Ink could offer a meaningful signal or remain quiet. I am interested in how little might be needed for a moment of expression, and in allowing the group to have something of its own to contribute.</p>
-          <p>The voice would belong to the encounter. When it ends, the temporary conversation would disappear without becoming the Inks’ memory. A later meeting could be different.</p>
-          <p>Privacy is part of the artistic form here: a conversation can matter without being kept forever. Canvas Voice asks whether an artwork can briefly speak while remaining open to the next person, rather than settling into a permanent personality.</p>
+          <p>Could a drawing briefly speak through the histories of its materials? Canvas Voice explores exchanges of up to five words each way, shaped by the Inks on the Canvas and the arrangement of their pixels.</p>
+          <p>Only meaningful, privacy-safe signals would contribute. An Ink may contribute nothing; that absence would not be treated as a failure or as proof of refusal. The voice would be an interpretation of the available data.</p>
+          <p>The planned session would end without adding the conversation to Ink memory. I want to explore a voice that belongs to a particular encounter, with a traceable basis for each reply and no permanent personality.</p>
         </div>
         <a class="ink-text-link" href="#voice-research">The planned boundaries of Canvas Voice ↓</a>
       </article>
+      <article class="ink-canvas-voice" aria-labelledby="archive-preview-title">
+        <div class="voice-heading"><h3 id="archive-preview-title">The 116-Pixel Archive</h3><p class="ink-development-status">Future project</p></div>
+        <div class="ink-prose"><p>116 photographs would become 116 Smart Inks, allowing their histories and relationships to develop as an artwork in their own right. The project remains a proposal; its rules would be explored through a small prototype.</p></div>
+      </article>
       <div class="ink-purpose ink-prose">
-        <p>You can use Digital Ink simply to make pictures. You can also stay with the questions inside the material: who authors a work, what a colour might carry, how histories are kept, and what collaboration becomes when command and response are only part of it.</p>
-        <p>For me, the app is a place to work through those questions by making things. What happens next is still part of the experiment.</p>
+        <p>You can use Digital Ink simply to make pictures, or to explore authorship, memory, scarcity and the relationships we form with digital materials. The app gives these questions a place to be worked through by making things.</p>
+        <p>For me, the app remains an open experiment. What happens next is part of the work.</p>
+      </div>
+      <div class="ink-continuity">
+        <h3>You decide what is shared</h3>
+        <div class="ink-prose"><p>Drawing and most Ink information stay on your iPad. Optional online AI features ask permission before sending selected content. Buying credits is not consent to share it.</p></div>
+        <a class="ink-text-link" href="/privacy/">Read the Digital Ink Privacy Policy ↗</a>
       </div>
     </div>
   </section>
@@ -266,7 +271,7 @@ const memoryLayers = [
       <!-- CHOICE: the system remains inspectable without interrupting the first encounter with the artwork. -->
       <details class="ink-record" id="technical-record">
         <summary>
-          <span><span class="ink-kicker">05 · OPEN SYSTEM NOTES</span><h2 id="record-title">TECHNICAL RECORD</h2><span class="record-invitation">For those who want to look underneath the artwork.</span></span>
+          <span><span class="ink-kicker">OPEN SYSTEM NOTES</span><h2 id="record-title">UNDER THE HOOD</h2><span class="record-invitation">For people who want the technical version.</span></span>
           <span class="record-toggle" aria-hidden="true">+</span>
         </summary>
         <div class="record-content">
@@ -279,10 +284,10 @@ const memoryLayers = [
             <p>A native iPadOS application with local Smart Inks, artworks, biographies, education, relationship history and provenance. Optional online operations travel through Digital Ink’s Cloudflare service to OpenAI.</p>
           </section>
           <section class="record-section" aria-labelledby="smart-ink-model">
-            <h3 id="smart-ink-model">Smart Ink data &amp; memory</h3>
-            <p>A selected image becomes finite material with a representative colour, identity and recorded origin. Distinct memory layers keep source evidence, personal testimony, learned knowledge and machine invention from quietly becoming the same thing.</p>
+            <h3 id="smart-ink-model">Smart Ink data &amp; source traces</h3>
+            <p>A selected image becomes finite material with a representative colour, identity and recorded origin. An Ink can carry seven kinds of information, with source evidence, personal notes, learned concepts and machine invention kept distinct.</p>
             <dl class="memory-record">
-              {memoryLayers.map((layer) => (<div><dt>{layer.name}</dt><dd>{layer.text}</dd></div>))}
+              {inkTraces.map((trace) => (<div><dt>{trace.name}</dt><dd>{trace.text}</dd></div>))}
             </dl>
           </section>
           <section class="record-section" aria-labelledby="ink-rules">
@@ -295,7 +300,7 @@ const memoryLayers = [
           </section>
           <section class="record-section" aria-labelledby="ink-relationships">
             <h3 id="ink-relationships">Relationships &amp; InkHome</h3>
-            <p>Version 3.0 introduced relationship history and a spatial InkHome. Smart Inks occupy a projected 3D environment, form routes and reveal connections. A relationship can become active, dormant or historical while retaining its earlier states, explanation and witnesses.</p>
+            <p>Version 3.0 introduced persistent relationships between Inks. InkHome gives the archive a spatial form, with recorded connections and routes visible in a projected 3D environment. A connection can become active, dormant or historical without silently erasing its earlier state.</p>
             <aside class="relationship-map" aria-label="Inkhome relationship map">
           <p>INKHOME · LOCAL RELATIONSHIP FIELD</p>
           <div class="relationship-field" aria-hidden="true">
@@ -321,14 +326,14 @@ const memoryLayers = [
             <li><i class="is-historical"></i>HISTORICAL</li>
           </ul>
           <p class="relationship-map-note">
-            Positions, routes and connections turn the archive into a small
-            inhabited system—not only a collection of files.
+            Positions, routes and connections make the archive feel less like
+            a list of files and more like a place with history.
           </p>
         </aside>
           </section>
           <section class="record-section" aria-labelledby="ink-provenance">
             <h3 id="ink-provenance">Provenance</h3>
-            <p>Artworks connect to the artist, Smart Inks and histories involved in making them. New artworks can carry stronger cryptographic verification. Older Smart Inks remain Heritage Ink: incomplete, truthful and never silently upgraded with evidence they did not originally have.</p>
+            <p>An artwork can record who made it and which Smart Inks were involved. New artworks can carry stronger cryptographic verification without pretending older Inks always had it. Older records remain marked as Heritage Ink where the original evidence is incomplete.</p>
           </section>
           <section class="record-section" aria-labelledby="ink-privacy">
             <h3 id="ink-privacy">Privacy / AI &amp; model information</h3>
@@ -341,27 +346,21 @@ const memoryLayers = [
           <section class="record-section" aria-labelledby="voice-research">
             <p class="ink-development-status">IN DEVELOPMENT · FUTURE FEATURE</p>
             <h3 id="voice-research">Canvas Voice research</h3>
-            <p>The planned conversation is limited to five words in and five words back. A temporary group of Inks would be able to contribute meaningful signals or remain quiet.</p>
-            <p>The design calls for only temporary, privacy-safe concepts to reach the language model. The encounter would not be added to Ink memory after the conversation ends. These describe the intended design of a feature still in development.</p>
+            <p>The planned exchange is limited to one to five words each way. A local extraction layer would combine meaningful signals from the Canvas Inks with computational properties such as density and symmetry. It would not use human object recognition to tell the Inks what the drawing represents. An Ink may contribute no signal; silence would not automatically become a filter.</p>
+            <p>Only the question and a few selected, privacy-safe concepts would reach the language mediator. Source images, personal notes, biographies, locations, identifiers and relationship evidence would stay outside that payload. Temporary records would show how the selected conditions led to each reply.</p>
+            <p>The intended session record would be discarded on the device when the conversation ends, without changing Ink memory or history. Local deletion does not determine an external service’s retention; that boundary would need to be stated before the feature is offered. These are design boundaries for a feature still in development.</p>
           </section>
           <section class="record-section" aria-labelledby="archive-title">
             <p class="ink-kicker">PROPOSED FUTURE RESEARCH EDITION</p>
             <h3 id="archive-title">The 116-Pixel Archive</h3>
-            <p>A proposed controlled archive in which 116 photographs become 116 Smart Inks. Version 3.0 supplies relationship history and spatial InkHome; the research edition would give that working foundation a deliberately governed population.</p>
-            <p><strong>This edition does not yet exist.</strong> The residency process would discover its rules before a dedicated edition is built.</p>
-            <ol class="archive-process">
-              <li><h4>Define the archive protocol</h4><p>Source and consent, memory rights, affinity, exchange, forgetting, intervention and what the audience may see.</p></li>
-              <li><h4>Run a controlled prototype</h4><p>Twelve photographs test whether the rules create meaningful differences before scale hardens them into software.</p></li>
-              <li><h4>Build the dedicated edition</h4><p>Only after observation: 116 Smart Inks with event history, replay, backup and exhibition-safe operation.</p></li>
-            </ol>
-            <blockquote>What might 116 finite witnesses remember together — without any of them being given a past they never had?</blockquote>
-            <p>A dedicated <code>/116</code> process page is planned when the research has a process to show.</p>
+            <p>A proposed research edition in which 116 photographs become 116 Smart Inks. The existing relationship history and InkHome would provide its foundation.</p>
+            <p><strong>This edition does not yet exist.</strong> A small prototype would explore source permissions, interpretation, exchange, forgetting and what visitors may see before the full archive is built.</p>
           </section>
           <section class="record-section" aria-labelledby="development-status">
             <h3 id="development-status">Current development status</h3>
-            <p>Digital Ink is available on the App Store. Version 3.0, released 20 September 2026, includes relationships, InkHome and Artist Identity. Canvas Voice is in development for a future version; the 116-Pixel Archive is a proposed research edition.</p>
-            <p>The film and authored interface studies on this page belong to the project’s development history. Their recorded interface states are part of that history.</p>
-            <nav class="ink-actions" aria-label="App and policy links"><a class="ink-button" href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">App Store ↗</a><a class="ink-button" href="/privacy/">Privacy policy</a><a class="ink-button" href="mailto:hello@q888.space">Contact the artist</a></nav>
+            <p>Digital Ink is available on the App Store. Version 3.0 includes relationships, InkHome and Artist Identity. Canvas Voice is an experiment in development; the 116-Pixel Archive remains a proposed research edition.</p>
+            <p>The film and interface studies on this page are part of the project’s development history. Their recorded states may differ from the current app.</p>
+            <nav class="ink-actions" aria-label="App, code and policy links"><a class="ink-button" href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">App Store ↗</a><a class="ink-button" href="https://github.com/Quirky888/DigitalInk" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="ink-button" href="/privacy/">Privacy policy</a><a class="ink-button" href="mailto:hello@q888.space">Contact the artist</a></nav>
           </section>
         </div>
       </details>
