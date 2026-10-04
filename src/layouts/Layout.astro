@@ -266,7 +266,7 @@ const jsonLd = JSON.stringify({
 			(function cleanupViewerState() {
 				const cleanup = () => {
 					document.documentElement.classList.remove("is-viewer-open");
-					document.body.style.overflow = "";
+					// Overlay owners restore their locks; a global reset races deep-link drawers.
 				};
 				if (document.readyState === "loading") {
 					document.addEventListener("DOMContentLoaded", cleanup);
