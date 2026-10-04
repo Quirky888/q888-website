@@ -1,5 +1,9 @@
 # Eden Super-Magical Map - Interactive Prototype Specs
 
+> Status: historical map prototype specification, retained as design evidence.
+> Use [AGENTS.md](../AGENTS.md) for current agent rules. Compare relevant details
+> with approved current requirements and the present implementation before reuse.
+
 ## PROJECT OVERVIEW
 Fullscreen interactive webpage featuring the Edinburgh Magic map with clickable hotspots and a story drawer component. All assets export-ready for Cursor implementation.
 

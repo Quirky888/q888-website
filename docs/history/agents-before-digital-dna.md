@@ -1,3 +1,6 @@
+> Status: superseded entry-point snapshot, archived on 2026-10-04. The original
+> instructions below are historical evidence. Use [AGENTS.md](../../AGENTS.md).
+
 # AGENTS.md
 
 ## Cursor Cloud specific instructions

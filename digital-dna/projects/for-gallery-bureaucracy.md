@@ -80,14 +80,12 @@ The page respects the need for practical information, but it does not hand insti
 - functional PDF controls;
 - the line: “For administrative purposes, the artist also exists on Earth.”
 
-## Change
+## Enduring surface requirements
 
-- reduce cold machine language;
-- reduce generic terminal aesthetics;
-- reduce repetitive all-caps system labels;
-- replace robotic authority with warm human confidence;
+- use warm human confidence rather than cold machine language or robotic authority;
+- keep generic terminal aesthetics and repetitive all-caps system labels out of the dominant visual language;
 - let institutional satire smile;
-- let the mushroom cap become visible now that the technical skeleton is safe.
+- make mushroom-soft expression visible while preserving the practical technical structure.
 
 ## Prefer
 

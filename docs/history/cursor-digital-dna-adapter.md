@@ -1,3 +1,7 @@
+> Status: retired duplicate adapter, archived on 2026-10-04. The original text
+> below is historical evidence. Use [AGENTS.md](../../AGENTS.md) for reading and
+> the original `digital-dna/` files for approved identity.
+
 ---
 description: "Always-on Q888 Digital DNA: meaning-first, readable, safe Human Code with context-sensitive artistic expression."
 ---

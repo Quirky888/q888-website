@@ -23,8 +23,8 @@ Use an existing file under `digital-dna/projects/` when available.
 
 ## Process
 
-1. Read the core DNA and expression lenses.
-2. Read the matching project overlay.
+1. Follow `AGENTS.md` for rule ownership and selective reading; use the core DNA and expression lenses already read or load them when needed.
+2. Read the matching project overlay, reusing it if already understood in this session.
 3. Identify what must remain practical.
 4. Identify what is explicitly allowed to become strange.
 5. Choose productive tensions to keep visible.
@@ -36,16 +36,9 @@ Use an existing file under `digital-dna/projects/` when available.
 
 ## Output declaration
 
-Before substantial work, state:
-
-```text
-WORKING_MODE:
-EXPRESSION_LENSES:
-PROJECT_OVERLAY:
-PHENOTYPE_INTENT:
-```
-
-Keep this compact.
+For substantial expression work, briefly identify the working mode, expression
+lenses, matching overlay, and intended feeling when they affect the decision.
+Use a short sentence; skip this declaration for tiny tasks.
 
 ## Important distinction
 

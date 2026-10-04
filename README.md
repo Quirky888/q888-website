@@ -2,6 +2,9 @@
 
 A dynamic, premium portfolio website for Q888 built using **Astro**, **Tailwind CSS v4**, and **GSAP**. This project includes interactive showcase sections, dynamic canvas effects, and AI-powered chatbot assistants.
 
+Coding-agent instructions start in [AGENTS.md](AGENTS.md), with task-specific
+reading and links to the shared technical requirements and Digital DNA.
+
 ---
 
 ## 🛠️ Tech Stack
