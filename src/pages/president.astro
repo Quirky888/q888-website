@@ -20,6 +20,7 @@ const constitution = constitutionEntry.data;
 const v2Entry = await getEntry("stickers", "22-pog-2026");
 if (!v2Entry) throw new Error("Required President V2 sticker entry is missing.");
 const v2 = v2Entry.data;
+if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
 ---
 
 <Layout
@@ -361,7 +362,7 @@ const v2 = v2Entry.data;
 
               <div class="v2-editions">
                 <figure>
-                  <div class="v2-artwork"><Image src="/images/president_v2.webp" alt={v2.imageAlt || v2.title} width={1200} height={1459} loading="lazy" /></div>
+                  <div class="v2-artwork"><Image src={v2.imageUrl} alt={v2.imageAlt || v2.title} width={830} height={928} loading="lazy" /></div>
                   <figcaption><strong>V2 · The update</strong><span>More human. More fingers. Same impossible office.</span></figcaption>
                 </figure>
                 <figure>
@@ -691,7 +692,7 @@ const v2 = v2Entry.data;
 
   const IMAGES: GalleryImage[] = [
     { src: "/images/president_galaxy.webp", alt: "President of the Galaxy — full campaign poster", label: "Campaign Poster" },
-    { src: "/images/president_v2.webp", alt: "President of the Galaxy V2 — Q888 drawing over the original AI-generated body", label: "President V2 · Edition of 10" },
+    { src: "/images/president_v2.png", alt: "President of the Galaxy V2 — Q888 drawing over the original AI-generated body", label: "President V2 · Edition of 10" },
     { src: "/images/president.webp", alt: "Original President of the Galaxy V1 sticker", label: "President V1 · Original edition" },
   ];
 
