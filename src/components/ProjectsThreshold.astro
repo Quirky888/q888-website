@@ -1,70 +1,98 @@
 ---
+import DoorArch from "./DoorArch.astro";
+
+// The two Q888 doors. Infocigan's micro-projects have their own doors inside the Infocigan section.
+const doors = [
+  {
+    id: "digital-ink",
+    title: "Digital Ink",
+    descriptor: "A system for meaning, scarcity, and traceable digital creation.",
+    href: "/dink/",
+    image: "/images/project_ink-768.webp",
+  },
+  {
+    id: "edinburgh-map",
+    title: "Edinburgh Magical Map",
+    descriptor: "A mythic cartography of place, memory, and hidden doors.",
+    href: "/map/",
+    image: "/images/Project_map-768.webp",
+    attrs: { "data-drawer-trigger": "edinburgh-map", "data-nav-direction": "right" },
+  },
+];
 ---
 
-<section data-threshold="projects" class="relative w-full">
-  <div class="flex flex-col lg:flex-row min-h-screen">
-    <!-- Digital Ink Panel -->
-    <a
-      href="/dink/"
-      id="project-digital-ink"
-      data-project="digital-ink"
-      aria-label="View Digital Ink: A system for digital creation"
-      class="group relative flex-1 flex flex-col items-center justify-start cursor-pointer min-h-[60dvh] bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500 overflow-hidden"
-    >
-      <img
-        src="/images/project_ink.webp"
-        srcset="/images/project_ink-480.webp 480w, /images/project_ink-768.webp 768w, /images/project_ink-1200.webp 1200w, /images/project_ink.webp 1563w"
-        sizes="(min-width: 1024px) 50vw, 100vw"
-        alt=""
-        class="w-full h-auto block"
-        loading="lazy"
-        decoding="async"
-        width="1563"
-        height="2500"
-      />
-      <div class="absolute inset-0 z-10 flex items-center justify-center p-6 pointer-events-none">
-        <div class="threshold-overlay w-80 min-w-80 text-center px-8 py-6 rounded-2xl bg-black/35 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_0_30px_rgba(0,0,0,0.35)]" data-overlay="digital-ink">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-sans text-white mb-6 tracking-tight">
-            Digital Ink
-          </h2>
-          <p class="text-sm md:text-base font-mono text-white/90 leading-relaxed uppercase tracking-[0.2em]">
-            A system for meaning, scarcity, and traceable digital creation.
-          </p>
-        </div>
-      </div>
-    </a>
+<section data-threshold="projects" class="worlds qd-wrap">
+  <header class="worlds-head">
+    <h2>Projects</h2>
+    <p class="qd-mono">{String(doors.length).padStart(2, "0")} doors</p>
+  </header>
 
-    <!-- Edinburgh Magical Map Panel -->
-    <a
-      href="/map/"
-      data-drawer-trigger="edinburgh-map"
-      data-nav-direction="right"
-      id="project-edinburgh-map"
-      data-project="edinburgh-map"
-      aria-label="View Edinburgh Magical Map: A mythic cartography"
-      class="group relative flex-1 flex flex-col items-center justify-start cursor-pointer min-h-[60dvh] bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[var(--line-soft)] transition-colors duration-500 overflow-hidden"
-    >
-      <img
-        src="/images/Project_map.webp"
-        srcset="/images/Project_map-480.webp 480w, /images/Project_map-768.webp 768w, /images/Project_map-1200.webp 1200w, /images/Project_map.webp 1563w"
-        sizes="(min-width: 1024px) 50vw, 100vw"
-        alt=""
-        class="w-full h-auto block"
-        loading="lazy"
-        decoding="async"
-        width="1563"
-        height="2500"
-      />
-      <div class="absolute inset-0 z-10 flex items-center justify-center p-6 pointer-events-none">
-        <div class="threshold-overlay w-80 min-w-80 text-center px-8 py-6 rounded-2xl bg-black/35 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_0_30px_rgba(0,0,0,0.35)]" data-overlay="edinburgh-map">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-sans text-white mb-6 tracking-tight">
-            Edinburgh Magical Map
-          </h2>
-          <p class="text-sm md:text-base font-mono text-white/90 leading-relaxed uppercase tracking-[0.2em]">
-            A mythic cartography of place, memory, and hidden doors.
-          </p>
-        </div>
-      </div>
-    </a>
-  </div>
+  <ul class="worlds-arches">
+    {doors.map((door, index) => (
+      <li>
+        <DoorArch {...door} index={index} />
+      </li>
+    ))}
+  </ul>
 </section>
+
+<style>
+  .worlds {
+    display: grid;
+    gap: 2.5rem clamp(1.5rem, 4vw, 4rem);
+    padding-block: 1.25rem clamp(5rem, 11vw, 10rem);
+    color: var(--text-ink);
+    background: var(--bg-fog);
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .worlds-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .worlds-head h2 {
+    margin: 0;
+    font-family: var(--font-door-display);
+    font-size: clamp(1.75rem, 4vw, 3.5rem);
+    font-weight: 700;
+    font-variation-settings: "wdth" 80;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .worlds-head p {
+    margin: 0;
+  }
+
+  .worlds-arches {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.9rem, 3vw, 3rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* The stagger gives the pair a walking rhythm instead of a product grid. */
+  .worlds-arches li:nth-child(even) {
+    margin-top: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .worlds {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+
+    .worlds-head {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .worlds-arches li:nth-child(even) {
+      margin-top: 6rem;
+    }
+  }
+</style>

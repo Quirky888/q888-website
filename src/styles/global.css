@@ -167,3 +167,53 @@ html[data-motion-ready="1"] [data-motion-stagger].is-revealed .q888-reveal-item 
 	}
 }
 
+
+/* Homepage "hidden door" concept: display pair, gold accent, and the Earth / Cosmos switch.
+   CHOICE: Cosmos re-values the existing fog tokens on the homepage only, so sub-pages
+   keep their own costumes and tokens.css stays untouched. */
+:root {
+	--font-door-display: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+	--font-door-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+	--font-door-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	--door-gold: #8a6c0c;
+	--door-glow: rgba(212, 175, 55, 0.5);
+	--door-thread: rgba(19, 19, 19, 0.16);
+	--door-art-filter: none;
+	--door-gutter: clamp(1.5rem, 4vw, 4rem);
+}
+
+html[data-q-theme="cosmos"] body:has([data-q-home]) {
+	--bg-fog: #0a0a0b;
+	--text-ink: #edebe5;
+	--text-muted: #98958c;
+	--line-soft: #2a2926;
+	--door-gold: #d9b540;
+	--door-glow: rgba(217, 181, 64, 0.55);
+	--door-thread: rgba(237, 235, 229, 0.17);
+	--door-art-filter: invert(1) hue-rotate(180deg);
+	color-scheme: dark;
+}
+
+body:has([data-q-home]) {
+	transition: background-color 600ms ease, color 600ms ease;
+}
+
+.qd-wrap {
+	padding-inline: max(var(--door-gutter), env(safe-area-inset-left, 0px))
+		max(var(--door-gutter), env(safe-area-inset-right, 0px));
+}
+
+.qd-mono {
+	font-family: var(--font-door-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	line-height: 1.5;
+	text-transform: uppercase;
+	color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body:has([data-q-home]) {
+		transition: none;
+	}
+}

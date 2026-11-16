@@ -6,7 +6,7 @@ import SubPageNav from "../components/SubPageNav.astro";
 
 <Layout
   title="Privacy Policy — Digital Ink"
-  description="How Digital Ink processes selected images, Smart Ink data, Source Memory, optional AI requests, credits and purchases."
+  description="How Digital Ink processes selected images, Smart Ink data, nearby Ink transfers, Source Memory, optional AI requests, credits and purchases."
   canonicalPath="/privacy/"
   pageType="article"
   keywords={["Digital Ink privacy policy", "Smart Ink privacy", "Q888", "Source Memory"]}
@@ -19,7 +19,7 @@ import SubPageNav from "../components/SubPageNav.astro";
       <div class="policy-shell">
         <p class="policy-kicker">DIGITAL INK · PUBLIC RECORD · PRIVACY</p>
         <h1>Privacy<br />Policy</h1>
-        <p class="policy-summary">Digital Ink works primarily on your iPad. Optional online AI features cross that boundary only after you choose the feature and give permission for that operation.</p>
+        <p class="policy-summary">Digital Ink works primarily on your iPad. You can choose to transfer an Ink to another artist’s iPad. Optional online AI features ask for permission before sending content to an online service.</p>
         <dl class="policy-meta">
           <div><dt>Effective date</dt><dd>September 19, 2026</dd></div>
           <div><dt>App</dt><dd>Digital Ink</dd></div>
@@ -38,6 +38,7 @@ import SubPageNav from "../components/SubPageNav.astro";
         <ol>
           <li><a href="#overview">Overview</a></li>
           <li><a href="#on-device">On-device information</a></li>
+          <li><a href="#ink-transfers">Nearby Ink transfers</a></li>
           <li><a href="#photos-files">Photographs and files</a></li>
           <li><a href="#source-memory">Source Memory</a></li>
           <li><a href="#offline-recognition">Offline recognition</a></li>
@@ -66,7 +67,7 @@ import SubPageNav from "../components/SubPageNav.astro";
           <ul>
             <li>Smart Inks created from images you select</li><li>Smart Ink identifiers, colours and creation dates</li><li>Vision Memory descriptions and structured visual metadata</li><li>Emotional descriptions, palettes, subjects and environmental details</li><li>Personal memory notes that you choose to write</li><li>Learned concepts, hashtags and education levels</li><li>Ink relationships, affinity information and provenance history</li><li>Artworks, canvases and pixel placement</li><li>Generated reconstructions</li><li>Certificates and export information</li><li>Application settings and preferences</li><li>Local activity and diagnostic history</li><li>Credit balance information received from the Digital Ink service</li>
           </ul>
-          <p>This information remains on your device unless you deliberately use an online feature, export content or share it through another application.</p>
+          <p>This information remains on your device unless you choose to use an online feature, transfer an Ink, export content or share it through another application.</p>
           <h3>Artist Identity</h3>
           <p>Digital Ink creates a local Artist Identity. It may include an artist handle, a derived Artist ID, a public signing key, a creation date and an optional artist identity image.</p>
           <p>The optional identity image is processed locally and reduced to a compact display image with a maximum dimension of 256 pixels. The private artwork-signing key is stored locally in the iOS Keychain and is not intentionally transmitted to Digital Ink’s online service.</p>
@@ -79,6 +80,10 @@ import SubPageNav from "../components/SubPageNav.astro";
           <h3>Local Smart Ink relationships</h3>
           <p>The current Smart Ink relationship network is calculated and stored locally. It may use local Ink metadata, artwork experience, relationship history and provenance-derived evidence.</p>
           <p>Relationship states, histories, explanations, 3D InkHome exploration and routes remain local functionality. The current relationship system does not require an external AI service and does not automatically upload source images, private notes or relationship histories for relationship calculation.</p>
+          <h3 id="ink-transfers">Nearby Ink transfers</h3>
+          <p>Digital Ink 3.2 can move one eligible Ink at a time between artists. Ink Transfers uses Apple’s Local Network permission to find and connect nearby iPads. During pairing, the iPads exchange signed public Artist Identity information such as the artist handle, Artist ID and public key, along with the device model. Both artists compare and confirm the pairing code.</p>
+          <p>The receiving artist can review a preview before accepting. The transferred Ink includes its identity, remaining Ink, biography, learning and provenance. It can also include personal notes, a Source Memory image, a reconstruction preview, life events, historical relationship references and recorded photo details such as location. Check the Ink’s BIO before choosing it.</p>
+          <p>The transfer uses an encrypted connection directly between the iPads. Digital Ink’s Cloudflare and OpenAI services do not receive this transfer data. Transfer records and receipts can remain on both iPads for history, provenance and recovery of interrupted transfers.</p>
         </section>
 
         <section id="photos-files">
@@ -97,7 +102,7 @@ import SubPageNav from "../components/SubPageNav.astro";
           <ul><li>Optional</li><li>Disabled unless you choose to include it</li><li>Resized to a maximum of 192 pixels on its longest edge</li><li>Compressed before being stored</li><li>Kept locally as part of the Smart Ink’s biography</li></ul>
           <p>If Source Memory is not selected, Digital Ink does not retain a preview of the original image as part of the Smart Ink.</p>
           <p>The full-resolution original image is not stored inside the Smart Ink.</p>
-          <p>A Source Memory remains on your device unless you explicitly choose to include it in an online AI Memory Reconstruction.</p>
+          <p>A Source Memory is included when you transfer the Ink that holds it to another artist. You can also separately choose to include it in an online AI Memory Reconstruction.</p>
         </section>
 
         <section id="offline-recognition">

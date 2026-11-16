@@ -1,103 +1,213 @@
 ---
+const openTo = [
+  "Exhibitions, residencies, commissions and acquisitions.",
+  "Artistic collaborations, research, talks and workshops.",
+  "Experimental technology, interactive narratives and digital strategy.",
+  "Pilot partners, production support and backing for projects ready to move.",
+];
+
+const elsewhere = [
+  { label: "Instagram @quirky_888", href: "https://instagram.com/quirky_888" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/aleksander-sestakovs-a9068442/" },
+  { label: "GitHub", href: "https://github.com/Quirky888" },
+  {
+    label: "Working Artwork Archive",
+    href: "https://periodic-snail-98e.notion.site/318afef9a7c2805a8d53e46fca38e092?v=319afef9a7c2800d83ab000c2ac68015",
+  },
+];
 ---
 
-<section 
-  id="contact" 
-  data-section="contact" 
-  class="relative min-h-screen py-32 px-6 md:px-12 lg:px-24 bg-[var(--bg-cosmic)] border-t border-[var(--line-silver)] flex flex-col justify-between"
->
-  <div class="max-w-6xl mx-auto w-full">
-    <!-- Header Block -->
-    <header class="mb-24">
-      <h2 class="text-[3rem] md:text-[5rem] font-light tracking-tight leading-none mb-4 text-[var(--text-silver)]">
-        CONTACT & COLLABORATION
-      </h2>
-      <p class="text-[var(--text-silver-muted)] text-sm md:text-base max-w-xl">
-        The shore after chaos.
+<section id="contact" data-section="contact" class="contact qd-wrap">
+  <p class="qd-mono">Contact &amp; collaboration</p>
+  <h2>The shore <em>after</em> chaos.</h2>
+
+  <a href="mailto:hello@q888.space" class="contact-mail">hello@q888.space</a>
+
+  <div class="contact-columns">
+    <div>
+      <h3 class="qd-mono">Open to</h3>
+      <ul>
+        {openTo.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="qd-mono">Capacity</h3>
+      <p>
+        Unexpected directions are welcome too. Current capacity is limited,
+        so each possibility begins with a conversation about scale, timing and
+        what can realistically be made together.
       </p>
-    </header>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32">
-      <!-- Open To List -->
-      <div>
-        <h3 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-silver-muted)] mb-8">
-          // WHAT_I_AM_OPEN_TO
-        </h3>
-        <ul class="space-y-4 text-[var(--text-silver)] font-light">
-          <li class="flex items-start gap-4">
-            <span class="opacity-30">•</span>
-            <span>Exhibitions, residencies, commissions and acquisitions.</span>
+    <div>
+      <h3 class="qd-mono">Elsewhere</h3>
+      <ul>
+        {elsewhere.map((link) => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label} <span aria-hidden="true">↗</span></a>
           </li>
-          <li class="flex items-start gap-4">
-            <span class="opacity-30">•</span>
-            <span>Artistic collaborations, research, talks and workshops.</span>
-          </li>
-          <li class="flex items-start gap-4">
-            <span class="opacity-30">•</span>
-            <span>Experimental technology, interactive narratives and digital strategy.</span>
-          </li>
-          <li class="flex items-start gap-4">
-            <span class="opacity-30">•</span>
-            <span>Pilot partners, production support and backing for projects ready to move.</span>
-          </li>
-        </ul>
-        <p class="mt-10 max-w-md text-sm leading-relaxed text-[var(--text-silver-muted)]">
-          Unexpected directions are welcome too. Current capacity is limited,
-          so each possibility begins with a conversation about scale, timing and
-          what can realistically be made together.
-        </p>
-      </div>
-
-      <!-- Contact Info -->
-      <div class="space-y-12">
-        <div>
-          <h3 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-silver-muted)] mb-8">
-            // COMMUNICATION_CHANNELS
-          </h3>
-          <div class="space-y-6">
-            <a 
-              href="mailto:hello@q888.space" 
-              class="block text-2xl md:text-3xl text-[var(--text-silver)] hover:text-white transition-colors border-b border-transparent hover:border-[var(--text-silver)] w-fit"
-            >
-              hello@q888.space
-            </a>
-            
-            <div class="flex gap-8 text-[var(--text-silver)] text-sm">
-              <a href="https://instagram.com/quirky_888" target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram @quirky_888</a>
-              <a href="https://www.linkedin.com/in/aleksander-sestakovs-a9068442/" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
-              <a href="https://github.com/Quirky888" target="_blank" rel="noopener" class="hover:text-white transition-colors">GitHub</a>
-            </div>
-            <a
-              href="https://periodic-snail-98e.notion.site/318afef9a7c2805a8d53e46fca38e092?v=319afef9a7c2800d83ab000c2ac68015"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-4 block text-lg w-fit bg-gradient-to-r from-gray-400 via-gray-100 to-gray-500 bg-clip-text text-transparent font-bold tracking-wide transition-all duration-300 hover:scale-105 hover:from-white hover:via-gray-200 hover:to-white"
-            >
-              ✦ Open Working Artwork Archive ✦
-            </a>
-          </div>
-        </div>
-      </div>
+        ))}
+      </ul>
+      <!-- DNA: the only telemetry left is a human one: what time it is where the work is made. -->
+      <p class="contact-clock qd-mono">Edinburgh, right now · <span data-door-clock>--:--</span></p>
     </div>
   </div>
 
-  <footer class="max-w-6xl mx-auto w-full mt-24 flex flex-wrap items-end justify-between gap-6">
-    <p class="max-w-2xl font-mono text-[9px] leading-relaxed tracking-[0.08em] uppercase text-[var(--text-silver-muted)]">
+  <footer class="contact-foot">
+    <p class="qd-mono">
       © Alexander Sestakovs / Q888. All rights reserved. Artwork may not be reproduced, commercially used, modified, or used for AI training without permission, except where permitted by law.
     </p>
-    <div class="flex flex-wrap justify-end gap-6">
-      <a
-        href="/privacy/"
-        class="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--text-silver-muted)] hover:text-[var(--text-silver)] transition-colors w-fit"
-      >
-        Digital Ink Privacy
-      </a>
-      <a
-        href="/copyright/"
-        class="font-mono text-[10px] tracking-[0.2em] uppercase text-[var(--text-silver-muted)] hover:text-[var(--text-silver)] transition-colors w-fit"
-      >
-        Copyright, Licensing &amp; Ethical Use
-      </a>
+    <div class="contact-legal">
+      <a href="/privacy/" class="qd-mono">Digital Ink Privacy</a>
+      <a href="/copyright/" class="qd-mono">Copyright, Licensing &amp; Ethical Use</a>
     </div>
   </footer>
 </section>
+
+<style>
+  .contact {
+    position: relative;
+    padding-block: clamp(5rem, 12vw, 11rem) 3rem;
+    font-family: var(--font-door-display);
+    color: var(--text-ink);
+    background: var(--bg-fog);
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .contact > .qd-mono {
+    margin: 0 0 1rem;
+  }
+
+  .contact h2 {
+    margin: 0;
+    font-family: var(--font-door-serif);
+    font-size: clamp(3.25rem, 10.5vw, 11.875rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    text-wrap: balance;
+  }
+
+  .contact h2 em {
+    color: var(--door-gold);
+  }
+
+  .contact-mail {
+    display: inline-block;
+    margin-top: clamp(1.75rem, 5vw, 4rem);
+    font-size: clamp(1.6rem, 5vw, 4.75rem);
+    font-weight: 600;
+    font-variation-settings: "wdth" 85;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid var(--door-gold);
+    transition: color 300ms ease;
+  }
+
+  .contact-mail:hover {
+    color: var(--door-gold);
+  }
+
+  .contact-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: clamp(2.5rem, 6vw, 5.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+
+  .contact-columns h3 {
+    margin: 0 0 0.6rem;
+    font-weight: 400;
+  }
+
+  .contact-columns ul {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-columns p {
+    max-width: 26em;
+    margin: 0;
+  }
+
+  .contact-columns a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--line-soft);
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color 300ms ease;
+  }
+
+  .contact-columns a:hover {
+    text-decoration-color: var(--door-gold);
+  }
+
+  .contact a:focus-visible {
+    outline: 2px solid var(--door-gold);
+    outline-offset: 3px;
+  }
+
+  .contact-columns .contact-clock {
+    margin-top: 1.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .contact-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: clamp(4rem, 8vw, 7rem);
+  }
+
+  .contact-foot p {
+    max-width: 42rem;
+    margin: 0;
+    font-size: 0.625rem;
+  }
+
+  .contact-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+  }
+
+  .contact-legal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.6875rem;
+    text-decoration: none;
+    transition: color 300ms ease;
+  }
+
+  .contact-legal a:hover {
+    color: var(--text-ink);
+  }
+
+  @media (min-width: 760px) {
+    .contact-columns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact a {
+      transition: none;
+    }
+  }
+</style>
