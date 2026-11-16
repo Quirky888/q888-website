@@ -1,0 +1,302 @@
+---
+import { getCollection } from "astro:content";
+import DoorArch from "./DoorArch.astro";
+import { projectHref } from "../lib/projectRoutes";
+
+// DNA: Infocigan is its micro-projects, so they stand here as its doors. They come from the
+// same collection as the Artifact Exchange, so a new project appears without a second list.
+const doors = (await getCollection("projects"))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+  .map(({ data }) => ({
+    id: data.slug,
+    title: data.cardTitle,
+    descriptor: data.cardDescriptor,
+    href: projectHref(data.slug),
+    image: data.cardImage,
+  }));
+
+const thinkOfItAs = [
+  "A trading zone between realities.",
+  "A long joke that accidentally becomes a cultural artifact.",
+  "“Over price” means above currency.",
+];
+
+const marketNotes = [
+  "Market state: unstable",
+  "Value logic: symbolic",
+  "Trust level: optional",
+];
+---
+
+<!-- DNA: Infocigan keeps its gold and flash glory in either homepage theme. It is always night here. -->
+<section id="infocigan" data-section="infocigan" class="ig-threshold">
+  <div class="ig-ticker" aria-hidden="true">
+    <div class="ig-ticker-track" data-viewport-animation>
+      {[0, 1, 2, 3].map(() => marketNotes.map((note) => <span>{note} ✦</span>))}
+    </div>
+  </div>
+
+  <div class="ig-inner qd-wrap">
+    <img
+      src="/images/InfoCigan_%20success.webp"
+      alt=""
+      class="ig-mascot"
+      data-viewport-animation
+      loading="lazy"
+      decoding="async"
+      width="888"
+      height="637"
+    />
+
+    <p class="qd-mono">Speculative marketplace · Value optional</p>
+    <h2 class="ig-title" data-viewport-animation>Infocigan</h2>
+    <p class="ig-declaration">
+      A speculative marketplace for objects, belief, and optional nonsense.
+    </p>
+
+    <!-- CHOICE: the orientation note in three breaths, in the artist's own words, instead of a separate page. -->
+    <div class="ig-about">
+      <p class="ig-origin">
+        Some say it began as a sticker. Others say it began long before that,
+        when someone accidentally paid too much for something... and liked the
+        feeling.
+      </p>
+      <ul class="ig-think" aria-label="Think of Infocigan as">
+        {thinkOfItAs.map((line) => <li>{line}</li>)}
+      </ul>
+    </div>
+
+    <p class="ig-doors-label qd-mono">
+      The micro-projects · {String(doors.length).padStart(2, "0")} doors
+    </p>
+    <ul class="ig-doors" aria-label="Infocigan projects">
+      {doors.map((door, index) => (
+        <li>
+          <DoorArch {...door} index={index} />
+        </li>
+      ))}
+    </ul>
+
+    <p class="ig-foot">
+      Remember: everything here is 100% real… in at least one dimension.
+    </p>
+  </div>
+</section>
+
+<style>
+  /* #infocigan carries a shared slate background in global.css; this section replaces it.
+     The local token values dress the shared doors in night and gold. */
+  #infocigan.ig-threshold {
+    --ig-gold: #d4af37;
+    --line-soft: #2c2a22;
+    --text-muted: #b9b5a8;
+    --door-gold: #d4af37;
+    --door-glow: rgba(212, 175, 55, 0.55);
+    position: relative;
+    overflow: hidden;
+    color: #efece3;
+    background-color: #070707;
+  }
+
+  .ig-ticker {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    border-block: 1px solid var(--line-soft);
+  }
+
+  .ig-ticker-track {
+    display: inline-block;
+    padding-block: 0.875rem;
+    font-family: var(--font-door-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ig-gold);
+    animation: ig-slide 40s linear infinite;
+  }
+
+  .ig-ticker-track span {
+    margin-right: 1.25em;
+  }
+
+  .ig-inner {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(4rem, 9vw, 8rem);
+  }
+
+  .ig-inner > .qd-mono {
+    margin: 0;
+  }
+
+  .ig-title {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-door-display);
+    font-size: clamp(3.4rem, 15.5vw, 18.75rem);
+    font-weight: 800;
+    font-variation-settings: "wdth" 100;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+    color: transparent;
+    background: linear-gradient(
+      100deg,
+      #6e5410 0%,
+      #d4af37 22%,
+      #fff3c4 34%,
+      #d4af37 46%,
+      #6e5410 70%,
+      #d4af37 100%
+    );
+    background-size: 250% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: ig-sheen 7s ease-in-out infinite alternate;
+  }
+
+  .ig-declaration {
+    max-width: 20em;
+    margin: 1.75rem 0 0;
+    font-family: var(--font-door-serif);
+    font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+    line-height: 1.15;
+  }
+
+  .ig-doors {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.9rem, 2.4vw, 2.5rem);
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* The stagger gives the row a walking rhythm instead of a product grid. */
+  .ig-doors li:nth-child(even) {
+    margin-top: 3rem;
+  }
+
+  .ig-about {
+    display: grid;
+    gap: 1.5rem clamp(2rem, 6vw, 6rem);
+    margin-top: clamp(2.5rem, 5vw, 4.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .ig-origin {
+    max-width: 30em;
+    margin: 0;
+    font-family: var(--font-door-display);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  .ig-think {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-door-display);
+    font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+    font-weight: 600;
+    font-variation-settings: "wdth" 85;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+
+  .ig-think li {
+    display: flex;
+    gap: 0.6em;
+  }
+
+  .ig-think li::before {
+    content: "✦";
+    color: var(--ig-gold);
+  }
+
+  .ig-inner > .ig-doors-label {
+    margin-top: clamp(3rem, 6vw, 5.5rem);
+  }
+
+  .ig-foot {
+    margin: clamp(3rem, 6vw, 5.5rem) 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-soft);
+    font-family: var(--font-door-mono);
+    font-size: clamp(0.8125rem, 1.4vw, 1.125rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ig-gold);
+  }
+
+  /* Phones: the mascot stands above the title. Wider screens: he fills the space beside it. */
+  .ig-mascot {
+    display: block;
+    width: 13rem;
+    height: auto;
+    margin: -1rem 0 1.25rem auto;
+    animation: ig-bob 6s ease-in-out infinite alternate;
+  }
+
+  @media (min-width: 760px) {
+    .ig-mascot {
+      position: absolute;
+      top: clamp(2rem, 4vw, 4rem);
+      right: max(var(--door-gutter), env(safe-area-inset-right, 0px));
+      width: clamp(13rem, 22vw, 24rem);
+      margin: 0;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .ig-about {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .ig-doors {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .ig-doors li:nth-child(n) {
+      margin-top: 0;
+    }
+
+    .ig-doors li:nth-child(4n + 2) {
+      margin-top: 4.5rem;
+    }
+
+    .ig-doors li:nth-child(4n + 3) {
+      margin-top: 1.5rem;
+    }
+
+    .ig-doors li:nth-child(4n) {
+      margin-top: 6.875rem;
+    }
+  }
+
+  @keyframes ig-slide {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes ig-sheen {
+    from {
+      background-position: 0% 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
+  }
+
+  @keyframes ig-bob {
+    to {
+      transform: translateY(-0.875rem) rotate(3deg);
+    }
+  }
+</style>

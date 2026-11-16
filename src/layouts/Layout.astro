@@ -27,6 +27,8 @@ interface Props {
 	noindex?: boolean;
 	structuredData?: SchemaNode[];
 	regularTextFont?: boolean;
+	/** Homepage display pair: Bricolage Grotesque and Instrument Serif. */
+	displayFonts?: boolean;
 }
 
 const {
@@ -42,10 +44,15 @@ const {
 	noindex = false,
 	structuredData = [],
 	regularTextFont = false,
+	displayFonts = false,
 } = Astro.props;
 
 // CHOICE: reading pages can load normal weights without changing shared typography elsewhere.
-const criticalFontsUrl = `https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@${regularTextFont ? "400;500;600;700" : "700"}&display=swap`;
+// CHOICE: the homepage display pair loads only where it is used, so sub-pages keep their own costume and weight.
+const displayFontFamilies = displayFonts
+	? "&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Serif:ital@0;1"
+	: "";
+const criticalFontsUrl = `https://fonts.googleapis.com/css2?family=Doto:wght@200&family=Space+Grotesk:wght@${regularTextFont ? "400;500;600;700" : "700"}${displayFontFamilies}&display=swap`;
 
 const siteBase = Astro.site ?? new URL(SITE_URL);
 const canonicalUrl = new URL(canonicalPath, siteBase).href;

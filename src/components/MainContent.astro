@@ -1,17 +1,26 @@
 ---
-import SystemMeta from "./SystemMeta.astro";
 import SlimNav from "./SlimNav.astro";
 import LandingHero from "./LandingHero.astro";
 import ProjectsThreshold from "./ProjectsThreshold.astro";
 import ProjectDrawer from "./ProjectDrawer.astro";
-import InfociganSection from "./InfociganSection.astro";
+import InfociganThreshold from "./InfociganThreshold.astro";
 import ContactSection from "./ContactSection.astro";
-
 ---
+
+<!-- Applies a saved Earth / Cosmos choice before first paint. Earth (fog) is the default. -->
+<script is:inline>
+  try {
+    if (localStorage.getItem("q888-theme") === "cosmos") {
+      document.documentElement.dataset.qTheme = "cosmos";
+    }
+  } catch {}
+</script>
 
 <SlimNav />
 
-<main class="relative min-h-[100dvh] overflow-x-hidden pt-10 md:pt-11">
+<!-- CHOICE: overflow-x-clip, not hidden. "hidden" would turn main into a scroll container
+     and the pinned door stage could no longer stick to the viewport. -->
+<main class="relative min-h-[100dvh] overflow-x-clip pt-10 md:pt-11" data-q-home>
   <section id="landing" data-section="landing" class="relative -mt-10 md:-mt-11">
     <LandingHero />
   </section>
@@ -20,21 +29,24 @@ import ContactSection from "./ContactSection.astro";
     <ProjectsThreshold />
   </section>
 
-  <InfociganSection />
+  <InfociganThreshold />
 
   <ContactSection />
 </main>
 
-<div class="hidden md:block">
-  <SystemMeta position="bottom" />
-</div>
+<button type="button" class="door-theme-switch" data-door-theme aria-pressed="false">
+  <span class="door-theme-earth">Earth</span>
+  <span aria-hidden="true">/</span>
+  <span class="door-theme-cosmos">Cosmos</span>
+  <span class="sr-only">: switch between the light and dark homepage</span>
+</button>
+<div class="door-bubble" data-door-bubble aria-hidden="true"></div>
 <ProjectDrawer />
 
 <script>
   import { initThresholdMotion } from "../scripts/thresholdMotion";
   import { initProjectDrawer, destroyProjectDrawer } from "../scripts/drawerNav";
-  import { initSystemMetaState, destroySystemMetaState } from "../scripts/systemMetaState";
-  import { initIpGeoCoords } from "../scripts/ipGeoCoords";
+  import { initHiddenDoor, destroyHiddenDoor } from "../scripts/hiddenDoor";
   import { initNavScroll, destroyNavScroll } from "../scripts/navScroll";
   import { initRevealMotion, destroyRevealMotion } from "../scripts/revealMotion";
   import {
@@ -49,8 +61,7 @@ import ContactSection from "./ContactSection.astro";
     if (didInit) return;
 
     initNavScroll();
-    initSystemMetaState();
-    initIpGeoCoords();
+    initHiddenDoor();
     initThresholdMotion();
     initProjectDrawer();
     initRevealMotion();
@@ -64,7 +75,7 @@ import ContactSection from "./ContactSection.astro";
     if (!didInit) return;
 
     destroyNavScroll();
-    destroySystemMetaState();
+    destroyHiddenDoor();
     destroyProjectDrawer();
     destroyRevealMotion();
     destroyViewportAnimations();
@@ -86,3 +97,73 @@ import ContactSection from "./ContactSection.astro";
     didBindLifecycle = true;
   }
 </script>
+
+<style>
+  .door-theme-switch {
+    position: fixed;
+    z-index: 60;
+    left: max(1rem, env(safe-area-inset-left, 0px));
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    min-height: 44px;
+    padding: 0 1rem;
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    font-family: var(--font-door-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-fog);
+    cursor: pointer;
+    transition: border-color 300ms ease;
+  }
+
+  .door-theme-switch:hover {
+    border-color: var(--door-gold);
+  }
+
+  .door-theme-switch:focus-visible {
+    outline: 2px solid var(--door-gold);
+    outline-offset: 3px;
+  }
+
+  /* The active world is spelled in ink; the other waits in muted grey. */
+  .door-theme-switch[aria-pressed="false"] .door-theme-earth,
+  .door-theme-switch[aria-pressed="true"] .door-theme-cosmos {
+    color: var(--text-ink);
+  }
+
+  /* Square Bubbles as a cursor companion: only for fine pointers, started by hiddenDoor.ts. */
+  .door-bubble {
+    position: fixed;
+    z-index: 1000000;
+    top: 0;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    border-radius: 9px;
+    background: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      width 300ms ease,
+      height 300ms ease,
+      margin 300ms ease,
+      border-radius 300ms ease,
+      opacity 300ms ease;
+  }
+
+  .door-bubble.is-visible {
+    opacity: 1;
+  }
+
+  .door-bubble.is-large {
+    width: 84px;
+    height: 84px;
+    margin: -42px 0 0 -42px;
+    border-radius: 28px;
+  }
+</style>
