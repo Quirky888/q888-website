@@ -3,11 +3,13 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   constitution: CollectionEntry<"constitutions">["data"];
-  variant?: "office" | "archive";
+  variant?: "office" | "archive" | "brief";
 }
 
 const { constitution, variant = "archive" } = Astro.props;
 const isOffice = variant === "office";
+// "brief" keeps the tests and the shortcut; the full principles live on /constitution/.
+const isBrief = variant === "brief";
 const SectionHeading = isOffice ? "h2" : "h3";
 const DraftHeading = isOffice ? "h3" : "h4";
 const PrincipleHeading = isOffice ? "h4" : "h5";
@@ -26,17 +28,17 @@ const headingId = `constitution-draft-${variant}`;
       </p>
     </div>
 
-    <dl class="constitution-draft__metadata">
+    {!isBrief && <dl class="constitution-draft__metadata">
       {constitution.metadata.map((item) => (
         <div>
           <dt>{item.label}</dt>
           <dd>{item.value}</dd>
         </div>
       ))}
-    </dl>
+    </dl>}
   </header>
 
-  <div class="constitution-draft__principles">
+  {!isBrief && <div class="constitution-draft__principles">
     {constitution.principles.map((principle) => {
       const principleHeadingId = `constitution-principle-${variant}-${principle.number}`;
 
@@ -73,7 +75,7 @@ const headingId = `constitution-draft-${variant}`;
       </article>
       );
     })}
-  </div>
+  </div>}
 
   <div class="constitution-draft__test">
     <p class="constitution-draft__label">THE WEAKEST-POSITION TEST</p>
@@ -101,6 +103,12 @@ const headingId = `constitution-draft-${variant}`;
     <footer class="constitution-draft__footer">
       <p>Read the evidence and interpretation behind this draft.</p>
       <a href="/constitution/">TRACE THE RESEARCH <span aria-hidden="true">↓</span></a>
+    </footer>
+  )}
+  {isBrief && (
+    <footer class="constitution-draft__footer">
+      <p>Ten principles, their evidence and the research behind them.</p>
+      <a href="/constitution/">READ THE FULL CONSTITUTION <span aria-hidden="true">→</span></a>
     </footer>
   )}
 </section>

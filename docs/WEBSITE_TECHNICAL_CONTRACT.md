@@ -85,6 +85,21 @@ not waive the container and scrollbar requirements below.
 - `scripts/checkIndexing.mjs` validates built output as part of `npm run build`.
   Do not assume correct source metadata proves correct generated output.
 
+## Artist CV and its Earth version
+
+- `/bureaucracy/` is the artist CV. Its Earth version (`#earth`) is the plain,
+  printable CV, and `public/docs/Q888_Artist_CV_Earth.pdf` is generated from it.
+- Adding, renaming, removing or materially changing a project, exhibition, research
+  framework, contact or biography fact requires checking the CV in the same task:
+  update `selectedSystems`, `fieldRecords` or the Earth data in
+  `src/pages/bureaucracy.astro` when the change belongs in an artist CV, then
+  regenerate the PDF with `npm run dev` and `npm run cv:pdf`, and include both
+  the PDF and `scripts/earth-cv-pdf.json` in the change.
+- Exhibitions need a real year or period from the artist. Never invent dates,
+  education, awards or press; ask instead.
+- `npm run build` runs `check:cv`, which warns when the Earth version changed
+  after the PDF was generated. Treat that warning as unfinished work.
+
 ## Responsiveness
 
 The UI must remain consistent across monitor sizes and browser zoom, including

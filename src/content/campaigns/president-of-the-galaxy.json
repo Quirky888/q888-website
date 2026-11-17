@@ -11,15 +11,15 @@
   "tagline": "SCREW STARS TOGETHER",
   "lead": "I am preparing for a job that, as far as I know, does not yet exist on this planet—by making small artworks, documenting them properly, and seeing whether I can handle tiny responsibilities before attempting galactic ones.",
   "statusLines": [
-    "ERA: PRE-GALACTIC",
-    "CAMPAIGN_STATUS: ACTIVE",
-    "CURRENT_TEST: 10 STICKERS"
+    "Era: Pre-Galactic",
+    "Campaign: active",
+    "Current test: 10 stickers"
   ],
   "authorship": {
     "imageStatus": [
-      "GENERATED IMAGE: YES",
-      "HUMAN ART DIRECTION: YES",
-      "FINAL FORM: NO"
+      "Generated base: yes",
+      "Human drawing: more",
+      "Final form: no"
     ],
     "eyebrow": "DECLARATION OF VISIBLE COLLABORATION",
     "heading": "Two voices. One unfinished office.",
@@ -87,7 +87,7 @@
   "rulesHeading": "Rules Before Power",
   "rules": [
     "<strong>Zero Collateral Damage:</strong> Before calling anything progress, ask who or what is paying the hidden cost. Perfect harmlessness is not claimed. Hiding the damage is not allowed.",
-    "<strong>Preparation Before Power:</strong> I should prove that I can handle small responsibilities before anyone gives me larger ones. Selling, documenting, pricing, and caring for ten stickers is the current test.",
+    "<strong>Preparation Before Power:</strong> I should prove that I can handle small responsibilities before anyone gives me larger ones. The current test is ten stickers, counted above.",
     "<strong>Work Fairly With Other Intelligence:</strong> ChatGPT helped develop the images, language, and world. I direct, edit, choose, and carry the final responsibility. Current AI cannot negotiate independently; that does not make its contribution invisible.",
     "<strong>Coexistence Instead of Conquest:</strong> I am not designing a galaxy where humans automatically own every other intelligence. Humans, AI, robots, mushrooms, ecosystems, and unknown entities will need a better introduction than conquest.",
     "<strong>Humour Against Self-Importance:</strong> If the title stops sounding slightly ridiculous, the campaign has become dangerous or boring."

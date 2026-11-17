@@ -10,7 +10,7 @@ const selectedSystems = [
     name: "Digital Ink",
     desc: "A system for memory, scarcity and traceable digital creation.",
     status: "Operational",
-    href: "/#projects",
+    href: "/dink/",
     signal: "cyan",
   },
   {
@@ -31,6 +31,38 @@ const selectedSystems = [
   },
   {
     code: "04",
+    name: "Q-Bag",
+    desc: "Experiment 001 in Creative Afterlife: a coffee container you already own, refilled, marked and kept in use.",
+    status: "Experiment 001",
+    href: "/qbag/",
+    signal: "lime",
+  },
+  {
+    code: "05",
+    name: "President of the Galaxy",
+    desc: "A campaign for a cosmic office with zero or 888 jurisdictional power and one ceremonial sash.",
+    status: "Campaign open",
+    href: "/president/",
+    signal: "magenta",
+  },
+  {
+    code: "06",
+    name: "Nar-Mail Express",
+    desc: "An interdimensional postal service where messages arrive when you are ready.",
+    status: "Delivering",
+    href: "/narmail/",
+    signal: "cyan",
+  },
+  {
+    code: "07",
+    name: "Afterlife Contract",
+    desc: "Pre-notarised paperwork for the deceased: things that may outlive you, regulated anyway.",
+    status: "Open for signing",
+    href: "/afterlife/",
+    signal: "clay",
+  },
+  {
+    code: "08",
     name: "Dyno Milk",
     desc: "A bio-dairy future product for status, satire and interdimensional wealth signalling.",
     status: "Phase 4",
@@ -38,7 +70,7 @@ const selectedSystems = [
     signal: "lime",
   },
   {
-    code: "05",
+    code: "09",
     name: "Edinburgh Magical Map",
     desc: "A mythic cartography of place, memory and hidden infrastructure.",
     status: "Archival",
@@ -46,7 +78,7 @@ const selectedSystems = [
     signal: "cyan",
   },
   {
-    code: "06",
+    code: "10",
     name: "Chromatic Sovereignty Treaty",
     desc: "An intergalactic legal accord governing the balance between The Void and The Singularity.",
     status: "Ratified",
@@ -54,7 +86,7 @@ const selectedSystems = [
     signal: "clay",
   },
   {
-    code: "07",
+    code: "11",
     name: "Q888 Digital DNA — DO NOT BECOME ME",
     desc: "A live five-stage web artwork testing how an artist can set a condition for contact with a future AI system without becoming a fixed profile to optimise.",
     status: "One gene implemented: Protected Residue · Prototype live",
@@ -63,7 +95,7 @@ const selectedSystems = [
     signal: "magenta",
   },
   {
-    code: "08",
+    code: "12",
     name: "Artificial Entelechy",
     desc: "An artistic research framework for allowing fragments to become worlds.",
     status: "In progress",
@@ -71,7 +103,7 @@ const selectedSystems = [
     signal: "lime",
   },
   {
-    code: "09",
+    code: "13",
     name: "The Right to a Narrative Reset",
     desc: "A proposal allowing continuing television stories to reconsider their direction without erasing the version that already exists.",
     status: "Public proposal · petition open",
@@ -83,29 +115,37 @@ const selectedSystems = [
 const fieldRecords = [
   {
     place: "Touched",
+    years: "2025",
     location: "Tbilisi, Georgia",
     format: "Collaborative exhibition",
+    earthNote: "Collaborative group exhibition",
     note: "A real-world contact point where Q888 entered shared exhibition space.",
     status: "Public record",
   },
   {
     place: "Chateau Chapiteau",
+    years: "Summers 2023–2024",
     location: "Georgia",
     format: "Forest / community field record",
+    earthNote: "Site-specific objects in a forest and community setting",
     note: "Site-specific objects from the underground mycelium phase. White cube not required.",
     status: "Physical works",
   },
   {
     place: "Private Flat Exhibitions",
+    years: "2023–2024",
     location: "Edinburgh, Scotland",
     format: "Invitation-only exhibition",
+    earthNote: "Invitation-only exhibitions in private flats",
     note: "Protected by chosen vibes. Memory preserved; access remains selective.",
     status: "Archive on request",
   },
   {
     place: "Sticker Placements",
+    years: "Ongoing",
     location: "Global",
     format: "Distributed underground practice",
+    earthNote: "Sticker works placed in public space and along travel routes",
     note: "Works placed across travel routes and public surfaces. The city becomes a gallery wall.",
     status: "Ongoing",
   },
@@ -117,6 +157,25 @@ const fieldRecords = [
     status: "Private / on request",
   },
 ];
+
+// The Earth version: the same record, printed plainly for application forms and PDFs.
+const SITE = "q888.space";
+const earthExhibitions = fieldRecords.filter((record) => record.years);
+// Research frameworks get their own block in the Earth version, so they are not listed twice.
+const researchNames = ["Artificial Entelechy", "Q888 Digital DNA — DO NOT BECOME ME"];
+const earthWorks = selectedSystems.filter((system) => !researchNames.includes(system.name));
+const earthResearch = [
+  { name: "Artificial Entelechy", note: "Artistic research framework for allowing fragments to become worlds.", href: "/research/" },
+  { name: "Adaptive Competence", note: "Development draft, July 2026.", href: "/docs/Q888_AE_Adaptive_Competence_Development_Draft_July_2026.pdf", linkText: "Draft (PDF) on q888.space" },
+  { name: "Q888 Digital DNA", note: "Development draft, July 2026. Live prototype: DO NOT BECOME ME.", href: "/prototype/" },
+];
+const earthContacts = [
+  { label: "Email", value: "hello@q888.space", href: "mailto:hello@q888.space" },
+  { label: "Website", value: SITE, href: "https://q888.space/" },
+  { label: "Instagram", value: "@quirky_888", href: "https://instagram.com/quirky_888" },
+  { label: "GitHub", value: "Quirky888", href: "https://github.com/Quirky888" },
+];
+const CV_PDF = "/docs/Q888_Artist_CV_Earth.pdf";
 
 // DNA: This is a disputed chronology, not a conventional list of career milestones.
 // Each era is grounded in an existing Q888 project or concept, while dates remain mythically unreliable.
@@ -248,76 +307,104 @@ const disputedChronology = [
   <SubPageNav />
   <div class="hidden md:block"><SlimNav /></div>
 
-  <main class="dossier" id="bureaucracy-main" data-q888-door-root>
-    <header class="dossier-hero" id="record">
-      <div class="hero-copy">
-        <aside class="bureaucracy-notice" aria-label="Why this dossier exists">
-          <p class="bureaucracy-notice-label">
-            Universe-specific compliance notice
+  <main class="dossier" id="bureaucracy-main" data-q888-door-root data-version="q888">
+    <!-- DNA: the artist has two registrations and issues whichever one was requested. -->
+    <div class="version-switch" role="group" aria-label="Choose which version of the CV to read">
+      <span class="version-switch-label">Registry</span>
+      <button type="button" data-version-choice="q888" aria-pressed="true">Q888 version</button>
+      <button type="button" data-version-choice="earth" aria-pressed="false">Earth version</button>
+    </div>
+
+    <section class="earth-cv" id="earth" aria-labelledby="earth-cv-title">
+      <header class="earth-cv-head">
+        <p class="earth-cv-kicker">Earth version · for administrative purposes</p>
+        <h1 id="earth-cv-title" tabindex="-1">Alexander Sestakovs</h1>
+        <p class="earth-cv-role">Multidisciplinary artist and designer, working as Q888 · Edinburgh, Scotland · Born Latvia, 1982</p>
+        <ul class="earth-cv-contacts">
+          {earthContacts.map((contact) => (
+            <li><span>{contact.label}</span> <a href={contact.href}>{contact.value}</a></li>
+          ))}
+        </ul>
+        <div class="earth-cv-actions">
+          <a href={CV_PDF} download>Download PDF</a>
+          <button type="button" data-print-cv>Print</button>
+        </div>
+      </header>
+
+      <section class="earth-cv-block" aria-labelledby="earth-cv-statement">
+        <h2 id="earth-cv-statement">Statement</h2>
+        <div>
+          <p>
+            I build visual mythologies, speculative products and functioning interfaces.
+            The work treats code, image, humour, memory and invented institutions as equal materials.
           </p>
           <p>
-            In every known universe, artistic talent remains incompatible with
-            <TypographicDoor
-              id="record-measurement"
-              zone="record"
-              kind="murmur"
-              voice="archive"
-              text="standard measurement"
-            />. In this one, human galleries and art spaces require an
-            <TypographicDoor
-              id="record-artist-cv"
-              zone="record"
-              kind="signal"
-              voice="confession"
-              text="Artist CV"
-              group="cv-proof"
-              pinned
-            /> so
-            <TypographicDoor
-              id="record-cv-creativity"
-              zone="record"
-              kind="trail"
-              voice="confession"
-              text="creativity"
-              group="cv-proof"
-            /> can be compared with their current administrative understanding of
-            creativity. The procedure is cosmically nonsensical. It is also, somehow,
-            accepted as premium evidence that an artist is an artist. This dossier
-            was therefore
-            <TypographicDoor
-              id="record-cv-engineered"
-              zone="record"
-              kind="trail"
-              voice="confession"
-              text="engineered"
-              group="cv-proof"
-            /> specifically
-            <TypographicDoor
-              id="record-cv-for"
-              zone="record"
-              kind="trail"
-              voice="confession"
-              text="for"
-              group="cv-proof"
-            /> local law, gravity and
-            <TypographicDoor
-              id="record-cv-filing"
-              zone="record"
-              kind="trail"
-              voice="confession"
-              text="filing"
-              group="cv-proof"
-            />
-            <TypographicDoor
-              id="record-cv-cabinets"
-              zone="record"
-              kind="trail"
-              voice="confession"
-              text="cabinets"
-              group="cv-proof"
-            />.
+            Q888 works across visual mythology, symbolic infrastructure, AI-assisted world-building,
+            fictional technologies and authorial systems for AI-generated code. Artworks arrive as images,
+            portals, certificates, maps, memory units and speculative products.
           </p>
-        </aside>
+          <p>Open to exhibitions, residencies, commissions and collaborations.</p>
+        </div>
+      </section>
+
+      <section class="earth-cv-block" aria-labelledby="earth-cv-exhibitions">
+        <h2 id="earth-cv-exhibitions">Exhibitions</h2>
+        <ol class="earth-cv-rows">
+          {earthExhibitions.map((record) => (
+            <li>
+              <span class="earth-cv-year">{record.years}</span>
+              <span><strong>{record.place}</strong>, {record.location}<br />{record.earthNote}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="earth-cv-block" aria-labelledby="earth-cv-works">
+        <h2 id="earth-cv-works">Selected works</h2>
+        <ol class="earth-cv-rows">
+          {earthWorks.map((system) => (
+            <li>
+              <span class="earth-cv-year">{system.status}</span>
+              <span>
+                <strong>{system.name}</strong>. {system.desc}<br />
+                <a href={system.href}>{SITE}{system.href.replace(/#.*$/, "")}</a>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="earth-cv-block" aria-labelledby="earth-cv-research">
+        <h2 id="earth-cv-research">Research</h2>
+        <ol class="earth-cv-rows">
+          {earthResearch.map((item) => (
+            <li>
+              <span class="earth-cv-year">Ongoing</span>
+              <span><strong>{item.name}</strong>. {item.note}<br /><a href={item.href}>{item.linkText ?? `${SITE}${item.href}`}</a></span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="earth-cv-block" aria-labelledby="earth-cv-background">
+        <h2 id="earth-cv-background">Background</h2>
+        <div>
+          <p>
+            Latvian-born, Edinburgh-based multidisciplinary artist and designer. Background in
+            specialty coffee, roasting, quality control, social care, volunteering, travel, farm work,
+            identity design, web experiments and independent app development. Discoverer of square bubbles.
+          </p>
+        </div>
+      </section>
+
+      <footer class="earth-cv-foot">
+        <span>Earth version of the Q888 dossier · {SITE}/bureaucracy/</span>
+        <span>Mythology remains available on request.</span>
+      </footer>
+    </section>
+
+    <header class="dossier-hero" id="record">
+      <div class="hero-copy">
         <p class="eyebrow">For gallery bureaucracy · Form Q888/CV</p>
         <h1>
           <span class="hero-mark">Q888</span>
@@ -327,14 +414,36 @@ const disputedChronology = [
         <p class="hero-statement">
           I build visual mythologies, speculative products and functioning
           interfaces. The work treats code, image, humour,
-          <TypographicDoor
-            id="record-memory"
-            zone="record"
-            kind="murmur"
-            voice="human"
-            text="memory"
-          /> and invented institutions as equal materials.
+          memory and invented institutions as equal materials.
         </p>
+        <p class="hero-open">
+          Open to exhibitions, residencies, commissions and collaborations.
+        </p>
+        <aside class="bureaucracy-notice" aria-label="Why this dossier exists">
+          <p class="bureaucracy-notice-label">
+            Universe-specific compliance notice
+          </p>
+          <p>
+            In every known universe, artistic talent remains incompatible with
+            standard measurement. In this one, human galleries and art spaces require an
+            <TypographicDoor
+              id="record-artist-cv"
+              zone="record"
+              kind="signal"
+              voice="confession"
+              text="Artist CV"
+              pinned
+            /> so
+            creativity can be compared with their current administrative understanding of
+            creativity. The procedure is cosmically nonsensical. It is also, somehow,
+            accepted as premium evidence that an artist is an artist. This dossier
+            was therefore
+            engineered specifically
+            for local law, gravity and
+            filing
+            cabinets.
+          </p>
+        </aside>
       </div>
 
       <div
@@ -426,26 +535,13 @@ const disputedChronology = [
         <div class="prose lead-prose">
           <p>
             Q888 is an
-            <TypographicDoor
-              id="practice-artist-system"
-              zone="practice"
-              kind="murmur"
-              voice="unstable"
-              text="artist-system"
-            /> working across visual mythology, symbolic infrastructure, AI-assisted
+            artist-system working across visual mythology, symbolic infrastructure, AI-assisted
             world-building, fictional technologies and authorial systems for AI-generated
             code.
           </p>
           <p>
             Artworks may arrive as
-            <TypographicDoor
-              id="practice-reality-images"
-              zone="practice"
-              kind="trail"
-              voice="archive"
-              text="images"
-              group="reality-operational"
-            />,
+            images,
             <TypographicDoor
               id="practice-portals"
               zone="practice"
@@ -454,46 +550,11 @@ const disputedChronology = [
               text="portals"
               href="/narmail/"
             />, certificates,
-            <TypographicDoor
-              id="practice-reality-maps"
-              zone="practice"
-              kind="trail"
-              voice="archive"
-              text="maps"
-              group="reality-operational"
-            />,
-            <TypographicDoor
-              id="practice-reality-memory"
-              zone="practice"
-              kind="trail"
-              voice="archive"
-              text="memory units"
-              group="reality-operational"
-            />,
-            <TypographicDoor
-              id="practice-reality-products"
-              zone="practice"
-              kind="trail"
-              voice="archive"
-              text="speculative products"
-              group="reality-operational"
-            /> or small pieces of
-            <TypographicDoor
-              id="practice-alternative-reality"
-              zone="practice"
-              kind="signal"
-              voice="archive"
-              text="alternative reality"
-              group="reality-operational"
-            /> trying to become
-            <TypographicDoor
-              id="practice-operational"
-              zone="practice"
-              kind="trail"
-              voice="archive"
-              text="operational"
-              group="reality-operational"
-            />.
+            maps,
+            memory units,
+            speculative products or small pieces of
+            alternative reality trying to become
+            operational.
           </p>
         </div>
         <blockquote>
@@ -527,42 +588,11 @@ const disputedChronology = [
         <div>
           <p class="section-kicker">Selected systems</p>
           <h2 id="works-title">
-            <TypographicDoor
-              id="works-evidence"
-              zone="works"
-              kind="signal"
-              voice="archive"
-              text="Evidence of practice"
-              group="evidence-review"
-            />.
+            Evidence of practice.
           </h2>
         </div>
         <p>
-          Nine
-          <TypographicDoor
-            id="works-fragments"
-            zone="works"
-            kind="trail"
-            voice="archive"
-            text="operational fragments"
-            group="evidence-review"
-          />. Evidence of
-          <TypographicDoor
-            id="works-exactly"
-            zone="works"
-            kind="trail"
-            voice="archive"
-            text="what, exactly"
-            group="evidence-review"
-          />, remains
-          <TypographicDoor
-            id="works-review"
-            zone="works"
-            kind="trail"
-            voice="archive"
-            text="under review"
-            group="evidence-review"
-          />.
+          Thirteen operational fragments. Evidence of what, exactly, remains under review.
         </p>
       </div>
       <div class="section-content work-list">
@@ -655,44 +685,15 @@ const disputedChronology = [
               kind="signal"
               voice="human"
               text="paperwork"
-              group="archive-verification"
             />.
           </h2>
         </div>
         <p>
           The
-          <TypographicDoor
-            id="field-archive"
-            zone="field"
-            kind="trail"
-            voice="human"
-            text="archive"
-            group="archive-verification"
-          /> is
-          <TypographicDoor
-            id="field-real"
-            zone="field"
-            kind="trail"
-            voice="human"
-            text="real"
-            group="archive-verification"
-          />.
-          <TypographicDoor
-            id="field-visibility"
-            zone="field"
-            kind="trail"
-            voice="human"
-            text="Visibility is selective"
-            group="archive-verification"
-          />.
-          <TypographicDoor
-            id="field-verification"
-            zone="field"
-            kind="trail"
-            voice="human"
-            text="Verification is available"
-            group="archive-verification"
-          />.
+          archive is
+          real.
+          Visibility is selective.
+          Verification is available.
         </p>
       </div>
       <div class="section-content field-list">
@@ -700,6 +701,7 @@ const disputedChronology = [
           fieldRecords.map((record) => (
             <article class="field-row">
               <div class="field-place">
+                {record.years && <span class="field-years">{record.years}</span>}
                 <h3>{record.place}</h3>
                 <span>{record.location}</span>
               </div>
@@ -721,13 +723,7 @@ const disputedChronology = [
       <div class="section-heading">
         <p class="section-kicker">Alternative records</p>
         <h2 id="records-title">
-          <TypographicDoor
-            id="records-chronology"
-            zone="records"
-            kind="murmur"
-            voice="unstable"
-            text="Chronology and compost"
-          />.
+          Chronology and compost.
         </h2>
       </div>
 
@@ -851,41 +847,19 @@ const disputedChronology = [
           <div>
             <p class="compost-lead">
               Some portals open. Some send a
-              <TypographicDoor
-                id="records-fee-fog"
-                zone="records"
-                kind="trail"
-                voice="confession"
-                text="polite fog"
-                group="fee-compost"
-              /> machine and keep the
+              polite fog machine and keep the
               <TypographicDoor
                 id="records-submission-fee"
                 zone="records"
                 kind="signal"
                 voice="confession"
                 text="submission fee"
-                group="fee-compost"
               />.
             </p>
             <p>
               This drawer keeps those fog machines. Not with
-              <TypographicDoor
-                id="records-fee-hatred"
-                zone="records"
-                kind="trail"
-                voice="confession"
-                text="hatred"
-                group="fee-compost"
-              />. Mostly for
-              <TypographicDoor
-                id="records-fee-compost"
-                zone="records"
-                kind="trail"
-                voice="confession"
-                text="compost"
-                group="fee-compost"
-              />.
+              hatred. Mostly for
+              compost.
             </p>
           </div>
           <div class="protocol">
@@ -904,7 +878,7 @@ const disputedChronology = [
                 <p class="compost-case-number">
                   Compost note 001 · Edinburgh / Earth
                 </p>
-                <h3 id="compost-case-gallery">&amp;Gallery</h3>
+                <h3 id="compost-case-gallery">A gallery, unnamed</h3>
               </div>
               <span class="compost-case-status">Portal closed · reversible</span
               >
@@ -913,7 +887,7 @@ const disputedChronology = [
             <dl class="compost-case-facts">
               <div>
                 <dt>Event</dt>
-                <dd>Open Call 2026 · September Group Exhibition</dd>
+                <dd>Group exhibition open call · 2026</dd>
               </div>
               <div>
                 <dt>Portal type</dt>
@@ -969,7 +943,7 @@ const disputedChronology = [
             <div class="compost-public-note">
               <p>
                 <strong
-                  >&amp;Gallery is not here because Q888 was rejected.</strong
+                  >The gallery is not named, and it is not here because Q888 was rejected.</strong
                 ><br />
                 It is here because the rejection gave no meaningful feedback after
                 a paid, labour-intensive submission.
@@ -1042,10 +1016,8 @@ const disputedChronology = [
           <p>Institutional bridge</p>
           <a href="mailto:hello@q888.space">hello@q888.space</a>
           <div class="contact-actions">
-            <a
-              href="mailto:hello@q888.space?subject=Q888%20artist%20CV%20request"
-              >Request artist CV</a
-            >
+            <a href={CV_PDF} download>Download artist CV (PDF)</a>
+            <a href="#earth" data-version-link="earth">Read the Earth version</a>
             <a
               href="mailto:hello@q888.space?subject=Q888%20project%20list%20request"
               >Request project list</a
@@ -1184,6 +1156,62 @@ const disputedChronology = [
       archiveResizeTimer = null;
     }
   }
+
+  /* Q888 / Earth version. The Earth version is also what prints and what the PDF is made from. */
+  let versionController: AbortController | null = null;
+
+  function initVersionSwitch() {
+    const main = document.getElementById("bureaucracy-main");
+    if (!main) return;
+    versionController?.abort();
+    versionController = new AbortController();
+    const { signal } = versionController;
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-version-choice]"));
+
+    const setVersion = (version: "q888" | "earth", moveFocus = false) => {
+      main.dataset.version = version;
+      buttons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.versionChoice === version));
+      });
+      const url = version === "earth" ? "#earth" : location.pathname + location.search;
+      history.replaceState(history.state, "", url);
+      if (moveFocus) {
+        window.scrollTo({ top: 0 });
+        if (version === "earth") document.getElementById("earth-cv-title")?.focus({ preventScroll: true });
+      }
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setVersion(button.dataset.versionChoice === "earth" ? "earth" : "q888", true);
+      }, { signal });
+    });
+    document.querySelectorAll<HTMLAnchorElement>("[data-version-link]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        setVersion("earth", true);
+      }, { signal });
+    });
+    document.querySelector("[data-print-cv]")?.addEventListener("click", () => window.print(), { signal });
+    window.addEventListener("hashchange", () => {
+      if (location.hash === "#earth") setVersion("earth", true);
+    }, { signal });
+
+    if (location.hash === "#earth") setVersion("earth");
+  }
+
+  function cleanupVersionSwitch() {
+    versionController?.abort();
+    versionController = null;
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVersionSwitch, { once: true });
+  } else {
+    initVersionSwitch();
+  }
+  document.addEventListener("astro:page-load", initVersionSwitch);
+  document.addEventListener("astro:before-swap", cleanupVersionSwitch);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initArchiveMotion, {
@@ -1340,8 +1368,9 @@ const disputedChronology = [
     position: absolute;
     isolation: isolate;
     z-index: 5;
-    top: 31%;
-    left: 44%;
+    /* Sits beside the Q888 wordmark, now that the name opens the hero. */
+    top: 4%;
+    left: 47%;
     width: clamp(15rem, 25vw, 27rem);
     aspect-ratio: 1.06;
     pointer-events: none;
@@ -1440,12 +1469,13 @@ const disputedChronology = [
     letter-spacing: 0.1em;
   }
 
+  /* The notice now follows the name: a curator meets the artist first, the joke second. */
   .bureaucracy-notice {
     display: grid;
     grid-template-columns: minmax(9.5rem, 0.34fr) 1fr;
     gap: clamp(1rem, 2.5vw, 2.25rem);
     max-width: 43rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    margin-top: clamp(2rem, 4vw, 3.5rem);
     padding-block: 0.9rem 1.05rem;
     border-top: 1px solid var(--line-strong);
     border-bottom: 1px solid var(--line);
@@ -2262,6 +2292,12 @@ const disputedChronology = [
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.025em;
+  }
+
+  .field-place .field-years {
+    margin: 0 0 0.35rem;
+    color: var(--moss);
+    font-weight: 700;
   }
 
   .field-place span,
@@ -3338,7 +3374,7 @@ const disputedChronology = [
 
     .bureaucracy-notice {
       grid-template-columns: 1fr;
-      margin-bottom: 3rem;
+      margin-top: 2.5rem;
     }
 
     .hero-mark {
@@ -3745,6 +3781,298 @@ const disputedChronology = [
     .contact-card > p,
     .contact-card small {
       color: black;
+    }
+  }
+
+  /* ── Q888 / Earth version switch ── */
+  .hero-open {
+    max-width: 38rem;
+    margin: 1rem 0 0;
+    color: var(--moss);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .version-switch {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    width: min(100% - 2rem, 76rem);
+    margin: 1rem auto 0;
+  }
+
+  .version-switch-label {
+    margin-right: 0.35rem;
+    color: var(--muted);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .version-switch button {
+    min-height: 44px;
+    padding: 0 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 200ms ease, color 200ms ease;
+  }
+
+  .version-switch button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper-light);
+  }
+
+  .version-switch button:focus-visible,
+  .earth-cv a:focus-visible,
+  .earth-cv button:focus-visible {
+    outline: 2px solid var(--moss);
+    outline-offset: 3px;
+  }
+
+  /* ── Earth version: a plain CV, also the print and PDF layout ── */
+  .earth-cv {
+    display: none;
+    width: min(100% - 2rem, 52rem);
+    margin: 2rem auto 5rem;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    background: #fff;
+    border: 1px solid var(--line);
+    color: #111;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .dossier[data-version="earth"] .earth-cv {
+    display: block;
+  }
+
+  .dossier[data-version="earth"] > :not(.earth-cv):not(.version-switch) {
+    display: none !important;
+  }
+
+  .earth-cv h1,
+  .earth-cv h2,
+  .earth-cv p {
+    margin: 0;
+  }
+
+  .earth-cv h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .earth-cv h1:focus {
+    outline: none;
+  }
+
+  .earth-cv-kicker,
+  .earth-cv-year,
+  .earth-cv-foot,
+  .earth-cv-contacts span {
+    color: #5c5c5c;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+
+  .earth-cv-kicker {
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .earth-cv-role {
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .earth-cv-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .earth-cv a {
+    color: #111;
+    text-decoration: underline;
+    text-decoration-color: #b5b5b5;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+  }
+
+  .earth-cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .earth-cv-actions a,
+  .earth-cv-actions button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 1.1rem;
+    border: 1px solid #111;
+    border-radius: 999px;
+    background: #fff;
+    color: #111;
+    font: 700 0.8rem/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .earth-cv-actions a {
+    background: #111;
+    color: #fff;
+  }
+
+  .earth-cv-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid #111;
+  }
+
+  .earth-cv-block h2 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .earth-cv-block p + p {
+    margin-top: 0.75rem;
+  }
+
+  .earth-cv-rows {
+    display: grid;
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .earth-cv-rows li {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: 1rem;
+    break-inside: avoid;
+  }
+
+  .earth-cv-year {
+    padding-top: 0.15rem;
+  }
+
+  .earth-cv-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #d0d0d0;
+  }
+
+  @media (min-width: 720px) {
+    .earth-cv-block {
+      grid-template-columns: 9.5rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .earth-cv-rows li {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+  }
+
+  /* Printing always produces the Earth version, whichever registry is on screen. */
+  @media print {
+    @page {
+      size: A4;
+      margin: 14mm 15mm 15mm;
+    }
+
+    :global(body)::after,
+    :global(astro-dev-toolbar) {
+      display: none !important;
+    }
+
+    /* The site's fog background and full-height body would print as a grey block. */
+    :global(html),
+    :global(body) {
+      height: auto !important;
+      min-height: 0 !important;
+      background: #fff !important;
+    }
+
+    .dossier {
+      min-height: 0 !important;
+      padding: 0 !important;
+      background: #fff !important;
+    }
+
+    .dossier > :not(.earth-cv) {
+      display: none !important;
+    }
+
+    .dossier .earth-cv {
+      display: block !important;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 9.6pt;
+      line-height: 1.45;
+    }
+
+    .earth-cv h1 {
+      font-size: 24pt;
+    }
+
+    .earth-cv-rows {
+      gap: 0.55rem;
+    }
+
+    .earth-cv-actions {
+      display: none !important;
+    }
+
+    .earth-cv a {
+      text-decoration: none;
+    }
+
+    .earth-cv-block {
+      grid-template-columns: 6.5rem minmax(0, 1fr);
+      margin-top: 1.1rem;
+      padding-top: 0.7rem;
+    }
+
+    .earth-cv-rows li {
+      grid-template-columns: 9rem minmax(0, 1fr);
     }
   }
 </style>

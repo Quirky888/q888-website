@@ -78,6 +78,7 @@ The page respects the need for practical information, but it does not hand insti
 - rejection archive;
 - Earth Record near the bottom;
 - functional PDF controls;
+- the Q888 / Earth version switch, and the Earth version PDF kept in step with the page;
 - the line: “For administrative purposes, the artist also exists on Earth.”
 
 ## Enduring surface requirements

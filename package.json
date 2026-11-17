@@ -6,8 +6,10 @@
     "dev": "astro dev",
     "dev:netlify": "npm run build:knowledge && netlify dev",
     "build:knowledge": "node scripts/buildChatKnowledge.mjs",
-    "build": "npm run build:knowledge && astro check && astro build && npm run check:indexing",
+    "build": "npm run build:knowledge && astro check && astro build && npm run check:indexing && npm run check:cv",
     "check:indexing": "node scripts/checkIndexing.mjs",
+    "check:cv": "node scripts/checkEarthCv.mjs",
+    "cv:pdf": "node scripts/buildCvPdf.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "audit": "node scripts/runAudit.mjs"

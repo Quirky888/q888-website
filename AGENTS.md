@@ -65,6 +65,7 @@ when needed; follow dependencies rather than loading every document.
 | Layout, styling, motion, drawer, or overlay change | Contract's Protected systems, Website defaults, Responsiveness and Accessibility sections |
 | Meaningful artistic, product, writing, architecture, or refactoring judgement | `core.md`; `profile.json` when choosing controls; expression lenses and matching project overlay when expression is involved; selective feedback below |
 | Chatbot or knowledge change | Contract's Chatbots section and relevant function or content files |
+| Adding, renaming or removing a project, exhibition or CV fact | Contract's Artist CV section; update the CV and regenerate its PDF in the same task |
 | Commit, PR, or publication | Contract's Git and deployment and Validation sections |
 | Explicit historical investigation | [Historical document register](docs/history/README.md), then only matching sources |
 

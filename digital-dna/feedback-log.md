@@ -192,3 +192,18 @@ The agent may propose an entry after meaningful work. The human decides whether 
 - **Evidence:** Aleksandrs explicitly stated, “Creative Afterlife can be actively promoted. The Adaptation Layer should mostly emerge,” then approved loosening “NOT A CAMPAIGN. NOT AN AESTHETIC BRIEF.” because it made Q-Bag too sensible and prematurely closed a productive ambiguity. He also approved limiting AI on the public Q-Bag page to one quiet sentence about imagining transformations from materials already present.
 - **Possible DNA change:** None proposed. This is project-specific evidence for the control ↔ accidental discovery and practical function ↔ alternative reality tensions.
 - **Status:** observation / approved
+
+---
+
+### 2026-11-17 — Subtract the lore, show the evidence, count the real thing
+
+- **Project:** q888-website / homepage, `/aero/`, `/bureaucracy/`, `/president/`
+- **Task context:** Page-by-page redesign so the site reads as "future art" rather than a 2000s website, without losing Q888 strangeness.
+- **Working mode:** EXPLORE for the audit, then BUILD
+- **Expression lens or overlay:** MYTHIC_Q888 + BUREAUCRATIC_SATIRE + COSMIC_PROPAGANDA; `for-gallery-bureaucracy` overlay on `/bureaucracy/`
+- **Agent produced:** Audits naming generated-sounding prose (adjective chains, repeated "not X but Y", intensifiers, the same joke told several times), followed by rebuilds: shorter copy in the artist's own phrases, his photographs as evidence, live counts read from `src/content/stickers/`, a Q888 / Earth version of the CV with a PDF, a ballot-style campaign platform, and black-and-gold foil treatment for the President V2 sticker.
+- **Human response:** accepted throughout, with small visual corrections; kept deliberate jokes ("1982bbb", "-+£230") exactly as written.
+- **Observed preference:** Reduce text by removing repetition rather than flattening voice. Prefer real facts, photographs and counts over explanatory lore. Put the one practical claim of a project (for President, the sticker test) before the authorship debate. Odd values may be jokes: ask instead of correcting them. Visual tuning happens in small, reversible steps.
+- **Evidence:** Approved audits and rebuilds for each page in the 2026-11-16/17 sessions; explicit corrections kept "1982bbb" and "-+£230"; requested the V1-only wording for the President progress bar and two size adjustments of the V2 card sticker.
+- **Possible DNA change:** None proposed. Existing anti-flattening, clarity ↔ mystery and artwork ↔ functioning tool tensions cover this.
+- **Status:** observation / approved

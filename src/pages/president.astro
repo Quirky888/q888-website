@@ -21,6 +21,16 @@ const v2Entry = await getEntry("stickers", "22-pog-2026");
 if (!v2Entry) throw new Error("Required President V2 sticker entry is missing.");
 const v2 = v2Entry.data;
 if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
+const v1Entry = await getEntry("stickers", "07-pog-2025");
+if (!v1Entry) throw new Error("Required President V1 sticker entry is missing.");
+const v1 = v1Entry.data;
+
+// DNA: "Preparation before power", measured. The count comes from the sticker registry,
+// so selling a sticker there moves the campaign forward here.
+const v1Total = Number(v1.editionTotal);
+const v1Left = Number(v1.availableCount);
+const v1Handled = Number.isFinite(v1Total) && Number.isFinite(v1Left) ? v1Total - v1Left : 0;
+const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 ---
 
 <Layout
@@ -87,16 +97,20 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
                 <text x="355" y="380" fill="#208c8d" font-size="10" opacity="0.6" font-family="monospace">☽</text>
               </svg>
             </div>
-            <div class="president-portal">
-              <img
-                src={president.heroImage}
-                alt={president.heroAlt}
-                loading="eager"
-                decoding="async"
-                width="900"
-                height="900"
-                class="president-portal-img"
-              />
+            <!-- The current edition sits on black as a real die-cut sticker, with a holographic rim. -->
+            <div class="president-portal president-portal--sticker">
+              <div class="sticker-stage">
+                <span class="sticker-holo-rim" aria-hidden="true"></span>
+                <img
+                  src="/images/president_v2_cutout.webp"
+                  alt={v2.imageAlt || "President of the Galaxy V2 sticker: Q888 drawing over the original AI-generated figure"}
+                  loading="eager"
+                  decoding="async"
+                  width="719"
+                  height="850"
+                  class="president-sticker-img"
+                />
+              </div>
               <div class="image-status-stamp" aria-label="Image authorship status">
                 <span>IMAGE PROVENANCE</span>
                 <ul>
@@ -120,8 +134,9 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
             </h1>
             <div class="president-status-block narmail-mono">
               {president.statusLines.map((line: string) => <div>{line}</div>)}
-              <div>YEAR: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
+              <div>Year: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
             </div>
+            <a class="president-witness-btn" href="#campaign-test">Become an early witness <span aria-hidden="true">↓</span></a>
           </div>
 
         </div>
@@ -161,6 +176,99 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
           </p>
         </section>
 
+        </section>
+
+
+        <!-- DNA: the campaign's one practical claim, shown before anything else. -->
+        <section class="president-section president-test" id="campaign-test" aria-labelledby="campaign-test-heading">
+          <h2 class="president-h2" id="campaign-test-heading">{president.dealHeading}</h2>
+          <p>{president.dealParagraph}</p>
+
+          <div class="test-progress">
+            <p class="test-progress-label">Preparation before power · V1, the original edition</p>
+            <p class="test-progress-count"><strong>{v1Handled} of {v1Total}</strong> V1 stickers collected</p>
+            <div
+              class="test-progress-bar"
+              role="progressbar"
+              aria-label="V1 original edition stickers collected"
+              aria-valuemin="0"
+              aria-valuemax={v1Total}
+              aria-valuenow={v1Handled}
+            >
+              <span style={`width: ${v1Progress}%`}></span>
+            </div>
+            <p class="test-progress-note">{v1Left} V1 stickers left. V2 has only just been released. The galaxy is watching, mildly.</p>
+          </div>
+
+          <div class="test-editions">
+            <a class="test-edition" href={`/overpriced/${v1.slug}/`}>
+              <div class="v2-artwork"><Image src={v1.imageUrl ?? "/images/president.webp"} alt="President of the Galaxy V1 sticker, the original edition" width={600} height={760} loading="lazy" /></div>
+              <p class="test-edition-label">V1 · The original</p>
+              <p class="test-edition-meta">Edition of {v1Total} · {v1Left} left · {v1.ask}</p>
+              <span class="test-edition-link">Collect V1 <span aria-hidden="true">→</span></span>
+            </a>
+            <a class="test-edition" href={`/overpriced/${v2.slug}/`}>
+              <div class="v2-artwork v2-artwork--sticker">
+                <span class="sticker-holo-rim sticker-holo-rim--quiet" aria-hidden="true"></span>
+                <img src="/images/president_v2_cutout.webp" alt={v2.imageAlt || v2.title} width="719" height="850" loading="lazy" decoding="async" />
+              </div>
+              <p class="test-edition-label">V2 · The update</p>
+              <p class="test-edition-meta">Edition of {v2.editionTotal} · more human drawing, more fingers · price on request</p>
+              <span class="test-edition-link">View V2 <span aria-hidden="true">→</span></span>
+            </a>
+          </div>
+
+          <h3 class="president-h3">{president.dealIncludesHeading}</h3>
+          <ul class="president-list">
+            {president.dealIncludes.map((item: string) => <li>{item}</li>)}
+          </ul>
+          <p set:html={DOMPurify.sanitize(president.dealReturns)}></p>
+          <p class="president-note">{president.dealFinePrint}</p>
+
+          <details class="v2-details">
+            <summary>Read what changed in V2</summary>
+            <div class="v2-updates">
+              <article>
+                <p class="v2-feature-label">THE SURFACE</p>
+                <h4>More human.</h4>
+                <p>The original AI-generated figure remains underneath, but significantly more of it has now been covered, interrupted and reorganised by human drawing. White lines reclaim the surface. Gold survives where appropriate. Orange has been authorised for official presidential typography.</p>
+              </article>
+              <article>
+                <p class="v2-feature-label">THE DIPLOMACY</p>
+                <h4>One additional middle finger.</h4>
+                <p>After extensive diplomatic research, the President can now perform the <strong>Peace On</strong> gesture with both hands, providing approximately twice the intergalactic peace experience.</p>
+              </article>
+              <article>
+                <p class="v2-feature-label">THE TYPOGRAPHY</p>
+                <h4>Now unscrewed.</h4>
+                <p>Words that previously behaved like a conventional slogan have been separated and repositioned: <strong>GALAXY, TOGETHER, SCREW, PRESIDENT, STARS.</strong> Their relationship is no longer completely supervised. You may read them correctly. You may also read them differently. Both readings have presidential approval.</p>
+              </article>
+            </div>
+          </details>
+
+          <blockquote class="president-blockquote test-verdict">
+            {president.campaignMethodLines[1]}<br />
+            {president.campaignMethodLines[2]}<br />
+            {president.campaignMethodLines[3]}
+          </blockquote>
+          <p class="test-verdict-closing">{president.campaignMethodClosing}</p>
+        </section>
+
+        <!-- Rules — campaign cards -->
+        <section class="president-section">
+          <p class="ballot-kicker">The platform · tick what you would vote for</p>
+          <h2 class="president-h2">{president.rulesHeading}</h2>
+          <div class="president-rules-grid">
+            {president.rules.map((rule: string, i: number) => (
+              <div class="president-rule-card">
+                <span class="ballot-box" aria-hidden="true"></span>
+                <span class="rule-number">Article 0{i + 1}</span>
+                <p set:html={DOMPurify.sanitize(rule)}></p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <!-- What is this -->
         <section class="president-section">
           <h2 class="president-h2">{president.whatHeading}</h2>
@@ -177,7 +285,6 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
               </a>
             </div>
           </div>
-        </section>
 
         <!-- Artwork card -->
         <section class="president-artwork-card-section">
@@ -211,7 +318,7 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
 
               <!-- Right: Content & Action -->
               <div class="artwork-card-text-wrap">
-                <div class="artwork-card-tag font-mono">// HUMAN × MACHINE WORKING ARCHIVE</div>
+                <div class="artwork-card-tag font-mono">Human × machine working archive</div>
                 <h3 class="artwork-card-title">{president.artworkCardTitle}</h3>
                 <p class="artwork-card-description">{president.artworkCardDescription}</p>
                 
@@ -225,6 +332,7 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
             </div>
           </div>
         </section>
+
 
         <!--
           DNA: The campaign and its artifact appear before the authorship debate.
@@ -276,23 +384,17 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
             ))}
           </div>
 
-          <div class="authorship-provenance">
-            <h3>{president.authorship.provenanceHeading}</h3>
-            <div class="provenance-grid">
-              {president.authorship.provenance.map((entry) => (
-                <article class="provenance-entry">
-                  <div class="provenance-entry-heading">
-                    <h4>{entry.label}</h4>
-                    <span>{entry.status}</span>
-                  </div>
-                  <p>{entry.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
+          <p class="authorship-provenance-line" aria-label="Working provenance">
+            {president.authorship.provenance.map((entry) => (
+              <span><strong>{entry.label}:</strong> {entry.status.toLowerCase()}</span>
+            ))}
+          </p>
 
           <p class="authorship-closing">{president.authorship.closing}</p>
         </section>
+
+        <!-- The full ten principles live on /constitution/; the campaign keeps the tests. -->
+        <ConstitutionDraft constitution={constitution} variant="brief" />
 
         <!-- sticker divider 2: mushroom + spiral (like square_bubble / love_mushroom art) -->
         <div class="cosmic-divider" aria-hidden="true">
@@ -335,118 +437,9 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
           </svg>
         </div>
 
-        <!-- The Deal -->
-        <section class="president-section">
-          <h2 class="president-h2">{president.dealHeading}</h2>
-          <p>{president.dealParagraph}</p>
-          <h3 class="president-h3">{president.dealIncludesHeading}</h3>
-          <ul class="president-list">
-            <li>{president.dealIncludes[0]}</li>
-            <li>{president.dealIncludes[1]}</li>
-            <li>{president.dealIncludes[2]}</li>
-            <li>{president.dealIncludes[3]}</li>
-          </ul>
-          <p set:html={DOMPurify.sanitize(president.dealReturns)}></p>
-          <p class="president-note">{president.dealFinePrint}</p>
 
-          <!-- The new edition continues the small-object test, within the campaign. -->
-          <section class="president-v2" id="president-v2" aria-labelledby="president-v2-heading">
-            <div class="v2-overview">
-              <div class="v2-context">
-                <p class="v2-feature-label">SECOND PRESIDENTIAL EDITION · {v2.editionTotal} STICKERS</p>
-                <h3 id="president-v2-heading">The campaign continues: V2.</h3>
-                <p>The first test now has a second edition. More Q888 drawing interrupts the original AI-generated figure, an additional middle finger doubles the Peace On diplomacy, and the orange typography is less obedient.</p>
-                <p>A small update for an unnecessarily large office. The President has been redesigned.</p>
-                <a class="v2-edition-link" href="/overpriced/president-v2/">View the edition of {v2.editionTotal}</a>
-              </div>
 
-              <div class="v2-editions">
-                <figure>
-                  <div class="v2-artwork"><Image src={v2.imageUrl} alt={v2.imageAlt || v2.title} width={830} height={928} loading="lazy" /></div>
-                  <figcaption><strong>V2 · The update</strong><span>More human drawing . More fingers.</span></figcaption>
-                </figure>
-                <figure>
-                  <div class="v2-artwork"><Image src="/images/president.webp" alt="Original President of the Galaxy V1 sticker, before the additional Q888 drawing layer" width={600} height={760} loading="lazy" /></div>
-                  <figcaption><strong>V1 · The original</strong></figcaption>
-                </figure>
-              </div>
-            </div>
 
-            <details class="v2-details">
-              <summary>Read what changed in V2</summary>
-              <div class="v2-updates">
-                <article>
-                  <p class="v2-feature-label">THE SURFACE</p>
-                  <h4>More human.</h4>
-                  <p>The original AI-generated figure remains underneath, but significantly more of it has now been covered, interrupted and reorganised by human drawing. White lines reclaim the surface. Gold survives where appropriate. Orange has been authorised for official presidential typography.</p>
-                </article>
-                <article>
-                  <p class="v2-feature-label">THE DIPLOMACY</p>
-                  <h4>One additional middle finger.</h4>
-                  <p>After extensive diplomatic research, the President can now perform the <strong>Peace On</strong> gesture with both hands, providing approximately twice the intergalactic peace experience.</p>
-                </article>
-                <article>
-                  <p class="v2-feature-label">THE TYPOGRAPHY</p>
-                  <h4>Now unscrewed.</h4>
-                  <p>Words that previously behaved like a conventional slogan have been separated and repositioned: <strong>GALAXY, TOGETHER, SCREW, PRESIDENT, STARS.</strong> Their relationship is no longer completely supervised. You may read them correctly. You may also read them differently. Both readings have presidential approval.</p>
-                </article>
-              </div>
-            </details>
-          </section>
-        </section>
-
-        <!-- Rules — campaign cards -->
-        <section class="president-section">
-          <h2 class="president-h2">{president.rulesHeading}</h2>
-          <div class="president-rules-grid">
-            {president.rules.map((rule: string, i: number) => (
-              <div class="president-rule-card">
-                <span class="rule-number">0{i + 1}</span>
-                <p set:html={DOMPurify.sanitize(rule)}></p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <!--
-          DNA: The current instrument stays readable here; the stranger research
-          lineage begins only after the visitor chooses to trace its provenance.
-        -->
-        <ConstitutionDraft constitution={constitution} variant="office" />
-
-        <!-- sticker divider 3: ouroboros orbit ring (like square_bubble sticker) -->
-        <div class="cosmic-divider" aria-hidden="true">
-          <svg viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="orbit-holo" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ff9de2" stop-opacity="0.8"/>
-                <stop offset="33%" stop-color="#a8edff" stop-opacity="0.8"/>
-                <stop offset="66%" stop-color="#ffcc33" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#208c8d" stop-opacity="0.8"/>
-              </linearGradient>
-            </defs>
-            <!-- left line -->
-            <line x1="0" y1="24" x2="344" y2="24" stroke="#208c8d" stroke-width="1" stroke-dasharray="5 5"/>
-            <!-- ouroboros circle (the square_bubble icon) -->
-            <g transform="translate(368, 4)">
-              <!-- outer ring -->
-              <circle cx="20" cy="20" r="19" stroke="url(#orbit-holo)" stroke-width="2.5"/>
-              <!-- inner mushroom-head symbol -->
-              <ellipse cx="20" cy="17" rx="9" ry="6" fill="none" stroke="#208c8d" stroke-width="1.5" opacity="0.7"/>
-              <!-- stalk -->
-              <line x1="20" y1="23" x2="20" y2="33" stroke="#a67c00" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <!-- planet-ring (ouroboros reference) -->
-              <ellipse cx="20" cy="20" rx="14" ry="5" stroke="#ffcc33" stroke-width="1" opacity="0.5" transform="rotate(-20 20 20)"/>
-              <!-- orbiting dot -->
-              <circle cx="20" cy="1" r="3" fill="#208c8d"/>
-            </g>
-            <!-- right line -->
-            <line x1="432" y1="24" x2="800" y2="24" stroke="#208c8d" stroke-width="1" stroke-dasharray="5 5"/>
-            <!-- decorative rune ticks -->
-            <text x="336" y="40" fill="#a67c00" font-size="9" opacity="0.4" font-family="monospace">☿</text>
-            <text x="430" y="40" fill="#ff9de2" font-size="9" opacity="0.4" font-family="monospace">♥</text>
-          </svg>
-        </div>
 
         <!-- Inline sticker motif strip (between campaign principles and method) -->
         <div class="sticker-strip" aria-hidden="true">
@@ -554,17 +547,6 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
           </div>
         </div>
 
-        <!-- Campaign Method -->
-        <section class="president-section">
-          <h2 class="president-h2">{president.campaignMethodHeading}</h2>
-          <p>{president.campaignMethodLines[0]}</p>
-          <blockquote class="president-blockquote">
-            {president.campaignMethodLines[1]}<br />
-            {president.campaignMethodLines[2]}<br />
-            {president.campaignMethodLines[3]}
-          </blockquote>
-          <p>{president.campaignMethodClosing}</p>
-        </section>
 
         <!-- Contact -->
         <section class="president-section">
@@ -592,6 +574,7 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
 
         <!-- CTA -->
         <section class="president-cta">
+          <a href="#campaign-test" class="president-witness-btn">Become an early witness</a>
           <a href="/#infocigan" class="president-retreat-btn">{president.ctaLabel}</a>
         </section>
 
@@ -952,6 +935,239 @@ if (!v2.imageUrl) throw new Error("Required President V2 artwork is missing.");
 </script>
 
 <style>
+  /* ─── Hero: V2 as a die-cut sticker on black ─── */
+  .president-portal--sticker {
+    background:
+      radial-gradient(circle at 50% 42%, rgba(32, 140, 141, 0.28), transparent 62%),
+      #05080b;
+  }
+  /* In normal flow on purpose: the image's own width is what sizes the portal,
+     so the existing responsive portal widths keep working. */
+  .sticker-stage {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 5% 11% 23%;
+  }
+  .president-sticker-img,
+  .sticker-holo-rim {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+  .president-sticker-img {
+    position: relative;
+    z-index: 1;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.55));
+  }
+  /* LEARN: the rim is the sticker's own silhouette used as a mask, filled with the
+     holographic gradient and scaled up slightly, so it reads as a foil edge. */
+  .sticker-holo-rim {
+    /* Black-and-gold foil: dark lacquer bands with a travelling gold highlight. */
+    background: linear-gradient(
+      115deg,
+      #0b0803 0%, #6e5410 14%, #d4af37 26%, #fff1bf 33%, #d4af37 40%,
+      #2a1f08 52%, #0b0803 60%, #a67c00 72%, #ffe08a 80%, #6e5410 90%, #0b0803 100%
+    );
+    background-size: 260% 260%;
+    -webkit-mask: url("/images/president_v2_cutout.webp") center / contain no-repeat;
+    mask: url("/images/president_v2_cutout.webp") center / contain no-repeat;
+    transform: scale(1.075);
+    filter: drop-shadow(0 0 1px rgba(255, 225, 140, 0.95)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.45));
+    animation: sticker-holo-shift 6s ease-in-out infinite alternate;
+  }
+  @keyframes sticker-holo-shift {
+    from { background-position: 0% 30%; }
+    to { background-position: 100% 70%; }
+  }
+  /* The stamp shrinks to a small label under the sticker. Double class: it must beat
+     the responsive stamp rules further down this file. */
+  .president-portal.president-portal--sticker .image-status-stamp {
+    right: 20%;
+    bottom: 5%;
+    left: 20%;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.72em;
+  }
+  .president-portal.president-portal--sticker .image-status-stamp li {
+    font-size: 1em;
+    line-height: 1.35;
+  }
+  /* On a small portal the stamp would cover the whole sticker; "Two voices" below carries
+     the same provenance, so the stamp steps aside and the sticker gets the full circle. */
+  @media (max-width: 640px) {
+    .president-portal.president-portal--sticker .image-status-stamp { display: none; }
+    .president-portal--sticker .sticker-stage { padding: 9% 12%; }
+  }
+  /* The same foil, quieter, for the V2 card beside V1. */
+  .v2-artwork--sticker {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 8% 8%;
+    background:
+      radial-gradient(circle at 50% 45%, rgba(166, 124, 0, 0.16), transparent 70%),
+      #05080b;
+  }
+  .v2-artwork.v2-artwork--sticker > img,
+  .v2-artwork--sticker .sticker-holo-rim {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+  .v2-artwork.v2-artwork--sticker > img {
+    position: relative;
+    z-index: 1;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+  }
+  .sticker-holo-rim--quiet {
+    transform: scale(1.04);
+    opacity: 0.85;
+    filter: drop-shadow(0 0 1px rgba(255, 225, 140, 0.7));
+    animation-duration: 9s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sticker-holo-rim { animation: none; }
+  }
+
+  /* ─── Campaign test: the measured promise ─── */
+  .president-witness-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    margin-top: 1.75rem;
+    padding: 0.9rem 1.6rem;
+    border-radius: 999px;
+    background: var(--eden-text);
+    color: #fff;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .president-witness-btn:hover { transform: translateY(-2px); background: var(--eden-primary); box-shadow: 0 10px 28px rgba(32, 140, 141, 0.28); }
+  .president-witness-btn:focus-visible { outline: 2px solid var(--eden-gold); outline-offset: 4px; }
+
+  .president-test { scroll-margin-top: 5rem; }
+  .test-progress {
+    margin: 2rem 0;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid rgba(19, 66, 82, 0.15);
+    border-left: 4px solid var(--eden-gold);
+    border-radius: 0 12px 12px 0;
+    background: rgba(255, 204, 51, 0.06);
+  }
+  .test-progress p { margin: 0 !important; }
+  .test-progress-label {
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--eden-gold) !important;
+  }
+  .test-progress-count { margin-top: 0.4rem !important; font-size: clamp(1.1rem, 2vw, 1.5rem) !important; color: var(--eden-text) !important; }
+  .test-progress-count strong { font-family: 'Bungee', 'Space Grotesk', sans-serif; font-weight: 400; font-size: 1.4em; }
+  .test-progress-bar {
+    height: 14px;
+    margin: 1rem 0 0.75rem;
+    border-radius: 999px;
+    background: rgba(19, 66, 82, 0.1);
+    overflow: hidden;
+  }
+  .test-progress-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--eden-primary), var(--eden-gold-bright));
+  }
+  .test-progress-note { font-size: 0.95rem !important; color: var(--eden-text-muted) !important; }
+
+  .test-editions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    max-width: 34rem;
+    margin-bottom: 2.5rem;
+  }
+  .test-edition { display: block; min-width: 0; color: inherit; text-decoration: none; }
+  .test-edition .v2-artwork { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .test-edition:hover .v2-artwork { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(19, 66, 82, 0.2); }
+  .test-edition:focus-visible { outline: 2px solid var(--eden-primary); outline-offset: 4px; border-radius: 0.5rem; }
+  .test-edition p { margin: 0 !important; }
+  .test-edition-label { margin-top: 0.75rem !important; font-weight: 700; color: var(--eden-text) !important; }
+  .test-edition-meta { font-size: 0.9rem !important; line-height: 1.5 !important; color: var(--eden-text-muted) !important; }
+  .test-edition-link { display: inline-flex; min-height: 44px; align-items: center; color: var(--eden-primary); font-weight: 700; }
+
+  .test-verdict { margin-top: 2.5rem; }
+  .test-verdict-closing { font-size: clamp(1.05rem, 1.6vw, 1.3rem) !important; color: var(--eden-text) !important; }
+
+  /* ─── Rules as a ballot paper ─── */
+  .ballot-kicker {
+    margin: 0 0 0.75rem !important;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--eden-gold) !important;
+  }
+  .ballot-box {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 2px solid var(--eden-text);
+    border-radius: 3px;
+  }
+  .ballot-box::after {
+    content: "✓";
+    position: absolute;
+    inset: -0.45rem 0 0 0.15rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--eden-primary);
+    opacity: 0;
+    transform: scale(0.6) rotate(-12deg);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .president-rule-card:hover .ballot-box::after { opacity: 1; transform: scale(1) rotate(-6deg); }
+
+  /* ─── Provenance in one line ─── */
+  .authorship-provenance-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    margin: 2rem 0 1.25rem !important;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(19, 66, 82, 0.15);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.85rem !important;
+    color: var(--eden-text-muted) !important;
+  }
+  .authorship-provenance-line strong { color: var(--eden-text); }
+
+  .president-cta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem 1.5rem; }
+  .president-cta .president-witness-btn { margin-top: 0; }
+
+  @media (max-width: 520px) {
+    .test-editions { gap: 0.9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .president-witness-btn, .test-edition .v2-artwork, .ballot-box::after { transition: none; }
+    .president-witness-btn:hover, .test-edition:hover .v2-artwork { transform: none; }
+  }
+
   /* Keep the edition subordinate to the campaign and its first practical test. */
   .president-v2 { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(19, 66, 82, 0.15); scroll-margin-top: 6rem; }
   .v2-overview { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
