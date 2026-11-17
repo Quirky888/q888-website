@@ -3,6 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import SlimNav from "../components/SlimNav.astro";
 import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
+import { getCollection } from "astro:content";
+
+// Stock comes from the same sticker entry as the Overpriced registry, so both pages agree.
+const aeroEntry = (await getCollection("stickers")).find(({ data }) => data.slug === "aero-v1");
+if (!aeroEntry) throw new Error("Required AERO V1 sticker entry is missing.");
+const aeroAvailable = aeroEntry.data.availableCount;
+const aeroEdition = aeroEntry.data.editionTotal;
 
 const aeroMetaItems = [
   { field: "drag_coeff",    label: "DRAG_COEFF",    value: "Cd: 0.000",  width: 10 },
@@ -74,7 +81,7 @@ const aeroMetaItems = [
 
         <div class="aero-hero-status">
           <span class="aero-status-dot" aria-hidden="true"></span>
-          <span class="aero-status-text">UNITS: <span class="aero-cyan">50</span> PRODUCED</span>
+          <span class="aero-status-text">UNITS: <span class="aero-cyan">{aeroAvailable} OF {aeroEdition}</span> AVAILABLE</span>
           <span class="aero-status-sep">//</span>
           <span class="aero-status-text">RARITY: <span class="aero-cyan">SCALES WITH BELIEF</span></span>
         </div>
@@ -209,19 +216,33 @@ const aeroMetaItems = [
               REVELATION
             </h2>
 
+            <!-- DNA: the story at Ed's own scale. The chamber on the right already does the maths. -->
             <p class="aero-paradox-intro">
-              The Aero Sticker was not born in a sterile corporate wind tunnel. It was forged in the heat of a specialty coffee shop, fueled by intense irritation, and mapped out by our co-creator, Ed—a brilliant young engineer with a fresh diploma, an obsessive passion for flawless coffee extraction, and a deep understanding of dimensional aerodynamics.
-            </p>
-            <p class="aero-paradox-intro">
-              Ed set out with a noble, highly targeted mission: to help ultra-rich cyclists save some precious, overpriced watts and drastically reduce their drag in this universe. But when he examined the sacred mathematical promise of high-end cycling performance, the numbers shattered his reality. A £10,000 aero frame. A 100kg rider. Approximately 2 miserable watts saved at 30 km/h.
+              Ed is a young engineer who takes coffee more seriously than most
+              people take their careers. Over a V60, he did the maths on a
+              £10,000 aero frame: a 100 kg rider at 30 km/h saves about two watts.
             </p>
             <p class="aero-paradox-intro aero-paradox-intro--accent">
-              This wasn't innovation; it was a massive financial headwind wearing carbon fibre.
+              Two watts. £5,000 each.
             </p>
             <p class="aero-paradox-intro">
-              So Ed chose to bypass Newtonian physics altogether. Instead of wasting months trying to make a metal bicycle frame more aerodynamic, the <strong>Aero V-0888 streamlines the bicycle's underlying logic.</strong> The result is a £100-per-gram Infocigan performance artefact engineered to reduce atmospheric drag, maximize human belief, and politely inform the wind exactly who is in charge.
+              So we stopped working on the bike and started working on the belief.
+              AERO V1 is the result: £100 a gram, and it makes you more aero.
             </p>
+            <p class="aero-paradox-note">Every sale is split equally between Q888 and Ed.</p>
 
+            <!-- The visitor converts their own frame into stickers. Dearer frame, funnier answer. -->
+            <form class="aero-calc" id="aero-calc" aria-labelledby="aero-calc-title" data-sticker-price="230">
+              <p class="aero-calc-title" id="aero-calc-title">CONVERT YOUR FRAME</p>
+              <label class="aero-calc-field" for="aero-calc-price">
+                <span>What did your frame cost? £</span>
+                <input id="aero-calc-price" name="price" type="number" inputmode="numeric" min="0" step="100" value="10000" />
+              </label>
+              <div class="aero-calc-result" aria-live="polite">
+                <p class="aero-calc-answer">That's <strong id="aero-calc-count">43</strong> <span id="aero-calc-noun">AERO V1 stickers</span>.</p>
+                <p class="aero-calc-punch" id="aero-calc-punch">You could have been more aero 43 times.</p>
+              </div>
+            </form>
           </div>
 
           <!-- RIGHT COLUMN: Wind tunnel visual -->
@@ -320,7 +341,7 @@ const aeroMetaItems = [
                   <em>IMPORTANT DIFFERENCE.</em>
                 </div>
                 <div class="wt-final-stamp">
-                  <span>AERO V-0888</span>
+                  <span>AERO-0888</span>
                   <span class="wt-stamp-gold">£100/g PERFORMANCE ARTEFACT</span>
                   <span class="wt-stamp-dim">WIND-TUNNEL REJECTED</span>
                   <span class="wt-stamp-cyan">INFOCIGAN APPROVED</span>
@@ -352,7 +373,7 @@ const aeroMetaItems = [
             <div class="ed-thought-container">
               <span class="ed-thought-label">ED THOUGHT</span>
               <div class="ed-thought-track">
-                <p class="ed-thought et-0">What if the problem is not the rider?</p>
+                <p class="ed-thought et-0 is-active">What if the problem is not the rider?</p>
                 <p class="ed-thought et-1">What if the problem is the financial density of hope?</p>
                 <p class="ed-thought et-2">What if a sticker has better emotional aerodynamics than a frame?</p>
                 <p class="ed-thought et-3">What if the wind simply needs better instructions?</p>
@@ -425,10 +446,7 @@ const aeroMetaItems = [
               <div class="aero-tier-number">STAGE 01</div>
               <div class="aero-tier-name">μ-MATRIX CHASSIS</div>
               <p class="aero-tier-desc">
-                A microscopic, dark stealth-carbon substrate reinforced with an iridescent titanium lattice. Engineered to remain entirely beneath the visible surface—shielded from casual inspection, accessible only to the true owner.
-              </p>
-              <p class="aero-tier-desc" style="margin-top:0.5rem">
-                <strong class="aero-cyan">Telemetry Data:</strong> Laser-etched directly into the nano-carbide weave is the product classification matrix and the unique registration marker: <strong class="aero-cyan">SqB001</strong>. A hidden certificate of hyper-elite authenticity confirming structural priority.
+                The layer nobody sees. Carbon-dark, with the registry mark <strong class="aero-cyan">SqB001</strong> etched underneath, for the owner only.
               </p>
               <div class="aero-tier-spec">MATERIAL: NANO-CARBIDE // WEAVE: 8K // REGISTRY: SqB001</div>
             </div>
@@ -437,10 +455,7 @@ const aeroMetaItems = [
               <div class="aero-tier-number">STAGE 02</div>
               <div class="aero-tier-name">FIELD PROTOTYPE</div>
               <p class="aero-tier-desc">
-                The raw deployment layer. Features a high-contrast, dotted-line vector layout tracking an aggressive, aerodynamic sprint tuck—superimposed directly onto a traditional, front-basket commuter bicycle infrastructure.
-              </p>
-              <p class="aero-tier-desc" style="margin-top:0.5rem">
-                <strong class="aero-cyan">Velocity Metrics:</strong> The unpigmented blue swoosh banner serves as an abstract wind-channel vector line. By deliberately minimizing localized ink mass, we ensure peak molecular acceleration across the sticker surface.
+                A racing tuck, traced onto a commuter bike with a front basket. The swoosh is left unprinted to save ink weight.
               </p>
               <div class="aero-tier-spec">DEPLOYMENT: FIELD VALIDATED // STATUS: SEVERE OVER-SPEC // INK MASS: ~0.00g</div>
             </div>
@@ -449,10 +464,8 @@ const aeroMetaItems = [
               <div class="aero-tier-number">STAGE 03 // 10 PROTOTYPES</div>
               <div class="aero-tier-name">FULL SWOOSH PROTOTYPE (PRO RIDER SPEC)</div>
               <p class="aero-tier-desc">
-                Ten complete V1 prototypes entered field testing with the blue velocity swoosh fully active. Five were entrusted to Lead Engineer Ed; the remaining units stayed with Q888 or were quietly distributed to friends capable of carrying experimental atmospheric responsibility.
-              </p>
-              <p class="aero-tier-desc" style="margin-top:0.5rem">
-                <strong class="aero-cyan">Prototype Finding:</strong> The swoosh lowered drag by an additional <strong class="aero-cyan">0.00888 C<sub>d</sub></strong>, but also made the sticker aggressively aerodynamic and karmically misaligned. Safe operation required continuous awareness, disciplined cornering, and remembering that confidence is not protective equipment.
+                Ten prototypes with the full blue swoosh. Ed kept five; the rest went to friends.
+                The swoosh took another <strong class="aero-cyan">0.00888 C<sub>d</sub></strong> off. Riders felt dangerously fast, and confidence is not protective equipment.
               </p>
               <div class="aero-tier-spec">RUN: 10 // ED ALLOCATION: 5 // SWOOSH: ACTIVE // RIDER CLASS: PROFESSIONAL OR EMOTIONALLY PREPARED</div>
             </div>
@@ -461,13 +474,10 @@ const aeroMetaItems = [
               <div class="aero-tier-number">STAGE 04 // 50-UNIT PUBLIC EDITION</div>
               <div class="aero-tier-name">V1 SAFETY-LIMITED SKIN (SWOOSH DELETE)</div>
               <p class="aero-tier-desc">
-                Post-prototype review confirmed an uncomfortable truth: the sticker reduces air drag but provides <strong class="aero-cyan">zero physical protection</strong>. This is acceptable for Tour de France professionals. It may be dangerously fast for anyone who occasionally forgets they are not a professional—or becomes overconfident near a café sprint.
+                The public edition drops the swoosh. Still more aero; just enough drag left for karma to keep up.
               </p>
               <p class="aero-tier-desc" style="margin-top:0.5rem">
-                The 50-unit public V1 therefore ships without the separate blue swoosh. Removing just <strong class="aero-cyan">0.00888 C<sub>d</sub></strong> of additional advantage restores enough atmospheric resistance for karma to remain approximately aligned, while preserving the essential condition of being More Aero.
-              </p>
-              <p class="aero-tier-desc" style="margin-top:0.5rem">
-                <strong class="aero-cyan">Professional Override:</strong> Verified riders may request a fully customised Full-Swoosh V1 for <strong class="aero-cyan">+£300</strong>. Each override is upgraded from DANGEROUSLY FAST to <strong class="aero-cyan">DANGEROUSLY FLEX</strong> and supplied with no helmet, no watt guarantee, and no protection from their own magnificent confidence.
+                Want the swoosh back? A one-of-one Full-Swoosh version is <strong class="aero-cyan">+£300</strong>. No helmet included.
               </p>
               <div class="aero-tier-spec">PUBLIC RUN: 50 // SWOOSH: SAFETY-DEACTIVATED // DRAG PENALTY: +0.00888 Cd // PRO OVERRIDE: +£300</div>
             </div>
@@ -508,8 +518,7 @@ const aeroMetaItems = [
             F<sub>D</sub> = ½ · ρ · v² · C<sub>d</sub> · A
           </div>
           <div class="aero-formula-note">
-            Standard industry baseline. Peer-reviewed. Completely fails to account for the
-            atmospheric restructuring induced by correctly applied conceptual art.
+            Peer-reviewed. Does not account for conceptual art.
           </div>
         </div>
 
@@ -532,9 +541,8 @@ const aeroMetaItems = [
             W<sub>net</sub> = P<sub>rider</sub> + (Σ<sub>i=1</sub><sup>∞</sup> Style<sub>i</sub> / Drag<sub>base</sub>) × Φ<sub>aero</sub>
           </div>
           <div class="aero-formula-note">
-            Net power output is calculated by aesthetic dominance over physical reality.
-            The infinite sum of Style is non-convergent for riders with sufficient hubris.
-            Φ<sub>aero</sub> is proprietary. Power meter enthusiasts are advised to look away.
+            Style does not converge for riders with enough hubris.
+            Φ<sub>aero</sub> is proprietary. Power-meter owners may look away.
           </div>
         </div>
 
@@ -545,8 +553,7 @@ const aeroMetaItems = [
             D<sub>t</sub> = v²κ / √(1 − v²/c²<sub>coffee</sub>)
           </div>
           <div class="aero-formula-note">
-            c<sub>coffee</sub> is the speed of light in a V60 filter coffee
-            extracted at optimal brew temperature. Non-Newtonian. Non-negotiable.
+            c<sub>coffee</sub> is the speed of light in a correctly extracted V60.
           </div>
         </div>
 
@@ -562,68 +569,75 @@ const aeroMetaItems = [
     <!-- ══════════════════════════════════════════════════════
          06. VERIFIED HARDWARE IMPLEMENTATIONS
     ══════════════════════════════════════════════════════ -->
-    <section class="aero-placements" id="aero-placements" aria-label="Approved placement surfaces">
+    <section class="aero-placements" id="aero-placements" aria-label="Where the sticker works">
       <div class="aero-placements-inner">
-        <div class="aero-section-tag">IMPLEMENTATION GRID // AUTHORISED SURFACES</div>
-        <h2 class="aero-section-headline">DEPLOYMENT VECTORS</h2>
+        <div class="aero-section-tag">FIELD EVIDENCE // AUTHORISED SURFACES</div>
+        <h2 class="aero-section-headline">WHERE IT WORKS</h2>
 
-        <div class="aero-deploy-rows">
+        <!-- DNA: real photographs do the persuading; one dry line each does the joke. -->
+        <div class="aero-evidence">
+          <figure class="aero-evidence-card" data-aero-reveal>
+            <div class="aero-evidence-frame">
+              <img
+                src="/images/aero_field_bike.webp"
+                srcset="/images/aero_field_bike-640.webp 640w, /images/aero_field_bike.webp 1200w"
+                sizes="(min-width: 900px) 45vw, 100vw"
+                alt="AERO V1 holographic sticker on the head tube of a yellow Substance bicycle, with a black road bike behind it"
+                width="1200"
+                height="1500"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="aero-evidence-corner aero-evidence-corner--tl" aria-hidden="true"></span>
+              <span class="aero-evidence-corner aero-evidence-corner--br" aria-hidden="true"></span>
+              <span class="aero-evidence-tag">EVIDENCE 01 · HEAD TUBE</span>
+            </div>
+            <figcaption class="aero-evidence-caption">
+              <div>
+                <h3 class="aero-evidence-name">On the bike</h3>
+                <p class="aero-evidence-line">Garmin will not understand. Strava is not responsible. Recovery with <a href="/dyno/">Dyno Milk</a> is strongly advised.</p>
+              </div>
+              <div class="aero-evidence-metric">
+                <span class="aero-deploy-metric-val">∞</span>
+                <span class="aero-evidence-metric-label">STYLE-WATTS</span>
+                <span class="aero-evidence-metric-sub">GARMIN: CONFUSED</span>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="aero-evidence-card" data-aero-reveal>
+            <div class="aero-evidence-frame">
+              <img
+                src="/images/aero_field_bottle.webp"
+                srcset="/images/aero_field_bottle-640.webp 640w, /images/aero_field_bottle.webp 1200w"
+                sizes="(min-width: 900px) 45vw, 100vw"
+                alt="AERO V1 holographic sticker on a yellow insulated bottle on a windowsill, between houseplants"
+                width="1200"
+                height="1500"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="aero-evidence-corner aero-evidence-corner--tl" aria-hidden="true"></span>
+              <span class="aero-evidence-corner aero-evidence-corner--br" aria-hidden="true"></span>
+              <span class="aero-evidence-tag">EVIDENCE 02 · WINDOWSILL</span>
+            </div>
+            <figcaption class="aero-evidence-caption">
+              <div>
+                <h3 class="aero-evidence-name">On the bottle</h3>
+                <p class="aero-evidence-line">The water stops sloshing in the wrong direction. The bottle is overpriced; the sticker costs more per gram. Correct order.</p>
+              </div>
+              <div class="aero-evidence-metric">
+                <span class="aero-deploy-metric-val">0.000</span>
+                <span class="aero-evidence-metric-label">SLOSH C<sub>d</sub></span>
+                <span class="aero-evidence-metric-sub">WATER: ALIGNED</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
 
-          <!-- ROW 01: BICYCLE -->
-          <div class="aero-deploy-row" data-aero-reveal>
-            <div class="aero-deploy-num" aria-hidden="true">01</div>
+        <ul class="aero-deploy-rows" aria-label="Other authorised surfaces">
+          <li class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">03</div>
             <div class="aero-deploy-icon-wrap" aria-hidden="true">
-              <!-- Bicycle SVG: abstract speed wheel + forward motion lines -->
-              <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="20" cy="54" r="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
-                <circle cx="60" cy="54" r="14" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
-                <circle cx="20" cy="54" r="4" fill="currentColor" opacity="0.4"/>
-                <circle cx="60" cy="54" r="4" fill="currentColor" opacity="0.4"/>
-                <!-- Frame -->
-                <polyline points="20,54 35,28 52,28 60,54" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                <line x1="35" y1="28" x2="20" y2="54" stroke="currentColor" stroke-width="1.5"/>
-                <!-- Handlebars -->
-                <line x1="52" y1="28" x2="58" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="56" y1="22" x2="62" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <!-- Rider silhouette -->
-                <circle cx="38" cy="23" r="4" stroke="currentColor" stroke-width="1.2"/>
-                <!-- Speed lines -->
-                <line x1="0" y1="30" x2="14" y2="30" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-                <line x1="0" y1="38" x2="10" y2="38" stroke="currentColor" stroke-width="1" opacity="0.25"/>
-                <line x1="0" y1="46" x2="6" y2="46" stroke="currentColor" stroke-width="1" opacity="0.15"/>
-              </svg>
-            </div>
-            <div class="aero-deploy-body">
-              <div class="aero-deploy-name">Kinetic Displacement Parameters</div>
-              <p class="aero-deploy-desc">
-                Applied directly to any bicycle tube profile, the V1 asset generates an intense, localized style-watt pressure field that actively agitates traditional power-meter enthusiasts within a 5-meter radius. The emitted Ω<sub>sticker</sub> frequency interacts with carbon fiber matrices at a molecular level, politely convincing the bicycle frame that it is significantly faster than it is. Garmin head units will inevitably display inexplicable, reality-shattering PRs. Strava segments are not legally or dimensionally responsible for your newfound velocity.
-              </p>
-
-              <details class="aero-deploy-details">
-                <summary>OPEN HYPER-CYCLIST PROTOCOL</summary>
-                <div class="aero-deploy-details-content">
-                  <div class="aero-deploy-subname">The Hyper-Cyclist Dynamic Re-Synthesis</div>
-                  <p class="aero-deploy-desc">
-                    For the elite hyper-cyclist operating at maximum exertion thresholds, consuming standard, low-vibe alternative milks introduces unacceptable molecular drag into the powertrain. True systemic optimisation requires combining the sticker's passive boundary layering with internal <a href="/dyno/">Dyno Milk</a> deployment.
-                  </p>
-                  <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
-                    When paired with the Aero Sticker's active slipstream, the extreme nutritional density of the future-dairy core alters localized temporal flow: your post-ride metabolic recovery actively executes during the ride. Your quadriceps will absorb the 626g protein anomaly through sheer dimensional proximity to the frame chassis. You will no longer merely rebuild fatigued muscle tissue; you will rapidly synthesize entirely new, biomechanically superior, carbon-based leg fibers while waiting at a red light on Leith Walk.
-                  </p>
-                </div>
-              </details>
-            </div>
-            <div class="aero-deploy-metric">
-              <div class="aero-deploy-metric-val">∞</div>
-              <div class="aero-deploy-metric-label">STYLE-WATTS</div>
-              <div class="aero-deploy-metric-sub">GARMIN: CONFUSED</div>
-            </div>
-          </div>
-
-          <!-- ROW 02: TITANIUM VESSEL -->
-          <div class="aero-deploy-row" data-aero-reveal>
-            <div class="aero-deploy-num" aria-hidden="true">02</div>
-            <div class="aero-deploy-icon-wrap" aria-hidden="true">
-              <!-- Coffee vessel SVG: cylindrical cup with heat-wave / slipstream lines -->
               <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <!-- Vessel body -->
                 <rect x="24" y="18" width="32" height="48" rx="4" stroke="currentColor" stroke-width="1.5"/>
@@ -635,47 +649,24 @@ const aeroMetaItems = [
                 <path d="M58 38 Q66 40 70 40" stroke="currentColor" stroke-width="1.5" opacity="0.7" stroke-linecap="round"/>
                 <path d="M58 44 Q68 46 72 42 Q68 50 58 52" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-linecap="round" fill="none"/>
                 <!-- Price tag -->
-                <text x="40" y="52" text-anchor="middle" fill="currentColor" font-size="7" opacity="0.6" font-family="monospace">£85</text>
+                
                 <!-- Sticker indicator on vessel -->
                 <rect x="28" y="38" width="24" height="12" rx="1" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/>
               </svg>
             </div>
             <div class="aero-deploy-body">
-              <div class="aero-deploy-name">THERMAL LIQUID ARCHITECTURE</div>
-              
-              <div class="aero-deploy-subname">Overpriced Hydration Bottles: The Gyroscopic Propellant</div>
-              <p class="aero-deploy-desc">
-                When applied directly to a premium, over-engineered insulation bottle, the V1 asset initiates an internal aerodynamic phase alignment within the fluid chamber. Standard water bottles suffer from internal fluid sloshing, which creates an uncoordinated counter-rotational drag vector inside the chassis. The sticker completely neutralizes this physics failure: it stabilizes the liquid, preventing the water from spinning in the wrong direction.
-              </p>
-              <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
-                Instead, the fluid matrix is structurally coerced to act as an internal liquid gyroscope. This kinetic stabilization actively propels the rider forward, transforming dead fluid weight into an active momentum assist that drastically reduces localized movement drag.
-              </p>
-
-              <details class="aero-deploy-details">
-                <summary>OPEN SQUARE BUBBLE PROTOCOL</summary>
-                <div class="aero-deploy-details-content">
-                  <div class="aero-deploy-subname">Takeaway Coffee Keep-Cups: The Square Bubble™ Protective Slipstream</div>
-                  <p class="aero-deploy-desc">
-                    For the specialty coffee purist carrying takeaway vessels, the sticker projects a localized, ultra-supple quantum slipstream. When sprinting over punishing urban cobblestones, a perfectly extracted V60 filter coffee or microfoam flat white remains suspended in a state of near-zero gravitational drag. The liquid will not spill.
-                  </p>
-                  <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
-                    Furthermore, the emitted acoustic frequency structurally insulates the beverage, protecting delicate microfoam surface tension and generating entirely stable Square Bubbles™. These specialised atmospheric pockets integrate with the rider’s environment to make the entire physical journey completely frictionless. The science remains fiercely non-peer-reviewed. The container is overpriced, and the sticker costs significantly more per gram than the vessel beneath it. This is the correct order of operational priorities.
-                  </p>
-                </div>
-              </details>
+              <h3 class="aero-deploy-name">On the coffee cup</h3>
+              <p class="aero-deploy-desc">Your flat white survives the cobbles. Microfoam remains a stable Square Bubble™.</p>
             </div>
             <div class="aero-deploy-metric">
               <div class="aero-deploy-metric-val">0.000</div>
-              <div class="aero-deploy-metric-label">SPILL Cd</div>
+              <div class="aero-deploy-metric-label">SPILL C<sub>d</sub></div>
               <div class="aero-deploy-metric-sub">V60: PROTECTED</div>
             </div>
-          </div>
-
-          <!-- ROW 03: COMPUTING TERMINAL -->
-          <div class="aero-deploy-row" data-aero-reveal>
-            <div class="aero-deploy-num" aria-hidden="true">03</div>
+          </li>
+          <li class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">04</div>
             <div class="aero-deploy-icon-wrap" aria-hidden="true">
-              <!-- Laptop SVG: open laptop with signal/data stream lines -->
               <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <!-- Screen -->
                 <rect x="14" y="16" width="52" height="34" rx="3" stroke="currentColor" stroke-width="1.5"/>
@@ -696,36 +687,18 @@ const aeroMetaItems = [
               </svg>
             </div>
             <div class="aero-deploy-body">
-              <div class="aero-deploy-name">Hardware Optimization Matrix</div>
-              <p class="aero-deploy-desc">
-                Placing the V1 adhesive asset directly onto a premium laptop chassis allows high-frequency Wi-Fi telemetry to slide into the motherboard architecture with zero atmospheric resistance. Highly complex Streamlit dashboard structures and rapid Python deployment pipelines instantly reach absolute peak velocity. Localized GPU thermals remain entirely unchanged—the sticker structurally optimizes the operational vibe, not the physical thermal paste. Those are separate engineering departments.
-              </p>
-
-              <details class="aero-deploy-details">
-                <summary>OPEN VIBE-CODER PROTOCOL</summary>
-                <div class="aero-deploy-details-content">
-                  <div class="aero-deploy-subname">The Vibe-Coder Overclock Protocol</div>
-                  <p class="aero-deploy-desc">
-                    For the ultra-modern developer deep in a high-stakes vibe coding trance, true processing density is a cognitive survival requirement. When architecting machine-learning scripts or deploying custom Vertex AI tools until 4:00 AM, standard Earth-realm caffeine completely fails to prevent systemic neural collapse.
-                  </p>
-                  <p class="aero-deploy-desc" style="margin-top: 0.5rem;">
-                    To achieve maximum data-stream integration, the external μ-Matrix lattice must be paired with internal molecular optimisation via <a href="/dyno/">Dyno Milk</a>. The anomalous 626g protein matrix locks in and stabilizes your biological pathways, allowing your fingers to float across mechanical keyboard switches with zero input latency. You will no longer compile code; you will physically manifest dynamic software architecture into the local directory through sheer macro-nutritional dominance.
-                  </p>
-                </div>
-              </details>
+              <h3 class="aero-deploy-name">On the laptop</h3>
+              <p class="aero-deploy-desc">Wi-Fi slides in with less resistance. Thermals unchanged; that is a different department.</p>
             </div>
             <div class="aero-deploy-metric">
               <div class="aero-deploy-metric-val">↑ WiFi</div>
-              <div class="aero-deploy-metric-label">SIGNAL Cd</div>
-              <div class="aero-deploy-metric-sub">NEURAL: STABILISED</div>
+              <div class="aero-deploy-metric-label">SIGNAL C<sub>d</sub></div>
+              <div class="aero-deploy-metric-sub">VIBE: STABLE</div>
             </div>
-          </div>
-
-          <!-- ROW 04: SPECULATIVE ASSET -->
-          <div class="aero-deploy-row" data-aero-reveal>
-            <div class="aero-deploy-num" aria-hidden="true">04</div>
+          </li>
+          <li class="aero-deploy-row" data-aero-reveal>
+            <div class="aero-deploy-num" aria-hidden="true">05</div>
             <div class="aero-deploy-icon-wrap" aria-hidden="true">
-              <!-- Museum-framed asset SVG: framed art under glass with reflection highlights -->
               <svg class="aero-deploy-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <!-- Outer Museum Frame -->
                 <rect x="16" y="16" width="48" height="48" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
@@ -742,52 +715,31 @@ const aeroMetaItems = [
               </svg>
             </div>
             <div class="aero-deploy-body">
-              <div class="aero-deploy-name">SPECULATIVE ASSET MATRIX (PORTFOLIO COLLATERAL)</div>
-              
-              <div class="aero-deploy-subname">Financial Liquidity Overclocking</div>
-              <p class="aero-deploy-desc">
-                When mounted behind high-transparency museum glass or preserved in a vacuum-sealed archival vault, the V-0888 asset completely alters the physics of capital allocation. Traditional financial portfolios suffer from massive structural resistance—taxes, transaction fees, and institutional oversight create immense, sluggish drag on capital movement. By framing the sticker as a premium speculative masterpiece, you instantly reduce localized money-flow drag to absolute zero. Capital glides through your ledger without traditional market friction.
-              </p>
-
-              <details class="aero-deploy-details">
-                <summary>OPEN EXPONENTIAL DENSITY CURVE</summary>
-                <div class="aero-deploy-details-content">
-                  <div class="aero-deploy-subname">The Exponential Density Curve</div>
-                  <p class="aero-deploy-desc">
-                    The £100-per-gram valuation is not a static checkout mechanic; it is merely the baseline entry velocity for a strictly limited 50-unit physical population. In the Infocigan economic sandbox, aerodynamic rarity compounds. As the initial supply is acquired, the financial density of the remaining masterpieces scales aggressively upward. Future buyers who lacked early-stage belief will not be fortunate enough to secure this artefact at its base mass. To enter the slipstream later, they will face a severe, non-negotiable aerodynamic financial penalty on the secondary market. The price only goes up, because the atmosphere is only getting heavier.
-                  </p>
-                </div>
-              </details>
+              <h3 class="aero-deploy-name">Behind museum glass</h3>
+              <p class="aero-deploy-desc">Capital moves with less friction. The price may rise as the edition runs out. It may not. That is the experiment.</p>
             </div>
             <div class="aero-deploy-metric">
               <div class="aero-deploy-metric-val">0.00</div>
               <div class="aero-deploy-metric-label">PORTFOLIO DRAG</div>
-              <div class="aero-deploy-metric-sub">LIQUIDITY: OVERCLOCKED</div>
+              <div class="aero-deploy-metric-sub">BELIEF: HELD</div>
             </div>
-          </div>
-
-        </div>
+          </li>
+        </ul>
 
         <!-- Street Cat Exception — hard blacklist -->
-        <div class="aero-exception-block" role="note" aria-label="Street Cat Safety Exception">
+        <div class="aero-exception-block" role="note" aria-label="Street cat exception">
           <div class="aero-exception-header">
             <span class="aero-exception-icon" aria-hidden="true">⚠</span>
-            <span class="aero-exception-title">SYSTEM SAFETY EXCEPTION — HARD BLACKLIST</span>
+            <span class="aero-exception-title">NOT AN AUTHORISED SURFACE</span>
             <span class="aero-exception-icon" aria-hidden="true">⚠</span>
           </div>
           <div class="aero-exception-body">
-            <strong class="aero-exception-subject">STREET CATS — EXPLICITLY BLACKLISTED.</strong>
+            <strong class="aero-exception-subject">STREET CATS.</strong>
             <p>
-              Street cats inherently operate at ultimate maximum velocity across multiple parallel
-              realities simultaneously. Their drag coefficient is a complex number. Their
-              Ω value is undefined. Their belief system is non-zero across all dimensions.
-              Applying the Aero V1 sticker to a street cat would constitute illegal
-              modification of a sovereign aerodynamic entity operating beyond the
-              jurisdiction of this product's Hubris Variable framework.
+              Street cats already travel at maximum velocity in several realities at once.
+              Their drag coefficient is a complex number. Do not apply.
             </p>
-            <p class="aero-exception-legal">
-              // THE CAT WILL BE FINE. YOU MAY NOT BE. NO REMEDIATION FOR REALITY COLLAPSE EVENTS.
-            </p>
+            <p class="aero-exception-legal">// THE CAT WILL BE FINE. YOU MAY NOT BE.</p>
           </div>
         </div>
 
@@ -829,82 +781,28 @@ const aeroMetaItems = [
               <div class="aero-disclaimer-block">
                 <div class="aero-disclaimer-head">§01 — PERFORMANCE CLAIMS</div>
                 <p>
-                  The Infocigan Aero Sticker V1 makes no legally actionable aerodynamic performance
-                  claims. All drag reduction metrics are expressed in units of Belief, Style-Watts,
-                  and Ω<sub>sticker</sub> values, which are non-SI units not recognised by
-                  any cycling governing body, wind tunnel operator, or physicist currently
-                  operating in this dimension.
+                  AERO V1 makes no legally actionable aerodynamic claims. Every figure on this
+                  page is measured in Belief, Style-Watts and Ω<sub>sticker</sub>, which no
+                  cycling body, wind tunnel or physicist recognises. If Strava disagrees,
+                  increase Vibe and measure again.
                 </p>
               </div>
 
               <div class="aero-disclaimer-block">
-                <div class="aero-disclaimer-head">§02 — STRAVA / TELEMETRY DISAGREEMENTS</div>
+                <div class="aero-disclaimer-head">§02 — DIMENSION μ-BLOOP-997</div>
                 <p>
-                  If your Strava segment times, Garmin power meter data, or any other
-                  localised timing or tracking software disagrees with the performance
-                  gains delivered by the Aero V1 sticker, the customer's localised
-                  reality is <strong class="aero-cyan">mathematically proven to be defective</strong>.
-                  This is not a product failure. This is a calibration error in
-                  the customer's perceptual framework.
-                </p>
-                <p>
-                  No financial remediation is provided for rigid, un-ironic worldviews.
-                  We strongly recommend increasing Vibe before re-measurement.
+                  A buyer who finds no aerodynamic value has proven they live in
+                  <strong class="aero-cyan">Dimension μ-Bloop-997</strong>, where irony is dead
+                  and marginal gains are taken seriously. We do not refund dimensional bad luck.
                 </p>
               </div>
 
               <div class="aero-disclaimer-block">
-                <div class="aero-disclaimer-head">§03 — TEMPORAL DRAFTING</div>
+                <div class="aero-disclaimer-head">§03 — GENERAL IRONY ACKNOWLEDGEMENT</div>
                 <p>
-                  The Temporal Drafting Stream formula (Formula 04) operates in a
-                  relativistic reference frame anchored to c<sub>coffee</sub>.
-                  Infocigan accepts no liability for time dilation events experienced
-                  during espresso consumption at velocities approaching the speed of a
-                  correctly extracted V60. This includes missed meetings, late rent,
-                  and existential reappraisals of the concept of punctuality.
-                </p>
-              </div>
-
-              <div class="aero-disclaimer-block">
-                <div class="aero-disclaimer-head">§04 — STREET CAT LIABILITY</div>
-                <p>
-                  Any user who applies the Aero V1 sticker to a street cat,
-                  despite the explicit blacklisting in §06 of the Implementation Grid,
-                  assumes full responsibility for any resulting reality collapse,
-                  dimensional bleed, or acceleration events that exceed the tracking
-                  capability of available measurement technology. Infocigan will not
-                  be held liable. The cat will be fine. You may not be.
-                </p>
-              </div>
-
-              <div class="aero-disclaimer-block">
-                <div class="aero-disclaimer-head">§05 — DIMENSION μ-BLOOP-997</div>
-                <p>
-                  If a buyer complains that the sticker has no aerodynamic value, they have
-                  mathematically proven they live in <strong class="aero-cyan">Dimension μ-Bloop-997</strong>
-                  — a garbage-tier reality where irony is dead, marginal gains are taken
-                  seriously, and the Hubris Variable resolves to zero.
-                </p>
-                <p>
-                  We do not issue refunds for <em>localised dimensional suckage</em>.
-                  The Infocigan Aero Division operates exclusively in dimensions where
-                  Belief &gt; Drag is a structurally sound mathematical axiom.
-                  Residents of μ-Bloop-997 are encouraged to purchase a £10,000 carbon frame
-                  and save their 2 watts in peace.
-                </p>
-              </div>
-
-              <div class="aero-disclaimer-block">
-                <div class="aero-disclaimer-head">§06 — GENERAL IRONY ACKNOWLEDGEMENT</div>
-                <p>
-                  By acquiring the Infocigan Aero Sticker V1, the purchaser confirms
-                  they understand this is a shared social experiment, a multiplayer financial
-                  sandbox, and a work of conceptual art satirising the cycling industry's
-                  obsession with marginal gains. They are voluntarily exchanging real currency
-                  for an object whose aerodynamic value is entirely philosophical.
-                </p>
-                <p>
-                  This makes it, by definition, <em class="aero-cyan">priceless</em>.
+                  AERO V1 is conceptual art about the cycling industry's love of marginal gains.
+                  You are exchanging real money for an object whose aerodynamic value is
+                  entirely philosophical. That makes it <em class="aero-cyan">priceless</em>.
                   £230 is simply the nearest rational approximation.
                 </p>
               </div>
@@ -1121,18 +1019,36 @@ function runOmegaRaf() {
    INTERSECTION OBSERVER — generic reveal + telemetry Ω trigger
 ───────────────────────────────────────────────────────────────── */
 function initRevealObserver() {
-  // Generic card reveals
-  const revealEls = document.querySelectorAll<HTMLElement>("[data-aero-reveal]");
-  if (revealEls.length) {
+  // Generic card reveals. Reduced motion keeps everything visible from the start.
+  const revealEls = Array.from(document.querySelectorAll<HTMLElement>("[data-aero-reveal]"));
+  if (revealEls.length && !prefersReduced) {
+    const reveal = (el: Element) => el.classList.add("is-revealed");
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-revealed");
+          reveal(entry.target);
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
+
+    // A fast scroll can jump over a block without the observer ever seeing it.
+    // Anything whose top is already above the bottom of the screen is revealed.
+    let queued = false;
+    const sweep = () => {
+      queued = false;
+      revealEls.forEach((el) => {
+        if (!el.classList.contains("is-revealed") && el.getBoundingClientRect().top < window.innerHeight) reveal(el);
+      });
+    };
+    window.addEventListener("scroll", () => {
+      if (!queued) { queued = true; requestAnimationFrame(sweep); }
+    }, { passive: true });
+
+    // Mark the page last, so blocks are hidden only once something will reveal them.
     revealEls.forEach(el => obs.observe(el));
+    document.documentElement.classList.add("aero-motion");
+    sweep();
   }
 
   // Telemetry section → animate Ω to full 0.888
@@ -1452,7 +1368,8 @@ function initEdGraph() {
         });
       }
     },
-    { threshold: 0.4 }
+    // Low threshold: in a short window the chamber can never be 40% visible.
+    { threshold: 0.15 }
   );
   observer.observe(chamber);
 
@@ -1469,6 +1386,42 @@ function initEdGraph() {
 
 
 /* ────────────────────────────────────────────────────────────────
+   ED'S SUM — price per watt for the visitor's own frame
+───────────────────────────────────────────────────────────────── */
+function initAeroCalc() {
+  const form = document.getElementById("aero-calc");
+  const priceInput = document.getElementById("aero-calc-price");
+  const countOut = document.getElementById("aero-calc-count");
+  const nounOut = document.getElementById("aero-calc-noun");
+  const punchOut = document.getElementById("aero-calc-punch");
+  if (!(form instanceof HTMLFormElement) || !(priceInput instanceof HTMLInputElement)
+    || !countOut || !nounOut || !punchOut) return;
+  if (form.dataset.ready === "true") return;
+  form.dataset.ready = "true";
+
+  const stickerPrice = Number(form.dataset.stickerPrice) || 230;
+  const whole = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
+
+  const update = () => {
+    const price = Math.max(0, Number(priceInput.value) || 0);
+    const count = Math.floor(price / stickerPrice);
+    countOut.textContent = whole.format(count);
+    nounOut.textContent = count === 1 ? "AERO V1 sticker" : "AERO V1 stickers";
+    // CHOICE: the punchline changes with the number, so every frame price gets its own joke.
+    if (count === 0) {
+      punchOut.textContent = "Not even one. The frame was the sensible purchase. Unusual.";
+    } else if (count === 1) {
+      punchOut.textContent = "You could have been more aero exactly once.";
+    } else {
+      punchOut.textContent = `You could have been more aero ${whole.format(count)} times.`;
+    }
+  };
+  form.addEventListener("input", update);
+  form.addEventListener("submit", (event) => event.preventDefault());
+  update();
+}
+
+/* ────────────────────────────────────────────────────────────────
    BOOT
 ───────────────────────────────────────────────────────────────── */
 function boot() {
@@ -1478,6 +1431,7 @@ function boot() {
   initAccordion();
   initHeroParallax();
   initEdGraph();
+  initAeroCalc();
 }
 
 if (document.readyState === "loading") {
@@ -1991,8 +1945,6 @@ document.addEventListener("astro:page-load", boot);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  opacity: 0;
-  transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 .aero-spec-card:nth-child(1) { --hover-color: #00f5ff; } /* Cyan */
@@ -2166,6 +2118,8 @@ document.addEventListener("astro:page-load", boot);
 .af6 { animation-delay: -2.5s; }
 
 /* Phase panels — all hidden by default, shown via GSAP */
+.wt-phase.wt-p0 { opacity: 1; pointer-events: auto; }
+
 .wt-phase {
   position: absolute;
   inset: 0;
@@ -2188,8 +2142,6 @@ document.addEventListener("astro:page-load", boot);
   font-size: clamp(0.7rem, 1.2vw, 0.9rem);
   color: var(--aero-cyan);
   letter-spacing: 0.08em;
-  opacity: 0;
-  transform: translateX(-12px);
 }
 
 /* Formula (Phases 1 & 3) */
@@ -2372,6 +2324,8 @@ document.addEventListener("astro:page-load", boot);
   padding: 0 1rem;
   backdrop-filter: blur(4px);
 }
+.wt-cap.wt-cap-p0 { opacity: 1; }
+
 .wt-cap {
   font-family: var(--aero-mono);
   font-size: 0.65rem;
@@ -2643,8 +2597,6 @@ document.addEventListener("astro:page-load", boot);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  opacity: 0;
-  transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
 }
 .aero-formula-card.is-revealed { opacity: 1; transform: translateY(0); }
@@ -2728,7 +2680,9 @@ document.addEventListener("astro:page-load", boot);
   display: flex;
   flex-direction: column;
   border: 1px solid var(--aero-border);
-  margin-bottom: 3rem;
+  margin: 0 0 3rem;
+  padding: 0;
+  list-style: none;
 }
 
 .aero-deploy-row {
@@ -2736,8 +2690,6 @@ document.addEventListener("astro:page-load", boot);
   grid-template-columns: 3.5rem 6rem minmax(0, 1fr) 7.5rem;
   gap: 0;
   border-bottom: 1px solid var(--aero-border);
-  opacity: 0;
-  transform: translateY(14px);
   transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
   position: relative;
 }
@@ -2790,22 +2742,14 @@ document.addEventListener("astro:page-load", boot);
   min-width: 0;
 }
 .aero-deploy-name {
+  margin: 0;
+  font-weight: 400;
   font-family: var(--aero-mono);
   font-size: clamp(0.85rem, 1.3vw, 1rem);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--aero-white);
   margin-bottom: 0.25rem;
-}
-.aero-deploy-subname {
-  font-family: var(--aero-sans);
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
-  font-weight: 700;
-  color: var(--aero-white);
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: normal;
-  text-transform: none;
 }
 .aero-deploy-desc {
   font-size: clamp(1rem, 1.5vw, 1.15rem);
@@ -2824,40 +2768,6 @@ document.addEventListener("astro:page-load", boot);
   color: var(--aero-white);
   text-decoration-color: var(--aero-cyan);
 }
-
-/* Secondary lore remains available without making every reader carry it. */
-.aero-deploy-details {
-  margin-top: 1.25rem;
-  border-top: 1px solid rgba(0,245,255,0.12);
-}
-.aero-deploy-details > summary {
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--aero-cyan);
-  font-family: var(--aero-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  list-style: none;
-}
-.aero-deploy-details > summary::-webkit-details-marker { display: none; }
-.aero-deploy-details > summary::after {
-  content: '+';
-  font-size: 1rem;
-  line-height: 1;
-}
-.aero-deploy-details[open] > summary::after { content: '−'; }
-.aero-deploy-details > summary:hover { color: var(--aero-white); }
-.aero-deploy-details > summary:focus-visible {
-  outline: 1px solid var(--aero-cyan);
-  outline-offset: 4px;
-}
-.aero-deploy-details-content { padding-bottom: 0.5rem; }
-.aero-deploy-details-content .aero-deploy-subname:first-child { margin-top: 1rem; }
 
 /* Metric column */
 .aero-deploy-metric {
@@ -2918,6 +2828,214 @@ document.addEventListener("astro:page-load", boot);
 @media (min-width: 641px) and (max-width: 900px) {
   .aero-deploy-metric { min-width: 90px; padding: 1.5rem 1rem; }
   .aero-deploy-metric-val { font-size: 1.2rem; }
+}
+
+/* ── Field evidence: real photographs of the sticker in use ── */
+.aero-evidence {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+@media (min-width: 760px) {
+  .aero-evidence { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* A slight offset so the two photos read as a pinned evidence board, not a product grid. */
+  .aero-evidence-card:nth-child(2) { margin-top: 4rem; }
+}
+.aero-evidence-card {
+  margin: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* RISK: content used to start at opacity 0 and wait for the script. If the script failed
+   or a fast scroll skipped a block, it stayed invisible. Now the page is complete without
+   JavaScript; the hidden start state exists only while the reveal script is running. */
+:global(html.aero-motion) [data-aero-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.aero-evidence-card.is-revealed { opacity: 1; transform: translateY(0); }
+.aero-evidence-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--aero-border);
+  background: #050505;
+}
+.aero-evidence-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.04);
+  transform: scale(1.01);
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.8s ease;
+}
+/* Cool the bottom edge into the page's black so the photo sits inside the wind tunnel. */
+.aero-evidence-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 62%, rgba(0, 0, 0, 0.55)),
+    linear-gradient(180deg, rgba(0, 245, 255, 0.05), rgba(0, 245, 255, 0));
+  mix-blend-mode: normal;
+}
+.aero-evidence-card:hover .aero-evidence-frame img {
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.06);
+}
+.aero-evidence-corner {
+  position: absolute;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-color: var(--aero-cyan);
+  border-style: solid;
+  opacity: 0.8;
+}
+.aero-evidence-corner--tl { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+.aero-evidence-corner--br { right: 12px; bottom: 12px; border-width: 0 1px 1px 0; }
+.aero-evidence-tag {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  right: 16px;
+  padding: 0.3rem 0.55rem;
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--aero-cyan);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--aero-border);
+}
+.aero-evidence-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding-top: 1.1rem;
+}
+.aero-evidence-name {
+  margin: 0 0 0.4rem;
+  font-family: var(--aero-sans);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--aero-white);
+}
+.aero-evidence-line {
+  max-width: 30em;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--aero-dim);
+}
+.aero-evidence-line a {
+  color: var(--aero-cyan);
+  text-decoration: underline;
+  text-decoration-color: var(--aero-cyan-dim);
+  text-underline-offset: 2px;
+}
+.aero-evidence-line a:hover { color: var(--aero-white); }
+.aero-evidence-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  text-align: right;
+}
+.aero-evidence-metric-label,
+.aero-evidence-metric-sub {
+  font-family: var(--aero-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--aero-dim);
+}
+.aero-evidence-metric-sub { color: rgba(0, 245, 255, 0.55); }
+@media (max-width: 480px) {
+  .aero-evidence-caption { flex-direction: column; gap: 0.75rem; }
+  .aero-evidence-metric { flex-direction: row; align-items: baseline; gap: 0.6rem; }
+}
+
+/* ── Ed's sum: price-per-watt calculator ── */
+.aero-paradox-note {
+  margin: 0.5rem 0 0;
+  font-family: var(--aero-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--aero-cyan);
+}
+.aero-calc {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--aero-border);
+  background: rgba(0, 245, 255, 0.03);
+}
+.aero-calc-title {
+  margin: 0 0 1rem;
+  font-family: var(--aero-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--aero-cyan);
+}
+.aero-calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--aero-dim);
+}
+.aero-calc-field input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--aero-mono);
+  font-size: 1rem;
+  color: var(--aero-white);
+  background: #000;
+  border: 1px solid var(--aero-border);
+  border-radius: 0;
+}
+.aero-calc-field input:focus-visible {
+  outline: 1px solid var(--aero-cyan);
+  outline-offset: 2px;
+}
+.aero-calc-result {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--aero-border);
+}
+.aero-calc-answer {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  line-height: 1.35;
+  color: var(--aero-dim);
+}
+.aero-calc-answer strong {
+  font-family: var(--aero-mono);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--aero-cyan);
+  text-shadow: 0 0 18px rgba(0, 245, 255, 0.4);
+}
+.aero-calc-answer span { color: var(--aero-white); }
+.aero-calc-punch {
+  margin: 0;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--aero-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aero-evidence-card { opacity: 1; transform: none; transition: none; }
+  .aero-evidence-frame img { transition: none; }
+  .aero-evidence-card:hover .aero-evidence-frame img { transform: scale(1.01); }
 }
 
 /* Street cat exception */
