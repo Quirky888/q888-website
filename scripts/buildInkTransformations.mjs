@@ -37,7 +37,15 @@ try {
     const source = await sharp(data, { raw: { width, height, channels: 3 } })
       .resize(size, size, { fit: "contain", background: "#000000" }).png().toBuffer();
     await sharp(source).webp({ quality: 90 }).toFile(new URL(`${name}.webp`, output).pathname);
-    await saveFrame(source, 1.8);
+    await saveFrame(source, 1.2);
+    const blend = async (from, to, amount) => {
+      const a = await sharp(from).removeAlpha().raw().toBuffer();
+      const b = await sharp(to).removeAlpha().raw().toBuffer();
+      const mixed = Buffer.alloc(a.length);
+      for (let i = 0; i < mixed.length; i++) mixed[i] = Math.round(a[i] * (1 - amount) + b[i] * amount);
+      return sharp(mixed, { raw: { width: size, height: size, channels: 3 } }).png().toBuffer();
+    };
+    let previous = source;
 
     const levels = [128, 96, 72, 56, 44, 36, 28, 22, 18, 14, 11, 9, 7, 6, 5, 4, 3, 2, 1];
     for (const [step, columns] of levels.entries()) {
@@ -68,8 +76,21 @@ try {
         .resize(frameWidth, frameHeight, { kernel: "nearest", fit: "fill" })
         .extend({ left: Math.floor((size - frameWidth) / 2), right: Math.ceil((size - frameWidth) / 2), top: Math.floor((size - frameHeight) / 2), bottom: Math.ceil((size - frameHeight) / 2), background: "#000000" })
         .png().toBuffer();
-      await saveFrame(frame, columns === 1 ? 2.4 : 0.18);
+      // Ease the largest block changes without changing their calculated colours.
+      if (columns <= 7) {
+        await saveFrame(await blend(previous, frame, 1 / 3), 0.06);
+        await saveFrame(await blend(previous, frame, 2 / 3), 0.06);
+      }
+      await saveFrame(frame, columns === 1 ? 1.2 : columns <= 7 ? 0.06 : 0.18);
+      previous = frame;
       if (columns === 1) await sharp(frame).webp({ lossless: true }).toFile(new URL(`${name}-colour.webp`, output).pathname);
+    }
+    // Let the source return through a soft haze; the loop ends on its exact first frame.
+    for (let step = 1; step <= 16; step++) {
+      const t = step / 16;
+      const eased = t * t * (3 - 2 * t);
+      const haze = step === 16 ? source : await sharp(source).blur(Math.max(0.3, (1 - eased) * 12)).png().toBuffer();
+      await saveFrame(await blend(previous, haze, eased), 0.08);
     }
     const list = join(temporary, `${name}.txt`);
     await writeFile(list, frames.map(frame => `file '${frame.path}'\nduration ${frame.duration}`).join("\n") + `\nfile '${frames.at(-1).path}'\n`);

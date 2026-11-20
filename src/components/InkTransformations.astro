@@ -39,64 +39,135 @@ import transformations from "../data/inkTransformations.json";
 
 <script>
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const figures = document.querySelectorAll<HTMLElement>("[data-ink-transformation]");
-  for (const [index, figure] of figures.entries()) {
+  const group = document.querySelector<HTMLElement>(".ink-transformations");
+  let visible = false;
+  const clips: Array<{ warm: () => Promise<string>; start: (when: number, explicit?: boolean) => void; stop: () => void }> = [];
+
+  for (const figure of group?.querySelectorAll<HTMLElement>("[data-ink-transformation]") ?? []) {
     const image = figure.querySelector("img");
     const canvas = figure.querySelector("canvas");
     const button = figure.querySelector("button");
     if (!image || !canvas || !button || !image.dataset.animation) continue;
     const poster = image.src;
     const animation = image.dataset.animation;
-    let played = false;
+    let source: Promise<string> | undefined;
+    let revision = 0;
     let scheduled: number | undefined;
-    const setButton = (playing: boolean) => {
-      figure.dataset.state = playing ? "playing" : "paused";
-      button.textContent = playing ? "Pause Ⅱ" : "Replay ↗";
-      button.setAttribute("aria-label", `${playing ? "Pause" : "Replay"} transformation: ${button.dataset.label}`);
+    let pausedByVisitor = false;
+
+    const setState = (state: "loading" | "playing" | "paused") => {
+      figure.dataset.state = state;
+      button.textContent = state === "loading" ? "Loading…" : state === "playing" ? "Pause Ⅱ" : "Replay ↗";
+      button.setAttribute("aria-label", `${state === "paused" ? "Replay" : "Pause"} transformation: ${button.dataset.label}`);
     };
-    const pause = () => {
+    const warm = (): Promise<string> => {
+      source ??= fetch(animation).then(response => {
+        if (!response.ok) throw new Error("Transformation unavailable");
+        return response.blob();
+      }).then(blob => new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      })).catch(error => { source = undefined; throw error; });
+      return source;
+    };
+    const stop = () => {
       window.clearTimeout(scheduled);
       scheduled = undefined;
-      if (figure.dataset.state !== "playing") return;
-      // GIF has no native pause API: preserve its current frame before unloading it.
-      if (image.complete && image.naturalWidth) {
+      revision++;
+      image.onload = null;
+      image.onerror = null;
+      if (figure.dataset.state === "playing" && image.complete && image.naturalWidth) {
+        // Leave a still frame while stopped: native GIF playback has no pause API.
         canvas.getContext("2d")?.drawImage(image, 0, 0, canvas.width, canvas.height);
         canvas.hidden = false;
         image.hidden = true;
       }
       image.src = poster;
-      setButton(false);
+      if (figure.dataset.state !== "idle") setState("paused");
     };
-    const play = () => {
+    const start = (when: number, explicit = false) => {
+      if (pausedByVisitor || !visible || document.hidden || (motion.matches && !explicit)) return;
       window.clearTimeout(scheduled);
-      scheduled = undefined;
-      played = true;
-      image.src = animation;
-      image.onload = () => {
-        if (figure.dataset.state !== "playing") return;
-        image.hidden = false;
-        canvas.hidden = true;
-      };
-      setButton(true);
+      const token = ++revision;
+      const current = () => token === revision && visible && !document.hidden;
+      setState("loading");
+      void warm().then(data => {
+        if (!current()) return;
+        scheduled = window.setTimeout(() => {
+          if (!current()) return;
+          // A valid MIME parameter gives each replay its own GIF clock without another download.
+          // Data images also work with the site's existing Content Security Policy.
+          const url = data.replace(";base64,", `;playback=${token};base64,`);
+          const finish = () => {
+            if (!current() || image.src !== url) return;
+            image.hidden = false;
+            canvas.hidden = true;
+            setState("playing");
+          };
+          image.onload = finish;
+          image.onerror = () => {
+            if (!current()) return;
+            source = undefined;
+            image.onload = null;
+            image.onerror = null;
+            image.src = poster;
+            image.hidden = false;
+            canvas.hidden = true;
+            setState("paused");
+          };
+          image.src = url;
+          if (image.complete && image.naturalWidth) finish();
+        }, Math.max(0, when - performance.now()));
+      }).catch(() => { if (current()) setState("paused"); });
     };
-    image.addEventListener("error", () => {
-      image.onload = null;
-      image.src = poster;
-      image.hidden = false;
-      canvas.hidden = true;
-      setButton(false);
-    }, { once: true });
     button.hidden = false;
-    button.addEventListener("click", () => figure.dataset.state === "playing" ? pause() : play());
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !played && !motion.matches && scheduled === undefined) {
-        // Every GIF has the same duration, preserving this half-second rhythm on each loop.
-        scheduled = window.setTimeout(play, index * 500);
+    button.addEventListener("click", () => {
+      if (figure.dataset.state === "playing" || figure.dataset.state === "loading") {
+        pausedByVisitor = true;
+        stop();
+      } else {
+        pausedByVisitor = false;
+        start(performance.now(), true);
       }
-      else if (!entry.isIntersecting) pause();
-    }, { threshold: 0.35 });
-    observer.observe(figure.closest(".ink-transformations") ?? figure);
-    motion.addEventListener("change", () => { if (motion.matches) pause(); });
-    document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
+    });
+    clips.push({ warm, start, stop });
+  }
+
+  if (group) {
+    let groupRevision = 0;
+    const sync = () => {
+      const token = ++groupRevision;
+      if (!visible || document.hidden || motion.matches) {
+        clips.forEach(clip => clip.stop());
+        return;
+      }
+      // Start one shared rhythm after loading, so a slower first file cannot miss its turn.
+      void Promise.allSettled(clips.map(clip => clip.warm())).then(() => {
+        if (token !== groupRevision || !visible || document.hidden || motion.matches) return;
+        const now = performance.now();
+        clips.forEach((clip, index) => clip.start(now + index * 500));
+      });
+    };
+    const warmObserver = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || motion.matches) return;
+      clips.forEach(clip => { void clip.warm().catch(() => {}); });
+      warmObserver.unobserve(group);
+    }, { rootMargin: "600px" });
+    warmObserver.observe(group);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (visible === entry.isIntersecting) return;
+      visible = entry.isIntersecting;
+      sync();
+    }, { threshold: 0.1 });
+    observer.observe(group);
+    document.addEventListener("visibilitychange", sync);
+    motion.addEventListener("change", sync);
+    window.addEventListener("pagehide", () => {
+      clips.forEach(clip => clip.stop());
+      observer.disconnect();
+      warmObserver.disconnect();
+    }, { once: true });
   }
 </script>

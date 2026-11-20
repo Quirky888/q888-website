@@ -1,5 +1,6 @@
 ---
 import InkClip from "./InkClip.astro";
+import InkMarginNote from "./InkMarginNote.astro";
 import InkMarquee from "./InkMarquee.astro";
 import InkTransformations from "./InkTransformations.astro";
 
@@ -26,15 +27,7 @@ const chapters = [
   { id: "gallery", number: "06", name: "Gallery" },
 ];
 
-const inkTraces = [
-  { name: "Visible trace", text: "One representative colour: the source image reduced to finite digital material." },
-  { name: "Source trace", text: "An optional compressed preview, no larger than 192 pixels on its longest edge." },
-  { name: "Machine description", text: "Machine-generated language, including its uncertainty and occasional mistakes." },
-  { name: "Place & personal note", text: "Date, place, provenance and your own note, kept distinct from machine interpretation." },
-  { name: "Learned concepts", text: "Concepts encountered through selected texts and PDFs after the Ink was created." },
-  { name: "Relationship history", text: "Relationships with other Inks, including how a connection became active, dormant or historical." },
-  { name: "Reconstruction", text: "An AI reconstruction: explicitly an invention, never presented as recovery of the source." },
-];
+
 ---
 
 <main class="ink-page" id="ink-top">
@@ -175,7 +168,13 @@ const inkTraces = [
         <p class="ink-sub">Drawing spends an Ink, and erasing gives it back.</p>
 
         <figure class="ink-stat" data-reveal data-bars>
-          <p class="ink-stat-line"><b class="ink-stat-num" data-count="406">406</b><span>of 587 Inks are grey.</span></p>
+          <div class="ink-stat-heading">
+            <p class="ink-stat-line">
+              <b class="ink-stat-num">406</b>
+              <span>of 587 Inks are grey.</span>
+            </p>
+            <InkMarginNote />
+          </div>
           <div class="ink-palette-bar" role="img" aria-label="Share of each colour in the artist’s collection: grey 406, yellow 85, blue 40, black 32, green 19, red 3, magenta 1, white 1.">
             {palette.map((colour, index) => (
               <span style={`flex:${colour.count} 1 0;background:${colour.colour};--i:${index}`} title={`${colour.name}: ${colour.count}`}></span>
@@ -186,7 +185,7 @@ const inkTraces = [
               <li><i style={`background:${colour.colour}`}></i>{colour.name} <b data-count={colour.count}>{colour.count}</b></li>
             ))}
           </ul>
-          <figcaption>My collection on 20 November 2026. Mostly grey.</figcaption>
+          <figcaption>My collection in November 2026. Mostly grey.</figcaption>
         </figure>
 
         <div class="ink-media-row" data-reveal>
@@ -295,6 +294,7 @@ const inkTraces = [
         </div>
       </div>
     </section>
+
   </div>
 
   <!-- ───────── Back into the light ───────── -->
@@ -307,70 +307,13 @@ const inkTraces = [
       <div class="ink-wrap">
         <p class="ink-mono ink-label">Digital Ink · version 3.2</p>
         <h2 id="cta-title" class="ink-mega ink-finale-title">Digital Ink <span>for iPad</span></h2>
-        <p class="ink-sub">Free on the App Store. Requires iPadOS 26 or later. iPad only.</p>
+        <p class="ink-sub">Built for the next millennium.<br />Currently available on iPad.</p>
+        <p class="ink-mono ink-finale-requirements">Free on the App Store · iPad only · iPadOS 26 or later</p>
         <div class="ink-actions">
           <a class="ink-button ink-button-primary ink-button-lg" href={APP_STORE} target="_blank" rel="noopener noreferrer">Get it on the App Store ↗</a>
           <a class="ink-button ink-button-lg" href="/privacy/">Read the privacy policy</a>
         </div>
         <p class="ink-fine">The app is free. The optional online description and memory reconstruction use a few credits, because they run on paid AI services.</p>
-
-        <details class="ink-record" id="technical-record">
-          <summary>
-            <span>
-              <span class="ink-mono ink-label">Open system notes</span>
-              <span class="ink-record-title" id="record-title">Under the hood</span>
-              <span class="ink-record-invite">For people who want the technical version.</span>
-            </span>
-            <span class="ink-record-toggle" aria-hidden="true">+</span>
-          </summary>
-          <div class="ink-record-content">
-            <p>Digital Ink is a native iPad application built in Swift and SwiftUI. Smart Inks and artworks are stored locally on the device. Online AI operations are optional and permission-based.</p>
-            <section class="ink-record-section">
-              <h3>App architecture</h3>
-              <p>A native iPadOS application with local Smart Inks, artworks, biographies, education, relationship history and provenance. Optional online operations travel through Digital Ink’s Cloudflare service to OpenAI.</p>
-            </section>
-            <section class="ink-record-section">
-              <h3>Smart Ink data &amp; source traces</h3>
-              <p>A selected image becomes finite material with a representative colour, identity and recorded origin. An Ink can carry seven kinds of information, with source evidence, personal notes, learned concepts and machine invention kept distinct.</p>
-              <dl class="ink-traces">
-                {inkTraces.map((trace) => (<div><dt>{trace.name}</dt><dd>{trace.text}</dd></div>))}
-              </dl>
-            </section>
-            <section class="ink-record-section">
-              <h3>Scarcity &amp; Ink rules</h3>
-              <p>Painting spends finite Ink; erasing can return material. Placed pixels remain connected to their source Ink. Colour, use and recorded history belong to the material rather than an unlimited colour picker.</p>
-            </section>
-            <section class="ink-record-section">
-              <h3>Education</h3>
-              <p>Selected texts and PDFs can add learned concepts to an Ink. These acquired concepts remain distinct from its original visual description and from personal notes. Education contributes to a developing biography; it is not a claim of consciousness.</p>
-            </section>
-            <section class="ink-record-section">
-              <h3>Relationships &amp; Ink Home</h3>
-              <p>Ink Home gives the collection a spatial form, with recorded connections and routes visible in a projected 3D environment. A connection can become active, dormant or historical without silently erasing its earlier state.</p>
-            </section>
-            <section class="ink-record-section">
-              <h3>Provenance</h3>
-              <p>An artwork can record who made it and which Smart Inks were involved. New artworks can carry stronger cryptographic verification without pretending older Inks always had it. Older records remain marked as Heritage Ink where the original evidence is incomplete.</p>
-            </section>
-            <section class="ink-record-section">
-              <h3>Privacy, AI &amp; model information</h3>
-              <div class="ink-boundaries">
-                <article><h4>On device · Apple Vision</h4><p>Apple-provided visual recognition can analyse selected images without credits or an internet connection. Its interpretations may be limited or inaccurate. Local Ink information stays on the device unless you choose a feature that shares selected information.</p></article>
-                <article><h4>Optional online · OpenAI</h4><p>With explicit permission for the operation, selected information travels through Cloudflare to OpenAI. Online descriptions and memory reconstructions use credits. Purchasing credits is never treated as consent.</p><p>Reconstruction generates a new image. It is an invention, never presented as recovery of the source photograph.</p></article>
-              </div>
-            </section>
-            <section class="ink-record-section">
-              <h3>How it is made</h3>
-              <p>Built with AI coding tools: Cursor, Antigravity, Codex and Claude Code. I started in September 2025 knowing very little about code and learned as I went.</p>
-            </section>
-          </div>
-        </details>
-
-        <aside class="ink-future" aria-labelledby="archive-title">
-          <p class="ink-mono ink-label">For the curious · a future project</p>
-          <h3 id="archive-title">The 116-Pixel Archive</h3>
-          <p>116 photographs would become 116 Smart Inks, so that their histories and relationships can grow as an artwork of their own. I would like to build it on Digital Ink so that it can be used on a phone. It does not exist yet.</p>
-        </aside>
       </div>
     </section>
 
@@ -586,7 +529,6 @@ const inkTraces = [
   .ink-dots a:focus-visible,
   .ink-zoom:focus-visible,
   .ink-more summary:focus-visible,
-  .ink-record summary:focus-visible,
   .ink-footer a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
@@ -865,6 +807,28 @@ const inkTraces = [
     margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
     max-inline-size: 60rem;
   }
+  .ink-stat-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  .ink-stat-heading > :global(.ink-margin-note) {
+    grid-row: 1;
+    justify-self: end;
+    max-inline-size: 30rem;
+  }
+  @media (min-width: 700px) {
+    .ink-stat-heading {
+      position: relative;
+      padding-block-start: clamp(5rem, 10vw, 8rem);
+    }
+    .ink-stat-heading > :global(.ink-margin-note) {
+      position: absolute;
+      inset-block-start: -2.5rem;
+      inset-inline-end: 0;
+      inline-size: 57%;
+    }
+  }
   .ink-stat-line {
     display: flex;
     flex-wrap: wrap;
@@ -881,7 +845,7 @@ const inkTraces = [
     color: var(--chip);
     font-variant-numeric: tabular-nums;
   }
-  .ink-stat-line span {
+  .ink-stat-line > span:last-child {
     font-family: var(--serif);
     font-style: italic;
     font-size: clamp(1.6rem, 3.4vw, 3rem);
@@ -1201,6 +1165,7 @@ const inkTraces = [
   :global(html.ink-js) .ink-dissolve--in {
     background: var(--paper);
   }
+
   :global(html.ink-js) .ink-dissolve--out {
     background: var(--dusk);
   }
@@ -1241,116 +1206,15 @@ const inkTraces = [
     font-variation-settings: normal;
     letter-spacing: -0.02em;
   }
+  .ink-finale-requirements {
+    margin-block-start: 1.5rem;
+    color: var(--fg-muted);
+  }
   .ink-fine {
     margin-block-start: 1.5rem;
     max-inline-size: 38rem;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--fg-muted);
-  }
-  .ink-future h3,
-  .ink-record-section h3 {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: clamp(1.25rem, 2vw, 1.6rem);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-  .ink-record {
-    margin-block-start: clamp(3rem, 7vw, 5rem);
-    border-block: 1px solid var(--line);
-  }
-  .ink-record summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-block: 1.75rem;
-    list-style: none;
-  }
-  .ink-record summary::-webkit-details-marker {
-    display: none;
-  }
-  .ink-record-title {
-    display: block;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
-    letter-spacing: -0.03em;
-  }
-  .ink-record-invite {
-    display: block;
-    margin-block-start: 0.35rem;
-    color: var(--fg-muted);
-  }
-  .ink-record-toggle {
-    flex: none;
-    display: grid;
-    place-items: center;
-    inline-size: 44px;
-    block-size: 44px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    font-size: 1.4rem;
-    transition: transform 0.3s ease;
-  }
-  .ink-record[open] .ink-record-toggle {
-    transform: rotate(45deg);
-  }
-  .ink-record-content {
-    padding-block-end: 2.5rem;
-    display: grid;
-    gap: 2rem;
-    max-inline-size: 50rem;
-  }
-  .ink-record-content p {
-    line-height: 1.7;
-    color: var(--fg-muted);
-  }
-  .ink-record-section h3 {
-    margin-block-end: 0.6rem;
-  }
-  .ink-traces {
-    display: grid;
-    gap: 0.9rem;
-    margin-block-start: 1.25rem;
-  }
-  .ink-traces div {
-    padding-inline-start: 1rem;
-    border-inline-start: 2px solid var(--plum);
-  }
-  .ink-traces dt {
-    font-weight: 600;
-    color: var(--fg);
-  }
-  .ink-traces dd {
-    margin: 0.15rem 0 0;
-    color: var(--fg-muted);
-    line-height: 1.6;
-  }
-  .ink-boundaries {
-    display: grid;
-    gap: 1.25rem;
-  }
-  .ink-boundaries article {
-    padding: 1.25rem;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-  }
-  .ink-boundaries h4 {
-    font-weight: 600;
-    margin-block-end: 0.5rem;
-    color: var(--fg);
-  }
-  .ink-future {
-    margin-block-start: clamp(3rem, 7vw, 5rem);
-    max-inline-size: 40rem;
-  }
-  .ink-future h3 {
-    margin-block-end: 0.6rem;
-  }
-  .ink-future p:not(.ink-mono) {
-    line-height: 1.7;
     color: var(--fg-muted);
   }
   .ink-footer {
@@ -1435,9 +1299,6 @@ const inkTraces = [
     }
     .ink-memory-grid {
       grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
-    }
-    .ink-boundaries {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (max-width: 899px) {
@@ -1649,7 +1510,6 @@ const inkTraces = [
       animation: none;
     }
     .ink-more summary i,
-    .ink-record-toggle,
     .ink-button,
     .ink-dots i,
     .ink-dot-num {
@@ -2188,6 +2048,36 @@ const inkTraces = [
     signal.addEventListener("abort", () => { observer.disconnect(); window.clearTimeout(timer); }, { once: true });
   }
 
+  // CHOICE: observe the number itself, independently of the generic reveal safety timer.
+  // Scrolling away cancels only the wait; once the pen starts, its marks are permanent.
+  function initMarginNote(signal: AbortSignal, reduced: MediaQueryList) {
+    const number = document.querySelector<HTMLElement>(".ink-stat-num");
+    const note = document.querySelector<SVGSVGElement>("[data-ink-note]");
+    if (!number || !note || note.classList.contains("is-written")) return;
+    if (reduced.matches) { note.classList.add("is-written"); return; }
+    let timer: number | undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      window.clearTimeout(timer);
+      if (!entry.isIntersecting) return;
+      timer = window.setTimeout(() => {
+        note.classList.add("is-writing");
+        observer.disconnect();
+      }, 1100);
+    }, { threshold: 0.6 });
+    observer.observe(number);
+    const lastLetter = Array.from(note.querySelectorAll(".ink-note-letter")).at(-1);
+    note.addEventListener("animationend", (event) => {
+      if (event.target === lastLetter) {
+        // Keep the final state even if animation styles are later removed.
+        note.classList.add("is-written");
+      }
+    }, { signal });
+    signal.addEventListener("abort", () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    }, { once: true });
+  }
+
   // Headlines are cut into words (letters for the hero) that rise out of their own line.
   function splitText(root: HTMLElement, byLetter: boolean) {
     let index = 0;
@@ -2505,6 +2395,7 @@ const inkTraces = [
     initScrollFx(fxs, reduced);
     initClips(signal, reduced);
     initReveal(signal, reduced);
+    initMarginNote(signal, reduced);
     initTone(fxs, signal);
     initLightbox(signal);
     fxs.kick();

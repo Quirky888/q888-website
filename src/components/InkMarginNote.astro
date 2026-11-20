@@ -1,0 +1,91 @@
+---
+// Single-line pen paths keep the reveal a drawn stroke, including each letter.
+const letters: Record<string, { width: number; path: string }> = {
+  M: { width: 30, path: "M1 28 Q5 11 10 1 Q8 17 9 27 Q18 8 23 3 Q21 18 24 28 L30 24" },
+  E: { width: 23, path: "M23 3 Q6 -1 7 9 Q7 14 18 13 Q2 12 3 23 Q4 32 23 24" },
+  a: { width: 20, path: "M16 13 Q7 8 3 19 Q0 29 8 28 Q14 26 17 13 Q13 29 19 27 L22 24" },
+  c: { width: 17, path: "M16 14 Q11 9 5 16 Q-2 26 5 28 Q10 30 18 24" },
+  e: { width: 18, path: "M2 22 Q18 18 13 13 Q7 9 3 19 Q-1 30 9 28 L19 23" },
+  g: { width: 20, path: "M17 13 Q8 8 3 19 Q0 28 7 28 Q14 26 17 14 Q13 41 6 41 Q-2 40 8 32 L22 24" },
+  h: { width: 21, path: "M2 28 Q14 0 9 0 Q3 1 3 25 Q14 7 17 14 Q18 17 14 25 Q14 31 22 24" },
+  i: { width: 11, path: "M6 14 Q0 32 12 24 M8 6 L8.5 5" },
+  l: { width: 12, path: "M2 23 Q17 1 10 0 Q5 -1 2 17 Q-1 33 13 24" },
+  m: { width: 30, path: "M1 28 L6 13 L3 25 Q14 7 16 14 L12 26 Q24 7 27 14 Q28 17 24 25 Q23 31 32 24" },
+  n: { width: 21, path: "M1 28 L6 13 L3 25 Q15 7 18 14 Q19 17 15 25 Q14 31 23 24" },
+  o: { width: 20, path: "M17 15 Q9 7 4 17 Q-2 29 8 28 Q18 27 18 17 Q17 12 13 13 Q12 19 22 21" },
+  p: { width: 21, path: "M6 15 L0 40 M4 24 Q13 7 19 14 Q25 24 12 28 Q7 28 5 25 L23 24" },
+  r: { width: 17, path: "M1 28 L6 13 L3 25 Q11 11 15 13 L18 16" },
+  s: { width: 17, path: "M16 13 Q6 9 4 17 Q4 20 11 22 Q18 26 9 29 Q2 31 0 27 L18 24" },
+  t: { width: 13, path: "M10 5 Q-3 34 14 25 M1 14 L16 12" },
+  v: { width: 20, path: "M3 13 Q-1 35 10 26 Q17 19 18 13 Q16 24 23 22" },
+  y: { width: 21, path: "M5 13 Q-2 32 8 27 Q15 23 18 13 Q11 40 4 41 Q-3 40 6 33 L23 24" },
+  ',': { width: 9, path: "M5 28 Q6 32 1 35" },
+  '.': { width: 8, path: "M3 28 L3.7 27" },
+  ':': { width: 13, path: "M5 8 L6 10 M3 26 L4.5 27" },
+  ')': { width: 22, path: "M2 -2 C22 7 19 17 17 23 Q15 35 0 41" },
+};
+const lines = [
+  { text: "Mostly grey.", x: 148, y: 12, angle: -4 },
+  { text: "Emotionally,", x: 125, y: 65, angle: -2 },
+  { text: "all over the place... :)", x: 153, y: 115, angle: 1 },
+];
+let order = 0;
+const handwriting = lines.map((line) => {
+  let x = 0;
+  const strokes = Array.from(line.text).flatMap((letter) => {
+    if (letter === " ") { x += 12; return []; }
+    const glyph = letters[letter];
+    if (!glyph) throw new Error(`Missing ink-note letter: ${letter}`);
+    const stroke = { path: glyph.path, x, order: order++ };
+    x += glyph.width;
+    return [stroke];
+  });
+  return { ...line, strokes };
+});
+---
+
+<svg class="ink-margin-note" data-ink-note viewBox="110 0 430 180" role="img" aria-label="Mostly grey. Emotionally, all over the place… :)">
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    {handwriting.map((line) => (
+      <g transform={`translate(${line.x} ${line.y}) rotate(${line.angle})`}>
+        {line.strokes.map((stroke) => (
+          <path class="ink-note-letter" pathLength="1" d={stroke.path} transform={`translate(${stroke.x} ${Math.sin(stroke.order * 2.4) * 1.2})`} style={`--letter:${stroke.order}`} />
+        ))}
+      </g>
+    ))}
+  </g>
+</svg>
+
+<style>
+  .ink-margin-note {
+    display: block;
+    inline-size: 100%;
+    max-inline-size: 34rem;
+    color: var(--chip);
+    overflow: visible;
+    pointer-events: none;
+    stroke-width: 2.2;
+  }
+  /* Without JavaScript, the complete annotation remains readable. */
+  :global(html.ink-js) .ink-margin-note:not(.is-written) path {
+    opacity: 0;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  :global(html.ink-js) .ink-margin-note.is-writing .ink-note-letter {
+    animation: ink-pen 230ms linear both;
+    animation-delay: calc(var(--letter) * 85ms);
+  }
+  @keyframes ink-pen {
+    from { opacity: 0; stroke-dasharray: 1; stroke-dashoffset: 1; }
+    1% { opacity: 1; }
+    to { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.ink-js) .ink-margin-note path {
+      opacity: 1 !important;
+      animation: none !important;
+      stroke-dashoffset: 0 !important;
+    }
+  }
+</style>
