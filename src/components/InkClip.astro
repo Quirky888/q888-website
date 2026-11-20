@@ -1,40 +1,30 @@
 ---
 /**
  * InkClip — one short screen recording of the Digital Ink app.
- * mode "once": plays one time when it scrolls into view, then holds the last frame.
- * mode "click": waits for the visitor to press Play.
- * Reduced motion: never starts by itself. Without JS the poster and a native link-free frame remain.
+ * It plays by itself, muted and in a loop, while it is on screen, and rests when it is not.
+ * With reduced motion it waits for the visitor to press Play.
  */
 interface Props {
   base: string;
   width: number;
   height: number;
-  mode: "once" | "click";
   label: string;
   caption?: string;
-  playText?: string;
+  hud?: string;
 }
 
-const { base, width, height, mode, label, caption, playText = "Play" } = Astro.props;
+const { base, width, height, label, caption, hud } = Astro.props;
 ---
 
-<figure class="ink-clip" data-ink-clip data-mode={mode} data-state="idle" data-play-text={playText} style={`--ratio:${width} / ${height}`}>
-  <div class="ink-frame ink-clip-frame">
-    <video
-      muted
-      playsinline
-      preload="none"
-      width={width}
-      height={height}
-      poster={`/videos/dink/${base}-poster.webp`}
-      aria-label={label}
-    >
+<figure class="ink-clip" data-ink-clip data-state="idle" style={`--ratio:${width} / ${height}`}>
+  <div class="ink-frame ink-clip-frame" data-hud={hud}>
+    <video muted loop playsinline preload="none" width={width} height={height} poster={`/videos/dink/${base}-poster.webp`} aria-label={label}>
       <source src={`/videos/dink/${base}.webm`} type='video/webm; codecs="vp9"' />
       <source src={`/videos/dink/${base}.mp4`} type="video/mp4" />
     </video>
-    <button class="ink-clip-btn" type="button" data-ink-clip-btn aria-label={`${playText}: ${label}`}>
+    <button class="ink-clip-btn" type="button" data-ink-clip-btn aria-label={`Play: ${label}`}>
       <span class="ink-clip-icon" aria-hidden="true"></span>
-      <span data-ink-clip-label>{playText}</span>
+      <span data-ink-clip-label>Play</span>
     </button>
   </div>
   {caption && <figcaption>{caption}</figcaption>}
@@ -51,46 +41,43 @@ const { base, width, height, mode, label, caption, playText = "Play" } = Astro.p
   }
   .ink-clip video {
     display: block;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: cover;
   }
   .ink-clip-btn {
     position: absolute;
-    inset-inline-start: 0.85rem;
+    inset-inline-end: 0.85rem;
     inset-block-end: 0.85rem;
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
     min-block-size: 44px;
     padding: 0 1rem 0 0.85rem;
-    border: 1px solid rgba(241, 236, 227, 0.32);
+    border: 1px solid rgba(248, 242, 232, 0.34);
     border-radius: 999px;
-    background: rgba(24, 20, 18, 0.72);
-    color: #f1ece3;
-    font: 500 0.8rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-    letter-spacing: 0.06em;
+    background: rgba(24, 20, 18, 0.88);
+    color: #f8f2e8;
+    font: 500 0.78rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    backdrop-filter: blur(6px);
     cursor: pointer;
     transition: opacity 0.5s ease, background 0.2s ease;
   }
   .ink-clip-btn:hover {
-    background: rgba(24, 20, 18, 0.92);
+    background: rgba(24, 20, 18, 0.94);
   }
   .ink-clip-btn:focus-visible {
-    outline: 2px solid #d9b27a;
+    outline: 2px solid #efc58a;
     outline-offset: 3px;
     opacity: 1;
   }
   .ink-clip-icon {
-    inline-size: 0.6rem;
-    block-size: 0.6rem;
-    border-inline-start: 0.6rem solid currentColor;
-    border-block: 0.35rem solid transparent;
     box-sizing: content-box;
     inline-size: 0;
     block-size: 0;
+    border-inline-start: 0.6rem solid currentColor;
+    border-block: 0.35rem solid transparent;
   }
   .ink-clip[data-state="playing"] .ink-clip-icon {
     inline-size: 0.5rem;
@@ -100,6 +87,6 @@ const { base, width, height, mode, label, caption, playText = "Play" } = Astro.p
   }
   /* While a clip plays, its button fades back so the recording stays clear. */
   .ink-clip[data-state="playing"] .ink-clip-btn:not(:hover):not(:focus-visible) {
-    opacity: 0.22;
+    opacity: 0.2;
   }
 </style>

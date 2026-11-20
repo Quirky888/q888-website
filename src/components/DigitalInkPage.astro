@@ -1,6 +1,6 @@
 ---
 import InkClip from "./InkClip.astro";
-import InkPixels from "./InkPixels.astro";
+import InkMarquee from "./InkMarquee.astro";
 
 const APP_STORE = "https://apps.apple.com/us/app/digital-ink/id6757157376";
 
@@ -37,12 +37,28 @@ const inkTraces = [
 ---
 
 <main class="ink-page" id="ink-top">
-  <!-- ───────── Hero: light fog like the landing, fading into dusk ───────── -->
+  <!-- The cursor companion: the landing’s soft square, a little livelier. -->
+  <div class="ink-bubble" data-ink-bubble aria-hidden="true"><span class="ink-bubble-label" data-ink-bubble-label></span></div>
+  <div class="ink-bubble-core" data-ink-bubble-core aria-hidden="true"></div>
+
+  <nav class="ink-dots" aria-label="Chapters">
+    {chapters.map((chapter) => (
+      <a href={`#${chapter.id}`} data-ink-dot={chapter.id} aria-label={`${chapter.number} ${chapter.name}`}>
+        <span class="ink-dot-num ink-mono" aria-hidden="true">{chapter.number}</span><i aria-hidden="true"></i>
+      </a>
+    ))}
+  </nav>
+
+  <!-- ───────── Hero: light, grey, alive ───────── -->
   <section class="ink-hero" aria-labelledby="ink-title" data-ink-hero>
     <canvas class="ink-field" data-ink-field aria-hidden="true"></canvas>
+    <div class="ink-hud ink-mono" aria-hidden="true">
+      <span>Ink in home <b data-ink-hud-ink>587</b></span>
+      <span>Drawn <b data-ink-hud-drawn>0</b></span>
+    </div>
     <div class="ink-wrap ink-hero-inner">
       <p class="ink-mono ink-hero-meta">Digital Ink · version 3.2 · iPad · iPadOS 26 or later</p>
-      <h1 id="ink-title">Every pixel has a <span class="ink-past">past.<i class="ink-seal" aria-hidden="true"></i></span></h1>
+      <h1 id="ink-title"><span class="ink-h1-line">Every pixel</span> <span class="ink-h1-line">has a <span class="ink-past">past.<i class="ink-seal" aria-hidden="true"></i></span></span></h1>
       <p class="ink-hero-sub">Turn a photo into one square of colour that can be drawn with, looked after and never duplicated.</p>
       <div class="ink-actions">
         <a class="ink-button ink-button-primary" href={APP_STORE} target="_blank" rel="noopener noreferrer">Get it on the App Store ↗</a>
@@ -52,242 +68,249 @@ const inkTraces = [
     </div>
   </section>
 
-  <!-- ───────── Dusk chapters ───────── -->
-  <div class="ink-dusk" id="ink-dusk" data-ink-dusk>
-    <nav class="ink-dots" aria-label="Chapters">
-      {chapters.map((chapter) => (
-        <a href={`#${chapter.id}`} data-ink-dot={chapter.id} aria-label={`${chapter.number} ${chapter.name}`}>
-          <span class="ink-dot-num ink-mono" aria-hidden="true">{chapter.number}</span><i aria-hidden="true"></i>
-        </a>
-      ))}
-    </nav>
-
-    <!-- 01 · Beginning -->
-    <section class="ink-chapter" id="beginning" aria-labelledby="beginning-title" data-ink-chapter>
-      <div class="ink-wrap ink-split">
-        <div class="ink-text" data-reveal>
-          <p class="ink-mono ink-label">01 / Beginning</p>
-          <h2 id="beginning-title">One work that holds all of them.</h2>
-          <p>Digital Ink began in the summer of 2025, in a village in a forest in Georgia, Chateau Chapiteau. I had more than 300 digital works and wanted to make one work that held all of them. The idea was to turn each piece into a single pixel, and to make every pixel unique, so that it could not be copied.</p>
-          <p>Digital art is easy to copy without losing anything, and I think that makes it feel disposable. I wanted something people would value more: sentimentally, and maybe one day in other ways too. Digital scarcity was in the air then, and I was curious what it would feel like inside an artwork.</p>
-          <p>So I call each of these squares a <strong>Smart Ink</strong>: one colour, a finite supply of it and a growing record. A collection holds up to 1,000 on one iPad, and none can be duplicated. I hoped people would look after their pixels and use them again.</p>
-        </div>
-        <div class="ink-media ink-media-narrow" data-reveal>
-          <InkClip base="transformation" width={1130} height={1248} mode="once" label="Four photos in the Transformation screen turning one by one into Smart Inks" caption="Four photos becoming four Smart Inks. Waiting time is shortened." playText="Replay" />
-        </div>
+  <!-- ───────── Light part: raw material, before we go inside ───────── -->
+  <div class="ink-light">
+    <section class="ink-statement" aria-label="Why Digital Ink exists">
+      <div class="ink-wrap">
+        <p class="ink-fill" data-ink-fill>Digital art is easy to copy without losing anything. That makes it feel disposable. In Digital Ink every pixel is <mark class="ink-chip">unique</mark>, and none can be duplicated.</p>
       </div>
     </section>
 
-    <InkPixels seed={11} />
+    <!-- 01 · Beginning -->
+    <section class="ink-chapter" id="beginning" aria-labelledby="beginning-title" data-ink-chapter>
+      <span class="ink-ghost" aria-hidden="true">01</span>
+      <div class="ink-wrap">
+        <p class="ink-mono ink-label">01 / Beginning</p>
+        <h2 id="beginning-title" class="ink-mega">One work that holds <mark class="ink-chip">all of them</mark>.</h2>
+        <p class="ink-sub">Turn each piece into a single pixel. Make every pixel unique.</p>
+        <div class="ink-media ink-media-wide" data-reveal>
+          <InkClip base="transformation" width={1120} height={510} label="Photos in the Transformation screen turning one by one into Smart Inks" hud="Transformation" caption="Photos becoming Smart Inks. Waiting time is shortened." />
+        </div>
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>Digital Ink began in the summer of 2025, in a village in a forest in Georgia, Chateau Chapiteau. I had more than 300 digital works and wanted to make one work that held all of them. The idea was to turn each piece into a single pixel, and to make every pixel unique, so that it could not be copied.</p>
+            <p>Digital art is easy to copy without losing anything, and I think that makes it feel disposable. I wanted something people would value more: sentimentally, and maybe one day in other ways too. Digital scarcity was in the air then, and I was curious what it would feel like inside an artwork.</p>
+            <p>So I call each of these squares a <strong>Smart Ink</strong>: one colour, a finite supply of it and a growing record. A collection holds up to 1,000 on one iPad, and none can be duplicated. I hoped people would look after their pixels and use them again.</p>
+          </div>
+        </details>
+      </div>
+    </section>
 
-    <!-- Three places: a horizontal pass on large screens, a plain stack elsewhere -->
+    <!-- Three places: big type that slides sideways on large screens -->
     <section class="ink-places" id="places" aria-labelledby="places-title" data-ink-places>
-      <div class="ink-places-stick" data-ink-places-stick>
+      <div class="ink-places-stick">
         <div class="ink-wrap ink-places-head">
           <p class="ink-mono ink-label">Three places <span class="ink-places-count" data-ink-places-count aria-hidden="true">01 / 03</span></p>
-          <h2 id="places-title">Where an Ink lives.</h2>
+          <h2 id="places-title" class="ink-mega">Where an Ink <mark class="ink-chip">lives</mark>.</h2>
         </div>
         <div class="ink-places-track" data-ink-places-track>
           <article class="ink-place">
             <p class="ink-mono ink-place-num" aria-hidden="true">01</p>
-            <h3>Ink Home</h3>
-            <p>A place to explore the materials.</p>
-            <div class="ink-frame ink-place-frame"><img src="/images/dink/connections-graph.webp" width="1336" height="2110" decoding="async" alt="Ink Home: a field of 585 Inks as dots, with orange lines showing the connections of one Ink." /></div>
+            <h3 class="ink-place-word is-outline">Ink Home</h3>
+            <p class="ink-place-line">A place to explore the materials.</p>
           </article>
           <article class="ink-place">
             <p class="ink-mono ink-place-num" aria-hidden="true">02</p>
-            <h3>Canvas</h3>
-            <p>A place to draw with them.</p>
-            <div class="ink-frame ink-place-frame"><img src="/images/dink/canvas-flower.webp" width="1400" height="1805" decoding="async" alt="The Canvas with a flower drawn from Inks and the colour palette on the left." /></div>
+            <h3 class="ink-place-word">Canvas</h3>
+            <p class="ink-place-line">A place to draw with them.</p>
           </article>
           <article class="ink-place">
             <p class="ink-mono ink-place-num" aria-hidden="true">03</p>
-            <h3>Gallery</h3>
-            <p>A place to see the finished work.</p>
-            <div class="ink-frame ink-place-frame ink-place-frame-wide"><img src="/images/dink/gallery.webp" width="1400" height="957" decoding="async" alt="The Gallery with two finished works, a mushroom and a flower." /></div>
+            <h3 class="ink-place-word is-outline">Gallery</h3>
+            <p class="ink-place-line">A place to see the finished work.</p>
           </article>
         </div>
       </div>
     </section>
+  </div>
 
-    <InkPixels seed={23} />
+  <!-- ───────── Slow fall from light into the app’s own dusk ───────── -->
+  <div class="ink-dissolve ink-dissolve--in" data-ink-dissolve="in" aria-hidden="true"><canvas></canvas></div>
 
+  <!-- ───────── Dusk part: inside the app ───────── -->
+  <div class="ink-dusk" id="ink-dusk" data-ink-dusk>
     <!-- 02 · Memory -->
     <section class="ink-chapter" id="memory" aria-labelledby="memory-title" data-ink-chapter>
+      <span class="ink-ghost" aria-hidden="true">02</span>
       <div class="ink-wrap">
-        <div class="ink-text ink-text-wide" data-reveal>
-          <p class="ink-mono ink-label">02 / Memory</p>
-          <h2 id="memory-title">The machine describes the picture. The memory stays with you.</h2>
-          <p>The description an Ink carries is written by a machine, and it only knows what it can see. It can be a little wrong, and it cannot know when, where or why I made the picture. That is fine. It is a neutral caption, something that helps me remember, or helps me show the picture to someone else. When you bring photos in, you can also add a short memory of your own; it appears in the Ink’s biography next to the machine’s description.</p>
-          <p>What matters sits somewhere else, with the person who owns the Ink: the layers of feeling and memory an image holds for them. An Ink is unique because of its code, but just as much because of that.</p>
-        </div>
-        <div class="ink-media-row ink-media-row-memory" data-reveal>
+        <p class="ink-mono ink-label">02 / Memory</p>
+        <h2 id="memory-title" class="ink-mega ink-mega--long">The machine describes the picture. The <mark class="ink-chip">memory</mark> stays with you.</h2>
+        <p class="ink-sub">A machine writes the description. It only knows what it can see.</p>
+
+        <div class="ink-memory-grid" data-reveal>
+          <InkClip base="ink-bio-a" width={1120} height={1186} label="Scrolling through the biography of an Ink: memory, provenance and essence" hud="Ink BIO" caption="An Ink’s biography." />
           <figure class="ink-figure">
-            <a class="ink-frame ink-zoom" href="/images/dink/ink-bio.webp" data-ink-zoom data-alt="The Ink BIO screen of a pixelated flower: its machine description, palette, provenance and symbolic essence.">
-              <img src="/images/dink/ink-bio.webp" width="1400" height="1805" loading="lazy" decoding="async" alt="The Ink BIO screen of a pixelated flower: its machine description, palette, provenance and symbolic essence." />
-            </a>
-            <figcaption>An Ink’s biography: description, palette, provenance.</figcaption>
-          </figure>
-          <InkClip base="ink-bio-a" width={1120} height={1186} mode="click" label="Scrolling through the biography of an Ink: memory, provenance and essence" caption="Scrolling through an Ink’s biography." playText="Play the biography" />
-          <figure class="ink-figure ink-figure-small">
-            <a class="ink-frame ink-zoom" href="/images/dink/reconstructed-memory.webp" data-ink-zoom data-alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI.">
+            <a class="ink-frame ink-zoom" href="/images/dink/reconstructed-memory.webp" data-hud="Reconstructed memory" data-ink-zoom data-alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI.">
               <img src="/images/dink/reconstructed-memory.webp" width="1179" height="978" loading="lazy" decoding="async" alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI." />
             </a>
             <figcaption>A reconstruction is a new invention, never a recovered photograph.</figcaption>
           </figure>
         </div>
+
+        <div class="ink-duo" data-reveal>
+          <p class="ink-duo-a"><span class="ink-mono">The machine saw</span>“A whimsical pixelated flower amidst a sea of darkness.”</p>
+          <p class="ink-duo-b"><span class="ink-mono">You remember</span>what the image <mark class="ink-chip">never showed</mark>.</p>
+        </div>
+
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>The description an Ink carries is written by a machine, and it only knows what it can see. It can be a little wrong, and it cannot know when, where or why I made the picture. That is fine. It is a neutral caption, something that helps me remember, or helps me show the picture to someone else. When you bring photos in, you can also add a short memory of your own; it appears in the Ink’s biography next to the machine’s description.</p>
+            <p>What matters sits somewhere else, with the person who owns the Ink: the layers of feeling and memory an image holds for them. An Ink is unique because of its code, but just as much because of that.</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <InkPixels seed={37} />
+    <InkMarquee words={["One colour", "A finite supply", "A growing record"]} direction={-1} />
 
     <!-- 03 · Canvas -->
     <section class="ink-chapter" id="canvas" aria-labelledby="canvas-title" data-ink-chapter>
-      <div class="ink-wrap ink-split ink-split-reverse">
-        <div class="ink-text" data-reveal>
-          <p class="ink-mono ink-label">03 / Canvas</p>
-          <h2 id="canvas-title">You draw with what you have.</h2>
-          <p>Drawing spends an Ink, and erasing gives it back. Every pixel you place stays connected to the photo it came from.</p>
-          <p>Colours run out. When one does, I look through my photographs and artworks for another whose average colour comes close. It is harder than it sounds: most images average out to grey or swamp green. So I draw with what I have, not with what I imagined.</p>
-          <p>I suspect the limit is part of the point. The materials have their own character, and they do not always agree with the picture in my head.</p>
-
-          <figure class="ink-palette" aria-labelledby="palette-caption" data-bars>
-            <div class="ink-palette-bar" role="img" aria-label="Share of each colour in the artist’s collection: grey 406, yellow 85, blue 40, black 32, green 19, red 3, magenta 1, white 1.">
-              {palette.map((colour, index) => (
-                <span style={`flex:${colour.count} 1 0;background:${colour.colour};--i:${index}`} title={`${colour.name}: ${colour.count}`}></span>
-              ))}
-            </div>
-            <ul class="ink-palette-legend ink-mono">
-              {palette.map((colour) => (
-                <li><i style={`background:${colour.colour}`}></i>{colour.name} <b data-count={colour.count}>{colour.count}</b></li>
-              ))}
-            </ul>
-            <figcaption id="palette-caption">My collection on 20 November 2026. Mostly grey.</figcaption>
-          </figure>
-        </div>
-        <div class="ink-media ink-media-pair" data-reveal>
-          <InkClip base="draw-mushroom" width={1024} height={1328} mode="once" label="A mushroom taking shape on the Canvas, pixel by pixel" caption="A mushroom taking shape. Sped up." playText="Replay" />
-          <InkClip base="canvas" width={1024} height={1326} mode="click" label="Choosing colours from the palette, drawing and erasing on the Canvas" caption="Choosing a colour, drawing, erasing. Sped up." playText="Play" />
-        </div>
-      </div>
+      <span class="ink-ghost" aria-hidden="true">03</span>
       <div class="ink-wrap">
-        <div class="ink-stills" data-reveal>
-          <figure class="ink-figure ink-figure-small">
-            <a class="ink-frame ink-zoom" href="/images/dink/canvas-flower.webp" data-ink-zoom data-alt="The Canvas with a flower drawn from Inks and the colour palette on the left, showing how many Inks of each colour are left.">
-              <img src="/images/dink/canvas-flower.webp" width="1400" height="1805" loading="lazy" decoding="async" alt="The Canvas with a flower drawn from Inks and the colour palette on the left, showing how many Inks of each colour are left." />
-            </a>
-            <figcaption>The palette counts what is left.</figcaption>
-          </figure>
-          <figure class="ink-figure ink-figure-small">
-            <a class="ink-frame ink-zoom" href="/images/dink/emotional-palette.webp" data-ink-zoom data-alt="The emotional palette: Inks grouped by air, earth, fire, love, mushroom and water, with the mushroom group open.">
+        <p class="ink-mono ink-label">03 / Canvas</p>
+        <h2 id="canvas-title" class="ink-mega">You draw with <mark class="ink-chip">what you have</mark>.</h2>
+        <p class="ink-sub">Drawing spends an Ink, and erasing gives it back.</p>
+
+        <figure class="ink-stat" data-reveal data-bars>
+          <p class="ink-stat-line"><b class="ink-stat-num" data-count="406">406</b><span>of 587 Inks are grey.</span></p>
+          <div class="ink-palette-bar" role="img" aria-label="Share of each colour in the artist’s collection: grey 406, yellow 85, blue 40, black 32, green 19, red 3, magenta 1, white 1.">
+            {palette.map((colour, index) => (
+              <span style={`flex:${colour.count} 1 0;background:${colour.colour};--i:${index}`} title={`${colour.name}: ${colour.count}`}></span>
+            ))}
+          </div>
+          <ul class="ink-palette-legend ink-mono">
+            {palette.map((colour) => (
+              <li><i style={`background:${colour.colour}`}></i>{colour.name} <b data-count={colour.count}>{colour.count}</b></li>
+            ))}
+          </ul>
+          <figcaption>My collection on 20 November 2026. Mostly grey.</figcaption>
+        </figure>
+
+        <div class="ink-media-row" data-reveal>
+          <InkClip base="draw-mushroom" width={1024} height={1328} label="A mushroom taking shape on the Canvas, pixel by pixel" hud="Canvas" caption="A mushroom taking shape. Sped up." />
+          <figure class="ink-figure">
+            <a class="ink-frame ink-zoom" href="/images/dink/emotional-palette.webp" data-hud="Emotional palette" data-ink-zoom data-alt="The emotional palette: Inks grouped by air, earth, fire, love, mushroom and water, with the mushroom group open.">
               <img src="/images/dink/emotional-palette.webp" width="1400" height="1805" loading="lazy" decoding="async" alt="The emotional palette: Inks grouped by air, earth, fire, love, mushroom and water, with the mushroom group open." />
             </a>
             <figcaption>The emotional palette: air, earth, fire, love, mushroom, water.</figcaption>
           </figure>
         </div>
+
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>Drawing spends an Ink, and erasing gives it back. Every pixel you place stays connected to the photo it came from.</p>
+            <p>Colours run out. When one does, I look through my photographs and artworks for another whose average colour comes close. It is harder than it sounds: most images average out to grey or swamp green. So I draw with what I have, not with what I imagined.</p>
+            <p>I suspect the limit is part of the point. The materials have their own character, and they do not always agree with the picture in my head.</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <InkPixels seed={41} />
-
-    <!-- 04 · Connections -->
+    <!-- 04 · Connections: type and one line, no screenshots -->
     <section class="ink-chapter" id="connections" aria-labelledby="connections-title" data-ink-chapter>
-      <div class="ink-wrap ink-split">
-        <div class="ink-text" data-reveal>
-          <p class="ink-mono ink-label">04 / Connections</p>
-          <h2 id="connections-title">Follow the connections.</h2>
-          <p>Ink Home gives the collection a place to live, in 2D or in 3D. You can follow the links between Inks, and a connection can be active or historical without erasing what came before. Inks can also stay unconnected.</p>
-          <p>An Ink can be handed to another iPad, but never copied. It leaves one device and arrives on the other, and only one of them can use it at a time.</p>
+      <span class="ink-ghost" aria-hidden="true">04</span>
+      <div class="ink-wrap">
+        <p class="ink-mono ink-label">04 / Connections</p>
+        <h2 id="connections-title" class="ink-mega">Follow the <mark class="ink-chip">connections</mark>.</h2>
+        <p class="ink-sub">A connection can be active or historical without erasing what came before.</p>
+        <div class="ink-link-demo" data-reveal aria-hidden="true">
+          <span class="ink-link-node is-active"><i></i><b class="ink-mono">Active</b></span>
+          <span class="ink-link-line"></span>
+          <span class="ink-link-node"><i></i><b class="ink-mono">Historical</b></span>
         </div>
-        <div class="ink-media ink-media-pair" data-reveal>
-          <InkClip base="connections" width={1024} height={1328} mode="click" label="Orbiting a field of Inks and following the lines that connect them" caption="Following the lines between Inks." playText="Play" />
-          <figure class="ink-figure">
-            <a class="ink-frame ink-zoom" href="/images/dink/connections-graph.webp" data-ink-zoom data-alt="A field of 585 Inks as dots, with a few orange lines showing the connections of one selected Ink.">
-              <img src="/images/dink/connections-graph.webp" width="1336" height="2110" loading="lazy" decoding="async" alt="A field of 585 Inks as dots, with a few orange lines showing the connections of one selected Ink." />
-            </a>
-            <figcaption>585 Inks and a few of their connections.</figcaption>
-          </figure>
-        </div>
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>Ink Home gives the collection a place to live, in 2D or in 3D. You can follow the links between Inks, and a connection can be active or historical without erasing what came before. Inks can also stay unconnected.</p>
+            <p>An Ink can be handed to another iPad, but never copied. It leaves one device and arrives on the other, and only one of them can use it at a time.</p>
+          </div>
+        </details>
       </div>
     </section>
 
-    <InkPixels seed={59} />
-
-    <!-- 05 · School -->
-    <section class="ink-chapter" id="school" aria-labelledby="school-title" data-ink-chapter>
-      <div class="ink-wrap ink-split">
-        <div class="ink-text" data-reveal>
-          <p class="ink-mono ink-label">05 / School</p>
-          <h2 id="school-title">Something to look after.</h2>
-          <p>School began as a small game, a bit like a Tamagotchi. You can add short books for your Inks, or short pieces you like, and let them study. Today the effect is visible rather than deep: as an Ink returns to school and its education grows, from level 4 it begins to glow and move a little differently on the Canvas, so it stands out from the others.</p>
-          <p>Later, what an Ink has learned might shape its character, how it behaves at home and the connections it makes. That part is an idea, not a feature yet. I like that the project stays alive: new ideas arrive, and the technology to try them arrives later.</p>
-        </div>
-        <figure class="ink-meter" data-reveal data-meter>
-          <ol class="ink-meter-row" aria-label="Education level, from 0 to 10. From level 4 an Ink begins to glow on the Canvas.">
-            {Array.from({ length: 10 }, (_, index) => (
-              <li class:list={["ink-meter-cell", index + 1 >= 4 && "is-glowing"]} style={`--i:${index}`}><span class="ink-mono">{index + 1}</span></li>
-            ))}
-          </ol>
-          <figcaption>Education level, 1 to 10. From level 4 an Ink begins to glow on the Canvas.</figcaption>
-        </figure>
+    <!-- 05 · School: pure type -->
+    <section class="ink-chapter ink-school" id="school" aria-labelledby="school-title" data-ink-chapter>
+      <span class="ink-ghost" aria-hidden="true">05</span>
+      <div class="ink-wrap">
+        <p class="ink-mono ink-label">05 / School</p>
+        <h2 id="school-title" class="ink-mega">Something to <mark class="ink-chip">look after</mark>.</h2>
+        <p class="ink-glowline" data-reveal>From level 4, an Ink begins to <em>glow</em>.</p>
+        <p class="ink-sub">School began as a small game, a bit like a Tamagotchi.</p>
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>School began as a small game, a bit like a Tamagotchi. You can add short books for your Inks, or short pieces you like, and let them study. Today the effect is visible rather than deep: as an Ink returns to school and its education grows, from level 4 it begins to glow and move a little differently on the Canvas, so it stands out from the others.</p>
+            <p>Later, what an Ink has learned might shape its character, how it behaves at home and the connections it makes. That part is an idea, not a feature yet. I like that the project stays alive: new ideas arrive, and the technology to try them arrives later.</p>
+          </div>
+        </details>
       </div>
     </section>
-
-    <InkPixels seed={71} />
 
     <!-- 06 · Gallery -->
     <section class="ink-chapter" id="gallery" aria-labelledby="gallery-title" data-ink-chapter>
+      <span class="ink-ghost" aria-hidden="true">06</span>
       <div class="ink-wrap">
-        <div class="ink-text ink-text-wide" data-reveal>
-          <p class="ink-mono ink-label">06 / Gallery</p>
-          <h2 id="gallery-title">When the picture is finished, it goes quiet.</h2>
-          <p>A finished work enters the Gallery and the image becomes quiet again. You can look into the Inks that made it and follow their histories, or simply spend time with the picture. Here, interpretation belongs to the person looking.</p>
-        </div>
+        <p class="ink-mono ink-label">06 / Gallery</p>
+        <h2 id="gallery-title" class="ink-mega ink-mega--long">When the picture is finished, it <mark class="ink-chip">goes quiet</mark>.</h2>
+        <p class="ink-sub">Here, interpretation belongs to the person looking.</p>
         <figure class="ink-figure ink-gallery" data-reveal>
-          <a class="ink-frame ink-zoom" href="/images/dink/gallery.webp" data-ink-zoom data-alt="The Gallery with two finished works, a mushroom made from 38 Inks and a flower made from 117 Inks.">
-            <img src="/images/dink/gallery.webp" width="1400" height="957" loading="lazy" decoding="async" alt="The Gallery with two finished works, a mushroom made from 38 Inks and a flower made from 117 Inks." />
+          <a class="ink-frame ink-zoom" href="/images/dink/gallery.webp" data-hud="Gallery" data-ink-zoom data-alt="The Gallery with two finished works, a mushroom made from 38 Inks and a flower made from 117 Inks.">
+            <img src="/images/dink/gallery.webp" width="1380" height="1127" loading="lazy" decoding="async" alt="The Gallery with two finished works, a mushroom made from 38 Inks and a flower made from 117 Inks." />
           </a>
           <figcaption>Two works from my Gallery, made from 38 and 117 Inks.</figcaption>
         </figure>
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>A finished work enters the Gallery and the image becomes quiet again. You can look into the Inks that made it and follow their histories, or simply spend time with the picture. Here, interpretation belongs to the person looking.</p>
+          </div>
+        </details>
       </div>
     </section>
 
     <!-- Made first for myself -->
     <section class="ink-chapter ink-about" aria-labelledby="about-title">
       <div class="ink-wrap">
-        <div class="ink-text ink-text-wide" data-reveal>
-          <p class="ink-mono ink-label">About</p>
-          <h2 id="about-title">Made first for myself.</h2>
-          <p>I made Digital Ink first for myself. I wanted an art installation I could carry in an iPad, and I wanted to learn to build software with AI. In September 2025 I knew very little about code; since then I have worked with AI coding tools and learned as I went.</p>
-          <p>I am not sure who else needs it. Probably people a little strange in the same way I am: people with too many pictures, who like small rules and slow things. If that is you, it is on the App Store. If not, I hope it is still interesting to look at.</p>
-        </div>
+        <p class="ink-mono ink-label">About</p>
+        <h2 id="about-title" class="ink-mega">Made first for <mark class="ink-chip">myself</mark>.</h2>
+        <p class="ink-sub">An art installation I could carry in an iPad.</p>
+        <details class="ink-more">
+          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="ink-more-body">
+            <p>I made Digital Ink first for myself. I wanted an art installation I could carry in an iPad, and I wanted to learn to build software with AI. In September 2025 I knew very little about code; since then I have worked with AI coding tools and learned as I went.</p>
+            <p>I am not sure who else needs it. Probably people a little strange in the same way I am: people with too many pictures, who like small rules and slow things. If that is you, it is on the App Store. If not, I hope it is still interesting to look at.</p>
+          </div>
+        </details>
       </div>
     </section>
+  </div>
 
-    <!-- Call to action + privacy -->
-    <section class="ink-chapter ink-cta" id="get-it" aria-labelledby="cta-title">
+  <!-- ───────── Back into the light ───────── -->
+  <div class="ink-dissolve ink-dissolve--out" data-ink-dissolve="out" aria-hidden="true"><canvas></canvas></div>
+
+  <div class="ink-finale" id="get-it">
+    <InkMarquee words={["Every pixel", "has a past"]} direction={1} />
+
+    <section class="ink-finale-main" aria-labelledby="cta-title">
       <div class="ink-wrap">
-        <div class="ink-cta-card" data-reveal>
-          <p class="ink-mono ink-label">Digital Ink · version 3.2</p>
-          <h2 id="cta-title">Digital Ink for iPad</h2>
-          <p class="ink-cta-line">Free on the App Store. Requires iPadOS 26 or later. iPad only.</p>
-          <div class="ink-actions">
-            <a class="ink-button ink-button-primary" href={APP_STORE} target="_blank" rel="noopener noreferrer">Get it on the App Store ↗</a>
-            <a class="ink-button" href="/privacy/">Read the privacy policy</a>
-          </div>
-          <p class="ink-fine">The app is free. The optional online description and memory reconstruction use a few credits, because they run on paid AI services.</p>
+        <p class="ink-mono ink-label">Digital Ink · version 3.2</p>
+        <h2 id="cta-title" class="ink-mega ink-finale-title">Digital Ink <span>for iPad</span></h2>
+        <p class="ink-sub">Free on the App Store. Requires iPadOS 26 or later. iPad only.</p>
+        <div class="ink-actions">
+          <a class="ink-button ink-button-primary ink-button-lg" href={APP_STORE} target="_blank" rel="noopener noreferrer">Get it on the App Store ↗</a>
+          <a class="ink-button ink-button-lg" href="/privacy/">Read the privacy policy</a>
         </div>
-        <div class="ink-privacy" data-reveal>
+        <p class="ink-fine">The app is free. The optional online description and memory reconstruction use a few credits, because they run on paid AI services.</p>
+
+        <div class="ink-privacy">
           <h3>You decide what is shared</h3>
           <p>Drawing and most Ink information stay on your iPad. Two features are optional and always ask first: an online description, which sends the selected image and its place name through Digital Ink’s service to OpenAI, and a memory reconstruction, which can share a small private trace of the image only if you choose to. Buying credits is not consent to share anything.</p>
           <a class="ink-text-link" href="/privacy/">Read the Digital Ink Privacy Policy ↗</a>
         </div>
-      </div>
-    </section>
 
-    <!-- Under the hood -->
-    <section class="ink-chapter ink-technical" aria-labelledby="record-title">
-      <div class="ink-wrap">
         <details class="ink-record" id="technical-record">
           <summary>
             <span>
@@ -339,15 +362,12 @@ const inkTraces = [
             </section>
           </div>
         </details>
-      </div>
-    </section>
 
-    <!-- For the curious -->
-    <section class="ink-chapter ink-future" aria-labelledby="archive-title">
-      <div class="ink-wrap">
-        <p class="ink-mono ink-label">For the curious · a future project</p>
-        <h2 id="archive-title">The 116-Pixel Archive</h2>
-        <p>116 photographs would become 116 Smart Inks, so that their histories and relationships can grow as an artwork of their own. I would like to build it on Digital Ink so that it can be used on a phone. It does not exist yet.</p>
+        <aside class="ink-future" aria-labelledby="archive-title">
+          <p class="ink-mono ink-label">For the curious · a future project</p>
+          <h3 id="archive-title">The 116-Pixel Archive</h3>
+          <p>116 photographs would become 116 Smart Inks, so that their histories and relationships can grow as an artwork of their own. I would like to build it on Digital Ink so that it can be used on a phone. It does not exist yet.</p>
+        </aside>
       </div>
     </section>
 
@@ -373,30 +393,29 @@ const inkTraces = [
   /* ───────── Tokens ───────── */
   .ink-page {
     --fog: #f5f5f5;
+    --paper: #ebe9e5;
     --ink: #1a1a1a;
-    --muted: #666666;
+    --muted: #5d5b56;
     --dusk: #211d1b;
-    --cream: #f1ece3;
-    --cream-muted: #b9b1a5;
+    --cream: #f8f2e8;
+    --cream-muted: #d4ccbe;
     --plum: #614454;
     --amber: #82603b;
-    --amber-text: #d9b27a;
-    --line: rgba(241, 236, 227, 0.16);
+    --amber-text: #efc58a;
     --gutter: clamp(1.25rem, 4vw, 3.5rem);
     --display: var(--font-door-display, "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif);
     --serif: var(--font-door-serif, "Instrument Serif", Georgia, serif);
     --mono: var(--font-door-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    /* Theme of the current zone, set below for the light and the dusk parts. */
+    --fg: var(--ink);
+    --fg-muted: var(--muted);
+    --line: rgba(26, 26, 26, 0.16);
+    --accent: #8a6c0c;
+    --chip: #f2c46b;
     font-family: "Space Grotesk", system-ui, sans-serif;
     font-weight: 400;
-    color: var(--ink);
+    color: var(--fg);
     background: var(--fog);
-    /* The cursor stays a small square, a single pixel. Links and buttons keep the pointer. */
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><rect x='6' y='6' width='10' height='10' fill='none' stroke='%231a1a1a' stroke-width='3'/><rect x='6' y='6' width='10' height='10' fill='none' stroke='%23f5f5f5' stroke-width='1'/></svg>") 11 11, auto;
-  }
-  .ink-page :global(a),
-  .ink-page :global(button),
-  .ink-page :global(summary) {
-    cursor: pointer;
   }
   .ink-page :global(*) {
     box-sizing: border-box;
@@ -410,7 +429,7 @@ const inkTraces = [
   }
   .ink-wrap {
     inline-size: 100%;
-    max-inline-size: 1180px;
+    max-inline-size: 1320px;
     margin-inline: auto;
     padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
   }
@@ -421,6 +440,23 @@ const inkTraces = [
     line-height: 1.5;
     text-transform: uppercase;
   }
+  .ink-light,
+  .ink-finale {
+    --fg: var(--ink);
+    --fg-muted: var(--muted);
+    --line: rgba(26, 26, 26, 0.16);
+    --accent: #8a6c0c;
+    --chip: #f2c46b;
+    color: var(--fg);
+  }
+  .ink-dusk {
+    --fg: var(--cream);
+    --fg-muted: var(--cream-muted);
+    --line: rgba(248, 242, 232, 0.18);
+    --accent: var(--amber-text);
+    --chip: var(--amber-text);
+    color: var(--fg);
+  }
 
   /* ───────── Hero ───────── */
   .ink-hero {
@@ -430,7 +466,7 @@ const inkTraces = [
     display: flex;
     align-items: flex-start;
     padding-block: clamp(6rem, 14vh, 9rem) 6rem;
-    background: linear-gradient(180deg, var(--fog) 0%, var(--fog) 72%, var(--dusk) 100%);
+    background: linear-gradient(180deg, var(--fog) 0%, var(--fog) 70%, var(--paper) 100%);
     overflow: clip;
   }
   .ink-field {
@@ -447,16 +483,19 @@ const inkTraces = [
     color: var(--muted);
     margin-block-end: 1.5rem;
   }
+  /* The headline is enormous and inverts against whatever square is behind it. */
   .ink-page h1 {
     font-family: var(--display);
     font-weight: 800;
     font-variation-settings: "wdth" 82;
-    font-size: clamp(3.4rem, 11.5vw, 10rem);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
-    max-inline-size: 11ch;
-    text-wrap: balance;
-    color: var(--ink);
+    font-size: clamp(3.7rem, 15.8vw, 15rem);
+    line-height: 0.84;
+    letter-spacing: -0.04em;
+    color: #fff;
+    mix-blend-mode: difference;
+  }
+  .ink-h1-line {
+    display: block;
   }
   .ink-past {
     position: relative;
@@ -473,7 +512,7 @@ const inkTraces = [
     transform: rotate(-1.5deg);
   }
   .ink-hero-sub {
-    margin-block-start: 1.75rem;
+    margin-block-start: 2.25rem;
     max-inline-size: 24em;
     font-family: var(--serif);
     font-style: italic;
@@ -484,6 +523,25 @@ const inkTraces = [
   .ink-hint {
     margin-block-start: 2.25rem;
     color: var(--muted);
+  }
+  .ink-hud {
+    position: absolute;
+    inset-block-start: clamp(4.5rem, 9vh, 6rem);
+    inset-inline: auto max(var(--gutter), env(safe-area-inset-right));
+    z-index: 2;
+    display: flex;
+    gap: 1.75rem;
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+  }
+  .ink-hud b {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  /* The hero drifts away slowly as you leave it; each part moves on its own so the headline can blend with the field. */
+  .ink-hero-inner > * {
+    will-change: transform;
   }
 
   /* ───────── Buttons ───────── */
@@ -505,19 +563,15 @@ const inkTraces = [
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
-    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    transition: background 0.25s ease, color 0.25s ease;
   }
   .ink-button:hover {
     background: color-mix(in srgb, currentColor 10%, transparent);
   }
-  .ink-button:focus-visible,
-  .ink-text-link:focus-visible,
-  .ink-dots a:focus-visible,
-  .ink-zoom:focus-visible,
-  .ink-record summary:focus-visible,
-  .ink-footer a:focus-visible {
-    outline: 2px solid var(--amber-text);
-    outline-offset: 3px;
+  .ink-button-lg {
+    min-block-size: 58px;
+    padding-inline: 1.9rem;
+    font-size: 1.1rem;
   }
   .ink-button-primary {
     background: var(--ink);
@@ -527,129 +581,317 @@ const inkTraces = [
   .ink-button-primary:hover {
     background: #000;
   }
-  .ink-dusk .ink-button-primary {
-    background: var(--cream);
-    border-color: var(--cream);
-    color: var(--dusk);
-  }
-  .ink-dusk .ink-button-primary:hover {
-    background: #fff;
+  .ink-button:focus-visible,
+  .ink-text-link:focus-visible,
+  .ink-dots a:focus-visible,
+  .ink-zoom:focus-visible,
+  .ink-more summary:focus-visible,
+  .ink-record summary:focus-visible,
+  .ink-footer a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
-  /* ───────── Dusk ───────── */
-  .ink-dusk {
-    position: relative;
-    color: var(--cream);
-    background:
-      radial-gradient(60rem 38rem at 8% -4%, rgba(97, 68, 84, 0.3), transparent 70%),
-      radial-gradient(52rem 36rem at 102% 34%, rgba(130, 96, 59, 0.22), transparent 70%),
-      radial-gradient(60rem 40rem at 0% 78%, rgba(97, 68, 84, 0.2), transparent 70%),
-      var(--dusk);
+  /* ───────── Light zone ───────── */
+  .ink-light {
+    background: var(--paper);
   }
-  .ink-chapter {
-    padding-block: clamp(4.5rem, 11vw, 9rem);
+  .ink-statement {
+    padding-block: clamp(5rem, 14vw, 11rem) clamp(2rem, 5vw, 4rem);
   }
-  .ink-label {
-    color: var(--amber-text);
-    margin-block-end: 1.25rem;
-  }
-  .ink-dusk h2 {
+  .ink-fill {
     font-family: var(--display);
     font-weight: 700;
     font-variation-settings: "wdth" 88;
-    font-size: clamp(2.1rem, 4.6vw, 4rem);
-    line-height: 1.03;
+    font-size: clamp(2.2rem, 6.4vw, 6rem);
+    line-height: 1.02;
     letter-spacing: -0.035em;
+    max-inline-size: 22ch;
     text-wrap: balance;
-    margin-block-end: 1.75rem;
   }
-  .ink-dusk h3 {
+  :global(html.ink-js) .ink-fill :global(.ink-fw) {
+    opacity: calc(0.16 + var(--on, 0) * 0.84);
+  }
+
+  /* ───────── Chapters ───────── */
+  .ink-chapter {
+    position: relative;
+    overflow-x: clip;
+    padding-block: clamp(4.5rem, 11vw, 9rem);
+  }
+  .ink-chapter > .ink-wrap {
+    position: relative;
+    z-index: 1;
+  }
+  #memory { --accent: #f6a8cd; --chip: #f6a8cd; }
+  #canvas { --accent: #b9e29f; --chip: #b9e29f; }
+  #connections { --accent: #f0a24a; --chip: #f0a24a; }
+  #school { --accent: #f8d97f; --chip: #f8d97f; }
+  #gallery { --accent: #f8f2e8; --chip: #f8f2e8; }
+  .ink-label {
+    color: var(--accent);
+    margin-block-end: 1.25rem;
+  }
+  /* Enormous, contrasting headlines carry the story; the paragraphs are optional. */
+  .ink-mega {
     font-family: var(--display);
-    font-weight: 600;
-    font-size: clamp(1.25rem, 2vw, 1.6rem);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-variation-settings: "wdth" 84;
+    font-size: clamp(2.9rem, 8.4vw, 8.2rem);
+    line-height: 0.93;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+    max-inline-size: 15ch;
   }
-  .ink-text p {
+  .ink-mega--long {
+    font-size: clamp(2.5rem, 6.2vw, 6rem);
+    max-inline-size: 20ch;
+  }
+  .ink-chip {
+    display: inline-block;
+    padding: 0 0.14em 0.05em;
+    margin-inline: 0.02em;
+    color: #1f1a17;
+    background: var(--chip);
+  }
+  .ink-sub {
+    margin-block-start: 1.75rem;
+    max-inline-size: 28ch;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+    line-height: 1.2;
+    color: var(--fg);
+  }
+
+  /* Ghost numerals behind the chapters. They are real elements so they can glide on their own layer. */
+  .ink-ghost {
+    position: absolute;
+    inset-block-start: 1.5rem;
+    inset-inline-end: 2vw;
+    z-index: 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(10rem, 30vw, 26rem);
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 38%, transparent);
+    pointer-events: none;
+    user-select: none;
+    will-change: transform;
+  }
+
+  /* ───────── Read more ───────── */
+  .ink-more {
+    margin-block-start: 2.5rem;
+  }
+  .ink-more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-block-size: 44px;
+    padding: 0 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    list-style: none;
+    color: var(--fg);
+  }
+  .ink-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .ink-more summary i {
+    position: relative;
+    inline-size: 0.8rem;
+    block-size: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+  .ink-more summary i::before,
+  .ink-more summary i::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    inset: 50% 0 auto 0;
+    block-size: 1px;
+  }
+  .ink-more summary i::after {
+    transform: rotate(90deg);
+  }
+  .ink-more[open] summary i {
+    transform: rotate(45deg);
+  }
+  .ink-more-body {
+    margin-block-start: 1.75rem;
+    max-inline-size: 40rem;
+  }
+  .ink-more-body p {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: var(--cream);
-    max-inline-size: 36rem;
+    color: var(--fg);
   }
-  .ink-text p + p {
+  .ink-more-body p + p {
     margin-block-start: 1.1rem;
   }
-  .ink-text strong {
+  .ink-more-body strong {
     font-weight: 600;
-    color: var(--amber-text);
-  }
-  .ink-text-wide p {
-    max-inline-size: 42rem;
-  }
-  .ink-split {
-    display: grid;
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: start;
+    color: var(--accent);
   }
 
   /* ───────── Media ───────── */
   .ink-page :global(.ink-frame) {
+    position: relative;
     display: block;
-    border: 1px solid var(--line);
-    border-radius: 20px;
     overflow: hidden;
+    border-radius: 18px;
     background: #17140f;
-    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--line);
+    box-shadow: 0 40px 80px -40px rgba(20, 16, 12, 0.55);
+    transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.4s ease, box-shadow 0.5s ease;
   }
   .ink-page :global(.ink-frame img) {
     display: block;
     inline-size: 100%;
     block-size: auto;
   }
+  .ink-page :global(.ink-frame)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--lx, 50%) var(--ly, 0%), rgba(255, 255, 255, 0.2), transparent 55%);
+    opacity: var(--glare, 0);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  /* In the dusk the dark screens sit on a cream mat, like a print on a table, so they never sink into the background. */
+  .ink-dusk :global(.ink-frame) {
+    border: 0;
+    padding: clamp(8px, 1vw, 14px);
+    background: var(--cream);
+    border-radius: 22px;
+    box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.85), 0 0 90px -24px color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+  .ink-dusk :global(.ink-frame img),
+  .ink-dusk :global(.ink-frame video) {
+    border-radius: 12px;
+  }
+  .ink-dusk :global(.ink-clip-frame) {
+    background: var(--cream);
+  }
+  .ink-page :global(.ink-frame)::before {
+    content: attr(data-hud);
+    position: absolute;
+    inset: 0.8rem auto auto 0.9rem;
+    z-index: 2;
+    padding: 0.35rem 0.6rem;
+    font: 500 0.68rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f8f2e8;
+    background: rgba(24, 20, 18, 0.7);
+    border: 1px solid rgba(248, 242, 232, 0.28);
+    pointer-events: none;
+  }
+  .ink-dusk :global(.ink-frame)::before {
+    inset: calc(clamp(8px, 1vw, 14px) + 0.8rem) auto auto calc(clamp(8px, 1vw, 14px) + 0.9rem);
+  }
+  .ink-page :global(.ink-frame:not([data-hud]))::before {
+    display: none;
+  }
   .ink-zoom {
     cursor: zoom-in;
   }
   .ink-page :global(figcaption) {
-    margin-block-start: 0.85rem;
+    margin-block-start: 0.9rem;
     font-family: var(--mono);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     letter-spacing: 0.04em;
     line-height: 1.55;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
     max-inline-size: 34rem;
   }
-  .ink-media {
-    display: grid;
-    gap: 1.5rem;
-  }
-  .ink-media-narrow {
-    max-inline-size: 30rem;
+  .ink-media-wide {
+    margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+    max-inline-size: 70rem;
   }
   .ink-media-row {
     display: grid;
-    gap: 1.5rem;
-    margin-block-start: clamp(2.5rem, 6vw, 4rem);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-block-start: clamp(3rem, 7vw, 5rem);
   }
-  .ink-stills {
+  .ink-memory-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-block-start: clamp(2.5rem, 6vw, 4rem);
-    max-inline-size: 44rem;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+    margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
   }
   .ink-gallery {
-    margin-block-start: clamp(2rem, 5vw, 3.5rem);
+    margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+    max-inline-size: 64rem;
   }
 
-  /* Colour counts of the artist’s collection. */
-  .ink-palette {
-    margin-block-start: 2.25rem;
-    max-inline-size: 36rem;
+  /* Memory: what the machine saw, and what you remember. Pure type. */
+  .ink-duo {
+    margin-block-start: clamp(3.5rem, 8vw, 7rem);
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .ink-duo .ink-mono {
+    display: block;
+    margin-block-end: 0.6rem;
+    color: var(--accent);
+  }
+  .ink-duo-a {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.6rem, 3.6vw, 3.4rem);
+    line-height: 1.12;
+    color: var(--fg-muted);
+    max-inline-size: 26ch;
+  }
+  .ink-duo-b {
+    font-family: var(--display);
+    font-weight: 800;
+    font-variation-settings: "wdth" 84;
+    font-size: clamp(2.4rem, 7.4vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    max-inline-size: 14ch;
+  }
+
+  /* Canvas: one big number says it better than a legend. */
+  .ink-stat {
+    margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+    max-inline-size: 60rem;
+  }
+  .ink-stat-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem clamp(1rem, 2.4vw, 2rem);
+  }
+  .ink-stat-num {
+    font-family: var(--display);
+    font-weight: 800;
+    font-variation-settings: "wdth" 80;
+    font-size: clamp(6rem, 22vw, 18rem);
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    color: var(--chip);
+    font-variant-numeric: tabular-nums;
+  }
+  .ink-stat-line span {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.6rem, 3.4vw, 3rem);
+    line-height: 1.1;
   }
   .ink-palette-bar {
     display: flex;
-    block-size: 2.25rem;
+    block-size: 3rem;
     gap: 2px;
+    margin-block-start: 2rem;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid var(--line);
@@ -665,7 +907,7 @@ const inkTraces = [
     padding: 0;
     margin-block-start: 0.85rem;
     list-style: none;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-palette-legend li {
     display: inline-flex;
@@ -675,87 +917,226 @@ const inkTraces = [
   .ink-palette-legend i {
     inline-size: 0.6rem;
     block-size: 0.6rem;
-    border: 1px solid rgba(241, 236, 227, 0.35);
+    border: 1px solid rgba(248, 242, 232, 0.35);
+  }
+  .ink-palette-legend b {
+    font-weight: 500;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+  :global(html.ink-js) .ink-palette-bar span {
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 1s cubic-bezier(0.2, 0.7, 0.1, 1);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+  :global(html.ink-js) .ink-stat.is-in .ink-palette-bar span {
+    transform: none;
   }
 
-  /* Education meter: ten squares, glowing from level 4. */
-  .ink-meter {
-    padding: clamp(1.25rem, 3vw, 2rem);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background: rgba(23, 20, 15, 0.45);
+  /* Connections: two squares and the line between them, drawn as you arrive. */
+  .ink-link-demo {
+    display: flex;
+    align-items: center;
+    max-inline-size: 56rem;
+    margin-block-start: clamp(3rem, 7vw, 5rem);
   }
-  .ink-meter-row {
+  .ink-link-node {
+    position: relative;
+    flex: none;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.75rem;
-    padding: 0;
-    list-style: none;
+    justify-items: center;
   }
-  .ink-meter-cell {
+  .ink-link-node i {
+    display: block;
+    inline-size: clamp(3rem, 8vw, 6rem);
     aspect-ratio: 1;
-    display: grid;
-    place-items: center;
-    border: 1px solid rgba(241, 236, 227, 0.24);
-    color: var(--cream-muted);
-    background: rgba(241, 236, 227, 0.04);
+    border: 2px solid var(--accent);
+    opacity: 0.55;
   }
-  .ink-meter-cell.is-glowing {
-    border-color: rgba(217, 178, 122, 0.7);
-    background: rgba(217, 178, 122, 0.14);
-    color: var(--cream);
-    animation: ink-breathe 7s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.35s);
+  .ink-link-node.is-active i {
+    background: var(--accent);
+    opacity: 1;
+    box-shadow: 0 0 60px -6px var(--accent);
   }
-  @keyframes ink-breathe {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(217, 178, 122, 0); }
-    50% { box-shadow: 0 0 22px 2px rgba(217, 178, 122, 0.34); }
+  .ink-link-node b {
+    position: absolute;
+    inset-block-start: calc(100% + 0.8rem);
+    font-weight: 500;
+    color: var(--fg-muted);
+    white-space: nowrap;
+  }
+  .ink-link-line {
+    flex: 1;
+    block-size: 2px;
+    background: var(--accent);
+    transform-origin: 0 50%;
+  }
+  :global(html.ink-js) .ink-link-line {
+    transform: scaleX(0);
+    transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.1, 1) 0.3s;
+  }
+  :global(html.ink-js) .ink-link-demo.is-in .ink-link-line {
+    transform: none;
   }
 
-  /* ───────── Call to action, privacy, technical ───────── */
-  .ink-about {
-    border-block-start: 1px solid var(--line);
+  /* School: type that glows. */
+  .ink-glowline {
+    margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+    font-family: var(--display);
+    font-weight: 700;
+    font-variation-settings: "wdth" 86;
+    font-size: clamp(2.2rem, 6.6vw, 6.4rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    max-inline-size: 16ch;
   }
-  .ink-cta-card {
-    padding: clamp(1.75rem, 5vw, 3.5rem);
-    border: 1px solid var(--line);
-    border-radius: 28px;
-    background: linear-gradient(135deg, rgba(97, 68, 84, 0.38), rgba(130, 96, 59, 0.22));
+  .ink-glowline em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--chip);
+    text-shadow: 0 0 0 transparent;
+    animation: ink-glow 7s ease-in-out infinite;
   }
-  .ink-cta-card h2 {
-    margin-block-end: 0.75rem;
+  @keyframes ink-glow {
+    0%, 100% { text-shadow: 0 0 0 rgba(248, 217, 127, 0); }
+    50% { text-shadow: 0 0 28px rgba(248, 217, 127, 0.85), 0 0 70px rgba(248, 217, 127, 0.45); }
   }
-  .ink-cta-line {
-    font-size: 1.15rem;
-    color: var(--cream);
+
+  /* ───────── Three places ───────── */
+  .ink-places {
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+  .ink-places-count {
+    margin-inline-start: 1rem;
+    color: var(--fg-muted);
+  }
+  .ink-places-track {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+    margin-block-start: clamp(2rem, 5vw, 3rem);
+  }
+  .ink-place-num {
+    color: var(--accent);
+    margin-block-end: 0.5rem;
+  }
+  .ink-place-word {
+    font-family: var(--display);
+    font-weight: 800;
+    font-variation-settings: "wdth" 80;
+    font-size: clamp(4.2rem, 19vw, 17rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--fg);
+  }
+  .ink-place-word.is-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--fg);
+  }
+  .ink-place-line {
+    margin-block-start: 1rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    color: var(--fg);
+  }
+
+  /* ───────── Slow dissolve between light and dusk ───────── */
+  .ink-dissolve {
+    position: relative;
+    block-size: clamp(60svh, 90svh, 60rem);
+    overflow: hidden;
+  }
+  .ink-dissolve--in {
+    background: linear-gradient(180deg, var(--paper), var(--dusk));
+  }
+  .ink-dissolve--out {
+    background: linear-gradient(180deg, var(--dusk), var(--fog));
+  }
+  .ink-dissolve canvas {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+  :global(html.ink-js) .ink-dissolve--in {
+    background: var(--paper);
+  }
+  :global(html.ink-js) .ink-dissolve--out {
+    background: var(--dusk);
+  }
+
+  /* ───────── Dusk zone ───────── */
+  .ink-dusk {
+    position: relative;
+    background:
+      radial-gradient(64rem 42rem at 6% -4%, rgba(176, 82, 138, 0.4), transparent 70%),
+      radial-gradient(58rem 40rem at 104% 28%, rgba(226, 150, 64, 0.32), transparent 70%),
+      radial-gradient(60rem 44rem at -2% 66%, rgba(112, 92, 204, 0.26), transparent 70%),
+      radial-gradient(52rem 38rem at 100% 90%, rgba(176, 82, 138, 0.3), transparent 70%),
+      var(--dusk);
+  }
+  .ink-dusk .ink-button-primary {
+    background: var(--cream);
+    border-color: var(--cream);
+    color: var(--dusk);
+  }
+
+  /* ───────── Finale: back in the light, like the landing ───────── */
+  .ink-finale {
+    background: var(--fog);
+  }
+  .ink-finale-main {
+    padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 8vw, 6rem);
+  }
+  .ink-finale-title {
+    max-inline-size: none;
+    font-size: clamp(3.4rem, 13vw, 13rem);
+    line-height: 0.88;
+  }
+  .ink-finale-title span {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: normal;
+    letter-spacing: -0.02em;
   }
   .ink-fine {
     margin-block-start: 1.5rem;
-    max-inline-size: 36rem;
+    max-inline-size: 38rem;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-privacy {
-    margin-block-start: clamp(2.5rem, 6vw, 4rem);
+    margin-block-start: clamp(3rem, 7vw, 5rem);
     max-inline-size: 42rem;
+  }
+  .ink-privacy h3,
+  .ink-future h3,
+  .ink-record-section h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
   .ink-privacy p {
     margin-block-start: 0.85rem;
-    font-size: 1rem;
     line-height: 1.7;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-text-link {
     display: inline-block;
     margin-block-start: 1rem;
-    color: var(--amber-text);
+    color: var(--fg);
     text-underline-offset: 0.25em;
   }
-  .ink-technical {
-    padding-block: clamp(2rem, 5vw, 4rem);
-  }
   .ink-record {
+    margin-block-start: clamp(3rem, 7vw, 5rem);
     border-block: 1px solid var(--line);
   }
   .ink-record summary {
@@ -779,7 +1160,7 @@ const inkTraces = [
   .ink-record-invite {
     display: block;
     margin-block-start: 0.35rem;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-record-toggle {
     flex: none;
@@ -803,7 +1184,7 @@ const inkTraces = [
   }
   .ink-record-content p {
     line-height: 1.7;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-record-section h3 {
     margin-block-end: 0.6rem;
@@ -819,11 +1200,11 @@ const inkTraces = [
   }
   .ink-traces dt {
     font-weight: 600;
-    color: var(--cream);
+    color: var(--fg);
   }
   .ink-traces dd {
     margin: 0.15rem 0 0;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
     line-height: 1.6;
   }
   .ink-boundaries {
@@ -838,23 +1219,23 @@ const inkTraces = [
   .ink-boundaries h4 {
     font-weight: 600;
     margin-block-end: 0.5rem;
-    color: var(--cream);
+    color: var(--fg);
   }
   .ink-future {
-    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 9vw, 7rem);
+    margin-block-start: clamp(3rem, 7vw, 5rem);
+    max-inline-size: 40rem;
   }
-  .ink-future h2 {
-    font-size: clamp(1.5rem, 2.6vw, 2rem);
+  .ink-future h3 {
+    margin-block-end: 0.6rem;
   }
   .ink-future p:not(.ink-mono) {
-    max-inline-size: 38rem;
     line-height: 1.7;
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-footer {
     padding-block: 2.5rem 7rem;
     border-block-start: 1px solid var(--line);
-    color: var(--cream-muted);
+    color: var(--fg-muted);
   }
   .ink-footer .ink-wrap {
     display: flex;
@@ -874,7 +1255,7 @@ const inkTraces = [
     display: inline-flex;
     align-items: center;
     min-block-size: 44px;
-    color: var(--cream);
+    color: var(--fg);
     text-underline-offset: 0.25em;
   }
 
@@ -882,7 +1263,7 @@ const inkTraces = [
   .ink-dots {
     display: none;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1400px) {
     .ink-dots {
       position: fixed;
       inset-inline-end: 1.5rem;
@@ -891,6 +1272,8 @@ const inkTraces = [
       z-index: 40;
       display: grid;
       gap: 0.2rem;
+      color: #1a1a1a;
+      transition: color 0.4s ease;
     }
     .ink-dots a {
       display: flex;
@@ -898,7 +1281,7 @@ const inkTraces = [
       justify-content: flex-end;
       gap: 0.6rem;
       min-block-size: 28px;
-      color: var(--cream-muted);
+      color: inherit;
       text-decoration: none;
     }
     .ink-dots i {
@@ -917,107 +1300,85 @@ const inkTraces = [
     .ink-dots a.is-active .ink-dot-num {
       opacity: 1;
     }
-    .ink-dots a.is-active {
-      color: var(--amber-text);
-    }
     .ink-dots a.is-active i {
       background: currentColor;
       transform: scale(1.25);
     }
   }
-  @media (min-width: 1200px) and (max-width: 1399px) {
-    .ink-dots {
-      display: none;
-    }
-  }
-  @media (min-width: 1400px) {
-    .ink-dots {
-      display: grid;
-    }
-  }
 
   /* ───────── Layout, wider screens ───────── */
   @media (min-width: 900px) {
-    .ink-split {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    }
-    .ink-split-reverse {
-      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    }
-    .ink-split-reverse > .ink-text {
-      order: 2;
-    }
-    .ink-media-pair {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .ink-media-row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       align-items: start;
     }
-    .ink-media-row-memory {
-      grid-template-columns: 1.25fr 1.1fr 1fr;
-      align-items: start;
+    .ink-memory-grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
     }
     .ink-boundaries {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .ink-meter-row {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
   }
   @media (max-width: 899px) {
-    .ink-media-pair {
-      grid-template-columns: minmax(0, 1fr);
-      max-inline-size: 30rem;
+    .ink-media-row > *,
+    .ink-memory-grid > * {
+      max-inline-size: 32rem;
     }
-    .ink-media-row-memory > * {
-      max-inline-size: 30rem;
+  }
+
+  /* The three places slide sideways as you scroll, on large screens; elsewhere they simply stack. */
+  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+    :global(html.ink-js) .ink-places {
+      position: relative;
+      padding-block: 0;
+      block-size: var(--places-h, 300svh);
+    }
+    :global(html.ink-js) .ink-places-stick {
+      position: sticky;
+      inset-block-start: 0;
+      block-size: 100svh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      padding-block-start: 3.5rem;
+    }
+    :global(html.ink-js) .ink-places-head .ink-mega {
+      font-size: clamp(2.6rem, 6vw, 5.5rem);
+    }
+    :global(html.ink-js) .ink-places-track {
+      display: flex;
+      align-items: flex-end;
+      gap: 9vw;
+      inline-size: max-content;
+      margin-block-start: 0;
+      padding-inline: max(var(--gutter), calc((100vw - 1320px) / 2 + var(--gutter))) 14vw;
+      will-change: transform;
+    }
+    :global(html.ink-js) .ink-place {
+      flex: none;
     }
   }
 
   /* ───────── Reveal, only when JS is present ───────── */
   :global(html.ink-js) .ink-page [data-reveal] {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
+    translate: 0 18px;
+    transition: opacity 0.9s ease, translate 0.9s ease;
   }
   :global(html.ink-js) .ink-page [data-reveal].is-in {
     opacity: 1;
-    transform: none;
+    translate: none;
+  }
+  .ink-media,
+  .ink-media-row,
+  .ink-memory-grid,
+  .ink-gallery {
+    will-change: transform;
   }
 
-  /* ───────── Lightbox ───────── */
-  .ink-lightbox {
-    inline-size: min(92vw, 900px);
-    max-block-size: 92svh;
-    padding: 0;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background: #17140f;
-    color: var(--cream);
-    overflow: hidden;
-  }
-  .ink-lightbox::backdrop {
-    background: rgba(14, 11, 9, 0.82);
-  }
-  .ink-lightbox img {
-    display: block;
-    inline-size: 100%;
-    max-block-size: 92svh;
-    object-fit: contain;
-  }
-  .ink-lightbox-close {
-    position: absolute;
-    inset-block-start: 0.6rem;
-    inset-inline-end: 0.6rem;
-    inline-size: 44px;
-    block-size: 44px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    background: rgba(24, 20, 18, 0.8);
-    color: var(--cream);
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-
-  /* ───────── Kinetic type: words and letters rise out of their own line ───────── */
+  /* ───────── Kinetic type ───────── */
   .ink-page :global(.ink-sw) {
     display: inline-block;
     overflow: hidden;
@@ -1042,165 +1403,130 @@ const inkTraces = [
     transform: none;
   }
 
-  /* Hero drifts away slowly as you leave it. */
-  .ink-hero-inner {
-    transform: translate3d(0, calc(var(--hp, 0) * 44px), 0);
-    opacity: calc(1 - var(--hp, 0) * 0.55);
+  /* ───────── The cursor companion ───────── */
+  .ink-bubble,
+  .ink-bubble-core {
+    position: fixed;
+    inset: 0 auto auto 0;
+    z-index: 1000000;
+    pointer-events: none;
+    opacity: 0;
   }
-
-  /* Reading focus: the paragraph in the middle of the screen is the one in full light. */
-  :global(html.ink-js) .ink-page :global(.ink-fp) {
-    opacity: 0.42;
-    transition: opacity 0.7s ease;
-  }
-  :global(html.ink-js) .ink-page :global(.ink-fp.is-focus) {
-    opacity: 1;
-  }
-
-  /* Media stays in view while the text beside it passes. */
-  @media (min-width: 900px) {
-    .ink-split > .ink-media,
-    .ink-split > .ink-meter {
-      position: sticky;
-      inset-block-start: 14vh;
-    }
-  }
-
-  /* The colour bar grows out of nothing, and the numbers count up. */
-  :global(html.ink-js) .ink-palette-bar span {
-    transform: scaleX(0);
-    transform-origin: 0 50%;
-    transition: transform 1s cubic-bezier(0.2, 0.7, 0.1, 1);
-    transition-delay: calc(var(--i, 0) * 110ms);
-  }
-  :global(html.ink-js) .ink-palette.is-in .ink-palette-bar span {
-    transform: none;
-  }
-  .ink-palette-legend b {
-    font-weight: 500;
-    color: var(--cream);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* The meter lights up one square at a time. */
-  :global(html.ink-js) .ink-meter-cell {
-    opacity: 0.4;
-    transition: opacity 0.6s ease, background 0.6s ease, border-color 0.6s ease, color 0.6s ease;
-  }
-  :global(html.ink-js) .ink-meter-cell.is-lit {
-    opacity: 1;
-  }
-  :global(html.ink-js) .ink-meter-cell.is-glowing:not(.is-lit) {
-    animation: none;
-    border-color: rgba(241, 236, 227, 0.24);
-    background: rgba(241, 236, 227, 0.04);
-    color: var(--cream-muted);
-  }
-
-  /* ───────── Three places ───────── */
-  .ink-places {
-    padding-block: clamp(3rem, 8vw, 6rem);
-  }
-  .ink-places-count {
-    margin-inline-start: 1rem;
-    color: var(--cream-muted);
-  }
-  .ink-places-track {
+  .ink-bubble {
     display: grid;
-    gap: 3rem;
-    padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    margin: -22px 0 0 -22px;
+    border-radius: 14px;
+    background: #f8f2e8;
+    box-shadow: 0 0 0 1.5px #1a1a1a, 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: width 0.32s ease, height 0.32s ease, margin 0.32s ease, border-radius 0.32s ease, opacity 0.3s ease, scale 0.2s ease;
   }
-  .ink-place {
-    max-inline-size: 30rem;
+  .ink-bubble.is-visible,
+  .ink-bubble-core.is-visible {
+    opacity: 1;
   }
-  .ink-place-num {
-    color: var(--amber-text);
-    margin-block-end: 0.5rem;
+  .ink-bubble.is-large {
+    inline-size: 92px;
+    block-size: 92px;
+    margin: -46px 0 0 -46px;
+    border-radius: 30px;
   }
-  .ink-dusk .ink-place h3 {
-    font-size: clamp(2.2rem, 7vw, 3.4rem);
+  .ink-bubble.is-media {
+    inline-size: 124px;
+    block-size: 124px;
+    margin: -62px 0 0 -62px;
+    border-radius: 38px;
+  }
+  .ink-bubble.is-down {
+    scale: 0.78;
+  }
+  .ink-bubble-label {
+    font: 600 0.72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .ink-bubble.is-media .ink-bubble-label {
+    opacity: 1;
+  }
+  .ink-bubble-core {
+    inline-size: 7px;
+    block-size: 7px;
+    margin: -3px 0 0 -3px;
+    background: #1a1a1a;
+    box-shadow: 0 0 0 2px #f8f2e8;
+    transition: opacity 0.3s ease;
+  }
+  .ink-page.ink-bubble-on,
+  .ink-page.ink-bubble-on :global(*) {
+    cursor: none;
+  }
+  .ink-page.ink-bubble-on :global(dialog),
+  .ink-page.ink-bubble-on :global(dialog *) {
+    cursor: auto;
+  }
+  :global(html:has(dialog[open])) .ink-bubble,
+  :global(html:has(dialog[open])) .ink-bubble-core {
+    opacity: 0;
+  }
+
+  /* ───────── Lightbox ───────── */
+  .ink-lightbox {
+    inline-size: min(92vw, 900px);
+    max-block-size: 92svh;
+    padding: 0;
+    border: 1px solid rgba(248, 242, 232, 0.2);
+    border-radius: 20px;
+    background: #17140f;
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .ink-lightbox::backdrop {
+    background: rgba(14, 11, 9, 0.82);
+  }
+  .ink-lightbox img {
+    display: block;
+    inline-size: 100%;
+    max-block-size: 92svh;
+    object-fit: contain;
+  }
+  .ink-lightbox-close {
+    position: absolute;
+    inset-block-start: 0.6rem;
+    inset-inline-end: 0.6rem;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 1px solid rgba(248, 242, 232, 0.2);
+    border-radius: 50%;
+    background: rgba(24, 20, 18, 0.8);
+    color: var(--cream);
+    font-size: 1.5rem;
     line-height: 1;
-    letter-spacing: -0.035em;
-    margin-block-end: 0.5rem;
-  }
-  .ink-place > p:not(.ink-place-num) {
-    margin-block-end: 1.25rem;
-    font-size: 1.1rem;
-    color: var(--cream-muted);
-  }
-  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-    :global(html.ink-js) .ink-places {
-      position: relative;
-      padding-block: 0;
-      block-size: var(--places-h, 300svh);
-    }
-    :global(html.ink-js) .ink-places-stick {
-      position: sticky;
-      inset-block-start: 0;
-      block-size: 100svh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.5rem;
-      padding-block-start: 3.5rem;
-    }
-    :global(html.ink-js) .ink-places-head h2 {
-      margin-block-end: 0;
-    }
-    :global(html.ink-js) .ink-places-track {
-      display: flex;
-      align-items: flex-start;
-      gap: 9vw;
-      inline-size: max-content;
-      padding-inline: max(var(--gutter), calc((100vw - 1180px) / 2 + var(--gutter))) 14vw;
-      transform: translate3d(var(--places-x, 0px), 0, 0);
-      will-change: transform;
-    }
-    :global(html.ink-js) .ink-place {
-      flex: none;
-      max-inline-size: none;
-      inline-size: min(44vw, 34rem);
-    }
-    :global(html.ink-js) .ink-place:last-child {
-      inline-size: min(62vw, 48rem);
-    }
-    :global(html.ink-js) .ink-place-frame {
-      inline-size: fit-content;
-    }
-    :global(html.ink-js) .ink-place-frame img {
-      inline-size: auto;
-      block-size: min(50svh, 32rem);
-    }
-    :global(html.ink-js) .ink-place-frame-wide img {
-      block-size: min(46svh, 28rem);
-    }
   }
 
   /* ───────── Reduced motion: nothing slides, nothing glows ───────── */
   @media (prefers-reduced-motion: reduce) {
     :global(html.ink-js) .ink-page [data-reveal] {
       opacity: 1;
-      transform: none;
+      translate: none;
       transition: none;
     }
-    .ink-meter-cell.is-glowing {
-      animation: none;
-    }
-    .ink-hero-inner {
-      transform: none;
+    :global(html.ink-js) .ink-fill :global(.ink-fw) {
       opacity: 1;
-    }
-    :global(html.ink-js) .ink-page :global(.ink-fp) {
-      opacity: 1;
-      transition: none;
     }
     :global(html.ink-js) .ink-palette-bar span,
-    :global(html.ink-js) .ink-meter-cell {
+    :global(html.ink-js) .ink-link-line {
       transform: none;
-      opacity: 1;
       transition: none;
     }
+    .ink-glowline em {
+      animation: none;
+    }
+    .ink-more summary i,
     .ink-record-toggle,
     .ink-button,
     .ink-dots i,
@@ -1210,7 +1536,7 @@ const inkTraces = [
   }
 </style>
 
-<!-- The tone switch lets the shared navigation follow the page from fog to dusk. -->
+<!-- The tone switch lets the shared navigation follow the page between light and dusk. -->
 <style is:global>
   body:has(.ink-page) {
     transition: background-color 0.6s ease, color 0.6s ease;
@@ -1246,38 +1572,57 @@ const inkTraces = [
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 
-  // Colours follow the real collection: mostly grey and swamp green, with a few rare ones.
-  const FIELD_PALETTE: Array<[string, number]> = [
-    ["#8f8d88", 30], ["#a6a39b", 24], ["#6f6d68", 18], ["#b9b6ae", 10],
-    ["#6b705a", 14], ["#7e8466", 8], ["#b99a45", 9], ["#6f7f96", 6],
-    ["#2f2d2a", 6], ["#5f7a52", 3], ["#b44a45", 1], ["#9b4f7e", 1], ["#ece8df", 1],
+  // The field uses the real collection: mostly grey and swamp green, a few warm notes, rare colour.
+  const FIELD_COLOURS: Array<[string, number]> = [
+    ["#8f8d88", 18], ["#a6a39b", 14], ["#6f6d68", 11], ["#b9b6ae", 8],
+    ["#6b705a", 11], ["#7e8466", 7], ["#9a8f78", 6], ["#6f7f96", 4],
+    ["#2f2d2a", 5], ["#d6a63a", 4], ["#b4786f", 3], ["#4f9a5f", 2],
+    ["#d24d46", 1], ["#b4559a", 1], ["#f2efe6", 3],
+  ];
+  const SPRITES: Array<{ rows: string[]; key: Record<string, string> }> = [
+    {
+      rows: ["...cc...", "..cccc..", ".cccccc.", "cccpcccc", "cppcccpc", "...ss...", "...ss...", "...sp...", "...ps...", "...bb..."],
+      key: { c: "#8d8880", p: "#d4a1a8", s: "#d9cfc1", b: "#b9a58a" },
+    },
+    {
+      rows: ["....p....", "...ppp...", "..ppypp..", "...ppp...", "....p....", "....g....", ".g..g..g.", "..g.g.g..", "...ggg...", "....g....", "....g....", "....g...."],
+      key: { p: "#ea7f9b", y: "#f0b72c", g: "#6f9a5a" },
+    },
   ];
 
+  // A living field: squares arrive and leave all the time, and now and then the field draws a small
+  // picture pixel by pixel, spending Ink, then erases it and gives the Ink back, as the app does.
   function initField(hero: HTMLElement, canvas: HTMLCanvasElement, signal: AbortSignal, reduced: MediaQueryList) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const hudInk = hero.querySelector<HTMLElement>("[data-ink-hud-ink]");
+    const hudDrawn = hero.querySelector<HTMLElement>("[data-ink-hud-drawn]");
+    const START_INK = 587;
 
-    type Cell = { col: number; row: number; colour: string; filled: boolean; phase: number; delay: number };
+    type Cell = { col: number; row: number; colour: string; fill: number; target: number; ox: number; oy: number; phase: number; appear: number; locked: boolean };
     type Ripple = { x: number; y: number; start: number };
-    let cells: Cell[] = [];
-    let ripples: Ripple[] = [];
-    let width = 0;
-    let height = 0;
-    let cell = 48;
-    let running = false;
-    let inView = true;
-    let last = 0;
-    let origin = performance.now();
-    const hover = { x: -999, y: -999, power: 0, target: 0 };
+    type Art = { order: Cell[]; step: number; phase: "draw" | "hold" | "erase" | "rest"; next: number };
 
-    const total = FIELD_PALETTE.reduce((sum, [, weight]) => sum + weight, 0);
-    const pick = (roll: number) => {
-      let acc = roll * total;
-      for (const [colour, weight] of FIELD_PALETTE) {
-        acc -= weight;
-        if (acc <= 0) return colour;
-      }
-      return FIELD_PALETTE[0][0];
+    let cells: Cell[] = [];
+    let grid: Cell[][] = [];
+    let ripples: Ripple[] = [];
+    let cols = 0, rows = 0, width = 0, height = 0, cell = 56;
+    let running = false, inView = true, lastFrame = 0, carry = 0, drawn = 0, spriteCounter = 0;
+    let art: Art | null = null;
+    const hover = { x: -999, y: -999, power: 0, target: 0 };
+    let rng = mulberry32(888);
+    const total = FIELD_COLOURS.reduce((sum, [, weight]) => sum + weight, 0);
+    const pick = () => {
+      let acc = rng() * total;
+      for (const [colour, weight] of FIELD_COLOURS) { acc -= weight; if (acc <= 0) return colour; }
+      return FIELD_COLOURS[0][0];
+    };
+    const sideOf = (cx: number) => 0.3 + 0.7 * smooth(width * 0.25, width * 0.8, cx);
+    const density = (cx: number) => 0.14 + 0.46 * smooth(width * 0.2, width * 0.85, cx);
+
+    const setHud = () => {
+      if (hudInk) hudInk.textContent = String(START_INK - drawn);
+      if (hudDrawn) hudDrawn.textContent = String(drawn);
     };
 
     const build = () => {
@@ -1288,84 +1633,154 @@ const inkTraces = [
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cell = clamp(Math.round(width / (width < 700 ? 9 : 24)), 34, 64);
-      const rng = mulberry32(888);
+      cell = clamp(Math.round(width / (width < 700 ? 8 : 22)), 38, 72);
+      cols = Math.ceil(width / cell);
+      rows = Math.ceil(height / cell);
+      rng = mulberry32(888);
+      const now = performance.now();
       cells = [];
-      for (let row = 0; row < Math.ceil(height / cell); row++) {
-        for (let col = 0; col < Math.ceil(width / cell); col++) {
-          cells.push({ col, row, colour: pick(rng()), filled: rng() < 0.5, phase: rng() * TAU, delay: rng() * 1000 });
+      grid = [];
+      for (let row = 0; row < rows; row++) {
+        grid[row] = [];
+        for (let col = 0; col < cols; col++) {
+          const cx = col * cell + cell / 2;
+          const item: Cell = {
+            col, row, colour: pick(), fill: 0, target: rng() < density(cx) ? 1 : 0, ox: 1.4, oy: (rng() - 0.5) * 1.2,
+            phase: rng() * TAU, appear: now + ((width - cx) / width) * 1100 + rng() * 500, locked: false,
+          };
+          if (reduced.matches) { item.fill = item.target; item.ox = 0; item.oy = 0; }
+          cells.push(item);
+          grid[row][col] = item;
         }
       }
+      art = null;
+      drawn = 0;
+      setHud();
     };
 
     const waveAt = (cx: number, cy: number, now: number) => {
       let best = 0;
       for (const ripple of ripples) {
         const age = now - ripple.start;
-        const radius = age * 0.5;
-        const distance = Math.hypot(cx - ripple.x, cy - ripple.y);
-        const band = Math.exp(-(((distance - radius) / 120) ** 2));
+        if (age < 0) continue;
+        const band = Math.exp(-(((Math.hypot(cx - ripple.x, cy - ripple.y) - age * 0.55) / 130) ** 2));
         best = Math.max(best, band * (1 - age / 2400));
       }
       return best;
     };
+    const hoverAt = (cx: number, cy: number) => hover.power * Math.exp(-((Math.hypot(cx - hover.x, cy - hover.y) / 160) ** 2)) * 0.95;
 
-    const hoverAt = (cx: number, cy: number) =>
-      hover.power * Math.exp(-((Math.hypot(cx - hover.x, cy - hover.y) / 150) ** 2)) * 0.9;
+    const startArt = (now: number) => {
+      const { rows: bitmap, key } = SPRITES[spriteCounter++ % SPRITES.length];
+      const h = bitmap.length;
+      const w = bitmap[0].length;
+      if (cols < w + 1 || rows < h + 2) { art = { order: [], step: 0, phase: "rest", next: now + 4000 }; return; }
+      const colMin = Math.max(0, Math.floor(cols * 0.45));
+      const colStart = colMin + Math.floor(rng() * Math.max(1, cols - w - colMin));
+      const rowStart = 1 + Math.floor(rng() * Math.max(1, Math.floor(rows * 0.62) - h));
+      const order: Cell[] = [];
+      for (let r = h - 1; r >= 0; r--) {
+        for (let c = 0; c < w; c++) {
+          const letter = bitmap[r][c];
+          const target = grid[rowStart + r]?.[colStart + c];
+          if (letter === "." || !target) continue;
+          target.colour = key[letter];
+          order.push(target);
+        }
+      }
+      art = { order, step: 0, phase: "draw", next: now + 700 };
+    };
 
-    const draw = (now: number) => {
-      hover.power += (hover.target - hover.power) * 0.1;
-      ripples = ripples.filter((ripple) => now - ripple.start < 2400);
-      ctx.clearRect(0, 0, width, height);
+    const stepArt = (now: number) => {
+      if (!art) { startArt(now); return; }
+      if (now < art.next) return;
+      if (art.phase === "draw") {
+        const item = art.order[art.step];
+        if (item) { item.locked = true; item.target = 1; item.ox = (rng() - 0.5) * 1.4; item.oy = -1; drawn++; setHud(); }
+        art.step++;
+        if (art.step >= art.order.length) { art.phase = "hold"; art.next = now + 3600; } else art.next = now + 95;
+      } else if (art.phase === "hold") {
+        art.phase = "erase"; art.step = art.order.length - 1; art.next = now + 60;
+      } else if (art.phase === "erase") {
+        const item = art.order[art.step];
+        if (item) { item.target = 0; item.locked = false; drawn = Math.max(0, drawn - 1); setHud(); }
+        art.step--;
+        if (art.step < 0) { art.phase = "rest"; art.next = now + 2600; } else art.next = now + 55;
+      } else {
+        startArt(now);
+      }
+    };
+
+    const draw = (now: number, dt: number) => {
       const still = reduced.matches;
+      hover.power += (hover.target - hover.power) * 0.1;
+      ripples = ripples.filter((ripple) => now - ripple.start < 2800);
+
+      if (!still) {
+        carry += dt * 0.018;
+        while (carry >= 1 && cells.length) {
+          carry -= 1;
+          const item = cells[Math.floor(rng() * cells.length)];
+          if (item.locked || now < item.appear) continue;
+          const wants = rng() < density(item.col * cell + cell / 2);
+          if (wants && item.target === 0) {
+            item.target = 1;
+            item.colour = pick();
+            const side = Math.floor(rng() * 4);
+            item.ox = side === 0 ? 1.1 : side === 1 ? -1.1 : 0;
+            item.oy = side === 2 ? 1.1 : side === 3 ? -1.1 : 0;
+          } else if (!wants && item.target === 1) {
+            item.target = 0;
+          }
+        }
+        stepArt(now);
+      }
+
+      ctx.clearRect(0, 0, width, height);
       for (const item of cells) {
         const x = item.col * cell;
         const y = item.row * cell;
         const cx = x + cell / 2;
         const cy = y + cell / 2;
-        // Quieter on the left so the headline stays easy to read.
-        const side = 0.2 + 0.8 * smooth(width * 0.3, width * 0.85, cx);
-        const arrive = still ? 1 : smooth(0, 900, now - origin - item.delay);
-        const wave = still ? 0 : Math.max(waveAt(cx, cy, now), hoverAt(cx, cy));
-        if (!item.filled) {
-          if (wave > 0.2) {
-            // Empty squares fill with colour as the pointer or a wave passes over them.
-            ctx.globalAlpha = clamp(wave * 0.7 * Math.max(side, 0.5), 0, 1);
-            ctx.fillStyle = item.colour;
-            ctx.fillRect(x + 2.5, y + 2.5, cell - 5, cell - 5);
-            ctx.globalAlpha = 1;
-          } else {
-            ctx.strokeStyle = `rgba(128,124,116,${0.14 * side * arrive})`;
-            ctx.lineWidth = 1;
-            ctx.strokeRect(x + 2.5, y + 2.5, cell - 5, cell - 5);
-          }
+        const side = sideOf(cx);
+        if (!still && now >= item.appear) {
+          item.fill += (item.target - item.fill) * 0.13;
+          item.ox *= 0.9;
+          item.oy *= 0.9;
+        }
+        const glow = still ? 0 : Math.max(waveAt(cx, cy, now), hoverAt(cx, cy));
+        const fill = clamp(item.fill + (item.target === 0 ? glow * 0.9 : glow * 0.2), 0, 1);
+        if (fill < 0.04) {
+          ctx.strokeStyle = `rgba(128,124,116,${0.2 * side})`;
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x + 2.5, y + 2.5, cell - 5, cell - 5);
           continue;
         }
-        const breathe = still ? 1 : 0.9 + 0.1 * Math.sin((now / 7000) * TAU + item.phase);
-        const size = (cell - 5) * (1 + 0.16 * wave);
-        ctx.globalAlpha = clamp((0.5 + 0.5 * wave) * side * arrive * breathe, 0, 1);
+        const breathe = still ? 1 : 0.92 + 0.08 * Math.sin((now / 6000) * TAU + item.phase);
+        const size = (cell - 5) * (0.4 + 0.6 * fill) * (1 + 0.2 * glow);
+        ctx.globalAlpha = clamp(fill * 0.92 * side * breathe + glow * 0.3, 0, 1);
         ctx.fillStyle = item.colour;
-        ctx.fillRect(cx - size / 2, cy - size / 2, size, size);
+        ctx.fillRect(cx + item.ox * cell - size / 2, cy + item.oy * cell - size / 2, size, size);
       }
       ctx.globalAlpha = 1;
     };
 
     const frame = (now: number) => {
       if (!running) return;
-      if (now - last >= 33) {
-        last = now;
-        draw(now);
-      }
+      const dt = Math.min(now - lastFrame, 64);
+      lastFrame = now;
+      draw(now, dt);
       requestAnimationFrame(frame);
     };
     const sync = () => {
       const shouldRun = inView && !document.hidden && !reduced.matches;
       if (shouldRun && !running) {
         running = true;
+        lastFrame = performance.now();
         requestAnimationFrame(frame);
       } else if (!shouldRun) {
         running = false;
-        draw(performance.now());
+        draw(performance.now(), 0);
       }
     };
 
@@ -1375,7 +1790,6 @@ const inkTraces = [
       ripples.push({ x: event.clientX - rect.left, y: event.clientY - rect.top, start: performance.now() });
       if (ripples.length > 6) ripples.shift();
     }, { signal });
-
     hero.addEventListener("pointermove", (event) => {
       if (reduced.matches || event.pointerType !== "mouse") return;
       const rect = canvas.getBoundingClientRect();
@@ -1388,17 +1802,195 @@ const inkTraces = [
     build();
     const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); });
     observer.observe(hero);
-    const resizer = new ResizeObserver(() => { build(); draw(performance.now()); });
+    const resizer = new ResizeObserver(() => { build(); draw(performance.now(), 0); });
     resizer.observe(canvas);
     document.addEventListener("visibilitychange", sync, { signal });
     reduced.addEventListener("change", sync, { signal });
     signal.addEventListener("abort", () => { running = false; observer.disconnect(); resizer.disconnect(); }, { once: true });
 
-    // One gentle wave on arrival, from the right where the squares are strongest.
-    if (!reduced.matches) ripples.push({ x: width * 0.72, y: height * 0.38, start: performance.now() + 500 });
+    if (!reduced.matches) {
+      ripples.push({ x: width * 0.78, y: height * 0.35, start: performance.now() + 400 });
+      ripples.push({ x: width * 0.2, y: height * 0.7, start: performance.now() + 1500 });
+    }
     sync();
   }
 
+  // One shared scroll loop: read everything first, write second, and ease the movement so it glides
+  // instead of stepping. Transforms are written straight onto the moving element, never through
+  // inherited variables, so a scroll frame does not restyle whole chapters.
+  type Fx = { read: () => void; write: () => boolean };
+  type Scheduler = { add: (fx: Fx) => void; kick: () => void };
+  const ease = (current: number, target: number, rate: number, epsilon: number) => {
+    const next = current + (target - current) * rate;
+    return Math.abs(target - next) < epsilon ? target : next;
+  };
+  function createScheduler(signal: AbortSignal): Scheduler {
+    const fxs: Fx[] = [];
+    let raf = 0;
+    let idleUntil = 0;
+    const frame = (now: number) => {
+      raf = 0;
+      for (const fx of fxs) fx.read();
+      let more = false;
+      for (const fx of fxs) if (fx.write()) more = true;
+      if (more || now < idleUntil) raf = requestAnimationFrame(frame);
+    };
+    const kick = () => {
+      idleUntil = performance.now() + 160;
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+    window.addEventListener("scroll", kick, { passive: true, signal });
+    window.addEventListener("resize", kick, { passive: true, signal });
+    signal.addEventListener("abort", () => cancelAnimationFrame(raf), { once: true });
+    return { add: (fx) => { fxs.push(fx); }, kick };
+  }
+
+  // A long, scroll-driven fall from one world into the other: squares climb from the bottom.
+  function initDissolve(fxs: Scheduler, signal: AbortSignal, reduced: MediaQueryList) {
+    const zones = Array.from(document.querySelectorAll<HTMLElement>("[data-ink-dissolve]"));
+    const TINTS = {
+      in: ["#211d1b", "#241d1f", "#2a211c", "#1f1b1f", "#261f1b"],
+      out: ["#f5f5f5", "#f1f0ee", "#f7f6f4", "#efeeec", "#f3f2f0"],
+    };
+    type State = {
+      zone: HTMLElement; canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; kind: "in" | "out";
+      cells: Array<{ col: number; row: number; thr: number; tint: number }>;
+      cols: number; rows: number; cell: number; width: number; height: number;
+      target: number; current: number; drawn: number; visible: boolean; primed: boolean;
+    };
+    const states: State[] = [];
+    for (const zone of zones) {
+      const canvas = zone.querySelector("canvas");
+      const ctx = canvas?.getContext("2d");
+      if (!canvas || !ctx) continue;
+      states.push({
+        zone, canvas, ctx, kind: zone.dataset.inkDissolve === "out" ? "out" : "in", cells: [], cols: 0, rows: 0, cell: 56,
+        width: 0, height: 0, target: 0, current: 0, drawn: -1, visible: false, primed: false,
+      });
+    }
+
+    const build = (state: State) => {
+      const rect = state.canvas.getBoundingClientRect();
+      state.width = rect.width;
+      state.height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      state.canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      state.canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      state.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      state.cell = clamp(Math.round(rect.width / (rect.width < 700 ? 8 : 22)), 38, 72);
+      state.cols = Math.ceil(rect.width / state.cell);
+      state.rows = Math.ceil(rect.height / state.cell);
+      const rng = mulberry32(state.kind === "in" ? 31 : 77);
+      state.cells = [];
+      for (let row = 0; row < state.rows; row++) {
+        for (let col = 0; col < state.cols; col++) state.cells.push({ col, row, thr: rng(), tint: Math.floor(rng() * 5) });
+      }
+      state.drawn = -1;
+    };
+    const draw = (state: State) => {
+      const ctx = state.ctx;
+      const progress = state.current;
+      ctx.clearRect(0, 0, state.width, state.height);
+      const tints = TINTS[state.kind];
+      for (const item of state.cells) {
+        const fromBottom = (state.rows - 1 - item.row) / Math.max(1, state.rows - 1);
+        const order = fromBottom * 0.6 + item.thr * 0.4;
+        const t = clamp((progress * 1.25 - order) / 0.14, 0, 1);
+        if (t <= 0) continue;
+        const size = (state.cell + 1) * (0.3 + 0.7 * t);
+        ctx.fillStyle = tints[item.tint];
+        ctx.fillRect(item.col * state.cell + (state.cell - size) / 2, item.row * state.cell + (state.cell - size) / 2, size, size);
+      }
+      if (progress > 0.9) {
+        ctx.globalAlpha = clamp((progress - 0.9) / 0.08, 0, 1);
+        ctx.fillStyle = tints[0];
+        ctx.fillRect(0, 0, state.width, state.height);
+        ctx.globalAlpha = 1;
+      }
+    };
+
+    states.forEach(build);
+    fxs.add({
+      read: () => {
+        const vh = window.innerHeight;
+        for (const state of states) {
+          const rect = state.zone.getBoundingClientRect();
+          state.visible = rect.bottom > -120 && rect.top < vh + 120;
+          // Slow on purpose: it takes about a screen and a half of scrolling to finish.
+          state.target = reduced.matches ? 1 : clamp((vh * 0.95 - rect.top) / (rect.height + vh * 0.65), 0, 1);
+        }
+      },
+      write: () => {
+        let more = false;
+        for (const state of states) {
+          if (!state.primed) { state.current = state.target; state.primed = true; }
+          state.current = ease(state.current, state.target, 0.16, 0.0008);
+          if (state.visible && Math.abs(state.current - state.drawn) > 0.0006) { draw(state); state.drawn = state.current; }
+          if (state.current !== state.target) more = true;
+        }
+        return more;
+      },
+    });
+    window.addEventListener("resize", () => { states.forEach(build); fxs.kick(); }, { passive: true, signal });
+  }
+
+  // Big sentences that fill with ink, word by word, as you scroll.
+  function initFill(fxs: Scheduler, reduced: MediaQueryList) {
+    const blocks = Array.from(document.querySelectorAll<HTMLElement>("[data-ink-fill]"));
+    if (!blocks.length || reduced.matches) return;
+    const groups = blocks.map((block) => {
+      const words: HTMLElement[] = [];
+      const walk = (node: Node) => {
+        for (const child of Array.from(node.childNodes)) {
+          if (child.nodeType === Node.TEXT_NODE) {
+            const text = child.textContent ?? "";
+            if (!text.trim()) continue;
+            const fragment = document.createDocumentFragment();
+            for (const part of text.split(/(\s+)/)) {
+              if (!part) continue;
+              if (/^\s+$/.test(part)) { fragment.appendChild(document.createTextNode(" ")); continue; }
+              const span = document.createElement("span");
+              span.className = "ink-fw";
+              span.textContent = part;
+              words.push(span);
+              fragment.appendChild(span);
+            }
+            child.replaceWith(fragment);
+          } else if (child instanceof HTMLElement) {
+            walk(child);
+          }
+        }
+      };
+      walk(block);
+      return { block, words, target: 0, current: 0, drawn: -1, visible: false, primed: false };
+    });
+    fxs.add({
+      read: () => {
+        const vh = window.innerHeight;
+        for (const group of groups) {
+          const rect = group.block.getBoundingClientRect();
+          group.visible = rect.bottom > -150 && rect.top < vh + 150;
+          group.target = clamp((vh * 0.85 - rect.top) / (rect.height + vh * 0.3), 0, 1);
+        }
+      },
+      write: () => {
+        let more = false;
+        for (const group of groups) {
+          if (!group.primed) { group.current = group.target; group.primed = true; }
+          group.current = ease(group.current, group.target, 0.2, 0.0005);
+          if (group.visible && Math.abs(group.current - group.drawn) > 0.0005) {
+            const count = group.words.length;
+            group.words.forEach((word, index) => word.style.setProperty("--on", clamp(group.current * (count + 4) - index, 0, 1).toFixed(3)));
+            group.drawn = group.current;
+          }
+          if (group.current !== group.target) more = true;
+        }
+        return more;
+      },
+    });
+  }
+
+  // Every clip plays by itself in a loop while it is on screen.
   function initClips(signal: AbortSignal, reduced: MediaQueryList) {
     const clips = Array.from(document.querySelectorAll<HTMLElement>("[data-ink-clip]"));
     const setState = (clip: HTMLElement, state: string) => {
@@ -1407,49 +1999,33 @@ const inkTraces = [
       const label = clip.querySelector<HTMLElement>("[data-ink-clip-label]");
       if (!video || !button || !label) return;
       clip.dataset.state = state;
-      const text = state === "playing" ? "Pause" : state === "ended" ? "Replay" : state === "paused" ? "Resume" : (clip.dataset.playText ?? "Play");
+      const text = state === "playing" ? "Pause" : "Play";
       label.textContent = text;
       button.setAttribute("aria-label", `${text}: ${video.getAttribute("aria-label") ?? ""}`);
     };
-    const pauseOthers = (except: HTMLElement) => {
-      for (const other of clips) {
-        if (other === except) continue;
-        const video = other.querySelector("video");
-        if (video && !video.paused) { video.pause(); }
-      }
-    };
-    const play = (clip: HTMLElement) => {
-      const video = clip.querySelector("video");
-      if (!video) return;
-      pauseOthers(clip);
-      if (video.ended) video.currentTime = 0;
-      void video.play().then(() => setState(clip, "playing")).catch(() => setState(clip, "idle"));
-    };
-
     for (const clip of clips) {
       const video = clip.querySelector("video");
       const button = clip.querySelector<HTMLButtonElement>("[data-ink-clip-btn]");
       if (!video || !button) continue;
-      let started = false;
-      let resumeOnReturn = false;
+      let pausedByVisitor = false;
+      const play = () => { void video.play().then(() => setState(clip, "playing")).catch(() => setState(clip, "idle")); };
 
       button.addEventListener("click", () => {
-        started = true;
-        if (video.paused || video.ended) play(clip);
-        else { video.pause(); setState(clip, "paused"); }
+        if (video.paused) { pausedByVisitor = false; play(); }
+        else { video.pause(); setState(clip, "idle"); pausedByVisitor = true; }
       }, { signal });
-      video.addEventListener("ended", () => setState(clip, "ended"), { signal });
-      video.addEventListener("pause", () => { if (!video.ended && clip.dataset.state === "playing") setState(clip, "paused"); }, { signal });
+      clip.querySelector<HTMLElement>(".ink-clip-frame")?.addEventListener("click", (event) => {
+        if (!(event.target as HTMLElement).closest("button")) button.click();
+      }, { signal });
 
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
-          if (clip.dataset.mode === "once" && !started && !reduced.matches) { started = true; play(clip); }
-          else if (resumeOnReturn) { resumeOnReturn = false; play(clip); }
+          if (!reduced.matches && !pausedByVisitor) play();
         } else if (!video.paused) {
-          resumeOnReturn = true;
           video.pause();
+          setState(clip, "idle");
         }
-      }, { threshold: 0.55 });
+      }, { threshold: 0.4 });
       observer.observe(clip);
       signal.addEventListener("abort", () => observer.disconnect(), { once: true });
     }
@@ -1469,19 +2045,9 @@ const inkTraces = [
     });
   }
 
-  function lightMeter(root: HTMLElement) {
-    root.querySelectorAll<HTMLElement>(".ink-meter-cell").forEach((cell, index) => {
-      window.setTimeout(() => cell.classList.add("is-lit"), 250 + index * 170);
-    });
-  }
-
   function initReveal(signal: AbortSignal, reduced: MediaQueryList) {
-    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal], [data-pixels], [data-bars], [data-meter]"));
-    if (reduced.matches) {
-      items.forEach((item) => item.classList.add("is-in"));
-      document.querySelectorAll<HTMLElement>(".ink-meter-cell").forEach((cell) => cell.classList.add("is-lit"));
-      return;
-    }
+    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal], [data-bars]"));
+    if (reduced.matches) { items.forEach((item) => item.classList.add("is-in")); return; }
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         // Anything already scrolled past counts as seen, so fast scrolling never leaves a blank section.
@@ -1489,17 +2055,13 @@ const inkTraces = [
           const target = entry.target as HTMLElement;
           target.classList.add("is-in");
           if (target.hasAttribute("data-bars")) countUp(target);
-          if (target.hasAttribute("data-meter")) lightMeter(target);
           observer.unobserve(target);
         }
       }
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     items.forEach((item) => observer.observe(item));
     // Safety net: if the observer never reports, show everything after a moment.
-    const timer = window.setTimeout(() => {
-      items.forEach((item) => item.classList.add("is-in"));
-      document.querySelectorAll<HTMLElement>(".ink-meter-cell").forEach((cell) => cell.classList.add("is-lit"));
-    }, 8000);
+    const timer = window.setTimeout(() => items.forEach((item) => item.classList.add("is-in")), 8000);
     signal.addEventListener("abort", () => { observer.disconnect(); window.clearTimeout(timer); }, { once: true });
   }
 
@@ -1541,7 +2103,7 @@ const inkTraces = [
   function initSplit(signal: AbortSignal, reduced: MediaQueryList) {
     if (reduced.matches) return;
     const hero = document.querySelector<HTMLElement>(".ink-page h1");
-    const headings = Array.from(document.querySelectorAll<HTMLElement>(".ink-dusk h2"));
+    const headings = Array.from(document.querySelectorAll<HTMLElement>(".ink-page h2.ink-mega"));
     if (hero) {
       splitText(hero, true);
       const start = () => window.setTimeout(() => hero.classList.add("is-in"), 140);
@@ -1560,91 +2122,220 @@ const inkTraces = [
     signal.addEventListener("abort", () => { observer.disconnect(); window.clearTimeout(timer); }, { once: true });
   }
 
-  // The paragraph in the middle of the screen is in full light; its neighbours rest.
-  function initFocus(signal: AbortSignal, reduced: MediaQueryList) {
+  function initHeroDrift(hero: HTMLElement, fxs: Scheduler, reduced: MediaQueryList) {
     if (reduced.matches) return;
-    const targets = Array.from(document.querySelectorAll<HTMLElement>(".ink-chapter .ink-text p"))
-      .filter((paragraph) => (paragraph.parentElement?.querySelectorAll(":scope > p").length ?? 0) >= 2);
-    targets.forEach((paragraph) => paragraph.classList.add("ink-fp"));
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => entry.target.classList.toggle("is-focus", entry.isIntersecting));
-    }, { rootMargin: "-28% 0px -28% 0px" });
-    targets.forEach((paragraph) => observer.observe(paragraph));
-    signal.addEventListener("abort", () => observer.disconnect(), { once: true });
-  }
-
-  function initHeroDrift(hero: HTMLElement, signal: AbortSignal, reduced: MediaQueryList) {
-    if (reduced.matches) return;
-    let queued = false;
-    const update = () => {
-      queued = false;
-      const rect = hero.getBoundingClientRect();
-      hero.style.setProperty("--hp", clamp(-rect.top / (rect.height * 0.7), 0, 1).toFixed(3));
-    };
-    window.addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true, signal });
+    const parts = Array.from(hero.querySelectorAll<HTMLElement>(".ink-hero-inner > *"));
+    let target = 0;
+    let current = 0;
+    fxs.add({
+      read: () => {
+        const rect = hero.getBoundingClientRect();
+        target = clamp(-rect.top / (rect.height * 0.7), 0, 1);
+      },
+      write: () => {
+        current = ease(current, target, 0.16, 0.001);
+        for (const part of parts) {
+          part.style.transform = `translate3d(0, ${(current * 60).toFixed(2)}px, 0)`;
+          if (part.tagName !== "H1") part.style.opacity = String(clamp(1 - current * 2.4, 0, 1));
+        }
+        return current !== target;
+      },
+    });
   }
 
   // On large screens the three places slide sideways as you scroll down: normal scroll speed, no hijacking.
-  function initPlaces(signal: AbortSignal) {
+  function initPlaces(fxs: Scheduler, signal: AbortSignal) {
     const section = document.querySelector<HTMLElement>("[data-ink-places]");
     const track = section?.querySelector<HTMLElement>("[data-ink-places-track]");
     const count = section?.querySelector<HTMLElement>("[data-ink-places-count]");
     if (!section || !track) return;
     const query = window.matchMedia("(min-width: 900px) and (prefers-reduced-motion: no-preference)");
     let maxShift = 0;
-    let queued = false;
-    const update = () => {
-      queued = false;
-      if (!query.matches) return;
-      const progress = maxShift > 0 ? clamp(-section.getBoundingClientRect().top / maxShift, 0, 1) : 0;
-      track.style.setProperty("--places-x", `${(-progress * maxShift).toFixed(1)}px`);
-      if (count) count.textContent = `0${Math.min(3, Math.floor(progress * 2.999) + 1)} / 03`;
-    };
+    let target = 0;
+    let current = 0;
+    let shownIndex = 0;
     const measure = () => {
       if (!query.matches) {
         section.style.removeProperty("--places-h");
-        track.style.removeProperty("--places-x");
+        track.style.transform = "";
         return;
       }
       maxShift = Math.max(0, track.scrollWidth - window.innerWidth);
       section.style.setProperty("--places-h", `${window.innerHeight + maxShift}px`);
-      update();
+      fxs.kick();
     };
-    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
-    window.addEventListener("scroll", queue, { passive: true, signal });
+    fxs.add({
+      read: () => {
+        if (!query.matches) return;
+        const progress = maxShift > 0 ? clamp(-section.getBoundingClientRect().top / maxShift, 0, 1) : 0;
+        target = progress * maxShift;
+      },
+      write: () => {
+        if (!query.matches) return false;
+        current = ease(current, target, 0.2, 0.3);
+        track.style.transform = `translate3d(${(-current).toFixed(1)}px, 0, 0)`;
+        const index = maxShift > 0 ? Math.min(3, Math.floor((current / maxShift) * 2.999) + 1) : 1;
+        if (count && index !== shownIndex) { count.textContent = `0${index} / 03`; shownIndex = index; }
+        return current !== target;
+      },
+    });
     window.addEventListener("resize", measure, { passive: true, signal });
     window.addEventListener("load", measure, { once: true, signal });
     query.addEventListener("change", measure, { signal });
-    section.querySelectorAll("img").forEach((image) => image.addEventListener("load", measure, { once: true, signal }));
-    // Styles, fonts and images can arrive after this script; measure again whenever the track changes size.
+    // Styles and fonts can arrive after this script; measure again whenever the track changes size.
     const resizer = new ResizeObserver(measure);
     resizer.observe(track);
     signal.addEventListener("abort", () => resizer.disconnect(), { once: true });
     measure();
   }
 
-  function initTone(signal: AbortSignal) {
-    const dusk = document.getElementById("ink-dusk");
+  // The cursor companion: the landing’s soft square, stretched by speed, swelling over things you can use.
+  function initBubble(signal: AbortSignal, reduced: MediaQueryList) {
+    const page = document.querySelector<HTMLElement>(".ink-page");
+    const bubble = document.querySelector<HTMLElement>("[data-ink-bubble]");
+    const core = document.querySelector<HTMLElement>("[data-ink-bubble-core]");
+    const label = document.querySelector<HTMLElement>("[data-ink-bubble-label]");
+    if (!page || !bubble || !core || !label || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    page.classList.add("ink-bubble-on");
+    let targetX = 0, targetY = 0, x = 0, y = 0, frame = 0;
+
+    const follow = () => {
+      const dx = targetX - x;
+      const dy = targetY - y;
+      const ease = reduced.matches ? 1 : 0.2;
+      x += dx * ease;
+      y += dy * ease;
+      const speed = reduced.matches ? 0 : Math.min(Math.hypot(dx, dy) / 70, 1);
+      const angle = Math.atan2(dy, dx);
+      const stretch = speed * 0.4;
+      bubble.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${angle}rad) scale(${1 + stretch}, ${1 - stretch * 0.45}) rotate(${-angle}rad)`;
+      frame = Math.abs(dx) + Math.abs(dy) > 0.3 ? requestAnimationFrame(follow) : 0;
+    };
+
+    window.addEventListener("pointermove", (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      core.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+      bubble.classList.add("is-visible");
+      core.classList.add("is-visible");
+      const target = event.target instanceof Element ? event.target : null;
+      const clip = target?.closest<HTMLElement>("[data-ink-clip]");
+      const zoom = target?.closest("[data-ink-zoom]");
+      const overButton = !!target?.closest("button");
+      const media = (!!clip && !overButton) || !!zoom;
+      bubble.classList.toggle("is-media", media);
+      bubble.classList.toggle("is-large", !media && !!target?.closest("a, button, summary"));
+      if (media) label.textContent = zoom ? "View" : clip?.dataset.state === "playing" ? "Pause" : "Play";
+      if (!frame) frame = requestAnimationFrame(follow);
+    }, { passive: true, capture: true, signal });
+    window.addEventListener("pointerdown", () => bubble.classList.add("is-down"), { signal });
+    window.addEventListener("pointerup", () => bubble.classList.remove("is-down"), { signal });
+    const hide = () => { bubble.classList.remove("is-visible", "is-large", "is-media", "is-down"); core.classList.remove("is-visible"); };
+    document.documentElement.addEventListener("mouseleave", hide, { signal });
+    window.addEventListener("blur", hide, { signal });
+    signal.addEventListener("abort", () => { cancelAnimationFrame(frame); page.classList.remove("ink-bubble-on"); }, { once: true });
+  }
+
+  // Screenshots and clips tilt toward the pointer, with a soft light that follows it.
+  function initTilt(signal: AbortSignal, reduced: MediaQueryList) {
+    if (reduced.matches || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    document.querySelectorAll<HTMLElement>(".ink-chapter .ink-frame").forEach((frame) => {
+      frame.addEventListener("pointermove", (event) => {
+        const rect = frame.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width;
+        const py = (event.clientY - rect.top) / rect.height;
+        frame.style.setProperty("--ry", `${((px - 0.5) * 8).toFixed(2)}deg`);
+        frame.style.setProperty("--rx", `${((0.5 - py) * 8).toFixed(2)}deg`);
+        frame.style.setProperty("--lx", `${(px * 100).toFixed(1)}%`);
+        frame.style.setProperty("--ly", `${(py * 100).toFixed(1)}%`);
+        frame.style.setProperty("--glare", "1");
+      }, { signal });
+      frame.addEventListener("pointerleave", () => {
+        frame.style.setProperty("--rx", "0deg");
+        frame.style.setProperty("--ry", "0deg");
+        frame.style.setProperty("--glare", "0");
+      }, { signal });
+    });
+  }
+
+  // Things drift at different speeds as you scroll: media, the ghost numerals, the big type bands.
+  function initScrollFx(fxs: Scheduler, reduced: MediaQueryList) {
+    if (reduced.matches) return;
+    type Item = { el: HTMLElement; ref: Element; kind: "media" | "ghost" | "band"; dir: number; target: number; current: number; primed: boolean };
+    const items: Item[] = [];
+    document.querySelectorAll<HTMLElement>(".ink-media, .ink-media-row, .ink-memory-grid, .ink-gallery").forEach((el) => {
+      const ref = el.closest("section");
+      if (ref) items.push({ el, ref, kind: "media", dir: 1, target: 0, current: 0, primed: false });
+    });
+    document.querySelectorAll<HTMLElement>(".ink-ghost").forEach((el) => {
+      if (el.parentElement) items.push({ el, ref: el.parentElement, kind: "ghost", dir: 1, target: 0, current: 0, primed: false });
+    });
+    document.querySelectorAll<HTMLElement>("[data-ink-marquee]").forEach((band) => {
+      const el = band.querySelector<HTMLElement>(".ink-marquee-track");
+      if (el) items.push({ el, ref: band, kind: "band", dir: Number(band.dataset.dir ?? -1), target: 0, current: 0, primed: false });
+    });
+    fxs.add({
+      read: () => {
+        const vh = window.innerHeight;
+        for (const item of items) {
+          const rect = item.ref.getBoundingClientRect();
+          if (rect.bottom < -vh || rect.top > vh * 2) continue;
+          if (item.kind === "band") item.target = item.dir * (rect.top - vh / 2) * 0.55;
+          else item.target = clamp((rect.top + rect.height / 2 - vh / 2) / vh, -1.2, 1.2) * (item.kind === "ghost" ? -90 : -22);
+        }
+      },
+      write: () => {
+        let more = false;
+        for (const item of items) {
+          if (!item.primed) { item.current = item.target; item.primed = true; }
+          const next = ease(item.current, item.target, 0.14, 0.05);
+          if (next === item.current) continue;
+          item.current = next;
+          item.el.style.transform = item.kind === "band" ? `translate3d(${next.toFixed(1)}px, 0, 0)` : `translate3d(0, ${next.toFixed(1)}px, 0)`;
+          if (next !== item.target) more = true;
+        }
+        return more;
+      },
+    });
+  }
+
+  // The shared navigation turns dark while we are inside the app, and light again at the end.
+  function initTone(fxs: Scheduler, signal: AbortSignal) {
+    const dissolveIn = document.querySelector<HTMLElement>('[data-ink-dissolve="in"]');
+    const dissolveOut = document.querySelector<HTMLElement>('[data-ink-dissolve="out"]');
     const dots = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-ink-dot]"));
     const chapters = Array.from(document.querySelectorAll<HTMLElement>("[data-ink-chapter]"));
-    if (!dusk) return;
-    let queued = false;
-    const update = () => {
-      queued = false;
-      const inDusk = dusk.getBoundingClientRect().top < window.innerHeight * 0.45;
-      if (inDusk) document.documentElement.dataset.inkTone = "dusk";
-      else delete document.documentElement.dataset.inkTone;
-      let active = "";
-      for (const chapter of chapters) {
-        if (chapter.getBoundingClientRect().top < window.innerHeight * 0.45) active = chapter.id;
-      }
-      dots.forEach((dot) => dot.classList.toggle("is-active", dot.dataset.inkDot === active));
-    };
-    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
-    window.addEventListener("scroll", queue, { passive: true, signal });
-    window.addEventListener("resize", queue, { passive: true, signal });
+    if (!dissolveIn) return;
+    let dusk = false;
+    let active = "";
+    let nextDusk = false;
+    let nextActive = "";
+    fxs.add({
+      read: () => {
+        const vh = window.innerHeight;
+        const entered = dissolveIn.getBoundingClientRect().bottom < vh * 0.8;
+        const left = dissolveOut ? dissolveOut.getBoundingClientRect().top < vh * 0.35 : false;
+        nextDusk = entered && !left;
+        nextActive = "";
+        for (const chapter of chapters) {
+          if (chapter.getBoundingClientRect().top < vh * 0.45) nextActive = chapter.id;
+        }
+      },
+      write: () => {
+        // Only touch the page when something really changes.
+        if (nextDusk !== dusk) {
+          dusk = nextDusk;
+          if (dusk) document.documentElement.dataset.inkTone = "dusk";
+          else delete document.documentElement.dataset.inkTone;
+        }
+        if (nextActive !== active) {
+          active = nextActive;
+          dots.forEach((dot) => dot.classList.toggle("is-active", dot.dataset.inkDot === active));
+        }
+        return false;
+      },
+    });
     signal.addEventListener("abort", () => { delete document.documentElement.dataset.inkTone; }, { once: true });
-    update();
   }
 
   function initLightbox(signal: AbortSignal) {
@@ -1680,14 +2371,20 @@ const inkTraces = [
     const hero = page.querySelector<HTMLElement>("[data-ink-hero]");
     const canvas = page.querySelector<HTMLCanvasElement>("[data-ink-field]");
     if (hero && canvas) initField(hero, canvas, signal, reduced);
-    if (hero) initHeroDrift(hero, signal, reduced);
+    const fxs = createScheduler(signal);
+    if (hero) initHeroDrift(hero, fxs, reduced);
     initSplit(signal, reduced);
-    initFocus(signal, reduced);
-    initPlaces(signal);
+    initFill(fxs, reduced);
+    initPlaces(fxs, signal);
+    initDissolve(fxs, signal, reduced);
+    initBubble(signal, reduced);
+    initTilt(signal, reduced);
+    initScrollFx(fxs, reduced);
     initClips(signal, reduced);
     initReveal(signal, reduced);
-    initTone(signal);
+    initTone(fxs, signal);
     initLightbox(signal);
+    fxs.kick();
 
     const leave = () => { controller.abort(); document.documentElement.classList.remove("ink-js"); };
     window.addEventListener("pagehide", leave, { once: true });

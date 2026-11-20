@@ -1,0 +1,69 @@
+---
+/**
+ * InkMarquee — a band of very large type that slides sideways as the page scrolls.
+ * The movement follows the scrollbar, it never moves on its own. With reduced motion it stands still.
+ */
+interface Props {
+  words: string[];
+  direction?: 1 | -1;
+}
+
+const { words, direction = -1 } = Astro.props;
+const loop = [...words, ...words, ...words];
+---
+
+<div class="ink-marquee" data-ink-marquee data-dir={direction} aria-hidden="true">
+  <div class="ink-marquee-track">
+    {loop.map((word, index) => (
+      <span class:list={["ink-marquee-word", index % 2 === 1 && "is-filled"]}>{word}<i></i></span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ink-marquee {
+    overflow: hidden;
+    padding-block: clamp(1.5rem, 4vw, 3rem);
+    user-select: none;
+    color: var(--fg, #f8f2e8);
+  }
+  .ink-marquee-track {
+    display: flex;
+    inline-size: max-content;
+    gap: 0;
+    margin-inline-start: -40vw;
+    will-change: transform;
+  }
+  .ink-marquee-word {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    padding-inline-end: clamp(1.5rem, 4vw, 3.5rem);
+    font-family: var(--font-door-display, "Bricolage Grotesque", Arial, sans-serif);
+    font-weight: 800;
+    font-variation-settings: "wdth" 82;
+    font-size: clamp(3.5rem, 12vw, 10.5rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1.5px color-mix(in srgb, currentColor 60%, transparent);
+  }
+  .ink-marquee-word.is-filled {
+    color: currentColor;
+    -webkit-text-stroke: 0;
+  }
+  .ink-marquee-word i {
+    display: block;
+    inline-size: clamp(0.9rem, 2vw, 1.6rem);
+    aspect-ratio: 1;
+    background: #d9b27a;
+    flex: none;
+  }
+  .ink-marquee-word:nth-child(3n + 1) i {
+    background: #d99bbb;
+  }
+  .ink-marquee-word:nth-child(3n + 2) i {
+    background: #9bb38a;
+  }
+</style>
