@@ -39,6 +39,8 @@ import transformations from "../data/inkTransformations.json";
 
 <script>
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  // On phones nothing downloads or plays by itself: the pictures wait for a tap on Play, which keeps data use low.
+  const phone = window.matchMedia("(max-width: 767px)");
   const group = document.querySelector<HTMLElement>(".ink-transformations");
   let visible = false;
   const clips: Array<{ warm: () => Promise<string>; start: (when: number, explicit?: boolean) => void; stop: () => void }> = [];
@@ -129,6 +131,8 @@ import transformations from "../data/inkTransformations.json";
         stop();
       } else {
         pausedByVisitor = false;
+        // A tap means the visitor is looking at it, even if the scroll observer has not reported yet.
+        visible = true;
         start(performance.now(), true);
       }
     });
@@ -143,6 +147,8 @@ import transformations from "../data/inkTransformations.json";
         clips.forEach(clip => clip.stop());
         return;
       }
+      // Phones: nothing starts by itself, and a clip the visitor started keeps playing while it is on screen.
+      if (phone.matches) return;
       // Start one shared rhythm after loading, so a slower first file cannot miss its turn.
       void Promise.allSettled(clips.map(clip => clip.warm())).then(() => {
         if (token !== groupRevision || !visible || document.hidden || motion.matches) return;
@@ -151,7 +157,7 @@ import transformations from "../data/inkTransformations.json";
       });
     };
     const warmObserver = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || motion.matches) return;
+      if (!entry.isIntersecting || motion.matches || phone.matches) return;
       clips.forEach(clip => { void clip.warm().catch(() => {}); });
       warmObserver.unobserve(group);
     }, { rootMargin: "600px" });
@@ -164,6 +170,7 @@ import transformations from "../data/inkTransformations.json";
     observer.observe(group);
     document.addEventListener("visibilitychange", sync);
     motion.addEventListener("change", sync);
+    phone.addEventListener("change", sync);
     window.addEventListener("pagehide", () => {
       clips.forEach(clip => clip.stop());
       observer.disconnect();

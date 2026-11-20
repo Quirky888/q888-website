@@ -148,7 +148,7 @@ const chapters = [
         </div>
 
         <details class="ink-more">
-          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <summary><span class="ink-mono">Who writes the memory</span><i aria-hidden="true"></i></summary>
           <div class="ink-more-body">
             <p>The description an Ink carries is written by a machine, and it only knows what it can see. It can be a little wrong, and it cannot know when, where or why I made the picture. That is fine. It is a neutral caption, something that helps me remember, or helps me show the picture to someone else. When you bring photos in, you can also add a short memory of your own; it appears in the Ink’s biography next to the machine’s description.</p>
             <p>What matters sits somewhere else, with the person who owns the Ink: the layers of feeling and memory an image holds for them. An Ink is unique because of its code, but just as much because of that.</p>
@@ -199,7 +199,7 @@ const chapters = [
         </div>
 
         <details class="ink-more">
-          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <summary><span class="ink-mono">Why so much grey</span><i aria-hidden="true"></i></summary>
           <div class="ink-more-body">
             <p>Drawing spends an Ink, and erasing gives it back. Every pixel you place stays connected to the photo it came from.</p>
             <p>Colours run out. When one does, I look through my photographs and artworks for another whose average colour comes close. It is harder than it sounds: most images average out to grey or swamp green. So I draw with what I have, not with what I imagined.</p>
@@ -222,7 +222,7 @@ const chapters = [
           <span class="ink-link-node"><i></i><b class="ink-mono">Historical</b></span>
         </div>
         <details class="ink-more">
-          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <summary><span class="ink-mono">How an Ink travels</span><i aria-hidden="true"></i></summary>
           <div class="ink-more-body">
             <p>Ink Home gives the collection a place to live, in 2D or in 3D. You can follow the links between Inks, and a connection can be active or historical without erasing what came before. Inks can also stay unconnected.</p>
             <p>An Ink can be handed to another iPad, but never copied. It leaves one device and arrives on the other, and only one of them can use it at a time.</p>
@@ -247,7 +247,7 @@ const chapters = [
         </div>
         <p class="ink-sub">Each study session adds one education level, from 0 to 10.</p>
         <details class="ink-more">
-          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <summary><span class="ink-mono">What School is</span><i aria-hidden="true"></i></summary>
           <div class="ink-more-body">
             <p>School began as a small game, a bit like a Tamagotchi. You can add short books for your Inks, or short pieces you like, and let them study. Each study session adds one education level, starting at 0 and reaching 10. Today the effect is visible rather than deep: at education level 4, an Ink begins to glow and move a little differently on the Canvas, so it stands out from the others.</p>
             <p>Later, what an Ink has learned might shape its character, how it behaves at home and the connections it makes. That part is an idea, not a feature yet. I like that the project stays alive: new ideas arrive, and the technology to try them arrives later.</p>
@@ -270,7 +270,7 @@ const chapters = [
           <figcaption>Two works from my Gallery, made from 38 and 117 Inks.</figcaption>
         </figure>
         <details class="ink-more">
-          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
+          <summary><span class="ink-mono">Why it goes quiet</span><i aria-hidden="true"></i></summary>
           <div class="ink-more-body">
             <p>A finished work enters the Gallery and the image becomes quiet again. You can look into the Inks that made it and follow their histories, or simply spend time with the picture. Here, interpretation belongs to the person looking.</p>
           </div>
@@ -299,6 +299,7 @@ const chapters = [
             </div>
           </details>
         </div>
+        <p class="ink-mono ink-about-hint" aria-hidden="true">Real story, or the future? <svg class="ink-shrug" viewBox="-10 -10 60 52" focusable="false" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 -3 Q27 -4 27 3 Q27 10 20 10 Q13 10 13 3 Q13 -3 20 -3" /><path d="M17 -3 Q18 -9 24 -8 Q26 -5 23 -3" /><path d="M17.3 2.6 L17.6 2.5" /><path d="M23 2.6 L23.3 2.5" /><path d="M18 6.6 L22.2 6" /><path d="M13 16 Q12 28 6 39 L34 38 Q29 28 27 16" /><path d="M13 17 Q7 23 3 29 Q-1 21 -5 13 Q-8 12 -6 16" /><path d="M27 17 Q33 23 37 29 Q41 21 45 13 Q48 12 46 16" /></g></svg></p>
       </div>
     </section>
 
@@ -1072,6 +1073,33 @@ const chapters = [
   }
   .ink-future-arrow {
     font: 400 0.5em/1 var(--mono);
+    animation: ink-arrow-nudge 2.8s ease-in-out infinite;
+  }
+  @keyframes ink-arrow-nudge {
+    0%, 55%, 100% { transform: translate(0, 0); }
+    75% { transform: translate(0.25em, -0.25em); }
+  }
+  .ink-about-future[open] .ink-future-arrow {
+    animation: none;
+  }
+  /* A quiet hint that both phrases open: it fades once either one is open. */
+  .ink-about-hint {
+    margin-block-start: clamp(1.5rem, 3cqi, 2.5rem);
+    color: var(--fg-muted);
+    transition: opacity 0.4s ease;
+  }
+  .ink-about:has(.ink-about-stories details[open]) .ink-about-hint {
+    opacity: 0;
+  }
+  /* A woman shrugging, drawn in the same thin line as the text: no colour of its own. */
+  .ink-shrug {
+    display: inline-block;
+    inline-size: 3.2em;
+    block-size: auto;
+    margin-inline-start: 0.5em;
+    vertical-align: middle;
+    stroke-width: 2.4;
+    overflow: visible;
   }
   @media (max-width: 767px) {
     .ink-about-future .ink-more-body {
@@ -1111,12 +1139,12 @@ const chapters = [
     0%, 100% { text-shadow: 0 0 0 rgba(248, 217, 127, 0); }
     50% { text-shadow: 0 0 28px rgba(248, 217, 127, 0.85), 0 0 70px rgba(248, 217, 127, 0.45); }
   }
-  /* The small canvas beside the line exists only on large screens with motion allowed. */
+  /* The small canvas beside the line exists only on large screens; with reduced motion it stays still. */
   .ink-glow-patch {
     display: none;
     margin: 0;
   }
-  @media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+  @media (min-width: 1100px) {
     .ink-school-stage {
       display: grid;
       grid-template-columns: minmax(0, 1fr) clamp(11rem, 16vw, 16rem);
@@ -1539,6 +1567,7 @@ const chapters = [
       transition: none;
     }
     .ink-glowline em,
+    .ink-future-arrow,
     .ink-about-star-shape {
       animation: none;
     }
@@ -2177,9 +2206,29 @@ const chapters = [
     let running = false;
     let inView = false;
 
-    const draw = (now: number) => {
+    // Where each light is in its life right now: null while an Ink rests. With reduced motion two lights
+    // stand still, caught mid-orbit, so the picture still says what it means.
+    const FROZEN = 0.3;
+    const stateOf = (ink: (typeof educated)[number], index: number, seconds: number) => {
+      if (reduced.matches) return index % 2 === 0 ? { progress: FROZEN, cycle: 0 } : null;
+      const shifted = seconds + ink.offset;
+      const cycle = Math.floor(shifted / ink.period);
+      const start = unitHash(ink.seed * 97 + 1, cycle + 3) * JITTER;
+      const local = shifted - cycle * ink.period - start;
+      if (!startedAt || local < 0 || local >= DURATION) return null;
+      return { progress: local / DURATION, cycle };
+    };
+    let painted = false;
+    let wasActive = true;
+    const draw = (now: number, force = false) => {
       if (!width || !height) return;
       const seconds = startedAt ? (now - startedAt) / 1000 : 0;
+      const states = educated.map((ink, index) => stateOf(ink, index, seconds));
+      const active = states.some(Boolean);
+      // Nothing is moving and nothing was moving a moment ago: leave the canvas alone.
+      if (!force && painted && !active && !wasActive) return;
+      painted = true;
+      wasActive = active;
       const cw = width / COLS;
       const ch = height / ROWS;
       ctx.clearRect(0, 0, width, height);
@@ -2189,17 +2238,14 @@ const chapters = [
         ctx.fillRect((index % COLS) * cw + 0.5, Math.floor(index / COLS) * ch + 0.5, cw - 1, ch - 1);
       });
       ctx.globalAlpha = 1;
-      for (const ink of educated) {
-        const shifted = seconds + ink.offset;
-        const cycle = Math.floor(shifted / ink.period);
-        const start = unitHash(ink.seed * 97 + 1, cycle + 3) * JITTER;
-        const local = shifted - cycle * ink.period - start;
-        if (!startedAt || local < 0 || local >= DURATION) continue;
+      educated.forEach((ink, index) => {
+        const state = states[index];
+        if (!state) return;
+        const { progress, cycle } = state;
         const x = ink.col * cw + 0.5;
         const y = ink.row * ch + 0.5;
         const w = cw - 1;
         const h = ch - 1;
-        const progress = local / DURATION;
         const dying = smooth(0.45, 0.72, progress);
         const strength = smooth(0, 0.15, progress) * (1 - dying);
         const size = 1 - 0.65 * dying;
@@ -2237,7 +2283,7 @@ const chapters = [
           }
         }
         ctx.restore();
-      }
+      });
     };
     const tick = (now: number) => { draw(now); frame = requestAnimationFrame(tick); };
     const sync = () => {
@@ -2259,7 +2305,7 @@ const chapters = [
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw(performance.now());
+      draw(performance.now(), true);
     };
     const sizer = new ResizeObserver(resize);
     sizer.observe(canvas);
@@ -2267,7 +2313,7 @@ const chapters = [
     observer.observe(figure);
     document.addEventListener("visibilitychange", sync, { signal });
     wide.addEventListener("change", sync, { signal });
-    reduced.addEventListener("change", sync, { signal });
+    reduced.addEventListener("change", () => { sync(); draw(performance.now(), true); }, { signal });
     signal.addEventListener("abort", () => {
       cancelAnimationFrame(frame);
       sizer.disconnect();
@@ -2317,7 +2363,9 @@ const chapters = [
     if (hero) {
       splitText(hero, true);
       const start = () => window.setTimeout(() => hero.classList.add("is-in"), 140);
-      if (document.fonts?.ready) void document.fonts.ready.then(start); else start();
+      // Wait for the fonts, but never longer than a moment: on a slow phone the title must not stay blank.
+      if (document.fonts?.ready) void Promise.race([document.fonts.ready, new Promise((resolve) => window.setTimeout(resolve, 700))]).then(start);
+      else start();
     }
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
