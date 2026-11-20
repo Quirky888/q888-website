@@ -1,6 +1,7 @@
 ---
 import InkClip from "./InkClip.astro";
 import InkMarquee from "./InkMarquee.astro";
+import InkTransformations from "./InkTransformations.astro";
 
 const APP_STORE = "https://apps.apple.com/us/app/digital-ink/id6757157376";
 
@@ -84,7 +85,7 @@ const inkTraces = [
         <h2 id="beginning-title" class="ink-mega">One work that holds <mark class="ink-chip">all of them</mark>.</h2>
         <p class="ink-sub">Turn each piece into a single pixel. Make every pixel unique.</p>
         <div class="ink-media ink-media-wide" data-reveal>
-          <InkClip base="transformation" width={1120} height={510} label="Photos in the Transformation screen turning one by one into Smart Inks" hud="Transformation" caption="Photos becoming Smart Inks. Waiting time is shortened." />
+          <InkTransformations />
         </div>
         <details class="ink-more">
           <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
@@ -141,15 +142,15 @@ const inkTraces = [
         <div class="ink-memory-grid" data-reveal>
           <InkClip base="ink-bio-a" width={1120} height={1186} label="Scrolling through the biography of an Ink: memory, provenance and essence" hud="Ink BIO" caption="An Ink’s biography." />
           <figure class="ink-figure">
-            <a class="ink-frame ink-zoom" href="/images/dink/reconstructed-memory.webp" data-hud="Reconstructed memory" data-ink-zoom data-alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI.">
-              <img src="/images/dink/reconstructed-memory.webp" width="1179" height="978" loading="lazy" decoding="async" alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI." />
+            <a class="ink-frame ink-zoom" href="/images/dink/reconstructed-memory.webp" data-hud="Reconstructed memory" data-ink-zoom data-alt="An AI-imagined reconstructed memory: an elderly woman in a headscarf surrounded by collage fragments on dark paper.">
+              <img src="/images/dink/reconstructed-memory.webp" width="758" height="794" loading="lazy" decoding="async" alt="An AI-imagined reconstructed memory: an elderly woman in a headscarf surrounded by collage fragments on dark paper." />
             </a>
             <figcaption>A reconstruction is a new invention, never a recovered photograph.</figcaption>
           </figure>
         </div>
 
         <div class="ink-duo" data-reveal>
-          <p class="ink-duo-a"><span class="ink-mono">The machine saw</span>“A whimsical pixelated flower amidst a sea of darkness.”</p>
+          <p class="ink-duo-a"><span class="ink-mono">The machine saw</span>“Elderly woman with a headscarf.”</p>
           <p class="ink-duo-b"><span class="ink-mono">You remember</span>what the image <mark class="ink-chip">never showed</mark>.</p>
         </div>
 
@@ -483,7 +484,7 @@ const inkTraces = [
     color: var(--muted);
     margin-block-end: 1.5rem;
   }
-  /* The headline is enormous and inverts against whatever square is behind it. */
+  /* Solid lettering stays above the moving field without colour inversion. */
   .ink-page h1 {
     font-family: var(--display);
     font-weight: 800;
@@ -491,8 +492,7 @@ const inkTraces = [
     font-size: clamp(3.7rem, 15.8vw, 15rem);
     line-height: 0.84;
     letter-spacing: -0.04em;
-    color: #fff;
-    mix-blend-mode: difference;
+    color: var(--ink);
   }
   .ink-h1-line {
     display: block;
@@ -531,15 +531,14 @@ const inkTraces = [
     z-index: 2;
     display: flex;
     gap: 1.75rem;
-    color: #fff;
-    mix-blend-mode: difference;
+    color: var(--muted);
     pointer-events: none;
   }
   .ink-hud b {
     font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
-  /* The hero drifts away slowly as you leave it; each part moves on its own so the headline can blend with the field. */
+  /* The hero drifts away slowly as you leave it. */
   .ink-hero-inner > * {
     will-change: transform;
   }
@@ -1572,21 +1571,20 @@ const inkTraces = [
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 
-  // The field uses the real collection: mostly grey and swamp green, a few warm notes, rare colour.
+  // Average-colour material: warm greys, earth and olive, with rare yellow and plum accents.
   const FIELD_COLOURS: Array<[string, number]> = [
-    ["#8f8d88", 18], ["#a6a39b", 14], ["#6f6d68", 11], ["#b9b6ae", 8],
-    ["#6b705a", 11], ["#7e8466", 7], ["#9a8f78", 6], ["#6f7f96", 4],
-    ["#2f2d2a", 5], ["#d6a63a", 4], ["#b4786f", 3], ["#4f9a5f", 2],
-    ["#d24d46", 1], ["#b4559a", 1], ["#f2efe6", 3],
+    ["#8b8175", 19], ["#a49a8c", 16], ["#70685d", 14], ["#b9b0a1", 10],
+    ["#666a51", 12], ["#85866b", 8], ["#8b785e", 8], ["#676359", 5],
+    ["#4e443d", 3], ["#726035", 3], ["#e0b838", 1], ["#786080", 1],
   ];
   const SPRITES: Array<{ rows: string[]; key: Record<string, string> }> = [
     {
       rows: ["...cc...", "..cccc..", ".cccccc.", "cccpcccc", "cppcccpc", "...ss...", "...ss...", "...sp...", "...ps...", "...bb..."],
-      key: { c: "#8d8880", p: "#d4a1a8", s: "#d9cfc1", b: "#b9a58a" },
+      key: { c: "#81756a", p: "#968084", s: "#c4b9a6", b: "#9a8365" },
     },
     {
       rows: ["....p....", "...ppp...", "..ppypp..", "...ppp...", "....p....", "....g....", ".g..g..g.", "..g.g.g..", "...ggg...", "....g....", "....g....", "....g...."],
-      key: { p: "#ea7f9b", y: "#f0b72c", g: "#6f9a5a" },
+      key: { p: "#786080", y: "#e0b838", g: "#777b5b" },
     },
   ];
 
@@ -1758,9 +1756,11 @@ const inkTraces = [
         }
         const breathe = still ? 1 : 0.92 + 0.08 * Math.sin((now / 6000) * TAU + item.phase);
         const size = (cell - 5) * (0.4 + 0.6 * fill) * (1 + 0.2 * glow);
-        ctx.globalAlpha = clamp(fill * 0.92 * side * breathe + glow * 0.3, 0, 1);
+        const drawX = cx + item.ox * cell - size / 2;
+        const drawY = cy + item.oy * cell - size / 2;
+        ctx.globalAlpha = clamp(fill * 0.68 * side * breathe + glow * 0.2, 0, 0.8);
         ctx.fillStyle = item.colour;
-        ctx.fillRect(cx + item.ox * cell - size / 2, cy + item.oy * cell - size / 2, size, size);
+        ctx.fillRect(drawX, drawY, size, size);
       }
       ctx.globalAlpha = 1;
     };

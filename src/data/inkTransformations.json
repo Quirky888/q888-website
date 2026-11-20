@@ -1,0 +1,22 @@
+[
+  {
+    "name": "edinburgh",
+    "label": "Edinburgh collage",
+    "colour": "#5d6039"
+  },
+  {
+    "name": "saints",
+    "label": "Saints and hand-drawn creatures",
+    "colour": "#676359"
+  },
+  {
+    "name": "chevrolet",
+    "label": "Red Chevrolet collage",
+    "colour": "#3b2728"
+  },
+  {
+    "name": "dinosaur",
+    "label": "Yellow dinosaur artwork",
+    "colour": "#726035"
+  }
+]

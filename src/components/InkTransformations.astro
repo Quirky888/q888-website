@@ -1,0 +1,102 @@
+---
+import { Image } from "astro:assets";
+import transformations from "../data/inkTransformations.json";
+---
+
+<div class="ink-transformations">
+  <div class="transformation-grid">
+    {transformations.map(({ name, label, colour }, index) => (
+      <figure data-ink-transformation data-state="idle">
+        <div class="transformation-image">
+          <Image src={`/images/dink/transformation/${name}.webp`} width={480} height={480} loading="lazy" alt={`${label}, gradually reduced to its average colour ${colour}.`} data-animation={`/images/dink/transformation/${name}.gif`} />
+          <canvas width="480" height="480" hidden aria-hidden="true"></canvas>
+        </div>
+        <figcaption>
+          <span class="transformation-number">0{index + 1} <span aria-hidden="true">→</span> <span class="transformation-colour">{colour.toUpperCase()}</span></span>
+          <button type="button" aria-label={`Play transformation: ${label}`} data-label={label} hidden>Play ↗</button>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+  <p class="transformation-caption">Four works becoming four Inks. Each square is the average colour of its whole image.</p>
+</div>
+
+<style>
+  .transformation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+  figure { margin: 0; min-inline-size: 0; }
+  .transformation-image { aspect-ratio: 1; background: #000; overflow: hidden; border-radius: 3px; }
+  img, canvas { display: block; inline-size: 100%; block-size: 100%; }
+  [hidden] { display: none; }
+  figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 0.5rem; padding-block-start: 0.4rem; font: 400 0.7rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; }
+  .transformation-number { display: flex; gap: 0.5rem; align-items: center; }
+  .transformation-colour { color: #55534d; }
+  button { min-block-size: 44px; min-inline-size: 44px; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+  button:hover { text-decoration: underline; text-underline-offset: 4px; }
+  button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  .transformation-caption { margin: 1rem 0 0; max-inline-size: 44rem; font-size: 1rem; line-height: 1.6; color: #55534d; }
+  @media (min-width: 1000px) { .transformation-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+</style>
+
+<script>
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const figures = document.querySelectorAll<HTMLElement>("[data-ink-transformation]");
+  for (const [index, figure] of figures.entries()) {
+    const image = figure.querySelector("img");
+    const canvas = figure.querySelector("canvas");
+    const button = figure.querySelector("button");
+    if (!image || !canvas || !button || !image.dataset.animation) continue;
+    const poster = image.src;
+    const animation = image.dataset.animation;
+    let played = false;
+    let scheduled: number | undefined;
+    const setButton = (playing: boolean) => {
+      figure.dataset.state = playing ? "playing" : "paused";
+      button.textContent = playing ? "Pause Ⅱ" : "Replay ↗";
+      button.setAttribute("aria-label", `${playing ? "Pause" : "Replay"} transformation: ${button.dataset.label}`);
+    };
+    const pause = () => {
+      window.clearTimeout(scheduled);
+      scheduled = undefined;
+      if (figure.dataset.state !== "playing") return;
+      // GIF has no native pause API: preserve its current frame before unloading it.
+      if (image.complete && image.naturalWidth) {
+        canvas.getContext("2d")?.drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.hidden = false;
+        image.hidden = true;
+      }
+      image.src = poster;
+      setButton(false);
+    };
+    const play = () => {
+      window.clearTimeout(scheduled);
+      scheduled = undefined;
+      played = true;
+      image.src = animation;
+      image.onload = () => {
+        if (figure.dataset.state !== "playing") return;
+        image.hidden = false;
+        canvas.hidden = true;
+      };
+      setButton(true);
+    };
+    image.addEventListener("error", () => {
+      image.onload = null;
+      image.src = poster;
+      image.hidden = false;
+      canvas.hidden = true;
+      setButton(false);
+    }, { once: true });
+    button.hidden = false;
+    button.addEventListener("click", () => figure.dataset.state === "playing" ? pause() : play());
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !played && !motion.matches && scheduled === undefined) {
+        // Every GIF has the same duration, preserving this half-second rhythm on each loop.
+        scheduled = window.setTimeout(play, index * 500);
+      }
+      else if (!entry.isIntersecting) pause();
+    }, { threshold: 0.35 });
+    observer.observe(figure.closest(".ink-transformations") ?? figure);
+    motion.addEventListener("change", () => { if (motion.matches) pause(); });
+    document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
+  }
+</script>
