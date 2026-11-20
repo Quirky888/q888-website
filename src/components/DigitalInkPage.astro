@@ -1,975 +1,869 @@
 ---
-import { Image } from "astro:assets";
+import InkClip from "./InkClip.astro";
+import InkPixels from "./InkPixels.astro";
+
+const APP_STORE = "https://apps.apple.com/us/app/digital-ink/id6757157376";
+
+// Snapshot of the artist's own collection, 20 November 2026 (587 Inks at home).
+const palette = [
+  { name: "Grey", count: 406, colour: "#9a9a9a" },
+  { name: "Yellow", count: 85, colour: "#f2c40f" },
+  { name: "Blue", count: 40, colour: "#2f8cf0" },
+  { name: "Black", count: 32, colour: "#161616" },
+  { name: "Green", count: 19, colour: "#3cc36a" },
+  { name: "Red", count: 3, colour: "#ff4a47" },
+  { name: "Magenta", count: 1, colour: "#d63cf0" },
+  { name: "White", count: 1, colour: "#f2f2f2" },
+];
+
+const chapters = [
+  { id: "beginning", number: "01", name: "Beginning" },
+  { id: "memory", number: "02", name: "Memory" },
+  { id: "canvas", number: "03", name: "Canvas" },
+  { id: "connections", number: "04", name: "Connections" },
+  { id: "school", number: "05", name: "School" },
+  { id: "gallery", number: "06", name: "Gallery" },
+];
 
 const inkTraces = [
-  {
-    number: "01",
-    name: "Visible trace",
-    text: "One representative colour: the source image reduced to finite digital material.",
-  },
-  {
-    number: "02",
-    name: "Source trace",
-    text: "An optional compressed preview, no larger than 192 pixels on its longest edge.",
-  },
-  {
-    number: "03",
-    name: "Machine description",
-    text: "Machine-generated language—including its uncertainty and occasional mistakes.",
-  },
-  {
-    number: "04",
-    name: "Place & personal note",
-    text: "Date, place, provenance and the artist’s own note, kept distinct from machine interpretation.",
-  },
-  {
-    number: "05",
-    name: "Learned concepts",
-    text: "Concepts encountered through selected texts and PDFs after the ink was created.",
-  },
-  {
-    number: "06",
-    name: "Relationship history",
-    text: "Relationships with other inks—including how a connection became active, dormant or historical.",
-  },
-  {
-    number: "07",
-    name: "Reconstruction",
-    text: "An AI reconstruction: explicitly an invention, never presented as recovery of the source.",
-  },
+  { name: "Visible trace", text: "One representative colour: the source image reduced to finite digital material." },
+  { name: "Source trace", text: "An optional compressed preview, no larger than 192 pixels on its longest edge." },
+  { name: "Machine description", text: "Machine-generated language, including its uncertainty and occasional mistakes." },
+  { name: "Place & personal note", text: "Date, place, provenance and your own note, kept distinct from machine interpretation." },
+  { name: "Learned concepts", text: "Concepts encountered through selected texts and PDFs after the Ink was created." },
+  { name: "Relationship history", text: "Relationships with other Inks, including how a connection became active, dormant or historical." },
+  { name: "Reconstruction", text: "An AI reconstruction: explicitly an invention, never presented as recovery of the source." },
 ];
 ---
 
-<main class="ink-page">
-  <section class="ink-hero" aria-labelledby="ink-title">
-    <div class="ink-hero-film" aria-hidden="true">
-      <video data-ink-hero-video data-src="/videos/digital-ink-116-memory.m4v" muted loop playsinline preload="none" tabindex="-1"></video>
+<main class="ink-page" id="ink-top">
+  <!-- ───────── Hero: light fog like the landing, fading into dusk ───────── -->
+  <section class="ink-hero" aria-labelledby="ink-title" data-ink-hero>
+    <canvas class="ink-field" data-ink-field aria-hidden="true"></canvas>
+    <div class="ink-wrap ink-hero-inner">
+      <p class="ink-mono ink-hero-meta">Digital Ink · version 3.2 · iPad · iPadOS 26 or later</p>
+      <h1 id="ink-title">Every pixel has a <span class="ink-past">past.<i class="ink-seal" aria-hidden="true"></i></span></h1>
+      <p class="ink-hero-sub">Turn a photo into one square of colour that can be drawn with, looked after and never duplicated.</p>
+      <div class="ink-actions">
+        <a class="ink-button ink-button-primary" href={APP_STORE} target="_blank" rel="noopener noreferrer">Get it on the App Store ↗</a>
+        <a class="ink-button" href="#beginning">Follow a pixel ↓</a>
+      </div>
+      <p class="ink-mono ink-hint" aria-hidden="true">Click or tap the squares</p>
     </div>
-    <div class="ink-wrap">
-      <p class="ink-kicker">An ongoing artwork by Q888</p>
-      <h1 id="ink-title">DIGITAL INK</h1>
-      <p class="ink-hero-line">Images become materials with a past.</p>
+  </section>
 
-      <div class="ink-hero-body">
-        <div class="ink-prose ink-hero-copy">
-          <p>Start with an image that means something to you. A photograph, a drawing, something you found or made. In Digital Ink, it can continue in another form: as a colour you can draw with, carrying traces of where it came from.</p>
-          <p>I call this material a <strong>Smart Ink</strong>: one colour, a finite supply and a growing record. You can draw with it, introduce it to new concepts and explore its connections with other Inks.</p>
-          <p>Digital Ink is an experimental iPad drawing app, and also an art world I am building inside it. I wanted digital material to feel less disposable — more like something we might care for.</p>
+  <!-- ───────── Dusk chapters ───────── -->
+  <div class="ink-dusk" id="ink-dusk" data-ink-dusk>
+    <nav class="ink-dots" aria-label="Chapters">
+      {chapters.map((chapter) => (
+        <a href={`#${chapter.id}`} data-ink-dot={chapter.id} aria-label={`${chapter.number} ${chapter.name}`}>
+          <span class="ink-dot-num ink-mono" aria-hidden="true">{chapter.number}</span><i aria-hidden="true"></i>
+        </a>
+      ))}
+    </nav>
+
+    <!-- 01 · Beginning -->
+    <section class="ink-chapter" id="beginning" aria-labelledby="beginning-title" data-ink-chapter>
+      <div class="ink-wrap ink-split">
+        <div class="ink-text" data-reveal>
+          <p class="ink-mono ink-label">01 / Beginning</p>
+          <h2 id="beginning-title">One work that holds all of them.</h2>
+          <p>Digital Ink began in the summer of 2025, in a village in a forest in Georgia, Chateau Chapiteau. I had more than 300 digital works and wanted to make one work that held all of them. The idea was to turn each piece into a single pixel, and to make every pixel unique, so that it could not be copied.</p>
+          <p>Digital art is easy to copy without losing anything, and I think that makes it feel disposable. I wanted something people would value more: sentimentally, and maybe one day in other ways too. Digital scarcity was in the air then, and I was curious what it would feel like inside an artwork.</p>
+          <p>So I call each of these squares a <strong>Smart Ink</strong>: one colour, a finite supply of it and a growing record. A collection holds up to 1,000 on one iPad, and none can be duplicated. I hoped people would look after their pixels and use them again.</p>
         </div>
-        <figure class="ink-studio">
-          <Image src="/images/DigitalInk_Ipad_kn.webp" alt="A drawing made in Digital Ink, on an iPad in the artist’s studio, with two Q888 cat figures beside it" width={2747} height={1538} loading="eager" decoding="async" fetchpriority="high" />
-          <figcaption>Digital Ink on my studio iPad. The drawing is made with finite Smart Inks.</figcaption>
+        <div class="ink-media ink-media-narrow" data-reveal>
+          <InkClip base="transformation" width={1130} height={1248} mode="once" label="Four photos in the Transformation screen turning one by one into Smart Inks" caption="Four photos becoming four Smart Inks. Waiting time is shortened." playText="Replay" />
+        </div>
+      </div>
+    </section>
+
+    <InkPixels seed={11} />
+
+    <!-- Three places: a horizontal pass on large screens, a plain stack elsewhere -->
+    <section class="ink-places" id="places" aria-labelledby="places-title" data-ink-places>
+      <div class="ink-places-stick" data-ink-places-stick>
+        <div class="ink-wrap ink-places-head">
+          <p class="ink-mono ink-label">Three places <span class="ink-places-count" data-ink-places-count aria-hidden="true">01 / 03</span></p>
+          <h2 id="places-title">Where an Ink lives.</h2>
+        </div>
+        <div class="ink-places-track" data-ink-places-track>
+          <article class="ink-place">
+            <p class="ink-mono ink-place-num" aria-hidden="true">01</p>
+            <h3>Ink Home</h3>
+            <p>A place to explore the materials.</p>
+            <div class="ink-frame ink-place-frame"><img src="/images/dink/connections-graph.webp" width="1336" height="2110" decoding="async" alt="Ink Home: a field of 585 Inks as dots, with orange lines showing the connections of one Ink." /></div>
+          </article>
+          <article class="ink-place">
+            <p class="ink-mono ink-place-num" aria-hidden="true">02</p>
+            <h3>Canvas</h3>
+            <p>A place to draw with them.</p>
+            <div class="ink-frame ink-place-frame"><img src="/images/dink/canvas-flower.webp" width="1400" height="1805" decoding="async" alt="The Canvas with a flower drawn from Inks and the colour palette on the left." /></div>
+          </article>
+          <article class="ink-place">
+            <p class="ink-mono ink-place-num" aria-hidden="true">03</p>
+            <h3>Gallery</h3>
+            <p>A place to see the finished work.</p>
+            <div class="ink-frame ink-place-frame ink-place-frame-wide"><img src="/images/dink/gallery.webp" width="1400" height="957" decoding="async" alt="The Gallery with two finished works, a mushroom and a flower." /></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <InkPixels seed={23} />
+
+    <!-- 02 · Memory -->
+    <section class="ink-chapter" id="memory" aria-labelledby="memory-title" data-ink-chapter>
+      <div class="ink-wrap">
+        <div class="ink-text ink-text-wide" data-reveal>
+          <p class="ink-mono ink-label">02 / Memory</p>
+          <h2 id="memory-title">The machine describes the picture. The memory stays with you.</h2>
+          <p>The description an Ink carries is written by a machine, and it only knows what it can see. It can be a little wrong, and it cannot know when, where or why I made the picture. That is fine. It is a neutral caption, something that helps me remember, or helps me show the picture to someone else. When you bring photos in, you can also add a short memory of your own; it appears in the Ink’s biography next to the machine’s description.</p>
+          <p>What matters sits somewhere else, with the person who owns the Ink: the layers of feeling and memory an image holds for them. An Ink is unique because of its code, but just as much because of that.</p>
+        </div>
+        <div class="ink-media-row ink-media-row-memory" data-reveal>
+          <figure class="ink-figure">
+            <a class="ink-frame ink-zoom" href="/images/dink/ink-bio.webp" data-ink-zoom data-alt="The Ink BIO screen of a pixelated flower: its machine description, palette, provenance and symbolic essence.">
+              <img src="/images/dink/ink-bio.webp" width="1400" height="1805" loading="lazy" decoding="async" alt="The Ink BIO screen of a pixelated flower: its machine description, palette, provenance and symbolic essence." />
+            </a>
+            <figcaption>An Ink’s biography: description, palette, provenance.</figcaption>
+          </figure>
+          <InkClip base="ink-bio-a" width={1120} height={1186} mode="click" label="Scrolling through the biography of an Ink: memory, provenance and essence" caption="Scrolling through an Ink’s biography." playText="Play the biography" />
+          <figure class="ink-figure ink-figure-small">
+            <a class="ink-frame ink-zoom" href="/images/dink/reconstructed-memory.webp" data-ink-zoom data-alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI.">
+              <img src="/images/dink/reconstructed-memory.webp" width="1179" height="978" loading="lazy" decoding="async" alt="A reconstructed memory: a collage around the pixelated flower, imagined by AI." />
+            </a>
+            <figcaption>A reconstruction is a new invention, never a recovered photograph.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <InkPixels seed={37} />
+
+    <!-- 03 · Canvas -->
+    <section class="ink-chapter" id="canvas" aria-labelledby="canvas-title" data-ink-chapter>
+      <div class="ink-wrap ink-split ink-split-reverse">
+        <div class="ink-text" data-reveal>
+          <p class="ink-mono ink-label">03 / Canvas</p>
+          <h2 id="canvas-title">You draw with what you have.</h2>
+          <p>Drawing spends an Ink, and erasing gives it back. Every pixel you place stays connected to the photo it came from.</p>
+          <p>Colours run out. When one does, I look through my photographs and artworks for another whose average colour comes close. It is harder than it sounds: most images average out to grey or swamp green. So I draw with what I have, not with what I imagined.</p>
+          <p>I suspect the limit is part of the point. The materials have their own character, and they do not always agree with the picture in my head.</p>
+
+          <figure class="ink-palette" aria-labelledby="palette-caption" data-bars>
+            <div class="ink-palette-bar" role="img" aria-label="Share of each colour in the artist’s collection: grey 406, yellow 85, blue 40, black 32, green 19, red 3, magenta 1, white 1.">
+              {palette.map((colour, index) => (
+                <span style={`flex:${colour.count} 1 0;background:${colour.colour};--i:${index}`} title={`${colour.name}: ${colour.count}`}></span>
+              ))}
+            </div>
+            <ul class="ink-palette-legend ink-mono">
+              {palette.map((colour) => (
+                <li><i style={`background:${colour.colour}`}></i>{colour.name} <b data-count={colour.count}>{colour.count}</b></li>
+              ))}
+            </ul>
+            <figcaption id="palette-caption">My collection on 20 November 2026. Mostly grey.</figcaption>
+          </figure>
+        </div>
+        <div class="ink-media ink-media-pair" data-reveal>
+          <InkClip base="draw-mushroom" width={1024} height={1328} mode="once" label="A mushroom taking shape on the Canvas, pixel by pixel" caption="A mushroom taking shape. Sped up." playText="Replay" />
+          <InkClip base="canvas" width={1024} height={1326} mode="click" label="Choosing colours from the palette, drawing and erasing on the Canvas" caption="Choosing a colour, drawing, erasing. Sped up." playText="Play" />
+        </div>
+      </div>
+      <div class="ink-wrap">
+        <div class="ink-stills" data-reveal>
+          <figure class="ink-figure ink-figure-small">
+            <a class="ink-frame ink-zoom" href="/images/dink/canvas-flower.webp" data-ink-zoom data-alt="The Canvas with a flower drawn from Inks and the colour palette on the left, showing how many Inks of each colour are left.">
+              <img src="/images/dink/canvas-flower.webp" width="1400" height="1805" loading="lazy" decoding="async" alt="The Canvas with a flower drawn from Inks and the colour palette on the left, showing how many Inks of each colour are left." />
+            </a>
+            <figcaption>The palette counts what is left.</figcaption>
+          </figure>
+          <figure class="ink-figure ink-figure-small">
+            <a class="ink-frame ink-zoom" href="/images/dink/emotional-palette.webp" data-ink-zoom data-alt="The emotional palette: Inks grouped by air, earth, fire, love, mushroom and water, with the mushroom group open.">
+              <img src="/images/dink/emotional-palette.webp" width="1400" height="1805" loading="lazy" decoding="async" alt="The emotional palette: Inks grouped by air, earth, fire, love, mushroom and water, with the mushroom group open." />
+            </a>
+            <figcaption>The emotional palette: air, earth, fire, love, mushroom, water.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <InkPixels seed={41} />
+
+    <!-- 04 · Connections -->
+    <section class="ink-chapter" id="connections" aria-labelledby="connections-title" data-ink-chapter>
+      <div class="ink-wrap ink-split">
+        <div class="ink-text" data-reveal>
+          <p class="ink-mono ink-label">04 / Connections</p>
+          <h2 id="connections-title">Follow the connections.</h2>
+          <p>Ink Home gives the collection a place to live, in 2D or in 3D. You can follow the links between Inks, and a connection can be active or historical without erasing what came before. Inks can also stay unconnected.</p>
+          <p>An Ink can be handed to another iPad, but never copied. It leaves one device and arrives on the other, and only one of them can use it at a time.</p>
+        </div>
+        <div class="ink-media ink-media-pair" data-reveal>
+          <InkClip base="connections" width={1024} height={1328} mode="click" label="Orbiting a field of Inks and following the lines that connect them" caption="Following the lines between Inks." playText="Play" />
+          <figure class="ink-figure">
+            <a class="ink-frame ink-zoom" href="/images/dink/connections-graph.webp" data-ink-zoom data-alt="A field of 585 Inks as dots, with a few orange lines showing the connections of one selected Ink.">
+              <img src="/images/dink/connections-graph.webp" width="1336" height="2110" loading="lazy" decoding="async" alt="A field of 585 Inks as dots, with a few orange lines showing the connections of one selected Ink." />
+            </a>
+            <figcaption>585 Inks and a few of their connections.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <InkPixels seed={59} />
+
+    <!-- 05 · School -->
+    <section class="ink-chapter" id="school" aria-labelledby="school-title" data-ink-chapter>
+      <div class="ink-wrap ink-split">
+        <div class="ink-text" data-reveal>
+          <p class="ink-mono ink-label">05 / School</p>
+          <h2 id="school-title">Something to look after.</h2>
+          <p>School began as a small game, a bit like a Tamagotchi. You can add short books for your Inks, or short pieces you like, and let them study. Today the effect is visible rather than deep: as an Ink returns to school and its education grows, from level 4 it begins to glow and move a little differently on the Canvas, so it stands out from the others.</p>
+          <p>Later, what an Ink has learned might shape its character, how it behaves at home and the connections it makes. That part is an idea, not a feature yet. I like that the project stays alive: new ideas arrive, and the technology to try them arrives later.</p>
+        </div>
+        <figure class="ink-meter" data-reveal data-meter>
+          <ol class="ink-meter-row" aria-label="Education level, from 0 to 10. From level 4 an Ink begins to glow on the Canvas.">
+            {Array.from({ length: 10 }, (_, index) => (
+              <li class:list={["ink-meter-cell", index + 1 >= 4 && "is-glowing"]} style={`--i:${index}`}><span class="ink-mono">{index + 1}</span></li>
+            ))}
+          </ol>
+          <figcaption>Education level, 1 to 10. From level 4 an Ink begins to glow on the Canvas.</figcaption>
         </figure>
       </div>
-      <p class="ink-doorway">The artwork is made from pixels, but the pixels are no longer empty.</p>
-      <div class="ink-actions">
-        <a class="ink-button ink-button-primary" href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">Try Digital Ink on iPad ↗</a>
-        <a class="ink-button" href="#how-it-lives">Follow an Ink ↓</a>
-      </div>
-      <div class="ink-film-tools" data-ink-film-tools hidden>
-        <p>The moving background is an AI-generated artistic imagining of this world.</p>
-        <button class="ink-film-toggle" data-ink-film-toggle type="button">Pause background</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="ink-section ink-idea" id="how-it-lives" aria-labelledby="idea-title">
-    <div class="ink-wrap">
-      <header class="ink-story-heading"><h2 id="idea-title">Giving a colour somewhere to come from</h2></header>
-      <div class="ink-prose">
-        <p>When I choose a colour in ordinary drawing software, I can use as much of it as I like. It has no particular origin, and the next time I choose it, nothing needs to have changed. Digital Ink began with a curiosity about what that freedom leaves out.</p>
-        <p>What if choosing a material also meant choosing a past? An image becomes one Smart Ink with a recorded origin. Drawing spends some of its finite supply; erasing can return material. Each placed pixel stays connected to its source Ink, so a mark has a history as well as a colour.</p>
-        <p>I am interested in what digital material can carry beyond its appearance: learned concepts, personal notes and relationships that continue beyond a single picture. Knowing those histories can change how I use a colour, even when the colour itself stays the same.</p>
-      </div>
+    <InkPixels seed={71} />
 
-      <ol class="ink-journey" aria-label="From an image to an artwork">
-        <li><span class="journey-mark journey-image" aria-hidden="true"></span><span>Image</span></li>
-        <li><span class="journey-mark journey-ink" aria-hidden="true"></span><span>Smart Ink</span></li>
-        <li><span class="journey-mark journey-home" aria-hidden="true"></span><span>InkHome</span></li>
-        <li><span class="journey-mark journey-canvas" aria-hidden="true"></span><span>Canvas</span></li>
-        <li><span class="journey-mark journey-art" aria-hidden="true"></span><span>Artwork</span></li>
-      </ol>
-
-      <div class="ink-biography">
-        <div class="ink-prose">
-          <p>The Ink below began with an Afterlife Contract from another part of my practice. Its biography brings together a machine description, my own note and learned concepts. Each offers a different trace of the source.</p>
-          <p>A description can misread the image. A personal note can remember something the image never showed. Keeping those traces distinct matters to me: an Ink’s past can grow without being rewritten into one convenient story.</p>
+    <!-- 06 · Gallery -->
+    <section class="ink-chapter" id="gallery" aria-labelledby="gallery-title" data-ink-chapter>
+      <div class="ink-wrap">
+        <div class="ink-text ink-text-wide" data-reveal>
+          <p class="ink-mono ink-label">06 / Gallery</p>
+          <h2 id="gallery-title">When the picture is finished, it goes quiet.</h2>
+          <p>A finished work enters the Gallery and the image becomes quiet again. You can look into the Inks that made it and follow their histories, or simply spend time with the picture. Here, interpretation belongs to the person looking.</p>
         </div>
-        <figure
-        class="art-study art-study--memory"
-        id="memory-study"
-        data-art-study="memory"
-      >
-        <div class="art-study-shell">
-          <div class="art-study-toolbar">
-            <figcaption>
-              <span>One Ink · a biography from the studio</span>
-              <p>An Afterlife Contract, remembered as colour, description and learned concepts.</p>
-              <q
-                >What I remember is not what I was. It is what happened to me.</q
-              >
-            </figcaption>
-            <span
-              class="art-study-scroll-cue"
-              data-study-cue
-              data-resting="DESCEND THROUGH MY MEMORY ↓"
-              >DESCEND THROUGH MY MEMORY ↓</span
-            >
+        <figure class="ink-figure ink-gallery" data-reveal>
+          <a class="ink-frame ink-zoom" href="/images/dink/gallery.webp" data-ink-zoom data-alt="The Gallery with two finished works, a mushroom made from 38 Inks and a flower made from 117 Inks.">
+            <img src="/images/dink/gallery.webp" width="1400" height="957" loading="lazy" decoding="async" alt="The Gallery with two finished works, a mushroom made from 38 Inks and a flower made from 117 Inks." />
+          </a>
+          <figcaption>Two works from my Gallery, made from 38 and 117 Inks.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Made first for myself -->
+    <section class="ink-chapter ink-about" aria-labelledby="about-title">
+      <div class="ink-wrap">
+        <div class="ink-text ink-text-wide" data-reveal>
+          <p class="ink-mono ink-label">About</p>
+          <h2 id="about-title">Made first for myself.</h2>
+          <p>I made Digital Ink first for myself. I wanted an art installation I could carry in an iPad, and I wanted to learn to build software with AI. In September 2025 I knew very little about code; since then I have worked with AI coding tools and learned as I went.</p>
+          <p>I am not sure who else needs it. Probably people a little strange in the same way I am: people with too many pictures, who like small rules and slow things. If that is you, it is on the App Store. If not, I hope it is still interesting to look at.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to action + privacy -->
+    <section class="ink-chapter ink-cta" id="get-it" aria-labelledby="cta-title">
+      <div class="ink-wrap">
+        <div class="ink-cta-card" data-reveal>
+          <p class="ink-mono ink-label">Digital Ink · version 3.2</p>
+          <h2 id="cta-title">Digital Ink for iPad</h2>
+          <p class="ink-cta-line">Free on the App Store. Requires iPadOS 26 or later. iPad only.</p>
+          <div class="ink-actions">
+            <a class="ink-button ink-button-primary" href={APP_STORE} target="_blank" rel="noopener noreferrer">Get it on the App Store ↗</a>
+            <a class="ink-button" href="/privacy/">Read the privacy policy</a>
           </div>
-          <div class="art-study-frame art-study-frame--memory">
-            <img
-              class="art-study-base"
-              data-study-base
-              src="/images/memory.webp"
-              alt="Digital Ink Smart Ink biography showing machine description, personal memory and learned concepts"
-              width="2745"
-              height="1492"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              class="art-study-overlay"
-              data-study-overlay
-              aria-hidden="true"
-              src="/images/memory_overlay.webp"
-              alt="Artistic memory interpretation joining a Smart Ink biography to fragments of an Afterlife Contract and hand-drawn marks"
-              width="2745"
-              height="1669"
-              loading="lazy"
-              decoding="async"
-            />
-            <p class="art-study-fog" aria-hidden="true">
-              I REMEMBER …<br />being many pixels…
-            </p>
+          <p class="ink-fine">The app is free. The optional online description and memory reconstruction use a few credits, because they run on paid AI services.</p>
+        </div>
+        <div class="ink-privacy" data-reveal>
+          <h3>You decide what is shared</h3>
+          <p>Drawing and most Ink information stay on your iPad. Two features are optional and always ask first: an online description, which sends the selected image and its place name through Digital Ink’s service to OpenAI, and a memory reconstruction, which can share a small private trace of the image only if you choose to. Buying credits is not consent to share anything.</p>
+          <a class="ink-text-link" href="/privacy/">Read the Digital Ink Privacy Policy ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Under the hood -->
+    <section class="ink-chapter ink-technical" aria-labelledby="record-title">
+      <div class="ink-wrap">
+        <details class="ink-record" id="technical-record">
+          <summary>
+            <span>
+              <span class="ink-mono ink-label">Open system notes</span>
+              <span class="ink-record-title" id="record-title">Under the hood</span>
+              <span class="ink-record-invite">For people who want the technical version.</span>
+            </span>
+            <span class="ink-record-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="ink-record-content">
+            <p>Digital Ink is a native iPad application built in Swift and SwiftUI. Smart Inks and artworks are stored locally on the device. Online AI operations are optional and permission-based.</p>
+            <section class="ink-record-section">
+              <h3>App architecture</h3>
+              <p>A native iPadOS application with local Smart Inks, artworks, biographies, education, relationship history and provenance. Optional online operations travel through Digital Ink’s Cloudflare service to OpenAI.</p>
+            </section>
+            <section class="ink-record-section">
+              <h3>Smart Ink data &amp; source traces</h3>
+              <p>A selected image becomes finite material with a representative colour, identity and recorded origin. An Ink can carry seven kinds of information, with source evidence, personal notes, learned concepts and machine invention kept distinct.</p>
+              <dl class="ink-traces">
+                {inkTraces.map((trace) => (<div><dt>{trace.name}</dt><dd>{trace.text}</dd></div>))}
+              </dl>
+            </section>
+            <section class="ink-record-section">
+              <h3>Scarcity &amp; Ink rules</h3>
+              <p>Painting spends finite Ink; erasing can return material. Placed pixels remain connected to their source Ink. Colour, use and recorded history belong to the material rather than an unlimited colour picker.</p>
+            </section>
+            <section class="ink-record-section">
+              <h3>Education</h3>
+              <p>Selected texts and PDFs can add learned concepts to an Ink. These acquired concepts remain distinct from its original visual description and from personal notes. Education contributes to a developing biography; it is not a claim of consciousness.</p>
+            </section>
+            <section class="ink-record-section">
+              <h3>Relationships &amp; Ink Home</h3>
+              <p>Ink Home gives the collection a spatial form, with recorded connections and routes visible in a projected 3D environment. A connection can become active, dormant or historical without silently erasing its earlier state.</p>
+            </section>
+            <section class="ink-record-section">
+              <h3>Provenance</h3>
+              <p>An artwork can record who made it and which Smart Inks were involved. New artworks can carry stronger cryptographic verification without pretending older Inks always had it. Older records remain marked as Heritage Ink where the original evidence is incomplete.</p>
+            </section>
+            <section class="ink-record-section">
+              <h3>Privacy, AI &amp; model information</h3>
+              <div class="ink-boundaries">
+                <article><h4>On device · Apple Vision</h4><p>Apple-provided visual recognition can analyse selected images without credits or an internet connection. Its interpretations may be limited or inaccurate. Local Ink information stays on the device unless you choose a feature that shares selected information.</p></article>
+                <article><h4>Optional online · OpenAI</h4><p>With explicit permission for the operation, selected information travels through Cloudflare to OpenAI. Online descriptions and memory reconstructions use credits. Purchasing credits is never treated as consent.</p><p>Reconstruction generates a new image. It is an invention, never presented as recovery of the source photograph.</p></article>
+              </div>
+            </section>
+            <section class="ink-record-section">
+              <h3>How it is made</h3>
+              <p>Built with AI coding tools: Cursor, Antigravity, Codex and Claude Code. I started in September 2025 knowing very little about code and learned as I went.</p>
+            </section>
           </div>
-        </div>
-      </figure>
-        <p class="ink-media-note">A moment from building and using Digital Ink, drawn back into its interface. As you scroll, the app and my interpretation move over one another.</p>
+        </details>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="ink-section ink-spaces" aria-labelledby="spaces-title">
-    <div class="ink-wrap">
-      <header class="ink-story-heading"><h2 id="spaces-title">Following an Ink through the world</h2></header>
-      <div class="ink-prose"><p>There are three spaces in Digital Ink: a place to explore the materials, a place to draw with them, and a place to see the finished work.</p></div>
-      <article class="ink-space" aria-labelledby="home-title">
-        <h3 id="home-title">InkHome</h3>
-        <div class="ink-prose">
-          <p>InkHome gives the archive a spatial form. You can explore Inks together, read their biographies, introduce new concepts through School and see their recorded connections.</p>
-          <p>A connection can become active, dormant or historical without erasing its earlier state. Inks can also remain unconnected. Their histories have a place here beyond the next drawing.</p>
-        </div>
-      </article>
-      <article class="ink-space" aria-labelledby="canvas-title">
-        <h3 id="canvas-title">Canvas</h3>
-        <div class="ink-prose">
-          <p>On the Canvas, you become the artist. You choose which Inks to bring together and where their pixels will go. This is the part where you can simply enjoy making an image.</p>
-          <p>The materials arrive with histories of their own. You compose the picture; knowing where an Ink came from may influence how you use it. A drawing can become a meeting between those histories, if that is how you choose to see it.</p>
-        </div>
-      </article>
-      <figure class="art-study" id="canvas-study" data-art-study="canvas">
-        <div class="art-study-shell">
-          <div class="art-study-toolbar">
-            <figcaption>
-              <span>The Canvas · an artist’s interface study</span>
-              <p>A moment from the app, with another drawing growing around it.</p>
-              <q>I have 174 pieces left. I am not a colour picker.</q>
-            </figcaption>
-            <span
-              class="art-study-scroll-cue"
-              data-study-cue
-              data-resting="BRING ME TO THE CENTRE ↓"
-              >BRING ME TO THE CENTRE ↓</span
-            >
-          </div>
-          <div class="art-study-frame art-study-frame--canvas">
-            <img
-              class="art-study-base"
-              data-study-base
-              src="/images/screen.webp"
-              alt="Digital Ink canvas interface dated Tuesday 13 January at 17:23, containing a finite pixel artwork"
-              width="2422"
-              height="1535"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              class="art-study-overlay"
-              data-study-overlay
-              aria-hidden="true"
-              src="/images/screen_overlay.webp"
-              alt="Artistic interpretation of the Digital Ink canvas, with hand-drawn roots, creatures and emotional ink symbols growing from the interface"
-              width="2422"
-              height="1535"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
-      </figure>
-      <p class="ink-media-note">I kept the date, unfinished details and occasional mistakes as part of the project’s history. The drawn roots are my interpretation of the materials’ connections.</p>
-      <article class="ink-space ink-space-gallery" aria-labelledby="gallery-title">
-        <h3 id="gallery-title">Gallery</h3>
-        <div class="ink-prose">
-          <p>When you finish a work, it enters the Gallery and the image becomes quiet again. You can look into the Inks that made it and follow their histories, or simply spend time with the picture.</p>
-          <p>Here, interpretation belongs to the person looking. The system can show how a work came together; what it means remains open.</p>
-        </div>
-      </article>
-    </div>
-  </section>
+    <!-- For the curious -->
+    <section class="ink-chapter ink-future" aria-labelledby="archive-title">
+      <div class="ink-wrap">
+        <p class="ink-mono ink-label">For the curious · a future project</p>
+        <h2 id="archive-title">The 116-Pixel Archive</h2>
+        <p>116 photographs would become 116 Smart Inks, so that their histories and relationships can grow as an artwork of their own. I would like to build it on Digital Ink so that it can be used on a phone. It does not exist yet.</p>
+      </div>
+    </section>
 
-  <section class="ink-section ink-independence" aria-labelledby="independence-title">
-    <div class="ink-wrap">
-      <header class="ink-story-heading"><h2 id="independence-title">Leaving room for interpretation</h2></header>
-      <div class="ink-prose">
-        <p>I choose the Inks and arrange the artwork. Their histories and relationships are real parts of the software; the artistic value I find in them is my interpretation. Knowing an Ink’s past can change how I relate to it, but that does not prove it has an intention of its own.</p>
-        <p>Digital Ink provides the record, not the conclusion. The relationship an artist develops with these materials remains personal, and what it might become is still open.</p>
+    <footer class="ink-footer">
+      <div class="ink-wrap">
+        <p>Digital Ink<br /><span>An ongoing artwork by Alexander Sestakovs / Q888</span></p>
+        <nav aria-label="Digital Ink links">
+          <a href={APP_STORE} target="_blank" rel="noopener noreferrer">App Store ↗</a>
+          <a href="/privacy/">Privacy policy</a>
+          <a href="mailto:hello@q888.space">Contact</a>
+        </nav>
       </div>
-      <div class="ink-continuity">
-        <h3>What an Ink can carry</h3>
-        <div class="ink-prose">
-          <p>An Ink can hold traces of its source, a machine description, personal notes, learned concepts and relationship history. Keeping them separate matters: a machine guess, a personal note and a recorded fact should not quietly become the same thing.</p>
-          <p>I use words such as <em>memory</em>, <em>education</em> and <em>relationship</em> for these artistic and computational structures. The Inks are not presented as conscious beings. Imagination has a place here too: an AI reconstruction is a new invention, never a recovered photograph.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
+  </div>
 
-  <section class="ink-section ink-growing" aria-labelledby="growing-title">
-    <div class="ink-wrap">
-      <header class="ink-story-heading"><h2 id="growing-title">Letting the work continue</h2></header>
-      <div class="ink-prose">
-        <p>Digital Ink is both an artwork and a place where further artworks can happen. New experiments can draw on the Inks’ existing histories without rewriting them.</p>
-      </div>
-      <article class="ink-canvas-voice" aria-labelledby="voice-title">
-        <div class="voice-heading"><h3 id="voice-title">Canvas Voice</h3><p class="ink-development-status">Current experiment · in development</p></div>
-        <div class="ink-prose">
-          <p>Could a drawing briefly speak through the histories of its materials? Canvas Voice explores exchanges of up to five words each way, shaped by the Inks on the Canvas and the arrangement of their pixels.</p>
-          <p>Only meaningful, privacy-safe signals would contribute. An Ink may contribute nothing; that absence would not be treated as a failure or as proof of refusal. The voice would be an interpretation of the available data.</p>
-          <p>The planned session would end without adding the conversation to Ink memory. I want to explore a voice that belongs to a particular encounter, with a traceable basis for each reply and no permanent personality.</p>
-        </div>
-        <a class="ink-text-link" href="#voice-research">The planned boundaries of Canvas Voice ↓</a>
-      </article>
-      <article class="ink-canvas-voice" aria-labelledby="archive-preview-title">
-        <div class="voice-heading"><h3 id="archive-preview-title">The 116-Pixel Archive</h3><p class="ink-development-status">Future project</p></div>
-        <div class="ink-prose"><p>116 photographs would become 116 Smart Inks, allowing their histories and relationships to develop as an artwork in their own right. The project remains a proposal; its rules would be explored through a small prototype.</p></div>
-      </article>
-      <div class="ink-purpose ink-prose">
-        <p>You can use Digital Ink simply to make pictures, or to explore authorship, memory, scarcity and the relationships we form with digital materials. The app gives these questions a place to be worked through by making things.</p>
-        <p>For me, the app remains an open experiment. What happens next is part of the work.</p>
-      </div>
-      <div class="ink-continuity">
-        <h3>You decide what is shared</h3>
-        <div class="ink-prose"><p>Drawing and most Ink information stay on your iPad. Optional online AI features ask permission before sending selected content. Buying credits is not consent to share it.</p></div>
-        <a class="ink-text-link" href="/privacy/">Read the Digital Ink Privacy Policy ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="ink-section ink-technical" aria-labelledby="record-title">
-    <div class="ink-wrap">
-      <!-- CHOICE: the system remains inspectable without interrupting the first encounter with the artwork. -->
-      <details class="ink-record" id="technical-record">
-        <summary>
-          <span><span class="ink-kicker">OPEN SYSTEM NOTES</span><h2 id="record-title">UNDER THE HOOD</h2><span class="record-invitation">For people who want the technical version.</span></span>
-          <span class="record-toggle" aria-hidden="true">+</span>
-        </summary>
-        <div class="record-content">
-          <p class="ink-section-intro">Digital Ink is a native iPad application built in Swift / SwiftUI. Smart Inks and artworks are primarily stored locally on the device. Online AI operations are optional and permission-based.</p>
-          <nav class="record-nav" aria-label="Technical record sections">
-            <a href="#app-architecture">Architecture</a><a href="#smart-ink-model">Smart Inks</a><a href="#ink-rules">Scarcity</a><a href="#ink-education">Education</a><a href="#ink-relationships">Relationships</a><a href="#ink-provenance">Provenance</a><a href="#ink-privacy">Privacy &amp; AI</a><a href="#voice-research">Canvas Voice</a><a href="#archive-title">116-Pixel Archive</a><a href="#development-status">Development status</a>
-          </nav>
-          <section class="record-section" aria-labelledby="app-architecture">
-            <h3 id="app-architecture">App architecture</h3>
-            <p>A native iPadOS application with local Smart Inks, artworks, biographies, education, relationship history and provenance. Optional online operations travel through Digital Ink’s Cloudflare service to OpenAI.</p>
-          </section>
-          <section class="record-section" aria-labelledby="smart-ink-model">
-            <h3 id="smart-ink-model">Smart Ink data &amp; source traces</h3>
-            <p>A selected image becomes finite material with a representative colour, identity and recorded origin. An Ink can carry seven kinds of information, with source evidence, personal notes, learned concepts and machine invention kept distinct.</p>
-            <dl class="memory-record">
-              {inkTraces.map((trace) => (<div><dt>{trace.name}</dt><dd>{trace.text}</dd></div>))}
-            </dl>
-          </section>
-          <section class="record-section" aria-labelledby="ink-rules">
-            <h3 id="ink-rules">Scarcity / Ink rules</h3>
-            <p>Painting spends finite Ink; erasing can return material. Placed pixels remain connected to their source Ink. Colour, use and recorded history belong to the material rather than an unlimited colour picker.</p>
-          </section>
-          <section class="record-section" aria-labelledby="ink-education">
-            <h3 id="ink-education">Education</h3>
-            <p>Selected texts and PDFs can add learned concepts to an Ink. These acquired concepts remain distinct from its original visual description and from personal notes. Education contributes to a developing biography; it is not a claim of consciousness.</p>
-          </section>
-          <section class="record-section" aria-labelledby="ink-relationships">
-            <h3 id="ink-relationships">Relationships &amp; InkHome</h3>
-            <p>Version 3.0 introduced persistent relationships between Inks. InkHome gives the archive a spatial form, with recorded connections and routes visible in a projected 3D environment. A connection can become active, dormant or historical without silently erasing its earlier state.</p>
-            <aside class="relationship-map" aria-label="Inkhome relationship map">
-          <p>INKHOME · LOCAL RELATIONSHIP FIELD</p>
-          <div class="relationship-field" aria-hidden="true">
-            <i class="relationship-line relationship-line--active"></i>
-            <i class="relationship-line relationship-line--dormant"></i>
-            <i class="relationship-line relationship-line--historical"></i>
-            <span class="relationship-node relationship-node--ink-a"
-              >INK 031</span
-            >
-            <span class="relationship-node relationship-node--ink-b"
-              >INK 088</span
-            >
-            <span class="relationship-node relationship-node--artwork"
-              >ARTWORK</span
-            >
-            <span class="relationship-node relationship-node--artist"
-              >ARTIST ID</span
-            >
-          </div>
-          <ul class="relationship-key">
-            <li><i class="is-active"></i>ACTIVE</li>
-            <li><i class="is-dormant"></i>DORMANT</li>
-            <li><i class="is-historical"></i>HISTORICAL</li>
-          </ul>
-          <p class="relationship-map-note">
-            Positions, routes and connections make the archive feel less like
-            a list of files and more like a place with history.
-          </p>
-        </aside>
-          </section>
-          <section class="record-section" aria-labelledby="ink-provenance">
-            <h3 id="ink-provenance">Provenance</h3>
-            <p>An artwork can record who made it and which Smart Inks were involved. New artworks can carry stronger cryptographic verification without pretending older Inks always had it. Older records remain marked as Heritage Ink where the original evidence is incomplete.</p>
-          </section>
-          <section class="record-section" aria-labelledby="ink-privacy">
-            <h3 id="ink-privacy">Privacy / AI &amp; model information</h3>
-            <div class="record-boundaries">
-              <article><h4>On device · Apple Vision</h4><p>Apple-provided visual recognition can analyse selected images without credits or an internet connection. Its interpretations may be limited or inaccurate. Local Ink information stays on the device unless you choose a feature that shares selected information.</p></article>
-              <article><h4>Optional online · OpenAI</h4><p>With explicit permission for the operation, selected information travels through Cloudflare to OpenAI. Online Assist costs 1 credit; AI Memory Reconstruction costs 10. Purchasing credits is never treated as consent.</p><p>Reconstruction generates a new image. It is an invention, never presented as recovery of the source photograph.</p></article>
-            </div>
-            <a class="ink-text-link" href="/privacy/">Read the complete Digital Ink Privacy Policy ↗</a>
-          </section>
-          <section class="record-section" aria-labelledby="voice-research">
-            <p class="ink-development-status">IN DEVELOPMENT · FUTURE FEATURE</p>
-            <h3 id="voice-research">Canvas Voice research</h3>
-            <p>The planned exchange is limited to one to five words each way. A local extraction layer would combine meaningful signals from the Canvas Inks with computational properties such as density and symmetry. It would not use human object recognition to tell the Inks what the drawing represents. An Ink may contribute no signal; silence would not automatically become a filter.</p>
-            <p>Only the question and a few selected, privacy-safe concepts would reach the language mediator. Source images, personal notes, biographies, locations, identifiers and relationship evidence would stay outside that payload. Temporary records would show how the selected conditions led to each reply.</p>
-            <p>The intended session record would be discarded on the device when the conversation ends, without changing Ink memory or history. Local deletion does not determine an external service’s retention; that boundary would need to be stated before the feature is offered. These are design boundaries for a feature still in development.</p>
-          </section>
-          <section class="record-section" aria-labelledby="archive-title">
-            <p class="ink-kicker">PROPOSED FUTURE RESEARCH EDITION</p>
-            <h3 id="archive-title">The 116-Pixel Archive</h3>
-            <p>A proposed research edition in which 116 photographs become 116 Smart Inks. The existing relationship history and InkHome would provide its foundation.</p>
-            <p><strong>This edition does not yet exist.</strong> A small prototype would explore source permissions, interpretation, exchange, forgetting and what visitors may see before the full archive is built.</p>
-          </section>
-          <section class="record-section" aria-labelledby="development-status">
-            <h3 id="development-status">Current development status</h3>
-            <p>Digital Ink is available on the App Store. Version 3.0 includes relationships, InkHome and Artist Identity. Canvas Voice is an experiment in development; the 116-Pixel Archive remains a proposed research edition.</p>
-            <p>The film and interface studies on this page are part of the project’s development history. Their recorded states may differ from the current app.</p>
-            <nav class="ink-actions" aria-label="App, code and policy links"><a class="ink-button" href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">App Store ↗</a><a class="ink-button" href="https://github.com/Quirky888/DigitalInk" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="ink-button" href="/privacy/">Privacy policy</a><a class="ink-button" href="mailto:hello@q888.space">Contact the artist</a></nav>
-          </section>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <footer class="ink-footer">
-    <div class="ink-wrap">
-      <p>Digital Ink<br /><span>An ongoing artwork by Aleksandrs Sestakovs / Q888</span></p>
-      <nav aria-label="Digital Ink links"><a href="https://apps.apple.com/us/app/digital-ink/id6757157376" target="_blank" rel="noopener noreferrer">App Store ↗</a><a href="/privacy/">Privacy policy</a><a href="mailto:hello@q888.space">Contact</a></nav>
-    </div>
-  </footer>
+  <dialog class="ink-lightbox" data-ink-lightbox aria-label="Enlarged screenshot">
+    <button class="ink-lightbox-close" type="button" data-close aria-label="Close">×</button>
+    <img alt="" />
+  </dialog>
 </main>
 
 <style>
+  /* ───────── Tokens ───────── */
   .ink-page {
-    --blue: #a9c9e7;
-    --peach: #e5aa82;
-    --paper: #f4f0e9;
-    --muted: #c0bfb9;
-    --night: #232421;
-    --line: rgba(244, 240, 233, 0.2);
-    background: var(--night);
-    color: var(--paper);
+    --fog: #f5f5f5;
+    --ink: #1a1a1a;
+    --muted: #666666;
+    --dusk: #211d1b;
+    --cream: #f1ece3;
+    --cream-muted: #b9b1a5;
+    --plum: #614454;
+    --amber: #82603b;
+    --amber-text: #d9b27a;
+    --line: rgba(241, 236, 227, 0.16);
+    --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    --display: var(--font-door-display, "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif);
+    --serif: var(--font-door-serif, "Instrument Serif", Georgia, serif);
+    --mono: var(--font-door-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
     font-family: "Space Grotesk", system-ui, sans-serif;
     font-weight: 400;
+    color: var(--ink);
+    background: var(--fog);
+    /* The cursor stays a small square, a single pixel. Links and buttons keep the pointer. */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><rect x='6' y='6' width='10' height='10' fill='none' stroke='%231a1a1a' stroke-width='3'/><rect x='6' y='6' width='10' height='10' fill='none' stroke='%23f5f5f5' stroke-width='1'/></svg>") 11 11, auto;
   }
-  /* CHOICE: flexible columns and wrapping keep every page element inside narrow phone screens. */
+  .ink-page :global(a),
+  .ink-page :global(button),
+  .ink-page :global(summary) {
+    cursor: pointer;
+  }
   .ink-page :global(*) {
     box-sizing: border-box;
     min-inline-size: 0;
   }
-  .ink-wrap {
-    --page-gutter: clamp(1.25rem, 4vw, 3rem);
-    width: 100%;
-    max-width: 1180px;
-    padding-inline: max(var(--page-gutter), env(safe-area-inset-left)) max(var(--page-gutter), env(safe-area-inset-right));
-    margin-inline: auto;
-  }
-  h1, h2, h3, h4, p, a, summary, blockquote, figcaption, li, dt, dd {
-    overflow-wrap: anywhere;
-  }
-  h1, h2, h3, h4, p, blockquote, figure, ol, dl {
+  :where(.ink-page h1, .ink-page h2, .ink-page h3, .ink-page h4, .ink-page p, .ink-page figure, .ink-page ol, .ink-page ul, .ink-page dl) {
     margin: 0;
   }
-  h1 {
-    font-size: clamp(3rem, 7.5vw, 6rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.055em;
+  .ink-page :global(p) {
+    overflow-wrap: break-word;
   }
-  h2 {
-    font-size: clamp(1.65rem, 2.8vw, 2.35rem);
-    font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: -0.025em;
+  .ink-wrap {
+    inline-size: 100%;
+    max-inline-size: 1180px;
+    margin-inline: auto;
+    padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
   }
-  h3 {
-    font-size: clamp(1.35rem, 2.1vw, 1.8rem);
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
+  .ink-mono {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
   }
-  h4 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    line-height: 1.45;
-  }
-  [id] {
-    scroll-margin-top: 7rem;
-  }
-  .ink-kicker, .ink-development-status {
-    font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.07em;
-    line-height: 1.65;
-  }
-  .ink-kicker {
-    color: var(--blue);
-    margin-bottom: 1.25rem;
-  }
+
+  /* ───────── Hero ───────── */
   .ink-hero {
     position: relative;
     isolation: isolate;
-    padding-block: clamp(7rem, 10vw, 9rem) clamp(3rem, 6vw, 5rem);
-    background-color: #30312d;
-    background-image: linear-gradient(rgba(244, 240, 233, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(244, 240, 233, 0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
+    min-block-size: 100svh;
+    display: flex;
+    align-items: flex-start;
+    padding-block: clamp(6rem, 14vh, 9rem) 6rem;
+    background: linear-gradient(180deg, var(--fog) 0%, var(--fog) 72%, var(--dusk) 100%);
+    overflow: clip;
   }
-  .ink-hero-line {
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    font-weight: 400;
-    line-height: 1.6;
-    margin-top: 1rem;
+  .ink-field {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    z-index: -1;
   }
-  .ink-hero-film video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.55;
-    filter: grayscale(35%) saturate(0.7);
+  .ink-hero-inner {
+    position: relative;
   }
-  .ink-studio figcaption, .ink-media-note {
+  .ink-hero-meta {
     color: var(--muted);
-    font-size: 0.95rem;
-    font-weight: 400;
-    line-height: 1.65;
-    margin-top: 1rem;
-    max-width: 68ch;
+    margin-block-end: 1.5rem;
   }
-  .ink-space {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
+  .ink-page h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-variation-settings: "wdth" 82;
+    font-size: clamp(3.4rem, 11.5vw, 10rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-inline-size: 11ch;
+    text-wrap: balance;
+    color: var(--ink);
   }
-  .ink-prose, .record-section {
-    font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
-    font-weight: 400;
-    line-height: 1.8;
+  .ink-past {
+    position: relative;
+    display: inline-block;
   }
-  .ink-prose > * + *, .record-section > * + * {
-    margin-top: 1.25rem;
+  /* The empty square from the landing: Q888’s quiet authorship seal. */
+  .ink-seal {
+    position: absolute;
+    inset-block-start: 0.08em;
+    inset-inline-end: -0.16em;
+    inline-size: 0.075em;
+    aspect-ratio: 1;
+    border: max(2px, 0.008em) solid currentColor;
+    transform: rotate(-1.5deg);
   }
-  .ink-prose strong, .record-section strong {
-    font-weight: 600;
-    color: var(--paper);
-  }
-  .ink-doorway {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    font-weight: 400;
+  .ink-hero-sub {
+    margin-block-start: 1.75rem;
+    max-inline-size: 24em;
+    font-family: var(--serif);
     font-style: italic;
-    line-height: 1.65;
-    max-width: 54ch;
-    margin-top: 2.5rem;
-    color: var(--peach);
+    font-size: clamp(1.45rem, 2.6vw, 2.1rem);
+    line-height: 1.25;
+    color: var(--ink);
   }
+  .ink-hint {
+    margin-block-start: 2.25rem;
+    color: var(--muted);
+  }
+
+  /* ───────── Buttons ───────── */
   .ink-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 2rem;
+    margin-block-start: 2rem;
   }
   .ink-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
-    max-width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--line);
-    color: var(--paper);
+    min-block-size: 48px;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    color: inherit;
     text-decoration: none;
+    font-weight: 500;
     font-size: 1rem;
-    line-height: 1.5;
-  }
-  .ink-button-primary {
-    background: var(--paper);
-    color: var(--night);
-    border-color: var(--paper);
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   }
   .ink-button:hover {
-    border-color: var(--peach);
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+  .ink-button:focus-visible,
+  .ink-text-link:focus-visible,
+  .ink-dots a:focus-visible,
+  .ink-zoom:focus-visible,
+  .ink-record summary:focus-visible,
+  .ink-footer a:focus-visible {
+    outline: 2px solid var(--amber-text);
+    outline-offset: 3px;
+  }
+  .ink-button-primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--fog);
   }
   .ink-button-primary:hover {
-    background: var(--peach);
-    color: var(--night);
+    background: #000;
   }
-  a:focus-visible, summary:focus-visible, video:focus-visible {
-    outline: 3px solid var(--blue);
-    outline-offset: 5px;
+  .ink-dusk .ink-button-primary {
+    background: var(--cream);
+    border-color: var(--cream);
+    color: var(--dusk);
   }
-  .ink-section {
-    padding-block: clamp(3rem, 6vw, 5rem);
-    border-top: 1px solid var(--line);
+  .ink-dusk .ink-button-primary:hover {
+    background: #fff;
   }
-  .ink-idea {
-    background: #30312d;
+
+  /* ───────── Dusk ───────── */
+  .ink-dusk {
+    position: relative;
+    color: var(--cream);
+    background:
+      radial-gradient(60rem 38rem at 8% -4%, rgba(97, 68, 84, 0.3), transparent 70%),
+      radial-gradient(52rem 36rem at 102% 34%, rgba(130, 96, 59, 0.22), transparent 70%),
+      radial-gradient(60rem 40rem at 0% 78%, rgba(97, 68, 84, 0.2), transparent 70%),
+      var(--dusk);
   }
-  .ink-journey {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
-    max-width: 700px;
-    margin-block: 2.5rem 3.5rem;
+  .ink-chapter {
+    padding-block: clamp(4.5rem, 11vw, 9rem);
   }
-  .ink-journey li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1rem;
+  .ink-label {
+    color: var(--amber-text);
+    margin-block-end: 1.25rem;
   }
-  .ink-journey li + li::before {
-    content: "↓";
-    color: var(--muted);
-    width: 1rem;
+  .ink-dusk h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-variation-settings: "wdth" 88;
+    font-size: clamp(2.1rem, 4.6vw, 4rem);
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    margin-block-end: 1.75rem;
   }
-  .ink-journey li:first-child {
-    padding-left: 2rem;
+  .ink-dusk h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
-  .journey-mark {
-    width: 1.5rem;
-    flex: 0 0 1.5rem;
-    aspect-ratio: 1;
-    background: var(--peach);
-  }
-  .journey-image {
-    background: conic-gradient(var(--peach) 0 25%, #9eaa8d 0 50%, #ae959d 0 75%, var(--blue) 0);
-  }
-  .journey-ink {
-    background: #ae959d;
-  }
-  .journey-home {
-    background: #9eaa8d;
-    box-shadow: inset 0 0 0 6px #30312d;
-    border: 1px solid #9eaa8d;
-  }
-  .journey-canvas {
-    background: transparent;
-    border: 1px solid var(--blue);
-  }
-  .journey-art {
-    background: conic-gradient(#ae959d 0 25%, var(--blue) 0 50%, var(--peach) 0 75%, #9eaa8d 0);
-  }
-  .ink-section-intro {
-    max-width: 65ch;
-    font-size: 1.15rem;
+  .ink-text p {
+    font-size: 1.1rem;
     line-height: 1.7;
-    margin-bottom: 2rem;
+    color: var(--cream);
+    max-inline-size: 36rem;
   }
-  .art-study-shell {
-    max-width: 1000px;
+  .ink-text p + p {
+    margin-block-start: 1.1rem;
+  }
+  .ink-text strong {
+    font-weight: 600;
+    color: var(--amber-text);
+  }
+  .ink-text-wide p {
+    max-inline-size: 42rem;
+  }
+  .ink-split {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  /* ───────── Media ───────── */
+  .ink-page :global(.ink-frame) {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    background: #17140f;
+    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.7);
+  }
+  .ink-page :global(.ink-frame img) {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+  .ink-zoom {
+    cursor: zoom-in;
+  }
+  .ink-page :global(figcaption) {
+    margin-block-start: 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.55;
+    color: var(--cream-muted);
+    max-inline-size: 34rem;
+  }
+  .ink-media {
     display: grid;
     gap: 1.5rem;
   }
-  .art-study-toolbar {
+  .ink-media-narrow {
+    max-inline-size: 30rem;
+  }
+  .ink-media-row {
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-block-start: clamp(2.5rem, 6vw, 4rem);
   }
-  .art-study figcaption {
+  .ink-stills {
     display: grid;
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-block-start: clamp(2.5rem, 6vw, 4rem);
+    max-inline-size: 44rem;
   }
-  .art-study figcaption > span, .art-study-scroll-cue {
-    font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.8rem;
-    line-height: 1.6;
-    letter-spacing: 0.04em;
-    color: var(--blue);
+  .ink-gallery {
+    margin-block-start: clamp(2rem, 5vw, 3.5rem);
   }
-  .art-study figcaption q {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.05rem;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--muted);
+
+  /* Colour counts of the artist’s collection. */
+  .ink-palette {
+    margin-block-start: 2.25rem;
+    max-inline-size: 36rem;
   }
-  .art-study-scroll-cue {
-    border-left: 2px solid var(--peach);
-    padding-left: 1rem;
-    align-self: end;
+  .ink-palette-bar {
+    display: flex;
+    block-size: 2.25rem;
+    gap: 2px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--line);
   }
-  .art-study-frame {
-    display: grid;
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    background: transparent;
-    isolation: isolate;
-  }
-  .art-study-frame--canvas {
-    aspect-ratio: 2422 / 1535;
-  }
-  .art-study-frame--memory {
-    aspect-ratio: 2745 / 1669;
-  }
-  .art-study-frame img {
-    grid-area: 1 / 1;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .ink-palette-bar span {
     display: block;
+    min-inline-size: 4px;
   }
-  .art-study-base {
-    opacity: 1;
-    transition: opacity 1000ms ease;
-  }
-  .art-study-overlay {
-    position: relative;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 1000ms ease;
-  }
-  .art-study.is-revealed .art-study-base {
-    opacity: 0;
-  }
-  .art-study.is-revealed .art-study-overlay {
-    opacity: 1;
-  }
-  .art-study-fog {
-    position: absolute;
-    z-index: 1;
-    right: 4%;
-    top: 45%;
-    color: rgba(244, 240, 233, 0.25);
-    max-width: 43%;
-    font-size: clamp(1rem, 3vw, 2.6rem);
-    line-height: 1.2;
-  }
-  .art-study.is-revealed .art-study-fog {
-    opacity: 0;
-  }
-  .ink-spaces h2 {
-    max-width: 32ch;
-  }
-  .ink-space {
-    border-top: 1px solid var(--line);
-    padding-block: 2rem;
-  }
-  .ink-space h3 {
-    color: var(--blue);
-    font-size: clamp(1.5rem, 2.4vw, 2rem);
-    font-weight: 500;
-  }
-  .ink-space-gallery {
-    margin-top: 2.5rem;
-    padding-bottom: 0;
-  }
-  .ink-independence {
-    background: #30312d;
-  }
-  blockquote {
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    color: var(--peach);
-  }
-  .ink-continuity, .ink-purpose {
-    border-top: 1px solid var(--line);
-    padding-top: 2rem;
-    margin-top: 2.5rem;
-  }
-  .ink-canvas-voice {
-    margin-block: 2.5rem;
-    padding-block: 2.5rem;
-    border-block: 1px solid var(--line);
-  }
-  .voice-heading {
+  .ink-palette-legend {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.5rem 1.5rem;
-    margin-bottom: 1.5rem;
+    gap: 0.4rem 1rem;
+    padding: 0;
+    margin-block-start: 0.85rem;
+    list-style: none;
+    color: var(--cream-muted);
   }
-  .ink-development-status {
-    color: var(--peach);
-  }
-  .voice-heading .ink-development-status {
-    color: var(--peach);
-    letter-spacing: 0;
-  }
-  .ink-canvas-voice h3 {
-    font-size: clamp(1.5rem, 2.4vw, 2rem);
-    font-weight: 500;
-    line-height: 1.3;
-  }
-  .ink-text-link {
+  .ink-palette-legend li {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
-    max-width: 100%;
-    color: var(--blue);
-    font-size: 1rem;
+    gap: 0.4rem;
+  }
+  .ink-palette-legend i {
+    inline-size: 0.6rem;
+    block-size: 0.6rem;
+    border: 1px solid rgba(241, 236, 227, 0.35);
+  }
+
+  /* Education meter: ten squares, glowing from level 4. */
+  .ink-meter {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgba(23, 20, 15, 0.45);
+  }
+  .ink-meter-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+  .ink-meter-cell {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(241, 236, 227, 0.24);
+    color: var(--cream-muted);
+    background: rgba(241, 236, 227, 0.04);
+  }
+  .ink-meter-cell.is-glowing {
+    border-color: rgba(217, 178, 122, 0.7);
+    background: rgba(217, 178, 122, 0.14);
+    color: var(--cream);
+    animation: ink-breathe 7s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.35s);
+  }
+  @keyframes ink-breathe {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(217, 178, 122, 0); }
+    50% { box-shadow: 0 0 22px 2px rgba(217, 178, 122, 0.34); }
+  }
+
+  /* ───────── Call to action, privacy, technical ───────── */
+  .ink-about {
+    border-block-start: 1px solid var(--line);
+  }
+  .ink-cta-card {
+    padding: clamp(1.75rem, 5vw, 3.5rem);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(97, 68, 84, 0.38), rgba(130, 96, 59, 0.22));
+  }
+  .ink-cta-card h2 {
+    margin-block-end: 0.75rem;
+  }
+  .ink-cta-line {
+    font-size: 1.15rem;
+    color: var(--cream);
+  }
+  .ink-fine {
+    margin-block-start: 1.5rem;
+    max-inline-size: 36rem;
+    font-size: 0.9rem;
     line-height: 1.6;
-    text-decoration-thickness: 1px;
+    color: var(--cream-muted);
+  }
+  .ink-privacy {
+    margin-block-start: clamp(2.5rem, 6vw, 4rem);
+    max-inline-size: 42rem;
+  }
+  .ink-privacy p {
+    margin-block-start: 0.85rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--cream-muted);
+  }
+  .ink-text-link {
+    display: inline-block;
+    margin-block-start: 1rem;
+    color: var(--amber-text);
     text-underline-offset: 0.25em;
   }
-  .ink-canvas-voice .ink-text-link {
-    color: var(--blue);
-    margin-top: 1rem;
-  }
-  .ink-canvas-voice a:focus-visible {
-    outline-color: var(--blue);
-  }
   .ink-technical {
-    background: #1c1d1a;
+    padding-block: clamp(2rem, 5vw, 4rem);
   }
-  .ink-record > summary {
+  .ink-record {
+    border-block: 1px solid var(--line);
+  }
+  .ink-record summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    cursor: pointer;
+    padding-block: 1.75rem;
     list-style: none;
-    padding-block: 1rem;
   }
-  .ink-record > summary::-webkit-details-marker {
+  .ink-record summary::-webkit-details-marker {
     display: none;
   }
-  .ink-record > summary .ink-kicker {
+  .ink-record-title {
     display: block;
-    margin-bottom: 1rem;
-  }
-  .ink-record h2 {
-    font-size: clamp(1.65rem, 3.8vw, 3rem);
-  }
-  .record-invitation {
-    display: block;
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-top: 1rem;
-  }
-  .record-toggle {
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--line);
-    font-size: 1.75rem;
-    line-height: 1;
-  }
-  .ink-record[open] .record-toggle {
-    font-size: 0;
-  }
-  .ink-record[open] .record-toggle::after {
-    content: "−";
-    font-size: 1.75rem;
-  }
-  .record-content {
-    margin-top: 2.5rem;
-  }
-  .record-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    margin-block: 2rem;
-  }
-  .record-nav a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    color: var(--blue);
-    font-size: 1rem;
-    text-underline-offset: 0.25em;
-  }
-  .record-section {
-    padding-block: 2.5rem;
-    border-top: 1px solid var(--line);
-  }
-  .record-section h3 {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-  }
-  .record-section .ink-kicker {
-    margin-bottom: 1rem;
-  }
-  .memory-record > div {
-    display: grid;
-    gap: 0.5rem;
-    padding-block: 1rem;
-    border-top: 1px solid var(--line);
-  }
-  .memory-record dt {
+    font-family: var(--display);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    letter-spacing: -0.03em;
   }
-  .memory-record dd {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--muted);
+  .ink-record-invite {
+    display: block;
+    margin-block-start: 0.35rem;
+    color: var(--cream-muted);
   }
-  .relationship-map {
-    padding: 1.25rem;
-    border: 1px solid var(--line);
-    max-width: 620px;
-  }
-  .relationship-map > p:first-child {
-    font-family: "Space Mono", monospace;
-    font-size: 0.8rem;
-    color: var(--blue);
-  }
-  .relationship-field {
-    position: relative;
-    height: 250px;
-    margin-top: 1rem;
-  }
-  .relationship-node {
-    position: absolute;
-    z-index: 2;
+  .ink-record-toggle {
+    flex: none;
     display: grid;
     place-items: center;
-    width: 80px;
-    height: 56px;
-    background: #30312d;
-    border: 1px solid var(--peach);
-    font-family: "Space Mono", monospace;
-    font-size: 0.7rem;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
   }
-  .relationship-node--ink-a {
-    left: 0;
-    top: 20px;
+  .ink-record[open] .ink-record-toggle {
+    transform: rotate(45deg);
   }
-  .relationship-node--ink-b {
-    right: 0;
-    top: 20px;
-    border-color: var(--blue);
-  }
-  .relationship-node--artwork {
-    left: 50%;
-    top: 115px;
-    transform: translateX(-50%);
-  }
-  .relationship-node--artist {
-    left: 50%;
-    top: 194px;
-    transform: translateX(-50%);
-    border-color: #9eaa8d;
-  }
-  .relationship-line {
-    position: absolute;
-    top: 47px;
-    left: 40px;
-    width: calc(100% - 80px);
-    border-top: 1px solid var(--peach);
-  }
-  .relationship-line--dormant {
-    top: 75px;
-    left: 50%;
-    width: 1px;
-    height: 45px;
-    border-top: 0;
-    border-left: 1px dashed var(--blue);
-  }
-  .relationship-line--historical {
-    top: 171px;
-    left: 50%;
-    width: 1px;
-    height: 24px;
-    border-top: 0;
-    border-left: 1px dotted #9eaa8d;
-  }
-  .relationship-key {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    list-style: none;
-    padding: 0;
-    margin-block: 1.5rem 1rem;
-    font-family: "Space Mono", monospace;
-    font-size: 0.7rem;
-  }
-  .relationship-key li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .relationship-key i {
-    width: 1rem;
-    border-top: 1px solid var(--peach);
-  }
-  .relationship-key .is-dormant {
-    border-top: 1px dashed var(--blue);
-  }
-  .relationship-key .is-historical {
-    border-top: 1px dotted #9eaa8d;
-  }
-  .relationship-map-note {
-    font-size: 1rem;
-    color: var(--muted);
-  }
-  .record-boundaries {
+  .ink-record-content {
+    padding-block-end: 2.5rem;
     display: grid;
     gap: 2rem;
+    max-inline-size: 50rem;
   }
-  .record-boundaries p {
-    margin-top: 1rem;
+  .ink-record-content p {
+    line-height: 1.7;
+    color: var(--cream-muted);
   }
-  .archive-process {
-    padding-left: 1.5rem;
+  .ink-record-section h3 {
+    margin-block-end: 0.6rem;
   }
-  .archive-process li {
-    padding-left: 0.5rem;
-    margin-top: 1.5rem;
+  .ink-traces {
+    display: grid;
+    gap: 0.9rem;
+    margin-block-start: 1.25rem;
   }
-  .archive-process p {
-    margin-top: 0.5rem;
+  .ink-traces div {
+    padding-inline-start: 1rem;
+    border-inline-start: 2px solid var(--plum);
+  }
+  .ink-traces dt {
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .ink-traces dd {
+    margin: 0.15rem 0 0;
+    color: var(--cream-muted);
+    line-height: 1.6;
+  }
+  .ink-boundaries {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .ink-boundaries article {
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  .ink-boundaries h4 {
+    font-weight: 600;
+    margin-block-end: 0.5rem;
+    color: var(--cream);
+  }
+  .ink-future {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(4rem, 9vw, 7rem);
+  }
+  .ink-future h2 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+  }
+  .ink-future p:not(.ink-mono) {
+    max-inline-size: 38rem;
+    line-height: 1.7;
+    color: var(--cream-muted);
   }
   .ink-footer {
-    padding-block: 2.5rem 5rem;
-    border-top: 1px solid var(--line);
+    padding-block: 2.5rem 7rem;
+    border-block-start: 1px solid var(--line);
+    color: var(--cream-muted);
   }
   .ink-footer .ink-wrap {
     display: flex;
     flex-wrap: wrap;
-    align-items: end;
+    gap: 1.5rem 3rem;
     justify-content: space-between;
-    gap: 2rem;
   }
-  .ink-footer p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-  }
-  .ink-footer p span {
-    color: var(--muted);
-    font-size: 1rem;
+  .ink-footer span {
+    font-size: 0.9rem;
   }
   .ink-footer nav {
     display: flex;
@@ -979,378 +873,827 @@ const inkTraces = [
   .ink-footer a {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
-    color: var(--paper);
-    font-size: 1rem;
+    min-block-size: 44px;
+    color: var(--cream);
     text-underline-offset: 0.25em;
   }
-  @media (min-width: 600px) {
-    .ink-journey {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1.5rem;
+
+  /* ───────── Chapter dots (large screens) ───────── */
+  .ink-dots {
+    display: none;
+  }
+  @media (min-width: 1200px) {
+    .ink-dots {
+      position: fixed;
+      inset-inline-end: 1.5rem;
+      inset-block-start: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      display: grid;
+      gap: 0.2rem;
     }
-    .ink-journey li {
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-      gap: 1rem;
+    .ink-dots a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      min-block-size: 28px;
+      color: var(--cream-muted);
+      text-decoration: none;
     }
-    .ink-journey li:first-child {
-      padding-left: 0;
+    .ink-dots i {
+      display: block;
+      inline-size: 9px;
+      block-size: 9px;
+      border: 1px solid currentColor;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
-    .ink-journey li + li::before {
-      content: "→";
-      position: absolute;
-      left: -1.2rem;
-      top: 0.3rem;
-      width: auto;
+    .ink-dot-num {
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    .art-study-toolbar {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.45fr);
-      gap: 2rem;
+    .ink-dots a:hover .ink-dot-num,
+    .ink-dots a:focus-visible .ink-dot-num,
+    .ink-dots a.is-active .ink-dot-num {
+      opacity: 1;
     }
-    .art-study-scroll-cue {
-      justify-self: end;
+    .ink-dots a.is-active {
+      color: var(--amber-text);
     }
-    .memory-record > div {
-      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-      gap: 2rem;
+    .ink-dots a.is-active i {
+      background: currentColor;
+      transform: scale(1.25);
     }
   }
-  @media (min-width: 800px) {
-    .record-boundaries {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2.5rem;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .art-study-base, .art-study-overlay {
-      transition: none;
-    }
-    .art-study-scroll-cue {
+  @media (min-width: 1200px) and (max-width: 1399px) {
+    .ink-dots {
       display: none;
     }
   }
-  .ink-hero > .ink-wrap {
-    position: relative;
-    z-index: 1;
-  }
-  .ink-hero-film {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .ink-hero-film::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(35, 36, 33, 0.82), rgba(35, 36, 33, 0.5)), linear-gradient(180deg, transparent 65%, #30312d);
-  }
-  .ink-hero-body {
-    display: grid;
-    grid-template-areas: "studio" "story";
-    gap: 2rem;
-    margin-top: 2.5rem;
-    align-items: center;
-  }
-  .ink-hero-copy {
-    grid-area: story;
-  }
-  .ink-studio {
-    grid-area: studio;
-  }
-  .ink-studio :global(img) {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .ink-film-tools {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 1.5rem;
-    margin-top: 2rem;
-    color: var(--muted);
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-  .ink-film-tools[hidden] {
-    display: none;
-  }
-  .ink-film-tools p {
-    max-width: 62ch;
-  }
-  .ink-film-toggle {
-    min-height: 44px;
-    padding: 0.5rem 0;
-    color: var(--muted);
-    cursor: pointer;
-    font: inherit;
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-  }
-  .ink-film-toggle:focus-visible {
-    outline: 3px solid var(--blue);
-    outline-offset: 5px;
-  }
-  .ink-story-heading {
-    max-width: 68ch;
-    margin-bottom: 1.5rem;
-  }
-  .ink-prose {
-    max-width: 68ch;
-  }
-  .ink-biography .art-study {
-    margin-top: 2rem;
-  }
-  .art-study figcaption p {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.65;
-    max-width: 60ch;
-  }
-  .ink-spaces > .ink-wrap > .ink-prose {
-    margin-bottom: 2.5rem;
-  }
-  .ink-continuity > h3 {
-    margin-bottom: 1.5rem;
-  }
-  .ink-purpose {
-    border-top: 0;
-    padding-top: 0;
-  }
-  @media (min-width: 900px) {
-    .ink-hero-body {
-      grid-template-areas: "story studio";
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: clamp(2rem, 4vw, 3.5rem);
+  @media (min-width: 1400px) {
+    .ink-dots {
+      display: grid;
     }
-    .ink-space {
-      grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr);
-      gap: 3rem;
+  }
+
+  /* ───────── Layout, wider screens ───────── */
+  @media (min-width: 900px) {
+    .ink-split {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    }
+    .ink-split-reverse {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    }
+    .ink-split-reverse > .ink-text {
+      order: 2;
+    }
+    .ink-media-pair {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+    .ink-media-row-memory {
+      grid-template-columns: 1.25fr 1.1fr 1fr;
+      align-items: start;
+    }
+    .ink-boundaries {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ink-meter-row {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 899px) {
+    .ink-media-pair {
+      grid-template-columns: minmax(0, 1fr);
+      max-inline-size: 30rem;
+    }
+    .ink-media-row-memory > * {
+      max-inline-size: 30rem;
+    }
+  }
+
+  /* ───────── Reveal, only when JS is present ───────── */
+  :global(html.ink-js) .ink-page [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  :global(html.ink-js) .ink-page [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ───────── Lightbox ───────── */
+  .ink-lightbox {
+    inline-size: min(92vw, 900px);
+    max-block-size: 92svh;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #17140f;
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .ink-lightbox::backdrop {
+    background: rgba(14, 11, 9, 0.82);
+  }
+  .ink-lightbox img {
+    display: block;
+    inline-size: 100%;
+    max-block-size: 92svh;
+    object-fit: contain;
+  }
+  .ink-lightbox-close {
+    position: absolute;
+    inset-block-start: 0.6rem;
+    inset-inline-end: 0.6rem;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: rgba(24, 20, 18, 0.8);
+    color: var(--cream);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  /* ───────── Kinetic type: words and letters rise out of their own line ───────── */
+  .ink-page :global(.ink-sw) {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding: 0.08em 0.05em 0.14em;
+    margin: -0.08em -0.05em -0.14em;
+  }
+  .ink-page :global(.ink-swi) {
+    display: inline-block;
+  }
+  :global(html.ink-js) .ink-page :global(.ink-sp .ink-swi) {
+    transform: translateY(118%) rotate(6deg);
+    transform-origin: 0 100%;
+    transition: transform 1s cubic-bezier(0.2, 0.7, 0.1, 1);
+    transition-delay: calc(var(--w, 0) * 55ms);
+  }
+  :global(html.ink-js) .ink-page h1 :global(.ink-swi) {
+    transition-duration: 1.15s;
+    transition-delay: calc(var(--w, 0) * 38ms + 120ms);
+  }
+  :global(html.ink-js) .ink-page :global(.ink-sp.is-in .ink-swi) {
+    transform: none;
+  }
+
+  /* Hero drifts away slowly as you leave it. */
+  .ink-hero-inner {
+    transform: translate3d(0, calc(var(--hp, 0) * 44px), 0);
+    opacity: calc(1 - var(--hp, 0) * 0.55);
+  }
+
+  /* Reading focus: the paragraph in the middle of the screen is the one in full light. */
+  :global(html.ink-js) .ink-page :global(.ink-fp) {
+    opacity: 0.42;
+    transition: opacity 0.7s ease;
+  }
+  :global(html.ink-js) .ink-page :global(.ink-fp.is-focus) {
+    opacity: 1;
+  }
+
+  /* Media stays in view while the text beside it passes. */
+  @media (min-width: 900px) {
+    .ink-split > .ink-media,
+    .ink-split > .ink-meter {
+      position: sticky;
+      inset-block-start: 14vh;
+    }
+  }
+
+  /* The colour bar grows out of nothing, and the numbers count up. */
+  :global(html.ink-js) .ink-palette-bar span {
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 1s cubic-bezier(0.2, 0.7, 0.1, 1);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+  :global(html.ink-js) .ink-palette.is-in .ink-palette-bar span {
+    transform: none;
+  }
+  .ink-palette-legend b {
+    font-weight: 500;
+    color: var(--cream);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The meter lights up one square at a time. */
+  :global(html.ink-js) .ink-meter-cell {
+    opacity: 0.4;
+    transition: opacity 0.6s ease, background 0.6s ease, border-color 0.6s ease, color 0.6s ease;
+  }
+  :global(html.ink-js) .ink-meter-cell.is-lit {
+    opacity: 1;
+  }
+  :global(html.ink-js) .ink-meter-cell.is-glowing:not(.is-lit) {
+    animation: none;
+    border-color: rgba(241, 236, 227, 0.24);
+    background: rgba(241, 236, 227, 0.04);
+    color: var(--cream-muted);
+  }
+
+  /* ───────── Three places ───────── */
+  .ink-places {
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+  .ink-places-count {
+    margin-inline-start: 1rem;
+    color: var(--cream-muted);
+  }
+  .ink-places-track {
+    display: grid;
+    gap: 3rem;
+    padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+  }
+  .ink-place {
+    max-inline-size: 30rem;
+  }
+  .ink-place-num {
+    color: var(--amber-text);
+    margin-block-end: 0.5rem;
+  }
+  .ink-dusk .ink-place h3 {
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-block-end: 0.5rem;
+  }
+  .ink-place > p:not(.ink-place-num) {
+    margin-block-end: 1.25rem;
+    font-size: 1.1rem;
+    color: var(--cream-muted);
+  }
+  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+    :global(html.ink-js) .ink-places {
+      position: relative;
+      padding-block: 0;
+      block-size: var(--places-h, 300svh);
+    }
+    :global(html.ink-js) .ink-places-stick {
+      position: sticky;
+      inset-block-start: 0;
+      block-size: 100svh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+      padding-block-start: 3.5rem;
+    }
+    :global(html.ink-js) .ink-places-head h2 {
+      margin-block-end: 0;
+    }
+    :global(html.ink-js) .ink-places-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 9vw;
+      inline-size: max-content;
+      padding-inline: max(var(--gutter), calc((100vw - 1180px) / 2 + var(--gutter))) 14vw;
+      transform: translate3d(var(--places-x, 0px), 0, 0);
+      will-change: transform;
+    }
+    :global(html.ink-js) .ink-place {
+      flex: none;
+      max-inline-size: none;
+      inline-size: min(44vw, 34rem);
+    }
+    :global(html.ink-js) .ink-place:last-child {
+      inline-size: min(62vw, 48rem);
+    }
+    :global(html.ink-js) .ink-place-frame {
+      inline-size: fit-content;
+    }
+    :global(html.ink-js) .ink-place-frame img {
+      inline-size: auto;
+      block-size: min(50svh, 32rem);
+    }
+    :global(html.ink-js) .ink-place-frame-wide img {
+      block-size: min(46svh, 28rem);
+    }
+  }
+
+  /* ───────── Reduced motion: nothing slides, nothing glows ───────── */
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.ink-js) .ink-page [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .ink-meter-cell.is-glowing {
+      animation: none;
+    }
+    .ink-hero-inner {
+      transform: none;
+      opacity: 1;
+    }
+    :global(html.ink-js) .ink-page :global(.ink-fp) {
+      opacity: 1;
+      transition: none;
+    }
+    :global(html.ink-js) .ink-palette-bar span,
+    :global(html.ink-js) .ink-meter-cell {
+      transform: none;
+      opacity: 1;
+      transition: none;
+    }
+    .ink-record-toggle,
+    .ink-button,
+    .ink-dots i,
+    .ink-dot-num {
+      transition: none;
+    }
+  }
+</style>
+
+<!-- The tone switch lets the shared navigation follow the page from fog to dusk. -->
+<style is:global>
+  body:has(.ink-page) {
+    transition: background-color 0.6s ease, color 0.6s ease;
+  }
+  html[data-ink-tone="dusk"] body:has(.ink-page) {
+    --bg-fog: #211d1b;
+    --text-ink: #f1ece3;
+    --text-muted: #b9b1a5;
+    --line-soft: rgba(241, 236, 227, 0.16);
+    color-scheme: dark;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body:has(.ink-page) {
+      transition: none;
     }
   }
 </style>
 
 <script>
-  type DigitalInkWindow = Window & {
-    __digitalInkStudyAbort?: AbortController;
-    __digitalInkRecordAbort?: AbortController;
-    __digitalInkVideoAbort?: AbortController;
-    __digitalInkVideoPaused?: boolean;
+  type InkWindow = Window & { __inkAbort?: AbortController };
+
+  const TAU = Math.PI * 2;
+  const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+  const smooth = (edge0: number, edge1: number, value: number) => {
+    const t = clamp((value - edge0) / (edge1 - edge0), 0, 1);
+    return t * t * (3 - 2 * t);
+  };
+  const mulberry32 = (seed: number) => () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 
-  function initHeroFilm() {
-    const video = document.querySelector<HTMLVideoElement>("[data-ink-hero-video]");
-    const tools = document.querySelector<HTMLElement>("[data-ink-film-tools]");
-    const toggle = document.querySelector<HTMLButtonElement>("[data-ink-film-toggle]");
-    const hero = document.querySelector<HTMLElement>(".ink-hero");
-    if (!video || !tools || !toggle || !hero) return;
+  // Colours follow the real collection: mostly grey and swamp green, with a few rare ones.
+  const FIELD_PALETTE: Array<[string, number]> = [
+    ["#8f8d88", 30], ["#a6a39b", 24], ["#6f6d68", 18], ["#b9b6ae", 10],
+    ["#6b705a", 14], ["#7e8466", 8], ["#b99a45", 9], ["#6f7f96", 6],
+    ["#2f2d2a", 6], ["#5f7a52", 3], ["#b44a45", 1], ["#9b4f7e", 1], ["#ece8df", 1],
+  ];
 
-    const pageWindow = window as DigitalInkWindow;
-    pageWindow.__digitalInkVideoAbort?.abort();
-    const controller = new AbortController();
-    pageWindow.__digitalInkVideoAbort = controller;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function initField(hero: HTMLElement, canvas: HTMLCanvasElement, signal: AbortSignal, reduced: MediaQueryList) {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    type Cell = { col: number; row: number; colour: string; filled: boolean; phase: number; delay: number };
+    type Ripple = { x: number; y: number; start: number };
+    let cells: Cell[] = [];
+    let ripples: Ripple[] = [];
+    let width = 0;
+    let height = 0;
+    let cell = 48;
+    let running = false;
     let inView = true;
-    video.playbackRate = 0.7;
+    let last = 0;
+    let origin = performance.now();
+    const hover = { x: -999, y: -999, power: 0, target: 0 };
 
-    const syncPlayback = () => {
-      const canAnimate = window.innerWidth > 600 && !reducedMotion.matches;
-      const pausedByVisitor = Boolean(pageWindow.__digitalInkVideoPaused);
-      tools.hidden = !canAnimate;
-      toggle.textContent = pausedByVisitor ? "Resume background" : "Pause background";
+    const total = FIELD_PALETTE.reduce((sum, [, weight]) => sum + weight, 0);
+    const pick = (roll: number) => {
+      let acc = roll * total;
+      for (const [colour, weight] of FIELD_PALETTE) {
+        acc -= weight;
+        if (acc <= 0) return colour;
+      }
+      return FIELD_PALETTE[0][0];
+    };
 
-      if (canAnimate && inView && !pausedByVisitor) {
-        if (!video.getAttribute("src") && video.dataset.src) {
-          video.src = video.dataset.src;
-          video.load();
-        }
-        void video.play().catch(() => undefined);
-      } else {
-        video.pause();
-        if (!canAnimate && video.hasAttribute("src")) {
-          video.removeAttribute("src");
-          video.load();
+    const build = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cell = clamp(Math.round(width / (width < 700 ? 9 : 24)), 34, 64);
+      const rng = mulberry32(888);
+      cells = [];
+      for (let row = 0; row < Math.ceil(height / cell); row++) {
+        for (let col = 0; col < Math.ceil(width / cell); col++) {
+          cells.push({ col, row, colour: pick(rng()), filled: rng() < 0.5, phase: rng() * TAU, delay: rng() * 1000 });
         }
       }
     };
 
-    // CHOICE: keep the film as atmosphere, with an explicit pause and a static mobile/reduced-motion surface.
-    toggle.addEventListener("click", () => {
-      pageWindow.__digitalInkVideoPaused = !pageWindow.__digitalInkVideoPaused;
-      syncPlayback();
-    }, { signal: controller.signal });
-    window.addEventListener("resize", syncPlayback, { passive: true, signal: controller.signal });
-    reducedMotion.addEventListener("change", syncPlayback, { signal: controller.signal });
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      syncPlayback();
-    });
+    const waveAt = (cx: number, cy: number, now: number) => {
+      let best = 0;
+      for (const ripple of ripples) {
+        const age = now - ripple.start;
+        const radius = age * 0.5;
+        const distance = Math.hypot(cx - ripple.x, cy - ripple.y);
+        const band = Math.exp(-(((distance - radius) / 120) ** 2));
+        best = Math.max(best, band * (1 - age / 2400));
+      }
+      return best;
+    };
+
+    const hoverAt = (cx: number, cy: number) =>
+      hover.power * Math.exp(-((Math.hypot(cx - hover.x, cy - hover.y) / 150) ** 2)) * 0.9;
+
+    const draw = (now: number) => {
+      hover.power += (hover.target - hover.power) * 0.1;
+      ripples = ripples.filter((ripple) => now - ripple.start < 2400);
+      ctx.clearRect(0, 0, width, height);
+      const still = reduced.matches;
+      for (const item of cells) {
+        const x = item.col * cell;
+        const y = item.row * cell;
+        const cx = x + cell / 2;
+        const cy = y + cell / 2;
+        // Quieter on the left so the headline stays easy to read.
+        const side = 0.2 + 0.8 * smooth(width * 0.3, width * 0.85, cx);
+        const arrive = still ? 1 : smooth(0, 900, now - origin - item.delay);
+        const wave = still ? 0 : Math.max(waveAt(cx, cy, now), hoverAt(cx, cy));
+        if (!item.filled) {
+          if (wave > 0.2) {
+            // Empty squares fill with colour as the pointer or a wave passes over them.
+            ctx.globalAlpha = clamp(wave * 0.7 * Math.max(side, 0.5), 0, 1);
+            ctx.fillStyle = item.colour;
+            ctx.fillRect(x + 2.5, y + 2.5, cell - 5, cell - 5);
+            ctx.globalAlpha = 1;
+          } else {
+            ctx.strokeStyle = `rgba(128,124,116,${0.14 * side * arrive})`;
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x + 2.5, y + 2.5, cell - 5, cell - 5);
+          }
+          continue;
+        }
+        const breathe = still ? 1 : 0.9 + 0.1 * Math.sin((now / 7000) * TAU + item.phase);
+        const size = (cell - 5) * (1 + 0.16 * wave);
+        ctx.globalAlpha = clamp((0.5 + 0.5 * wave) * side * arrive * breathe, 0, 1);
+        ctx.fillStyle = item.colour;
+        ctx.fillRect(cx - size / 2, cy - size / 2, size, size);
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    const frame = (now: number) => {
+      if (!running) return;
+      if (now - last >= 33) {
+        last = now;
+        draw(now);
+      }
+      requestAnimationFrame(frame);
+    };
+    const sync = () => {
+      const shouldRun = inView && !document.hidden && !reduced.matches;
+      if (shouldRun && !running) {
+        running = true;
+        requestAnimationFrame(frame);
+      } else if (!shouldRun) {
+        running = false;
+        draw(performance.now());
+      }
+    };
+
+    hero.addEventListener("pointerdown", (event) => {
+      if (reduced.matches || (event.target as HTMLElement).closest("a, button")) return;
+      const rect = canvas.getBoundingClientRect();
+      ripples.push({ x: event.clientX - rect.left, y: event.clientY - rect.top, start: performance.now() });
+      if (ripples.length > 6) ripples.shift();
+    }, { signal });
+
+    hero.addEventListener("pointermove", (event) => {
+      if (reduced.matches || event.pointerType !== "mouse") return;
+      const rect = canvas.getBoundingClientRect();
+      hover.x = event.clientX - rect.left;
+      hover.y = event.clientY - rect.top;
+      hover.target = 1;
+    }, { signal });
+    hero.addEventListener("pointerleave", () => { hover.target = 0; }, { signal });
+
+    build();
+    const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); });
     observer.observe(hero);
-    controller.signal.addEventListener("abort", () => observer.disconnect(), { once: true });
-    document.addEventListener("astro:before-swap", () => controller.abort(), { once: true, signal: controller.signal });
-    syncPlayback();
+    const resizer = new ResizeObserver(() => { build(); draw(performance.now()); });
+    resizer.observe(canvas);
+    document.addEventListener("visibilitychange", sync, { signal });
+    reduced.addEventListener("change", sync, { signal });
+    signal.addEventListener("abort", () => { running = false; observer.disconnect(); resizer.disconnect(); }, { once: true });
+
+    // One gentle wave on arrival, from the right where the squares are strongest.
+    if (!reduced.matches) ripples.push({ x: width * 0.72, y: height * 0.38, start: performance.now() + 500 });
+    sync();
   }
 
-  function initArtStudies() {
-    const studies = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-art-study]"),
-    );
-    if (studies.length === 0) return;
-
-    const pageWindow = window as DigitalInkWindow;
-    pageWindow.__digitalInkStudyAbort?.abort();
-    const controller = new AbortController();
-    pageWindow.__digitalInkStudyAbort = controller;
-
-    const canvasStudy = studies.find(
-      (study) => study.dataset.artStudy === "canvas",
-    );
-    const memoryStudy = studies.find(
-      (study) => study.dataset.artStudy === "memory",
-    );
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const portraitMobile = window.matchMedia(
-      "(max-width: 767px) and (orientation: portrait)",
-    );
-    let previousScrollY = window.scrollY;
-    let memoryLatched = false;
-    let ticking = false;
-
-    const setStudyState = (
-      study: HTMLElement | undefined,
-      isRevealed: boolean,
-    ) => {
-      if (!study) return;
-      study.classList.toggle("is-revealed", isRevealed);
-      study
-        .querySelector("[data-study-base]")
-        ?.setAttribute("aria-hidden", String(isRevealed));
-      study
-        .querySelector("[data-study-overlay]")
-        ?.setAttribute("aria-hidden", String(!isRevealed));
-
-      const cue = study.querySelector<HTMLElement>("[data-study-cue]");
-      if (cue) {
-        cue.textContent = isRevealed
-          ? "MEMORY IS SPEAKING"
-          : (cue.dataset.resting ?? "BRING ME TO THE CENTRE ↓");
+  function initClips(signal: AbortSignal, reduced: MediaQueryList) {
+    const clips = Array.from(document.querySelectorAll<HTMLElement>("[data-ink-clip]"));
+    const setState = (clip: HTMLElement, state: string) => {
+      const video = clip.querySelector("video");
+      const button = clip.querySelector<HTMLButtonElement>("[data-ink-clip-btn]");
+      const label = clip.querySelector<HTMLElement>("[data-ink-clip-label]");
+      if (!video || !button || !label) return;
+      clip.dataset.state = state;
+      const text = state === "playing" ? "Pause" : state === "ended" ? "Replay" : state === "paused" ? "Resume" : (clip.dataset.playText ?? "Play");
+      label.textContent = text;
+      button.setAttribute("aria-label", `${text}: ${video.getAttribute("aria-label") ?? ""}`);
+    };
+    const pauseOthers = (except: HTMLElement) => {
+      for (const other of clips) {
+        if (other === except) continue;
+        const video = other.querySelector("video");
+        if (video && !video.paused) { video.pause(); }
       }
     };
+    const play = (clip: HTMLElement) => {
+      const video = clip.querySelector("video");
+      if (!video) return;
+      pauseOthers(clip);
+      if (video.ended) video.currentTime = 0;
+      void video.play().then(() => setState(clip, "playing")).catch(() => setState(clip, "idle"));
+    };
 
-    const checkReveal = () => {
-      if (reducedMotion.matches) {
-        studies.forEach((study) => setStudyState(study, false));
-        ticking = false;
+    for (const clip of clips) {
+      const video = clip.querySelector("video");
+      const button = clip.querySelector<HTMLButtonElement>("[data-ink-clip-btn]");
+      if (!video || !button) continue;
+      let started = false;
+      let resumeOnReturn = false;
+
+      button.addEventListener("click", () => {
+        started = true;
+        if (video.paused || video.ended) play(clip);
+        else { video.pause(); setState(clip, "paused"); }
+      }, { signal });
+      video.addEventListener("ended", () => setState(clip, "ended"), { signal });
+      video.addEventListener("pause", () => { if (!video.ended && clip.dataset.state === "playing") setState(clip, "paused"); }, { signal });
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          if (clip.dataset.mode === "once" && !started && !reduced.matches) { started = true; play(clip); }
+          else if (resumeOnReturn) { resumeOnReturn = false; play(clip); }
+        } else if (!video.paused) {
+          resumeOnReturn = true;
+          video.pause();
+        }
+      }, { threshold: 0.55 });
+      observer.observe(clip);
+      signal.addEventListener("abort", () => observer.disconnect(), { once: true });
+    }
+  }
+
+  function countUp(root: HTMLElement) {
+    root.querySelectorAll<HTMLElement>("[data-count]").forEach((element) => {
+      const target = Number(element.dataset.count);
+      const start = performance.now();
+      const tick = (now: number) => {
+        const t = clamp((now - start) / 1400, 0, 1);
+        element.textContent = String(Math.round(target * (1 - (1 - t) ** 3)));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      element.textContent = "0";
+      requestAnimationFrame(tick);
+    });
+  }
+
+  function lightMeter(root: HTMLElement) {
+    root.querySelectorAll<HTMLElement>(".ink-meter-cell").forEach((cell, index) => {
+      window.setTimeout(() => cell.classList.add("is-lit"), 250 + index * 170);
+    });
+  }
+
+  function initReveal(signal: AbortSignal, reduced: MediaQueryList) {
+    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal], [data-pixels], [data-bars], [data-meter]"));
+    if (reduced.matches) {
+      items.forEach((item) => item.classList.add("is-in"));
+      document.querySelectorAll<HTMLElement>(".ink-meter-cell").forEach((cell) => cell.classList.add("is-lit"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        // Anything already scrolled past counts as seen, so fast scrolling never leaves a blank section.
+        if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+          const target = entry.target as HTMLElement;
+          target.classList.add("is-in");
+          if (target.hasAttribute("data-bars")) countUp(target);
+          if (target.hasAttribute("data-meter")) lightMeter(target);
+          observer.unobserve(target);
+        }
+      }
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    items.forEach((item) => observer.observe(item));
+    // Safety net: if the observer never reports, show everything after a moment.
+    const timer = window.setTimeout(() => {
+      items.forEach((item) => item.classList.add("is-in"));
+      document.querySelectorAll<HTMLElement>(".ink-meter-cell").forEach((cell) => cell.classList.add("is-lit"));
+    }, 8000);
+    signal.addEventListener("abort", () => { observer.disconnect(); window.clearTimeout(timer); }, { once: true });
+  }
+
+  // Headlines are cut into words (letters for the hero) that rise out of their own line.
+  function splitText(root: HTMLElement, byLetter: boolean) {
+    let index = 0;
+    root.setAttribute("aria-label", (root.textContent ?? "").replace(/\s+/g, " ").trim());
+    const walk = (node: Node) => {
+      for (const child of Array.from(node.childNodes)) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.textContent ?? "";
+          if (!text.trim()) continue;
+          const fragment = document.createDocumentFragment();
+          for (const part of text.split(/(\s+)/)) {
+            if (!part) continue;
+            if (/^\s+$/.test(part)) { fragment.appendChild(document.createTextNode(" ")); continue; }
+            const word = document.createElement("span");
+            word.className = "ink-sw";
+            word.setAttribute("aria-hidden", "true");
+            for (const piece of byLetter ? Array.from(part) : [part]) {
+              const inner = document.createElement("span");
+              inner.className = "ink-swi";
+              inner.style.setProperty("--w", String(index++));
+              inner.textContent = piece;
+              word.appendChild(inner);
+            }
+            fragment.appendChild(word);
+          }
+          child.replaceWith(fragment);
+        } else if (child instanceof HTMLElement && !child.classList.contains("ink-seal")) {
+          walk(child);
+        }
+      }
+    };
+    walk(root);
+    root.classList.add("ink-sp");
+  }
+
+  function initSplit(signal: AbortSignal, reduced: MediaQueryList) {
+    if (reduced.matches) return;
+    const hero = document.querySelector<HTMLElement>(".ink-page h1");
+    const headings = Array.from(document.querySelectorAll<HTMLElement>(".ink-dusk h2"));
+    if (hero) {
+      splitText(hero, true);
+      const start = () => window.setTimeout(() => hero.classList.add("is-in"), 140);
+      if (document.fonts?.ready) void document.fonts.ready.then(start); else start();
+    }
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.2 });
+    headings.forEach((heading) => { splitText(heading, false); observer.observe(heading); });
+    const timer = window.setTimeout(() => document.querySelectorAll(".ink-sp").forEach((item) => item.classList.add("is-in")), 8000);
+    signal.addEventListener("abort", () => { observer.disconnect(); window.clearTimeout(timer); }, { once: true });
+  }
+
+  // The paragraph in the middle of the screen is in full light; its neighbours rest.
+  function initFocus(signal: AbortSignal, reduced: MediaQueryList) {
+    if (reduced.matches) return;
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(".ink-chapter .ink-text p"))
+      .filter((paragraph) => (paragraph.parentElement?.querySelectorAll(":scope > p").length ?? 0) >= 2);
+    targets.forEach((paragraph) => paragraph.classList.add("ink-fp"));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.target.classList.toggle("is-focus", entry.isIntersecting));
+    }, { rootMargin: "-28% 0px -28% 0px" });
+    targets.forEach((paragraph) => observer.observe(paragraph));
+    signal.addEventListener("abort", () => observer.disconnect(), { once: true });
+  }
+
+  function initHeroDrift(hero: HTMLElement, signal: AbortSignal, reduced: MediaQueryList) {
+    if (reduced.matches) return;
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const rect = hero.getBoundingClientRect();
+      hero.style.setProperty("--hp", clamp(-rect.top / (rect.height * 0.7), 0, 1).toFixed(3));
+    };
+    window.addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true, signal });
+  }
+
+  // On large screens the three places slide sideways as you scroll down: normal scroll speed, no hijacking.
+  function initPlaces(signal: AbortSignal) {
+    const section = document.querySelector<HTMLElement>("[data-ink-places]");
+    const track = section?.querySelector<HTMLElement>("[data-ink-places-track]");
+    const count = section?.querySelector<HTMLElement>("[data-ink-places-count]");
+    if (!section || !track) return;
+    const query = window.matchMedia("(min-width: 900px) and (prefers-reduced-motion: no-preference)");
+    let maxShift = 0;
+    let queued = false;
+    const update = () => {
+      queued = false;
+      if (!query.matches) return;
+      const progress = maxShift > 0 ? clamp(-section.getBoundingClientRect().top / maxShift, 0, 1) : 0;
+      track.style.setProperty("--places-x", `${(-progress * maxShift).toFixed(1)}px`);
+      if (count) count.textContent = `0${Math.min(3, Math.floor(progress * 2.999) + 1)} / 03`;
+    };
+    const measure = () => {
+      if (!query.matches) {
+        section.style.removeProperty("--places-h");
+        track.style.removeProperty("--places-x");
         return;
       }
-      const viewportCenter = window.innerHeight / 2;
-      // CHOICE: a generous centre band gives the artwork enough time to surface
-      // during natural reading, instead of demanding a perfectly timed scroll.
-      const threshold = window.innerHeight * 0.26;
-      const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > previousScrollY;
-
-      if (canvasStudy) {
-        const rect = canvasStudy
-          .querySelector(".art-study-frame")
-          ?.getBoundingClientRect();
-        if (rect) {
-          const distance = Math.abs(
-            viewportCenter - (rect.top + rect.height / 2),
-          );
-          setStudyState(canvasStudy, distance < threshold);
-        }
-      }
-
-      if (memoryStudy) {
-        if (portraitMobile.matches) {
-          memoryLatched = true;
-        } else {
-          const rect = memoryStudy
-            .querySelector(".art-study-frame")
-            ?.getBoundingClientRect();
-          if (rect) {
-            const center = rect.top + rect.height / 2;
-            const inRevealZone = Math.abs(viewportCenter - center) < threshold;
-            const aboveResetPoint = center < viewportCenter - threshold * 1.4;
-            if (scrollingDown && inRevealZone) memoryLatched = true;
-            else if (!scrollingDown && aboveResetPoint) memoryLatched = false;
-          }
-        }
-        setStudyState(memoryStudy, memoryLatched);
-      }
-
-      previousScrollY = currentScrollY;
-      ticking = false;
+      maxShift = Math.max(0, track.scrollWidth - window.innerWidth);
+      section.style.setProperty("--places-h", `${window.innerHeight + maxShift}px`);
+      update();
     };
-
-    const requestRevealCheck = () => {
-      if (ticking) return;
-      requestAnimationFrame(checkReveal);
-      ticking = true;
-    };
-
-    reducedMotion.addEventListener("change", requestRevealCheck, {
-      signal: controller.signal,
-    });
-    window.addEventListener("scroll", requestRevealCheck, {
-      passive: true,
-      signal: controller.signal,
-    });
-    window.addEventListener("resize", requestRevealCheck, {
-      passive: true,
-      signal: controller.signal,
-    });
-    window.addEventListener("hashchange", requestRevealCheck, {
-      passive: true,
-      signal: controller.signal,
-    });
-    window.addEventListener("orientationchange", requestRevealCheck, {
-      passive: true,
-      signal: controller.signal,
-    });
-    document.addEventListener("astro:before-swap", () => controller.abort(), {
-      once: true,
-      signal: controller.signal,
-    });
-    requestRevealCheck();
-    requestAnimationFrame(requestRevealCheck);
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    window.addEventListener("scroll", queue, { passive: true, signal });
+    window.addEventListener("resize", measure, { passive: true, signal });
+    window.addEventListener("load", measure, { once: true, signal });
+    query.addEventListener("change", measure, { signal });
+    section.querySelectorAll("img").forEach((image) => image.addEventListener("load", measure, { once: true, signal }));
+    // Styles, fonts and images can arrive after this script; measure again whenever the track changes size.
+    const resizer = new ResizeObserver(measure);
+    resizer.observe(track);
+    signal.addEventListener("abort", () => resizer.disconnect(), { once: true });
+    measure();
   }
 
-  function initRecordLinks() {
-    const record = document.querySelector<HTMLDetailsElement>("#technical-record");
-    if (!record) return;
-    const pageWindow = window as DigitalInkWindow;
-    pageWindow.__digitalInkRecordAbort?.abort();
+  function initTone(signal: AbortSignal) {
+    const dusk = document.getElementById("ink-dusk");
+    const dots = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-ink-dot]"));
+    const chapters = Array.from(document.querySelectorAll<HTMLElement>("[data-ink-chapter]"));
+    if (!dusk) return;
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const inDusk = dusk.getBoundingClientRect().top < window.innerHeight * 0.45;
+      if (inDusk) document.documentElement.dataset.inkTone = "dusk";
+      else delete document.documentElement.dataset.inkTone;
+      let active = "";
+      for (const chapter of chapters) {
+        if (chapter.getBoundingClientRect().top < window.innerHeight * 0.45) active = chapter.id;
+      }
+      dots.forEach((dot) => dot.classList.toggle("is-active", dot.dataset.inkDot === active));
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    window.addEventListener("scroll", queue, { passive: true, signal });
+    window.addEventListener("resize", queue, { passive: true, signal });
+    signal.addEventListener("abort", () => { delete document.documentElement.dataset.inkTone; }, { once: true });
+    update();
+  }
+
+  function initLightbox(signal: AbortSignal) {
+    const dialog = document.querySelector<HTMLDialogElement>("[data-ink-lightbox]");
+    const image = dialog?.querySelector("img");
+    if (!dialog || !image) return;
+    document.querySelectorAll<HTMLAnchorElement>("[data-ink-zoom]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (typeof dialog.showModal !== "function") return;
+        event.preventDefault();
+        image.src = link.href;
+        image.alt = link.dataset.alt ?? "";
+        dialog.showModal();
+      }, { signal });
+    });
+    dialog.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (target === dialog || target.closest("[data-close]")) dialog.close();
+    }, { signal });
+  }
+
+  function initInkPage() {
+    const page = document.querySelector<HTMLElement>(".ink-page");
+    if (!page) return;
+    const pageWindow = window as InkWindow;
+    pageWindow.__inkAbort?.abort();
     const controller = new AbortController();
-    pageWindow.__digitalInkRecordAbort = controller;
-    const openHashTarget = () => {
-      const hash = window.location.hash.slice(1);
-      const target = hash ? document.getElementById(hash) : null;
-      if (target && record.contains(target)) {
-        // CHOICE: links into the closed record open it before the browser scrolls.
-        record.open = true;
-        target.scrollIntoView({ block: "start" });
-      }
-    };
-    openHashTarget();
-    document.querySelectorAll<HTMLAnchorElement>(".ink-page a[href^='#']").forEach((link) => {
-      link.addEventListener("click", () => {
-        const target = document.getElementById(link.hash.slice(1));
-        if (target && record.contains(target)) record.open = true;
-      }, { signal: controller.signal });
-    });
-    window.addEventListener("hashchange", openHashTarget, { signal: controller.signal });
-    document.addEventListener("astro:before-swap", () => controller.abort(), { once: true, signal: controller.signal });
+    pageWindow.__inkAbort = controller;
+    const { signal } = controller;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.documentElement.classList.add("ink-js");
+    const hero = page.querySelector<HTMLElement>("[data-ink-hero]");
+    const canvas = page.querySelector<HTMLCanvasElement>("[data-ink-field]");
+    if (hero && canvas) initField(hero, canvas, signal, reduced);
+    if (hero) initHeroDrift(hero, signal, reduced);
+    initSplit(signal, reduced);
+    initFocus(signal, reduced);
+    initPlaces(signal);
+    initClips(signal, reduced);
+    initReveal(signal, reduced);
+    initTone(signal);
+    initLightbox(signal);
+
+    const leave = () => { controller.abort(); document.documentElement.classList.remove("ink-js"); };
+    window.addEventListener("pagehide", leave, { once: true });
+    document.addEventListener("astro:before-swap", leave, { once: true });
   }
 
-  initHeroFilm();
-  initArtStudies();
-  initRecordLinks();
-  document.addEventListener("astro:page-load", initHeroFilm);
-  document.addEventListener("astro:page-load", initArtStudies);
-  document.addEventListener("astro:page-load", initRecordLinks);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initInkPage, { once: true });
+  else initInkPage();
 </script>

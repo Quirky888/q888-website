@@ -1,0 +1,105 @@
+---
+/**
+ * InkClip — one short screen recording of the Digital Ink app.
+ * mode "once": plays one time when it scrolls into view, then holds the last frame.
+ * mode "click": waits for the visitor to press Play.
+ * Reduced motion: never starts by itself. Without JS the poster and a native link-free frame remain.
+ */
+interface Props {
+  base: string;
+  width: number;
+  height: number;
+  mode: "once" | "click";
+  label: string;
+  caption?: string;
+  playText?: string;
+}
+
+const { base, width, height, mode, label, caption, playText = "Play" } = Astro.props;
+---
+
+<figure class="ink-clip" data-ink-clip data-mode={mode} data-state="idle" data-play-text={playText} style={`--ratio:${width} / ${height}`}>
+  <div class="ink-frame ink-clip-frame">
+    <video
+      muted
+      playsinline
+      preload="none"
+      width={width}
+      height={height}
+      poster={`/videos/dink/${base}-poster.webp`}
+      aria-label={label}
+    >
+      <source src={`/videos/dink/${base}.webm`} type='video/webm; codecs="vp9"' />
+      <source src={`/videos/dink/${base}.mp4`} type="video/mp4" />
+    </video>
+    <button class="ink-clip-btn" type="button" data-ink-clip-btn aria-label={`${playText}: ${label}`}>
+      <span class="ink-clip-icon" aria-hidden="true"></span>
+      <span data-ink-clip-label>{playText}</span>
+    </button>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .ink-clip {
+    margin: 0;
+  }
+  .ink-clip-frame {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    background: #17140f;
+  }
+  .ink-clip video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ink-clip-btn {
+    position: absolute;
+    inset-inline-start: 0.85rem;
+    inset-block-end: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-block-size: 44px;
+    padding: 0 1rem 0 0.85rem;
+    border: 1px solid rgba(241, 236, 227, 0.32);
+    border-radius: 999px;
+    background: rgba(24, 20, 18, 0.72);
+    color: #f1ece3;
+    font: 500 0.8rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: opacity 0.5s ease, background 0.2s ease;
+  }
+  .ink-clip-btn:hover {
+    background: rgba(24, 20, 18, 0.92);
+  }
+  .ink-clip-btn:focus-visible {
+    outline: 2px solid #d9b27a;
+    outline-offset: 3px;
+    opacity: 1;
+  }
+  .ink-clip-icon {
+    inline-size: 0.6rem;
+    block-size: 0.6rem;
+    border-inline-start: 0.6rem solid currentColor;
+    border-block: 0.35rem solid transparent;
+    box-sizing: content-box;
+    inline-size: 0;
+    block-size: 0;
+  }
+  .ink-clip[data-state="playing"] .ink-clip-icon {
+    inline-size: 0.5rem;
+    block-size: 0.65rem;
+    border: 0;
+    border-inline: 0.16rem solid currentColor;
+  }
+  /* While a clip plays, its button fades back so the recording stays clear. */
+  .ink-clip[data-state="playing"] .ink-clip-btn:not(:hover):not(:focus-visible) {
+    opacity: 0.22;
+  }
+</style>
