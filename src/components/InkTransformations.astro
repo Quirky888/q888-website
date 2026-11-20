@@ -8,7 +8,7 @@ import transformations from "../data/inkTransformations.json";
     {transformations.map(({ name, label, colour }, index) => (
       <figure data-ink-transformation data-state="idle">
         <div class="transformation-image">
-          <Image src={`/images/dink/transformation/${name}.webp`} width={480} height={480} loading="lazy" alt={`${label}, gradually reduced to its average colour ${colour}.`} data-animation={`/images/dink/transformation/${name}.gif`} />
+          <Image src={`/images/dink/transformation/${name}.webp`} width={480} height={480} loading="lazy" alt={`${label}, gradually reduced to its average colour ${colour}.`} data-animation={`/images/dink/transformation/${name}-play.webp`} />
           <canvas width="480" height="480" hidden aria-hidden="true"></canvas>
         </div>
         <figcaption>
@@ -79,7 +79,7 @@ import transformations from "../data/inkTransformations.json";
       image.onload = null;
       image.onerror = null;
       if (figure.dataset.state === "playing" && image.complete && image.naturalWidth) {
-        // Leave a still frame while stopped: native GIF playback has no pause API.
+        // Leave a still frame while stopped: animated images have no pause API.
         canvas.getContext("2d")?.drawImage(image, 0, 0, canvas.width, canvas.height);
         canvas.hidden = false;
         image.hidden = true;
@@ -97,7 +97,7 @@ import transformations from "../data/inkTransformations.json";
         if (!current()) return;
         scheduled = window.setTimeout(() => {
           if (!current()) return;
-          // A valid MIME parameter gives each replay its own GIF clock without another download.
+          // A valid MIME parameter gives each replay its own animation clock without another download.
           // Data images also work with the site's existing Content Security Policy.
           const url = data.replace(";base64,", `;playback=${token};base64,`);
           const finish = () => {

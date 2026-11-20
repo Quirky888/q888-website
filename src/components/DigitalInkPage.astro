@@ -237,7 +237,14 @@ const chapters = [
       <div class="ink-wrap">
         <p class="ink-mono ink-label">05 / School</p>
         <h2 id="school-title" class="ink-mega">Something to <mark class="ink-chip">look after</mark>.</h2>
-        <p class="ink-glowline" data-reveal>At education level 4, an Ink begins to <em>glow</em>.</p>
+        <div class="ink-school-stage">
+          <p class="ink-glowline" data-reveal>At education level 4, an Ink begins to <em>glow</em>.</p>
+          <!-- Desktop only: a few educated Inks on a patch of Canvas, each showing its small light now and then, as in the app. -->
+          <figure class="ink-glow-patch" data-ink-glow data-reveal aria-hidden="true">
+            <canvas></canvas>
+            <figcaption class="ink-mono">Level 4 and up</figcaption>
+          </figure>
+        </div>
         <p class="ink-sub">Each study session adds one education level, from 0 to 10.</p>
         <details class="ink-more">
           <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
@@ -1103,6 +1110,32 @@ const chapters = [
   @keyframes ink-glow {
     0%, 100% { text-shadow: 0 0 0 rgba(248, 217, 127, 0); }
     50% { text-shadow: 0 0 28px rgba(248, 217, 127, 0.85), 0 0 70px rgba(248, 217, 127, 0.45); }
+  }
+  /* The small canvas beside the line exists only on large screens with motion allowed. */
+  .ink-glow-patch {
+    display: none;
+    margin: 0;
+  }
+  @media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+    .ink-school-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(11rem, 16vw, 16rem);
+      align-items: end;
+      column-gap: clamp(2rem, 4vw, 4rem);
+    }
+    .ink-glow-patch {
+      display: block;
+      margin-block-end: 0.6rem;
+    }
+    .ink-glow-patch canvas {
+      display: block;
+      inline-size: 100%;
+      aspect-ratio: 1;
+    }
+    .ink-glow-patch figcaption {
+      margin-block-start: 0.7rem;
+      color: var(--fg-muted);
+    }
   }
 
   /* ───────── Three places ───────── */
@@ -2078,6 +2111,170 @@ const chapters = [
     }, { once: true });
   }
 
+  // School: a few educated Inks on a small patch of Canvas. As in the app, each one now and then shows a small
+  // light in its complementary colour that circles once inside its own square, then shrinks and crumbles into
+  // six motes. Everything stays inside the square: no glow, no outline. Timing is per square, never in step.
+  function initGlowPatch(signal: AbortSignal, reduced: MediaQueryList) {
+    const figure = document.querySelector<HTMLElement>("[data-ink-glow]");
+    const canvas = figure?.querySelector("canvas");
+    const ctx = canvas?.getContext("2d");
+    if (!figure || !canvas || !ctx) return;
+    const wide = window.matchMedia("(min-width: 1100px)");
+    const COLS = 4;
+    const ROWS = 4;
+    const DURATION = 4.5;
+    const JITTER = 3;
+    const unitHash = (a: number, b: number) => {
+      const value = Math.sin(a * 127.1 + b * 311.7) * 43758.5453;
+      return value - Math.floor(value);
+    };
+    const hexToHsv = (hex: string) => {
+      const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      const d = max - min;
+      let h = 0;
+      if (d > 0) {
+        if (max === r) h = ((g - b) / d) % 6;
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+      }
+      return { h: ((h / 6) + 1) % 1, s: max === 0 ? 0 : d / max };
+    };
+    const hsvToRgb = (h: number, s: number, v: number) => {
+      const f = (n: number) => {
+        const k = (n + h * 6) % 6;
+        return Math.round(255 * (v - v * s * Math.max(0, Math.min(k, 4 - k, 1))));
+      };
+      return `${f(5)}, ${f(3)}, ${f(1)}`;
+    };
+
+    // Earth, olive and plum squares, the same material as the hero field.
+    const rng = mulberry32(61);
+    const total = FIELD_COLOURS.reduce((sum, [, weight]) => sum + weight, 0);
+    const pick = () => {
+      let acc = rng() * total;
+      for (const [colour, weight] of FIELD_COLOURS) { acc -= weight; if (acc <= 0) return colour; }
+      return FIELD_COLOURS[0][0];
+    };
+    const base: string[] = Array.from({ length: COLS * ROWS }, pick);
+    // The educated ones: coloured Inks, with long, different rests so lights seldom meet.
+    const educated = [
+      { col: 1, row: 1, colour: "#666a51", period: 14, offset: 1.5 },
+      { col: 3, row: 0, colour: "#786080", period: 17, offset: 6 },
+      { col: 2, row: 2, colour: "#726035", period: 19, offset: 10.5 },
+      { col: 0, row: 3, colour: "#85866b", period: 16, offset: 13 },
+    ].map((item, index) => {
+      const { h, s } = hexToHsv(item.colour);
+      base[item.row * COLS + item.col] = item.colour;
+      return { ...item, seed: unitHash(item.col + 1, item.row + 1 + index), ember: [(h + 0.5) % 1, Math.max(0.6, s)] as const };
+    });
+
+    let width = 0;
+    let height = 0;
+    let startedAt = 0;
+    let frame = 0;
+    let running = false;
+    let inView = false;
+
+    const draw = (now: number) => {
+      if (!width || !height) return;
+      const seconds = startedAt ? (now - startedAt) / 1000 : 0;
+      const cw = width / COLS;
+      const ch = height / ROWS;
+      ctx.clearRect(0, 0, width, height);
+      base.forEach((colour, index) => {
+        ctx.globalAlpha = 0.82;
+        ctx.fillStyle = colour;
+        ctx.fillRect((index % COLS) * cw + 0.5, Math.floor(index / COLS) * ch + 0.5, cw - 1, ch - 1);
+      });
+      ctx.globalAlpha = 1;
+      for (const ink of educated) {
+        const shifted = seconds + ink.offset;
+        const cycle = Math.floor(shifted / ink.period);
+        const start = unitHash(ink.seed * 97 + 1, cycle + 3) * JITTER;
+        const local = shifted - cycle * ink.period - start;
+        if (!startedAt || local < 0 || local >= DURATION) continue;
+        const x = ink.col * cw + 0.5;
+        const y = ink.row * ch + 0.5;
+        const w = cw - 1;
+        const h = ch - 1;
+        const progress = local / DURATION;
+        const dying = smooth(0.45, 0.72, progress);
+        const strength = smooth(0, 0.15, progress) * (1 - dying);
+        const size = 1 - 0.65 * dying;
+        const orbit = (p: number) => {
+          const angle = p * TAU - Math.PI / 2;
+          return { x: x + w / 2 + Math.cos(angle) * w * 0.3, y: y + h / 2 + Math.sin(angle) * h * 0.3 };
+        };
+        const rgb = hsvToRgb(ink.ember[0], ink.ember[1], 1);
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(x, y, w, h);
+        ctx.clip();
+        if (strength > 0) {
+          const at = orbit(progress);
+          const gradient = ctx.createRadialGradient(at.x, at.y, 0, at.x, at.y, w * 0.36 * size);
+          gradient.addColorStop(0, `rgba(${rgb}, ${0.85 * strength})`);
+          gradient.addColorStop(1, `rgba(${rgb}, 0)`);
+          ctx.fillStyle = gradient;
+          ctx.fillRect(x, y, w, h);
+        }
+        const crumbleStart = 0.58;
+        if (progress > crumbleStart) {
+          const scatter = (progress - crumbleStart) / (1 - crumbleStart);
+          const travel = 1 - (1 - scatter) ** 2;
+          const origin = orbit(crumbleStart);
+          const radius = Math.max(0.8, w * 0.035) * (1 - 0.5 * scatter);
+          ctx.fillStyle = `rgba(${rgb}, ${0.8 * (1 - scatter) ** 1.5})`;
+          for (let i = 0; i < 6; i++) {
+            const spread = unitHash(ink.seed * 53 + i, cycle + 7);
+            const direction = ((i + spread) / 6) * TAU;
+            const distance = w * (0.14 + 0.12 * spread) * travel;
+            ctx.beginPath();
+            ctx.arc(origin.x + Math.cos(direction) * distance, origin.y + Math.sin(direction) * distance, radius, 0, TAU);
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+      }
+    };
+    const tick = (now: number) => { draw(now); frame = requestAnimationFrame(tick); };
+    const sync = () => {
+      const should = inView && wide.matches && !reduced.matches && !document.hidden;
+      if (should && !running) {
+        running = true;
+        startedAt ||= performance.now();
+        frame = requestAnimationFrame(tick);
+      } else if (!should && running) {
+        running = false;
+        cancelAnimationFrame(frame);
+      }
+    };
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw(performance.now());
+    };
+    const sizer = new ResizeObserver(resize);
+    sizer.observe(canvas);
+    const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); }, { threshold: 0.2 });
+    observer.observe(figure);
+    document.addEventListener("visibilitychange", sync, { signal });
+    wide.addEventListener("change", sync, { signal });
+    reduced.addEventListener("change", sync, { signal });
+    signal.addEventListener("abort", () => {
+      cancelAnimationFrame(frame);
+      sizer.disconnect();
+      observer.disconnect();
+    }, { once: true });
+  }
+
   // Headlines are cut into words (letters for the hero) that rise out of their own line.
   function splitText(root: HTMLElement, byLetter: boolean) {
     let index = 0;
@@ -2396,6 +2593,7 @@ const chapters = [
     initClips(signal, reduced);
     initReveal(signal, reduced);
     initMarginNote(signal, reduced);
+    initGlowPatch(signal, reduced);
     initTone(fxs, signal);
     initLightbox(signal);
     fxs.kick();

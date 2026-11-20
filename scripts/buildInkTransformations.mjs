@@ -81,9 +81,8 @@ try {
         await saveFrame(await blend(previous, frame, 1 / 3), 0.06);
         await saveFrame(await blend(previous, frame, 2 / 3), 0.06);
       }
-      await saveFrame(frame, columns === 1 ? 1.2 : columns <= 7 ? 0.06 : 0.18);
+      await saveFrame(frame, columns === 1 ? 3 : columns <= 7 ? 0.06 : 0.18);
       previous = frame;
-      if (columns === 1) await sharp(frame).webp({ lossless: true }).toFile(new URL(`${name}-colour.webp`, output).pathname);
     }
     // Let the source return through a soft haze; the loop ends on its exact first frame.
     for (let step = 1; step <= 16; step++) {
@@ -94,7 +93,10 @@ try {
     }
     const list = join(temporary, `${name}.txt`);
     await writeFile(list, frames.map(frame => `file '${frame.path}'\nduration ${frame.duration}`).join("\n") + `\nfile '${frames.at(-1).path}'\n`);
-    execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", list, "-filter_complex", "[0:v]split[a][b];[a]palettegen=stats_mode=single[p];[b][p]paletteuse=new=1:dither=none", "-fps_mode", "vfr", "-loop", "0", new URL(`${name}.gif`, output).pathname]);
+    // ffmpeg joins the frames into a temporary GIF; sharp turns it into a lossless animated WebP (flat pixels stay flat).
+    const gif = join(temporary, `${name}.gif`);
+    execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", list, "-filter_complex", "[0:v]split[a][b];[a]palettegen=stats_mode=single[p];[b][p]paletteuse=new=1:dither=none", "-fps_mode", "vfr", "-loop", "0", gif]);
+    await sharp(gif, { animated: true }).webp({ lossless: true, effort: 6, loop: 0 }).toFile(new URL(`${name}-play.webp`, output).pathname);
     records.push({ name, label: labels[index], colour });
     console.log(`${name}: ${colour}`);
   }
