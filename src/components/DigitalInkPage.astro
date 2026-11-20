@@ -238,12 +238,12 @@ const inkTraces = [
       <div class="ink-wrap">
         <p class="ink-mono ink-label">05 / School</p>
         <h2 id="school-title" class="ink-mega">Something to <mark class="ink-chip">look after</mark>.</h2>
-        <p class="ink-glowline" data-reveal>From level 4, an Ink begins to <em>glow</em>.</p>
-        <p class="ink-sub">School began as a small game, a bit like a Tamagotchi.</p>
+        <p class="ink-glowline" data-reveal>At education level 4, an Ink begins to <em>glow</em>.</p>
+        <p class="ink-sub">Each study session adds one education level, from 0 to 10.</p>
         <details class="ink-more">
           <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
           <div class="ink-more-body">
-            <p>School began as a small game, a bit like a Tamagotchi. You can add short books for your Inks, or short pieces you like, and let them study. Today the effect is visible rather than deep: as an Ink returns to school and its education grows, from level 4 it begins to glow and move a little differently on the Canvas, so it stands out from the others.</p>
+            <p>School began as a small game, a bit like a Tamagotchi. You can add short books for your Inks, or short pieces you like, and let them study. Each study session adds one education level, starting at 0 and reaching 10. Today the effect is visible rather than deep: at education level 4, an Ink begins to glow and move a little differently on the Canvas, so it stands out from the others.</p>
             <p>Later, what an Ink has learned might shape its character, how it behaves at home and the connections it makes. That part is an idea, not a feature yet. I like that the project stays alive: new ideas arrive, and the technology to try them arrives later.</p>
           </div>
         </details>
@@ -272,19 +272,27 @@ const inkTraces = [
       </div>
     </section>
 
-    <!-- Made first for myself -->
+    <!-- Made for...: the story stays an invitation. -->
     <section class="ink-chapter ink-about" aria-labelledby="about-title">
       <div class="ink-wrap">
         <p class="ink-mono ink-label">About</p>
-        <h2 id="about-title" class="ink-mega">Made first for <mark class="ink-chip">myself</mark>.</h2>
-        <p class="ink-sub">An art installation I could carry in an iPad.</p>
-        <details class="ink-more">
-          <summary><span class="ink-mono">Read the story</span><i aria-hidden="true"></i></summary>
-          <div class="ink-more-body">
-            <p>I made Digital Ink first for myself. I wanted an art installation I could carry in an iPad, and I wanted to learn to build software with AI. In September 2025 I knew very little about code; since then I have worked with AI coding tools and learned as I went.</p>
-            <p>I am not sure who else needs it. Probably people a little strange in the same way I am: people with too many pictures, who like small rules and slow things. If that is you, it is on the App Store. If not, I hope it is still interesting to look at.</p>
-          </div>
-        </details>
+        <h2 id="about-title" class="ink-mega" aria-label="Made for...">Made <span class="ink-about-for">for<span class="ink-about-star" aria-hidden="true"><span class="ink-about-star-shape"></span></span></span><span class="ink-about-dots">...</span></h2>
+        <div class="ink-about-stories">
+          <details class="ink-about-future" name="ink-about-story">
+            <summary><span>the future</span><span class="ink-future-arrow" aria-hidden="true">↗</span></summary>
+            <div class="ink-more-body">
+              <p>Digital Ink was designed approximately 1,000 years ahead of its time. Unfortunately, the future is running a little late, so we have released it for iPad.</p>
+              <p>Eventually, humans, artificial intelligences and unidentified residents of Square Bubbles will create art together. Q888 will become the most expensive artist in the galaxy, finally able to afford an intergalactic campervan with a decent coffee machine.</p>
+            </div>
+          </details>
+          <details class="ink-more ink-about-real" name="ink-about-story">
+            <summary><span class="ink-mono">Read the real story</span><i aria-hidden="true"></i></summary>
+            <div class="ink-more-body">
+              <p>I made Digital Ink first for myself. I wanted an art installation I could carry in an iPad, and I wanted to learn to build software with AI. In September 2025 I knew very little about code; since then I have worked with AI coding tools and learned as I went.</p>
+              <p>I am not sure who else needs it. Probably people a little strange in the same way I am: people with too many pictures, who like small rules and slow things. If that is you, it is on the App Store. If not, I hope it is still interesting to look at.</p>
+            </div>
+          </details>
+        </div>
       </div>
     </section>
   </div>
@@ -305,12 +313,6 @@ const inkTraces = [
           <a class="ink-button ink-button-lg" href="/privacy/">Read the privacy policy</a>
         </div>
         <p class="ink-fine">The app is free. The optional online description and memory reconstruction use a few credits, because they run on paid AI services.</p>
-
-        <div class="ink-privacy">
-          <h3>You decide what is shared</h3>
-          <p>Drawing and most Ink information stay on your iPad. Two features are optional and always ask first: an online description, which sends the selected image and its place name through Digital Ink’s service to OpenAI, and a memory reconstruction, which can share a small private trace of the image only if you choose to. Buying credits is not consent to share anything.</p>
-          <a class="ink-text-link" href="/privacy/">Read the Digital Ink Privacy Policy ↗</a>
-        </div>
 
         <details class="ink-record" id="technical-record">
           <summary>
@@ -581,7 +583,6 @@ const inkTraces = [
     background: #000;
   }
   .ink-button:focus-visible,
-  .ink-text-link:focus-visible,
   .ink-dots a:focus-visible,
   .ink-zoom:focus-visible,
   .ink-more summary:focus-visible,
@@ -979,6 +980,143 @@ const inkTraces = [
     transform: none;
   }
 
+  /* About: one open-ended phrase becomes the graphic, within the section's gutters. */
+  .ink-about > .ink-wrap {
+    max-inline-size: none;
+    container-type: inline-size;
+  }
+  .ink-about .ink-mega {
+    max-inline-size: none;
+    font-variation-settings: "wdth" 100;
+    font-size: clamp(3.5rem, 19.5cqi, 36rem);
+    line-height: 0.95;
+    letter-spacing: 0.012em;
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+  .ink-about-dots {
+    color: var(--amber-text);
+  }
+  .ink-about-for {
+    position: relative;
+    display: inline-block;
+  }
+  .ink-about-star {
+    position: absolute;
+    inset-block-start: -0.03em;
+    inset-inline-end: -0.2em;
+    inline-size: clamp(1.25rem, 3.5cqi, 3.5rem);
+    aspect-ratio: 1;
+    color: var(--amber-text);
+    pointer-events: none;
+  }
+  .ink-about-star-shape {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    background: currentColor;
+    clip-path: polygon(50% 0%, 61% 31%, 93% 25%, 82% 50%, 93% 75%, 61% 69%, 50% 100%, 39% 69%, 7% 75%, 18% 50%, 7% 25%, 39% 31%);
+    animation: ink-future-star 18s linear infinite;
+  }
+  @keyframes ink-future-star {
+    0%, 40% { transform: rotate(0deg); animation-timing-function: ease-in; }
+    48% {
+      transform: rotate(90deg);
+      clip-path: polygon(50% 0%, 61% 31%, 93% 25%, 82% 50%, 93% 75%, 61% 69%, 50% 100%, 39% 69%, 7% 75%, 18% 50%, 7% 25%, 39% 31%);
+    }
+    54% {
+      transform: rotate(720deg);
+      clip-path: polygon(0% 0%, 33% 0%, 66% 0%, 100% 0%, 100% 33%, 100% 66%, 100% 100%, 66% 100%, 33% 100%, 0% 100%, 0% 66%, 0% 33%);
+    }
+    60% { transform: rotate(2160deg); }
+    66% {
+      transform: rotate(3240deg);
+      clip-path: polygon(0% 0%, 33% 0%, 66% 0%, 100% 0%, 100% 33%, 100% 66%, 100% 100%, 66% 100%, 33% 100%, 0% 100%, 0% 66%, 0% 33%);
+    }
+    74% {
+      transform: rotate(3570deg);
+      clip-path: polygon(50% 0%, 61% 31%, 93% 25%, 82% 50%, 93% 75%, 61% 69%, 50% 100%, 39% 69%, 7% 75%, 18% 50%, 7% 25%, 39% 31%);
+      animation-timing-function: ease-out;
+    }
+    80%, 100% { transform: rotate(3600deg); }
+  }
+  .ink-about:has(.ink-about-stories details[open]) .ink-about-star-shape {
+    animation-play-state: paused;
+  }
+  .ink-about-stories {
+    display: grid;
+    grid-template-columns: minmax(0, 53.5fr) minmax(0, 46.5fr);
+    align-items: start;
+  }
+  .ink-about-future {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .ink-about-real {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    position: relative;
+    z-index: 2;
+    margin-block-start: 0;
+    padding-inline-end: 2rem;
+  }
+  .ink-about-future > summary {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    inline-size: fit-content;
+    min-block-size: 44px;
+    margin-block-start: -0.5rem;
+    margin-inline-start: 53.5%;
+    color: var(--amber-text);
+    font: 800 clamp(1.65rem, 4.5cqi, 4.5rem)/1.05 var(--display);
+    font-variation-settings: "wdth" 100;
+    letter-spacing: 0.012em;
+    list-style: none;
+    cursor: pointer;
+  }
+  .ink-about-future > summary::-webkit-details-marker {
+    display: none;
+  }
+  .ink-about-future > summary:hover,
+  .ink-about-future[open] > summary {
+    color: var(--cream);
+  }
+  .ink-about-future > summary:focus-visible {
+    outline: 2px solid var(--amber-text);
+    outline-offset: 4px;
+  }
+  .ink-about-future .ink-more-body {
+    inline-size: 46.5%;
+    max-inline-size: none;
+    margin-block-start: clamp(1.5rem, 3cqi, 3rem);
+    margin-inline-start: auto;
+  }
+  .ink-about-future .ink-more-body p {
+    font-size: clamp(1.25rem, 2cqi, 2.1rem);
+    line-height: 1.5;
+  }
+  .ink-future-arrow {
+    font: 400 0.5em/1 var(--mono);
+  }
+  @media (max-width: 767px) {
+    .ink-about-future .ink-more-body {
+      inline-size: 100%;
+      margin-block-start: 2rem;
+    }
+    .ink-about-real {
+      align-self: start;
+      padding-inline-end: 1rem;
+    }
+    .ink-about-real > summary {
+      max-inline-size: 100%;
+      padding: 0.6rem 0.7rem;
+    }
+  }
+
   /* School: type that glows. */
   .ink-glowline {
     margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
@@ -1110,11 +1248,6 @@ const inkTraces = [
     line-height: 1.6;
     color: var(--fg-muted);
   }
-  .ink-privacy {
-    margin-block-start: clamp(3rem, 7vw, 5rem);
-    max-inline-size: 42rem;
-  }
-  .ink-privacy h3,
   .ink-future h3,
   .ink-record-section h3 {
     font-family: var(--display);
@@ -1122,17 +1255,6 @@ const inkTraces = [
     font-size: clamp(1.25rem, 2vw, 1.6rem);
     line-height: 1.2;
     letter-spacing: -0.02em;
-  }
-  .ink-privacy p {
-    margin-block-start: 0.85rem;
-    line-height: 1.7;
-    color: var(--fg-muted);
-  }
-  .ink-text-link {
-    display: inline-block;
-    margin-block-start: 1rem;
-    color: var(--fg);
-    text-underline-offset: 0.25em;
   }
   .ink-record {
     margin-block-start: clamp(3rem, 7vw, 5rem);
@@ -1418,8 +1540,8 @@ const inkTraces = [
     block-size: 44px;
     margin: -22px 0 0 -22px;
     border-radius: 14px;
-    background: #f8f2e8;
-    box-shadow: 0 0 0 1.5px #1a1a1a, 0 8px 24px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    mix-blend-mode: difference;
     transition: width 0.32s ease, height 0.32s ease, margin 0.32s ease, border-radius 0.32s ease, opacity 0.3s ease, scale 0.2s ease;
   }
   .ink-bubble.is-visible,
@@ -1456,8 +1578,8 @@ const inkTraces = [
     inline-size: 7px;
     block-size: 7px;
     margin: -3px 0 0 -3px;
-    background: #1a1a1a;
-    box-shadow: 0 0 0 2px #f8f2e8;
+    background: #fff;
+    mix-blend-mode: difference;
     transition: opacity 0.3s ease;
   }
   .ink-page.ink-bubble-on,
@@ -1522,7 +1644,8 @@ const inkTraces = [
       transform: none;
       transition: none;
     }
-    .ink-glowline em {
+    .ink-glowline em,
+    .ink-about-star-shape {
       animation: none;
     }
     .ink-more summary i,
@@ -2068,7 +2191,7 @@ const inkTraces = [
   // Headlines are cut into words (letters for the hero) that rise out of their own line.
   function splitText(root: HTMLElement, byLetter: boolean) {
     let index = 0;
-    root.setAttribute("aria-label", (root.textContent ?? "").replace(/\s+/g, " ").trim());
+    root.setAttribute("aria-label", root.getAttribute("aria-label") ?? (root.textContent ?? "").replace(/\s+/g, " ").trim());
     const walk = (node: Node) => {
       for (const child of Array.from(node.childNodes)) {
         if (child.nodeType === Node.TEXT_NODE) {
