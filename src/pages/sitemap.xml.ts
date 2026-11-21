@@ -18,6 +18,7 @@ const staticRoutes = [
   "/overpriced/",
   "/president/",
   "/privacy/",
+  "/terms/",
   "/prototype/",
   "/qbag/",
   "/research/",
