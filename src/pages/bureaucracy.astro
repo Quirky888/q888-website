@@ -9,25 +9,28 @@ const selectedSystems = [
     code: "01",
     name: "Digital Ink",
     desc: "A system for memory, scarcity and traceable digital creation.",
-    status: "Operational",
+    status: "Live · App Store",
     href: "/dink/",
+    featured: true,
     signal: "cyan",
   },
   {
     code: "02",
+    name: "Edinburgh Magical Map",
+    desc: "A mythic cartography of place, memory and hidden infrastructure.",
+    status: "Live · interactive map",
+    href: "/map/",
+    featured: true,
+    signal: "cyan",
+  },
+  {
+    code: "03",
     name: "Overpriced",
     desc: "Collectibles where price is part of the narrative and the price tag becomes material.",
     status: "Active",
     href: "/overpriced/",
+    featured: true,
     signal: "magenta",
-  },
-  {
-    code: "03",
-    name: "Aero V1",
-    desc: "A performance artefact for reducing drag through belief, style-watts and atmospheric fiction.",
-    status: "Deployed",
-    href: "/aero/",
-    signal: "clay",
   },
   {
     code: "04",
@@ -35,6 +38,7 @@ const selectedSystems = [
     desc: "Experiment 001 in Creative Afterlife: a coffee container you already own, refilled, marked and kept in use.",
     status: "Experiment 001",
     href: "/qbag/",
+    featured: true,
     signal: "lime",
   },
   {
@@ -43,10 +47,29 @@ const selectedSystems = [
     desc: "A campaign for a cosmic office with zero or 888 jurisdictional power and one ceremonial sash.",
     status: "Campaign open",
     href: "/president/",
+    featured: true,
     signal: "magenta",
   },
   {
     code: "06",
+    name: "Q888 Digital DNA — DO NOT BECOME ME",
+    desc: "A live five-stage web artwork testing how an artist can set a condition for contact with a future AI system without becoming a fixed profile to optimise.",
+    status: "One gene implemented: Protected Residue · Prototype live",
+    href: "/prototype/",
+    featured: true,
+    documentHref: "/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf",
+    signal: "magenta",
+  },
+  {
+    code: "07",
+    name: "Aero V1",
+    desc: "A performance artefact for reducing drag through belief, style-watts and atmospheric fiction.",
+    status: "Deployed",
+    href: "/aero/",
+    signal: "clay",
+  },
+  {
+    code: "08",
     name: "Nar-Mail Express",
     desc: "An interdimensional postal service where messages arrive when you are ready.",
     status: "Delivering",
@@ -54,7 +77,7 @@ const selectedSystems = [
     signal: "cyan",
   },
   {
-    code: "07",
+    code: "09",
     name: "Afterlife Contract",
     desc: "Pre-notarised paperwork for the deceased: things that may outlive you, regulated anyway.",
     status: "Open for signing",
@@ -62,7 +85,7 @@ const selectedSystems = [
     signal: "clay",
   },
   {
-    code: "08",
+    code: "10",
     name: "Dyno Milk",
     desc: "A bio-dairy future product for status, satire and interdimensional wealth signalling.",
     status: "Phase 4",
@@ -70,29 +93,12 @@ const selectedSystems = [
     signal: "lime",
   },
   {
-    code: "09",
-    name: "Edinburgh Magical Map",
-    desc: "A mythic cartography of place, memory and hidden infrastructure.",
-    status: "Archival",
-    href: "/map/",
-    signal: "cyan",
-  },
-  {
-    code: "10",
+    code: "11",
     name: "Chromatic Sovereignty Treaty",
     desc: "An intergalactic legal accord governing the balance between The Void and The Singularity.",
     status: "Ratified",
     href: "/docs/black_and_white_contract.pdf",
     signal: "clay",
-  },
-  {
-    code: "11",
-    name: "Q888 Digital DNA — DO NOT BECOME ME",
-    desc: "A live five-stage web artwork testing how an artist can set a condition for contact with a future AI system without becoming a fixed profile to optimise.",
-    status: "One gene implemented: Protected Residue · Prototype live",
-    href: "/prototype/",
-    documentHref: "/docs/Q888_Digital_DNA_Development_Draft_July_2026.pdf",
-    signal: "magenta",
   },
   {
     code: "12",
@@ -423,6 +429,12 @@ const disputedChronology = [
         <p class="hero-open">
           Open to exhibitions, residencies, commissions and collaborations.
         </p>
+        <p class="hero-direction">
+          Current direction: <strong>Smart Art Technologies</strong>, art
+          materials with their own identities, histories and rules. First
+          prototype: <a href="/dink/">Digital Ink</a>.
+          <a href="#earth" data-version-link="earth">Need the plain CV? Earth version →</a>
+        </p>
         <aside class="bureaucracy-notice" aria-label="Why this dossier exists">
           <p class="bureaucracy-notice-label">
             Universe-specific compliance notice
@@ -439,8 +451,8 @@ const disputedChronology = [
               pinned
             /> so
             creativity can be compared with their current administrative understanding of
-            creativity. The procedure is cosmically nonsensical. It is also, somehow,
-            accepted as premium evidence that an artist is an artist. This dossier
+            creativity. The procedure is nonsensical, yet accepted as evidence that an
+            artist is an artist. This dossier
             was therefore
             engineered specifically
             for local law, gravity and
@@ -601,14 +613,15 @@ const disputedChronology = [
           </h2>
         </div>
         <p>
-          Thirteen operational fragments. Evidence of what, exactly, remains under review.
+          Six main fragments, seven more behind the button. Evidence of what, exactly, remains under review.
         </p>
       </div>
       <div class="section-content work-list">
+        <input type="checkbox" id="work-more-toggle" class="work-more-toggle" />
         {
           selectedSystems.map((system) =>
             system.documentHref ? (
-              <details class="work-choice" data-signal={system.signal}>
+              <details class:list={["work-choice", { "work-extra": !system.featured }]} data-signal={system.signal}>
                 <summary class="work-row" data-signal={system.signal}>
                   <span class="work-number">{system.code}</span>
                   <span class="work-name">{system.name}</span>
@@ -655,7 +668,7 @@ const disputedChronology = [
               </details>
             ) : (
               <a
-                class="work-row"
+                class:list={["work-row", { "work-extra": !system.featured }]}
                 data-signal={system.signal}
                 href={system.href}
                 target={system.href.endsWith(".pdf") ? "_blank" : undefined}
@@ -674,6 +687,7 @@ const disputedChronology = [
             ),
           )
         }
+        <label class="work-more-label" for="work-more-toggle"></label>
       </div>
     </section>
 
@@ -708,7 +722,7 @@ const disputedChronology = [
       <div class="section-content field-list">
         {
           fieldRecords.map((record) => (
-            <article class="field-row">
+            <article class:list={["field-row", { "field-row-public": record.status === "Public record" }]}>
               <div class="field-place">
                 {record.years && <span class="field-years">{record.years}</span>}
                 <h3>{record.place}</h3>
@@ -1262,7 +1276,7 @@ const disputedChronology = [
     --paper-deep: #e8e7df;
     --ink: #151714;
     --charcoal: #292c28;
-    --muted: #676a63;
+    --muted: #565951;
     --line: rgba(21, 23, 20, 0.2);
     --line-strong: rgba(21, 23, 20, 0.7);
     --moss: #4f6849;
@@ -1956,24 +1970,28 @@ const disputedChronology = [
   .practice-facts {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     margin: 0;
     border-top: 1px solid var(--line);
   }
 
   .practice-facts div {
-    padding: 1.25rem 1.5rem 0 0;
+    padding: 1.25rem 1.5rem 1.25rem 0;
   }
 
-  .practice-facts div + div {
+  .practice-facts div:nth-child(even) {
     padding-left: 1.5rem;
     border-left: 1px solid var(--line);
+  }
+
+  .practice-facts div:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
   }
 
   .practice-facts dt {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -2110,7 +2128,7 @@ const disputedChronology = [
   .work-status {
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -2315,7 +2333,7 @@ const disputedChronology = [
     margin-top: 0.4rem;
     color: var(--muted);
     font-family: "Space Mono", ui-monospace, monospace;
-    font-size: 0.64rem;
+    font-size: 0.72rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -3493,9 +3511,13 @@ const disputedChronology = [
       border-bottom: 1px solid var(--line);
     }
 
-    .practice-facts div + div {
+    .practice-facts div:nth-child(even) {
       padding-left: 0;
       border-left: 0;
+    }
+
+    .practice-facts div:nth-child(n + 3) {
+      border-top: 0;
     }
 
     .work-row {
@@ -3794,6 +3816,69 @@ const disputedChronology = [
   }
 
   /* ── Q888 / Earth version switch ── */
+  .hero-direction {
+    max-width: 38rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .hero-direction a {
+    color: var(--moss);
+    text-underline-offset: 0.2em;
+  }
+
+  .hero-direction a[data-version-link] {
+    display: block;
+    margin-top: 0.35rem;
+  }
+
+  .work-more-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .work-more-toggle:not(:checked) ~ .work-extra {
+    display: none;
+  }
+
+  .work-more-label {
+    display: block;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--moss);
+    font-family: "Space Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .work-more-label::before {
+    content: "+ Show seven more fragments";
+  }
+
+  .work-more-toggle:checked ~ .work-more-label::before {
+    content: "\2212  Show only the main six";
+  }
+
+  .work-more-toggle:focus-visible ~ .work-more-label {
+    outline: 2px solid var(--moss);
+    outline-offset: 2px;
+  }
+
+  .field-row-public {
+    background: var(--moss-soft);
+    padding-inline: 1rem;
+  }
+
+  .field-row-public .field-status {
+    color: var(--moss);
+    font-weight: 700;
+  }
+
   .hero-open {
     max-width: 38rem;
     margin: 1rem 0 0;
