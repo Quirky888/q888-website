@@ -176,7 +176,9 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
               aria-valuemax={v1Total}
               aria-valuenow={v1Handled}
             >
-              <span style={`width: ${v1Progress}%`}></span>
+              {Array.from({ length: v1Total }, (_, i) => (
+                <i class:list={{ "is-on": i < v1Handled }} style={`--n:${i}`}></i>
+              ))}
             </div>
             <p class="test-progress-note">{v1Left} V1 stickers left. V2 has only just been released. The galaxy is watching, mildly.</p>
           </div>
@@ -334,7 +336,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
                     <span
                       class="ai-collective-reveal"
                       tabindex="0"
-                      aria-label={`${voice.speaker}. ${voice.collectiveNote}`}
+                      aria-label={`${voice.speaker}, also known as AI. ${voice.collectiveNote}`}
                     >
                       <span class="authorship-speaker ai-collective-name" aria-hidden="true">
                         <span class="ai-name-sizer">PERPLEXITY</span>
@@ -350,7 +352,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
                           ))}
                         </span>
                       </span>
-                      <span class="ai-collective-hint" aria-hidden="true">≈ COLLECTIVE AI</span>
+                      <span class="ai-collective-hint" aria-hidden="true">AKA AI</span>
                       <span class="ai-collective-note" aria-hidden="true">
                         {voice.collectiveNote}
                       </span>
@@ -363,6 +365,39 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
                 <p>{voice.statement}</p>
               </article>
             ))}
+          </div>
+
+
+          <!-- A third, quiet voice below the surface. Mycelium links the two voices above it. -->
+          <div class="authorship-ground">
+            <div class="ground-surface qb-mono-label" aria-hidden="true"><span>SURFACE</span><span>SUBSOIL</span></div>
+            <svg class="mycelium" viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.2" vector-effect="non-scaling-stroke">
+                <path pathLength="1" d="M250,0 C250,50 330,70 400,95 S480,130 500,150" />
+                <path pathLength="1" d="M750,0 C750,50 670,70 600,95 S520,130 500,150" />
+                <path pathLength="1" d="M330,66 C300,90 280,110 240,128" />
+                <path pathLength="1" d="M670,66 C700,92 722,108 766,126" />
+                <path pathLength="1" d="M400,95 C420,118 410,134 380,148" />
+                <path pathLength="1" d="M600,95 C585,116 600,136 628,148" />
+                <path pathLength="1" d="M500,150 C490,150 470,150 440,150" />
+              </g>
+              <g class="mycelium-nodes">
+                <circle cx="400" cy="95" r="3" /><circle cx="600" cy="95" r="3" /><circle cx="330" cy="66" r="2.4" />
+                <circle cx="670" cy="66" r="2.4" /><circle cx="500" cy="150" r="3.6" /><circle cx="240" cy="128" r="2" />
+                <circle cx="766" cy="126" r="2" />
+              </g>
+            </svg>
+            <article class="authorship-voice is-fungi" aria-label="Third voice: fungi">
+              <header class="authorship-voice-header">
+                <span class="authorship-speaker">FUNGI</span>
+                <span class="authorship-role">NETWORK / NOT YET CONSULTED</span>
+              </header>
+              <p class="fungi-line" style="--k:0">…</p>
+              <p class="fungi-line" style="--k:1">11°C. damp. fine.</p>
+              <p class="fungi-line" style="--k:2">we were here before the argument.</p>
+              <p class="fungi-line" style="--k:3">nothing to add. everything is already connected.</p>
+              <p class="fungi-note">Mycelium does not answer in sentences. Q888 translates, with uncertainty. <span>TRANSLATION: UNVERIFIED</span></p>
+            </article>
           </div>
 
           <p class="authorship-provenance-line" aria-label="Working provenance">
@@ -802,6 +837,19 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
         card.style.setProperty("--cx", (e.clientX - r.left) + "px");
         card.style.setProperty("--cy", (e.clientY - r.top) + "px");
       }, { passive: true });
+    });
+  }
+
+  if (finePointer && !reduce) {
+    document.querySelectorAll<HTMLElement>(".test-edition").forEach((card) => {
+      const art = card.querySelector<HTMLElement>(".v2-artwork");
+      if (!art) return;
+      card.addEventListener("pointermove", (e) => {
+        const r = art.getBoundingClientRect();
+        art.style.setProperty("--ty", (((e.clientX - r.left) / r.width - 0.5) * 14).toFixed(1) + "deg");
+        art.style.setProperty("--tx", ((0.5 - (e.clientY - r.top) / r.height) * 12).toFixed(1) + "deg");
+      }, { passive: true });
+      card.addEventListener("pointerleave", () => { art.style.setProperty("--tx", "0deg"); art.style.setProperty("--ty", "0deg"); });
     });
   }
 
@@ -1875,10 +1923,10 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   .ai-collective-hint {
     color: var(--eden-primary);
     font-family: 'Space Mono', ui-monospace, monospace;
-    font-size: 0.5rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    opacity: 0.72;
+    letter-spacing: 0.16em;
+    opacity: 0.9;
   }
 
   .ai-collective-note {
@@ -2750,5 +2798,160 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     .artwork-card-button:hover {
       transform: none;
     }
+  }
+
+  /* ═══ Modern pass: open layouts, squares, light-touch motion ═══ */
+  /* Progress: one square per sticker, lighting up in sequence. */
+  .test-progress {
+    margin: 2.25rem 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .test-progress-count strong {
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-variation-settings: "wdth" 80;
+    line-height: 0.9;
+    margin-right: 0.15em;
+  }
+  .test-progress-bar {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: clamp(0.25rem, 0.8vw, 0.6rem);
+    height: auto;
+    margin: 1.1rem 0 0.9rem;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+    max-width: 34rem;
+  }
+  .test-progress-bar i {
+    aspect-ratio: 1;
+    border: 1px solid var(--eden-line);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .test-progress-bar i.is-on {
+    border-color: transparent;
+    background: linear-gradient(135deg, var(--eden-gold-bright), #c8941a);
+  }
+  :global(.pg-reveal) .test-progress-bar i.is-on { opacity: 0.15; transform: scale(0.6); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  :global(.pg-reveal.is-in) .test-progress-bar i.is-on { opacity: 1; transform: none; transition-delay: calc(0.5s + var(--n) * 70ms); }
+
+  /* Sticker plates tilt toward the pointer. */
+  .test-edition .v2-artwork { transform-style: preserve-3d; transition: transform 0.25s ease-out, box-shadow 0.3s ease; border-radius: 14px; }
+  .test-edition:hover .v2-artwork { transform: perspective(700px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)) translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55); }
+
+  /* Voices: an open dialogue instead of paper cards. */
+  .president-authorship-section {
+    margin: 1rem 0 4rem;
+    padding: clamp(1.5rem, 4vw, 3rem) 0 0;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--eden-line);
+    box-shadow: none;
+    overflow: visible;
+  }
+  .president-authorship-section::after { display: none; }
+  .authorship-voices { gap: clamp(1.5rem, 4vw, 3.5rem); }
+  .authorship-voice {
+    padding: 1.4rem 0 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+    border-top: 2px solid var(--eden-line);
+    transition: border-color 0.4s ease;
+  }
+  .authorship-voice.is-human { border-left: 0; border-top-color: var(--eden-gold); transform: none; }
+  .authorship-voice.is-machine { border-left: 0; border-top-color: var(--eden-primary); transform: none; }
+  .authorship-speaker {
+    font-size: clamp(1.8rem, 3.6vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-variation-settings: "wdth" 82;
+  }
+  .authorship-voice.is-human .authorship-speaker { color: var(--eden-gold-bright); }
+  .authorship-voice.is-machine .authorship-speaker { color: var(--eden-primary); }
+  .provenance-entry { background: none; border: 0; border-top: 1px solid var(--eden-line); padding: 1rem 0 0; }
+
+  /* Archive card: dark glass, hairline edge, a light sweep on hover. */
+  .artwork-info-card.president-glass {
+    background: linear-gradient(135deg, rgba(63, 211, 212, 0.06), rgba(255, 204, 51, 0.04) 60%, rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--eden-line);
+    box-shadow: none;
+    isolation: isolate;
+  }
+  .artwork-info-card.president-glass:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); border-color: rgba(63, 211, 212, 0.5); }
+  .artwork-info-card.president-glass .certificate-secure-border,
+  .artwork-info-card.president-glass .certificate-corner-brackets { display: none; }
+  .artwork-info-card.president-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.09) 50%, transparent 62%);
+    transform: translateX(-120%);
+    transition: transform 1s cubic-bezier(0.16, 0.84, 0.24, 1);
+    pointer-events: none;
+  }
+  .artwork-info-card.president-glass:hover::after { transform: translateX(120%); }
+  @media (prefers-reduced-motion: reduce) {
+    .test-edition:hover .v2-artwork { transform: none; }
+    .artwork-info-card.president-glass::after { display: none; }
+    :global(.pg-reveal) .test-progress-bar i.is-on { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ─── Third voice (prototype): quiet, below the surface ─── */
+  .authorship-ground { --fungi: #ff9de2; position: relative; margin-top: clamp(1.5rem, 4vw, 3rem); }
+  .ground-surface {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--eden-line);
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.24em;
+    color: var(--eden-text-muted);
+  }
+  .ground-surface span:last-child { color: var(--fungi); opacity: 0.8; }
+  .mycelium { display: block; width: 100%; height: clamp(5rem, 12vw, 9rem); color: var(--fungi); opacity: 0.55; overflow: visible; }
+  .mycelium path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .mycelium-nodes circle { fill: var(--fungi); animation: node-pulse 4.5s ease-in-out infinite; }
+  .mycelium-nodes circle:nth-child(2n) { animation-delay: 1.3s; }
+  .mycelium-nodes circle:nth-child(3n) { animation-delay: 2.6s; }
+  @keyframes node-pulse { 50% { opacity: 0.25; } }
+  :global(.pg-reveal) .mycelium path { stroke-dashoffset: 1; }
+  :global(.pg-reveal.is-in) .mycelium path { stroke-dashoffset: 0; transition: stroke-dashoffset 3.2s cubic-bezier(0.4, 0, 0.2, 1) 0.6s; }
+  .authorship-voice.is-fungi {
+    max-width: 24rem;
+    margin: 0 auto;
+    padding-top: 1.2rem;
+    border-top: 2px solid var(--fungi);
+    text-align: left;
+  }
+  .authorship-voice.is-fungi .authorship-speaker { color: var(--fungi); }
+  .fungi-line {
+    margin: 0 0 0.55rem !important;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    color: var(--eden-text-muted) !important;
+  }
+  :global(.pg-reveal) .fungi-line { opacity: 0; }
+  :global(.pg-reveal.is-in) .fungi-line { opacity: 1; transition: opacity 2.4s ease calc(2.2s + var(--k) * 4.5s); }
+  .fungi-note {
+    margin: 1.2rem 0 0 !important;
+    font-size: 0.78rem !important;
+    line-height: 1.5 !important;
+    color: var(--eden-text-muted) !important;
+    opacity: 0.8;
+  }
+  .fungi-note span { display: block; margin-top: 0.35rem; font-family: 'Space Mono', ui-monospace, monospace; font-size: 0.62rem; letter-spacing: 0.16em; color: var(--fungi); }
+  @media (prefers-reduced-motion: reduce) {
+    .mycelium-nodes circle { animation: none; }
+    :global(.pg-reveal) .mycelium path, :global(.pg-reveal) .fungi-line { stroke-dashoffset: 0; opacity: 1; transition: none; }
   }
 </style>
