@@ -21,6 +21,23 @@ const tickerFont = "'Doto', ui-monospace, SFMono-Regular, monospace";
 const tickerText = `Q888 DETECTED UNAUTHORIZED VALUE GROWTH - "STICKER" NOW A RECOGNIZED COMMODITY (IN 1 UNIVERSE) - MARKET SENTIMENT: HYPER-MYTHIC - ORDER #0008 LOST IN TIME LOOP — REFUND: PHILOSOPHICAL - EYE OF LAIMA APPROVES CURRENT PRICING — FOR NOW - ARTIFACT #KOTIKI-002 WHISPERING TO BUYER - STICKER MEMORY IMPRINTED ON 3.5 MINDS - 📉 VALUE COLLAPSE AVERTED VIA INTERDIMENSIONAL BUREAU - RETURN REQUEST DENIED: MEANING IRREVERSIBLE - INFLATION INDEX: FEELS-BASED - SAVED TO COLLECTOR'S DREAM CACHE - TRADING ENABLED | LIQUIDITY: COSMIC MIST - OWNERSHIP LOCKED | METAPHYSICAL RIGHTS UNCLEAR - ⚖️ LEGAL STATUS: UNCLASSIFIED ART-WEAPON - ANALYTICS SUGGEST STICKERS OUTPERFORMING GOLD (IN EMOTIONAL RETURN) - 🎲 RISK LEVEL: EXISTENTIALLY ATTRACTIVE - CLIPPED TO REALITY WITH DIMENSIONAL PAPERCLIP - STICKER MUTATING | RARITY +12% - LAST SEEN IN RIGA | THEN NOWHERE - 📡 SIGNAL LOST | VALUE ESTIMATED VIA VIBES - 🔥 DEMAND SPIKE | SUPPLY: STUBBORNLY MYTHIC - OVERPRICED KNIGHT RIDING STEADY AT £∞ - NAR-MAIL EXPRESS MISDELIVERS TO PARALLEL SELF - GHOST COLLECTOR SIGHTED | BIDS TRANSLATED PSYCHICALLY - VALUE ASSESSMENT UNDER DIVINE REVIEW - TRUTH ENGINE OFFLINE — PRICES DEFAULTING TO POETIC - INVESTOR FEELING: "STRANGELY COMFORTABLE" - LISTED IN FOLKLORE MARKET INDEX UNDER "WEIRDLY VALUABLE" - FUTURE VALUE: STILL NEGOTIATING WITH TIME - INFOCIGAN AVAILABLE FOR CONSULTATION — EMOTIONAL LIQUIDITY PENDING REVIEW - SQUARE BUBBLES COUNCIL UPDATES PRICING QUARTERLY VIA COSMIC FEELING - STICKER MARKET SUPERVISED BY AN ENTITY THAT DOESN'T TECHNICALLY EXIST YET - ACTIVE: ${activeCount} | Q888 STATUS: TERMINAL`;
 
 const tickerUnit = `${tickerText} — `;
+const statusLabel = (status: string) =>
+  ({
+    LISTED: "Listed",
+    BEYOND_TRANSACTION: "Beyond transaction",
+    SOLD_OUT: "Sold out",
+    SOLD: "Sold",
+    NEGOTIABLE: "Negotiable",
+    SUBSCRIPTION: "Subscription",
+    RESERVED: "Reserved",
+  })[status] ?? status;
+const editionLabel = (i: Instrument) =>
+  ["POG-2026", "NAR-OOPS"].includes(i.id)
+    ? `Edition ${i.editionTotal}`
+    : typeof i.availableCount === "number"
+      ? `Ed. ${i.availableCount}/${i.editionTotal}`
+      : `Ed. ${i.availableCount}/${i.editionTotal}`;
+const heroLines = ["Overpriced", "Stickers"].map((w) => w.split(""));
 ---
 
 <section
@@ -28,78 +45,55 @@ const tickerUnit = `${tickerText} — `;
   style="background:transparent!important;position:relative;overflow:hidden;z-index:1"
 >
   <div
-    class="overpriced-inner w-full max-w-[120rem] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24"
+    class="overpriced-inner w-full max-w-[120rem] mx-auto px-6 md:px-12 lg:px-24 xl:px-32 pt-2 md:pt-4 lg:pt-6 pb-12 md:pb-16 lg:pb-24"
     style="background:transparent!important"
   >
-    <div
-      class="q888-ticker sticky top-0 z-30 bg-[var(--bg-fog)]/92 backdrop-blur-md border-b border-[var(--line-soft)]/60 -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+12rem)] xl:w-[calc(100%+16rem)] py-[0.6875rem] shadow-[0_2px_12px_rgba(0,0,0,0.08)]"
-      style={`--ticker-font: ${tickerFont}`}
-    >
-      <div class="ticker-wrapper w-full overflow-hidden">
-        <div class="ticker-content flex" data-ticker-content>
-          <span
-            class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0"
-            data-ticker-unit>{tickerUnit}</span
-          >
-          <span
-            class="ticker-text font-[var(--ticker-font)] font-extralight text-base md:text-lg lg:text-xl tracking-[0.2em] uppercase text-[#a67c00] whitespace-nowrap flex-shrink-0"
-            >{tickerUnit}</span
-          >
-        </div>
+    <header class="hero relative mb-24 md:mb-32 lg:mb-40" data-motion-reveal>
+      <div class="hero-kicker" aria-hidden="true">
+        <span>Overpriced Stickers Ingc.</span>
+        <span class="hero-kicker-rule"></span>
+        <span>Q888 · Infocigan</span>
       </div>
-    </div>
-
-    <header class="hero mb-20 md:mb-24 lg:mb-32" data-motion-reveal>
-      <h1
-        class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold mb-8 md:mb-12 leading-none tracking-tight"
-      >
-        Overpriced Stickers
+      <h1 class="hero-title" aria-label="Overpriced Stickers">
+        {heroLines.map((letters, line) => (
+          <span class:list={["hero-line", line === 1 && "hero-line-2"]} aria-hidden="true">
+            {letters.map((ch, i) => (
+              <span class="hero-ch" style={`--i:${i + line * 4}`}>{ch}</span>
+            ))}
+          </span>
+        ))}
       </h1>
-      <p
-        class="text-2xl md:text-3xl lg:text-4xl font-medium mb-12 md:mb-16 leading-tight max-w-3xl text-right ml-auto"
-      >
-        We called them stickers. The market disagreed.
-      </p>
-      <div
-        class="w-full text-left text-lg md:text-xl lg:text-2xl text-[var(--text-ink)] mb-16 md:mb-20 leading-relaxed space-y-6"
-      >
-        <p>
-          Yes, these are just pieces of paper with glue on the back. But
-          somehow, they are now operating as highly sophisticated art instruments
-          in an economy we invented by accident.
-        </p>
-        <p>
-          We call them "Overpriced" as a joke, because the math is actually
-          backwards. In reality, whatever slightly ridiculous amount of cash you
-          hand over is practically pennies compared to the sticker's true,
-          invisible worth. You could pay in solid gold and you'd still be getting
-          a bargain. Technically, you are robbing me. I am okay with this.
-        </p>
-        <p>
-          Will the price go up? Will the sticker just end up covering a scratch
-          on your laptop or decorating your overpriced water bottle? Value is
-          just something we all collectively hallucinate anyway. Both outcomes
-          are beautiful. Both are officially blessed by the Square Bubbles
-          Council™ in this reality or another.
-        </p>
+      <div class="hero-lower">
+        <p class="hero-sub">We called them stickers. The market disagreed.</p>
+        <div class="hero-copy">
+          <p>
+            The price is calculated from something else: rarity, story, and a
+            modest amount of belief in the future.
+          </p>
+          <p>
+            Whether a sticker appreciates or ends up covering a scratch on your
+            laptop, both outcomes are approved by the Square Bubbles Council™.
+          </p>
+          <p>If anything, you are robbing me. I have accepted this.</p>
+        </div>
       </div>
     </header>
 
     <div class="instruments-section-header" data-motion-reveal aria-hidden="true">
-      <span>THE INSTRUMENTS</span>
+      <span>The instruments</span>
       <span class="instruments-section-divider" aria-hidden="true"></span>
-      <span>ACTIVE LISTINGS — Q888 ART MARKET</span>
+      <span>Active listings</span>
     </div>
 
     <div
-      class="instruments-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8 lg:gap-12 mb-20 md:mb-24"
+      class="instruments-grid"
       data-motion-stagger
       data-motion-children="[data-motion-item]"
     >
       {
         visibleInstruments.map((instrument) => (
           <article
-            class="instrument-card border border-[var(--line-soft)] bg-transparent hover:bg-[var(--bg-fog)]/80 overflow-hidden flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200"
+            class="instrument-card ex"
             data-motion-item
             data-instrument-id={instrument.id}
             data-status={instrument.status}
@@ -108,24 +102,19 @@ const tickerUnit = `${tickerText} — `;
             role="button"
             aria-label={`View details for ${instrument.title}`}
           >
-            <div class="instrument-card-top flex justify-between items-baseline font-mono text-sm md:text-base lg:text-lg uppercase tracking-widest text-[#a67c00] px-4 pt-3">
-              <div class="ticker-badge">
-                {instrument.ticker} { ["POG-2026", "NAR-OOPS"].includes(instrument.id)
-                  ? `EDITION: ${instrument.editionTotal}`
-                  : `ED: ${instrument.availableCount}/${instrument.editionTotal}` }
-              </div>
-            </div>
             {instrument.imageUrl && (
               <div
-                class={`instrument-image-container aspect-[4/3] overflow-hidden border-t border-[var(--line-soft)] ${instrument.id === "DM-0001" ? "dm-classified-wrap" : ""}`}
+                class:list={[
+                  "ex-art",
+                  instrument.id === "DM-0001" && "dm-classified-wrap",
+                ]}
               >
                 <Image
                   src={instrument.imageUrl}
                   alt={instrument.imageAlt || instrument.title}
-                  class:list={["w-full h-full", instrument.id === "POG-2026" ? "object-contain bg-black" : instrument.id === "NAR-OOPS" ? "object-contain bg-[var(--bg-fog)]" : "object-cover"]}
                   loading="lazy"
-                  width={400}
-                  height={300}
+                  width={900}
+                  height={675}
                 />
                 {instrument.id === "DM-0001" && (
                   <div class="dm-classified-overlay" aria-hidden="true">
@@ -143,34 +132,13 @@ const tickerUnit = `${tickerText} — `;
                 )}
               </div>
             )}
-            <div class="instrument-card-body px-4 py-3 flex-1">
-              <h2 class="font-bold text-[var(--text-ink)] text-xl md:text-2xl lg:text-3xl mb-1">
-                {instrument.title}
-              </h2>
-              <p class="text-lg md:text-xl text-[var(--text-muted)] leading-snug">
-                {instrument.tagline}
-              </p>
-            </div>
-            <div
-              class="instrument-meta font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--text-muted)] px-4 py-3 border-t border-[var(--line-soft)] space-y-1 instrument-meta-styled"
-            >
-              <div>
-                PRICE: {instrument.ask} · STATUS:{" "}
-                {instrument.status === "BEYOND_TRANSACTION"
-                  ? "Beyond transaction"
-                  : instrument.status === "SOLD_OUT"
-                    ? "Sold out"
-                    : instrument.status === "NEGOTIABLE"
-                      ? "Negotiable"
-                      : instrument.status === "SUBSCRIPTION"
-                        ? "Subscription"
-                        : instrument.status}
-              </div>
-              <div>PROVENANCE: {instrument.provenance.split(" | ")[0]}</div>
-              <div>
-                {typeof instrument.availableCount === "number"
-                  ? `QTY: ${instrument.availableCount}/${instrument.editionTotal}`
-                  : `QTY: ${instrument.availableCount}`}
+            <div class="ex-label">
+              <h2 class="ex-title">{instrument.title}</h2>
+              <p class="ex-tag">{instrument.tagline}</p>
+              <div class="ex-meta">
+                <span class="ex-ask">{instrument.ask}</span>
+                <span>{instrument.ticker} · {editionLabel(instrument)}</span>
+                <span>{statusLabel(instrument.status)}</span>
               </div>
             </div>
           </article>
@@ -178,14 +146,9 @@ const tickerUnit = `${tickerText} — `;
       }
     </div>
 
-    <footer
-      class="return-policy prose prose-2xl md:prose-3xl lg:prose-4xl max-w-none leading-relaxed border-t border-[var(--line-soft)] pt-16 lg:pt-20 mt-24 text-lg md:text-xl text-[var(--text-ink)]"
-      data-motion-reveal
-    >
-      <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 not-italic">
-        Return Policy
-      </h3>
-      <p>
+    <footer class="return-policy" data-motion-reveal>
+      <h3 class="return-title">Return Policy</h3>
+      <p class="return-body">
         Overpriced Stickers are sold as collectible art objects. All sales are
         final. No returns, no refunds. By initiating a trade you confirm that
         you understand the speculative nature of the instrument and accept full
@@ -195,8 +158,8 @@ const tickerUnit = `${tickerText} — `;
         Emotional returns are not tracked but are statistically likely.
       </p>
     </footer>
-    <div class="footer-back w-full px-6 md:px-12 lg:px-24 xl:px-32 pt-8 pb-12">
-      <a href="/#infocigan" class="panel-back hover:text-[#a67c00] no-underline"
+    <div class="footer-back pt-14 pb-24">
+      <a href="/#infocigan" class="panel-back hover:text-[var(--text-ink)] no-underline"
         >Retreat to Market</a
       >
     </div>
@@ -222,21 +185,15 @@ const tickerUnit = `${tickerText} — `;
     class="drawer-scrollable max-w-4xl w-full max-h-[80dvh] overflow-y-auto bg-[var(--bg-fog)] shadow-2xl ring-1 ring-[var(--line-soft)] prose prose-lg prose-headings:text-[var(--text-ink)] prose-p:text-[var(--text-muted)]"
   >
     <div class="drawer-content">
-      <p
-        class="drawer-ticker font-mono text-sm uppercase tracking-widest text-[#a67c00] mb-2"
-        data-sticker-ticker
-      >
-      </p>
-      <h2
-        class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4"
-        data-sticker-title
-      >
-      </h2>
-      <p
-        class="drawer-tagline text-[var(--text-muted)] mb-6"
-        data-sticker-tagline
-      >
-      </p>
+      <div class="rec-bar">
+        <div class="rec-nav">
+          <button type="button" class="rec-nav-btn" data-rec-prev aria-label="Previous sticker">←</button>
+          <button type="button" class="rec-nav-btn" data-rec-next aria-label="Next sticker">→</button>
+        </div>
+        <span class="rec-count" data-rec-count aria-hidden="true"></span>
+      </div>
+      <div class="rec-grid">
+        <div class="rec-art">
       <div
         class="drawer-image-hero w-full max-w-2xl mx-auto mb-8 rounded-2xl overflow-hidden border-4 border-[var(--line-soft)] shadow-2xl relative"
         data-sticker-image-container
@@ -411,6 +368,25 @@ const tickerUnit = `${tickerText} — `;
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 hidden"
       >
       </div>
+        </div>
+        <div class="rec-info">
+          <div class="rec-head">
+      <p
+        class="drawer-ticker font-mono text-sm uppercase tracking-widest mb-2"
+        data-sticker-ticker
+      >
+      </p>
+      <h2
+        class="drawer-title text-2xl md:text-3xl font-bold text-[var(--text-ink)] mb-4"
+        data-sticker-title
+      >
+      </h2>
+      <p
+        class="drawer-tagline text-[var(--text-muted)] mb-6"
+        data-sticker-tagline
+      >
+      </p>
+          </div>
       <div
         data-sticker-description
         class="prose prose-sm max-w-none leading-relaxed mb-8 text-[var(--text-ink)] hidden"
@@ -434,19 +410,16 @@ const tickerUnit = `${tickerText} — `;
         class="drawer-links mt-4 pt-4 border-t border-[var(--line-soft)] text-xs space-y-1 hidden"
       >
       </div>
+          <div class="rec-key-wrap">
       <div
         class="drawer-meta flex flex-col gap-y-1 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-6 pb-6 border-b border-[var(--line-soft)]"
         data-sticker-meta
       >
       </div>
-      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6" data-sticker-protocol>
-        Trade protocol: negotiation via email. No automated checkout. Signal
-        intent; we respond.
-      </p>
       <div data-sticker-negotiation>
         <button
           type="button"
-          class="open-negotiation font-mono text-xs uppercase tracking-widest text-[#a67c00] hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a67c00] rounded px-3 py-3 min-h-[44px]"
+          class="open-negotiation font-mono text-xs uppercase tracking-widest focus:outline-none focus-visible:ring-1 min-h-[44px]"
           data-sticker-negotiate-btn>Open negotiation channel</button
         >
         <p
@@ -454,6 +427,13 @@ const tickerUnit = `${tickerText} — `;
           data-sticker-email
         >
         </p>
+      </div>
+      <p class="drawer-protocol text-sm text-[var(--text-muted)] mb-6" data-sticker-protocol>
+        Trade protocol: negotiation via email. No automated checkout. Signal
+        intent; we respond.
+      </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -483,6 +463,136 @@ const tickerUnit = `${tickerText} — `;
     background-size: 50px 50px;
     opacity: 0.03;
     pointer-events: none;
+  }
+
+  /* HERO: one composition. Monumental serif title, mono kicker, a hairline of
+     champagne gold, copy set small in the right column. Each title word rises
+     out of a mask once; a gold sheen follows the pointer across the letters. */
+  .hero {
+    --ink: var(--text-ink);
+    padding-top: 0;
+  }
+  .hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: clamp(1.5rem, 4vw, 3.5rem);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(0.6rem, 0.9vw, 0.72rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    animation: hero-fade 1.6s ease-out 0.2s both;
+  }
+  @media (max-width: 520px) {
+    .hero-kicker {
+      letter-spacing: 0.2em;
+    }
+    .hero-kicker span:last-child {
+      display: none;
+    }
+  }
+  .hero-kicker-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--line-soft), transparent);
+  }
+  .hero-title {
+    margin: 0;
+    font-family: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.6rem, 17vw, 22rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .hero-line {
+    display: block;
+    white-space: nowrap;
+  }
+  .hero-line-2 {
+    padding-left: clamp(1.25rem, 9vw, 12rem);
+  }
+  /* Letters inflate from hairline to full weight in a wave, like a price
+     going up. Plays once on load. */
+  .hero-ch {
+    display: inline-block;
+    font-weight: 800;
+    animation: ch-inflate 1.9s cubic-bezier(0.16, 1, 0.3, 1) calc(0.15s + var(--i) * 0.07s) both;
+  }
+  @keyframes ch-inflate {
+    from {
+      font-weight: 200;
+      opacity: 0;
+      filter: blur(6px);
+    }
+    to {
+      font-weight: 800;
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  .hero-lower {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: clamp(2.5rem, 6vw, 5rem);
+  }
+  @media (min-width: 900px) {
+    .hero-lower {
+      grid-template-columns: 5fr 4fr;
+      gap: clamp(3rem, 8vw, 9rem);
+    }
+  }
+  .hero-sub {
+    margin: 0;
+    font-family: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+    font-weight: 500;
+    font-size: clamp(1.7rem, 3.2vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    max-width: 18ch;
+    animation: hero-fade 1.8s ease-out 0.9s both;
+  }
+  .hero-copy {
+    max-width: 36rem;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    line-height: 1.55;
+    color: var(--text-muted);
+    display: grid;
+    gap: 1.1rem;
+    animation: hero-fade 1.8s ease-out 1.2s both;
+  }
+  .hero-copy p {
+    margin: 0;
+  }
+  @keyframes hero-rise {
+    from {
+      transform: translateY(108%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-ch,
+    .hero-kicker,
+    .hero-sub,
+    .hero-copy {
+      animation: none;
+    }
   }
 
   .ticker-wrapper {
@@ -535,67 +645,213 @@ const tickerUnit = `${tickerText} — `;
     }
   }
 
-  .instrument-card {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  /* FONTS: Bricolage Grotesque for everything set in type, system mono for
+     records and labels. Nothing else on this page. */
+  .overpriced-stickers-outer,
+  .sticker-drawer {
+    --op-font: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --op-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-family: var(--op-font);
+  }
+  .op-mono {
+    font-family: var(--op-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--text-muted);
   }
 
-  .instrument-card:hover {
-    transform: translateY(-5px);
-    box-shadow:
-      0 20px 48px -10px rgba(0, 0, 0, 0.12),
-      0 0 0 1px rgba(166, 124, 0, 0.18),
-      0 8px 24px -8px rgba(166, 124, 0, 0.15);
+  /* RETURN POLICY: same two-column rhythm as the hero copy, so the page reads
+     as one composition. Title left, policy right. */
+  .return-policy {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line-soft);
+  }
+  .return-title {
+    margin: 0;
+    font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-ink);
+  }
+  .return-body {
+    margin: 0;
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  @media (min-width: 900px) {
+    .return-policy {
+      grid-template-columns: 5fr 4fr;
+      gap: clamp(3rem, 8vw, 9rem);
+    }
+  }
+  .footer-back a {
+    font-family: var(--op-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-muted);
   }
 
-  .instrument-card:focus-visible {
-    outline: 2px solid #a67c00;
-    outline-offset: 2px;
-  }
-
-  .instrument-card[data-status="RESERVED"] {
-    opacity: 0.92;
-  }
-
-  /* ── INSTRUMENTS SECTION HEADER ── */
+  /* SECTION HEADER */
   .instruments-section-header {
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    margin-bottom: 2.5rem;
-    font-family: ui-monospace, SFMono-Regular, 'Courier New', monospace;
-    font-size: clamp(0.55rem, 1vw, 0.7rem);
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    font-family: var(--op-mono);
+    font-size: 0.7rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: #a67c00;
-    opacity: 0.7;
+    color: var(--text-muted);
     white-space: nowrap;
   }
-
   .instruments-section-divider {
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, rgba(166, 124, 0, 0.3), transparent);
+    background: var(--line-soft);
     min-width: 1rem;
   }
-
-  .instruments-section-header > span:last-child + .instruments-section-divider {
-    background: linear-gradient(270deg, rgba(166, 124, 0, 0.3), transparent);
+  @media (max-width: 520px) {
+    .instruments-section-header span:last-child {
+      display: none;
+    }
   }
 
-  /* Gold accent on card meta strip */
-  .instrument-meta-styled {
-    border-left: 2px solid rgba(166, 124, 0, 0.18);
-    margin-left: 0;
+  /* THE HALL: every sticker shown whole, in an identical quiet frame, three
+     to a row. The calm comes from repetition and space, not from variety. */
+  .instruments-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 5.5rem) clamp(1.25rem, 3vw, 3rem);
+    align-items: start;
+    margin-bottom: 6rem;
   }
-
-  /* Finer transition on card hover */
-  .instrument-card {
+  @media (min-width: 640px) {
+    .instruments-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .instruments-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .ex {
+    display: block;
+    min-width: 0;
+    cursor: pointer;
+    outline: none;
+  }
+  .ex-art {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    /* frosted glass plate: soft light from one corner, cooler grey in the
+       other, a white edge and a faint shadow underneath */
+    border-radius: 14px;
+    background:
+      radial-gradient(70% 55% at 18% 16%, rgba(255, 255, 255, 0.95), transparent 70%),
+      radial-gradient(65% 55% at 88% 92%, rgba(186, 189, 196, 0.5), transparent 70%),
+      color-mix(in srgb, var(--text-ink) 6%, var(--bg-fog));
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 26px 40px -28px rgba(0, 0, 0, 0.3);
+    outline: 1px solid transparent;
+    outline-offset: 0;
     transition:
-      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      outline-color 0.5s ease,
+      outline-offset 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ex-art img {
+    position: absolute;
+    z-index: 1;
+    inset: 10%;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    display: block;
+    /* hairline edge plus a soft shadow: follows the sticker's own outline,
+       so cut-outs show their shape and white prints show their edge */
+    filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.5))
+      drop-shadow(0 12px 18px rgba(0, 0, 0, 0.16));
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ex-label {
+    margin-top: 1.1rem;
+    display: grid;
+    gap: 0.3rem;
+  }
+  .ex-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 1.9vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--text-ink);
+  }
+  .ex-title::after {
+    content: " →";
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-0.5rem);
+    transition:
+      opacity 0.4s ease,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ex-tag {
+    margin: 0;
+    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+  .ex-meta {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 1.25rem;
+    font-family: var(--op-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .ex-ask {
+    color: var(--text-ink);
+  }
+  .ex:hover .ex-art,
+  .ex:focus-visible .ex-art {
+    outline-color: var(--text-ink);
+    outline-offset: 9px;
+  }
+  .ex:hover .ex-art img,
+  .ex:focus-visible .ex-art img {
+    transform: scale(1.035);
+  }
+  .ex:hover .ex-title::after,
+  .ex:focus-visible .ex-title::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ex-art,
+    .ex-art img,
+    .ex-title::after {
+      transition: none;
+    }
+    .ex:hover .ex-art img {
+      transform: none;
+    }
   }
 
   .ambassador-mission-section {
@@ -618,7 +874,7 @@ const tickerUnit = `${tickerText} — `;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #a67c00;
+    color: var(--text-ink);
   }
 
   :global(.purchase-options-grid) {
@@ -653,7 +909,7 @@ const tickerUnit = `${tickerText} — `;
   }
 
   :global(.purchase-option-price) {
-    color: #a67c00;
+    color: var(--text-ink);
     white-space: nowrap;
   }
 
@@ -710,7 +966,7 @@ const tickerUnit = `${tickerText} — `;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 1.35rem;
     font-weight: 700;
-    color: #a67c00;
+    color: var(--text-ink);
   }
 
   :global(.revenue-allocation-name),
@@ -1045,7 +1301,267 @@ const tickerUnit = `${tickerText} — `;
   .drawer-scrollable {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    border-radius: 0.75rem;
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--bg-fog) 72%, transparent) !important;
+    backdrop-filter: blur(24px) saturate(1.1);
+    -webkit-backdrop-filter: blur(24px) saturate(1.1);
+    box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.35) !important;
+  }
+  /* RECORD: two columns on wide screens (sticker left, facts right), a full
+     sheet on phones. The price and the button sit near the top. */
+  .sticker-drawer .drawer-scrollable {
+    max-width: min(74rem, 100%) !important;
+    max-height: 90dvh !important;
+  }
+  .drawer-content {
+    padding: 0 !important;
+  }
+  .rec-bar {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem clamp(1.25rem, 3vw, 2.5rem);
+    background: var(--bg-fog);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .rec-nav {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .rec-count {
+    font-family: var(--op-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    color: var(--text-muted);
+    padding-right: 3rem;
+  }
+  .rec-nav-btn {
+    font-family: var(--op-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-ink);
+    background: transparent;
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+  .rec-nav-btn:hover {
+    background: var(--text-ink);
+    color: var(--bg-fog);
+    border-color: var(--text-ink);
+  }
+  .rec-grid {
+    display: grid;
+    gap: 2rem;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .rec-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .rec-info > * {
+    order: 2;
+  }
+  .rec-info > .rec-head {
+    order: 0;
+  }
+  .rec-info > .rec-key-wrap {
+    order: 1;
+  }
+  @media (min-width: 900px) {
+    .rec-grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+    .rec-art {
+      position: sticky;
+      top: 5.5rem;
+    }
+  }
+  .rec-head {
+    margin-bottom: 1.5rem;
+  }
+  .rec-head .drawer-title {
+    margin: 0 0 0.5rem !important;
+  }
+  .rec-head .drawer-tagline {
+    margin: 0 !important;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+  .rec-art .drawer-image-hero {
+    margin: 0 !important;
+    max-width: none !important;
+    aspect-ratio: 4 / 5;
+    max-height: calc(90dvh - 8rem);
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    border-radius: 14px !important;
+    background:
+      radial-gradient(70% 55% at 18% 16%, rgba(255, 255, 255, 0.95), transparent 70%),
+      radial-gradient(65% 55% at 88% 92%, rgba(186, 189, 196, 0.5), transparent 70%),
+      color-mix(in srgb, var(--text-ink) 6%, var(--bg-fog));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  }
+  .rec-art .drawer-image-hero img {
+    position: absolute;
+    inset: 9%;
+    width: 82%;
+    height: 82% !important;
+    background: transparent !important;
+    filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.5))
+      drop-shadow(0 12px 18px rgba(0, 0, 0, 0.16));
+  }
+  /* price block: first thing under the title */
+  .rec-key-wrap {
+    margin-bottom: 2rem;
+    padding: 1.25rem 0;
+    border-block: 1px solid var(--line-soft);
+  }
+  .rec-key-wrap .drawer-meta {
+    border: 0 !important;
+    margin: 0 0 1rem !important;
+    padding: 0 !important;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  :global(.rec-price) {
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-ink);
+  }
+  :global(.rec-sub) {
+    margin-top: 0.35rem;
+    font-family: var(--op-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .rec-key-wrap .drawer-protocol {
+    margin: 1rem 0 0 !important;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .rec-key-wrap .open-negotiation {
+    padding: 0.75rem 1.5rem !important;
+  }
+  /* facts: label small and quiet, value in plain text */
+  [data-sticker-specs] {
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-family: var(--op-font) !important;
+    font-size: 1rem !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 2rem 0 0 !important;
+    display: grid;
+    gap: 0 !important;
+  }
+  :global(.spec-row) {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--line-soft);
+    line-height: 1.5;
+  }
+  :global(.spec-k) {
+    font-family: var(--op-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: 0.25rem;
+  }
+  :global(.spec-v) {
+    color: var(--text-ink);
+  }
+  [data-sticker-description] {
+    font-size: 1.05rem;
+    margin-bottom: 0 !important;
+  }
+  [data-sticker-description] :global(p) {
+    margin: 0 0 1.1rem !important;
+    line-height: 1.65;
+  }
+  :global(.drawer-link),
+  .drawer-links :global(a) {
+    font-family: var(--op-font) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-size: 1rem !important;
+  }
+  .drawer-links {
+    border: 0 !important;
+    margin-top: 1.5rem !important;
+    padding-top: 0 !important;
+    font-size: 0.95rem !important;
+  }
+  @media (max-width: 767px) {
+    .sticker-drawer {
+      padding: 0 !important;
+      align-items: stretch !important;
+    }
+    .sticker-drawer .drawer-scrollable {
+      max-height: none !important;
+      height: 100dvh;
+      border-radius: 0 !important;
+    }
+    .rec-art .drawer-image-hero {
+      max-height: 60dvh;
+    }
+    :global(.spec-row) {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+  .drawer-title {
+    font-size: clamp(2rem, 4vw, 3.25rem) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+  .drawer-image-hero {
+    border-width: 1px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+  }
+  [data-sticker-description] :global(p) {
+    margin: 0 0 1.1rem !important;
+    line-height: 1.65;
+  }
+  .open-negotiation {
+    color: var(--text-ink) !important;
+    border: 1px solid var(--text-ink);
+    border-radius: 999px !important;
+    padding: 0.7rem 1.4rem !important;
+    text-decoration: none !important;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease;
+  }
+  .open-negotiation:hover {
+    background: var(--text-ink);
+    color: var(--bg-fog) !important;
+  }
+  .drawer-ticker {
+    font-family: var(--op-mono);
+    color: var(--text-muted) !important;
+    letter-spacing: 0.28em;
   }
 
   .drawer-content {
@@ -1207,11 +1723,11 @@ const tickerUnit = `${tickerText} — `;
     line-height: 1.625;
     margin-bottom: 2rem;
   }
-  [data-sticker-description] p {
+  [data-sticker-description] :global(p) {
     color: var(--text-ink);
     margin-bottom: 1rem;
   }
-  [data-sticker-description] p:last-child {
+  [data-sticker-description] :global(p:last-child) {
     margin-bottom: 0;
   }
   [data-sticker-gallery] img {
@@ -1245,28 +1761,19 @@ const tickerUnit = `${tickerText} — `;
   .drawer-links a:hover {
     text-decoration: underline !important;
     text-decoration-thickness: 2px !important;
-    text-decoration-color: #a67c00 !important;
+    text-decoration-color: var(--text-ink) !important;
     text-underline-offset: 2px !important;
     text-decoration-skip-ink: none !important;
   }
   .drawer-links .gold-shine,
   .drawer-links a.gold-shine {
-    color: transparent !important;
-    background: linear-gradient(
-      to right,
-      #a67c00 20%,
-      #ce9e00 40%,
-      #ffcc33 50%,
-      #ce9e00 60%,
-      #a67c00 80%
-    ) !important;
-    background-size: 200% auto !important;
-    background-clip: text !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
+    color: var(--text-ink) !important;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
   }
   .drawer-links a:focus-visible {
-    outline: 1px solid #a67c00;
+    outline: 1px solid var(--text-ink);
     outline-offset: 2px;
   }
 
@@ -1279,21 +1786,12 @@ const tickerUnit = `${tickerText} — `;
   /* KomproMir download link is inline-styled in JS */
 
   .gold-shine {
-    color: #a67c00 !important;
-    background: linear-gradient(
-      to right,
-      #a67c00 20%,
-      #ce9e00 40%,
-      #ffcc33 50%,
-      #ce9e00 60%,
-      #a67c00 80%
-    ) !important;
-    background-size: 200% auto !important;
-    background-clip: text !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    animation: shine 8s linear infinite;
+    color: var(--text-ink) !important;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
   }
+
 
   @keyframes shine {
     to {
@@ -1770,13 +2268,7 @@ const tickerUnit = `${tickerText} — `;
                     font-weight: 700;
                     text-transform: uppercase;
                     letter-spacing: 0.15em;
-                    color: transparent !important;
-                    background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
-                    background-size: 200% auto !important;
-                    background-clip: text !important;
-                    -webkit-background-clip: text !important;
-                    -webkit-text-fill-color: transparent !important;
-                    animation: shine 8s linear infinite;
+                    color: var(--text-ink); text-decoration: underline; text-underline-offset: 0.3em;
                   "
                 >
                   Subscription Terms &amp; Conditions 😈
@@ -1845,15 +2337,9 @@ const tickerUnit = `${tickerText} — `;
                 font-size: 0.75rem;
                 text-transform: uppercase;
                 letter-spacing: 0.2em;
-                color: transparent !important;
-                background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
-                background-size: 200% auto !important;
-                background-clip: text !important;
-                -webkit-background-clip: text !important;
-                -webkit-text-fill-color: transparent !important;
-                animation: shine 8s linear infinite;
+                color: var(--text-ink); text-decoration: underline; text-underline-offset: 0.3em;
               ">
-                🎵 ${label}
+                ${label}
               </span>
             </a>
             <p class="playlist-note">${note}</p>
@@ -1869,15 +2355,9 @@ const tickerUnit = `${tickerText} — `;
                   font-size: 0.75rem;
                   text-transform: uppercase;
                   letter-spacing: 0.2em;
-                  color: transparent !important;
-                  background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
-                  background-size: 200% auto !important;
-                  background-clip: text !important;
-                  -webkit-background-clip: text !important;
-                  -webkit-text-fill-color: transparent !important;
-                  animation: shine 8s linear infinite;
+                  color: var(--text-ink); text-decoration: underline; text-underline-offset: 0.3em;
                 ">
-                  📖 ${label}
+                  ${label}
                 </span>
               </a>
             </div>
@@ -1950,16 +2430,10 @@ const tickerUnit = `${tickerText} — `;
           text-transform: uppercase;
           letter-spacing: 0.2em;
           line-height: 1.5;
-          color: transparent !important;
-          background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important;
-          background-size: 200% auto !important;
-          background-clip: text !important;
-          -webkit-background-clip: text !important;
-          -webkit-text-fill-color: transparent !important;
-          animation: shine 8s linear infinite;
+          color: var(--text-ink); text-decoration: underline; text-underline-offset: 0.3em;
         "
       >
-        📖 ${label}
+        ${label}
       </a>
           `;
             downloadEl.classList.remove("hidden");
@@ -2056,7 +2530,12 @@ const tickerUnit = `${tickerText} — `;
           specs.push("RITUAL: Apply at an edge during indecision.");
         }
         specsEl.innerHTML = specs
-          .map((s) => `<div class="text-[var(--text-ink)]">${s}</div>`)
+          .map((s) => {
+            const i = s.indexOf(": ");
+            return i < 0
+              ? `<div class="spec-row"><span class="spec-v">${s}</span></div>`
+              : `<div class="spec-row"><span class="spec-k">${s.slice(0, i)}</span><span class="spec-v">${s.slice(i + 2)}</span></div>`;
+          })
           .join("");
       }
       if (specsEl) specsEl.classList.remove("hidden");
@@ -2071,12 +2550,12 @@ const tickerUnit = `${tickerText} — `;
           linksEl.classList.remove("hidden");
         } else if (id === "ML-0444") {
           linksEl.innerHTML = `
-            <a href="/docs/modern-love.pdf" download class="drawer-link gold-shine inline-flex items-center transition-all no-underline" style="color: transparent !important; background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important; background-size: 200% auto !important; background-clip: text !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; animation: shine 8s linear infinite;">
-              📖 Full story PDF (free download)
+            <a href="/docs/modern-love.pdf" download class="drawer-link gold-shine inline-flex items-center transition-all no-underline">
+              Full story PDF (free download)
             </a>
             <br>
-            <a href="https://open.spotify.com/playlist/1XXi7nCuLSmX0B2YNSRT5D?si=691b787012194cc6" target="_blank" rel="noopener noreferrer" class="drawer-link gold-shine inline-flex items-center transition-all no-underline" style="color: transparent !important; background: linear-gradient(to right, #a67c00 20%, #ce9e00 40%, #ffcc33 50%, #ce9e00 60%, #a67c00 80%) !important; background-size: 200% auto !important; background-clip: text !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; animation: shine 8s linear infinite;">
-              🎵 Modern Love Playlist (@Quirky888 + @hanam444)
+            <a href="https://open.spotify.com/playlist/1XXi7nCuLSmX0B2YNSRT5D?si=691b787012194cc6" target="_blank" rel="noopener noreferrer" class="drawer-link gold-shine inline-flex items-center transition-all no-underline">
+              Modern Love Playlist (@Quirky888 + @hanam444)
             </a>
           `;
           linksEl.classList.remove("hidden");
@@ -2086,21 +2565,20 @@ const tickerUnit = `${tickerText} — `;
       }
 
       if (metaEl) {
-        const qtyLine =
-          typeof inst.availableCount === "number"
-            ? `QTY: ${inst.availableCount}/${inst.editionTotal}`
-            : `QTY: ${inst.availableCount}`;
-        const statusLabel =
-          inst.status === "BEYOND_TRANSACTION"
-            ? "Beyond transaction"
-            : inst.status === "SOLD_OUT"
-              ? "Sold out"
-              : inst.status === "NEGOTIABLE"
-                ? "Negotiable"
-                : inst.status === "SUBSCRIPTION"
-                  ? "Subscription"
-                  : inst.status;
-        metaEl.innerHTML = `<div>PRICE: ${inst.ask} · STATUS: ${statusLabel}</div><div>PROVENANCE: ${inst.provenance}</div><div>${qtyLine}</div>`;
+        const statusMap = {
+          LISTED: "Listed",
+          BEYOND_TRANSACTION: "Beyond transaction",
+          SOLD_OUT: "Sold out",
+          SOLD: "Sold",
+          NEGOTIABLE: "Negotiable",
+          SUBSCRIPTION: "Subscription",
+          RESERVED: "Reserved",
+        };
+        const statusLabel = statusMap[inst.status] || inst.status;
+        const edition = ["POG-2026", "NAR-OOPS"].includes(inst.id)
+          ? `Edition ${inst.editionTotal}`
+          : `Ed. ${inst.availableCount}/${inst.editionTotal}`;
+        metaEl.innerHTML = `<div class="rec-price">${inst.ask}</div><div class="rec-sub">${edition} · ${statusLabel}</div>`;
       }
       if (emailEl) {
         emailEl.textContent = "";
@@ -2120,6 +2598,14 @@ const tickerUnit = `${tickerText} — `;
         ? "Oops Protocol: issued as an apology only. No purchase, reservation or negotiation. Unlimited money will not help."
         : "Trade protocol: negotiation via email. No automated checkout. Signal intent; we respond.";
 
+      const countEl = drawer.querySelector("[data-rec-count]");
+      if (countEl) {
+        const ids = Array.from(
+          document.querySelectorAll(".instrument-card[data-instrument-id]"),
+        ).map((el) => el.getAttribute("data-instrument-id"));
+        const n = ids.indexOf(inst.id);
+        countEl.textContent = n >= 0 ? `${String(n + 1).padStart(2, "0")} / ${String(ids.length).padStart(2, "0")}` : "";
+      }
       drawer.setAttribute("aria-hidden", "false");
       if (!releaseDrawerScroll) releaseDrawerScroll = lockScroll();
       drawer.classList.remove("hidden");
@@ -2216,6 +2702,23 @@ const tickerUnit = `${tickerText} — `;
         e.stopPropagation();
         closeDrawer();
       };
+      const stepOrder = Array.from(
+        document.querySelectorAll(".instrument-card[data-instrument-id]"),
+      ).map((el) => el.getAttribute("data-instrument-id"));
+      const step = (dir) => {
+        const cur = drawer.getAttribute("data-current-instrument-id");
+        const i = stepOrder.indexOf(cur);
+        if (i < 0 || !stepOrder.length) return;
+        openDrawer(stepOrder[(i + dir + stepOrder.length) % stepOrder.length]);
+        drawer.querySelector(".drawer-scrollable")?.scrollTo({ top: 0 });
+      };
+      drawer.querySelector("[data-rec-prev]")?.addEventListener("click", () => step(-1));
+      drawer.querySelector("[data-rec-next]")?.addEventListener("click", () => step(1));
+      drawer.addEventListener("keydown", (e) => {
+        if (drawer.getAttribute("aria-hidden") !== "false") return;
+        if (e.key === "ArrowLeft") step(-1);
+        if (e.key === "ArrowRight") step(1);
+      });
       closeBtn?.addEventListener("click", handleClose);
       closeBtn?.addEventListener("touchend", handleClose, { passive: false });
 

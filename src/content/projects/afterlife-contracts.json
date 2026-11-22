@@ -5,7 +5,7 @@
   "cardDescriptor": "Paperwork for things that may outlive you.",
   "cardSystem": "SYST: FINAL",
   "cardScatter": "md:translate-y-12 md:-translate-x-6 md:scale-105",
-  "cardImage": "/images/afterlife_link.webp",
+  "cardImage": "/images/afterlife_door_card.webp",
   "cardHolographic": false,
   "cardLightText": true,
   "panelTitle": "Afterlife Contract™",
