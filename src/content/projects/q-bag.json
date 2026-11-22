@@ -5,7 +5,7 @@
   "cardDescriptor": "Creative Afterlife begins with a coffee refill.",
   "cardSystem": "SYST: AFTERLIFE / 001",
   "cardScatter": "md:-translate-y-8 md:-translate-x-4 md:scale-95",
-  "cardImage": "/images/qbag.webp",
+  "cardImage": "/images/qbag_door_card.webp",
   "cardHolographic": false,
   "cardLightText": true,
   "panelTitle": "Q-Bag · Experiment 001",

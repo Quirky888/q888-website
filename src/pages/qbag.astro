@@ -5,7 +5,6 @@ import SubPageNav from "../components/SubPageNav.astro";
 import SystemMeta from "../components/SystemMeta.astro";
 import TypographicDoor from "../components/TypographicDoor.astro";
 import { getEntry } from "astro:content";
-import { Image } from "astro:assets";
 
 const qBagEntry = await getEntry("products", "q-bag");
 if (!qBagEntry || qBagEntry.data.slug !== "q-bag") {
@@ -37,91 +36,12 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
       <section class="qbag-hero">
         <div class="qbag-hero-inner px-6 sm:px-10 lg:px-16">
 
-          <!-- Portal image with holographic ring -->
-          <div class="qbag-visual-column">
-            <div class="qbag-portal-wrap">
-            <!-- Holographic bag ring -->
-            <div class="portal-badge-ring" aria-hidden="true">
-              <svg class="badge-ring-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="qb-holo-ring" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%"   stop-color="#ffcc33"/>
-                    <stop offset="16%"  stop-color="#c17a2e"/>
-                    <stop offset="33%"  stop-color="#208c8d"/>
-                    <stop offset="50%"  stop-color="#a8edff"/>
-                    <stop offset="66%"  stop-color="#ff9de2"/>
-                    <stop offset="83%"  stop-color="#ffcc33"/>
-                    <stop offset="100%" stop-color="#c17a2e"/>
-                  </linearGradient>
-                  <linearGradient id="qb-holo-ring-2" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%"   stop-color="#a67c00" stop-opacity="0.5"/>
-                    <stop offset="50%"  stop-color="#208c8d" stop-opacity="0.3"/>
-                    <stop offset="100%" stop-color="#a67c00" stop-opacity="0.5"/>
-                  </linearGradient>
-                </defs>
-                <!-- outer holo ring (rounded square, edge-hugging) -->
-                <rect x="3" y="3" width="434" height="434" rx="86" ry="86" stroke="url(#qb-holo-ring)" stroke-width="6" fill="none" opacity="0.9"/>
-                <!-- inner gold ring -->
-                <rect x="11" y="11" width="418" height="418" rx="78" ry="78" stroke="url(#qb-holo-ring-2)" stroke-width="2" fill="none"/>
-                <!-- mini bag silhouette top-left corner -->
-                <g transform="translate(72, 4)" opacity="0.8">
-                  <rect x="0" y="4" width="28" height="22" rx="3" fill="#c17a2e" opacity="0.7"/>
-                  <rect x="5" y="0" width="18" height="6" rx="2" fill="#a67c00" opacity="0.9"/>
-                  <circle cx="14" cy="11" r="4" fill="#ffcc33" opacity="0.6"/>
-                </g>
-                <!-- mini bag bottom-right corner -->
-                <g transform="translate(338, 414)" opacity="0.8">
-                  <rect x="0" y="0" width="28" height="22" rx="3" fill="#208c8d" opacity="0.7"/>
-                  <rect x="5" y="-4" width="18" height="6" rx="2" fill="#208c8d" opacity="0.9"/>
-                </g>
-                <!-- star top-right corner -->
-                <path d="M358 8 L364 10 L364 16 L368 11 L374 13 L371 8 L374 3 L368 5 L364 0 L364 6Z" fill="#ffcc33"/>
-                <!-- star bottom-left corner -->
-                <path d="M82 432 L76 430 L76 424 L72 429 L66 427 L69 432 L66 437 L72 435 L76 440 L76 434Z" fill="#208c8d"/>
-                <!-- tiny heart top-right -->
-                <text x="344" y="36" fill="#ff9de2" font-size="13" opacity="0.8">♥</text>
-                <!-- tiny star bottom-left -->
-                <text x="82" y="410" fill="#ffcc33" font-size="11" opacity="0.7">✦</text>
-                <!-- portal rune top-center -->
-                <text x="207" y="18" fill="#208c8d" font-size="10" opacity="0.6" font-family="monospace">☽</text>
-                <!-- coffee bean dots on left edge -->
-                <circle cx="3" cy="185" r="4" fill="#c17a2e" opacity="0.5"/>
-                <circle cx="3" cy="255" r="3" fill="#a67c00" opacity="0.4"/>
-              </svg>
-            </div>
-
-            <div class="qbag-portal">
-              <Image
-                src={qBag.heroImage}
-                alt={qBag.heroAlt}
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-                width={800}
-                height={800}
-                class="qbag-portal-img"
-              />
-              <!-- orbiting coffee-bean star -->
-              <div class="portal-orbit" aria-hidden="true">
-                <svg class="orbit-star" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- coffee bean shape -->
-                  <ellipse cx="16" cy="16" rx="10" ry="14" fill="#c17a2e" opacity="0.9"/>
-                  <path d="M16 4 Q20 10 16 16 Q12 22 16 28" stroke="#faf7f2" stroke-width="1.5" fill="none" opacity="0.7"/>
-                  <ellipse cx="16" cy="16" rx="10" ry="14" stroke="#ffcc33" stroke-width="1.5" fill="none"/>
-                </svg>
-              </div>
-            </div>
-            </div>
-
-            <aside class="qbag-image-disclosure" aria-label="Hero image process note">
-              <span class="qbag-image-disclosure-label">{qBag.imageDisclosure.label}</span>
-              <p>{qBag.imageDisclosure.text}</p>
-            </aside>
-          </div>
+          <!-- Typographic ghost numeral: calm, static, decorative -->
+          <p class="qbag-hero-ghost" aria-hidden="true">001</p>
 
           <!-- Title block -->
           <div class="qbag-hero-text">
-            <p class="qbag-eyebrow">Creative Afterlife · Experiment 001</p>
+            <p class="qbag-eyebrow">Creative Afterlife</p>
             <h1 class="qbag-headline">
               Q&#8209;BAG™
             </h1>
@@ -1167,130 +1087,40 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   .qbag-hero-inner {
     max-width: 72rem;
     margin: 0 auto;
+    position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr);
     align-items: center;
     min-height: 58dvh;
+    padding-block: 2rem;
   }
 
-  .qbag-visual-column {
-    display: grid;
-    justify-items: center;
-    gap: 1.25rem;
-    min-width: 0;
-  }
+  .qbag-hero { overflow-x: clip; }
 
-  /* ─── Portal wrap ─── */
-  .qbag-portal-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .qbag-hero-text {
     position: relative;
-    width: fit-content;
-    margin: 0 auto;
+    z-index: 1;
+    max-width: 44rem;
   }
 
-  /* Static gradient border frame — sits exactly on the image edge */
-  .qbag-portal-wrap::before {
-    content: '';
+  /* ─── Ghost numeral ─── */
+  .qbag-hero-ghost {
     position: absolute;
-    inset: 0;            /* flush with the image */
-    border-radius: 28px; /* match the portal exactly */
-    padding: 5px;        /* border thickness */
-    background: conic-gradient(
-      from 0deg,
-      #ffcc33,
-      #c17a2e,
-      #208c8d,
-      #a8edff,
-      #ff9de2,
-      #ffcc33,
-      #c17a2e,
-      #ffcc33
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.7;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    margin: 0;
+    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(9rem, 26vw, 22rem);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    background: linear-gradient(160deg, #ffcc33 0%, #c17a2e 55%, #208c8d 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.16;
     pointer-events: none;
-    z-index: 9; /* above the image (z-index:2), below the spinning ring (z-index:10) */
-  }
-
-  /* ─── Holographic ring ─── */
-  .portal-badge-ring {
-    position: absolute;
-    inset: -6px;
-    pointer-events: none;
-    animation: qb-holo-spin 20s linear infinite;
-    z-index: 10;
-  }
-
-  .badge-ring-svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  @keyframes qb-holo-spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  /* ─── Portal shape (rounded square) ─── */
-  .qbag-portal {
-    position: relative;
-    width: min(360px, 100%);
-    height: min(360px, 100vw); /* explicit square — same as width */
-    aspect-ratio: 1 / 1;      /* fallback insurance */
-    border-radius: 28px;
-    overflow: hidden;
-    box-shadow:
-      0 0 30px rgba(193, 122, 46, 0.18),
-      0 0 80px rgba(166, 124, 0, 0.08),
-      0 20px 60px rgba(26, 16, 8, 0.12);
-    transition: box-shadow 0.4s ease;
-    z-index: 2;
-  }
-
-  .qbag-portal:hover {
-    box-shadow:
-      0 0 50px rgba(193, 122, 46, 0.28),
-      0 0 100px rgba(255, 204, 51, 0.12),
-      0 20px 70px rgba(26, 16, 8, 0.18);
-  }
-
-  .qbag-portal-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  /* ─── Orbiting coffee bean ─── */
-  .portal-orbit {
-    position: absolute;
-    inset: -6px;
-    animation: orbit-spin 14s linear infinite;
-    pointer-events: none;
-    z-index: 11;
-  }
-
-  .orbit-star {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 28px;
-    height: 28px;
-    filter: drop-shadow(0 0 6px #c17a2e) drop-shadow(0 0 3px #ffcc33);
-  }
-
-  @keyframes orbit-spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+    user-select: none;
   }
 
   /* ─── Hero text ─── */
@@ -1311,7 +1141,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
 
   .qbag-headline {
     font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(3rem, 7vw, 7rem);
+    font-size: clamp(3.4rem, 11vw, 9rem);
     font-weight: 400;
     line-height: 0.9;
     letter-spacing: -0.01em;
@@ -1407,33 +1237,6 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     letter-spacing: 0.06em;
     text-underline-offset: 0.3em;
     text-transform: uppercase;
-  }
-
-  .qbag-image-disclosure {
-    width: min(360px, 100%);
-    padding: 0.9rem 1rem 1rem;
-    border: 1px dashed rgba(32, 140, 141, 0.45);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.46);
-    color: var(--qb-text-muted);
-  }
-
-  .qbag-image-disclosure-label {
-    display: block;
-    margin-bottom: 0.45rem;
-    color: var(--qb-primary);
-    font-family: 'Space Mono', ui-monospace, monospace;
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    line-height: 1.45;
-    text-transform: uppercase;
-  }
-
-  .qbag-image-disclosure p {
-    margin: 0;
-    font-size: 0.76rem;
-    line-height: 1.55;
   }
 
   .qb-mono {
@@ -3155,23 +2958,18 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   /* ── Tablet/small desktop ── */
   @media (max-width: 900px) {
     .qbag-hero-inner {
-      grid-template-columns: 1fr;
       min-height: auto;
-      gap: 2rem;
       padding-bottom: 2rem;
     }
 
-    .qbag-visual-column {
-      order: -1;
-    }
-
-    .qbag-portal {
-      width: min(280px, 65vw);
-      height: min(280px, 65vw);
+    .qbag-hero-ghost {
+      top: 0;
+      transform: none;
+      font-size: clamp(7rem, 38vw, 14rem);
     }
 
     .qbag-headline {
-      font-size: clamp(3rem, 10vw, 5rem);
+      font-size: clamp(3.4rem, 14vw, 6rem);
     }
 
     .qbag-manifesto {
@@ -3276,16 +3074,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   /* ── Landscape phone ── */
   @media (max-height: 520px) and (orientation: landscape) {
     .qbag-hero-inner {
-      grid-template-columns: 1fr 1.2fr;
       min-height: auto;
-      gap: 1.5rem;
-    }
-
-    .qbag-portal-wrap { order: 0; }
-
-    .qbag-portal {
-      width: min(180px, 35vw);
-      height: min(180px, 35vw);
     }
 
     .qbag-headline {
@@ -3299,8 +3088,6 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
 
   /* ── Mobile portrait ── */
   @media (max-width: 640px) {
-    .qbag-portal { width: min(240px, 72vw); height: min(240px, 72vw); }
-
     .qbag-two-col {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -3322,10 +3109,8 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
       justify-content: center;
     }
 
-    .qbag-headline { font-size: clamp(3rem, 14vw, 5rem); }
     .qbag-hero-actions { align-items: flex-start; flex-direction: column; }
     .qbag-primary-action { width: 100%; justify-content: center; }
-    .qbag-image-disclosure { width: min(240px, 72vw); }
     .qbag-manifesto-title { font-size: clamp(2.5rem, 15vw, 4.5rem); }
     .qbag-protocol-grid { grid-template-columns: 1fr; }
     .qbag-protocol-step { min-height: 0; }
@@ -3364,7 +3149,6 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
 
   /* ── Extra small ── */
   @media (max-width: 390px) {
-    .qbag-portal { width: min(200px, 78vw); height: min(200px, 78vw); }
     .qbag-headline { font-size: clamp(2.6rem, 15vw, 4rem); }
     .qb-sticker-chip { width: 54px; height: 54px; }
     .gallery-btn { width: 38px; height: 38px; }
@@ -3394,10 +3178,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
       animation: none;
       background-position: 0% center;
     }
-    .qbag-portal,
     .qbag-mini-portal { animation: none; }
-    .portal-orbit,
-    .portal-badge-ring { animation: none; }
     .qb-sticker-chip { animation: none; }
     .qb-sticker-chip:hover { transform: none; }
     .qbag-artwork-card:hover,

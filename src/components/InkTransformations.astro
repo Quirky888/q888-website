@@ -10,10 +10,15 @@ import transformations from "../data/inkTransformations.json";
         <div class="transformation-image">
           <Image src={`/images/dink/transformation/${name}.webp`} width={480} height={480} loading="lazy" alt={`${label}, gradually reduced to its average colour ${colour}.`} data-animation={`/images/dink/transformation/${name}-play.webp`} />
           <canvas width="480" height="480" hidden aria-hidden="true"></canvas>
+          <button type="button" class="glass-convert" aria-label={`Convert to Digital Ink: ${label}`} data-label={label} hidden>
+            <svg class="icon-grid" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1" /><rect x="13" y="3" width="8" height="8" rx="1" opacity=".7" /><rect x="3" y="13" width="8" height="8" rx="1" opacity=".7" /><rect x="13" y="13" width="8" height="8" rx="1" opacity=".45" /></g></svg>
+            <svg class="icon-one" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="1.5" fill="currentColor" /></svg>
+            <span class="glass-label">Convert</span>
+          </button>
         </div>
         <figcaption>
           <span class="transformation-number">0{index + 1} <span aria-hidden="true">→</span> <span class="transformation-colour">{colour.toUpperCase()}</span></span>
-          <button type="button" aria-label={`Play transformation: ${label}`} data-label={label} hidden>Play ↗</button>
+          <button type="button" class="text-play" aria-label={`Play transformation: ${label}`} data-label={label} hidden>Play ↗</button>
         </figcaption>
       </figure>
     ))}
@@ -24,7 +29,33 @@ import transformations from "../data/inkTransformations.json";
 <style>
   .transformation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
   figure { margin: 0; min-inline-size: 0; }
-  .transformation-image { aspect-ratio: 1; background: #000; overflow: hidden; border-radius: 3px; }
+  .transformation-image { position: relative; aspect-ratio: 1; background: #000; overflow: hidden; border-radius: 3px; }
+  .glass-convert { display: none; }
+  /* Phones: a frosted-glass square centred on the picture replaces the text button. */
+  @media (max-width: 767px) {
+    .text-play { display: none; }
+    .glass-convert:not([hidden]) {
+      position: absolute; inset-block-start: 50%; inset-inline-start: 50%; translate: -50% -50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      inline-size: 76px; block-size: 76px; min-block-size: 76px; min-inline-size: 76px; border-radius: 8px;
+      font: 500 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.95);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.1));
+      -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.55), inset 0 -1px 1px rgba(255, 255, 255, 0.12), 0 6px 18px rgba(0, 0, 0, 0.28);
+      transition: opacity 0.3s ease, transform 0.2s ease;
+    }
+    .glass-convert:hover { text-decoration: none; }
+    .glass-convert:active { transform: scale(0.94); }
+    .glass-convert:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .glass-convert svg { inline-size: 24px; block-size: 24px; }
+    .glass-convert .icon-one { display: none; }
+    figure:is([data-state="playing"], [data-state="loading"], [data-state="paused"]) .icon-grid { display: none; }
+    figure:is([data-state="playing"], [data-state="loading"], [data-state="paused"]) .icon-one { display: block; }
+    figure[data-state="loading"] .glass-convert { opacity: 0.6; }
+    /* While the animation runs the button steps aside; tapping the picture pauses it and brings the button back. */
+    figure[data-state="playing"] .glass-convert { opacity: 0; pointer-events: none; }
+  }
   img, canvas { display: block; inline-size: 100%; block-size: 100%; }
   [hidden] { display: none; }
   figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 0.5rem; padding-block-start: 0.4rem; font: 400 0.7rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; }
@@ -48,8 +79,8 @@ import transformations from "../data/inkTransformations.json";
   for (const figure of group?.querySelectorAll<HTMLElement>("[data-ink-transformation]") ?? []) {
     const image = figure.querySelector("img");
     const canvas = figure.querySelector("canvas");
-    const button = figure.querySelector("button");
-    if (!image || !canvas || !button || !image.dataset.animation) continue;
+    const buttons = Array.from(figure.querySelectorAll("button"));
+    if (!image || !canvas || !buttons.length || !image.dataset.animation) continue;
     const poster = image.src;
     const animation = image.dataset.animation;
     let source: Promise<string> | undefined;
@@ -59,8 +90,12 @@ import transformations from "../data/inkTransformations.json";
 
     const setState = (state: "loading" | "playing" | "paused") => {
       figure.dataset.state = state;
-      button.textContent = state === "loading" ? "Loading…" : state === "playing" ? "Pause Ⅱ" : "Replay ↗";
-      button.setAttribute("aria-label", `${state === "paused" ? "Replay" : "Pause"} transformation: ${button.dataset.label}`);
+      for (const button of buttons) {
+        const glass = button.classList.contains("glass-convert");
+        const text = glass ? button.querySelector(".glass-label") : button;
+        if (text) text.textContent = state === "loading" ? "Loading…" : state === "playing" ? (glass ? "Pause" : "Pause Ⅱ") : (glass ? "Replay" : "Replay ↗");
+        button.setAttribute("aria-label", `${state === "paused" ? "Replay" : "Pause"} transformation: ${button.dataset.label}`);
+      }
     };
     const warm = (): Promise<string> => {
       source ??= fetch(animation).then(response => {
@@ -124,8 +159,7 @@ import transformations from "../data/inkTransformations.json";
         }, Math.max(0, when - performance.now()));
       }).catch(() => { if (current()) setState("paused"); });
     };
-    button.hidden = false;
-    button.addEventListener("click", () => {
+    const onClick = () => {
       if (figure.dataset.state === "playing" || figure.dataset.state === "loading") {
         pausedByVisitor = true;
         stop();
@@ -135,7 +169,16 @@ import transformations from "../data/inkTransformations.json";
         visible = true;
         start(performance.now(), true);
       }
+    };
+    canvas.parentElement?.addEventListener("click", event => {
+      if (figure.dataset.state !== "playing" || (event.target as Element).closest("button")) return;
+      pausedByVisitor = true;
+      stop();
     });
+    for (const button of buttons) {
+      button.hidden = false;
+      button.addEventListener("click", onClick);
+    }
     clips.push({ warm, start, stop });
   }
 
