@@ -30,6 +30,11 @@ const v1 = v1Entry.data;
 const v1Total = Number(v1.editionTotal);
 const v1Left = Number(v1.availableCount);
 const v1Handled = Number.isFinite(v1Total) && Number.isFinite(v1Left) ? v1Total - v1Left : 0;
+// Seal ring text: runs once round the emblem.
+const sealText = `${president.heroTitleLines.join(" ")} ✦ ${president.statusLines[0]} ✦ ${president.tagline} ✦ `.toUpperCase();
+const sealTicks = Array.from({ length: 72 }, (_, i) => i);
+// Split a headline line into per-letter spans so each letter can react to the pointer.
+const splitChars = (text: string) => Array.from(text);
 const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 ---
 
@@ -38,6 +43,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   description="President of the Galaxy is an ongoing conceptual art campaign by Q888, built from limited artifacts, AI collaboration, mushroom civilizations, fictional economics, and preparation before power."
   image={president.heroImage}
   canonicalPath="/president/"
+  displayFonts
   mainEntityType="CreativeWork"
   mainEntityName="President of the Galaxy"
   keywords={["President of the Galaxy", "speculative campaign", "political art", "human AI collaborative art", "Q888"]}
@@ -50,127 +56,102 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     <div class="president-eden-wrap">
 
       <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
-      <section class="president-hero">
-        <div class="president-hero-inner px-6 sm:px-10 lg:px-16">
+      <section class="president-hero" data-president-hero>
+        <div class="president-hero-bg" aria-hidden="true">
+          <span class="hero-aurora hero-aurora--teal"></span>
+          <canvas class="hero-stars"></canvas>
+          <span class="hero-spot"></span>
+        </div>
 
-          <!-- Portal image with holographic badge ring -->
-          <div class="president-portal-wrap">
-            <!-- Holographic badge ring (inspired by Intergalactic J sticker) -->
-            <div class="portal-badge-ring" aria-hidden="true">
-              <svg class="badge-ring-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="holo-ring" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#ff9de2"/>
-                    <stop offset="16%" stop-color="#a8edff"/>
-                    <stop offset="33%" stop-color="#a8ff9d"/>
-                    <stop offset="50%" stop-color="#ffed9d"/>
-                    <stop offset="66%" stop-color="#208c8d"/>
-                    <stop offset="83%" stop-color="#c39af5"/>
-                    <stop offset="100%" stop-color="#ff9de2"/>
-                  </linearGradient>
-                  <linearGradient id="holo-ring-2" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.6"/>
-                    <stop offset="50%" stop-color="#208c8d" stop-opacity="0.3"/>
-                    <stop offset="100%" stop-color="#a67c00" stop-opacity="0.6"/>
-                  </linearGradient>
-                </defs>
-                <!-- outer holo ring -->
-                <ellipse cx="220" cy="220" rx="210" ry="210" stroke="url(#holo-ring)" stroke-width="5" opacity="0.8"/>
-                <!-- inner gold ring -->
-                <ellipse cx="220" cy="220" rx="198" ry="198" stroke="url(#holo-ring-2)" stroke-width="2"/>
-                <!-- small star ornaments around ring -->
-                <path d="M220 8 L222 15 L229 15 L223 19 L225 26 L220 22 L215 26 L217 19 L211 15 L218 15Z" fill="#ffcc33"/>
-                <path d="M220 432 L222 425 L229 425 L223 421 L225 414 L220 418 L215 414 L217 421 L211 425 L218 425Z" fill="#ffcc33"/>
-                <path d="M8 220 L15 222 L15 229 L19 223 L26 225 L22 220 L26 215 L19 217 L15 211 L15 218Z" fill="#208c8d"/>
-                <path d="M432 220 L425 222 L425 229 L421 223 L414 225 L418 220 L414 215 L421 217 L425 211 L425 218Z" fill="#208c8d"/>
-                <!-- small mushroom at top-right -->  
-                <g transform="translate(350, 38) rotate(30)" opacity="0.7">
-                  <ellipse cx="10" cy="8" rx="12" ry="8" fill="#208c8d" opacity="0.5"/>
-                  <ellipse cx="10" cy="8" rx="12" ry="8" stroke="#208c8d" stroke-width="1.5"/>
-                  <rect x="7.5" y="14" width="5" height="10" rx="2.5" fill="#a67c00" opacity="0.7"/>
+        <!-- Presidential seal + orrery: rings, a ringed planet, orbiting moons, text running round the edge. -->
+        <div class="hero-emblem" aria-hidden="true" data-emblem>
+          <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="seal-path" d="M300,300 m-262,0 a262,262 0 1,1 524,0 a262,262 0 1,1 -524,0" />
+              <linearGradient id="square-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff9de2" />
+                <stop offset="100%" stop-color="#9b4f9e" />
+              </linearGradient>
+              <radialGradient id="planet-grad" cx="35%" cy="32%" r="75%">
+                <stop offset="0%" stop-color="#fff1bf" />
+                <stop offset="45%" stop-color="#ffcc33" />
+                <stop offset="100%" stop-color="#7a5a00" />
+              </radialGradient>
+            </defs>
+            <g class="emblem-ticks">
+              {sealTicks.map((i) => <line x1="300" y1="6" x2="300" y2={i % 6 === 0 ? 24 : 15} transform={`rotate(${i * 5} 300 300)`} />)}
+            </g>
+            <g class="emblem-text">
+              <text><textPath href="#seal-path" textLength="1646" lengthAdjust="spacing">{sealText}</textPath></text>
+            </g>
+            <circle class="emblem-ring emblem-ring--a" cx="300" cy="300" r="226" />
+            <g class="emblem-orbit emblem-orbit--a"><circle class="moon moon--teal" cx="526" cy="300" r="7" /></g>
+            <circle class="emblem-ring emblem-ring--b" cx="300" cy="300" r="170" />
+            <g class="emblem-orbit emblem-orbit--b"><circle class="moon moon--gold" cx="130" cy="300" r="5" /></g>
+            <circle class="emblem-ring emblem-ring--c" cx="300" cy="300" r="112" />
+            <g class="emblem-orbit emblem-orbit--c"><circle class="moon moon--white" cx="412" cy="300" r="4" /></g>
+            <!-- Square planet: the only one that is not round, on a tilted, off-centre orbit. -->
+            <g class="emblem-square-orbit" transform="rotate(-32 300 300)">
+              <ellipse class="square-orbit-track" cx="330" cy="300" rx="262" ry="78" />
+              <g class="square-body">
+                <animateMotion dur="44s" repeatCount="indefinite" path="M592,300 A262,78 0 1,1 68,300 A262,78 0 1,1 592,300" />
+                <g class="square-spin" transform="rotate(32)">
+                  <rect x="-17" y="-17" width="34" height="34" rx="8" fill="url(#square-grad)" />
+                  <circle cx="-5" cy="-6" r="3.2" fill="#fff1e0" opacity="0.85" />
+                  <circle cx="7" cy="3" r="2.2" fill="#fff1e0" opacity="0.7" />
+                  <circle cx="-6" cy="8" r="1.6" fill="#fff1e0" opacity="0.6" />
                 </g>
-                <!-- tiny heart at bottom-left -->
-                <text x="72" y="374" fill="#ff9de2" font-size="14" opacity="0.8">♥</text>
-                <!-- tiny star at top-left -->
-                <text x="66" y="80" fill="#ffcc33" font-size="11" opacity="0.7">✦</text>
-                <!-- tiny rune mark -->
-                <text x="355" y="380" fill="#208c8d" font-size="10" opacity="0.6" font-family="monospace">☽</text>
-              </svg>
-            </div>
-            <!-- The current edition sits on black as a real die-cut sticker, with a holographic rim. -->
-            <div class="president-portal president-portal--sticker">
-              <div class="sticker-stage">
-                <span class="sticker-holo-rim" aria-hidden="true"></span>
-                <img
-                  src="/images/president_v2_cutout.webp"
-                  alt={v2.imageAlt || "President of the Galaxy V2 sticker: Q888 drawing over the original AI-generated figure"}
-                  loading="eager"
-                  decoding="async"
-                  width="719"
-                  height="850"
-                  class="president-sticker-img"
-                />
-              </div>
-              <div class="image-status-stamp" aria-label="Image authorship status">
-                <span>IMAGE PROVENANCE</span>
-                <ul>
-                  {president.authorship.imageStatus.map((line: string) => <li>{line}</li>)}
-                </ul>
-              </div>
-              <!-- orbiting star -->
-              <div class="portal-orbit" aria-hidden="true">
-                <svg class="orbit-star" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill="#ffcc33"/>
-                </svg>
-              </div>
-            </div>
-          </div>
+              </g>
+            </g>
+            <g class="emblem-planet">
+              <ellipse class="planet-ring planet-ring--back" cx="300" cy="300" rx="78" ry="20" transform="rotate(-18 300 300)" />
+              <circle cx="300" cy="300" r="42" fill="url(#planet-grad)" />
+              <path class="planet-ring planet-ring--front" d="M222,300 A78,20 0 0 0 378,300" transform="rotate(-18 300 300)" />
+            </g>
+          </svg>
+        </div>
 
-          <!-- Title block -->
+        <div class="president-hero-inner px-6 sm:px-10 lg:px-16">
           <div class="president-hero-text">
             <p class="president-eyebrow">{president.tagline}</p>
-            <h1 class="president-headline">
-              {president.heroTitleLines[0]}<br />{president.heroTitleLines[1]}
+            <h1 class="president-headline" aria-label={president.heroTitleLines.join(" ")} data-hl>
+              {president.heroTitleLines.map((line: string, li: number) => (
+                <span class="hl-line" aria-hidden="true">
+                  {splitChars(line).map((ch, ci) => ch === " "
+                    ? <span class="hl-space"></span>
+                    : <span class="hl-char" style={`--i:${li * 12 + ci}`}>{ch}</span>)}
+                </span>
+              ))}
             </h1>
             <div class="president-status-block narmail-mono">
               {president.statusLines.map((line: string) => <div>{line}</div>)}
-              <div>Year: <span class="president-censored" data-reveal="??" tabindex="0">██</span>88</div>
+              <div>Year: <span class="president-censored" data-reveal="??" tabindex="0" role="button" aria-label="Reveal year digits">██</span>88<span class="hud-cursor" aria-hidden="true"></span></div>
             </div>
+            <p class="president-provenance-line narmail-mono">
+              <span>Artwork provenance</span>
+              {president.authorship.imageStatus.join(" · ")}
+            </p>
             <a class="president-witness-btn" href="#campaign-test">Become an early witness <span aria-hidden="true">↓</span></a>
           </div>
+        </div>
 
+        <div class="president-ticker" aria-hidden="true">
+          <div class="president-ticker-track">
+            {[0, 1].map(() => (
+              <div class="president-ticker-group">
+                <span>{president.tagline}</span>
+                {president.statusLines.map((line: string) => <span>{line}</span>)}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-
-      <!-- sticker divider 1: star cluster + runic lines -->
-      <div class="cosmic-divider" aria-hidden="true">
-        <svg viewBox="0 0 800 44" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-          <!-- left dashed line -->
-          <line x1="0" y1="22" x2="310" y2="22" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 7"/>
-          <!-- center star cluster (like the sticker ornaments) -->
-          <g transform="translate(340, 10)">
-            <!-- big star -->
-            <path d="M30 0 L32 10 L42 10 L34 16 L37 26 L30 20 L23 26 L26 16 L18 10 L28 10Z" fill="#ffcc33" opacity="0.95"/>
-            <!-- small flanking stars -->
-            <path d="M8 14 L9 18 L13 18 L10 21 L11 25 L8 22 L5 25 L6 21 L3 18 L7 18Z" fill="#208c8d" opacity="0.7"/>
-            <path d="M52 14 L53 18 L57 18 L54 21 L55 25 L52 22 L49 25 L50 21 L47 18 L51 18Z" fill="#a67c00" opacity="0.7"/>
-            <!-- tiny dot ornaments -->
-            <circle cx="0" cy="22" r="2" fill="#208c8d" opacity="0.5"/>
-            <circle cx="60" cy="22" r="2" fill="#a67c00" opacity="0.5"/>
-          </g>
-          <!-- right dashed line -->
-          <line x1="460" y1="22" x2="800" y2="22" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 7"/>
-          <!-- rune-like tick marks (inspired by sticker runic text) -->
-          <text x="330" y="38" fill="#a67c00" font-size="8" opacity="0.4" font-family="monospace">⊕</text>
-          <text x="455" y="38" fill="#208c8d" font-size="8" opacity="0.4" font-family="monospace">☽</text>
-        </svg>
-      </div>
 
       <!-- ══════════════════════════════════ MAIN CONTENT ══════════════════════════════════ -->
       <div class="president-main-content px-6 sm:px-10 lg:px-16 pb-16">
 
         <!-- Lead section -->
-        <section class="president-section">
+        <section class="president-section" data-pg-reveal>
           <p class="president-lead">
             {president.lead}
           </p>
@@ -180,7 +161,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
 
         <!-- DNA: the campaign's one practical claim, shown before anything else. -->
-        <section class="president-section president-test" id="campaign-test" aria-labelledby="campaign-test-heading">
+        <section class="president-section president-test" data-pg-reveal id="campaign-test" aria-labelledby="campaign-test-heading">
           <h2 class="president-h2" id="campaign-test-heading">{president.dealHeading}</h2>
           <p>{president.dealParagraph}</p>
 
@@ -255,14 +236,14 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
         </section>
 
         <!-- Rules — campaign cards -->
-        <section class="president-section">
+        <section class="president-section" data-pg-reveal>
           <p class="ballot-kicker">The platform · tick what you would vote for</p>
           <h2 class="president-h2">{president.rulesHeading}</h2>
           <div class="president-rules-grid">
             {president.rules.map((rule: string, i: number) => (
               <div class="president-rule-card">
                 <span class="ballot-box" aria-hidden="true"></span>
-                <span class="rule-number">Article 0{i + 1}</span>
+                <span class="rule-number"><span class="rule-article">Article</span>0{i + 1}</span>
                 <p set:html={DOMPurify.sanitize(rule)}></p>
               </div>
             ))}
@@ -270,7 +251,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
         </section>
 
         <!-- What is this -->
-        <section class="president-section">
+        <section class="president-section" data-pg-reveal>
           <h2 class="president-h2">{president.whatHeading}</h2>
           <div class="president-two-col">
             <div class="president-two-col-text">
@@ -287,7 +268,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
           </div>
 
         <!-- Artwork card -->
-        <section class="president-artwork-card-section">
+        <section class="president-artwork-card-section" data-pg-reveal>
           <div
             class="artwork-info-card president-glass"
             id="president-gallery-trigger"
@@ -338,7 +319,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
           DNA: The campaign and its artifact appear before the authorship debate.
           Provenance deepens the work without becoming its first subject.
         -->
-        <section class="president-authorship-section" aria-labelledby="president-authorship-heading">
+        <section class="president-authorship-section" data-pg-reveal aria-labelledby="president-authorship-heading">
           <p class="authorship-eyebrow">{president.authorship.eyebrow}</p>
           <h2 class="president-h2 authorship-heading" id="president-authorship-heading">
             {president.authorship.heading}
@@ -397,159 +378,18 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
         <ConstitutionDraft constitution={constitution} variant="brief" />
 
         <!-- sticker divider 2: mushroom + spiral (like square_bubble / love_mushroom art) -->
-        <div class="cosmic-divider" aria-hidden="true">
-          <svg viewBox="0 0 800 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="shroom-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#208c8d"/>
-                <stop offset="100%" stop-color="#a67c00"/>
-              </linearGradient>
-            </defs>
-            <!-- left dotted line -->
-            <line x1="0" y1="26" x2="330" y2="26" stroke="#a67c00" stroke-width="1" stroke-dasharray="2 9"/>
-            <!-- mushroom cluster (centre) -->
-            <g transform="translate(358, 4)">
-              <!-- main mushroom -->
-              <ellipse cx="21" cy="16" rx="21" ry="14" fill="#208c8d" opacity="0.2"/>
-              <ellipse cx="21" cy="16" rx="21" ry="14" stroke="#208c8d" stroke-width="2"/>
-              <!-- mushroom spots -->
-              <circle cx="14" cy="13" r="2.5" fill="#208c8d" opacity="0.4"/>
-              <circle cx="24" cy="10" r="2" fill="#208c8d" opacity="0.3"/>
-              <circle cx="29" cy="16" r="1.5" fill="#208c8d" opacity="0.35"/>
-              <!-- stalk -->
-              <rect x="17" y="28" width="8" height="18" rx="4" fill="url(#shroom-grad)" opacity="0.7"/>
-              <!-- tiny mushroom left -->
-              <ellipse cx="4" cy="36" rx="6" ry="4" fill="#a67c00" opacity="0.35" stroke="#a67c00" stroke-width="1"/>
-              <rect x="2" y="38" width="4" height="8" rx="2" fill="#a67c00" opacity="0.4"/>
-              <!-- tiny mushroom right -->
-              <ellipse cx="38" cy="38" rx="5" ry="3.5" fill="#ffcc33" opacity="0.35" stroke="#ffcc33" stroke-width="1"/>
-              <rect x="36" y="40" width="4" height="7" rx="2" fill="#ffcc33" opacity="0.4"/>
-              <!-- heart ornament (like love_mushroom) -->
-              <text x="-6" y="26" fill="#ff9de2" font-size="12" opacity="0.7">♥</text>
-              <!-- spiral swirl right -->
-              <path d="M50 20 Q55 14 60 20 Q65 26 58 30 Q52 33 50 27" stroke="#208c8d" stroke-width="1.5" fill="none" opacity="0.6"/>
-            </g>
-            <!-- right dotted line -->
-            <line x1="460" y1="26" x2="800" y2="26" stroke="#a67c00" stroke-width="1" stroke-dasharray="2 9"/>
-            <!-- runic ticks -->
-            <text x="322" y="42" fill="#ffcc33" font-size="9" opacity="0.4" font-family="monospace">✦</text>
-            <text x="456" y="42" fill="#208c8d" font-size="9" opacity="0.4" font-family="monospace">✦</text>
-          </svg>
-        </div>
+        <hr class="president-hairline" aria-hidden="true" />
 
 
 
 
 
         <!-- Inline sticker motif strip (between campaign principles and method) -->
-        <div class="sticker-strip" aria-hidden="true">
-          <!-- Mini sticker 1: cosmic rune badge (Intergalactic J badge shape) -->
-          <div class="sticker-chip">
-            <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="chip-holo-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ff9de2"/>
-                  <stop offset="50%" stop-color="#a8edff"/>
-                  <stop offset="100%" stop-color="#ffcc33"/>
-                </linearGradient>
-              </defs>
-              <!-- badge outline (shield-ish like Intergalactic DJ sticker) -->
-              <path d="M6 14 Q6 6 14 6 L66 6 Q74 6 74 14 L74 62 Q74 82 40 86 Q6 82 6 62 Z" fill="#0a0a0a" stroke="url(#chip-holo-1)" stroke-width="3"/>
-              <!-- inner ring -->
-              <path d="M13 18 Q13 12 19 12 L61 12 Q67 12 67 18 L67 58 Q67 74 40 78 Q13 74 13 58 Z" fill="none" stroke="#208c8d" stroke-width="1" opacity="0.4"/>
-              <!-- peace-on hand (middle finger up — the POG gesture) -->
-              <g transform="translate(28, 18)">
-                <rect x="8" y="0" width="8" height="26" rx="4" fill="#208c8d" opacity="0.85"/>
-                <rect x="0" y="10" width="8" height="16" rx="4" fill="#208c8d" opacity="0.6"/>
-                <rect x="16" y="10" width="8" height="16" rx="4" fill="#208c8d" opacity="0.6"/>
-                <rect x="0" y="22" width="24" height="14" rx="4" fill="#208c8d" opacity="0.7"/>
-              </g>
-              <text x="12" y="80" fill="#ffcc33" font-size="7" font-family="monospace" letter-spacing="1">PEACE ON</text>
-            </svg>
-          </div>
-          <!-- Mini sticker 2: mushroom planet -->
-          <div class="sticker-chip">
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="chip-shroom" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#208c8d"/>
-                  <stop offset="100%" stop-color="#a67c00"/>
-                </linearGradient>
-              </defs>
-              <!-- space background -->
-              <circle cx="40" cy="40" r="36" fill="#0a0a0a" stroke="url(#chip-shroom)" stroke-width="3"/>
-              <!-- planet ring (like love_mushroom planet) -->
-              <ellipse cx="40" cy="42" rx="22" ry="7" stroke="#a67c00" stroke-width="1.5" opacity="0.6" fill="none" transform="rotate(-15 40 42)"/>
-              <!-- mushroom cap -->
-              <ellipse cx="40" cy="32" rx="18" ry="12" fill="#208c8d" opacity="0.7"/>
-              <ellipse cx="40" cy="32" rx="18" ry="12" stroke="#a8edff" stroke-width="1.5"/>
-              <!-- spots -->
-              <circle cx="33" cy="29" r="3" fill="white" opacity="0.3"/>
-              <circle cx="44" cy="27" r="2" fill="white" opacity="0.25"/>
-              <!-- stalk -->
-              <rect x="36" y="42" width="8" height="20" rx="4" fill="url(#chip-shroom)" opacity="0.8"/>
-              <!-- stars -->
-              <circle cx="14" cy="18" r="1.5" fill="#ffcc33"/>
-              <circle cx="64" cy="22" r="1" fill="#ff9de2"/>
-              <circle cx="20" cy="60" r="1.5" fill="#a8edff"/>
-              <circle cx="62" cy="58" r="1" fill="#ffcc33"/>
-            </svg>
-          </div>
-          <!-- Mini sticker 3: star burst -->
-          <div class="sticker-chip">
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="starburst-grad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.9"/>
-                  <stop offset="60%" stop-color="#a67c00" stop-opacity="0.5"/>
-                  <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-              <circle cx="40" cy="40" r="36" fill="#0a0a0a" stroke="#a67c00" stroke-width="2" opacity="0.8"/>
-              <!-- starburst rays -->
-              <g opacity="0.85">
-                <line x1="40" y1="10" x2="40" y2="70" stroke="#ffcc33" stroke-width="1" opacity="0.3"/>
-                <line x1="10" y1="40" x2="70" y2="40" stroke="#ffcc33" stroke-width="1" opacity="0.3"/>
-                <line x1="19" y1="19" x2="61" y2="61" stroke="#ffcc33" stroke-width="1" opacity="0.2"/>
-                <line x1="61" y1="19" x2="19" y2="61" stroke="#ffcc33" stroke-width="1" opacity="0.2"/>
-                <!-- 8-point star -->
-                <path d="M40 16 L43 31 L56 22 L47 35 L62 38 L47 41 L56 54 L43 45 L40 60 L37 45 L24 54 L33 41 L18 38 L33 35 L24 22 L37 31Z" fill="#ffcc33" opacity="0.9"/>
-                <!-- glow centre -->
-                <circle cx="40" cy="40" r="6" fill="url(#starburst-grad)"/>
-              </g>
-              <!-- outer ring dashes (like council_id barcode edge) -->
-              <circle cx="40" cy="40" r="34" stroke="#208c8d" stroke-width="1" stroke-dasharray="3 5" opacity="0.4"/>
-            </svg>
-          </div>
-          <!-- Mini sticker 4: ouroboros loop (square bubble reference) -->
-          <div class="sticker-chip">
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="chip-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ff9de2"/>
-                  <stop offset="25%" stop-color="#a8edff"/>
-                  <stop offset="50%" stop-color="#a8ff9d"/>
-                  <stop offset="75%" stop-color="#ffcc33"/>
-                  <stop offset="100%" stop-color="#c39af5"/>
-                </linearGradient>
-              </defs>
-              <!-- deep green void (like square_bubble bg) -->
-              <path d="M6 20 Q6 6 20 6 L60 6 Q74 6 74 20 L74 60 Q74 74 60 74 L20 74 Q6 74 6 60 Z" fill="#0d2015" stroke="url(#chip-rainbow)" stroke-width="3"/>
-              <!-- ouroboros ring -->
-              <circle cx="40" cy="38" r="20" stroke="url(#chip-rainbow)" stroke-width="3" fill="none" opacity="0.9"/>
-              <!-- mushroom cap inside -->
-              <ellipse cx="40" cy="33" rx="10" ry="7" fill="none" stroke="#a8ff9d" stroke-width="1.5" opacity="0.7"/>
-              <rect x="37" y="39" width="6" height="12" rx="3" fill="#208c8d" opacity="0.6"/>
-              <!-- heart symbol (like the sticker decoration) -->
-              <text x="28" y="72" fill="#ff9de2" font-size="10" opacity="0.8">♥</text>
-              <text x="46" y="72" fill="#ffcc33" font-size="8" opacity="0.7">✦</text>
-            </svg>
-          </div>
-        </div>
+        
 
 
         <!-- Contact -->
-        <section class="president-section">
+        <section class="president-section" data-pg-reveal>
           <h2 class="president-h2">{president.contactTitle}</h2>
           <p class="president-portal-reach">{president.contactReachLine}</p>
           <ul class="president-list">
@@ -934,36 +774,201 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   document.addEventListener("astro:page-load", initGallery);
 </script>
 
+<script>
+  /* Hero: starfield with constellation lines around the pointer (idle drift on touch), a seal that tilts
+     toward the pointer, scroll parallax, ticker speeding with scroll, magnetic button. Reduced motion: static stars. */
+  const hero = document.querySelector<HTMLElement>("[data-president-hero]");
+  const bg = hero?.querySelector<HTMLElement>(".president-hero-bg");
+  const canvas = hero?.querySelector<HTMLCanvasElement>(".hero-stars");
+  const emblem = hero?.querySelector<HTMLElement>("[data-emblem]");
+  const heroText = hero?.querySelector<HTMLElement>(".president-hero-text");
+  const track = hero?.querySelector<HTMLElement>(".president-ticker-track");
+  const btn = hero?.querySelector<HTMLElement>(".president-witness-btn");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  // Year chip: tap/click toggles (touch devices do not focus a span).
+  document.querySelectorAll<HTMLElement>(".president-censored").forEach((el) => {
+    el.addEventListener("click", () => el.classList.toggle("is-open"));
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); el.classList.toggle("is-open"); }
+    });
+  });
+
+  if (finePointer) {
+    document.querySelectorAll<HTMLElement>(".president-rule-card").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--cx", (e.clientX - r.left) + "px");
+        card.style.setProperty("--cy", (e.clientY - r.top) + "px");
+      }, { passive: true });
+    });
+  }
+
+  type Star = { x: number; y: number; z: number; r: number; ph: number };
+  if (reduce) emblem?.querySelector("svg")?.pauseAnimations();
+  if (hero && bg && canvas) {
+    const ctx = canvas.getContext("2d");
+    let w = 0, h = 0, dpr = 1;
+    let stars: Star[] = [];
+    let focusX = 0.68, focusY = 0.38, targetX = 0.68, targetY = 0.38;
+    let hasPointer = false, last = -9999, t = 0;
+    let streak: { x: number; y: number; vx: number; vy: number; life: number } | null = null;
+    let nextStreak = 3;
+    let lastY = window.scrollY, rate = 1, ex = 0, ey = 0;
+    const trackAnim = track?.getAnimations()[0];
+
+    const resize = () => {
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      w = hero.clientWidth; h = hero.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.min(260, Math.round((w * h) / 7000));
+      stars = Array.from({ length: n }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        z: 0.25 + Math.random() * 0.75, r: 0.4 + Math.random() * 1.3, ph: Math.random() * 6.28,
+      }));
+    };
+
+    const draw = () => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, w, h);
+      const fx = focusX * w, fy = focusY * h;
+      const ox = (focusX - 0.5) * -36, oy = (focusY - 0.5) * -24;
+      const pts: { x: number; y: number; z: number }[] = [];
+      for (const st of stars) {
+        const x = (((st.x + ox * st.z + t * 4 * st.z) % w) + w) % w;
+        const y = st.y + oy * st.z;
+        const tw = reduce ? 0.8 : 0.55 + 0.45 * Math.sin(t * 1.6 + st.ph);
+        ctx.globalAlpha = tw * (0.35 + st.z * 0.65);
+        ctx.fillStyle = st.z > 0.85 ? "#ffe9a8" : "#dfeff1";
+        ctx.beginPath(); ctx.arc(x, y, st.r * st.z + 0.2, 0, 6.283); ctx.fill();
+        if (Math.hypot(x - fx, y - fy) < 190) pts.push({ x, y, z: st.z });
+      }
+      // Constellation: lines join the stars near the focus point.
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < pts.length; i++) {
+        const a = pts[i];
+        const df = Math.hypot(a.x - fx, a.y - fy);
+        ctx.strokeStyle = "#ffcc33";
+        ctx.globalAlpha = Math.max(0, 1 - df / 190) * 0.55;
+        ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(a.x, a.y); ctx.stroke();
+        for (let j = i + 1; j < pts.length; j++) {
+          const b = pts[j];
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 95) {
+            ctx.strokeStyle = "#7fe3e4";
+            ctx.globalAlpha = (1 - d / 95) * Math.max(0, 1 - df / 190) * 0.6;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      if (streak) {
+        const g = ctx.createLinearGradient(streak.x, streak.y, streak.x - streak.vx * 14, streak.y - streak.vy * 14);
+        g.addColorStop(0, "rgba(255,240,190,0.95)"); g.addColorStop(1, "rgba(255,240,190,0)");
+        ctx.globalAlpha = Math.min(1, streak.life);
+        ctx.strokeStyle = g; ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(streak.x, streak.y); ctx.lineTo(streak.x - streak.vx * 14, streak.y - streak.vy * 14); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      targetX = (e.clientX - r.left) / r.width;
+      targetY = (e.clientY - r.top) / r.height;
+      hasPointer = true; last = performance.now();
+    }, { passive: true });
+    hero.addEventListener("pointerleave", () => { hasPointer = false; });
+    window.addEventListener("resize", () => { resize(); if (reduce) draw(); });
+    resize();
+
+    if (reduce) {
+      draw();
+    } else {
+      // Magnetic button
+      if (btn && finePointer) {
+        btn.addEventListener("pointermove", (e) => {
+          const r = btn.getBoundingClientRect();
+          btn.style.transform = `translate(${((e.clientX - (r.left + r.width / 2)) / r.width) * 14}px, ${((e.clientY - (r.top + r.height / 2)) / r.height) * 10}px)`;
+        });
+        btn.addEventListener("pointerleave", () => { btn.style.transform = ""; });
+      }
+      let prev = performance.now();
+      const tick = (now: number) => {
+        const dt = Math.min(0.05, (now - prev) / 1000); prev = now; t += dt;
+        const sy = window.scrollY;
+        const vel = sy - lastY; lastY = sy;
+        const visible = sy < hero.offsetHeight && !document.hidden;
+        if (visible) {
+          if (!hasPointer || now - last > 2500) { targetX = 0.62 + Math.sin(t * 0.5) * 0.2; targetY = 0.4 + Math.cos(t * 0.42) * 0.22; }
+          focusX += (targetX - focusX) * 0.06; focusY += (targetY - focusY) * 0.06;
+          bg.style.setProperty("--mx", (focusX * 100).toFixed(2) + "%");
+          bg.style.setProperty("--my", (focusY * 100).toFixed(2) + "%");
+          if (emblem) {
+            ey += (((focusX - 0.5) * 24) - ey) * 0.06; ex += (((0.5 - focusY) * 18) - ex) * 0.06;
+            emblem.style.setProperty("--ey", ey.toFixed(2) + "deg");
+            emblem.style.setProperty("--ex", ex.toFixed(2) + "deg");
+          }
+          nextStreak -= dt;
+          if (!streak && nextStreak <= 0) {
+            streak = { x: Math.random() * w * 0.7, y: Math.random() * h * 0.4, vx: 9 + Math.random() * 5, vy: 4 + Math.random() * 3, life: 1 };
+            nextStreak = 5 + Math.random() * 6;
+          }
+          if (streak) {
+            streak.x += streak.vx; streak.y += streak.vy; streak.life -= dt * 1.1;
+            if (streak.life <= 0 || streak.x > w + 40) streak = null;
+          }
+          draw();
+          if (heroText) {
+            const k = Math.min(1, sy / (hero.offsetHeight * 0.8));
+            heroText.style.transform = `translate3d(0, ${sy * 0.22}px, 0)`;
+            heroText.style.opacity = String(1 - k * 0.9);
+          }
+        }
+        if (trackAnim) {
+          const target = 1 + Math.min(8, Math.abs(vel) * 0.5) * (vel < 0 ? -1 : 1);
+          rate += (target - rate) * 0.08;
+          trackAnim.playbackRate = rate;
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+  }
+
+  if (!reduce && "IntersectionObserver" in window) {
+    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-pg-reveal]"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting || en.boundingClientRect.top < 0) {
+          en.target.classList.add("is-in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    items.forEach((el) => { el.classList.add("pg-reveal"); io.observe(el); });
+  }
+</script>
+
 <style>
-  /* ─── Hero: V2 as a die-cut sticker on black ─── */
-  .president-portal--sticker {
-    background:
-      radial-gradient(circle at 50% 42%, rgba(32, 140, 141, 0.28), transparent 62%),
-      #05080b;
+  /* ─── Hero: provenance line ─── */
+  .president-provenance-line {
+    max-width: 34rem;
+    margin: 1.25rem 0 1.75rem;
+    font-size: 0.7rem;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--eden-text-muted);
   }
-  /* In normal flow on purpose: the image's own width is what sizes the portal,
-     so the existing responsive portal widths keep working. */
-  .sticker-stage {
-    box-sizing: border-box;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 5% 11% 23%;
+  .president-provenance-line span {
+    display: block;
+    color: var(--eden-gold);
+    font-weight: 700;
+    letter-spacing: 0.18em;
   }
-  .president-sticker-img,
-  .sticker-holo-rim {
-    grid-area: 1 / 1;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-  }
-  .president-sticker-img {
-    position: relative;
-    z-index: 1;
-    object-fit: contain;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.55));
-  }
+
   /* LEARN: the rim is the sticker's own silhouette used as a mask, filled with the
      holographic gradient and scaled up slightly, so it reads as a foil edge. */
   .sticker-holo-rim {
@@ -983,25 +988,6 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   @keyframes sticker-holo-shift {
     from { background-position: 0% 30%; }
     to { background-position: 100% 70%; }
-  }
-  /* The stamp shrinks to a small label under the sticker. Double class: it must beat
-     the responsive stamp rules further down this file. */
-  .president-portal.president-portal--sticker .image-status-stamp {
-    right: 20%;
-    bottom: 5%;
-    left: 20%;
-    padding: 0.35rem 0.5rem;
-    font-size: 0.72em;
-  }
-  .president-portal.president-portal--sticker .image-status-stamp li {
-    font-size: 1em;
-    line-height: 1.35;
-  }
-  /* On a small portal the stamp would cover the whole sticker; "Two voices" below carries
-     the same provenance, so the stamp steps aside and the sticker gets the full circle. */
-  @media (max-width: 640px) {
-    .president-portal.president-portal--sticker .image-status-stamp { display: none; }
-    .president-portal--sticker .sticker-stage { padding: 9% 12%; }
   }
   /* The same foil, quieter, for the V2 card beside V1. */
   .v2-artwork--sticker {
@@ -1046,23 +1032,37 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     margin-top: 1.75rem;
     padding: 0.9rem 1.6rem;
     border-radius: 999px;
-    background: var(--eden-text);
-    color: #fff;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #ffcc33;
+    color: #120d00;
     font-family: 'Space Mono', ui-monospace, monospace;
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-decoration: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    transition: transform 0.25s ease-out;
   }
-  .president-witness-btn:hover { transform: translateY(-2px); background: var(--eden-primary); box-shadow: 0 10px 28px rgba(32, 140, 141, 0.28); }
+  .president-witness-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--eden-primary);
+    transform: translateX(-101%);
+    transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+  .president-witness-btn:hover::before { transform: translateX(0); }
+  .president-witness-btn > span { display: inline-block; transition: transform 0.35s cubic-bezier(0.16, 0.84, 0.24, 1); }
+  .president-witness-btn:hover > span { transform: translateY(3px); }
   .president-witness-btn:focus-visible { outline: 2px solid var(--eden-gold); outline-offset: 4px; }
 
   .president-test { scroll-margin-top: 5rem; }
   .test-progress {
     margin: 2rem 0;
     padding: 1.5rem 1.75rem;
-    border: 1px solid rgba(19, 66, 82, 0.15);
+    border: 1px solid rgba(170, 225, 232, 0.15);
     border-left: 4px solid var(--eden-gold);
     border-radius: 0 12px 12px 0;
     background: rgba(255, 204, 51, 0.06);
@@ -1076,12 +1076,12 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     color: var(--eden-gold) !important;
   }
   .test-progress-count { margin-top: 0.4rem !important; font-size: clamp(1.1rem, 2vw, 1.5rem) !important; color: var(--eden-text) !important; }
-  .test-progress-count strong { font-family: 'Bungee', 'Space Grotesk', sans-serif; font-weight: 400; font-size: 1.4em; }
+  .test-progress-count strong { font-family: 'Bungee', 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.4em; }
   .test-progress-bar {
     height: 14px;
     margin: 1rem 0 0.75rem;
     border-radius: 999px;
-    background: rgba(19, 66, 82, 0.1);
+    background: rgba(170, 225, 232, 0.1);
     overflow: hidden;
   }
   .test-progress-bar span {
@@ -1101,7 +1101,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
   .test-edition { display: block; min-width: 0; color: inherit; text-decoration: none; }
   .test-edition .v2-artwork { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .test-edition:hover .v2-artwork { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(19, 66, 82, 0.2); }
+  .test-edition:hover .v2-artwork { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5); }
   .test-edition:focus-visible { outline: 2px solid var(--eden-primary); outline-offset: 4px; border-radius: 0.5rem; }
   .test-edition p { margin: 0 !important; }
   .test-edition-label { margin-top: 0.75rem !important; font-weight: 700; color: var(--eden-text) !important; }
@@ -1123,7 +1123,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   .ballot-box {
     position: absolute;
     top: 1.5rem;
-    right: 1.5rem;
+    right: 0;
     width: 1.6rem;
     height: 1.6rem;
     border: 2px solid var(--eden-text);
@@ -1149,7 +1149,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     gap: 0.5rem 1.75rem;
     margin: 2rem 0 1.25rem !important;
     padding-top: 1.25rem;
-    border-top: 1px solid rgba(19, 66, 82, 0.15);
+    border-top: 1px solid rgba(170, 225, 232, 0.15);
     font-family: 'Space Mono', ui-monospace, monospace;
     font-size: 0.85rem !important;
     color: var(--eden-text-muted) !important;
@@ -1169,7 +1169,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   /* Keep the edition subordinate to the campaign and its first practical test. */
-  .president-v2 { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(19, 66, 82, 0.15); scroll-margin-top: 6rem; }
+  .president-v2 { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(170, 225, 232, 0.15); scroll-margin-top: 6rem; }
   .v2-overview { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
   .v2-context { min-width: 0; }
   .president-v2 h3 { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.2; color: var(--eden-text); margin: 0 0 1rem; }
@@ -1187,7 +1187,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   .v2-details summary { width: fit-content; min-height: 44px; padding-block: 0.65rem; cursor: pointer; color: var(--eden-primary); font-size: 1rem; }
   .v2-edition-link:focus-visible, .v2-details summary:focus-visible { outline: 2px solid var(--eden-primary); outline-offset: 4px; }
   .v2-updates { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 1rem; }
-  .v2-updates article { border-top: 1px solid rgba(19, 66, 82, 0.15); padding-top: 1rem; min-width: 0; }
+  .v2-updates article { border-top: 1px solid rgba(170, 225, 232, 0.15); padding-top: 1rem; min-width: 0; }
   .v2-updates h4 { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 1.125rem; line-height: 1.3; color: var(--eden-text); margin-bottom: 0.75rem; }
   @media (min-width: 900px) { .v2-overview { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); gap: 2rem; } }
   @media (min-width: 900px) { .v2-updates { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -1225,7 +1225,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   .president-gallery-dialog::backdrop {
-    background: rgba(250, 247, 242, 0.97);
+    background: rgba(4, 7, 10, 0.96);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
@@ -1237,7 +1237,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     justify-content: space-between;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(19, 66, 82, 0.15);
+    border-bottom: 1px solid rgba(170, 225, 232, 0.15);
     flex-shrink: 0;
     background: var(--eden-bg, #fcf8f9);
   }
@@ -1266,8 +1266,8 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   .gallery-btn {
-    background: rgba(19, 66, 82, 0.05);
-    border: 1px solid rgba(19, 66, 82, 0.15);
+    background: rgba(170, 225, 232, 0.05);
+    border: 1px solid rgba(170, 225, 232, 0.15);
     color: var(--eden-text, #134252);
     width: 44px;
     height: 44px;
@@ -1282,8 +1282,8 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   .gallery-btn:hover {
-    background: rgba(19, 66, 82, 0.1);
-    border-color: rgba(19, 66, 82, 0.3);
+    background: rgba(170, 225, 232, 0.1);
+    border-color: rgba(170, 225, 232, 0.3);
     color: var(--eden-primary, #208c8d);
     transform: translateY(-1px);
   }
@@ -1313,7 +1313,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     cursor: grab;
     touch-action: none;
     border-top: none;
-    background: rgba(19, 66, 82, 0.03);
+    background: rgba(170, 225, 232, 0.03);
   }
 
   .gallery-img-container {
@@ -1333,7 +1333,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;
-    box-shadow: 0 24px 80px rgba(19, 66, 82, 0.15);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
     border-radius: 4px;
   }
 
@@ -1343,7 +1343,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(19, 66, 82, 0.85);
+    background: rgba(170, 225, 232, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
     padding: 0.4rem 1rem;
@@ -1361,12 +1361,14 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ─── Base theme variables ─── */
   .president-eden-wrap {
-    --eden-bg: #fcf8f9;
-    --eden-text: #134252;
-    --eden-text-muted: #627078;
-    --eden-primary: #208c8d;
-    --eden-gold: #a67c00;
+    --eden-bg: #06090c;
+    --eden-text: #e9f1f2;
+    --eden-text-muted: #94a6ab;
+    --eden-primary: #3fd3d4;
+    --eden-gold: #e2b93b;
     --eden-gold-bright: #ffcc33;
+    --eden-surface: #0d1318;
+    --eden-line: rgba(170, 225, 232, 0.14);
     position: relative;
     min-height: 100dvh;
     background: var(--eden-bg);
@@ -1374,6 +1376,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ─── HERO ─── */
   .president-hero {
+    overflow-x: clip;
     padding: 3rem 0 0;
   }
 
@@ -1381,156 +1384,177 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     max-width: 72rem;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    min-height: 60dvh;
-  }
-
-  /* ─── Portal image ─── */
-  .president-portal-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    /* Must be fit-content so the absolute badge-ring hugs the portal, not the whole grid column */
-    width: fit-content;
-    margin: 0 auto;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    min-height: 58dvh;
+    padding-block: 2rem;
   }
 
-  /* ─── Holographic badge ring ─── */
-  .portal-badge-ring {
+  /* ─── Hero: dark, alive ─── */
+  .president-hero {
+    position: relative;
+    isolation: isolate;
+    padding: 3rem 0 0;
+    background: #04070a;
+  }
+  .president-hero-inner { min-height: 76dvh; padding-block: 2.5rem 3.5rem; }
+  .president-hero-text { position: relative; z-index: 1; }
+  .president-hero-bg {
     position: absolute;
-    inset: -28px;
-    pointer-events: none;
-    animation: holo-spin 18s linear infinite;
-    z-index: 1;
-  }
-
-  .badge-ring-svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  @keyframes holo-spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  .president-portal {
-    position: relative;
-    width: min(380px, 100%);
-    aspect-ratio: 1 / 1;
-    border-radius: 62% 38% 55% 45% / 52% 48% 60% 40%;
+    inset: 0;
+    z-index: 0;
     overflow: hidden;
-    box-shadow:
-      0 0 0 3px rgba(32, 140, 141, 0.25),
-      0 0 30px rgba(32, 140, 141, 0.3),
-      0 0 80px rgba(166, 124, 0, 0.15),
-      0 20px 60px rgba(19, 66, 82, 0.2);
-    transition: box-shadow 0.4s ease;
-    animation: portal-morph 10s ease-in-out infinite;
-  }
-
-  .president-portal:hover {
-    box-shadow:
-      0 0 0 3px rgba(32, 140, 141, 0.5),
-      0 0 50px rgba(32, 140, 141, 0.5),
-      0 0 120px rgba(166, 124, 0, 0.25),
-      0 20px 80px rgba(19, 66, 82, 0.3);
-  }
-
-  @keyframes portal-morph {
-    0%   { border-radius: 62% 38% 55% 45% / 52% 48% 60% 40%; }
-    25%  { border-radius: 50% 50% 40% 60% / 60% 40% 55% 45%; }
-    50%  { border-radius: 38% 62% 46% 54% / 48% 52% 44% 56%; }
-    75%  { border-radius: 55% 45% 60% 40% / 42% 58% 48% 52%; }
-    100% { border-radius: 62% 38% 55% 45% / 52% 48% 60% 40%; }
-  }
-
-  .president-portal-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-  }
-
-  /* ─── Visible image provenance ─── */
-  .image-status-stamp {
-    position: absolute;
-    right: 0.8rem;
-    bottom: 0.8rem;
-    left: 0.8rem;
-    z-index: 3;
-    padding: 0.7rem 0.8rem;
-    color: #fff;
-    text-align: center;
-    background: rgba(5, 24, 31, 0.84);
-    border: 1px solid rgba(255, 204, 51, 0.7);
-    box-shadow: 0 8px 24px rgba(5, 24, 31, 0.28);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  .image-status-stamp > span {
-    display: block;
-    margin-bottom: 0.38rem;
-    color: var(--eden-gold-bright);
-    font-family: 'Space Mono', ui-monospace, monospace;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-  }
-
-  .image-status-stamp ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.12rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .image-status-stamp li {
-    position: relative;
-    padding-left: 0.75rem;
-    font-family: 'Space Mono', ui-monospace, monospace;
-    font-size: 0.52rem;
-    line-height: 1.45;
-    letter-spacing: 0.06em;
-  }
-
-  .image-status-stamp li::before {
-    position: absolute;
-    left: 0;
-    color: #78d6d7;
-    content: '●';
-  }
-
-  /* ─── Orbiting star ─── */
-  .portal-orbit {
-    position: absolute;
-    inset: -20px;
-    animation: orbit-spin 12s linear infinite;
     pointer-events: none;
+    --mx: 68%;
+    --my: 38%;
   }
-
-  .orbit-star {
+  .hero-aurora {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 22px;
-    height: 22px;
-    filter: drop-shadow(0 0 6px #ffcc33);
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.55;
+    will-change: transform;
+  }
+  .hero-aurora--teal {
+    width: 46rem; height: 34rem; left: -12rem; top: -10rem;
+    background: radial-gradient(closest-side, rgba(63, 211, 212, 0.55), transparent);
+    animation: aurora-a 22s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-a { to { transform: translate3d(14rem, 9rem, 0) scale(1.15); } }
+  .hero-spot {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(26rem circle at var(--mx) var(--my), rgba(63, 211, 212, 0.1), transparent 70%);
+  }
+  .president-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 1.6rem;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--eden-gold-bright);
+    animation: none;
+    font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+  }
+  .president-eyebrow::before {
+    content: "";
+    width: 2.6rem;
+    height: 1px;
+    background: currentColor;
+  }
+  .president-status-block {
+    display: grid;
+    gap: 0.1rem;
+    width: fit-content;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--eden-line);
+    border-left: 2px solid var(--eden-primary);
+    border-radius: 0 10px 10px 0;
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .president-status-block > div::before { content: "› "; color: var(--eden-primary); }
+  .hud-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.3em;
+    vertical-align: -0.12em;
+    background: var(--eden-primary);
+    animation: hud-blink 1.1s steps(1) infinite;
+  }
+  @keyframes hud-blink { 50% { opacity: 0; } }
+  .president-ticker {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border-block: 1px solid var(--eden-line);
+    background: rgba(4, 7, 10, 0.7);
+  }
+  .president-ticker-track { display: flex; width: max-content; animation: ticker-run 38s linear infinite; }
+  .president-ticker-group { display: flex; flex: none; }
+  .president-ticker-group span {
+    padding: 0.85rem 1.6rem;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--eden-text-muted);
+    white-space: nowrap;
+  }
+  .president-ticker-group span::after { content: "✦"; margin-left: 1.6rem; color: var(--eden-gold); }
+  @keyframes ticker-run { to { transform: translateX(-50%); } }
+  .president-hairline {
+    height: 1px;
+    margin: 0;
+    border: 0;
+    background: linear-gradient(90deg, transparent, var(--eden-line), var(--eden-primary), var(--eden-line), transparent);
+    opacity: 0.6;
+  }
+  /* Scroll reveal: hidden only after the script has run, so no-JS and anchor jumps stay visible. */
+  :global(.pg-reveal) { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 0.84, 0.24, 1); }
+  :global(.pg-reveal.is-in) { opacity: 1; transform: none; }
+  :global(.pg-reveal .president-h2) { clip-path: inset(0 100% 0 0); transition: clip-path 1s cubic-bezier(0.7, 0, 0.2, 1) 0.15s; }
+  :global(.pg-reveal.is-in .president-h2) { clip-path: inset(0 0 0 0); }
+  :global(.pg-reveal .president-rule-card),
+  :global(.pg-reveal .test-edition) { opacity: 0; transform: translateY(34px); transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.16, 0.84, 0.24, 1); }
+  :global(.pg-reveal.is-in .president-rule-card),
+  :global(.pg-reveal.is-in .test-edition) { opacity: 1; transform: none; }
+  :global(.pg-reveal.is-in .president-rule-card:nth-child(2)),
+  :global(.pg-reveal.is-in .test-edition:nth-child(2)) { transition-delay: 0.12s; }
+  :global(.pg-reveal.is-in .president-rule-card:nth-child(3)) { transition-delay: 0.24s; }
+  :global(.pg-reveal.is-in .president-rule-card:nth-child(4)) { transition-delay: 0.36s; }
+  @media (prefers-reduced-motion: reduce) {
+    .hl-char { animation: none; transform: none; }
+    .hero-aurora, .president-ticker-track, .hud-cursor { animation: none; }
+    :global(.pg-reveal), :global(.pg-reveal .president-h2), :global(.pg-reveal .president-rule-card), :global(.pg-reveal .test-edition) { opacity: 1; transform: none; clip-path: none; transition: none; }
   }
 
-  @keyframes orbit-spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+  /* ─── Cosmic hero: stars + seal ─── */
+  .hero-stars { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-emblem {
+    position: absolute;
+    z-index: 0;
+    right: max(-4rem, calc(50% - 40rem));
+    top: 50%;
+    width: clamp(19rem, 50vw, 42rem);
+    aspect-ratio: 1;
+    margin-top: calc(clamp(19rem, 50vw, 42rem) / -2);
+    pointer-events: none;
+    transform: perspective(1000px) rotateX(var(--ex, 0deg)) rotateY(var(--ey, 0deg));
+    will-change: transform;
+  }
+  .hero-emblem svg { width: 100%; height: 100%; overflow: visible; }
+  .hero-emblem svg > * { transform-origin: 300px 300px; transform-box: view-box; }
+  .emblem-ticks line { stroke: rgba(255, 204, 51, 0.55); stroke-width: 1.2; }
+  .emblem-text text { font-family: 'Space Mono', ui-monospace, monospace; font-size: 17px; font-weight: 700; fill: rgba(255, 204, 51, 0.6); }
+  .emblem-text { animation: emblem-spin 140s linear infinite; }
+  .emblem-ring { stroke: rgba(63, 211, 212, 0.35); stroke-width: 1; }
+  .emblem-ring--a { stroke-dasharray: 2 9; stroke: rgba(255, 204, 51, 0.5); }
+  .emblem-ring--c { stroke-dasharray: 1 6; }
+  .emblem-orbit--a { animation: emblem-spin 46s linear infinite; }
+  .emblem-orbit--b { animation: emblem-spin 30s linear infinite reverse; }
+  .emblem-orbit--c { animation: emblem-spin 18s linear infinite; }
+  .moon--teal { fill: #3fd3d4; }
+  .moon--gold { fill: #ffcc33; }
+  .moon--white { fill: #e9f1f2; }
+  .planet-ring { stroke: rgba(255, 224, 138, 0.9); stroke-width: 3; fill: none; }
+  .planet-ring--back { opacity: 0.45; }
+  .hero-emblem svg > .emblem-square-orbit { transform-origin: 300px 300px; }
+  .square-orbit-track { fill: none; stroke: rgba(255, 157, 226, 0.28); stroke-width: 1; stroke-dasharray: 3 7; }
+  .square-spin { animation: square-turn 12s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes square-turn { to { transform: rotate(392deg); } }
+  .emblem-planet { animation: planet-bob 9s ease-in-out infinite alternate; }
+  @keyframes emblem-spin { to { transform: rotate(360deg); } }
+  @keyframes planet-bob { to { transform: translateY(-8px); } }
+  @media (max-width: 900px) {
+    .hero-emblem { right: -32%; width: 28rem; margin-top: -14rem; opacity: 0.5; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .emblem-text, .emblem-orbit--a, .emblem-orbit--b, .emblem-orbit--c, .emblem-planet, .square-spin { animation: none; }
   }
 
   /* ─── Hero text ─── */
@@ -1551,38 +1575,36 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   .president-headline {
-    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-    /*
-     * Bungee is very wide. The text column is ~50% of viewport at desktop.
-     * 3.2vw at a 1150px viewport = 36.8px → "PRESIDENT OF" ≈ 12 chars × 0.72em = 318px  ✓
-     * clamp keeps it legible on small screens and prevents overflow on the narrow column.
-     */
-    font-size: clamp(2rem, 3.2vw, 5rem);
-    font-weight: 400;
-    line-height: 0.96;
-    letter-spacing: -0.01em;
-    margin: 0 0 2rem 0;
-    /* Never break mid-word — the <br/> already splits the two lines correctly */
+    margin: 0 0 2.25rem;
+    font-family: 'Bricolage Grotesque', 'Arial Narrow', Arial, sans-serif;
+    font-variation-settings: "wdth" 78;
+    font-size: clamp(3rem, min(14.5vw, 25dvh), 10.5rem);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
-    background: linear-gradient(
-      135deg,
-      #000 15%,
-      #a67c00 35%,
-      #ffcc33 50%,
-      #a67c00 65%,
-      #000 85%
-    );
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: president-gold-shine 6s linear infinite;
   }
+  .hl-line {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    padding: 0.04em 0 0.1em;
+    white-space: pre;
+  }
+  .hl-space { display: inline-block; width: 0.24em; flex: none; }
+  .hl-char {
+    display: inline-block;
+    color: #e9f1f2;
+    transform: translateY(112%);
+    animation: hl-rise 0.9s cubic-bezier(0.16, 0.84, 0.24, 1) calc(0.1s + var(--i) * 32ms) forwards;
+  }
+  @keyframes hl-rise { to { transform: translateY(0); } }
 
   @keyframes president-gold-shine {
-    to { background-position: 200% center; }
+    to { background-position: 0% center; }
   }
 
   .president-status-block {
@@ -1601,18 +1623,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   /* ─── Cosmic dividers ─── */
-  .cosmic-divider {
-    width: 100%;
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 0.5rem 1.5rem;
-    overflow: hidden;
-  }
 
-  .cosmic-divider svg {
-    width: 100%;
-    height: 32px;
-  }
 
   /* ─── Main content layout ─── */
   .president-main-content {
@@ -1622,7 +1633,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   .president-section {
     padding: 4rem 0;
-    border-bottom: 1px solid rgba(19, 66, 82, 0.1);
+    border-bottom: 1px solid rgba(170, 225, 232, 0.1);
   }
 
   .president-section:last-of-type {
@@ -1631,17 +1642,33 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ─── Section headings ─── */
   .president-h2 {
-    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(1.6rem, 3vw, 3.2rem);
-    font-weight: 400;
+    font-family: 'Bricolage Grotesque', 'Arial Narrow', Arial, sans-serif;
+    font-variation-settings: "wdth" 84;
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    font-weight: 800;
     color: var(--eden-text);
     margin: 0 0 1.5rem 0;
-    letter-spacing: -0.01em;
-    line-height: 1;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  /* Section index, counted by CSS: 01 /, 02 / ... */
+  .president-main-content { counter-reset: pg-sec; }
+  .president-section > .president-h2::before {
+    counter-increment: pg-sec;
+    content: "0" counter(pg-sec) " /";
+    display: block;
+    margin-bottom: 0.9rem;
+    font-family: 'Space Mono', ui-monospace, monospace;
+    font-variation-settings: normal;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--eden-gold);
   }
 
   .president-h3 {
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1rem, 1.6vw, 1.5rem);
     font-weight: 700;
     color: var(--eden-text);
@@ -1652,14 +1679,19 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ─── Lead / body text ─── */
   .president-lead {
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.22;
+    max-width: 52rem;
     color: var(--eden-text);
     margin: 0;
   }
 
+  .president-section .president-lead {
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+    line-height: 1.22;
+  }
   .president-section p {
     font-size: clamp(1rem, 1.5vw, 1.4rem);
     line-height: 1.65;
@@ -1676,9 +1708,9 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     background:
       linear-gradient(90deg, rgba(32, 140, 141, 0.09) 1px, transparent 1px),
       linear-gradient(rgba(32, 140, 141, 0.09) 1px, transparent 1px),
-      #fff;
+      var(--eden-surface);
     background-size: 24px 24px;
-    border: 1px solid rgba(19, 66, 82, 0.2);
+    border: 1px solid rgba(170, 225, 232, 0.2);
     border-top: 5px solid var(--eden-text);
     box-shadow: 12px 12px 0 rgba(32, 140, 141, 0.12);
   }
@@ -1723,7 +1755,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     max-width: 58rem;
     margin: 0 0 2.25rem;
     color: var(--eden-text);
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.05rem, 1.7vw, 1.42rem);
     line-height: 1.65;
   }
@@ -1739,8 +1771,10 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   .authorship-voice {
     min-width: 0;
     padding: clamp(1.2rem, 2.5vw, 2rem);
-    background: rgba(252, 248, 249, 0.94);
-    border: 1px solid rgba(19, 66, 82, 0.2);
+    background: rgba(255, 255, 255, 0.045);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(170, 225, 232, 0.2);
   }
 
   .authorship-voice.is-human {
@@ -1762,7 +1796,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   .authorship-speaker {
     color: var(--eden-text);
-    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', 'Arial Narrow', Arial, sans-serif;
     font-size: clamp(1rem, 1.8vw, 1.45rem);
     line-height: 1;
   }
@@ -1827,13 +1861,13 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   .ai-name-alias:nth-child(3) {
     color: var(--eden-text);
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.06em;
   }
 
   .ai-name-alias:nth-child(4) {
     color: var(--eden-primary);
-    font-family: 'Bungee', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', 'Arial Narrow', Arial, sans-serif;
     font-size: 0.66em;
     letter-spacing: 0;
   }
@@ -1861,7 +1895,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     font-weight: 400;
     letter-spacing: 0.01em;
     line-height: 1.5;
-    background: #fff;
+    background: var(--eden-surface);
     border: 1px solid var(--eden-primary);
     box-shadow: 5px 5px 0 rgba(32, 140, 141, 0.15);
     pointer-events: none;
@@ -1929,7 +1963,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     z-index: 1;
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px dashed rgba(19, 66, 82, 0.35);
+    border-top: 1px dashed rgba(170, 225, 232, 0.35);
   }
 
   .authorship-provenance > h3 {
@@ -1949,8 +1983,8 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   .provenance-entry {
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.84);
-    border: 1px solid rgba(19, 66, 82, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(170, 225, 232, 0.14);
   }
 
   .provenance-entry-heading {
@@ -1965,7 +1999,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   .provenance-entry h4 {
     margin: 0;
     color: var(--eden-text);
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: 1rem;
   }
 
@@ -1994,7 +2028,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     margin: 2.25rem 0 0;
     padding-left: 1rem;
     color: var(--eden-text);
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1rem, 1.5vw, 1.25rem);
     font-weight: 700;
     line-height: 1.55;
@@ -2044,7 +2078,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     box-shadow:
       0 0 0 2px rgba(32, 140, 141, 0.2),
       0 0 20px rgba(32, 140, 141, 0.2),
-      0 8px 32px rgba(19, 66, 82, 0.15);
+      0 8px 32px rgba(0, 0, 0, 0.38);
     transition: all 0.4s ease;
     flex-shrink: 0;
   }
@@ -2054,7 +2088,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     box-shadow:
       0 0 0 2px rgba(32, 140, 141, 0.4),
       0 0 35px rgba(32, 140, 141, 0.35),
-      0 8px 40px rgba(19, 66, 82, 0.25);
+      0 8px 40px rgba(0, 0, 0, 0.62);
   }
 
   .president-mini-portal img {
@@ -2113,39 +2147,10 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   /* ─── Sticker strip ─── */
-  .sticker-strip {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding: 2.5rem 0;
-    flex-wrap: wrap;
-  }
 
-  .sticker-chip {
-    width: 76px;
-    height: 76px;
-    flex-shrink: 0;
-    filter: drop-shadow(0 4px 12px rgba(19, 66, 82, 0.15));
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
-    cursor: default;
-    animation: chip-float 4s ease-in-out infinite;
-  }
 
-  .sticker-chip:nth-child(1) { animation-delay: 0s; }
-  .sticker-chip:nth-child(2) { animation-delay: 0.8s; }
-  .sticker-chip:nth-child(3) { animation-delay: 1.6s; }
-  .sticker-chip:nth-child(4) { animation-delay: 2.4s; }
 
-  .sticker-chip:hover {
-    transform: scale(1.18) rotate(-6deg);
-    filter: drop-shadow(0 8px 20px rgba(32, 140, 141, 0.35));
-  }
 
-  .sticker-chip svg {
-    width: 100%;
-    height: 100%;
-  }
 
   @keyframes chip-float {
     0%, 100% { transform: translateY(0px); }
@@ -2155,52 +2160,77 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   /* ─── Rules: campaign platform cards ─── */
   .president-rules-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.25rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2.5rem 2.75rem;
+    margin-top: 1.5rem;
   }
 
   .president-rule-card {
     position: relative;
-    padding: 1.75rem;
-    background: rgba(19, 66, 82, 0.03);
-    border: 1px solid rgba(19, 66, 82, 0.1);
-    border-top: 3px solid var(--eden-primary);
-    border-radius: 0 0 12px 12px;
-    transition: all 0.25s ease;
-    overflow: hidden;
+    padding: 1.4rem 0 0.4rem;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--eden-line);
+    border-radius: 0;
+    isolation: isolate;
+    transition: transform 0.45s cubic-bezier(0.16, 0.84, 0.24, 1);
   }
-
+  /* Top rule that draws itself in teal on hover. */
   .president-rule-card::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(32, 140, 141, 0.04) 0%, transparent 60%);
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--eden-primary), var(--eden-gold-bright));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.7s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+  /* Soft light that follows the pointer inside the card. */
+  .president-rule-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px -1.2rem 0;
+    z-index: -1;
+    background: radial-gradient(18rem circle at var(--cx, 50%) var(--cy, 0%), rgba(63, 211, 212, 0.09), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
     pointer-events: none;
   }
-
-  .president-rule-card:hover {
-    background: rgba(19, 66, 82, 0.06);
-    border-color: rgba(19, 66, 82, 0.2);
-    border-top-color: var(--eden-primary);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(19, 66, 82, 0.1);
-  }
+  .president-rule-card:hover { transform: translateY(-4px); }
+  .president-rule-card:hover::before { transform: scaleX(1); }
+  .president-rule-card:hover::after { opacity: 1; }
 
   .rule-number {
     display: block;
+    margin-bottom: 1rem;
+    font-family: 'Bricolage Grotesque', 'Arial Narrow', Arial, sans-serif;
+    font-variation-settings: "wdth" 80;
+    font-size: clamp(3.4rem, 6vw, 5.2rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 204, 51, 0.7);
+    transition: color 0.5s ease, -webkit-text-stroke-color 0.5s ease;
+  }
+  .president-rule-card:hover .rule-number { color: rgba(255, 204, 51, 0.92); -webkit-text-stroke-color: transparent; }
+  .rule-article {
+    display: block;
+    margin-bottom: 0.6rem;
     font-family: 'Space Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: var(--eden-primary);
+    font-variation-settings: normal;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    opacity: 0.7;
+    -webkit-text-stroke: 0;
+    color: var(--eden-primary);
   }
 
   .president-rule-card p {
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem) !important;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem) !important;
     margin: 0 !important;
     line-height: 1.65 !important;
   }
@@ -2212,23 +2242,23 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   .artwork-info-card.president-glass {
     position: relative;
-    background: #ffffff;
-    border: 1px solid rgba(19, 66, 82, 0.12);
+    background: var(--eden-surface);
+    border: 1px solid rgba(170, 225, 232, 0.12);
     border-radius: 24px;
     max-width: 960px;
     margin: 0 auto;
     overflow: hidden;
     box-shadow: 
-      0 4px 24px rgba(19, 66, 82, 0.04),
-      0 20px 48px rgba(19, 66, 82, 0.06);
+      0 4px 24px rgba(0, 0, 0, 0.1),
+      0 20px 48px rgba(0, 0, 0, 0.15);
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .artwork-info-card.president-glass:hover {
     transform: translateY(-4px);
     box-shadow: 
-      0 8px 32px rgba(19, 66, 82, 0.08),
-      0 28px 64px rgba(19, 66, 82, 0.12);
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      0 28px 64px rgba(0, 0, 0, 0.3);
     border-color: rgba(32, 140, 141, 0.3);
   }
 
@@ -2293,9 +2323,9 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     aspect-ratio: 4 / 3;
     background: #fdfcfb;
     padding: 12px;
-    border: 1px solid rgba(19, 66, 82, 0.12);
+    border: 1px solid rgba(170, 225, 232, 0.12);
     box-shadow: 
-      0 8px 24px rgba(19, 66, 82, 0.06),
+      0 8px 24px rgba(0, 0, 0, 0.15),
       0 2px 6px rgba(0, 0, 0, 0.03);
     border-radius: 2px;
     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
@@ -2307,7 +2337,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     content: '';
     position: absolute;
     inset: -5px;
-    border: 6px dotted #ffffff;
+    border: 6px dotted var(--eden-surface);
     border-radius: 4px;
     pointer-events: none;
     z-index: 3;
@@ -2317,7 +2347,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border: 1px solid rgba(19, 66, 82, 0.08);
+    border: 1px solid rgba(170, 225, 232, 0.08);
     border-radius: 1px;
   }
 
@@ -2364,14 +2394,13 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     padding: 1px 4px;
     border-radius: 1px;
     z-index: 4;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(13, 19, 24, 0.85);
   }
 
   .artwork-info-card.president-glass:hover .postage-stamp {
     transform: translateY(-8px) rotate(-1.5deg) scale(1.02);
     box-shadow: 
-      0 18px 36px rgba(19, 66, 82, 0.12),
+      0 18px 36px rgba(0, 0, 0, 0.3),
       0 4px 12px rgba(0, 0, 0, 0.04);
   }
 
@@ -2405,7 +2434,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     -webkit-text-fill-color: transparent;
     animation: president-gold-shine-title 10s linear infinite;
     color: transparent;
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.4rem, 2.2vw, 2.2rem);
     font-weight: 700;
     line-height: 1.15;
@@ -2465,7 +2494,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ─── Contact section ─── */
   .president-portal-reach {
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.1rem, 1.5vw, 1.5rem);
     font-weight: 700;
     color: var(--eden-text);
@@ -2477,7 +2506,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   }
 
   .president-portal-meta p {
-    font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(0.95rem, 1.2vw, 1.2rem);
     color: var(--eden-text-muted);
     margin-bottom: 0.75rem;
@@ -2525,26 +2554,47 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ─── Censored reveal ─── */
   .president-censored {
-    display: inline-block;
+    display: inline-grid;
+    place-items: center;
     position: relative;
+    min-width: 2.6em;
+    margin: 0 0.15em;
+    padding: 0.05em 0.5em;
     cursor: pointer;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     color: var(--eden-text-muted);
+    border: 1px solid var(--eden-line);
+    border-radius: 6px;
+    background: rgba(63, 211, 212, 0.08);
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.16, 0.84, 0.24, 1);
   }
-
   .president-censored::after {
     content: attr(data-reveal);
     position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    color: var(--eden-gold);
-    transition: opacity 0.2s ease;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1.9em;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: #04070a;
+    background: var(--eden-primary);
+    border-radius: 5px;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.4s cubic-bezier(0.7, 0, 0.2, 1);
   }
-
+  .president-censored:hover,
+  .president-censored:focus-visible,
+  .president-censored.is-open {
+    transform: scale(1.12);
+    border-color: var(--eden-primary);
+  }
   .president-censored:hover::after,
-  .president-censored:focus-visible::after {
-    opacity: 1;
+  .president-censored:focus-visible::after,
+  .president-censored.is-open::after {
+    clip-path: inset(0 0 0 0);
   }
 
   /* ─── CTA ─── */
@@ -2583,19 +2633,12 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
 
   /* ── Wide desktop (> 1200px): let the headline breathe bigger ── */
   @media (min-width: 1200px) {
-    .president-headline {
-      font-size: clamp(3.5rem, 3.5vw, 5.5rem);
-    }
+
   }
 
   /* ── Tablet landscape + small desktop (900–1200px): 2-col, tighter font ── */
   @media (max-width: 1200px) and (min-width: 901px) {
-    .president-headline {
-      font-size: clamp(2rem, 3vw, 4rem);
-    }
-    .president-portal {
-      width: min(320px, 45vw);
-    }
+
   }
 
   /* ── Below 900px: switch to single-column stacked layout ── */
@@ -2607,19 +2650,6 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
       padding-bottom: 2rem;
     }
 
-    /* Image portal moves to top in single-column view */
-    .president-portal-wrap {
-      order: -1;
-    }
-
-    /* Full-width viewport available for headline now */
-    .president-headline {
-      font-size: clamp(2.8rem, 9vw, 5rem);
-    }
-
-    .president-portal {
-      width: min(280px, 60vw);
-    }
 
     .authorship-voices {
       grid-template-columns: 1fr;
@@ -2637,26 +2667,11 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
   /* ── Mobile landscape (wide but short, e.g. phone rotated) ── */
   @media (max-height: 520px) and (orientation: landscape) {
     .president-hero-inner {
-      /* Restore 2-column in landscape so content fits without scrolling too much */
-      grid-template-columns: 1fr 1.2fr;
-      gap: 1.5rem;
       min-height: auto;
       padding-top: 1rem;
       padding-bottom: 1rem;
     }
 
-    .president-portal-wrap {
-      order: 0;
-    }
-
-    .president-portal {
-      width: min(180px, 35vw);
-    }
-
-    .president-headline {
-      /* In landscape, column is narrower again — use vw-relative size */
-      font-size: clamp(1.6rem, 3.5vw, 3rem);
-    }
 
     .president-hero {
       padding-top: 1rem;
@@ -2666,14 +2681,7 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
       padding: 2rem 0;
     }
 
-    .sticker-strip {
-      padding: 1.5rem 0;
-    }
 
-    .sticker-chip {
-      width: 56px;
-      height: 56px;
-    }
   }
 
   /* ── Narrow mobile portrait (≤ 640px) ── */
@@ -2704,25 +2712,6 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
       justify-content: center;
     }
 
-    .president-headline {
-      font-size: clamp(2.8rem, 12vw, 4.5rem);
-    }
-
-    .president-portal {
-      width: min(240px, 70vw);
-    }
-
-    .image-status-stamp {
-      right: 0.45rem;
-      bottom: 0.45rem;
-      left: 0.45rem;
-      padding: 0.55rem 0.6rem;
-    }
-
-    .image-status-stamp li {
-      font-size: 0.46rem;
-    }
-
     .president-authorship-section {
       margin-right: 0.3rem;
       padding: 1.35rem;
@@ -2737,34 +2726,15 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
       max-width: calc(100% - 4rem);
     }
 
-    .sticker-strip {
-      gap: 1.25rem;
-    }
 
-    .sticker-chip {
-      width: 64px;
-      height: 64px;
-    }
   }
 
   /* ── Extra-small portrait (≤ 390px, iPhone SE / small Android) ── */
   @media (max-width: 390px) {
-    .president-portal {
-      width: min(200px, 75vw);
-    }
-
-    .president-headline {
-      font-size: clamp(2.4rem, 13vw, 3.5rem);
-    }
-
     .president-section {
       padding: 2rem 0;
     }
 
-    .sticker-chip {
-      width: 54px;
-      height: 54px;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -2773,21 +2743,6 @@ const v1Progress = v1Total > 0 ? Math.round((v1Handled / v1Total) * 100) : 0;
     .president-list li::before {
       animation: none;
       background-position: 0% center;
-    }
-    .president-portal {
-      animation: none;
-    }
-    .portal-orbit {
-      animation: none;
-    }
-    .portal-badge-ring {
-      animation: none;
-    }
-    .sticker-chip {
-      animation: none;
-    }
-    .sticker-chip:hover {
-      transform: none;
     }
     .artwork-info-card:hover,
     .president-rule-card:hover,
