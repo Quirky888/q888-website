@@ -1,0 +1,180 @@
+---
+import { Image } from "astro:assets";
+import transformations from "../data/inkTransformations.json";
+---
+
+<div class="ink-transformations">
+  <div class="transformation-grid">
+    {transformations.map(({ name, label, colour }, index) => (
+      <figure data-ink-transformation data-state="idle">
+        <div class="transformation-image">
+          <Image src={`/images/dink/transformation/${name}.webp`} width={480} height={480} loading="lazy" alt={`${label}, gradually reduced to its average colour ${colour}.`} data-animation={`/images/dink/transformation/${name}-play.webp`} />
+          <canvas width="480" height="480" hidden aria-hidden="true"></canvas>
+        </div>
+        <figcaption>
+          <span class="transformation-number">0{index + 1} <span aria-hidden="true">→</span> <span class="transformation-colour">{colour.toUpperCase()}</span></span>
+          <button type="button" aria-label={`Play transformation: ${label}`} data-label={label} hidden>Play ↗</button>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+  <p class="transformation-caption">Four works becoming four Inks. Each square is the average colour of its whole image.</p>
+</div>
+
+<style>
+  .transformation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+  figure { margin: 0; min-inline-size: 0; }
+  .transformation-image { aspect-ratio: 1; background: #000; overflow: hidden; border-radius: 3px; }
+  img, canvas { display: block; inline-size: 100%; block-size: 100%; }
+  [hidden] { display: none; }
+  figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 0.5rem; padding-block-start: 0.4rem; font: 400 0.7rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.04em; }
+  .transformation-number { display: flex; gap: 0.5rem; align-items: center; }
+  .transformation-colour { color: #55534d; }
+  button { min-block-size: 44px; min-inline-size: 44px; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+  button:hover { text-decoration: underline; text-underline-offset: 4px; }
+  button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  .transformation-caption { margin: 1rem 0 0; max-inline-size: 44rem; font-size: 1rem; line-height: 1.6; color: #55534d; }
+  @media (min-width: 1000px) { .transformation-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+</style>
+
+<script>
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  // On phones nothing downloads or plays by itself: the pictures wait for a tap on Play, which keeps data use low.
+  const phone = window.matchMedia("(max-width: 767px)");
+  const group = document.querySelector<HTMLElement>(".ink-transformations");
+  let visible = false;
+  const clips: Array<{ warm: () => Promise<string>; start: (when: number, explicit?: boolean) => void; stop: () => void }> = [];
+
+  for (const figure of group?.querySelectorAll<HTMLElement>("[data-ink-transformation]") ?? []) {
+    const image = figure.querySelector("img");
+    const canvas = figure.querySelector("canvas");
+    const button = figure.querySelector("button");
+    if (!image || !canvas || !button || !image.dataset.animation) continue;
+    const poster = image.src;
+    const animation = image.dataset.animation;
+    let source: Promise<string> | undefined;
+    let revision = 0;
+    let scheduled: number | undefined;
+    let pausedByVisitor = false;
+
+    const setState = (state: "loading" | "playing" | "paused") => {
+      figure.dataset.state = state;
+      button.textContent = state === "loading" ? "Loading…" : state === "playing" ? "Pause Ⅱ" : "Replay ↗";
+      button.setAttribute("aria-label", `${state === "paused" ? "Replay" : "Pause"} transformation: ${button.dataset.label}`);
+    };
+    const warm = (): Promise<string> => {
+      source ??= fetch(animation).then(response => {
+        if (!response.ok) throw new Error("Transformation unavailable");
+        return response.blob();
+      }).then(blob => new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      })).catch(error => { source = undefined; throw error; });
+      return source;
+    };
+    const stop = () => {
+      window.clearTimeout(scheduled);
+      scheduled = undefined;
+      revision++;
+      image.onload = null;
+      image.onerror = null;
+      if (figure.dataset.state === "playing" && image.complete && image.naturalWidth) {
+        // Leave a still frame while stopped: animated images have no pause API.
+        canvas.getContext("2d")?.drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.hidden = false;
+        image.hidden = true;
+      }
+      image.src = poster;
+      if (figure.dataset.state !== "idle") setState("paused");
+    };
+    const start = (when: number, explicit = false) => {
+      if (pausedByVisitor || !visible || document.hidden || (motion.matches && !explicit)) return;
+      window.clearTimeout(scheduled);
+      const token = ++revision;
+      const current = () => token === revision && visible && !document.hidden;
+      setState("loading");
+      void warm().then(data => {
+        if (!current()) return;
+        scheduled = window.setTimeout(() => {
+          if (!current()) return;
+          // A valid MIME parameter gives each replay its own animation clock without another download.
+          // Data images also work with the site's existing Content Security Policy.
+          const url = data.replace(";base64,", `;playback=${token};base64,`);
+          const finish = () => {
+            if (!current() || image.src !== url) return;
+            image.hidden = false;
+            canvas.hidden = true;
+            setState("playing");
+          };
+          image.onload = finish;
+          image.onerror = () => {
+            if (!current()) return;
+            source = undefined;
+            image.onload = null;
+            image.onerror = null;
+            image.src = poster;
+            image.hidden = false;
+            canvas.hidden = true;
+            setState("paused");
+          };
+          image.src = url;
+          if (image.complete && image.naturalWidth) finish();
+        }, Math.max(0, when - performance.now()));
+      }).catch(() => { if (current()) setState("paused"); });
+    };
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      if (figure.dataset.state === "playing" || figure.dataset.state === "loading") {
+        pausedByVisitor = true;
+        stop();
+      } else {
+        pausedByVisitor = false;
+        // A tap means the visitor is looking at it, even if the scroll observer has not reported yet.
+        visible = true;
+        start(performance.now(), true);
+      }
+    });
+    clips.push({ warm, start, stop });
+  }
+
+  if (group) {
+    let groupRevision = 0;
+    const sync = () => {
+      const token = ++groupRevision;
+      if (!visible || document.hidden || motion.matches) {
+        clips.forEach(clip => clip.stop());
+        return;
+      }
+      // Phones: nothing starts by itself, and a clip the visitor started keeps playing while it is on screen.
+      if (phone.matches) return;
+      // Start one shared rhythm after loading, so a slower first file cannot miss its turn.
+      void Promise.allSettled(clips.map(clip => clip.warm())).then(() => {
+        if (token !== groupRevision || !visible || document.hidden || motion.matches) return;
+        const now = performance.now();
+        clips.forEach((clip, index) => clip.start(now + index * 500));
+      });
+    };
+    const warmObserver = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || motion.matches || phone.matches) return;
+      clips.forEach(clip => { void clip.warm().catch(() => {}); });
+      warmObserver.unobserve(group);
+    }, { rootMargin: "600px" });
+    warmObserver.observe(group);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (visible === entry.isIntersecting) return;
+      visible = entry.isIntersecting;
+      sync();
+    }, { threshold: 0.1 });
+    observer.observe(group);
+    document.addEventListener("visibilitychange", sync);
+    motion.addEventListener("change", sync);
+    phone.addEventListener("change", sync);
+    window.addEventListener("pagehide", () => {
+      clips.forEach(clip => clip.stop());
+      observer.disconnect();
+      warmObserver.disconnect();
+    }, { once: true });
+  }
+</script>
