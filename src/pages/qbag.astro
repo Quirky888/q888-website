@@ -120,124 +120,8 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
           </div>
         </section>
 
-        <section class="qbag-equation" aria-label="Q-Bag ritual equation">
-          {qBag.ritualEquation.map((item, index) => (
-            <div
-              class:list={["qbag-equation-item", { "qbag-equation-item--secret": index === qBag.ritualEquation.length - 1 }]}
-              tabindex={index === qBag.ritualEquation.length - 1 ? "0" : undefined}
-            >
-              <span class="qbag-equation-subject qb-mono">{item.subject}</span>
-              <span class="qbag-equation-mark">=</span>
-              <strong>{item.meaning}</strong>
-              {index === qBag.ritualEquation.length - 1 && (
-                <span class="qbag-authorship-whisper qb-mono">AUTHORSHIP DETECTED</span>
-              )}
-              {index < qBag.ritualEquation.length - 1 && <span class="qbag-equation-plus" aria-hidden="true">+</span>}
-            </div>
-          ))}
-        </section>
-
-        <section class="qbag-section qbag-ageing-section" aria-labelledby="qbag-ageing-title">
-          <div class="qbag-section-heading">
-            <p class="qbag-section-index qb-mono">03 / THE ANTI-DISPOSABLE MECHANISM</p>
-            <h2 id="qbag-ageing-title" class="qbag-h2">{qBag.ageingTitle}</h2>
-            <p class="qbag-section-intro">{qBag.ageingLead}</p>
-          </div>
-          <ol class="qbag-ageing-track">
-            {qBag.ageingStages.map((stage, index) => (
-              <li
-                class:list={{ "qbag-ageing-stage--gravity": index === qBag.ageingStages.length - 1 }}
-                tabindex={index === qBag.ageingStages.length - 1 ? "0" : undefined}
-              >
-                <span class="qbag-ageing-count qb-mono">{stage.count}</span>
-                <span class="qbag-ageing-dot" aria-hidden="true"></span>
-                <h3>{stage.title}</h3>
-                <p>
-                  {index === 2 ? (
-                    <>
-                      <TypographicDoor
-                        id="qbag-overpriced-stickers"
-                        zone="qbag"
-                        kind="portal"
-                        voice="archive"
-                        text="Chosen stickers,"
-                        revealText="Overpriced stickers,"
-                        ariaLabel="Chosen stickers — secret passage to Overpriced Stickers"
-                        href="/overpriced/"
-                        pinned
-                      />{stage.detail.slice("Chosen stickers,".length)}
-                    </>
-                  ) : stage.detail}
-                </p>
-                {index === qBag.ageingStages.length - 1 && (
-                  <span class="qbag-gravity-whisper qb-mono">MEMORY HAS MASS</span>
-                )}
-              </li>
-            ))}
-          </ol>
-          <blockquote class="qbag-reverse-quote">The older the object becomes, the less disposable it feels.</blockquote>
-        </section>
-
-        <!-- DNA: The practical invitation arrives before the gallery and mythology. -->
-        <section class="qbag-pilot" id="qbag-pilot" aria-labelledby="qbag-pilot-title">
-          <div class="qbag-pilot-header">
-            <p class="qbag-section-index qb-mono">04 / {qBag.pilot.eyebrow}</p>
-            <h2 id="qbag-pilot-title">{qBag.pilot.title}</h2>
-            <p>{qBag.pilot.body}</p>
-          </div>
-          <div class="qbag-pilot-columns">
-            <div>
-              <h3>Experiment conditions</h3>
-              <ul>{qBag.pilot.scope.map((item) => <li>{item}</li>)}</ul>
-            </div>
-            <div>
-              <h3>Observe only what matters</h3>
-              <ul>{qBag.pilot.measures.map((item) => <li>{item}</li>)}</ul>
-            </div>
-          </div>
-          <p class="qbag-pilot-metric">{qBag.pilot.metric}</p>
-          <a href="#qbag-operating-layer" class="qbag-pilot-action">See how the pilot works →</a>
-        </section>
-
-        <section class="qbag-operating-layer" id="qbag-operating-layer" aria-labelledby="qbag-operating-title">
-          <header class="qbag-operating-header">
-            <p class="qbag-section-index qb-mono">05 / {qBag.operationalLayer.eyebrow}</p>
-            <h2 id="qbag-operating-title">{qBag.operationalLayer.title}</h2>
-            <p>{qBag.operationalLayer.intro}</p>
-          </header>
-
-          <div class="qbag-operating-grid">
-            <article class="qbag-cafe-desk">
-              <p class="qbag-operating-audience qb-mono">PILOT PARTNER / CAFÉ</p>
-              <h3>{qBag.operationalLayer.cafeTitle}</h3>
-              <dl>
-                {qBag.operationalLayer.cafeFacts.map((fact) => (
-                  <div>
-                    <dt class="qb-mono">{fact.label}</dt>
-                    <dd>{fact.body}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p class="qbag-pricing-note">{qBag.operationalLayer.pricingNote}</p>
-            </article>
-
-            <article class="qbag-backer-desk">
-              <p class="qbag-operating-audience qb-mono">PILOT BACKER / EVIDENCE</p>
-              <h3>{qBag.operationalLayer.backerTitle}</h3>
-              <p>{qBag.operationalLayer.backerIntro}</p>
-              <div class="qbag-backer-lists">
-                <div>
-                  <h4>{qBag.operationalLayer.fundsTitle}</h4>
-                  <ul>{qBag.operationalLayer.funds.map((item) => <li>{item}</li>)}</ul>
-                </div>
-                <div>
-                  <h4>{qBag.operationalLayer.evidenceTitle}</h4>
-                  <ul>{qBag.operationalLayer.evidence.map((item) => <li>{item}</li>)}</ul>
-                </div>
-              </div>
-            </article>
-          </div>
-
+        <!-- DNA: Physical evidence first — the V0 object shows the idea is already real. -->
+        <section class="qbag-v0-section">
           <!-- DNA: Physical evidence should make the concept more credible without overstating what V0 proved. -->
           <aside class="qbag-prototype-record" aria-labelledby="qbag-prototype-record-title">
             <div class="qbag-prototype-copy">
@@ -278,6 +162,135 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
               ))}
             </div>
           </aside>
+        </section>
+
+        <!-- DNA: The practical invitation arrives before the gallery and mythology. -->
+        <section class="qbag-pilot" id="qbag-pilot" aria-labelledby="qbag-pilot-title">
+          <div class="qbag-pilot-header">
+            <p class="qbag-section-index qb-mono">03 / {qBag.pilot.eyebrow}</p>
+            <h2 id="qbag-pilot-title">{qBag.pilot.title}</h2>
+            <p>{qBag.pilot.body}</p>
+          </div>
+          <div class="qbag-pilot-columns">
+            <div>
+              <h3>Experiment conditions</h3>
+              <ul>{qBag.pilot.scope.map((item) => <li>{item}</li>)}</ul>
+            </div>
+            <div>
+              <h3>Observe only what matters</h3>
+              <ul>{qBag.pilot.measures.map((item) => <li>{item}</li>)}</ul>
+            </div>
+          </div>
+          <p class="qbag-pilot-metric">{qBag.pilot.metric}</p>
+          <a href="#qbag-operating-layer" class="qbag-pilot-action">See how the pilot works →</a>
+        </section>
+
+        <!-- Full proposal: everything beyond the start page, for cafés, backers and grant readers. -->
+        <details class="qbag-full-proposal" id="qbag-proposal">
+          <summary>
+            <span>
+              <span class="qbag-section-index qb-mono">FULL PROPOSAL · FOR CAFÉS, BACKERS AND GRANT READERS</span>
+              <strong>The whole idea, in full</strong>
+            </span>
+            <span class="qbag-full-proposal-toggle qb-mono" aria-hidden="true">OPEN THE FULL PROPOSAL +</span>
+          </summary>
+          <div class="qbag-full-proposal-body">
+        <section class="qbag-equation" aria-label="Q-Bag ritual equation">
+          {qBag.ritualEquation.map((item, index) => (
+            <div
+              class:list={["qbag-equation-item", { "qbag-equation-item--secret": index === qBag.ritualEquation.length - 1 }]}
+              tabindex={index === qBag.ritualEquation.length - 1 ? "0" : undefined}
+            >
+              <span class="qbag-equation-subject qb-mono">{item.subject}</span>
+              <span class="qbag-equation-mark">=</span>
+              <strong>{item.meaning}</strong>
+              {index === qBag.ritualEquation.length - 1 && (
+                <span class="qbag-authorship-whisper qb-mono">AUTHORSHIP DETECTED</span>
+              )}
+              {index < qBag.ritualEquation.length - 1 && <span class="qbag-equation-plus" aria-hidden="true">+</span>}
+            </div>
+          ))}
+        </section>
+
+        <section class="qbag-section qbag-ageing-section" aria-labelledby="qbag-ageing-title">
+          <div class="qbag-section-heading">
+            <p class="qbag-section-index qb-mono">05 / THE ANTI-DISPOSABLE MECHANISM</p>
+            <h2 id="qbag-ageing-title" class="qbag-h2">{qBag.ageingTitle}</h2>
+            <p class="qbag-section-intro">{qBag.ageingLead}</p>
+          </div>
+          <ol class="qbag-ageing-track">
+            {qBag.ageingStages.map((stage, index) => (
+              <li
+                class:list={{ "qbag-ageing-stage--gravity": index === qBag.ageingStages.length - 1 }}
+                tabindex={index === qBag.ageingStages.length - 1 ? "0" : undefined}
+              >
+                <span class="qbag-ageing-count qb-mono">{stage.count}</span>
+                <span class="qbag-ageing-dot" aria-hidden="true"></span>
+                <h3>{stage.title}</h3>
+                <p>
+                  {index === 2 ? (
+                    <>
+                      <TypographicDoor
+                        id="qbag-overpriced-stickers"
+                        zone="qbag"
+                        kind="portal"
+                        voice="archive"
+                        text="Chosen stickers,"
+                        revealText="Overpriced stickers,"
+                        ariaLabel="Chosen stickers — secret passage to Overpriced Stickers"
+                        href="/overpriced/"
+                        pinned
+                      />{stage.detail.slice("Chosen stickers,".length)}
+                    </>
+                  ) : stage.detail}
+                </p>
+                {index === qBag.ageingStages.length - 1 && (
+                  <span class="qbag-gravity-whisper qb-mono">MEMORY HAS MASS</span>
+                )}
+              </li>
+            ))}
+          </ol>
+          <blockquote class="qbag-reverse-quote">The older the object becomes, the less disposable it feels.</blockquote>
+        </section>
+
+        <section class="qbag-operating-layer" id="qbag-operating-layer" aria-labelledby="qbag-operating-title">
+          <header class="qbag-operating-header">
+            <p class="qbag-section-index qb-mono">06 / {qBag.operationalLayer.eyebrow}</p>
+            <h2 id="qbag-operating-title">{qBag.operationalLayer.title}</h2>
+            <p>{qBag.operationalLayer.intro}</p>
+          </header>
+
+          <div class="qbag-operating-grid">
+            <article class="qbag-cafe-desk">
+              <p class="qbag-operating-audience qb-mono">PILOT PARTNER / CAFÉ</p>
+              <h3>{qBag.operationalLayer.cafeTitle}</h3>
+              <dl>
+                {qBag.operationalLayer.cafeFacts.map((fact) => (
+                  <div>
+                    <dt class="qb-mono">{fact.label}</dt>
+                    <dd>{fact.body}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p class="qbag-pricing-note">{qBag.operationalLayer.pricingNote}</p>
+            </article>
+
+            <article class="qbag-backer-desk">
+              <p class="qbag-operating-audience qb-mono">PILOT BACKER / EVIDENCE</p>
+              <h3>{qBag.operationalLayer.backerTitle}</h3>
+              <p>{qBag.operationalLayer.backerIntro}</p>
+              <div class="qbag-backer-lists">
+                <div>
+                  <h4>{qBag.operationalLayer.fundsTitle}</h4>
+                  <ul>{qBag.operationalLayer.funds.map((item) => <li>{item}</li>)}</ul>
+                </div>
+                <div>
+                  <h4>{qBag.operationalLayer.evidenceTitle}</h4>
+                  <ul>{qBag.operationalLayer.evidence.map((item) => <li>{item}</li>)}</ul>
+                </div>
+              </div>
+            </article>
+          </div>
 
           <div class="qbag-operating-actions">
             <a href="#qbag-contact" class="qbag-operating-action qbag-operating-action--host">{qBag.operationalLayer.hostCta} →</a>
@@ -335,7 +348,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
 
         <!-- DNA: Creative Afterlife is actively invitational; its historical consequence remains deeper and conditional. -->
         <section class="qbag-section qbag-concept-section">
-          <p class="qbag-section-index qb-mono">06 / CREATIVE AFTERLIFE</p>
+          <p class="qbag-section-index qb-mono">07 / CREATIVE AFTERLIFE</p>
           <h2 class="qbag-h2">{qBag.conceptCards[0].title}</h2>
           <div class="qbag-two-col">
             <div class="qbag-two-col-text">
@@ -548,14 +561,14 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
         </div>
 
         <section class="qbag-section qbag-participants-section">
-          <p class="qbag-section-index qb-mono">07 / POSSIBLE FUTURE TERRITORIES</p>
+          <p class="qbag-section-index qb-mono">08 / POSSIBLE FUTURE TERRITORIES</p>
           <h2 class="qbag-h2">Creative Afterlife can travel beyond coffee</h2>
           <p class="qbag-participant-note">{qBag.participantNote}</p>
         </section>
 
         <section class="qbag-value-circuit" aria-labelledby="qbag-value-circuit-title">
           <header class="qbag-value-circuit-header">
-            <p class="qbag-section-index qb-mono">08 / {qBag.valueCircuit.eyebrow}</p>
+            <p class="qbag-section-index qb-mono">09 / {qBag.valueCircuit.eyebrow}</p>
             <h2 id="qbag-value-circuit-title">{qBag.valueCircuit.title}</h2>
             <p>{qBag.valueCircuit.intro}</p>
           </header>
@@ -585,7 +598,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
         <details class="qbag-speculative-zone">
           <summary>
             <span>
-              <span class="qbag-section-index qb-mono">09 / {qBag.speculativeBoundary.eyebrow}</span>
+              <span class="qbag-section-index qb-mono">10 / {qBag.speculativeBoundary.eyebrow}</span>
               <strong id="qbag-speculative-title">{qBag.speculativeBoundary.title}</strong>
             </span>
             <span class="qbag-speculative-toggle qb-mono" aria-hidden="true">OPEN HISTORICAL HORIZON +</span>
@@ -609,9 +622,12 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
           </div>
         </section>
 
+          </div>
+        </details>
+
         <!-- Contact -->
         <section class="qbag-section qbag-contact-section" id="qbag-contact">
-          <p class="qbag-section-index qb-mono">10 / OPEN TRANSMISSION</p>
+          <p class="qbag-section-index qb-mono">04 / OPEN TRANSMISSION</p>
           <h2 class="qbag-h2">Begin the first return</h2>
           <p>{qBag.contactIntro}</p>
           <p class="qbag-portal-links">
@@ -713,6 +729,32 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     <SystemMeta position="bottom" />
   </div>
 </Layout>
+
+<script>
+  // Anchors that point inside the collapsed full proposal open it first.
+  function openProposalForHash() {
+    const hash = window.location.hash;
+    if (!hash || hash.length < 2) return;
+    let target: Element | null = null;
+    try {
+      target = document.querySelector(hash);
+    } catch {
+      return;
+    }
+    const proposal = target?.closest<HTMLDetailsElement>("details.qbag-full-proposal");
+    if (proposal && !proposal.open) {
+      proposal.open = true;
+      requestAnimationFrame(() => target?.scrollIntoView());
+    }
+  }
+  window.addEventListener("hashchange", openProposalForHash);
+  document.addEventListener("click", (event) => {
+    const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="#"]');
+    if (link) setTimeout(openProposalForHash, 0);
+  });
+  document.addEventListener("astro:page-load", openProposalForHash);
+  openProposalForHash();
+</script>
 
 <script>
   import {
@@ -2170,6 +2212,80 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     letter-spacing: 0.06em;
     text-underline-offset: 0.25em;
     text-transform: uppercase;
+  }
+
+  .qbag-v0-section {
+    margin: clamp(3rem, 6vw, 5rem) 0;
+  }
+
+  .qbag-full-proposal {
+    position: relative;
+    margin: 3rem 0;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px dashed rgba(193, 122, 46, 0.7);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.38);
+  }
+
+  .qbag-full-proposal > summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: end;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .qbag-full-proposal > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .qbag-full-proposal > summary:focus-visible {
+    border-radius: 0.25rem;
+    outline: 2px solid var(--qb-amber);
+    outline-offset: 0.6rem;
+  }
+
+  .qbag-full-proposal > summary .qbag-section-index {
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .qbag-full-proposal > summary strong {
+    display: block;
+    font-family: 'Bungee', 'Space Grotesk', sans-serif;
+    font-size: clamp(1.5rem, 3.4vw, 3rem);
+    font-weight: 400;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .qbag-full-proposal-toggle {
+    color: var(--qb-amber);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .qbag-full-proposal[open] .qbag-full-proposal-toggle {
+    font-size: 0;
+  }
+
+  .qbag-full-proposal[open] .qbag-full-proposal-toggle::after {
+    content: 'CLOSE THE FULL PROPOSAL −';
+    font-size: 0.64rem;
+  }
+
+  .qbag-full-proposal-body {
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  @media (max-width: 640px) {
+    .qbag-full-proposal > summary {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
   }
 
   .qbag-speculative-zone {
