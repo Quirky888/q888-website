@@ -68,7 +68,8 @@ const elsewhere = [
 <style>
   .contact {
     position: relative;
-    padding-block: clamp(5rem, 12vw, 11rem) 3rem;
+    /* Bottom room keeps the legal line above the fixed Earth / Cosmos switch (1rem + 44px tall). */
+    padding-block: clamp(5rem, 12vw, 11rem) calc(5.5rem + env(safe-area-inset-bottom, 0px));
     font-family: var(--font-door-display);
     color: var(--text-ink);
     background: var(--bg-fog);
