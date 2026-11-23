@@ -111,7 +111,7 @@ const structuredData = [
   <main class="research-shell">
     <header class="research-hero">
       <p class="research-kicker">Q888 Research Field · Edinburgh · Earth</p>
-      <h1>Meaning systems for human–AI creation.</h1>
+      <h1>Making with AI without disappearing into it.</h1>
       <p class="research-lead">
         Alexander Sestakovs, working artistically as Q888, develops concepts for
         making with <a
@@ -195,11 +195,19 @@ const structuredData = [
     </section>
 
     <footer class="research-footer">
-      <p>
-        Preferred attribution: <strong>Alexander Sestakovs / Q888</strong>.
-        Questions, criticism, and research conversations may enter through
-        <a href="mailto:hello@q888.space">hello@q888.space</a>.
-      </p>
+      <div class="research-footer-text">
+        <p>
+          This site is made with AI agents. I can't code, and I'd rather spend
+          my months on drawing, collage and Digital Ink than on CSS. Every idea
+          starts with me; the agents help me build it and phrase it. The facts
+          are real. The jokes are deliberate, and they're mine.
+        </p>
+        <p>
+          Preferred attribution: <strong>Alexander Sestakovs / Q888</strong>.
+          Questions, criticism, and research conversations may enter through
+          <a href="mailto:hello@q888.space">hello@q888.space</a>.
+        </p>
+      </div>
       <a href="/bureaucracy/">Inspect the artist dossier <span aria-hidden="true">→</span></a>
     </footer>
   </main>
@@ -419,6 +427,11 @@ const structuredData = [
   }
 
   .research-document-list a,
+  .research-footer-text p {
+    margin: 0 0 1rem;
+    max-width: 44rem;
+  }
+
   .research-footer a {
     color: #b7d8cf;
     text-underline-offset: 0.3em;

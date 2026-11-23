@@ -12,9 +12,9 @@
     "text": "This is one possible artist vessel, not the object required to participate. The experiment begins with something suitable you already have. The image was made with generative AI under my direction and may later be replaced, mutated, painted over, or respectfully composted."
   },
   "introTagline": "Refill. Remember. Return.",
-  "introLead": "Bring a suitable container you already own, buy coffee by weight, let refill evidence and personal expression accumulate, then bring the same object back. Q-Bag is a behaviour before it is a product.",
+  "introLead": "Bring a container you already own. Buy coffee by weight. Stick things on it, scribble on it, bring it back. Q-Bag is a habit before it is a product.",
   "protocolTitle": "The five-step refill ritual",
-  "protocolLead": "The refill action should remain almost boring. Personalisation makes the object singular; repetition gives that singular object a cultural life.",
+  "protocolLead": "The refill itself should stay almost boring. The stickers and scribbles make the bag yours; coming back again and again makes it matter.",
   "protocolSteps": [
     {
       "number": "01",
@@ -29,7 +29,7 @@
     {
       "number": "03",
       "action": "Record the return",
-      "detail": "A café stamp, refill mark, or occasional artist edition records that the performance happened."
+      "detail": "A café stamp, refill mark, or occasional artist edition shows you were here again."
     },
     {
       "number": "04",
@@ -51,7 +51,7 @@
     { "subject": "Owner", "meaning": "Co-author" }
   ],
   "ageingTitle": "Emotional depreciation in reverse",
-  "ageingLead": "Ordinary packaging loses value as it ages. Q-Bag asks whether the opposite can happen: each return gives wear, marks, and memory another reason to remain.",
+  "ageingLead": "Packaging gets worse with age. Q-Bag asks if it can get better: every return adds a mark, a scratch, a memory — one more reason not to throw it away.",
   "ageingStages": [
     {
       "count": "REFILL 00",
@@ -71,7 +71,7 @@
     {
       "count": "REFILL 88+",
       "title": "An object with gravity",
-      "detail": "Throwing it away would mean discarding accumulated evidence of a life."
+      "detail": "Throwing it away would feel like throwing away a diary."
     }
   ],
   "pilot": {
@@ -112,8 +112,8 @@
       }
     ],
     "pricingNote": "The café chooses its own refill pricing. A discount is welcome, not required.",
-    "backerTitle": "Fund evidence, not promises.",
-    "backerIntro": "A pilot backer helps existing containers enter a clear refill test, supports the café, and produces evidence before anyone is asked to believe in global scale.",
+    "backerTitle": "Back a small test, not a big promise.",
+    "backerIntro": "Backing the pilot pays for a small, honest test with one café, so there's something real to look at before anyone talks about scale.",
     "fundsTitle": "Pilot backing helps fund",
     "funds": [
       "Pilot setup, container-suitability guidance, tare labels, and café instructions",
@@ -129,7 +129,7 @@
     ],
     "hostCta": "Host the pilot",
     "backCta": "Back the pilot",
-    "closingNote": "No platform. No app. No speculative machine required at the counter—only a suitable existing object, an ordinary refill, and enough attention to learn what happens next.",
+    "closingNote": "No platform. No app. Just a container you already have, an ordinary refill, and someone paying attention to what happens.",
     "prototypeRecord": {
       "label": "Prototype Record / V0",
       "title": "It existed before it had a system.",
@@ -159,24 +159,11 @@
       ]
     }
   },
-  "participantCards": [
-    {
-      "title": "Clothing and repair",
-      "body": "Visible mending, alterations, patches, and accumulated decisions can continue a garment beyond its first finished identity."
-    },
-    {
-      "title": "Packaging and components",
-      "body": "Boxes, containers, frames, spare parts, and useful fragments can become material for another purpose instead of an automatic disposal decision."
-    },
-    {
-      "title": "Obsolete objects",
-      "body": "Damaged or discontinued things can receive repairs, combinations, new functions, or cultural lives their original manufacturers never specified."
-    }
-  ],
+  "participantNote": "A patched jacket, a jar with a second use, a broken thing that gets a new function: anything that already exists can get a second life it did not arrive with.",
   "valueCircuit": {
     "eyebrow": "Open Practice · Optional Objects",
     "title": "Participation is free. Objects can still fund what comes next.",
-    "intro": "Creative Afterlife does not require Q888 merchandise. Its commercial layer is optional and transparent: carefully made vessels, stickers, artist editions, tools, and collaborations can support the open behaviour and fund future experiments.",
+    "intro": "Anything I sell around it is optional: bags, stickers, artist editions. They help pay for the next experiment; they are not a ticket in.",
     "stages": [
       {
         "label": "Use what exists",
@@ -195,7 +182,7 @@
         "body": "Revenue and evidence can support café pilots, artists, long-life objects, travel, and future Q888 work."
       }
     ],
-    "collectorBonus": "An open practice can still produce things worth buying. Creative meaning and financial survival are not enemies; each can help the other remain alive.",
+    "collectorBonus": "An open practice can still make things worth buying, and the buying keeps the practice going.",
     "clarityNote": "NO Q888 PURCHASE IS REQUIRED. OPTIONAL EDITIONS MAY BE SOLD. COLLECTABILITY MAY EMERGE, BUT IT IS NEVER PROMISED."
   },
   "speculativeBoundary": {
@@ -211,7 +198,7 @@
     {
       "title": "Don't replace the object. Continue its biography.",
       "paragraphs": [
-        "Creative Afterlife treats existing objects as unfinished rather than expired. People can repair, decorate, combine, paint, modify, collage, add history, and continue an object's biography instead of accepting its first commercial identity as final.",
+        "Creative Afterlife treats existing objects as unfinished, not expired. Repair it, paint it, collage it, add to its history, instead of accepting the identity it left the shop with.",
         "Q-Bag is Experiment 001. Coffee keeps the first test small, repetitive, and measurable: can creative attachment help a suitable container return again and again?"
       ]
     },
@@ -231,8 +218,8 @@
     {
       "title": "The Adaptation Layer",
       "paragraphs": [
-        "Across decades, millions of uncoordinated acts of repair, alteration, decoration, and reuse might form a recognisable historical record of how humans adapted to material abundance and mass production.",
-        "Future historians might recognise it as the moment mass production stopped being the final author of an object."
+        "Millions of small, uncoordinated acts of repair, decoration and reuse might add up to a record of how people lived with too many things.",
+        "Maybe one day someone will call this the moment mass production stopped getting the last word on an object."
       ]
     }
   ],
