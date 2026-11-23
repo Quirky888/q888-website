@@ -372,21 +372,9 @@ if (dmAvailable <= 0) {
               <p class="dyno-vibe-label">THE VIBE</p>
               <p class="dyno-body-text">
                 Biological supremacy. Physical impossibility. Practically wet
-                concrete. But physics is for the common people. You don't want
-                to live like common people. You don't want to drink whatever
-                common people do... because you want your morning microfoam to
-                have been engineered from the dominant signature of a species
-                that had no predators. You want dominance, not just data. Apex
-                predator latte art.
-              </p>
-              <p
-                class="dyno-body-text dyno-gold-text"
-                style="font-size: clamp(0.9rem, 1.5vw, 1.2rem); line-height: 1.4; font-family: 'Syne Mono', monospace; font-weight: 700;"
-              >
-                (Note for the record: As we established, 626 grams of protein in
-                a liquid pint is a literal physical impossibility that would
-                result in a solid brick of matter, but in the Q888 universe, we
-                proudly ignore the laws of physics if it means a better flex).
+                concrete. You don't want to drink whatever common people do.
+                You want your morning microfoam engineered from a species that
+                had no predators. Apex predator latte art.
               </p>
 
               <div class="dyno-flex-container">
@@ -568,11 +556,20 @@ if (dmAvailable <= 0) {
 
         <div class="dyno-sight-unseen">
           <h3 class="dyno-sight-title">Sight Unseen Allocation.</h3>
-          <p class="dyno-sight-body">
+          <p
+            class="dyno-sight-body"
+            data-reveal-at="2028-01-01T00:00:00Z"
+            data-revealed-text="The first-wave investment sticker has been revealed. It is right above. If you still needed to see the art before you bought it, you lacked the vision required for this tax bracket."
+          >
             The first-wave investment sticker is finished. It is on this page,
             blurred, waiting for 2028. I will not show it to you earlier. If you
             need to see the art before you buy it, you lack the vision required
             for this tax bracket.
+          </p>
+          <p class="dyno-sight-how">
+            HOW IT WORKS: there is no cart. Apply below, then email
+            <a href="mailto:hello@q888.space">hello@q888.space</a>. I reply
+            personally.
           </p>
         </div>
 
@@ -1033,6 +1030,10 @@ if (dmAvailable <= 0) {
     document.querySelectorAll<HTMLElement>("[data-reveal-at]").forEach((el) => {
       const at = new Date(el.dataset.revealAt || "");
       if (Number.isNaN(at.getTime()) || new Date() < at) return;
+      if (el.dataset.revealedText) {
+        el.textContent = el.dataset.revealedText;
+        return;
+      }
       el.querySelector(".dyno-redacted-overlay")?.remove();
       const img = el.querySelector<HTMLElement>(".dyno-redacted-img");
       if (img) {
@@ -2463,6 +2464,27 @@ if (dmAvailable <= 0) {
     color: var(--dyno-white);
     margin: 0 0 1rem;
     text-transform: uppercase;
+  }
+
+  .dyno-sight-how {
+    margin: 1rem 0 0;
+    font-family: "Syne Mono", monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+    color: var(--dyno-yellow);
+  }
+
+  .dyno-sight-how a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 767px) {
+    /* one status banner is enough above the headline on a phone */
+    .dyno-entry-banner {
+      display: none;
+    }
   }
 
   .dyno-sight-body {
