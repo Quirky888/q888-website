@@ -37,24 +37,24 @@
     }
   ],
   "aboutHeading": "About the Contract",
-  "aboutParagraph": "Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury \"Lifetime Lease + Eternity\" agreement from Grim Reaper Inc., it satirizes how humans try to formalise the unformalizable: death, meaning, morality, and hope.",
+  "aboutParagraph": "Afterlife Contract™ is a conceptual artwork disguised as a legal document. Framed as a luxury \"Lifetime Lease + Eternity\" agreement from Grim Reaper Inc., it puts stamps and clauses on the one thing nobody can file.",
   "artworkCardTitle": "View Q888 Contract Certificate",
-  "artworkCardDescription": "The Underworld isn't a destination, but a curated experience. This original artwork binds cosmic symbols with vintage textures to frame your final choice: three destinations, one signature, and no reliable map. The soul is free; the ink is the only debt.",
+  "artworkCardDescription": "The Underworld, curated. Cosmic symbols and old-paper texture around one final choice: three destinations, one signature, no reliable map. The soul is free; the ink is the only debt.",
   "artworkCardButtonLabel": "Open the Door",
   "conceptHeading": "Concept",
   "conceptParagraphs": [
-    "The project is built around a simple paradox: Everyone gets the afterlife (or non-afterlife) for free—yet humans would still gladly pay for premium access, VIP status, and official confirmation.",
-    "This fictional contract echoes reality: the flow is free, but you pay for the package. Energy is abundant, but monetised. Meaning is internal, but outsourced. Freedom exists, yet certificates are sold to validate it."
+    "Everyone gets the afterlife (or non-afterlife) for free. People would still pay for premium access, VIP status and an official confirmation.",
+    "That's the whole joke, and it's probably also true."
   ],
   "bureaucracyHeading": "The Bureaucracy of Eternity",
-  "bureaucracyParagraph": "The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like \"Subject to Underworld Adjustments\" mock the human desire to regulate what cannot be regulated.",
+  "bureaucracyParagraph": "The design borrows the visual language of law and finance—stamps, ledgers, clauses—and applies it to the ultimate unknown. Lines like \"Subject to Underworld Adjustments\" are there to see how far a stamp can go.",
   "dualityHeading": "The Duality of Choice",
   "dualityParagraphs": [
-    "Viewers are invited to \"sign\" under three deliberately entangled options. Each represents a different existential path: fear/punishment, love/empathy, or creation/meaning-making. Their official names remain filed inside the original contract.",
-    "There is no correct answer. The act of choosing (or refusing to choose) becomes the real performance."
+    "Three options, deliberately tangled: one about fear, one about love, one about making things. Their official names stay inside the original contract.",
+    "There is no correct answer. Choosing, or refusing to choose, is the real performance."
   ],
   "visualLanguageHeading": "Visual Language",
-  "visualLanguageParagraph": "The work combines holographic gold frames, vintage parchment textures, cartoon skeletons, cosmic symbols, and handwritten annotations—living somewhere between medieval charter, corporate certificate, tarot deck, and internet meme.",
+  "visualLanguageParagraph": "Holographic gold frames, parchment textures, cartoon skeletons, cosmic symbols and handwritten annotations. Part medieval charter, part tarot deck, part internet meme.",
   "filedClausesHeading": "Filed Meanings",
   "filedClausesIntro": "Four articles explaining how free eternity acquired premium paperwork.",
   "filedClauseSummaries": [
@@ -64,14 +64,14 @@
     "Part medieval charter, part tarot deck, part internet afterthought."
   ],
   "interactionHeading": "Audience Interaction",
-  "interactionIntro": "The Afterlife Contract is participatory by nature. Viewers are encouraged to:",
+  "interactionIntro": "You are invited to:",
   "interactionItems": [
     "Read the fine print",
     "Choose a signature option",
     "Interpret the contract personally",
-    "Laugh, reflect, or feel mildly uncomfortable"
+    "Laugh, or feel mildly uncomfortable"
   ],
-  "interactionClosing": "It does not tell the viewer what to believe—it asks why they believe.",
+  "interactionClosing": "Nobody checks which option you chose. Only you know why.",
   "closingHeading": "Closing Statement",
   "closingQuoteLines": [
     "The only thing you actually sign",
@@ -101,13 +101,13 @@
   "decisionAcceptLabel": "I accept these metaphysical terms",
   "decisionRefuseLabel": "I refuse all known jurisdictions",
   "decisionAcceptedHint": "Terms accepted. Eternity is being processed.",
-  "decisionRefusedHint": "Jurisdiction refused. The original contract remains available as unauthorized evidence.",
+  "decisionRefusedHint": "Jurisdiction refused. The original contract remains available as unauthorised evidence.",
   "downloadHref": "/docs/afterlife_contract_to_sign_v2.png",
   "downloadFilename": "Afterlife_Contract.png",
   "downloadButtonLabel": "Download Contract",
   "downloadHint": "Choose an administrative position to release the file",
   "downloadConfirmation": "CONTRACT RELEASED · NO SOUL DEDUCTED",
-  "downloadRefusedConfirmation": "JURISDICTION REFUSED · CONTRACT RELEASED AS UNAUTHORIZED EVIDENCE",
+  "downloadRefusedConfirmation": "JURISDICTION REFUSED · CONTRACT RELEASED AS UNAUTHORISED EVIDENCE",
   "galleryClue": "Filed clue: inspect the lower-right signature zone.",
   "contractNote": "Note: Invalid until signed and returned.",
   "contractRefusedNote": "Possession does not constitute acceptance. Signing may accidentally restore jurisdiction.",

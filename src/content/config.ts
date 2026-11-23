@@ -218,14 +218,7 @@ const qBagProduct = z.object({
       ).length(2),
     }),
   }),
-  participantCards: z
-    .array(
-      z.object({
-        title: z.string().min(1),
-        body: z.string().min(1),
-      }),
-    )
-    .min(3),
+  participantNote: z.string().min(1),
   valueCircuit: z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),

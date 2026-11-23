@@ -550,14 +550,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
         <section class="qbag-section qbag-participants-section">
           <p class="qbag-section-index qb-mono">07 / POSSIBLE FUTURE TERRITORIES</p>
           <h2 class="qbag-h2">Creative Afterlife can travel beyond coffee</h2>
-          <div class="qbag-participant-grid">
-            {qBag.participantCards.map((card) => (
-              <article>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
-              </article>
-            ))}
-          </div>
+          <p class="qbag-participant-note">{qBag.participantNote}</p>
         </section>
 
         <section class="qbag-value-circuit" aria-labelledby="qbag-value-circuit-title">
@@ -1358,8 +1351,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   }
 
   .qbag-protocol-step h3,
-  .qbag-ageing-track h3,
-  .qbag-participant-grid h3 {
+  .qbag-ageing-track h3 {
     margin: 0 0 0.7rem;
     font-family: 'Syne', ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(1.1rem, 1.6vw, 1.45rem);
@@ -1367,8 +1359,7 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
   }
 
   .qbag-protocol-step p,
-  .qbag-ageing-track p,
-  .qbag-participant-grid p {
+  .qbag-ageing-track p {
     margin: 0;
     color: var(--qb-text-muted);
     font-size: 0.92rem;
@@ -2014,27 +2005,12 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     text-transform: uppercase;
   }
 
-  .qbag-participant-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2.5rem;
-  }
-
-  .qbag-participant-grid article {
-    min-height: 13rem;
-    padding: 1.5rem;
-    border: 1px solid var(--qb-border);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.4);
-  }
-
-  .qbag-participant-grid article:nth-child(2) {
-    background: rgba(255, 204, 51, 0.1);
-  }
-
-  .qbag-participant-grid article:nth-child(3) {
-    background: rgba(32, 140, 141, 0.08);
+  .qbag-participant-note {
+    max-width: 44rem;
+    margin: 1.5rem 0 0;
+    color: var(--qb-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
   .qbag-value-circuit {
@@ -3035,14 +3011,6 @@ const backPilotMailto = `mailto:${qBag.contactEmail}?subject=${encodeURIComponen
     .qbag-prototype-copy {
       border-right: 0;
       border-bottom: 2px solid rgba(255, 250, 240, 0.55);
-    }
-
-    .qbag-participant-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .qbag-participant-grid article {
-      min-height: 0;
     }
 
     .qbag-value-circuit-header {
