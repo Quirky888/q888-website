@@ -108,6 +108,7 @@ const heroLines = ["Overpriced", "Stickers"].map((w) => w.split(""));
                   "ex-art",
                   instrument.id === "DM-0001" && "dm-classified-wrap",
                 ]}
+                data-reveal-at={instrument.id === "DM-0001" ? "2028-01-01T00:00:00Z" : undefined}
               >
                 <Image
                   src={instrument.imageUrl}
@@ -1923,6 +1924,20 @@ const heroLines = ["Overpriced", "Stickers"].map((w) => w.split(""));
     }
   }
 </style>
+
+<script>
+  // Time-lock: DM-0001 card unblurs on 2028-01-01 (matches the drawer logic).
+  function revealDm() {
+    document.querySelectorAll<HTMLElement>(".dm-classified-wrap[data-reveal-at]").forEach((el) => {
+      const at = new Date(el.dataset.revealAt || "");
+      if (Number.isNaN(at.getTime()) || new Date() < at) return;
+      el.classList.remove("dm-classified-wrap");
+      el.querySelector(".dm-classified-overlay")?.remove();
+    });
+  }
+  revealDm();
+  document.addEventListener("astro:page-load", revealDm);
+</script>
 
 <script>
   (function () {

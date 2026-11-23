@@ -474,15 +474,20 @@ if (dmAvailable <= 0) {
           <div class="dyno-futures-block">
             <h3 class="dyno-wealth-subhead">DAIRY FUTURES</h3>
             <div class="dyno-futures-text-wrap">
-              <img
-                src="/images/dyno_milk_overpriced.webp"
-                alt="VERY EXPENSIVE sticker"
-                class="dyno-inline-float dyno-inline-float-right"
-                loading="lazy"
-                decoding="async"
-                width="180"
-                height="180"
-              />
+              <figure class="dyno-inline-float dyno-inline-float-right dyno-promo-fig">
+                <img
+                  src="/images/dyno_milk_overpriced.webp"
+                  alt="DYNO MILK promo sticker on black — not for sale"
+                  loading="lazy"
+                  decoding="async"
+                  width="180"
+                  height="180"
+                />
+                <figcaption class="dyno-promo-caption">
+                  <span>PROMO · NOT FOR SALE</span>
+                  <span>FOR FRIENDS &amp; EARLY WITNESSES</span>
+                </figcaption>
+              </figure>
               <p class="dyno-wealth-body">
                 Dyno Milk is currently in Phase 4 of Genetic Incubation.*
               </p>
@@ -505,19 +510,20 @@ if (dmAvailable <= 0) {
             <div class="dyno-roi-text-wrap">
               <div
                 class="zero-g-float dyno-redacted-wrap dyno-inline-float dyno-inline-float-left"
+                data-reveal-at="2028-01-01T00:00:00Z"
                 data-drift-x="-12"
                 data-drift-y="18"
                 data-drift-rot="-5"
                 aria-label="First edition design — classified"
               >
                 <img
-                  src="/images/IMG_6183Dyno.webp"
-                  alt="DYNO MILK first edition — design classified"
+                  src="/images/dyno_gold_sticker.webp"
+                  alt="DYNO MILK first edition — design classified until 2028"
                   class="dyno-redacted-img"
                   loading="lazy"
                   decoding="async"
                   width="160"
-                  height="210"
+                  height="161"
                 />
                 <div class="dyno-redacted-overlay" aria-hidden="true">
                   <div class="dyno-redacted-scan"></div>
@@ -531,8 +537,8 @@ if (dmAvailable <= 0) {
                 </div>
               </div>
               <p class="dyno-wealth-body">
-                By purchasing a <strong class="dyno-highlight"
-                  >'VERY EXPENSIVE'</strong
+                By purchasing the <strong class="dyno-highlight"
+                  >'VISIONARY'</strong
                 > holographic sticker today, you are investing in the Infocigan ecosystem.
                 Stick it on your laptop. Let the masses know you are an early backer
                 of synthetic dinosaur bio-fluids.
@@ -563,9 +569,10 @@ if (dmAvailable <= 0) {
         <div class="dyno-sight-unseen">
           <h3 class="dyno-sight-title">Sight Unseen Allocation.</h3>
           <p class="dyno-sight-body">
-            I am currently designing the first wave of investment stickers. I
-            will not show them to you. If you need to see the art before you buy
-            it, you lack the vision required for this tax bracket.
+            The first-wave investment sticker is finished. It is on this page,
+            blurred, waiting for 2028. I will not show it to you earlier. If you
+            need to see the art before you buy it, you lack the vision required
+            for this tax bracket.
           </p>
         </div>
 
@@ -1021,8 +1028,24 @@ if (dmAvailable <= 0) {
     setTimeout(() => banner.classList.add("is-visible"), 100);
   }
 
+  // ── Time-lock: unblur the classified sticker on 2028-01-01 ──
+  function initReveal() {
+    document.querySelectorAll<HTMLElement>("[data-reveal-at]").forEach((el) => {
+      const at = new Date(el.dataset.revealAt || "");
+      if (Number.isNaN(at.getTime()) || new Date() < at) return;
+      el.querySelector(".dyno-redacted-overlay")?.remove();
+      const img = el.querySelector<HTMLElement>(".dyno-redacted-img");
+      if (img) {
+        img.style.filter = "none";
+        img.style.transform = "none";
+      }
+      el.setAttribute("aria-label", "First edition design — revealed");
+    });
+  }
+
   // ── Master init ──
   function init() {
+    initReveal();
     initZeroGravity();
     initSplitGlitch();
     initAnarchyFilm();
@@ -2300,6 +2323,34 @@ if (dmAvailable <= 0) {
     shape-outside: circle(48%);
     shape-margin: 1rem;
     filter: drop-shadow(0 0 15px rgba(255, 230, 0, 0.35));
+  }
+
+  .dyno-promo-fig {
+    margin-top: 0;
+    margin-right: 0;
+  }
+
+  .dyno-promo-fig img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .dyno-promo-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.4rem;
+    text-align: center;
+    font-family: "Syne Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    color: var(--dyno-yellow);
+  }
+
+  .dyno-promo-caption span:last-child {
+    opacity: 0.7;
   }
 
   .dyno-inline-float-left {
